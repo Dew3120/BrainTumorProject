@@ -1,0 +1,52 @@
+{
+  "phase": "Phase 4 segmentation smoke test only",
+  "run": "20260921-174907-092984-smoke",
+  "mlflow_run_id": "ff3ff108eb854c759deb31d5ce020be2",
+  "script_sha256": "defa28dc8f94dc6fd3c41f5928fba1dbb6959d685acc32972711526ce3341dca",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "selected_pairs_sha256": "22d8e7f62ad3aebe21ca0250e5d09bc18424fdc517e8ae398cb1cab4ccafbaf8",
+  "code_tests": "4 paired-transform/mask/metric regression tests passed",
+  "result": {
+    "status": "AUTOMATED_SMOKE_CHECKS_PASSED",
+    "scope": "Experimental positive-case segmentation pipeline check, not a performance estimate. No test images, no negative-case specificity estimate. Patient independence and modality consistency remain unverified.",
+    "visual_review": {
+      "status": "TECHNICAL_VISUAL_REVIEW_PASSED",
+      "reviewer": "Codex visual inspection",
+      "training_pairs_viewed": 6,
+      "validation_pairs_viewed": 3,
+      "reference_geometry": "No obvious gross flip, shift or stretching observed across the nine displayed reference overlays. This does not certify medical boundary correctness.",
+      "prediction_quality": "Diffuse foreground and background false positives after six updates; not useful tumor delineation yet.",
+      "clinical_annotation_review": false,
+      "full_training_authorized_by_smoke_alone": false,
+      "next_gate": "Tiny-set overfit check on the same six training pairs; do not tune on the three validation images."
+    },
+    "training_pairs": 6,
+    "validation_pairs": 3,
+    "optimizer_steps": 6,
+    "weights_updated": true,
+    "checkpoint_reload_max_absolute_difference": 0.0,
+    "selected_pairs_hashes_verified": true,
+    "source_files_modified": false,
+    "masks_binary_and_nonempty_after_resize": true,
+    "history": [
+      {
+        "epoch": 1,
+        "training_loss": 2.0595058600107827,
+        "validation_loss": 2.0020289421081543,
+        "smoke_validation_dice": 0.04242223501205444,
+        "smoke_validation_iou": 0.022060809656977654
+      },
+      {
+        "epoch": 2,
+        "training_loss": 2.02001162370046,
+        "validation_loss": 1.9727270603179932,
+        "smoke_validation_dice": 0.03895539045333862,
+        "smoke_validation_iou": 0.020197484642267227
+      }
+    ],
+    "test_evaluated": false,
+    "full_training_started": false,
+    "next_gate": "Visual review, then separate tiny-set overfit check before full training"
+  },
+  "remaining": "Tiny-set learning check and full segmentation training/evaluation have not been completed."
+}
