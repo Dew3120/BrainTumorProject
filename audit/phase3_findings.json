@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "phase": "Phase 3 experimental baseline closeout",
+  "baseline_run": "20260921-170607-243133-baseline",
+  "baseline_mlflow_run_id": "f8bb3cf4e8f7499f9a9c5f17b7d4d937",
+  "classifier_code_commit": "15578a5d467b56ab76b51c916a971c7e28935067",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+  "best_epoch": 7,
+  "epochs_completed": 12,
+  "checkpoint_selection": "Highest observed validation macro F1; patience 5; not an independent final test",
+  "validation_metrics": {
+    "accuracy": 0.9776035834266518,
+    "balanced_accuracy": 0.9775991175502443,
+    "macro_f1": 0.9779057904419031,
+    "tumor_sensitivity": 0.9985294117647059,
+    "no_tumor_specificity": 0.9953051643192489,
+    "tumor_roc_auc": 0.9987089201877934,
+    "false_negatives": 1,
+    "false_positives": 1,
+    "recall_glioma": 0.9803921568627451,
+    "recall_meningioma": 0.9427312775330396,
+    "recall_pituitary": 0.9919678714859438,
+    "recall_no_tumor": 0.9953051643192489
+  },
+  "geometry_only_diagnostic": {
+    "experiment": "Geometry-only tumor/no-tumor classifier",
+    "features": [
+      "original_width",
+      "original_height",
+      "width_divided_by_height"
+    ],
+    "image_pixels_used": false,
+    "test_evaluated": false,
+    "train_images": 3570,
+    "validation_images": 893,
+    "validation_roc_auc": 0.819020988677161,
+    "validation_balanced_accuracy": 0.816449185307926,
+    "confusion_matrix_rows_true_columns_predicted_no_tumor_then_tumor": [
+      [
+        137,
+        76
+      ],
+      [
+        7,
+        673
+      ]
+    ],
+    "interpretation": "Above-chance results show geometry-label association, not proof that ResNet uses it. Near-chance results do not exclude other shortcuts. Original dimensions are not explicit ResNet inputs; aspect ratio can survive padding."
+  },
+  "binary_errors": [
+    {
+      "filename": "brisc2025_train_01380_me_ax_t1.jpg",
+      "kind": "false_negative",
+      "dataset_label": "meningioma",
+      "tumor_score": 1.5372235793620348e-05
+    },
+    {
+      "filename": "brisc2025_train_02833_no_co_t1.jpg",
+      "kind": "false_positive",
+      "dataset_label": "no_tumor",
+      "tumor_score": 0.9940662384033203
+    }
+  ],
+  "review_notes": [
+    "Epoch 12 had 4 FN and 2 FP; these are not saved-model counts.",
+    "One FN and one FP are confidently incorrect against dataset labels; clinical labels were not reinterpreted.",
+    "AUC 0.819 is a ranking measure, not 81.9 percent accuracy.",
+    "Geometry-only logistic regression demonstrates geometry-label association. Comparing its AUC with ResNet cannot quantify shortcut reliance or prove ResNet learned anatomical tumor features.",
+    "Calibration may improve score reliability on matching data but cannot repair missing patient independence or guarantee safety under distribution shift."
+  ],
+  "test_evaluated": false,
+  "patient_independence_verified": false,
+  "phase1_data_suitability_review_complete": false,
+  "remaining_work": [
+    "Investigate modality/source consistency",
+    "Independent patient-separated evaluation",
+    "Calibration and uncertainty evaluation on suitable held-out data"
+  ],
+  "learning_log": "The saved classifier is epoch 7, selected by validation macro F1. A dimensions-only diagnostic achieved 0.8190 validation ROC AUC, exposing label association without image pixels. The saved classifier made one binary false negative and one false positive, both with extreme raw scores. These internal results support an experimental prototype, not clinical performance claims.",
+  "mlflow_display_fix": "best_validation_* metrics and best_checkpoint_epoch now explicitly identify saved-model performance; original epoch history retained."
+}

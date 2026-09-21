@@ -7,7 +7,8 @@ __pycache__/
 .ipynb_checkpoints/
 
 data/
-audit/
+audit/*
+!audit/phase3_findings.json
 runs/
 models/
 mlruns/
