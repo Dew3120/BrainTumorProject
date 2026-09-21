@@ -1,0 +1,17 @@
+﻿.venv/
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+data/
+audit/
+runs/
+models/
+mlruns/
+mlartifacts/
+
+.env
+kaggle.json
