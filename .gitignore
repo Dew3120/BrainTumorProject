@@ -10,6 +10,7 @@ data/
 audit/*
 !audit/phase3_findings.json
 !audit/phase4_smoke_findings.json
+!audit/phase4_overfit_findings.json
 runs/
 models/
 mlruns/

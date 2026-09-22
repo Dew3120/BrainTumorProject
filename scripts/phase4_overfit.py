@@ -1,0 +1,338 @@
+"""Predetermined six-pair memorization check; separate validation is diagnostic only."""
+
+import argparse
+import csv
+import json
+import random
+import shutil
+from datetime import UTC, datetime
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import mlflow
+import numpy as np
+import phase4_segmentation_smoke as smoke
+import torch
+from monai.losses import DiceLoss
+from torch.utils.data import DataLoader, TensorDataset
+
+RULE = {
+    "max_epochs": 100,
+    "mean_training_dice_required": 0.90,
+    "minimum_individual_training_dice_required": 0.80,
+    "consecutive_epochs_required": 5,
+    "plateau_check_start_epoch": 50,
+    "plateau_window": 20,
+    "low_dice_ceiling": 0.20,
+    "plateau_range_maximum": 0.02,
+    "validation_used_for_selection_or_stopping": False,
+}
+
+
+def decision(history):
+    if len(history) >= 5 and all(
+        row["train_dice"] >= RULE["mean_training_dice_required"]
+        and row["train_min_dice"] >= RULE["minimum_individual_training_dice_required"]
+        for row in history[-5:]
+    ):
+        return "MEMORIZATION_PASS"
+    if len(history) >= RULE["plateau_check_start_epoch"]:
+        recent = [r["train_dice"] for r in history[-RULE["plateau_window"] :]]
+        if (
+            max(recent) < RULE["low_dice_ceiling"]
+            and max(recent) - min(recent) < RULE["plateau_range_maximum"]
+        ):
+            return "STOP_AND_DIAGNOSE_LOW_PLATEAU"
+    if len(history) >= RULE["max_epochs"]:
+        return "BUDGET_EXHAUSTED_DIAGNOSE_BEFORE_FULL_TRAINING"
+    return "CONTINUE"
+
+
+def write_history(path, rows):
+    with path.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def make_diagnostic_model(head):
+    model = smoke.make_model()
+    if head == "linear":
+        # Preserve the encoder and inner decoder; replace the one-channel normalized
+        # residual output block with an unrestricted linear logit layer.
+        model.model[2] = torch.nn.ConvTranspose2d(
+            16, 1, 3, stride=2, padding=1, output_padding=1
+        )
+    return model
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--smoke-run",
+        type=Path,
+        default=smoke.ROOT / "runs/segmentation/20260921-174907-092984-smoke",
+    )
+    parser.add_argument("--learning-rate", type=float, default=0.001)
+    parser.add_argument("--head", choices=("original", "linear"), default="original")
+    args = parser.parse_args()
+    if not 0 < args.learning_rate <= 0.01:
+        raise ValueError("Learning rate must be positive and at most 0.01")
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA unavailable")
+    source = args.smoke_run.resolve()
+    config_before = json.loads((source / "config.json").read_text(encoding="utf-8"))
+    if smoke.digest(smoke.__file__) != config_before["script_sha256"]:
+        raise ValueError(
+            "Smoke pipeline changed; inspect before reusing this implementation"
+        )
+    rows = smoke.read_csv(source / "selected_pairs.csv")
+    if len(rows) != 9 or len({r["path"] for r in rows}) != 9:
+        raise ValueError("Expected original nine unique smoke pairs")
+    subsets = {
+        name: [r for r in rows if r["draft_split"] == name]
+        for name in ("train", "validation")
+    }
+    if [len(subsets[p]) for p in subsets] != [6, 3] or len(
+        {r["similarity_group"] for r in rows}
+    ) != 9:
+        raise ValueError("Smoke membership or group separation changed")
+    for row in rows:
+        if row["original_split"] != "train":
+            raise ValueError("Unexpected original test data")
+        if (
+            smoke.digest(smoke.dataset_path(row["path"])) != row["sha256"]
+            or smoke.digest(smoke.dataset_path(row["mask_path"]))
+            != row["mask_sha256_verified"]
+        ):
+            raise ValueError("Image or mask changed since smoke run")
+    datasets = {name: smoke.Pairs(subset) for name, subset in subsets.items()}
+    tensors = {
+        name: (
+            torch.stack([ds[i][0] for i in range(len(ds))]).cuda(),
+            torch.stack([ds[i][1] for i in range(len(ds))]).cuda(),
+        )
+        for name, ds in datasets.items()
+    }
+    random.seed(42)
+    np.random.seed(42)
+    torch.manual_seed(42)
+    torch.cuda.manual_seed_all(42)
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = True
+    output = (
+        smoke.ROOT
+        / "runs/segmentation"
+        / (datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f") + "-overfit")
+    )
+    output.mkdir(parents=True, exist_ok=False)
+    shutil.copy2(source / "selected_pairs.csv", output / "selected_pairs.csv")
+    shutil.copy2(__file__, output / "overfit_script.py")
+    shutil.copy2(smoke.__file__, output / "phase4_segmentation_smoke.py")
+    config = {
+        "purpose": "Training-set memorization diagnostic, not a generalization claim",
+        "decision_rule": RULE,
+        "initialization": "fresh random seed 42; not resumed smoke weights",
+        "same_selected_pairs_sha256": smoke.digest(source / "selected_pairs.csv"),
+        "source_smoke_run": source.name,
+        "split_sha256": config_before["split_sha256"],
+        "overfit_script_sha256": smoke.digest(__file__),
+        "smoke_script_sha256": smoke.digest(smoke.__file__),
+        "lock_sha256": smoke.digest(smoke.ROOT / "uv.lock"),
+        "torch": str(torch.__version__),
+        "monai": str(smoke.monai.__version__),
+        "seed": 42,
+        "learning_rate": args.learning_rate,
+        "output_head": args.head,
+        "weight_decay": 0.0001,
+        "batch_size": 2,
+        "image_size": 128,
+        "channels": [8, 16, 32],
+        "precision": "FP32 for this diagnostic",
+        "augmentation": "none",
+        "train_pairs": 6,
+        "validation_pairs": 3,
+        "metric_definition": "Mean foreground hard Dice per image at sigmoid >= 0.5, in eval mode after each epoch",
+        "test_evaluated": False,
+        "patient_independence_verified": False,
+    }
+    smoke.save_json(output / "config.json", config)
+    print("PREDECLARED RULE:", json.dumps(RULE), flush=True)
+    print("RUN DIRECTORY:", output, flush=True)
+    model = make_diagnostic_model(args.head).cuda()
+    optimizer = torch.optim.AdamW(
+        model.parameters(), lr=args.learning_rate, weight_decay=0.0001
+    )
+    dice_loss = DiceLoss(sigmoid=True)
+    bce = torch.nn.BCEWithLogitsLoss()
+    loader = DataLoader(
+        TensorDataset(*tensors["train"]), batch_size=2, shuffle=True, num_workers=0
+    )
+    tracking = smoke.ROOT / "runs"
+    artifact_root = tracking / "mlflow_artifacts/segmentation-overfit"
+    artifact_root.mkdir(parents=True, exist_ok=True)
+    mlflow.set_tracking_uri(f"sqlite:///{(tracking / 'mlflow.db').as_posix()}")
+    exp = mlflow.get_experiment_by_name("brisc-segmentation-overfit")
+    exp_id = (
+        exp.experiment_id
+        if exp
+        else mlflow.create_experiment(
+            "brisc-segmentation-overfit", artifact_location=artifact_root.as_uri()
+        )
+    )
+    history = []
+    with mlflow.start_run(experiment_id=exp_id, run_name=output.name) as run:
+        config["mlflow_run_id"] = run.info.run_id
+        smoke.save_json(output / "config.json", config)
+        mlflow.log_params({k: str(v) for k, v in config.items()})
+        mlflow.log_artifact(str(output / "config.json"))
+        for epoch in range(1, RULE["max_epochs"] + 1):
+            model.train()
+            total = 0.0
+            for images, targets in loader:
+                optimizer.zero_grad(set_to_none=True)
+                logits = model(images)
+                loss = dice_loss(logits, targets) + bce(logits, targets)
+                if not torch.isfinite(loss).item():
+                    raise RuntimeError("Non-finite loss: stop and diagnose")
+                loss.backward()
+                if any(
+                    not torch.isfinite(p.grad).all().item()
+                    for p in model.parameters()
+                    if p.grad is not None
+                ):
+                    raise RuntimeError("Non-finite gradient: stop and diagnose")
+                optimizer.step()
+                total += loss.item() * len(images)
+            model.eval()
+            scores, predictions = {}, {}
+            with torch.inference_mode():
+                for name, (images, targets) in tensors.items():
+                    logits = model(images)
+                    if not torch.isfinite(logits).all().item():
+                        raise RuntimeError("Non-finite evaluation output")
+                    dice, iou = smoke.mask_scores(logits, targets)
+                    scores[name] = (
+                        dice.cpu().tolist(),
+                        iou.cpu().tolist(),
+                        (dice_loss(logits, targets) + bce(logits, targets)).item(),
+                    )
+                    predictions[name] = logits
+            train_dice, train_iou, train_eval_loss = scores["train"]
+            val_dice, val_iou, val_loss = scores["validation"]
+            record = {
+                "epoch": epoch,
+                "optimization_loss": total / 6,
+                "train_eval_loss": train_eval_loss,
+                "val_loss": val_loss,
+                "train_dice": float(np.mean(train_dice)),
+                "train_min_dice": min(train_dice),
+                "val_dice": float(np.mean(val_dice)),
+                "train_iou": float(np.mean(train_iou)),
+                "val_iou": float(np.mean(val_iou)),
+                **{
+                    f"train_pair_{i + 1}_dice": value
+                    for i, value in enumerate(train_dice)
+                },
+                **{f"val_pair_{i + 1}_dice": value for i, value in enumerate(val_dice)},
+            }
+            history.append(record)
+            write_history(output / "history.csv", history)
+            mlflow.log_metrics(
+                {k: v for k, v in record.items() if k != "epoch"}, step=epoch
+            )
+            print(
+                f"Epoch {epoch:03d}: train Dice={record['train_dice']:.4f}, worst train={record['train_min_dice']:.4f}, validation Dice={record['val_dice']:.4f}",
+                flush=True,
+            )
+            status = decision(history)
+            if status != "CONTINUE":
+                break
+        torch.save(
+            {
+                "model_state": {
+                    k: v.detach().cpu() for k, v in model.state_dict().items()
+                },
+                "epoch": epoch,
+                "config": config,
+            },
+            output / "overfit_model.pt",
+        )
+        restored = make_diagnostic_model(args.head).cuda()
+        restored.load_state_dict(
+            torch.load(
+                output / "overfit_model.pt", map_location="cpu", weights_only=True
+            )["model_state"]
+        )
+        restored.eval()
+        with torch.inference_mode():
+            delta = max(
+                (restored(tensors[name][0]) - predictions[name]).abs().max().item()
+                for name in tensors
+            )
+        if delta > 1e-6:
+            raise RuntimeError("Reload mismatch")
+        for name, subset in subsets.items():
+            smoke.contact_sheet(
+                subset,
+                datasets[name],
+                predictions[name].cpu(),
+                output / f"{name}_overlays.png",
+            )
+        figure, axis = plt.subplots(figsize=(9, 5))
+        for key, label in (
+            ("train_dice", "Training mean"),
+            ("train_min_dice", "Worst training pair"),
+            ("val_dice", "Separate validation mean (3 pairs)"),
+        ):
+            axis.plot(
+                [r["epoch"] for r in history], [r[key] for r in history], label=label
+            )
+        axis.axhline(0.9, linestyle="--", color="gray", label="Training mean target")
+        axis.set(
+            xlabel="Epoch",
+            ylabel="Foreground Dice",
+            ylim=(0, 1),
+            title="Six-pair memorization check; not a performance benchmark",
+        )
+        axis.legend(fontsize=8)
+        figure.tight_layout()
+        figure.savefig(output / "dice_curve.png", dpi=160)
+        plt.close(figure)
+        result = {
+            "status": status,
+            "decision_rule": RULE,
+            "epochs_completed": epoch,
+            "optimizer_steps": epoch * 3,
+            "final_metrics": history[-1],
+            "last_five_train_dice": [r["train_dice"] for r in history[-5:]],
+            "last_five_worst_train_dice": [r["train_min_dice"] for r in history[-5:]],
+            "checkpoint_reload_max_absolute_difference": delta,
+            "same_smoke_pairs_used": True,
+            "test_evaluated": False,
+            "validation_used_for_selection": False,
+            "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
+            "visual_review": "PENDING",
+        }
+        smoke.save_json(output / "result.json", result)
+        for file in (
+            "history.csv",
+            "result.json",
+            "selected_pairs.csv",
+            "dice_curve.png",
+            "train_overlays.png",
+            "validation_overlays.png",
+        ):
+            mlflow.log_artifact(str(output / file))
+        mlflow.set_tag("diagnostic_outcome", status)
+    (smoke.ROOT / "runs/segmentation/latest_overfit.txt").write_text(
+        str(output), encoding="utf-8"
+    )
+    print(status, flush=True)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,228 @@
+{
+  "status": "MEMORIZATION_GATE_NOT_PASSED",
+  "decision_rule": {
+    "max_epochs": 100,
+    "mean_training_dice_required": 0.9,
+    "minimum_individual_training_dice_required": 0.8,
+    "consecutive_epochs_required": 5,
+    "plateau_check_start_epoch": 50,
+    "plateau_window": 20,
+    "low_dice_ceiling": 0.2,
+    "plateau_range_maximum": 0.02,
+    "validation_used_for_selection_or_stopping": false
+  },
+  "same_six_training_and_three_validation_pairs": true,
+  "all_epoch_curves_logged_to_mlflow": true,
+  "test_evaluated": false,
+  "full_training_started": false,
+  "experiments": [
+    {
+      "run": "20260921-175439-356139-overfit",
+      "mlflow_run_id": "5fe7f81842d74c2b877da374d7cd6e50",
+      "learning_rate": 0.001,
+      "head": "original",
+      "selected_pairs_sha256": "22d8e7f62ad3aebe21ca0250e5d09bc18424fdc517e8ae398cb1cab4ccafbaf8",
+      "history_sha256": "56388175579b7b34694a37b9a7b5665b775b0aa86c62347abeeba0f7d4a187d4",
+      "result": {
+        "status": "STOP_AND_DIAGNOSE_LOW_PLATEAU",
+        "decision_rule": {
+          "max_epochs": 100,
+          "mean_training_dice_required": 0.9,
+          "minimum_individual_training_dice_required": 0.8,
+          "consecutive_epochs_required": 5,
+          "plateau_check_start_epoch": 50,
+          "plateau_window": 20,
+          "low_dice_ceiling": 0.2,
+          "plateau_range_maximum": 0.02,
+          "validation_used_for_selection_or_stopping": false
+        },
+        "epochs_completed": 50,
+        "optimizer_steps": 150,
+        "final_metrics": {
+          "epoch": 50,
+          "optimization_loss": 1.7648458083470662,
+          "train_eval_loss": 1.7630243301391602,
+          "val_loss": 1.7416621446609497,
+          "train_dice": 0.02201207137356202,
+          "train_min_dice": 0.005594761110842228,
+          "val_dice": 0.04118635536481937,
+          "train_iou": 0.011170709738507867,
+          "val_iou": 0.021413488779217005,
+          "train_pair_1_dice": 0.01792866736650467,
+          "train_pair_2_dice": 0.03100094199180603,
+          "train_pair_3_dice": 0.04405122995376587,
+          "train_pair_4_dice": 0.005594761110842228,
+          "train_pair_5_dice": 0.02260247804224491,
+          "train_pair_6_dice": 0.0108943497762084,
+          "val_pair_1_dice": 0.09472603350877762,
+          "val_pair_2_dice": 0.012717199511826038,
+          "val_pair_3_dice": 0.016115833073854446
+        },
+        "last_five_train_dice": [
+          0.022645068122074008,
+          0.02247097894238929,
+          0.022324976744130254,
+          0.02215687503727774,
+          0.02201207137356202
+        ],
+        "last_five_worst_train_dice": [
+          0.005813586059957743,
+          0.005819838028401136,
+          0.0058231535367667675,
+          0.00570776266977191,
+          0.005594761110842228
+        ],
+        "checkpoint_reload_max_absolute_difference": 0.0,
+        "same_smoke_pairs_used": true,
+        "test_evaluated": false,
+        "validation_used_for_selection": false,
+        "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
+        "visual_review": "PENDING"
+      }
+    },
+    {
+      "run": "20260922-060600-323325-overfit",
+      "mlflow_run_id": "9c41eeb86bf14ea59efa66838ce0d2a4",
+      "learning_rate": 0.01,
+      "head": "original",
+      "selected_pairs_sha256": "22d8e7f62ad3aebe21ca0250e5d09bc18424fdc517e8ae398cb1cab4ccafbaf8",
+      "history_sha256": "930b30a72246abd3f3e452efeb62664cf371a4cea36a9ac1e9ebeb26cc8f3cd1",
+      "result": {
+        "status": "STOP_AND_DIAGNOSE_LOW_PLATEAU",
+        "decision_rule": {
+          "max_epochs": 100,
+          "mean_training_dice_required": 0.9,
+          "minimum_individual_training_dice_required": 0.8,
+          "consecutive_epochs_required": 5,
+          "plateau_check_start_epoch": 50,
+          "plateau_window": 20,
+          "low_dice_ceiling": 0.2,
+          "plateau_range_maximum": 0.02,
+          "validation_used_for_selection_or_stopping": false
+        },
+        "epochs_completed": 50,
+        "optimizer_steps": 150,
+        "final_metrics": {
+          "epoch": 50,
+          "optimization_loss": 0.9787756403287252,
+          "train_eval_loss": 0.9871919751167297,
+          "val_loss": 1.062673807144165,
+          "train_dice": 0.0,
+          "train_min_dice": 0.0,
+          "val_dice": 0.0,
+          "train_iou": 0.0,
+          "val_iou": 0.0,
+          "train_pair_1_dice": 0.0,
+          "train_pair_2_dice": 0.0,
+          "train_pair_3_dice": 0.0,
+          "train_pair_4_dice": 0.0,
+          "train_pair_5_dice": 0.0,
+          "train_pair_6_dice": 0.0,
+          "val_pair_1_dice": 0.0,
+          "val_pair_2_dice": 0.0,
+          "val_pair_3_dice": 0.0
+        },
+        "last_five_train_dice": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "last_five_worst_train_dice": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "checkpoint_reload_max_absolute_difference": 0.0,
+        "same_smoke_pairs_used": true,
+        "test_evaluated": false,
+        "validation_used_for_selection": false,
+        "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
+        "visual_review": "PENDING"
+      }
+    },
+    {
+      "run": "20260922-060723-749607-overfit",
+      "mlflow_run_id": "30ac0615363e4fc0811db6a31a0a1910",
+      "learning_rate": 0.001,
+      "head": "linear",
+      "selected_pairs_sha256": "22d8e7f62ad3aebe21ca0250e5d09bc18424fdc517e8ae398cb1cab4ccafbaf8",
+      "history_sha256": "8b8d935a7c9a5c41bb44704f26a7ffb51b514e559157c3f90a5169fc3e306789",
+      "result": {
+        "status": "STOP_AND_DIAGNOSE_LOW_PLATEAU",
+        "decision_rule": {
+          "max_epochs": 100,
+          "mean_training_dice_required": 0.9,
+          "minimum_individual_training_dice_required": 0.8,
+          "consecutive_epochs_required": 5,
+          "plateau_check_start_epoch": 50,
+          "plateau_window": 20,
+          "low_dice_ceiling": 0.2,
+          "plateau_range_maximum": 0.02,
+          "validation_used_for_selection_or_stopping": false
+        },
+        "epochs_completed": 50,
+        "optimizer_steps": 150,
+        "final_metrics": {
+          "epoch": 50,
+          "optimization_loss": 1.0898003975550334,
+          "train_eval_loss": 1.0867613554000854,
+          "val_loss": 1.1210583448410034,
+          "train_dice": 0.017066085245460272,
+          "train_min_dice": 0.0,
+          "val_dice": 0.0,
+          "train_iou": 0.008911632699891925,
+          "val_iou": 0.0,
+          "train_pair_1_dice": 0.0,
+          "train_pair_2_dice": 0.0,
+          "train_pair_3_dice": 0.0,
+          "train_pair_4_dice": 0.0,
+          "train_pair_5_dice": 0.009803921915590763,
+          "train_pair_6_dice": 0.09259258955717087,
+          "val_pair_1_dice": 0.0,
+          "val_pair_2_dice": 0.0,
+          "val_pair_3_dice": 0.0
+        },
+        "last_five_train_dice": [
+          0.017058114521205425,
+          0.017042404195914667,
+          0.017050221251944702,
+          0.017058114521205425,
+          0.017066085245460272
+        ],
+        "last_five_worst_train_dice": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "checkpoint_reload_max_absolute_difference": 0.0,
+        "same_smoke_pairs_used": true,
+        "test_evaluated": false,
+        "validation_used_for_selection": false,
+        "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
+        "visual_review": "PENDING"
+      }
+    }
+  ],
+  "optimization_diagnostic": {
+    "foreground_fraction": 0.0115966796875,
+    "predicted_foreground_fraction": 0.9548746943473816,
+    "mean_foreground_logit": 0.1695501059293747,
+    "mean_background_logit": 0.17315822839736938,
+    "dice_loss": 0.9775025844573975,
+    "bce_loss": 0.7855215072631836,
+    "manual_dice_loss_difference": 0.0,
+    "all_gradients_finite": true,
+    "gradient_l2": 0.5552715481204403,
+    "diagnosis": "Predominantly foreground output, not empty-mask collapse. Loss formulation agrees with independent computation and gradients are finite/nonzero. Optimization rate/budget is a hypothesis, not a proven root cause.",
+    "next_controlled_experiment": "Fresh same-seed model, identical pairs/architecture/loss/batch size/decision rule; change only AdamW learning rate from 0.001 to 0.01. No validation-based tuning."
+  },
+  "conclusion": "No tested configuration demonstrated six-pair memorization within the predeclared rule. Neither changing learning rate nor the linear output-head variant resolved this. No root cause is established.",
+  "next_diagnostic": "Single-training-pair optimization check with per-component losses and foreground/background gradients before changing six-pair architecture or loss balance.",
+  "warning": "Training-set Dice measures memorization only. Three separate validation images are not training images and their scores were not used to tune or stop these runs."
+}
