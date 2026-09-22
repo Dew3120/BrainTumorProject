@@ -1,0 +1,188 @@
+{
+  "status": "BATCH_ENCODING_CHECKS_PASS_MEMORIZATION_NOT_PASSED",
+  "run": "20260922-062033-862162-single-pair",
+  "mlflow_run_id": "e27809de820746cba0178f9e3dd34bf6",
+  "batch_inspection": {
+    "pair": "brisc2025_train_01036_gl_sa_t1.jpg",
+    "split": "train",
+    "batch_size": 1,
+    "image": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": 0.0,
+      "max": 0.7882353067398071,
+      "mean": 0.18924561142921448,
+      "finite": true
+    },
+    "mask": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00872802734375,
+      "finite": true
+    },
+    "mask_unique_values": [
+      0.0,
+      1.0
+    ],
+    "foreground_pixels": 143,
+    "background_pixels": 16241,
+    "raw_model_logits": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": -3.2591311931610107,
+      "max": 6.771856307983398,
+      "mean": 0.5818723440170288,
+      "finite": true
+    },
+    "sigmoid_probabilities": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": 0.0370001494884491,
+      "max": 0.998855710029602,
+      "mean": 0.6166151165962219,
+      "finite": true
+    },
+    "initial_losses": {
+      "dice": 0.018306272104382515,
+      "dice_loss": 0.9818981885910034,
+      "bce_foreground_mean": 0.4612824618816376,
+      "bce_background_mean": 1.1130763292312622,
+      "bce_foreground_contribution": 0.0040260860696434975,
+      "bce_background_contribution": 1.1033613681793213,
+      "bce_total": 1.1073875427246094,
+      "total_loss": 2.0892858505249023,
+      "predicted_foreground_pixels": 12421,
+      "foreground_probability_mean": 0.6484755873680115,
+      "background_probability_mean": 0.6163346171379089
+    },
+    "component_gradients": {
+      "dice_parameter_gradient_l2": 0.01043409593675106,
+      "bce_foreground_contribution_parameter_gradient_l2": 0.00898901209896703,
+      "bce_background_contribution_parameter_gradient_l2": 0.9016496993269385
+    },
+    "checks": "PASS: shapes/dtypes/ranges/finiteness/binary mask/source hashes/manual Dice and BCE decomposition",
+    "test_or_validation_images_used": false
+  },
+  "result": {
+    "status": "STOP_AND_DIAGNOSE_LOW_PLATEAU",
+    "updates": 150,
+    "rule": {
+      "max_updates": 300,
+      "pass_dice": 0.9,
+      "consecutive_passes": 5,
+      "plateau_check_start_update": 150,
+      "plateau_window": 60,
+      "low_dice_ceiling": 0.2,
+      "plateau_range_maximum": 0.02
+    },
+    "initial_metrics": {
+      "update": 0,
+      "dice": 0.018306272104382515,
+      "dice_loss": 0.9818981885910034,
+      "bce_foreground_mean": 0.4612824618816376,
+      "bce_background_mean": 1.1130763292312622,
+      "bce_foreground_contribution": 0.0040260860696434975,
+      "bce_background_contribution": 1.1033613681793213,
+      "bce_total": 1.1073875427246094,
+      "total_loss": 2.0892858505249023,
+      "predicted_foreground_pixels": 12421,
+      "foreground_probability_mean": 0.6484755873680115,
+      "background_probability_mean": 0.6163346171379089
+    },
+    "final_metrics": {
+      "update": 150,
+      "dice": 0.017570804804563522,
+      "dice_loss": 0.9827731847763062,
+      "bce_foreground_mean": 0.6021504402160645,
+      "bce_background_mean": 0.7936204671859741,
+      "bce_foreground_contribution": 0.005255585536360741,
+      "bce_background_contribution": 0.7866936922073364,
+      "bce_total": 0.7919492721557617,
+      "total_loss": 1.7747224569320679,
+      "predicted_foreground_pixels": 16134,
+      "foreground_probability_mean": 0.5477713942527771,
+      "background_probability_mean": 0.5463204979896545
+    },
+    "test_or_validation_images_used": false,
+    "full_training_started": false,
+    "interpretation": "One-image diagnostic only; loss contributions do not by themselves establish a root cause."
+  },
+  "final_batch_inspection": {
+    "raw_model_logits": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": -11.793962478637695,
+      "max": 5.93835973739624,
+      "mean": 0.18462200462818146,
+      "finite": true
+    },
+    "sigmoid_probabilities": {
+      "shape": [
+        1,
+        1,
+        128,
+        128
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "min": 7.549946531071328e-06,
+      "max": 0.9973706007003784,
+      "mean": 0.5463331937789917,
+      "finite": true
+    },
+    "component_gradients": {
+      "dice_parameter_gradient_l2": 0.0011926006744773347,
+      "bce_foreground_contribution_parameter_gradient_l2": 0.004087312427174349,
+      "bce_background_contribution_parameter_gradient_l2": 0.5466518452445711
+    },
+    "losses": {
+      "dice": 0.017570804804563522,
+      "dice_loss": 0.9827731847763062,
+      "bce_foreground_mean": 0.6021506786346436,
+      "bce_background_mean": 0.7936204671859741,
+      "bce_foreground_contribution": 0.00525558739900589,
+      "bce_background_contribution": 0.7866936922073364,
+      "bce_total": 0.7919492125511169,
+      "total_loss": 1.7747223377227783,
+      "predicted_foreground_pixels": 16134,
+      "foreground_probability_mean": 0.5477713942527771,
+      "background_probability_mean": 0.5463205575942993
+    }
+  },
+  "interpretation": "No obvious range, dtype, binary-mask, shape or loss-formula error detected. Background BCE dominates initial parameter-gradient magnitude, and its contribution decreases while foreground BCE worsens. This motivates a controlled class-balanced-loss test, but does not establish the sole root cause.",
+  "next_experiment_proposal": "Same one image, seed, architecture, LR and stopping rule; change only BCE weighting using training-mask counts, then reassess. Do not use validation to choose weights or thresholds.",
+  "validation_and_test_used": false,
+  "full_training_started": false
+}
