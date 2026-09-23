@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "REGISTERED_NOT_STARTED",
+  "preregistration": {
+    "path": "audit/preregistration.md",
+    "sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda"
+  },
+  "baseline": {
+    "path": "runs/baseline_v1/manifest.json",
+    "sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80"
+  },
+  "experiments": [
+    {
+      "id": "glioma_segmentation_improvement",
+      "path": "experiments/glioma_segmentation_improvement",
+      "hypothesis_ids": ["H1"],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "sealed_final_evaluation",
+      "path": "experiments/sealed_final_evaluation",
+      "hypothesis_ids": ["H2", "H3", "H4"],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "application_integrity_validation",
+      "path": "experiments/application_integrity_validation",
+      "hypothesis_ids": ["H5"],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "measurement_engine_validation",
+      "path": "experiments/measurement_engine_validation",
+      "hypothesis_ids": ["H6"],
+      "status": "REGISTERED_NOT_STARTED"
+    }
+  ]
+}

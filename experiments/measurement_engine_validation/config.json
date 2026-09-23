@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "experiment_id": "measurement_engine_validation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H6"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "seed": 42,
+  "synthetic_mask_minimum": 50,
+  "gates": {
+    "pixel_area_exact_fraction": 1.0,
+    "maximum_diameter_absolute_error_pixels": 1.0,
+    "bounding_box_dimension_absolute_error_pixels": 1.0,
+    "physical_area_relative_error_maximum": 0.01,
+    "physical_diameter_relative_error_maximum": 0.02,
+    "empty_mask_not_measurable_fraction": 1.0
+  },
+  "physical_measurement_policy": "millimetres require verified row and column spacing",
+  "test_images_accessed": 0
+}

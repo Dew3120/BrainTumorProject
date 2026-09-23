@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "experiment_id": "measurement_engine_validation",
+  "status": "NOT_RUN",
+  "started_at": null,
+  "completed_at": null,
+  "source_git_head": null,
+  "metrics": {},
+  "gate_checks": {},
+  "artifacts": {},
+  "constraint_checks": {
+    "real_patient_measurements_used": false,
+    "test_images_accessed": 0
+  }
+}

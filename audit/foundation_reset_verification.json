@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "FOUNDATION_RESET_COMPLETE",
+  "completed_at": "2026-09-24T03:23:39+05:30",
+  "evidence_cutoff_git_head": "3b25787f148c2c7b0ed23e19f451df5d5c98a382",
+  "preregistration": {
+    "path": "audit/preregistration.md",
+    "sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+    "hypotheses_registered": 6,
+    "gates_frozen": true,
+    "post_result_relaxation_allowed": false
+  },
+  "baseline_v1": {
+    "manifest_path": "runs/baseline_v1/manifest.json",
+    "manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+    "verification_status": "PASS",
+    "file_count": 59,
+    "total_size_bytes": 60198748,
+    "payload_storage": "local read-only archive; manifest and manifest checksum tracked in Git",
+    "overwrite_allowed": false
+  },
+  "experiment_tracking": {
+    "registry_path": "experiments/registry.json",
+    "registry_sha256": "6a19640b662aec69cbad394d2c6fd236bcb435e9767cf2ec5c3b06b13e31ea26",
+    "verification_status": "PASS",
+    "registered_experiments": 4,
+    "required_files_per_experiment": [
+      "hypothesis.md",
+      "config.json",
+      "result.json",
+      "decision.md",
+      "artifacts/"
+    ]
+  },
+  "review_log": {
+    "path": "audit/review_log.md",
+    "initialized": true,
+    "append_only_policy_declared": true
+  },
+  "quality_checks": {
+    "ruff": "PASS",
+    "pytest": "60 passed",
+    "baseline_verifier": "PASS",
+    "experiment_registry_validator": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "constraints": {
+    "test_images_accessed": 0,
+    "test_predictions_accessed": 0,
+    "model_retraining_performed": false,
+    "model_threshold_changed": false,
+    "application_integration_performed": false
+  }
+}

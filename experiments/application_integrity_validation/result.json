@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "experiment_id": "application_integrity_validation",
+  "status": "NOT_RUN",
+  "started_at": null,
+  "completed_at": null,
+  "source_git_head": null,
+  "application_artifact_hashes": {},
+  "metrics": {},
+  "gate_checks": {},
+  "artifacts": {},
+  "constraint_checks": {
+    "sealed_test_used": false,
+    "model_retrained": false,
+    "threshold_changed": false
+  }
+}

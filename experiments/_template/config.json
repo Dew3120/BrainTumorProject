@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REPLACE_ME",
+  "status": "DRAFT",
+  "seed": 42,
+  "dataset_sha256": "REPLACE_ME",
+  "split_sha256": "REPLACE_ME",
+  "baseline_manifest_sha256": "REPLACE_ME",
+  "parameters": {},
+  "gates": {}
+}

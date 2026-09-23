@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "sealed_final_evaluation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H2", "H3", "H4"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "dataset": "BRISC Kaggle version 6",
+  "dataset_descriptor_sha256": "53f4aba8d78f245bf95f56d3c71cbf23ec916b61b2243b2ee4a3b7407b955c35",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "similarity_candidates_sha256": "dab1cdcef3173315544d7d39807b54cd356d0a39223885df840f83ebd5cca1a0",
+  "seed": 42,
+  "classification_test_images": 1000,
+  "segmentation_test_pairs": 860,
+  "classification_threshold": 0.5,
+  "segmentation_threshold": 0.5,
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity group",
+    "ci": "percentile 2.5/97.5"
+  },
+  "classifier_gates": {
+    "macro_f1_minimum": 0.9,
+    "tumor_sensitivity_minimum": 0.95,
+    "no_tumor_specificity_minimum": 0.9,
+    "each_class_recall_minimum": 0.85,
+    "top_label_ece_maximum": 0.05,
+    "macro_f1_ci95_lower_minimum": 0.85
+  },
+  "segmenter_gates": {
+    "overall_mean_dice_minimum": 0.7,
+    "macro_type_dice_minimum": 0.7,
+    "glioma_mean_dice_minimum": 0.55,
+    "meningioma_mean_dice_minimum": 0.75,
+    "pituitary_mean_dice_minimum": 0.75,
+    "zero_dice_fraction_maximum": 0.05,
+    "overall_dice_ci95_lower_minimum": 0.68,
+    "glioma_dice_ci95_lower_minimum": 0.5
+  },
+  "reliability_gates": {
+    "failure_detection_auroc_minimum": 0.75,
+    "auroc_ci95_lower_minimum": 0.7,
+    "ece_maximum": 0.05,
+    "brier_skill_strictly_above": 0.0,
+    "brier_skill_ci95_lower_strictly_above": 0.0,
+    "top20_failure_capture_fraction_minimum": 0.5,
+    "top20_zero_dice_capture_fraction_minimum": 0.5
+  },
+  "test_access_policy": "exactly one run after final artifact lock",
+  "test_images_accessed_before_start": 0
+}

@@ -8,6 +8,9 @@ __pycache__/
 
 data/
 audit/*
+!audit/preregistration.md
+!audit/review_log.md
+!audit/foundation_reset_verification.json
 !audit/classifier_training_findings.json
 !audit/segmentation_smoke_findings.json
 !audit/segmentation_overfit_gate_findings.json
@@ -35,7 +38,13 @@ audit/*
 !audit/segmenter_case_reliability.json
 !audit/segmenter_case_reliability.md
 !audit/technical_debt.md
-runs/
+/runs/
+!/runs/
+/runs/*
+!/runs/baseline_v1/
+/runs/baseline_v1/*
+!/runs/baseline_v1/manifest.json
+!/runs/baseline_v1/manifest.sha256
 models/
 mlruns/
 mlartifacts/

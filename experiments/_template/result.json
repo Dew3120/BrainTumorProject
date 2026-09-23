@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "experiment_id": "REPLACE_ME",
+  "status": "NOT_RUN",
+  "started_at": null,
+  "completed_at": null,
+  "source_git_head": null,
+  "metrics": {},
+  "artifacts": {},
+  "constraint_checks": {}
+}

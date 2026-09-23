@@ -1,0 +1,7 @@
+# Content-addressed records must keep their exact bytes on every platform.
+audit/preregistration.md -text
+audit/foundation_reset_verification.json -text
+experiments/registry.json -text
+experiments/*/config.json -text
+runs/baseline_v1/manifest.json binary
+runs/baseline_v1/manifest.sha256 binary

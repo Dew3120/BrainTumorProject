@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_id": "application_integrity_validation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H5"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "seed": 42,
+  "registered_hardware": "NVIDIA GeForce RTX 4060 Laptop GPU, 8 GB dedicated VRAM",
+  "repeatability_fixture_cases": 20,
+  "repetitions_per_case": 10,
+  "unsupported_fixture_minimum": 20,
+  "latency_warmup_runs": 10,
+  "latency_measured_runs": 100,
+  "gates": {
+    "predicted_class_agreement_fraction": 1.0,
+    "hard_mask_bitwise_agreement_fraction": 1.0,
+    "maximum_probability_difference": 1e-06,
+    "unsupported_input_rejection_fraction": 1.0,
+    "missing_spacing_mm_suppression_fraction": 1.0,
+    "verified_spacing_conversion_tolerance": 1e-06,
+    "median_latency_seconds_maximum": 2.0,
+    "p95_latency_seconds_maximum": 5.0,
+    "provenance_mismatch_stop_fraction": 1.0
+  },
+  "test_images_accessed": 0
+}

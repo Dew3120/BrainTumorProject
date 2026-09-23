@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "experiment_id": "glioma_segmentation_improvement",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H1"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "dataset": "BRISC Kaggle version 6",
+  "dataset_descriptor_sha256": "53f4aba8d78f245bf95f56d3c71cbf23ec916b61b2243b2ee4a3b7407b955c35",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "similarity_candidates_sha256": "dab1cdcef3173315544d7d39807b54cd356d0a39223885df840f83ebd5cca1a0",
+  "seed": 42,
+  "comparison": "paired candidate minus frozen baseline_v1 on identical validation cases",
+  "validation_cases": 680,
+  "glioma_validation_cases": 204,
+  "segmentation_threshold": 0.5,
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity group",
+    "paired": true,
+    "ci": "percentile 2.5/97.5"
+  },
+  "gates": {
+    "glioma_mean_dice_delta_minimum": 0.05,
+    "glioma_delta_ci95_lower_strictly_above": 0.0,
+    "overall_mean_dice_delta_minimum": -0.01,
+    "overall_delta_ci95_lower_minimum": -0.02,
+    "meningioma_mean_dice_delta_minimum": -0.02,
+    "pituitary_mean_dice_delta_minimum": -0.02,
+    "glioma_zero_dice_count_maximum": 12
+  },
+  "test_images_accessed": 0
+}
