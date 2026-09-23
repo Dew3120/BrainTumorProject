@@ -19,6 +19,9 @@ audit/*
 !audit/phase4_full_training_findings.json
 !audit/phase4_visual_review_guide.md
 !audit/phase4_failure_modes.md
+!audit/phase4_classifier_segmenter_agreement.json
+!audit/phase4_classifier_segmenter_agreement.md
+!audit/technical_debt.md
 runs/
 models/
 mlruns/

@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "status": "SECTION_C_CLASSIFIER_SEGMENTER_AGREEMENT_COMPLETE",
+  "scope": "Experimental BRISC internal validation agreement; not clinical validation",
+  "validation_images_joined": 680,
+  "validation_counts": {
+    "glioma": 204,
+    "meningioma": 227,
+    "pituitary": 249
+  },
+  "definitions": {
+    "classifier_correct": "four-class prediction equals the dataset tumor type",
+    "segmenter_success": "hard-mask Dice is at least 0.50",
+    "classifier_binary_prediction": "tumor score threshold fixed at 0.50",
+    "segmenter_nonempty": "hard mask at threshold 0.50 contains at least one foreground pixel"
+  },
+  "agreement_2x2": {
+    "classifier_correct": {
+      "segmenter_dice_at_least_0_50": 583,
+      "segmenter_dice_below_0_50": 78,
+      "total": 661
+    },
+    "classifier_incorrect": {
+      "segmenter_dice_at_least_0_50": 14,
+      "segmenter_dice_below_0_50": 5,
+      "total": 19
+    }
+  },
+  "observations": {
+    "classifier_correct_count": 661,
+    "classifier_error_count": 19,
+    "segmenter_success_count": 597,
+    "segmenter_failure_count": 83,
+    "segmenter_failures_with_correct_classifier": 78,
+    "classifier_errors_with_successful_segmenter": 14,
+    "both_failed_count": 5,
+    "zero_dice_count": 17,
+    "zero_dice_with_correct_classifier_type": 16
+  },
+  "special_cases": {
+    "flag_classifier_no_tumor_segmenter_nonempty": {
+      "count": 1,
+      "cases": [
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01380_me_ax_t1.jpg",
+          "category": "meningioma",
+          "classifier_predicted_class": "no_tumor",
+          "classifier_binary_prediction": "no_tumor",
+          "classifier_tumor_score": 1.5372235793620348e-05,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 179
+        }
+      ]
+    },
+    "flag_classifier_tumor_segmenter_empty": {
+      "count": 0,
+      "cases": []
+    },
+    "flag_classifier_correct_type_segmenter_zero_dice": {
+      "count": 16,
+      "cases": [
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00050_gl_ax_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9995744228363037,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 171
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00279_gl_ax_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9935517311096191,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 106
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00417_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9999597072601318,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 84
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00559_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9999324083328247,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 49
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00607_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9998400211334229,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 87
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00701_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9983124136924744,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 261
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00744_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.999776303768158,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 31
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00789_gl_co_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9992755055427551,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 241
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00871_gl_sa_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9996574521064758,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 112
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00874_gl_sa_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9985960125923157,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 42
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00950_gl_sa_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9999250173568726,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 179
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00972_gl_sa_t1.jpg",
+          "category": "glioma",
+          "classifier_predicted_class": "glioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9987103939056396,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 376
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01959_me_co_t1.jpg",
+          "category": "meningioma",
+          "classifier_predicted_class": "meningioma",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9980789422988892,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 24
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03839_pi_ax_t1.jpg",
+          "category": "pituitary",
+          "classifier_predicted_class": "pituitary",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9990583062171936,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 151
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03894_pi_ax_t1.jpg",
+          "category": "pituitary",
+          "classifier_predicted_class": "pituitary",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.996364176273346,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 150
+        },
+        {
+          "path": "data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04439_pi_co_t1.jpg",
+          "category": "pituitary",
+          "classifier_predicted_class": "pituitary",
+          "classifier_binary_prediction": "tumor",
+          "classifier_tumor_score": 0.9999897480010986,
+          "segmenter_dice": 0.0,
+          "segmenter_predicted_pixels": 183
+        }
+      ]
+    }
+  },
+  "verification": {
+    "device": "cuda",
+    "shared_split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "classifier_checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+    "segmenter_checkpoint_sha256": "16DC8745993EEF959D0F2924C9147A45320673F6FC0B465AB08F8AD7B2F723DE",
+    "classifier_validation_images_recomputed": 893,
+    "classifier_maximum_metric_difference": 0.0,
+    "classifier_maximum_probability_difference": 0.0,
+    "segmenter_validation_images_recomputed": 680,
+    "segmenter_maximum_metric_difference": 0.0,
+    "segmenter_maximum_per_image_difference": 0.0,
+    "test_images_accessed": 0
+  },
+  "limitations": [
+    "BRISC patient independence is not verified.",
+    "The sealed test set was not evaluated.",
+    "Agreement on an internal validation split does not establish clinical validity or cross-dataset generalization."
+  ]
+}
