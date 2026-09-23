@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "status": "CLASSIFIER_BINARY_TEMPERATURE_SCALING_COMPLETE",
+  "scope": "Post-hoc BRISC internal-validation calibration; not clinical validation",
+  "method": {
+    "name": "binary scalar temperature scaling",
+    "binary_margin": "logsumexp(glioma, meningioma, pituitary logits) - no_tumor logit",
+    "fit_objective": "binary tumor/no-tumor negative log-likelihood",
+    "four_class_nll_used_for_fitting": false,
+    "case_weighting": "every validation image weighted equally",
+    "temperature_bounds": [
+      0.05,
+      20.0
+    ],
+    "cross_fitting": "five held-out folds; exact similarity-aware fold assignment reused from the accepted multiclass calibration",
+    "reported_metrics_probability_source": "out-of-fold probabilities only; each case was calibrated by a temperature fitted without that case or its similarity group"
+  },
+  "decision_rules": {
+    "all_checks_must_pass": true,
+    "metric_tie_break": null,
+    "temperature_accepted_for_application": false,
+    "on_failure": "Use raw classifier probabilities for both four-class and binary outputs"
+  },
+  "validation_cases": 893,
+  "tumor_cases": 680,
+  "no_tumor_cases": 213,
+  "similarity_groups": 784,
+  "multi_member_similarity_groups": 79,
+  "largest_similarity_group": 6,
+  "folds": [
+    {
+      "fold": 1,
+      "temperature": 1.3484386454998285,
+      "fit_cases": 714,
+      "evaluation_cases": 179,
+      "fit_similarity_groups": 627,
+      "evaluation_similarity_groups": 157,
+      "evaluation_tumor_cases": 136,
+      "evaluation_no_tumor_cases": 43,
+      "evaluation_class_counts": {
+        "glioma": 40,
+        "meningioma": 46,
+        "no_tumor": 43,
+        "pituitary": 50
+      }
+    },
+    {
+      "fold": 2,
+      "temperature": 1.060535544764844,
+      "fit_cases": 714,
+      "evaluation_cases": 179,
+      "fit_similarity_groups": 627,
+      "evaluation_similarity_groups": 157,
+      "evaluation_tumor_cases": 136,
+      "evaluation_no_tumor_cases": 43,
+      "evaluation_class_counts": {
+        "glioma": 41,
+        "meningioma": 45,
+        "no_tumor": 43,
+        "pituitary": 50
+      }
+    },
+    {
+      "fold": 3,
+      "temperature": 1.3431411940945204,
+      "fit_cases": 714,
+      "evaluation_cases": 179,
+      "fit_similarity_groups": 627,
+      "evaluation_similarity_groups": 157,
+      "evaluation_tumor_cases": 137,
+      "evaluation_no_tumor_cases": 42,
+      "evaluation_class_counts": {
+        "glioma": 41,
+        "meningioma": 46,
+        "no_tumor": 42,
+        "pituitary": 50
+      }
+    },
+    {
+      "fold": 4,
+      "temperature": 1.2566786375740595,
+      "fit_cases": 715,
+      "evaluation_cases": 178,
+      "fit_similarity_groups": 628,
+      "evaluation_similarity_groups": 156,
+      "evaluation_tumor_cases": 135,
+      "evaluation_no_tumor_cases": 43,
+      "evaluation_class_counts": {
+        "glioma": 41,
+        "meningioma": 45,
+        "no_tumor": 43,
+        "pituitary": 49
+      }
+    },
+    {
+      "fold": 5,
+      "temperature": 1.3510813074349382,
+      "fit_cases": 715,
+      "evaluation_cases": 178,
+      "fit_similarity_groups": 627,
+      "evaluation_similarity_groups": 157,
+      "evaluation_tumor_cases": 136,
+      "evaluation_no_tumor_cases": 42,
+      "evaluation_class_counts": {
+        "glioma": 41,
+        "meningioma": 45,
+        "no_tumor": 42,
+        "pituitary": 50
+      }
+    }
+  ],
+  "final_temperature_all_validation": 1.285966399541037,
+  "final_temperature_role": {
+    "status": "proposed operational value only",
+    "used_for_reported_metrics": false,
+    "eligible_for_later_application_integration": false
+  },
+  "metrics": {
+    "raw": {
+      "nll": 0.019244405090774963,
+      "brier": 0.0022459456828827665,
+      "ece": 0.0020682140151788257,
+      "mce": 0.011096016222189054,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 90,
+          "minimum_confidence": 1.8587159495533475e-08,
+          "maximum_confidence": 6.37225483755482e-05,
+          "mean_confidence": 1.509488892205729e-05,
+          "observed_accuracy": 0.011111111111111112,
+          "absolute_gap": 0.011096016222189054
+        },
+        {
+          "bin": 2,
+          "count": 90,
+          "minimum_confidence": 7.102496022654001e-05,
+          "maximum_confidence": 0.001465875864789012,
+          "mean_confidence": 0.00043972938528274107,
+          "observed_accuracy": 0.0,
+          "absolute_gap": 0.00043972938528274107
+        },
+        {
+          "bin": 3,
+          "count": 90,
+          "minimum_confidence": 0.0014660299372866858,
+          "maximum_confidence": 0.9972270997024797,
+          "mean_confidence": 0.629501350663998,
+          "observed_accuracy": 0.6222222222222222,
+          "absolute_gap": 0.007279128441775806
+        },
+        {
+          "bin": 4,
+          "count": 89,
+          "minimum_confidence": 0.9972388767384484,
+          "maximum_confidence": 0.9995002829258409,
+          "mean_confidence": 0.9986739835191142,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.0013260164808858166
+        },
+        {
+          "bin": 5,
+          "count": 89,
+          "minimum_confidence": 0.9995341080901832,
+          "maximum_confidence": 0.9998477858440848,
+          "mean_confidence": 0.9997172488357859,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.00028275116421405677
+        },
+        {
+          "bin": 6,
+          "count": 89,
+          "minimum_confidence": 0.9998524888168605,
+          "maximum_confidence": 0.9999612450795643,
+          "mean_confidence": 0.9999129148694429,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 8.708513055710743e-05
+        },
+        {
+          "bin": 7,
+          "count": 89,
+          "minimum_confidence": 0.9999615491487086,
+          "maximum_confidence": 0.9999880191613751,
+          "mean_confidence": 0.9999773913676615,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 2.2608632338494417e-05
+        },
+        {
+          "bin": 8,
+          "count": 89,
+          "minimum_confidence": 0.9999880660288478,
+          "maximum_confidence": 0.9999980554308073,
+          "mean_confidence": 0.9999937415141607,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 6.258485839349959e-06
+        },
+        {
+          "bin": 9,
+          "count": 89,
+          "minimum_confidence": 0.9999980592167846,
+          "maximum_confidence": 0.9999997957406657,
+          "mean_confidence": 0.9999991928705401,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 8.071294599343304e-07
+        },
+        {
+          "bin": 10,
+          "count": 89,
+          "minimum_confidence": 0.9999997970215234,
+          "maximum_confidence": 0.9999999999188283,
+          "mean_confidence": 0.9999999489207958,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 5.1079204199666606e-08
+        }
+      ]
+    },
+    "cross_fitted_temperature_scaled": {
+      "nll": 0.019611441079161893,
+      "brier": 0.0022920769433953337,
+      "ece": 0.002316560133999226,
+      "mce": 0.010976801635856515,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 90,
+          "minimum_confidence": 4.5766340085119207e-07,
+          "maximum_confidence": 0.00043908080748129223,
+          "mean_confidence": 0.00013430947525459633,
+          "observed_accuracy": 0.011111111111111112,
+          "absolute_gap": 0.010976801635856515
+        },
+        {
+          "bin": 2,
+          "count": 90,
+          "minimum_confidence": 0.00046610240764632054,
+          "maximum_confidence": 0.006153983900172272,
+          "mean_confidence": 0.0022917051517176695,
+          "observed_accuracy": 0.0,
+          "absolute_gap": 0.0022917051517176695
+        },
+        {
+          "bin": 3,
+          "count": 90,
+          "minimum_confidence": 0.006235402064208769,
+          "maximum_confidence": 0.988998524961745,
+          "mean_confidence": 0.6237028915354952,
+          "observed_accuracy": 0.6222222222222222,
+          "absolute_gap": 0.0014806693132729531
+        },
+        {
+          "bin": 4,
+          "count": 89,
+          "minimum_confidence": 0.9890668006469686,
+          "maximum_confidence": 0.9973124439250525,
+          "mean_confidence": 0.9943857343807773,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.005614265619222736
+        },
+        {
+          "bin": 5,
+          "count": 89,
+          "minimum_confidence": 0.9973281211971257,
+          "maximum_confidence": 0.998944191272799,
+          "mean_confidence": 0.9982558464052778,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.001744153594722242
+        },
+        {
+          "bin": 6,
+          "count": 89,
+          "minimum_confidence": 0.9989454924224285,
+          "maximum_confidence": 0.99963864725057,
+          "mean_confidence": 0.9993527689234292,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.0006472310765708311
+        },
+        {
+          "bin": 7,
+          "count": 89,
+          "minimum_confidence": 0.9996401588644407,
+          "maximum_confidence": 0.9998772684057443,
+          "mean_confidence": 0.9997604550204439,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.00023954497955613885
+        },
+        {
+          "bin": 8,
+          "count": 89,
+          "minimum_confidence": 0.9998782210885739,
+          "maximum_confidence": 0.9999733527610389,
+          "mean_confidence": 0.9999310456501833,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 6.895434981668558e-05
+        },
+        {
+          "bin": 9,
+          "count": 89,
+          "minimum_confidence": 0.9999740689187381,
+          "maximum_confidence": 0.9999961988180691,
+          "mean_confidence": 0.9999864990629471,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 1.3500937052879358e-05
+        },
+        {
+          "bin": 10,
+          "count": 89,
+          "minimum_confidence": 0.9999962532083861,
+          "maximum_confidence": 0.9999999960016754,
+          "mean_confidence": 0.9999988601009295,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 1.1398990704680756e-06
+        }
+      ]
+    },
+    "bootstrap_paired_deltas": {
+      "nll": {
+        "point_estimate": 0.0003670359883869295,
+        "bootstrap_mean": 0.00031474762142362744,
+        "ci95_lower": -0.002839069677885313,
+        "ci95_upper": 0.0024148078963470584
+      },
+      "brier": {
+        "point_estimate": 4.6131260512567284e-05,
+        "bootstrap_mean": 4.514555185549406e-05,
+        "ci95_lower": -1.604818492582057e-05,
+        "ci95_upper": 9.188031783257029e-05
+      },
+      "ece": {
+        "point_estimate": 0.0002483461188204001,
+        "bootstrap_mean": 0.0007351548150085034,
+        "ci95_lower": -0.00018007401579073332,
+        "ci95_upper": 0.0018311198104536191
+      },
+      "mce": {
+        "point_estimate": -0.00011921458633253924,
+        "bootstrap_mean": -0.000616677952219628,
+        "ci95_lower": -0.008318022208338448,
+        "ci95_upper": 0.00811912928051919
+      }
+    }
+  },
+  "gate": {
+    "status": "FAIL",
+    "checks": {
+      "binary_nll_improved": false,
+      "binary_brier_improved": false,
+      "binary_ece_at_most_0_05": true,
+      "brier_delta_bootstrap_ci95_upper_below_zero": false,
+      "binary_threshold_decisions_identical": true
+    },
+    "rule": "All checks must pass; there is no metric tie-break."
+  },
+  "verification": {
+    "classifier_run": "20260921-170607-243133-baseline",
+    "checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+    "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "accepted_audit_inventory_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "similarity_candidates_sha256": "dab1cdcef3173315544d7d39807b54cd356d0a39223885df840f83ebd5cca1a0",
+    "validation_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+    "reused_fold_assignments_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+    "prior_multiclass_calibration_sha256": "9b8112e3077b57ebf51bbaf9bc2da6bb403b1ecf212a81196d04bf9565a0dcf2",
+    "script_sha256": "381c5c55fb9e9de661f289fb1802b746b3c8b196be3b7e5f8640ed84ba860633",
+    "inference_device": "cuda",
+    "maximum_stored_probability_difference": 1.3074738869356395e-07,
+    "maximum_stored_metric_difference": 0.0,
+    "maximum_binary_collapse_difference": 4.440892098500626e-16,
+    "maximum_prior_binary_metric_difference": 2.42861286636753e-17,
+    "fold_groups_disjoint": true,
+    "binary_decisions_changed_at_0_50": 0,
+    "test_images_accessed": 0,
+    "test_predictions_accessed": 0,
+    "model_retrained": false,
+    "threshold_changed": false
+  },
+  "artifacts": {
+    "reliability_diagram": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\classifier_binary_reliability_diagram.png",
+    "fold_results": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\classifier_binary_calibration_fold_results.csv",
+    "out_of_fold_predictions": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\classifier_binary_calibration_oof_predictions.csv"
+  },
+  "limitations": [
+    "The classifier checkpoint was selected using this validation partition before calibration.",
+    "The proposed all-validation temperature is not used for reported metrics.",
+    "Similarity groups are not verified patient identifiers.",
+    "Patient independence and cross-dataset generalization remain unverified."
+  ]
+}
