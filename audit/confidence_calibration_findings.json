@@ -13,6 +13,32 @@
     "status": "FAIL",
     "result_path": "E:\\BrainTumorProject\\audit\\segmenter_pixel_calibration.json",
     "proposed_temperature": 2.5387340499120445,
-    "accepted_for_application": false
+    "accepted_for_application": false,
+    "finding": "Segmenter pixel calibration improved foreground reliability substantially but missed the predeclared ECE threshold by 0.0014 and slightly worsened background NLL. The gate was not relaxed. Raw segmenter probabilities remain the accepted output.",
+    "raw_foreground": {
+      "ece": 0.07551321,
+      "mce": 0.43750226,
+      "nll": 0.59544472
+    },
+    "oof_calibrated_foreground": {
+      "ece": 0.05141609,
+      "mce": 0.25688457,
+      "nll": 0.28034549
+    },
+    "glioma_ece": {
+      "raw": 0.13110488,
+      "oof_calibrated": 0.09463909
+    },
+    "foreground_brier_change_ci95": [
+      -0.00951966,
+      -0.00820665
+    ],
+    "gate_failures": {
+      "foreground_ece_excess_over_0_05": 0.00141609,
+      "background_nll_increase": 0.00030038
+    },
+    "gate_relaxed": false,
+    "further_pixel_calibration_variants_allowed": false,
+    "accepted_probability_source": "raw segmenter probabilities"
   }
 }
