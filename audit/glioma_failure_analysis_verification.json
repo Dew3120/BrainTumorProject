@@ -1,0 +1,14 @@
+{
+  "status": "COMPLETE",
+  "checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "device": "cuda",
+  "threshold": 0.5,
+  "validation_images_recomputed": 680,
+  "glioma_images_analyzed": 204,
+  "glioma_failures_analyzed": 60,
+  "maximum_stored_metric_difference": 0.0,
+  "recomputed_glioma_mean_dice": 0.608951638747171,
+  "visual_review_complete": true,
+  "test_images_accessed": 0
+}

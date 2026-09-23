@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "decomposition_cases": 60,
+  "sharpness_cases": 204,
+  "matched_pairs": 10,
+  "literature_primary_papers": 19,
+  "test_images_accessed": 0,
+  "artifacts": [
+    {
+      "path": "audit/glioma_failure_decomposition.csv",
+      "sha256": "c9b754a8bea61a4ef591f2371d676324b6dc039612ffc88bdbc2c791ffcf8290",
+      "bytes": 61998
+    },
+    {
+      "path": "audit/glioma_failure_findings.md",
+      "sha256": "ff56e9e77aafa7b6dcc6ccb684e37fa8950d5b6c657d9d67f0a7f2685243c836",
+      "bytes": 3519
+    },
+    {
+      "path": "audit/glioma_boundary_sharpness.csv",
+      "sha256": "49466a5a8f3d6139fd7c536e393af4e3508cfa0834e8b3e992dc61b4fc8ba28f",
+      "bytes": 56631
+    },
+    {
+      "path": "audit/glioma_case_study.md",
+      "sha256": "87bfc76e16a753cc1135a233a1e50b1439d76e8455837fb8e784350721900cb1",
+      "bytes": 5312
+    },
+    {
+      "path": "audit/glioma_case_study_pairs.png",
+      "sha256": "aea535fdefd94dc8d2a277e17c79239bb3e2eff0fb5b923a668283e467980ba1",
+      "bytes": 2089439
+    },
+    {
+      "path": "audit/glioma_subgroup_analysis.md",
+      "sha256": "68427119fc4a5ae2545f87a271e6a00c01bcda22c20780e540ab1fa63aee9e6f",
+      "bytes": 2723
+    },
+    {
+      "path": "audit/glioma_visual_review_annotations.csv",
+      "sha256": "01bf1dfcbee0553f9fc778eab00c67c4fec5e5ddcff27c805d1472d1ec7cb37f",
+      "bytes": 30447
+    },
+    {
+      "path": "audit/glioma_failure_analysis_verification.json",
+      "sha256": "59555ca6192953296d0473c66b1884e9bdbc82330e207a477415e6d7b2b9f353",
+      "bytes": 520
+    },
+    {
+      "path": "audit/glioma_failure_review_01.png",
+      "sha256": "130f2f0bf6dba22d316c432d0b48fd2ae720a418da643163e92435239a38015b",
+      "bytes": 151770
+    },
+    {
+      "path": "audit/glioma_failure_review_02.png",
+      "sha256": "a31ecca35613347f29770fa0254b00783c09a9ee08dfbe2dfaed30aa89f501d9",
+      "bytes": 157156
+    },
+    {
+      "path": "audit/glioma_failure_review_03.png",
+      "sha256": "a4a1fee079d7dbdc5e3d242a417eee80350e1a3e5315e00eb1cdd78387967ba1",
+      "bytes": 175811
+    },
+    {
+      "path": "audit/glioma_failure_review_04.png",
+      "sha256": "1378e75dea23046e58d56dc0fade28069c6e23531e20d7401783f842d453027d",
+      "bytes": 176314
+    },
+    {
+      "path": "audit/glioma_failure_review_05.png",
+      "sha256": "e2ab21883461c0b4f4deb8bedcb477b18472c7dd5db2eda2e4a1c7e7f2f0765c",
+      "bytes": 204577
+    },
+    {
+      "path": "audit/glioma_failure_review_06.png",
+      "sha256": "f1955f09dd7b9d2d0194e84477d5a954577a4297efe8eb5db2261dcd7f6bf4aa",
+      "bytes": 200770
+    },
+    {
+      "path": "docs/glioma_literature_review.md",
+      "sha256": "694c6a7a2dd1c0af2e9b31c073b722d42feefa8e42fe01f4bca2bb307b71bce6",
+      "bytes": 12948
+    }
+  ]
+}

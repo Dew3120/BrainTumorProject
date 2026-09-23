@@ -39,6 +39,7 @@ audit/*
 !audit/segmenter_case_reliability.json
 !audit/segmenter_case_reliability.md
 !audit/technical_debt.md
+!audit/glioma_*
 /runs/
 !/runs/
 /runs/*
