@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e01_lcc_filter",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H1"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "validation_cases": 680,
+  "threshold": 0.5,
+  "connectivity": 8,
+  "operation": "keep only the largest predicted component; equal-area ties use the component with the lexicographically smallest top-left (y, x) pixel",
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.02,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "role": "secondary uncertainty interval; not part of the local gate"
+  },
+  "test_images_accessed": 0
+}

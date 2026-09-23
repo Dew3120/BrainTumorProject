@@ -23,6 +23,12 @@
       "status": "REGISTERED_NOT_STARTED"
     },
     {
+      "id": "e01_lcc_filter",
+      "path": "experiments/e01_lcc_filter",
+      "hypothesis_ids": ["H1"],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": ["H2", "H3", "H4"],
