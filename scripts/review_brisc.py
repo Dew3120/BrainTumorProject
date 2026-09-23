@@ -1,11 +1,11 @@
-"""Reproducible Phase 1 review. Never edits raw data or chooses medical labels."""
-from pathlib import Path
-from collections import Counter, defaultdict
-from datetime import datetime
+"""Reproducible data suitability review that never edits raw data or medical labels."""
 import argparse
 import csv
 import hashlib
 import json
+from collections import defaultdict
+from datetime import UTC, datetime
+from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
@@ -32,7 +32,7 @@ def main():
     rows = read_csv(audit / "inventory.csv")
     pairs = read_csv(audit / "similarity_candidates.csv")
     raw = project / "data/raw/brisc/brisc2025"
-    output = project / "audit/reviews" / datetime.now().strftime("%Y%m%d-%H%M%S")
+    output = project / "audit/reviews" / datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     output.mkdir(parents=True, exist_ok=False)
 
     print("Verifying every file listed in the publisher manifest...", flush=True)
@@ -61,7 +61,6 @@ def main():
 
     groups = defaultdict(list)
     exact = defaultdict(list)
-    by_path = {row["path"]: row for row in rows}
     for row in rows:
         groups[row["similarity_group"]].append(row)
         exact[row["pixel_sha256"]].append(row)

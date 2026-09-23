@@ -6,7 +6,11 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_failure_analysis import component_statistics, primary_mode_table, summarize
+from segmentation_failure_analysis import (
+    component_statistics,
+    primary_mode_table,
+    summarize,
+)
 
 
 def test_empty_and_nonempty_zero_overlap_remain_separate():

@@ -1,4 +1,4 @@
-# Phase 4 uncertainty signals
+# Segmentation uncertainty analysis
 
 This analysis uses the accepted classifier and segmenter on the held-out BRISC validation partition. It compares all 17 zero-Dice cases with the 20 highest-Dice cases. No model was retrained, thresholds remained at 0.50, and no test image was accessed.
 
@@ -38,18 +38,18 @@ Median classifier predicted-class confidence is 0.9964 for zero-Dice cases and 0
 
 ### 3. Classifier/segmenter decoupling
 
-Across all 680 paired validation cases, Spearman correlation between classifier predicted-class confidence and segmenter Dice is 0.3252; correlation with segmenter mean probability inside the reference is 0.1660. These are weak-to-moderate and weak relationships, respectively. By comparison, segmenter mean inside-reference probability correlates with its own Dice at 0.5428. Section C also found that 78 of 83 segmentation failures retained the correct classifier type, and 16 of 17 zero-Dice cases retained it. Classifier confidence cannot be used as a proxy for segmentation reliability.
+Across all 680 paired validation cases, Spearman correlation between classifier predicted-class confidence and segmenter Dice is 0.3252; correlation with segmenter mean probability inside the reference is 0.1660. These are weak-to-moderate and weak relationships, respectively. By comparison, segmenter mean inside-reference probability correlates with its own Dice at 0.5428. classifier/segmenter agreement audit also found that 78 of 83 segmentation failures retained the correct classifier type, and 16 of 17 zero-Dice cases retained it. Classifier confidence cannot be used as a proxy for segmentation reliability.
 
-### 4. Phase 5 calibration hand-off
+### 4. Calibration hand-off
 
-The observed problem is miscalibration and over-confidence, not global under-confidence. Phase 5 should calibrate the classifier and segmenter separately. The classifier needs class-probability calibration and an abstention/disagreement rule because its no-tumor false negative is confidently wrong. The segmenter needs pixel-level reliability analysis inside and outside reference regions, calibration curves, and case-level uncertainty or abstention signals that expose misplaced foreground. Calibration can make confidence more honest; it cannot repair incorrect localization or replace retraining and external validation.
+The observed problem is miscalibration and over-confidence, not global under-confidence. calibration and uncertainty work should calibrate the classifier and segmenter separately. The classifier needs class-probability calibration and an abstention/disagreement rule because its no-tumor false negative is confidently wrong. The segmenter needs pixel-level reliability analysis inside and outside reference regions, calibration curves, and case-level uncertainty or abstention signals that expose misplaced foreground. Calibration can make confidence more honest; it cannot repair incorrect localization or replace retraining and external validation.
 
-## Manual review still required
+## Manual review result
 
-The review panel contains the single classifier-no-tumor/segmenter-non-empty case and four deterministically sampled zero-Dice gliomas. Confirm whether the meningioma reference mask is incomplete and whether the glioma cases share a visible pattern before accepting Section D.
+The user reviewed the single classifier-no-tumor/segmenter-non-empty case and four deterministically sampled zero-Dice gliomas. The meningioma reference covers a visible lesion; the scattered prediction is therefore treated as a segmentation localization failure rather than an incomplete reference. The four sampled gliomas were anatomically heterogeneous. A separate all-17 position check did not confirm a consistent skull-base bias.
 
-- Panel: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\section_d_manual_review.png`
-- Selection CSV: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\section_d_manual_review_selections.csv`
+- Panel: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\uncertainty_manual_review.png`
+- Selection CSV: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\uncertainty_manual_review_selections.csv`
 
 ## Scope
 

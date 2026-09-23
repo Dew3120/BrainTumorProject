@@ -1,4 +1,4 @@
-# Phase 4 failure-mode analysis
+# Segmentation failure-mode analysis
 
 This analysis covers the 83 held-out BRISC validation cases with hard-mask Dice below 0.50 at the unchanged probability threshold of 0.50. The epoch-56 checkpoint was reloaded, all 680 validation predictions were recomputed exactly, and no test image was accessed.
 
@@ -51,7 +51,7 @@ Severe over-prediction accounts for 62.5% of meningioma failures and 26.7% of pi
 
 ## Technical cause versus task difficulty
 
-Only 0.0% of failed references touch a model-space edge. Together with the passed Section A alignment review, the failure distribution does not indicate a common flip, shift, pairing, or edge-clipping defect.
+Only 0.0% of failed references touch a model-space edge. Together with the passed visual audit alignment review, the failure distribution does not indicate a common flip, shift, pairing, or edge-clipping defect.
 
 The dominant cross-category topology signal is fragmentation: 84.3% of all weak cases contain multiple predicted components, and 80.7% contain at least one predicted component with no reference overlap. This is a model-output failure pattern, not evidence of a shared image/mask mapping defect.
 

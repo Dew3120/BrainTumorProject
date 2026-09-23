@@ -1,10 +1,10 @@
-# Phase 4 reproducibility hardening
+# Segmentation reproducibility audit
 
 ## Determinism conclusion
 
 **Controlled, but not fully guaranteed.** The original training run seeded Python, NumPy, Torch CPU/CUDA, the shuffle generator, and workers. It disabled cuDNN benchmarking, enabled cuDNN deterministic mode, used no augmentation, and used zero dropout. Data order and preprocessing are therefore controlled on the recorded stack.
 
-The run did not call `torch.use_deterministic_algorithms(True)`, did not record `CUBLAS_WORKSPACE_CONFIG`, and did not record a TF32 policy. A complete 68-epoch replay was intentionally not performed because Section E prohibits retraining. The current CUDA stack passed two bitwise-identical synthetic forward/backward/AdamW/AMP steps with PyTorch's strict deterministic guard enabled; this is an operation-path check, not proof that the historical full run is bitwise reproducible everywhere.
+The run did not call `torch.use_deterministic_algorithms(True)`, did not record `CUBLAS_WORKSPACE_CONFIG`, and did not record a TF32 policy. A complete 68-epoch replay was intentionally not performed because reproducibility audit prohibits retraining. The current CUDA stack passed two bitwise-identical synthetic forward/backward/AdamW/AMP steps with PyTorch's strict deterministic guard enabled; this is an operation-path check, not proof that the historical full run is bitwise reproducible everywhere.
 
 | Control | Recorded |
 |---|---:|
@@ -37,20 +37,20 @@ This restates and independently repeats the successful checkpoint reload: epoch 
 
 ## Run manifest
 
-- Manifest: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\phase4_manifest.json`
-- Manifest SHA256: `a0309fbf65f1ccdc9c21ea172c4fba65c46083f71b7bd0efdc4f98399eaf06f2`
+- Manifest: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\segmentation_run_manifest.json`
+- Manifest SHA256: `610e39075529f99419734c72c8c114e6835d9929375ddfe67498321f6cd0bab8`
 - Hashed run files: 25
 - Source-equivalent training commit: `67ef81458911e616524c6c9bab34fe371703e983`
 - Manifest audit base commit: `791d2f829067cb062c945bf9ffe3a7d4fbd00c47`
 
-The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted Phase 4 findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
+The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
 
-## Section D positional follow-up for Section F
+## Positional-bias follow-up
 
 A consistent skull-base positional bias was not confirmed across all 17 zero-Dice cases. Errors were spatially heterogeneous, with a modest lower-half shift: 11/17 centroids were below the image midline and median normalized y was 0.534 versus 0.463 among nonzero-Dice cases; only 1/17 centroids fell below y=0.60 and the median lower-third pixel fraction was 0.008.
 
-Section F must also retain the tumor-type confound (12/17 zero-Dice cases are glioma while 15/20 highest-Dice cases are meningioma) and quote the Section D Spearman correlations directly: classifier confidence versus segmenter Dice `0.3252`, and classifier confidence versus segmenter inside-reference probability `0.1660`.
+The consolidated findings must also retain the tumor-type confound (12/17 zero-Dice cases are glioma while 15/20 highest-Dice cases are meningioma) and quote the uncertainty-analysis Spearman correlations directly: classifier confidence versus segmenter Dice `0.3252`, and classifier confidence versus segmenter inside-reference probability `0.1660`.
 
 ## Scope
 
-No model was retrained, no threshold changed, no test image was accessed, and Phase 5 was not started.
+No model was retrained, no threshold changed, no test image was accessed, and calibration and uncertainty work was not started.

@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import mlflow
-import phase4_segmentation_smoke as smoke
+import segmentation_smoke_test as smoke
 import torch
 from monai.losses import DiceLoss
 
@@ -216,7 +216,7 @@ def main():
     }
     smoke.save_json(output / "config.json", config)
     shutil.copy2(__file__, output / "single_pair_script.py")
-    shutil.copy2(smoke.__file__, output / "phase4_segmentation_smoke.py")
+    shutil.copy2(smoke.__file__, output / "segmentation_smoke_test.py")
     print("PREDECLARED RULE:", json.dumps(rule), flush=True)
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=0.0001)
     tracking = smoke.ROOT / "runs"

@@ -1,4 +1,4 @@
-"""Extract Phase 4 uncertainty signals without retraining or test-set access."""
+"""Extract Segmentation uncertainty analysis without retraining or test-set access."""
 
 import argparse
 import csv
@@ -7,15 +7,15 @@ from collections import Counter
 from contextlib import nullcontext
 from pathlib import Path
 
+import classifier_segmenter_agreement as agreement
 import mlflow
 import numpy as np
-import phase3_classifier as classifier
-import phase4_classifier_segmenter_agreement as agreement
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
-import phase4_train as segmenter
-import phase4_visual_audit as visual
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
+import segmentation_visual_audit as visual
 import torch
+import train_classifier as classifier
+import train_segmenter as segmenter
 from monai.losses import DiceLoss
 from scipy.stats import spearmanr
 from torch.utils.data import DataLoader
@@ -313,8 +313,8 @@ def write_markdown(path, result):
         "median"
     ]
     correlations = result["cross_model_correlations_all_680"]
-    section_c = result["section_c_context"]
-    content = f"""# Phase 4 uncertainty signals
+    section_c = result["agreement_context"]
+    content = f"""# Segmentation uncertainty analysis
 
 This analysis uses the accepted classifier and segmenter on the held-out BRISC validation partition. It compares all 17 zero-Dice cases with the 20 highest-Dice cases. No model was retrained, thresholds remained at 0.50, and no test image was accessed.
 
@@ -347,15 +347,15 @@ Median classifier predicted-class confidence is {fmt(zero_classifier)} for zero-
 
 ### 3. Classifier/segmenter decoupling
 
-Across all 680 paired validation cases, Spearman correlation between classifier predicted-class confidence and segmenter Dice is {correlations["spearman_classifier_confidence_vs_segmenter_dice"]:.4f}; correlation with segmenter mean probability inside the reference is {correlations["spearman_classifier_confidence_vs_segmenter_mean_probability_inside_reference"]:.4f}. These are weak-to-moderate and weak relationships, respectively. By comparison, segmenter mean inside-reference probability correlates with its own Dice at {correlations["spearman_segmenter_mean_probability_inside_reference_vs_dice"]:.4f}. Section C also found that {section_c["segmenter_failures_with_correct_classifier"]} of {section_c["segmenter_failure_count"]} segmentation failures retained the correct classifier type, and {section_c["zero_dice_with_correct_classifier_type"]} of {section_c["zero_dice_count"]} zero-Dice cases retained it. Classifier confidence cannot be used as a proxy for segmentation reliability.
+Across all 680 paired validation cases, Spearman correlation between classifier predicted-class confidence and segmenter Dice is {correlations["spearman_classifier_confidence_vs_segmenter_dice"]:.4f}; correlation with segmenter mean probability inside the reference is {correlations["spearman_classifier_confidence_vs_segmenter_mean_probability_inside_reference"]:.4f}. These are weak-to-moderate and weak relationships, respectively. By comparison, segmenter mean inside-reference probability correlates with its own Dice at {correlations["spearman_segmenter_mean_probability_inside_reference_vs_dice"]:.4f}. classifier/segmenter agreement audit also found that {section_c["segmenter_failures_with_correct_classifier"]} of {section_c["segmenter_failure_count"]} segmentation failures retained the correct classifier type, and {section_c["zero_dice_with_correct_classifier_type"]} of {section_c["zero_dice_count"]} zero-Dice cases retained it. Classifier confidence cannot be used as a proxy for segmentation reliability.
 
-### 4. Phase 5 calibration hand-off
+### 4. Calibration hand-off
 
-The observed problem is miscalibration and over-confidence, not global under-confidence. Phase 5 should calibrate the classifier and segmenter separately. The classifier needs class-probability calibration and an abstention/disagreement rule because its no-tumor false negative is confidently wrong. The segmenter needs pixel-level reliability analysis inside and outside reference regions, calibration curves, and case-level uncertainty or abstention signals that expose misplaced foreground. Calibration can make confidence more honest; it cannot repair incorrect localization or replace retraining and external validation.
+The observed problem is miscalibration and over-confidence, not global under-confidence. calibration and uncertainty work should calibrate the classifier and segmenter separately. The classifier needs class-probability calibration and an abstention/disagreement rule because its no-tumor false negative is confidently wrong. The segmenter needs pixel-level reliability analysis inside and outside reference regions, calibration curves, and case-level uncertainty or abstention signals that expose misplaced foreground. Calibration can make confidence more honest; it cannot repair incorrect localization or replace retraining and external validation.
 
-## Manual review still required
+## Manual review result
 
-The review panel contains the single classifier-no-tumor/segmenter-non-empty case and four deterministically sampled zero-Dice gliomas. Confirm whether the meningioma reference mask is incomplete and whether the glioma cases share a visible pattern before accepting Section D.
+The user reviewed the single classifier-no-tumor/segmenter-non-empty case and four deterministically sampled zero-Dice gliomas. The meningioma reference covers a visible lesion; the scattered prediction is therefore treated as a segmentation localization failure rather than an incomplete reference. The four sampled gliomas were anatomically heterogeneous. A separate all-17 position check did not confirm a consistent skull-base bias.
 
 - Panel: `{result["manual_review"]["panel"]}`
 - Selection CSV: `{result["manual_review"]["selection_csv"]}`
@@ -395,12 +395,12 @@ def main():
         raise ValueError("Run identity mismatch")
 
     classifier_findings = json.loads(
-        (ROOT / "audit/phase3_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/classifier_training_findings.json").read_text(encoding="utf-8")
     )
     segmenter_findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
-    section_c_path = ROOT / "audit/phase4_classifier_segmenter_agreement.json"
+    section_c_path = ROOT / "audit/classifier_segmenter_agreement.json"
     section_c = json.loads(section_c_path.read_text(encoding="utf-8"))
     expected_context = {
         "segmenter_failure_count": 83,
@@ -412,7 +412,7 @@ def main():
         section_c["observations"][key] != value
         for key, value in expected_context.items()
     ):
-        raise ValueError("Section C context mismatch")
+        raise ValueError("classifier/segmenter agreement audit context mismatch")
 
     classifier_checkpoint = classifier_run / CLASSIFIER_CHECKPOINT_NAME
     segmenter_checkpoint = (
@@ -616,7 +616,7 @@ def main():
         "flag_classifier_no_tumor_segmenter_nonempty"
     ]["cases"]
     if len(section_c_special) != 1:
-        raise ValueError("Expected one Section C no-tumor/non-empty special case")
+        raise ValueError("Expected one classifier/segmenter agreement audit no-tumor/non-empty special case")
     record_lookup = {
         agreement.normalized_path(row["path"]): row for row in segmenter_records
     }
@@ -639,12 +639,12 @@ def main():
         ("Classifier no-tumor / segmenter non-empty", [special_record]),
         ("Sampled zero-Dice gliomas", sampled_glioma),
     ]
-    panel_path = segmenter_run / "section_d_manual_review.png"
-    selection_path = segmenter_run / "section_d_manual_review_selections.csv"
+    panel_path = segmenter_run / "uncertainty_manual_review.png"
+    selection_path = segmenter_run / "uncertainty_manual_review_selections.csv"
     row_lookup = {row["path"]: row for row in segmentation_validation}
     visual.render_panel(
         panel_path,
-        "Phase 4 Section D manual review",
+        "segmentation uncertainty analysis manual review",
         manual_groups,
         row_lookup,
         predictions,
@@ -653,7 +653,7 @@ def main():
 
     result = {
         "schema_version": 1,
-        "status": "SECTION_D_SIGNALS_COMPLETE_USER_VISUAL_REVIEW_PENDING",
+        "status": "UNCERTAINTY_ANALYSIS_COMPLETE_USER_VISUAL_REVIEWED",
         "scope": "Experimental BRISC internal validation uncertainty signals; not clinical validation",
         "group_definitions": {
             "zero_dice": "all 17 validation cases with hard-mask Dice exactly 0 at threshold 0.50",
@@ -668,16 +668,21 @@ def main():
             "highest_dice_20": summarize_group(best_cases),
         },
         "cross_model_correlations_all_680": cross_model_correlations(all_cases),
-        "section_c_context": {
+        "agreement_context": {
             **expected_context,
             "source_sha256": classifier.sha256(section_c_path),
         },
         "manual_review": {
-            "status": "USER_REVIEW_PENDING",
+            "status": "USER_REVIEW_COMPLETE",
             "panel": str(panel_path),
             "selection_csv": str(selection_path),
             "special_case_count": 1,
             "sampled_zero_dice_glioma_count": len(sampled_glioma),
+            "observations": [
+                "The meningioma reference covers a visible lesion; the scattered prediction is a segmentation localization failure rather than evidence of an incomplete reference.",
+                "The four sampled zero-Dice gliomas are anatomically heterogeneous.",
+                "The all-17 position check did not confirm a consistent skull-base bias.",
+            ],
         },
         "verification": {
             "device": str(device),
@@ -699,8 +704,8 @@ def main():
             "Calibration can quantify or improve score reliability but cannot correct spatial localization errors.",
         ],
     }
-    json_path = ROOT / "audit/phase4_uncertainty_signals.json"
-    markdown_path = ROOT / "audit/phase4_uncertainty_signals.md"
+    json_path = ROOT / "audit/segmentation_uncertainty_signals.json"
+    markdown_path = ROOT / "audit/segmentation_uncertainty_signals.md"
     json_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     write_markdown(markdown_path, result)
     mlflow.set_tracking_uri(f"sqlite:///{(ROOT / 'runs/mlflow.db').as_posix()}")

@@ -38,7 +38,7 @@ CLASSES = ["glioma", "meningioma", "pituitary", "no_tumor"]
 MEAN = [0.485, 0.456, 0.406]
 STD = [0.229, 0.224, 0.225]
 SCOPE = (
-    "EXPERIMENTAL BRISC internal baseline. Phase 1 suitability review remains open. "
+    "EXPERIMENTAL BRISC internal baseline. data suitability review suitability review remains open. "
     "Patient independence and modality consistency are not verified. "
     "Scores are not clinical validation. Measurements and segmentation are not included."
 )
@@ -250,7 +250,7 @@ def save_plots(output, history, labels, probabilities):
 def train(args):
     if not args.experimental:
         raise ValueError(
-            "Use --experimental: Phase 1 data suitability review is still open."
+            "Use --experimental: data suitability review is still open."
         )
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable. Fix the environment before training.")
@@ -483,7 +483,7 @@ def predict(args):
     ) as stream:
         rows = list(csv.DictReader(stream))
     digest = sha256(source)
-    # Only approved-for-development examples are allowed in this Phase 3 demo.
+    # Only approved-for-development examples are allowed in this classifier baseline demo.
     matches = [r for r in rows if r["sha256"] == digest]
     if not matches or any(
         r["draft_split"] not in ("train", "validation") for r in matches

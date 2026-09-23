@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "phase": "Phase 3 experimental baseline closeout",
+  "activity": "Classifier training baseline closeout",
   "baseline_run": "20260921-170607-243133-baseline",
   "baseline_mlflow_run_id": "f8bb3cf4e8f7499f9a9c5f17b7d4d937",
   "classifier_code_commit": "15578a5d467b56ab76b51c916a971c7e28935067",
@@ -71,7 +71,7 @@
   ],
   "test_evaluated": false,
   "patient_independence_verified": false,
-  "phase1_data_suitability_review_complete": false,
+  "data_suitability_review_complete": false,
   "remaining_work": [
     "Investigate modality/source consistency",
     "Independent patient-separated evaluation",

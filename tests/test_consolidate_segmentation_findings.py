@@ -1,4 +1,4 @@
-"""Tests for the fail-closed Phase 4 findings consolidation."""
+"""Tests for the fail-closed segmentation findings consolidation."""
 
 import json
 import sys
@@ -8,7 +8,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from phase4_consolidate_findings import summarize_failures
+from consolidate_segmentation_findings import summarize_failures
 
 
 def failure_row(category, fragmented=False, disconnected=False, dice="0.25"):
@@ -51,9 +51,9 @@ def test_failure_summary_rejects_changed_membership():
 
 def test_generated_findings_contains_required_section_f_evidence():
     findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
-    section = findings["phase4_consolidation"]
+    section = findings["segmentation_validation_consolidation"]
     assert section["overall_metrics"]["reported_4dp"] == {
         "image_mean_dice": 0.7694,
         "image_mean_iou": 0.6724,
@@ -83,5 +83,5 @@ def test_generated_findings_contains_required_section_f_evidence():
         "retraining_performed": False,
         "threshold_changed": False,
         "test_images_accessed": 0,
-        "phase5_started": False,
+        "calibration_work_started": False,
     }

@@ -6,7 +6,7 @@ from pathlib import Path
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_overfit import (
+from segmentation_overfit_gate import (
     decision,
     foreground_statistics,
     make_diagnostic_model,

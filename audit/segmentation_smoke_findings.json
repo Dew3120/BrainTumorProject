@@ -1,5 +1,5 @@
 {
-  "phase": "Phase 4 segmentation smoke test only",
+  "activity": "Segmentation smoke test only",
   "run": "20260921-174907-092984-smoke",
   "mlflow_run_id": "ff3ff108eb854c759deb31d5ce020be2",
   "script_sha256": "defa28dc8f94dc6fd3c41f5928fba1dbb6959d685acc32972711526ce3341dca",

@@ -7,7 +7,7 @@ import numpy as np
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_visual_audit import normalized_path, overlay, select_cases
+from segmentation_visual_audit import normalized_path, overlay, select_cases
 
 
 def record(label, index, dice):

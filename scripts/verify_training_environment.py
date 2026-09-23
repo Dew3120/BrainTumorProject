@@ -1,9 +1,9 @@
-from pathlib import Path
-from datetime import datetime
 import gc
 import json
 import platform
 import time
+from datetime import UTC, datetime
+from pathlib import Path
 
 import mlflow
 import monai
@@ -12,7 +12,6 @@ import torch
 import torchvision
 from monai.networks.nets import UNet
 from torchvision.models import resnet18
-
 
 PROJECT = Path(__file__).resolve().parents[1]
 
@@ -113,7 +112,7 @@ def main():
         PROJECT
         / "audit"
         / "environment"
-        / datetime.now().strftime("%Y%m%d-%H%M%S")
+        / datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     )
     output.mkdir(parents=True, exist_ok=False)
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "SECTION_D_SIGNALS_COMPLETE_USER_VISUAL_REVIEW_PENDING",
+  "status": "UNCERTAINTY_ANALYSIS_COMPLETE_USER_VISUAL_REVIEWED",
   "scope": "Experimental BRISC internal validation uncertainty signals; not clinical validation",
   "group_definitions": {
     "zero_dice": "all 17 validation cases with hard-mask Dice exactly 0 at threshold 0.50",
@@ -773,19 +773,24 @@
     "spearman_classifier_confidence_vs_segmenter_mean_probability_inside_reference": 0.16603542526179857,
     "spearman_segmenter_mean_probability_inside_reference_vs_dice": 0.5428103737066047
   },
-  "section_c_context": {
+  "agreement_context": {
     "segmenter_failure_count": 83,
     "segmenter_failures_with_correct_classifier": 78,
     "zero_dice_count": 17,
     "zero_dice_with_correct_classifier_type": 16,
-    "source_sha256": "a5f90d7a4e04bd7a47da6362543811508939edae92e60204fd804b1bea101efe"
+    "source_sha256": "59f17c3a7ed8f4baa4456a5a970c1d66646ed6e03c13292aa5382afffd052f50"
   },
   "manual_review": {
-    "status": "USER_REVIEW_PENDING",
-    "panel": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\section_d_manual_review.png",
-    "selection_csv": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\section_d_manual_review_selections.csv",
+    "status": "USER_REVIEW_COMPLETE",
+    "panel": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\uncertainty_manual_review.png",
+    "selection_csv": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\uncertainty_manual_review_selections.csv",
     "special_case_count": 1,
-    "sampled_zero_dice_glioma_count": 4
+    "sampled_zero_dice_glioma_count": 4,
+    "observations": [
+      "The meningioma reference covers a visible lesion; the scattered prediction is a segmentation localization failure rather than evidence of an incomplete reference.",
+      "The four sampled zero-Dice gliomas are anatomically heterogeneous.",
+      "The all-17 position check did not confirm a consistent skull-base bias."
+    ]
   },
   "verification": {
     "device": "cuda",

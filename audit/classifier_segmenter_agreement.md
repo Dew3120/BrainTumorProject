@@ -1,6 +1,6 @@
-# Phase 4 classifier/segmenter agreement
+# Classifier/segmenter agreement audit
 
-This verification joins the accepted Phase 3 classifier and accepted Phase 4 segmenter on the same 680 held-out BRISC validation images that have tumor masks. No test image was accessed. Four-class classifier correctness is evaluated against the tumor type. Segmenter success means hard-mask Dice at or above 0.50.
+This verification joins the accepted classifier and accepted segmenter on the same 680 held-out BRISC validation images that have tumor masks. No test image was accessed. Four-class classifier correctness is evaluated against the tumor type. Segmenter success means hard-mask Dice at or above 0.50.
 
 ## Verification
 

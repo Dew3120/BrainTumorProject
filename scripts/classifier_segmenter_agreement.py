@@ -9,12 +9,12 @@ from pathlib import Path
 
 import mlflow
 import numpy as np
-import phase3_classifier as classifier
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
-import phase4_train as segmenter
-import phase4_visual_audit as visual
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
+import segmentation_visual_audit as visual
 import torch
+import train_classifier as classifier
+import train_segmenter as segmenter
 from torch.utils.data import DataLoader
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -237,9 +237,9 @@ def write_markdown(path, result):
     ci = table["classifier_incorrect"]
     special = result["special_cases"]
     observations = result["observations"]
-    content = f"""# Phase 4 classifier/segmenter agreement
+    content = f"""# Classifier/segmenter agreement audit
 
-This verification joins the accepted Phase 3 classifier and accepted Phase 4 segmenter on the same 680 held-out BRISC validation images that have tumor masks. No test image was accessed. Four-class classifier correctness is evaluated against the tumor type. Segmenter success means hard-mask Dice at or above 0.50.
+This verification joins the accepted classifier and accepted segmenter on the same 680 held-out BRISC validation images that have tumor masks. No test image was accessed. Four-class classifier correctness is evaluated against the tumor type. Segmenter success means hard-mask Dice at or above 0.50.
 
 ## Verification
 
@@ -318,10 +318,10 @@ def main():
     ):
         raise ValueError("Run identity mismatch")
     classifier_findings = json.loads(
-        (ROOT / "audit/phase3_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/classifier_training_findings.json").read_text(encoding="utf-8")
     )
     segmenter_findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
     if classifier_findings["baseline_run"] != classifier_run.name:
         raise ValueError("Accepted classifier run mismatch")
@@ -536,7 +536,7 @@ def main():
     }
     result = {
         "schema_version": 1,
-        "status": "SECTION_C_CLASSIFIER_SEGMENTER_AGREEMENT_COMPLETE",
+        "status": "CLASSIFIER_SEGMENTER_AGREEMENT_AUDIT_COMPLETE",
         "scope": "Experimental BRISC internal validation agreement; not clinical validation",
         "validation_images_joined": len(agreement_rows),
         "validation_counts": dict(
@@ -570,9 +570,9 @@ def main():
             "Agreement on an internal validation split does not establish clinical validity or cross-dataset generalization.",
         ],
     }
-    csv_path = segmenter_run / "phase4_classifier_segmenter_agreement.csv"
-    json_path = ROOT / "audit/phase4_classifier_segmenter_agreement.json"
-    markdown_path = ROOT / "audit/phase4_classifier_segmenter_agreement.md"
+    csv_path = segmenter_run / "classifier_segmenter_agreement.csv"
+    json_path = ROOT / "audit/classifier_segmenter_agreement.json"
+    markdown_path = ROOT / "audit/classifier_segmenter_agreement.md"
     write_csv(csv_path, agreement_rows)
     json_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     write_markdown(markdown_path, result)

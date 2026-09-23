@@ -1,4 +1,4 @@
-"""Recompute validation predictions and render deterministic Phase 4 audit panels."""
+"""Recompute validation predictions and render deterministic segmentation audit panels."""
 
 import argparse
 import csv
@@ -10,17 +10,17 @@ from pathlib import Path
 
 import mlflow
 import numpy as np
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
-import phase4_train as train
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
 import torch
+import train_segmenter as train
 from matplotlib import font_manager
 from monai.losses import DiceLoss
 from PIL import Image, ImageDraw, ImageFont
 from torch.utils.data import DataLoader
 
 ROOT = Path(__file__).resolve().parents[1]
-GUIDE = ROOT / "audit/phase4_visual_review_guide.md"
+GUIDE = ROOT / "audit/segmentation_visual_review_guide.md"
 LABELS = train.LABELS
 
 
@@ -263,13 +263,13 @@ def main():
     parser.add_argument("--threshold", type=float, default=0.5)
     args = parser.parse_args()
     if args.threshold != 0.5:
-        raise ValueError("The accepted Phase 4 threshold is fixed at 0.5")
+        raise ValueError("The accepted segmentation threshold is fixed at 0.5")
     run = args.run.resolve()
     checkpoint = args.checkpoint.resolve()
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     result = json.loads((run / "result.json").read_text(encoding="utf-8"))
     findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
     expected_checkpoint = findings["top3_checkpoints"][0]
     if checkpoint.name != expected_checkpoint["file"]:
@@ -332,14 +332,14 @@ def main():
     row_lookup = {row["path"]: row for row in validation_rows}
     render_panel(
         run / "worst_validation_by_category.png",
-        "Phase 4 worst held-out validation cases",
+        "Worst held-out segmentation validation cases",
         worst_groups,
         row_lookup,
         predictions,
     )
     render_panel(
         run / "best_validation_by_category.png",
-        "Phase 4 best held-out validation cases",
+        "Best held-out segmentation validation cases",
         best_groups,
         row_lookup,
         predictions,

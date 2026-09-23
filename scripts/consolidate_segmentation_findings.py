@@ -1,4 +1,4 @@
-"""Consolidate the verified Phase 4 audit without inference or retraining."""
+"""Consolidate the verified segmentation audit without inference or retraining."""
 
 import csv
 import hashlib
@@ -11,11 +11,11 @@ import mlflow
 ROOT = Path(__file__).resolve().parents[1]
 RUN_NAME = "20260923-072439-397263-full"
 RUN = ROOT / "runs" / "segmentation" / RUN_NAME
-FINDINGS_PATH = ROOT / "audit" / "phase4_full_training_findings.json"
-AGREEMENT_PATH = ROOT / "audit" / "phase4_classifier_segmenter_agreement.json"
-UNCERTAINTY_PATH = ROOT / "audit" / "phase4_uncertainty_signals.json"
-MANIFEST_PATH = RUN / "phase4_manifest.json"
-FAILURE_CSV_PATH = RUN / "phase4_failure_modes.csv"
+FINDINGS_PATH = ROOT / "audit" / "segmentation_training_findings.json"
+AGREEMENT_PATH = ROOT / "audit" / "classifier_segmenter_agreement.json"
+UNCERTAINTY_PATH = ROOT / "audit" / "segmentation_uncertainty_signals.json"
+MANIFEST_PATH = RUN / "segmentation_run_manifest.json"
+FAILURE_CSV_PATH = RUN / "segmentation_failure_modes.csv"
 RESULT_PATH = RUN / "result.json"
 
 
@@ -49,7 +49,7 @@ def verify_manifest(run, manifest):
         if path.is_file() and path.name != MANIFEST_PATH.name
     }
     if set(actual) != set(expected):
-        raise ValueError("Run-folder membership differs from the Section E manifest")
+        raise ValueError("Run-folder membership differs from the reproducibility audit manifest")
     for relative, path in actual.items():
         item = expected[relative]
         if path.stat().st_size != item["size_bytes"]:
@@ -82,7 +82,7 @@ def summarize_failures(rows):
     )
     if fragmented != 70 or disconnected != 67:
         raise ValueError(
-            "Section B topology counts changed: "
+            "failure-mode analysis topology counts changed: "
             f"fragmented={fragmented}, disconnected={disconnected}"
         )
     return {
@@ -116,9 +116,9 @@ def verify_inputs(findings, result, agreement, uncertainty, manifest, failures):
         "retraining_performed": False,
         "threshold_changed": False,
         "test_images_accessed": 0,
-        "phase5_started": False,
+        "calibration_work_started": False,
     }:
-        raise ValueError("Section E constraints changed")
+        raise ValueError("reproducibility audit constraints changed")
     for name, source in {
         "agreement": agreement,
         "uncertainty": uncertainty,
@@ -150,15 +150,15 @@ def verify_inputs(findings, result, agreement, uncertainty, manifest, failures):
 
     observations = agreement["observations"]
     if observations["segmenter_failure_count"] != len(failures):
-        raise ValueError("Section B and Section C failure counts disagree")
+        raise ValueError("failure-mode analysis and classifier/segmenter agreement audit failure counts disagree")
     if observations["segmenter_failures_with_correct_classifier"] != 78:
-        raise ValueError("Section C correct-classifier failure count changed")
+        raise ValueError("classifier/segmenter agreement audit correct-classifier failure count changed")
     if observations["zero_dice_with_correct_classifier_type"] != 16:
-        raise ValueError("Section C zero-Dice agreement count changed")
+        raise ValueError("classifier/segmenter agreement audit zero-Dice agreement count changed")
 
     correlations = uncertainty["cross_model_correlations_all_680"]
     if correlations["population"] != 680:
-        raise ValueError("Section D correlation population changed")
+        raise ValueError("uncertainty analysis correlation population changed")
     assert_close(
         correlations["spearman_classifier_confidence_vs_segmenter_dice"],
         0.32524900331879836,
@@ -178,12 +178,12 @@ def build_consolidation(result, failures, agreement, uncertainty, manifest):
     observations = agreement["observations"]
     correlations = uncertainty["cross_model_correlations_all_680"]
     group_summaries = uncertainty["group_summaries"]
-    positional = manifest["section_f_carry_forward"]["zero_dice_position_check"]
+    positional = manifest["findings_carry_forward"]["zero_dice_position_check"]
     zero_position = positional["zero_dice"]
 
     return {
         "scope": (
-            "Consolidated Sections A-E evidence for the 680-image BRISC internal "
+            "Consolidated visual, failure-mode, agreement, uncertainty, and reproducibility evidence for the 680-image BRISC internal "
             "segmentation validation partition; not clinical validation"
         ),
         "overall_metrics": {
@@ -316,7 +316,7 @@ def build_consolidation(result, failures, agreement, uncertainty, manifest):
             ]["specific_unenforced_or_environment_sensitive_operations"],
             "checkpoint_reload": manifest["checkpoint_reload_verification"],
         },
-        "what_phase4_does_not_prove": [
+        "what_segmentation_validation_does_not_prove": [
             {
                 "claim": "clinical validity or safety",
                 "status": "NOT_ESTABLISHED",
@@ -350,7 +350,7 @@ def build_consolidation(result, failures, agreement, uncertainty, manifest):
             "retraining_performed": False,
             "threshold_changed": False,
             "test_images_accessed": 0,
-            "phase5_started": False,
+            "calibration_work_started": False,
         },
     }
 
@@ -370,8 +370,8 @@ def main():
     )
 
     findings["schema_version"] = 2
-    findings["audit_status"] = "SECTION_F_CONSOLIDATED_AWAITING_USER_REVIEW"
-    findings["phase4_consolidation"] = consolidation
+    findings["audit_status"] = "SEGMENTATION_FINDINGS_CONSOLIDATED_AWAITING_USER_REVIEW"
+    findings["segmentation_validation_consolidation"] = consolidation
     findings["source_artifacts"] = {
         "result_json": {"path": str(RESULT_PATH), "sha256": sha256(RESULT_PATH)},
         "failure_modes_csv": {
@@ -386,15 +386,15 @@ def main():
             "path": str(UNCERTAINTY_PATH),
             "sha256": sha256(UNCERTAINTY_PATH),
         },
-        "phase4_manifest_json": {
+        "segmentation_run_manifest_json": {
             "path": str(MANIFEST_PATH),
             "sha256": sha256(MANIFEST_PATH),
         },
     }
     findings["limitations"] = [
-        item["reason"] for item in consolidation["what_phase4_does_not_prove"]
+        item["reason"] for item in consolidation["what_segmentation_validation_does_not_prove"]
     ]
-    findings["phase5_started"] = False
+    findings["calibration_work_started"] = False
     FINDINGS_PATH.write_text(
         json.dumps(findings, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
@@ -404,9 +404,9 @@ def main():
     with mlflow.start_run(run_id=config["mlflow_run_id"]):
         mlflow.log_artifact(str(FINDINGS_PATH))
 
-    print(f"Section F findings: {FINDINGS_PATH}")
+    print(f"Consolidated segmentation findings: {FINDINGS_PATH}")
     print(f"SHA256: {sha256(FINDINGS_PATH)}")
-    print("No retraining, threshold change, sealed-test access, or Phase 5 work occurred.")
+    print("No retraining, threshold change, sealed-test access, or calibration work occurred.")
 
 
 if __name__ == "__main__":

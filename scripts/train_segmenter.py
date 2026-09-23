@@ -14,8 +14,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import mlflow
 import numpy as np
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
 import torch
 from monai.losses import DiceLoss
 from torch.utils.data import DataLoader, Dataset
@@ -247,8 +247,8 @@ def main():
     checkpoint_directory.mkdir()
     shutil.copy2(split, output / "split_snapshot.csv")
     shutil.copy2(__file__, output / "training_script.py")
-    shutil.copy2(overfit.__file__, output / "phase4_overfit.py")
-    shutil.copy2(smoke.__file__, output / "phase4_segmentation_smoke.py")
+    shutil.copy2(overfit.__file__, output / "segmentation_overfit_gate.py")
+    shutil.copy2(smoke.__file__, output / "segmentation_smoke_test.py")
     fixed_overlay_rows = []
     for label in LABELS:
         fixed_overlay_rows.extend(

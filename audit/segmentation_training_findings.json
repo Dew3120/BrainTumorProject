@@ -106,11 +106,11 @@
     "Glioma mean Dice is quantified at 0.6090, with 60/204 cases below Dice 0.50 and 12 zero-Dice cases; the limitation remains unresolved.",
     "The sealed BRISC test partition was not accessed."
   ],
-  "phase5_started": false,
+  "calibration_work_started": false,
   "schema_version": 2,
-  "audit_status": "SECTION_F_CONSOLIDATED_AWAITING_USER_REVIEW",
-  "phase4_consolidation": {
-    "scope": "Consolidated Sections A-E evidence for the 680-image BRISC internal segmentation validation partition; not clinical validation",
+  "audit_status": "SEGMENTATION_FINDINGS_CONSOLIDATED_AWAITING_USER_REVIEW",
+  "segmentation_validation_consolidation": {
+    "scope": "Consolidated visual, failure-mode, agreement, uncertainty, and reproducibility evidence for the 680-image BRISC internal segmentation validation partition; not clinical validation",
     "overall_metrics": {
       "validation_images": 680,
       "image_mean_dice": 0.7693531739806263,
@@ -279,7 +279,7 @@
         "test_images_accessed": 0
       }
     },
-    "what_phase4_does_not_prove": [
+    "what_segmentation_validation_does_not_prove": [
       {
         "claim": "clinical validity or safety",
         "status": "NOT_ESTABLISHED",
@@ -310,7 +310,7 @@
       "retraining_performed": false,
       "threshold_changed": false,
       "test_images_accessed": 0,
-      "phase5_started": false
+      "calibration_work_started": false
     }
   },
   "source_artifacts": {
@@ -319,20 +319,20 @@
       "sha256": "954bedbb86b62ecbe46bae1d8b63863360130b8d1aad6a0f0d89faaec8e74851"
     },
     "failure_modes_csv": {
-      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\phase4_failure_modes.csv",
+      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\segmentation_failure_modes.csv",
       "sha256": "e1e28e1d4bf06702c44495a88d0368843823eab003fd476bfcf705e24940212f"
     },
     "classifier_segmenter_agreement_json": {
-      "path": "E:\\BrainTumorProject\\audit\\phase4_classifier_segmenter_agreement.json",
-      "sha256": "a5f90d7a4e04bd7a47da6362543811508939edae92e60204fd804b1bea101efe"
+      "path": "E:\\BrainTumorProject\\audit\\classifier_segmenter_agreement.json",
+      "sha256": "59f17c3a7ed8f4baa4456a5a970c1d66646ed6e03c13292aa5382afffd052f50"
     },
     "uncertainty_signals_json": {
-      "path": "E:\\BrainTumorProject\\audit\\phase4_uncertainty_signals.json",
-      "sha256": "8f77f23d425e5551a95c00bf7a9dd11d03431930ab1cb9d792b34c16cfe3101e"
+      "path": "E:\\BrainTumorProject\\audit\\segmentation_uncertainty_signals.json",
+      "sha256": "2efa0dd3702758aea4f7f11fe65f894bcfb47dac0264c64ca21b836ae53155d6"
     },
-    "phase4_manifest_json": {
-      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\phase4_manifest.json",
-      "sha256": "a0309fbf65f1ccdc9c21ea172c4fba65c46083f71b7bd0efdc4f98399eaf06f2"
+    "segmentation_run_manifest_json": {
+      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\segmentation_run_manifest.json",
+      "sha256": "610e39075529f99419734c72c8c114e6835d9929375ddfe67498321f6cd0bab8"
     }
   }
 }

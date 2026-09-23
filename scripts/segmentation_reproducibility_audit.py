@@ -1,4 +1,4 @@
-"""Harden Phase 4 reproducibility without retraining or sealed-test access."""
+"""Harden segmentation reproducibility without retraining or sealed-test access."""
 
 import argparse
 import hashlib
@@ -10,18 +10,18 @@ from pathlib import Path
 
 import mlflow
 import numpy as np
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
-import phase4_train as segmenter
-import phase4_visual_audit as visual
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
+import segmentation_visual_audit as visual
 import torch
+import train_segmenter as segmenter
 from monai.losses import DiceLoss
 
 ROOT = Path(__file__).resolve().parents[1]
 RUN_NAME = "20260923-072439-397263-full"
 CHECKPOINT_NAME = "epoch_056_macro_dice_0.762662.pt"
 TRAINING_SOURCE_COMMIT = "67ef81458911e616524c6c9bab34fe371703e983"
-MANIFEST_NAME = "phase4_manifest.json"
+MANIFEST_NAME = "segmentation_run_manifest.json"
 
 
 def sha256(path):
@@ -35,25 +35,36 @@ def normalized_text(value):
 
 def verify_source_commit(run):
     mapping = {
-        "scripts/phase4_train.py": run / "training_script.py",
-        "scripts/phase4_overfit.py": run / "phase4_overfit.py",
-        "scripts/phase4_segmentation_smoke.py": run / "phase4_segmentation_smoke.py",
+        "scripts/train_segmenter.py": run / "training_script.py",
+        "scripts/segmentation_overfit_gate.py": run / "overfit_source_snapshot.py",
+        "scripts/segmentation_smoke_test.py": run / "smoke_source_snapshot.py",
     }
+    historical_paths = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", TRAINING_SOURCE_COMMIT, "scripts"],
+        cwd=ROOT,
+        text=True,
+    ).splitlines()
     results = {}
     for repository_path, saved_path in mapping.items():
-        committed = subprocess.check_output(
-            ["git", "show", f"{TRAINING_SOURCE_COMMIT}:{repository_path}"],
-            cwd=ROOT,
-        ).decode("utf-8-sig")
         saved = saved_path.read_text(encoding="utf-8-sig")
-        identical = normalized_text(committed) == normalized_text(saved)
-        if not identical:
+        matching_paths = []
+        for historical_path in historical_paths:
+            if not historical_path.endswith(".py"):
+                continue
+            committed = subprocess.check_output(
+                ["git", "show", f"{TRAINING_SOURCE_COMMIT}:{historical_path}"],
+                cwd=ROOT,
+            ).decode("utf-8-sig")
+            if normalized_text(committed) == normalized_text(saved):
+                matching_paths.append(historical_path)
+        if len(matching_paths) != 1:
             raise ValueError(
-                f"Saved training source differs from {TRAINING_SOURCE_COMMIT}: "
-                f"{repository_path}"
+                f"Expected one source match in {TRAINING_SOURCE_COMMIT} for "
+                f"{repository_path}; found {matching_paths}"
             )
         results[repository_path] = {
             "saved_copy": saved_path.relative_to(run).as_posix(),
+            "historical_commit_path": matching_paths[0],
             "normalized_text_identical": True,
             "saved_sha256": sha256(saved_path),
         }
@@ -169,7 +180,7 @@ def strict_determinism_probe():
 
 def inspect_training_determinism(run, config):
     script = (run / "training_script.py").read_text(encoding="utf-8")
-    helper = (run / "phase4_overfit.py").read_text(encoding="utf-8")
+    helper = (run / "overfit_source_snapshot.py").read_text(encoding="utf-8")
     controls = {
         "python_seed_42": "random.seed(42)" in script,
         "numpy_seed_42": "np.random.seed(42)" in script,
@@ -354,7 +365,7 @@ def analyze_zero_dice_positions(records, predictions):
 def write_report(path, manifest, manifest_hash):
     determinism = manifest["determinism_audit"]
     reload = manifest["checkpoint_reload_verification"]
-    position = manifest["section_f_carry_forward"]["zero_dice_position_check"]
+    position = manifest["findings_carry_forward"]["zero_dice_position_check"]
     controls = determinism["controls"]
     risks = "\n".join(
         f"- **{item['operations']}:** {item['reason']}"
@@ -362,13 +373,13 @@ def write_report(path, manifest, manifest_hash):
             "specific_unenforced_or_environment_sensitive_operations"
         ]
     )
-    content = f"""# Phase 4 reproducibility hardening
+    content = f"""# Segmentation reproducibility audit
 
 ## Determinism conclusion
 
 **Controlled, but not fully guaranteed.** The original training run seeded Python, NumPy, Torch CPU/CUDA, the shuffle generator, and workers. It disabled cuDNN benchmarking, enabled cuDNN deterministic mode, used no augmentation, and used zero dropout. Data order and preprocessing are therefore controlled on the recorded stack.
 
-The run did not call `torch.use_deterministic_algorithms(True)`, did not record `CUBLAS_WORKSPACE_CONFIG`, and did not record a TF32 policy. A complete 68-epoch replay was intentionally not performed because Section E prohibits retraining. The current CUDA stack passed two bitwise-identical synthetic forward/backward/AdamW/AMP steps with PyTorch's strict deterministic guard enabled; this is an operation-path check, not proof that the historical full run is bitwise reproducible everywhere.
+The run did not call `torch.use_deterministic_algorithms(True)`, did not record `CUBLAS_WORKSPACE_CONFIG`, and did not record a TF32 policy. A complete 68-epoch replay was intentionally not performed because reproducibility audit prohibits retraining. The current CUDA stack passed two bitwise-identical synthetic forward/backward/AdamW/AMP steps with PyTorch's strict deterministic guard enabled; this is an operation-path check, not proof that the historical full run is bitwise reproducible everywhere.
 
 | Control | Recorded |
 |---|---:|
@@ -404,17 +415,17 @@ This restates and independently repeats the successful checkpoint reload: epoch 
 - Source-equivalent training commit: `{manifest["git"]["training_source_equivalent_commit"]}`
 - Manifest audit base commit: `{manifest["git"]["manifest_audit_base_commit"]}`
 
-The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted Phase 4 findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
+The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
 
-## Section D positional follow-up for Section F
+## Positional-bias follow-up
 
 {position["section_f_wording"]}
 
-Section F must also retain the tumor-type confound (12/17 zero-Dice cases are glioma while 15/20 highest-Dice cases are meningioma) and quote the Section D Spearman correlations directly: classifier confidence versus segmenter Dice `0.3252`, and classifier confidence versus segmenter inside-reference probability `0.1660`.
+The consolidated findings must also retain the tumor-type confound (12/17 zero-Dice cases are glioma while 15/20 highest-Dice cases are meningioma) and quote the uncertainty-analysis Spearman correlations directly: classifier confidence versus segmenter Dice `0.3252`, and classifier confidence versus segmenter inside-reference probability `0.1660`.
 
 ## Scope
 
-No model was retrained, no threshold changed, no test image was accessed, and Phase 5 was not started.
+No model was retrained, no threshold changed, no test image was accessed, and calibration and uncertainty work was not started.
 """
     Path(path).write_text(content, encoding="utf-8")
 
@@ -431,10 +442,10 @@ def main():
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     result = json.loads((run / "result.json").read_text(encoding="utf-8"))
     findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
     section_d = json.loads(
-        (ROOT / "audit/phase4_uncertainty_signals.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_uncertainty_signals.json").read_text(encoding="utf-8")
     )
     if findings["accepted_run"] != run.name:
         raise ValueError("Accepted findings/run mismatch")
@@ -515,7 +526,7 @@ def main():
         )
         > 1e-12
     ):
-        raise ValueError("Section D correlation context mismatch")
+        raise ValueError("uncertainty analysis correlation context mismatch")
 
     files = inventory_files(run)
     base_commit = subprocess.check_output(
@@ -524,13 +535,13 @@ def main():
     manifest_path = run / MANIFEST_NAME
     manifest = {
         "schema_version": 1,
-        "status": "PHASE4_REPRODUCIBILITY_MANIFEST_COMPLETE",
+        "status": "SEGMENTATION_REPRODUCIBILITY_MANIFEST_COMPLETE",
         "manifest_path": str(manifest_path),
         "manifest_self_exclusion": {
             "excluded_from_file_inventory": True,
             "reason": (
                 "A manifest cannot contain its own final SHA256. Its hash is stored in "
-                "audit/phase4_reproducibility.md and the MLflow artifact store."
+                "audit/segmentation_reproducibility.md and the MLflow artifact store."
             ),
         },
         "run": run.name,
@@ -561,7 +572,7 @@ def main():
             "maximum_per_image_difference": maximum_per_image_difference,
             "test_images_accessed": 0,
         },
-        "section_f_carry_forward": {
+        "findings_carry_forward": {
             "zero_dice_position_check": position,
             "tumor_type_confounded_confidence_comparison": (
                 "12/17 zero-Dice cases are glioma; 15/20 highest-Dice cases are meningioma"
@@ -577,13 +588,13 @@ def main():
             "retraining_performed": False,
             "threshold_changed": False,
             "test_images_accessed": 0,
-            "phase5_started": False,
+            "calibration_work_started": False,
         },
     }
     manifest_path.write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     verify_inventory(run, files)
     manifest_hash = sha256(manifest_path)
-    report_path = ROOT / "audit/phase4_reproducibility.md"
+    report_path = ROOT / "audit/segmentation_reproducibility.md"
     write_report(report_path, manifest, manifest_hash)
     mlflow.set_tracking_uri(f"sqlite:///{(ROOT / 'runs/mlflow.db').as_posix()}")
     with mlflow.start_run(run_id=config["mlflow_run_id"]):

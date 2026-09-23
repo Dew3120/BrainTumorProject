@@ -9,7 +9,7 @@ import torch
 from monai.losses import DiceLoss
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_train import (
+from train_segmenter import (
     qualifies_for_top3,
     retain_top3,
     segmentation_loss,

@@ -1,4 +1,4 @@
-# Phase 4 visual review guide
+# Segmentation visual review guide
 
 Review the exact 128×128 model input, the reference mask in red, and the prediction in cyan. A bad cyan prediction is a model failure. Treat it as a pipeline defect only when the image, reference mask, pairing, or preprocessing geometry is wrong.
 

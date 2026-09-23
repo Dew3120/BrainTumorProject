@@ -14,7 +14,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import mlflow
 import numpy as np
-import phase4_segmentation_smoke as smoke
+import segmentation_smoke_test as smoke
 import torch
 import torch.nn.functional as F
 from monai.losses import DiceLoss
@@ -271,7 +271,7 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     shutil.copy2(source / "selected_pairs.csv", output / "selected_pairs.csv")
     shutil.copy2(__file__, output / "overfit_script.py")
-    shutil.copy2(smoke.__file__, output / "phase4_segmentation_smoke.py")
+    shutil.copy2(smoke.__file__, output / "segmentation_smoke_test.py")
     model = make_diagnostic_model(args.head, args.model_size).cuda()
     model_channels = [8, 16, 32] if args.model_size == "tiny" else [16, 32, 64, 128]
     config = {

@@ -8,7 +8,7 @@ import pytest
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_single_pair import breakdown, make_diagnostic_model
+from segmentation_single_pair_diagnostic import breakdown, make_diagnostic_model
 
 
 def test_region_means_and_weighted_contributions_are_distinct():

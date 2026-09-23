@@ -1,18 +1,17 @@
-from pathlib import Path
-from collections import Counter, defaultdict
 import csv
 import hashlib
 import json
-from datetime import datetime
+from collections import Counter, defaultdict
+from datetime import UTC, datetime
+from pathlib import Path
 
 import imagehash
 from PIL import Image, ImageDraw, ImageOps
 from sklearn.model_selection import StratifiedGroupKFold
 
-
 PROJECT = Path(__file__).resolve().parents[1]
 RAW = PROJECT / "data" / "raw" / "brisc"
-OUT = PROJECT / "audit" / "runs" / datetime.now().strftime("%Y%m%d-%H%M%S-%f")
+OUT = PROJECT / "audit" / "runs" / datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
 SPLITS = PROJECT / "data" / "splits"
 
 OUT.mkdir(parents=True, exist_ok=True)
@@ -167,7 +166,7 @@ for path in sorted(classification.rglob("*")):
 
         rows.append(row)
 
-    except Exception as error:
+    except (KeyError, OSError, ValueError) as error:
         issues.append({"file": str(relative), "issue": str(error)})
 
     if len(rows) and len(rows) % 500 == 0:
@@ -301,7 +300,7 @@ try:
 
     split_created = True
 
-except Exception as error:
+except (StopIteration, ValueError) as error:
     issues.append({"file": "split", "issue": str(error)})
 
 counts = Counter(

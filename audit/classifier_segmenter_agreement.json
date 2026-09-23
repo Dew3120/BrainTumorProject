@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "SECTION_C_CLASSIFIER_SEGMENTER_AGREEMENT_COMPLETE",
+  "status": "CLASSIFIER_SEGMENTER_AGREEMENT_AUDIT_COMPLETE",
   "scope": "Experimental BRISC internal validation agreement; not clinical validation",
   "validation_images_joined": 680,
   "validation_counts": {

@@ -1,4 +1,4 @@
-"""Phase 4 uncertainty extraction and deterministic selection tests."""
+"""segmentation uncertainty extraction and deterministic selection tests."""
 
 import sys
 from pathlib import Path
@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_uncertainty_signals import (
+from segmentation_uncertainty_analysis import (
     probability_statistics,
     select_groups,
     summarize_group,

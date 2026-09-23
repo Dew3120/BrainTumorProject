@@ -1,10 +1,10 @@
-"""Section C agreement logic must preserve all four cells and special flags."""
+"""classifier/segmenter agreement audit agreement logic must preserve all four cells and special flags."""
 
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_classifier_segmenter_agreement import (
+from classifier_segmenter_agreement import (
     build_agreement,
     summarize_agreement,
 )

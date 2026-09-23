@@ -1,4 +1,4 @@
-"""Quantify failure modes for held-out Phase 4 validation cases below Dice 0.50."""
+"""Quantify failure modes for held-out segmentation validation cases below Dice 0.50."""
 
 import argparse
 import csv
@@ -7,11 +7,11 @@ from pathlib import Path
 
 import mlflow
 import numpy as np
-import phase4_overfit as overfit
-import phase4_segmentation_smoke as smoke
-import phase4_train as train
-import phase4_visual_audit as visual
+import segmentation_overfit_gate as overfit
+import segmentation_smoke_test as smoke
+import segmentation_visual_audit as visual
 import torch
+import train_segmenter as train
 from scipy import ndimage
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -220,12 +220,12 @@ def write_markdown(path, summary, verification):
         technical = (
             "Only "
             f"{percentage(edge_fraction)} of failed references touch a model-space edge. "
-            "Together with the passed Section A alignment review, the failure distribution "
+            "Together with the passed visual audit alignment review, the failure distribution "
             "does not indicate a common flip, shift, pairing, or edge-clipping defect."
         )
     fragmented = summary["all"]["fragmented_prediction"]["fraction"]
     disconnected = summary["all"]["disconnected_false_positive"]["fraction"]
-    content = f"""# Phase 4 failure-mode analysis
+    content = f"""# Segmentation failure-mode analysis
 
 This analysis covers the 83 held-out BRISC validation cases with hard-mask Dice below 0.50 at the unchanged probability threshold of 0.50. The epoch-56 checkpoint was reloaded, all 680 validation predictions were recomputed exactly, and no test image was accessed.
 
@@ -284,14 +284,14 @@ def main():
     parser.add_argument("--threshold", type=float, default=0.5)
     args = parser.parse_args()
     if args.threshold != 0.5:
-        raise ValueError("Phase 4 failure analysis is fixed at threshold 0.5")
+        raise ValueError("segmentation failure analysis is fixed at threshold 0.5")
     run = args.run.resolve()
     checkpoint = args.checkpoint.resolve()
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     model_size = int(config["image_size"])
     result = json.loads((run / "result.json").read_text(encoding="utf-8"))
     findings = json.loads(
-        (ROOT / "audit/phase4_full_training_findings.json").read_text(encoding="utf-8")
+        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
     )
     accepted = findings["top3_checkpoints"][0]
     if (
@@ -362,13 +362,13 @@ def main():
                 "iou": record["iou"],
             }
         )
-    csv_path = run / "phase4_failure_modes.csv"
+    csv_path = run / "segmentation_failure_modes.csv"
     with csv_path.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(analyzed[0]))
         writer.writeheader()
         writer.writerows(analyzed)
     summary = summarize(analyzed)
-    markdown_path = ROOT / "audit/phase4_failure_modes.md"
+    markdown_path = ROOT / "audit/segmentation_failure_modes.md"
     verification = {
         "checkpoint_sha256": accepted["sha256"],
         "split_sha256": config["split_sha256"],
