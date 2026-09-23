@@ -1,0 +1,40 @@
+{
+  "status": "BUDGET_EXHAUSTED_DIAGNOSE_BEFORE_FULL_TRAINING",
+  "run": "20260923-064720-473343-overfit-256",
+  "controlled_change": "Input and mask resolution changed from 128x128 to 256x256",
+  "held_constant": {
+    "selected_pairs": 6,
+    "output_head": "linear logits",
+    "loss": "fixed aggregate pos_weight BCE plus unchanged foreground soft Dice",
+    "fixed_pos_weight": 85.23157894736842,
+    "learning_rate": 0.001,
+    "batch_size": 2,
+    "maximum_epochs": 100,
+    "maximum_optimizer_steps": 300,
+    "gate": "mean Dice >= 0.90 and every image >= 0.80 for five consecutive epochs",
+    "validation_used_for_selection_or_stopping": false,
+    "test_evaluated": false
+  },
+  "foreground_pixel_comparison": [
+    {"pair": 1, "pixels_128": 143, "pixels_256": 566, "max_dice_128": 0.831858, "max_dice_256": 0.453983},
+    {"pair": 2, "pixels_128": 247, "pixels_256": 991, "max_dice_128": 0.842288, "max_dice_256": 0.741159},
+    {"pair": 3, "pixels_128": 398, "pixels_256": 1610, "max_dice_128": 0.942012, "max_dice_256": 0.925166},
+    {"pair": 4, "pixels_128": 48, "pixels_256": 196, "max_dice_128": 0.554913, "max_dice_256": 0.333050},
+    {"pair": 5, "pixels_128": 201, "pixels_256": 797, "max_dice_128": 0.797619, "max_dice_256": 0.790283},
+    {"pair": 6, "pixels_128": 103, "pixels_256": 423, "max_dice_128": 0.769811, "max_dice_256": 0.646248}
+  ],
+  "best_simultaneous_256_result": {
+    "epoch": 99,
+    "mean_training_dice": 0.6461106737454733,
+    "worst_training_dice": 0.3330501317977905
+  },
+  "smallest_mask_result": {
+    "foreground_pixels_128": 48,
+    "foreground_pixels_256": 196,
+    "maximum_dice_128": 0.554913,
+    "maximum_dice_256": 0.333050
+  },
+  "visual_review": "The final-epoch masks contain severe over-segmentation and many disconnected false-positive regions. The final epoch followed a sharp metric collapse, so these overlays describe instability at epoch 100 rather than the best epoch-99 state.",
+  "interpretation": "Increasing foreground pixel count by about fourfold did not improve the smallest mask and reduced the best simultaneous mean Dice. Insufficient pixel resolution is therefore not the sole bottleneck. This experiment does not by itself prove that loss weighting is the only remaining cause; optimization stability, batch composition, and model capacity remain plausible. Full training remains blocked.",
+  "full_training_started": false
+}

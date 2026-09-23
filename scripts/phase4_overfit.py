@@ -17,6 +17,7 @@ import numpy as np
 import phase4_segmentation_smoke as smoke
 import torch
 from monai.losses import DiceLoss
+from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
 
 RULE = {
@@ -69,6 +70,22 @@ def make_diagnostic_model(head):
     return model
 
 
+class SizedPairs(smoke.Pairs):
+    """Reuse the verified smoke preprocessing at an explicit square resolution."""
+
+    def __init__(self, rows, size):
+        super().__init__(rows)
+        self.size = size
+
+    def __getitem__(self, index):
+        row = self.rows[index]
+        with (
+            Image.open(smoke.dataset_path(row["path"])) as image,
+            Image.open(smoke.dataset_path(row["mask_path"])) as mask,
+        ):
+            return smoke.transform_pair(image, mask, size=self.size)
+
+
 def foreground_statistics(rows, targets):
     """Describe each transformed training mask and derive one fixed BCE weight."""
     if len(rows) != len(targets):
@@ -111,16 +128,28 @@ def main():
     )
     parser.add_argument("--learning-rate", type=float, default=0.001)
     parser.add_argument("--head", choices=("original", "linear"), default="original")
+    parser.add_argument("--image-size", type=int, choices=(128, 256), default=128)
     parser.add_argument(
         "--balanced-bce",
         action="store_true",
         help="Use one fixed pos_weight derived only from all six training masks",
+    )
+    parser.add_argument(
+        "--fixed-pos-weight",
+        type=float,
+        help="Freeze BCE pos_weight to this positive value instead of recomputing it",
     )
     args = parser.parse_args()
     if not 0 < args.learning_rate <= 0.01:
         raise ValueError("Learning rate must be positive and at most 0.01")
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable")
+    if args.fixed_pos_weight is not None and (
+        not args.balanced_bce or args.fixed_pos_weight <= 0
+    ):
+        raise ValueError(
+            "--fixed-pos-weight requires --balanced-bce and a positive value"
+        )
     source = args.smoke_run.resolve()
     config_before = json.loads((source / "config.json").read_text(encoding="utf-8"))
     if smoke.digest(smoke.__file__) != config_before["script_sha256"]:
@@ -147,7 +176,9 @@ def main():
             != row["mask_sha256_verified"]
         ):
             raise ValueError("Image or mask changed since smoke run")
-    datasets = {name: smoke.Pairs(subset) for name, subset in subsets.items()}
+    datasets = {
+        name: SizedPairs(subset, args.image_size) for name, subset in subsets.items()
+    }
     tensors = {
         name: (
             torch.stack([ds[i][0] for i in range(len(ds))]).cuda(),
@@ -158,6 +189,24 @@ def main():
     per_image_foreground, aggregate_foreground = foreground_statistics(
         subsets["train"], tensors["train"][1]
     )
+    resolution_comparison = {}
+    for size in (128, 256):
+        comparison_dataset = SizedPairs(subsets["train"], size)
+        comparison_targets = torch.stack(
+            [comparison_dataset[i][1] for i in range(len(comparison_dataset))]
+        )
+        per_image, aggregate = foreground_statistics(
+            subsets["train"], comparison_targets
+        )
+        resolution_comparison[str(size)] = {
+            "per_image": per_image,
+            "aggregate": aggregate,
+        }
+    used_pos_weight = (
+        args.fixed_pos_weight
+        if args.fixed_pos_weight is not None
+        else aggregate_foreground["pos_weight"]
+    )
     random.seed(42)
     np.random.seed(42)
     torch.manual_seed(42)
@@ -167,7 +216,10 @@ def main():
     output = (
         smoke.ROOT
         / "runs/segmentation"
-        / (datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f") + "-overfit")
+        / (
+            datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
+            + f"-overfit-{args.image_size}"
+        )
     )
     output.mkdir(parents=True, exist_ok=False)
     shutil.copy2(source / "selected_pairs.csv", output / "selected_pairs.csv")
@@ -190,19 +242,20 @@ def main():
         "output_head": args.head,
         "weight_decay": 0.0001,
         "batch_size": 2,
-        "image_size": 128,
+        "image_size": args.image_size,
         "channels": [8, 16, 32],
         "precision": "FP32 for this diagnostic",
         "augmentation": "none",
         "loss": "fixed aggregate pos_weight BCE + unchanged foreground soft Dice"
         if args.balanced_bce
         else "unweighted BCE + foreground soft Dice",
-        "fixed_pos_weight": aggregate_foreground["pos_weight"]
-        if args.balanced_bce
-        else 1.0,
-        "weight_source": "all six transformed training masks only; fixed before optimization",
+        "fixed_pos_weight": used_pos_weight if args.balanced_bce else 1.0,
+        "weight_source": "explicit fixed value from the prior 128x128 six-mask aggregate"
+        if args.fixed_pos_weight is not None
+        else "all six transformed training masks only; fixed before optimization",
         "aggregate_training_mask_statistics": aggregate_foreground,
         "per_image_training_mask_statistics": per_image_foreground,
+        "training_mask_resolution_comparison": resolution_comparison,
         "train_pairs": 6,
         "validation_pairs": 3,
         "metric_definition": "Mean foreground hard Dice per image at sigmoid >= 0.5, in eval mode after each epoch",
@@ -210,6 +263,28 @@ def main():
         "patient_independence_verified": False,
     }
     smoke.save_json(output / "config.json", config)
+    comparison_rows = []
+    for index, row in enumerate(subsets["train"]):
+        comparison_rows.append(
+            {
+                "pair_index": index + 1,
+                "filename": row["filename"],
+                "label": row["label"],
+                "foreground_pixels_128": resolution_comparison["128"]["per_image"][
+                    index
+                ]["foreground_pixels"],
+                "foreground_fraction_128": resolution_comparison["128"]["per_image"][
+                    index
+                ]["foreground_fraction"],
+                "foreground_pixels_256": resolution_comparison["256"]["per_image"][
+                    index
+                ]["foreground_pixels"],
+                "foreground_fraction_256": resolution_comparison["256"]["per_image"][
+                    index
+                ]["foreground_fraction"],
+            }
+        )
+    write_history(output / "foreground_by_resolution.csv", comparison_rows)
     print("PREDECLARED RULE:", json.dumps(RULE), flush=True)
     print(
         "TRAINING MASK STATISTICS:",
@@ -217,6 +292,7 @@ def main():
             {
                 "per_image": per_image_foreground,
                 "aggregate": aggregate_foreground,
+                "comparison_128_and_256": resolution_comparison,
             }
         ),
         flush=True,
@@ -228,9 +304,7 @@ def main():
     )
     dice_loss = DiceLoss(sigmoid=True)
     pos_weight = (
-        tensors["train"][1].new_tensor(aggregate_foreground["pos_weight"])
-        if args.balanced_bce
-        else None
+        tensors["train"][1].new_tensor(used_pos_weight) if args.balanced_bce else None
     )
     bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
     loader = DataLoader(
@@ -254,6 +328,7 @@ def main():
         smoke.save_json(output / "config.json", config)
         mlflow.log_params({k: str(v) for k, v in config.items()})
         mlflow.log_artifact(str(output / "config.json"))
+        mlflow.log_artifact(str(output / "foreground_by_resolution.csv"))
         for epoch in range(1, RULE["max_epochs"] + 1):
             model.train()
             total = 0.0
@@ -386,6 +461,7 @@ def main():
             "fixed_pos_weight": config["fixed_pos_weight"],
             "aggregate_training_mask_statistics": aggregate_foreground,
             "per_image_training_mask_statistics": per_image_foreground,
+            "training_mask_resolution_comparison": resolution_comparison,
             "test_evaluated": False,
             "validation_used_for_selection": False,
             "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
@@ -396,6 +472,7 @@ def main():
             "history.csv",
             "result.json",
             "selected_pairs.csv",
+            "foreground_by_resolution.csv",
             "dice_curve.png",
             "train_overlays.png",
             "validation_overlays.png",
