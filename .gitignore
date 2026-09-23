@@ -24,6 +24,8 @@ audit/*
 !audit/segmentation_uncertainty_signals.json
 !audit/segmentation_uncertainty_signals.md
 !audit/segmentation_reproducibility.md
+!audit/classifier_calibration.json
+!audit/classifier_calibration.md
 !audit/technical_debt.md
 runs/
 models/
