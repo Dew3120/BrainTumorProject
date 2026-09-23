@@ -40,5 +40,16 @@
     "gate_relaxed": false,
     "further_pixel_calibration_variants_allowed": false,
     "accepted_probability_source": "raw segmenter probabilities"
+  },
+  "segmenter_case_reliability": {
+    "status": "PASS",
+    "result_path": "E:\\BrainTumorProject\\audit\\segmenter_case_reliability.json",
+    "failure_detection_auroc": 0.9409900910173357,
+    "zero_dice_captured_top20_risk": 14,
+    "zero_dice_total": 17,
+    "reliability_ece": 0.021171142276516394,
+    "brier_skill": 0.4760515206975343,
+    "accepted_for_application": true,
+    "on_failure": "No variants; subsection closed."
   }
 }

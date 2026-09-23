@@ -31,6 +31,8 @@ audit/*
 !audit/segmenter_pixel_calibration.json
 !audit/segmenter_pixel_calibration.md
 !audit/confidence_calibration_findings.json
+!audit/segmenter_case_reliability.json
+!audit/segmenter_case_reliability.md
 !audit/technical_debt.md
 runs/
 models/
