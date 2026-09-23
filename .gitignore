@@ -28,6 +28,9 @@ audit/*
 !audit/classifier_calibration.md
 !audit/classifier_binary_calibration.json
 !audit/classifier_binary_calibration.md
+!audit/segmenter_pixel_calibration.json
+!audit/segmenter_pixel_calibration.md
+!audit/confidence_calibration_findings.json
 !audit/technical_debt.md
 runs/
 models/

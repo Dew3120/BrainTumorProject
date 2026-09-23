@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "scope": "Internal BRISC confidence calibration findings; not clinical validation",
+  "classifier": {
+    "status": "CLOSED_RAW_PROBABILITIES_ACCEPTED",
+    "finding": "Raw probabilities are used for four-class and binary tumor/no-tumor outputs. Multiclass and binary temperature scaling produced no statistically stable improvement.",
+    "positive_result": "The unscaled classifier confidence was already well calibrated on internal validation.",
+    "raw_multiclass_ece": 0.0083915474361794,
+    "raw_binary_ece": 0.0020682140151788366,
+    "further_classifier_calibration_allowed": false
+  },
+  "segmenter_pixel_calibration": {
+    "status": "FAIL",
+    "result_path": "E:\\BrainTumorProject\\audit\\segmenter_pixel_calibration.json",
+    "proposed_temperature": 2.5387340499120445,
+    "accepted_for_application": false
+  }
+}
