@@ -21,6 +21,8 @@ audit/*
 !audit/phase4_failure_modes.md
 !audit/phase4_classifier_segmenter_agreement.json
 !audit/phase4_classifier_segmenter_agreement.md
+!audit/phase4_uncertainty_signals.json
+!audit/phase4_uncertainty_signals.md
 !audit/technical_debt.md
 runs/
 models/
