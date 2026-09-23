@@ -16,6 +16,7 @@ audit/*
 !audit/phase4_six_pair_weighted_gate_findings.json
 !audit/phase4_resolution_gate_findings.json
 !audit/phase4_capacity_gate_findings.json
+!audit/phase4_full_training_findings.json
 runs/
 models/
 mlruns/

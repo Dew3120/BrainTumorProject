@@ -1,0 +1,86 @@
+{
+  "status": "EARLY_STOPPED_SUCCESSFULLY",
+  "accepted_run": "20260923-072439-397263-full",
+  "scope": "Experimental held-out BRISC segmentation validation; not clinical validation",
+  "data": {
+    "training_pairs": 2719,
+    "validation_pairs": 680,
+    "validation_counts": {
+      "glioma": 204,
+      "meningioma": 227,
+      "pituitary": 249
+    },
+    "sealed_test_pairs": 860,
+    "test_evaluated": false,
+    "patient_independence_verified": false
+  },
+  "training": {
+    "model": "MONAI compact 2D U-Net with linear logit head",
+    "parameters": 401277,
+    "image_size": 128,
+    "batch_size": 8,
+    "loss": "per-image background/foreground balanced BCE plus foreground Dice",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "maximum_epochs": 75,
+    "early_stopping_patience": 12,
+    "selection_metric": "validation macro mean across three tumor-type Dice values",
+    "epochs_completed": 68,
+    "best_epoch": 56
+  },
+  "best_validation": {
+    "image_mean_dice": 0.7693531739806263,
+    "macro_type_mean_dice": 0.7626617953449699,
+    "image_mean_iou": 0.6724482061118846,
+    "macro_type_mean_iou": 0.665263589829253,
+    "dice_by_type": {
+      "glioma": 0.608951638747171,
+      "meningioma": 0.8702445032838158,
+      "pituitary": 0.808789244003923
+    },
+    "iou_by_type": {
+      "glioma": 0.4946793160234651,
+      "meningioma": 0.7921160102415715,
+      "pituitary": 0.7089954432227226
+    },
+    "checkpoint_reload_max_metric_difference": 0.0
+  },
+  "validation_distribution": {
+    "overall": {"median_dice": 0.864625, "zero_dice": 17, "below_0.5": 83, "at_least_0.8": 433, "count": 680},
+    "glioma": {"median_dice": 0.698289, "zero_dice": 12, "below_0.5": 60, "at_least_0.8": 66, "count": 204},
+    "meningioma": {"median_dice": 0.916890, "zero_dice": 2, "below_0.5": 8, "at_least_0.8": 191, "count": 227},
+    "pituitary": {"median_dice": 0.871473, "zero_dice": 3, "below_0.5": 15, "at_least_0.8": 176, "count": 249}
+  },
+  "top3_checkpoints": [
+    {
+      "rank": 1,
+      "epoch": 56,
+      "macro_type_dice": 0.7626617953449699,
+      "file": "epoch_056_macro_dice_0.762662.pt",
+      "sha256": "16DC8745993EEF959D0F2924C9147A45320673F6FC0B465AB08F8AD7B2F723DE"
+    },
+    {
+      "rank": 2,
+      "epoch": 54,
+      "macro_type_dice": 0.7598466406107907,
+      "file": "epoch_054_macro_dice_0.759847.pt",
+      "sha256": "649761C34EC3F89882E280769E95FA11EA8FA3F4457F6964A7FD64CD440CE26D"
+    },
+    {
+      "rank": 3,
+      "epoch": 57,
+      "macro_type_dice": 0.758095449434509,
+      "file": "epoch_057_macro_dice_0.758095.pt",
+      "sha256": "0B199FEA0397B5518BE31B5C59D0501E7A27BBC0F08A2CEF8A55FD44A1B3C527"
+    }
+  ],
+  "visual_review": "Fixed validation examples generally show correct localization and close overlap. Glioma commonly under-segments. Worst-case examples include complete misses, localization errors, and disconnected false-positive regions in every category.",
+  "limitations": [
+    "Glioma performance is materially lower than meningioma and pituitary performance.",
+    "Seventeen of 680 validation masks have zero Dice and 83 have Dice below 0.5.",
+    "BRISC patient independence is not verified.",
+    "The sealed test set has not been evaluated.",
+    "These results do not establish clinical safety or real-patient generalization."
+  ],
+  "phase5_started": false
+}
