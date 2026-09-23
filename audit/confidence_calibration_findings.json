@@ -1,55 +1,246 @@
 {
-  "schema_version": 1,
-  "scope": "Internal BRISC confidence calibration findings; not clinical validation",
-  "classifier": {
-    "status": "CLOSED_RAW_PROBABILITIES_ACCEPTED",
-    "finding": "Raw probabilities are used for four-class and binary tumor/no-tumor outputs. Multiclass and binary temperature scaling produced no statistically stable improvement.",
-    "positive_result": "The unscaled classifier confidence was already well calibrated on internal validation.",
-    "raw_multiclass_ece": 0.0083915474361794,
-    "raw_binary_ece": 0.0020682140151788366,
-    "further_classifier_calibration_allowed": false
+  "schema_version": 2,
+  "status": "CONFIDENCE_CALIBRATION_COMPLETE",
+  "scope": "Frozen-model confidence evaluation on BRISC internal validation; not clinical validation",
+  "component_decisions": {
+    "classifier": {
+      "status": "CLOSED_RAW_PROBABILITIES_ACCEPTED",
+      "four_class_temperature_gate": "FAIL",
+      "binary_temperature_gate": "FAIL",
+      "raw_multiclass_ece": 0.0083915474361794,
+      "raw_binary_ece": 0.0020682140151788257,
+      "finding": "The raw four-class and binary probabilities were already well calibrated internally. Neither temperature experiment produced a statistically stable accepted improvement.",
+      "accepted_probability_source": "raw classifier probabilities",
+      "further_classifier_calibration_allowed": false
+    },
+    "segmenter_pixel": {
+      "status": "CLOSED_RAW_PROBABILITIES_ACCEPTED",
+      "temperature_gate": "FAIL",
+      "raw_foreground": {
+        "nll": 0.5954447237126036,
+        "brier": 0.08040554492228716,
+        "ece": 0.07551320872995725,
+        "mce": 0.437502258443456
+      },
+      "oof_calibrated_foreground": {
+        "nll": 0.28034549154667576,
+        "brier": 0.0715500080193758,
+        "ece": 0.05141609353711084,
+        "mce": 0.25688457235297923
+      },
+      "raw_background": {
+        "nll": 0.0048581633524544645,
+        "brier": 0.0008240521670267628,
+        "ece": 0.0010295248598763639,
+        "mce": 0.9886791339146751
+      },
+      "oof_calibrated_background": {
+        "nll": 0.005158547666754488,
+        "brier": 0.0007788180784747779,
+        "ece": 0.003776201245954247,
+        "mce": 0.9742919380532843
+      },
+      "foreground_brier_change_ci95": [
+        -0.009519659434949939,
+        -0.008206654820212045
+      ],
+      "gate_failures": {
+        "foreground_ece_excess_over_0_05": 0.0014160935371108352,
+        "background_nll_increase": 0.0003003843143000234
+      },
+      "finding": "Temperature scaling substantially improved foreground reliability but missed the fixed foreground-ECE gate and slightly worsened background NLL. The gate was not relaxed.",
+      "accepted_probability_source": "raw segmenter probabilities",
+      "further_pixel_calibration_variants_allowed": false
+    },
+    "segmenter_case_reliability": {
+      "status": "ACCEPTED_FOR_APPLICATION_DESIGN_HANDOFF",
+      "gate": "PASS",
+      "target": "P(Dice >= 0.50)",
+      "feature_provenance": {
+        "source": "raw segmenter probability map and unchanged 0.50 hard mask only",
+        "features": [
+          "empty_prediction",
+          "predicted_area_fraction",
+          "whole_probability_mean",
+          "whole_probability_sd",
+          "predicted_region_probability_mean",
+          "predicted_region_entropy_mean",
+          "boundary_entropy_mean",
+          "high_confidence_foreground_fraction",
+          "uncertain_pixel_fraction",
+          "log1p_component_count",
+          "largest_component_fraction",
+          "bounding_box_fill_ratio",
+          "normalized_perimeter",
+          "border_touch_fraction"
+        ],
+        "reference_mask_use": "target creation and evaluation only; no reference-derived model feature",
+        "reference_derived_features": false
+      },
+      "reported_scores": "out-of-fold only",
+      "failure_detection_auroc": 0.9409900910173357,
+      "auroc_ci95": [
+        0.9183515581799334,
+        0.961196846754838
+      ],
+      "zero_dice_capture_top20_risk": {
+        "captured": 14,
+        "total": 17,
+        "top_risk_cases": 136
+      },
+      "calibration": {
+        "ece": 0.021171142276516394,
+        "mce": 0.059337257519656544,
+        "brier": 0.05620545748899727,
+        "prevalence_baseline_brier": 0.10727287072924378,
+        "brier_skill": 0.4760515206975343,
+        "brier_skill_ci95": [
+          0.3629971411340828,
+          0.5788389273061325
+        ],
+        "brier_skill_definition": "1 - model Brier / prevalence-baseline Brier",
+        "baseline_definition": "Each held-out fold receives a constant reliability equal to one minus the failure prevalence in that fold's training data.",
+        "bootstrap": {
+          "repetitions": 2000,
+          "seed": 42,
+          "unit": "similarity groups resampled with replacement, retaining all member cases"
+        }
+      },
+      "per_category": {
+        "glioma": {
+          "count": 204,
+          "failures": 60,
+          "zero_dice": 12,
+          "failure_detection_auroc": 0.8474537037037038,
+          "ece": 0.08830979794493382,
+          "mce": 0.18888621716711962,
+          "brier": 0.13976599847643634,
+          "prevalence_baseline_brier": 0.23742232348685768,
+          "brier_skill": 0.41131905195859575,
+          "cases_in_global_top20_risk": 90,
+          "failures_in_global_top20_risk": 47,
+          "zero_dice_in_global_top20_risk": 10
+        },
+        "meningioma": {
+          "count": 227,
+          "failures": 8,
+          "zero_dice": 2,
+          "failure_detection_auroc": 0.9942922374429224,
+          "ece": 0.02078961383702154,
+          "mce": 0.11539798151323755,
+          "brier": 0.012598818148067166,
+          "prevalence_baseline_brier": 0.04159989042842051,
+          "brier_skill": 0.6971429968128038,
+          "cases_in_global_top20_risk": 19,
+          "failures_in_global_top20_risk": 8,
+          "zero_dice_in_global_top20_risk": 2
+        },
+        "pituitary": {
+          "count": 249,
+          "failures": 15,
+          "zero_dice": 3,
+          "failure_detection_auroc": 0.9740740740740741,
+          "ece": 0.019318712148329007,
+          "mce": 0.04946063622190494,
+          "brier": 0.027500062986802756,
+          "prevalence_baseline_brier": 0.06051495171612591,
+          "brier_skill": 0.5455658113088341,
+          "cases_in_global_top20_risk": 27,
+          "failures_in_global_top20_risk": 13,
+          "zero_dice_in_global_top20_risk": 2
+        }
+      },
+      "interpretable_signals": {
+        "strongest_mean_standardized_coefficient": {
+          "feature": "boundary_entropy_mean",
+          "mean": -1.0377722973131445,
+          "sample_sd": 0.19902711241436918,
+          "negative_folds": 5,
+          "interpretation": "Higher boundary entropy is the strongest observed predictor of segmentation failure."
+        },
+        "confident_wrong_signal": {
+          "feature": "high_confidence_foreground_fraction",
+          "mean": -0.08625828248886107,
+          "sample_sd": 0.024708612132906857,
+          "negative_folds": 5,
+          "interpretation": "A larger high-confidence foreground fraction can accompany lower reliability, operationalizing the confident-spatial-error finding."
+        },
+        "causal_interpretation_allowed": false,
+        "limitation": "The standardized coefficients are descriptive associations. Features are correlated and the sample contains 680 cases."
+      },
+      "final_all_validation_model_role": "Proposed operational model for later integration only; it was not used for reported metrics.",
+      "application_integration_performed": false
+    }
   },
-  "segmenter_pixel_calibration": {
-    "status": "FAIL",
-    "result_path": "E:\\BrainTumorProject\\audit\\segmenter_pixel_calibration.json",
-    "proposed_temperature": 2.5387340499120445,
-    "accepted_for_application": false,
-    "finding": "Segmenter pixel calibration improved foreground reliability substantially but missed the predeclared ECE threshold by 0.0014 and slightly worsened background NLL. The gate was not relaxed. Raw segmenter probabilities remain the accepted output.",
-    "raw_foreground": {
-      "ece": 0.07551321,
-      "mce": 0.43750226,
-      "nll": 0.59544472
+  "cross_cutting_finding": {
+    "title": "Glioma remains the weakest subgroup",
+    "statement": "The aggregate case-reliability pass is not uniform across tumor types. Glioma drives most segmentation failures and has the weakest reliability discrimination and calibration.",
+    "aggregate": {
+      "failure_detection_auroc": 0.9409900910173357,
+      "reliability_ece": 0.021171142276516394,
+      "failures": 83
     },
-    "oof_calibrated_foreground": {
-      "ece": 0.05141609,
-      "mce": 0.25688457,
-      "nll": 0.28034549
+    "glioma": {
+      "failure_detection_auroc": 0.8474537037037038,
+      "reliability_ece": 0.08830979794493382,
+      "brier_skill": 0.41131905195859575,
+      "failures": 60,
+      "validation_cases": 204,
+      "zero_dice_cases": 12
     },
-    "glioma_ece": {
-      "raw": 0.13110488,
-      "oof_calibrated": 0.09463909
-    },
-    "foreground_brier_change_ci95": [
-      -0.00951966,
-      -0.00820665
-    ],
-    "gate_failures": {
-      "foreground_ece_excess_over_0_05": 0.00141609,
-      "background_nll_increase": 0.00030038
-    },
-    "gate_relaxed": false,
-    "further_pixel_calibration_variants_allowed": false,
-    "accepted_probability_source": "raw segmenter probabilities"
+    "qualification": "This does not invalidate the aggregate gate pass. It prevents claiming uniform reliability and requires explicit glioma caution in later use.",
+    "subgroup_metrics_role": "Descriptive only; no per-category confidence intervals or predeclared subgroup acceptance gates were used.",
+    "resolved": false
   },
-  "segmenter_case_reliability": {
-    "status": "PASS",
-    "result_path": "E:\\BrainTumorProject\\audit\\segmenter_case_reliability.json",
-    "failure_detection_auroc": 0.9409900910173357,
-    "zero_dice_captured_top20_risk": 14,
-    "zero_dice_total": 17,
-    "reliability_ece": 0.021171142276516394,
-    "brier_skill": 0.4760515206975343,
-    "accepted_for_application": true,
-    "on_failure": "No variants; subsection closed."
+  "what_this_work_establishes": [
+    "The frozen classifier's raw probabilities are acceptably calibrated on the BRISC internal-validation partition under the declared gates.",
+    "Pixel temperature scaling improved several segmenter calibration metrics but did not satisfy the full fixed gate, so it was rejected.",
+    "Prediction-derived case features can rank Dice-below-0.50 failures in similarity-aware out-of-fold evaluation on these 680 validation cases."
+  ],
+  "what_this_work_does_not_establish": [
+    "Clinical validity, safety, diagnosis, or autonomous use.",
+    "Patient-independent, cross-dataset, scanner-independent, or prospective performance.",
+    "Uniform reliability across tumor types; glioma remains materially weaker.",
+    "Guaranteed catastrophic-failure capture; 3/17 zero-Dice and 15/83 Dice-below-0.50 cases remain outside the top-risk quintile.",
+    "Acceptance of calibrated segmenter pixel probabilities; raw pixels remain in force.",
+    "Prospective performance of the final all-validation case model; reported metrics are out-of-fold.",
+    "Causal meaning for any reliability-model coefficient."
+  ],
+  "application_design_handoff": {
+    "eligible_input": "case-level reliability score P(Dice >= 0.50)",
+    "allowed_next_step": "Design and validate the review policy that maps the score to display, warning, or required-review states.",
+    "required_qualification": "The interface must preserve the glioma subgroup warning and must not present the score as clinical certainty.",
+    "started": false
+  },
+  "constraints_verified": {
+    "base_models_retrained": false,
+    "test_images_accessed": 0,
+    "test_predictions_accessed": 0,
+    "threshold": 0.5,
+    "threshold_changed": false,
+    "application_integration_performed": false,
+    "gate_relaxed": false
+  },
+  "source_artifacts": {
+    "classifier_multiclass": {
+      "path": "E:\\BrainTumorProject\\audit\\classifier_calibration.json",
+      "sha256": "9b8112e3077b57ebf51bbaf9bc2da6bb403b1ecf212a81196d04bf9565a0dcf2"
+    },
+    "classifier_binary": {
+      "path": "E:\\BrainTumorProject\\audit\\classifier_binary_calibration.json",
+      "sha256": "7e127dcdd769b35214c116d648df6f2c30b8bffdc42973eec2010fcbff2bd0ca"
+    },
+    "segmenter_pixel": {
+      "path": "E:\\BrainTumorProject\\audit\\segmenter_pixel_calibration.json",
+      "sha256": "8cf300d8629d5b088571b4b8f598f374f5e386c17b723fe84faff90286388075"
+    },
+    "segmenter_case": {
+      "path": "E:\\BrainTumorProject\\audit\\segmenter_case_reliability.json",
+      "sha256": "9734a47e26224ca8182a37957ed1a6d3b145fac78e96e3d65b06a55f76bbd19d"
+    },
+    "segmenter_case_script": {
+      "path": "E:\\BrainTumorProject\\scripts\\fit_segmenter_case_reliability.py",
+      "sha256": "d3cd7cb0211df7dc6050c3aa3874e2f49dc5781048e8ef8e1af1df3b046317a4"
+    }
   }
 }

@@ -38,12 +38,12 @@ This restates and independently repeats the successful checkpoint reload: epoch 
 ## Run manifest
 
 - Manifest: `E:\BrainTumorProject\runs\segmentation\20260923-072439-397263-full\segmentation_run_manifest.json`
-- Manifest SHA256: `610e39075529f99419734c72c8c114e6835d9929375ddfe67498321f6cd0bab8`
+- Manifest SHA256: `b837985f4df75ca3d2b43e1ae318254d5227037ac1d856a4ede2020b68c21a7a`
 - Hashed run files: 25
-- Source-equivalent training commit: `67ef81458911e616524c6c9bab34fe371703e983`
-- Manifest audit base commit: `791d2f829067cb062c945bf9ffe3a7d4fbd00c47`
+- Source-equivalent training commit: `459c67555851edb950c6304492beca926b995eb1`
+- Manifest audit base commit: `56e96d9b3d67cebee1e938fff8e769f704d9c233`
 
-The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
+The exact training-time Git HEAD was not recorded by the historical run. Commit `459c675` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
 
 ## Positional-bias follow-up
 

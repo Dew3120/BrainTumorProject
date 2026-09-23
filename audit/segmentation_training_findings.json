@@ -219,8 +219,8 @@
       "conclusion": "CONTROLLED_BUT_NOT_FULLY_GUARANTEED",
       "training_time_git_head": {
         "recorded": false,
-        "source_equivalent_commit": "67ef81458911e616524c6c9bab34fe371703e983",
-        "explicit_limitation": "The exact training-time Git HEAD was not recorded. Commit 67ef814 is the source-equivalent commit, not a proven launch-time commit."
+        "source_equivalent_commit": "459c67555851edb950c6304492beca926b995eb1",
+        "explicit_limitation": "The exact training-time Git HEAD was not recorded. Commit 459c675 is the source-equivalent commit, not a proven launch-time commit."
       },
       "controls": {
         "python_seed_42": true,
@@ -332,7 +332,7 @@
     },
     "segmentation_run_manifest_json": {
       "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\segmentation_run_manifest.json",
-      "sha256": "610e39075529f99419734c72c8c114e6835d9929375ddfe67498321f6cd0bab8"
+      "sha256": "b837985f4df75ca3d2b43e1ae318254d5227037ac1d856a4ede2020b68c21a7a"
     }
   }
 }

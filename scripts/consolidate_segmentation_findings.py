@@ -303,7 +303,7 @@ def build_consolidation(result, failures, agreement, uncertainty, manifest):
                     "training_source_equivalent_commit"
                 ],
                 "explicit_limitation": (
-                    "The exact training-time Git HEAD was not recorded. Commit 67ef814 is "
+                    "The exact training-time Git HEAD was not recorded. Commit 459c675 is "
                     "the source-equivalent commit, not a proven launch-time commit."
                 ),
             },

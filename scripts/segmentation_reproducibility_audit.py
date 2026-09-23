@@ -20,7 +20,7 @@ from monai.losses import DiceLoss
 ROOT = Path(__file__).resolve().parents[1]
 RUN_NAME = "20260923-072439-397263-full"
 CHECKPOINT_NAME = "epoch_056_macro_dice_0.762662.pt"
-TRAINING_SOURCE_COMMIT = "67ef81458911e616524c6c9bab34fe371703e983"
+TRAINING_SOURCE_COMMIT = "459c67555851edb950c6304492beca926b995eb1"
 MANIFEST_NAME = "segmentation_run_manifest.json"
 
 
@@ -415,7 +415,7 @@ This restates and independently repeats the successful checkpoint reload: epoch 
 - Source-equivalent training commit: `{manifest["git"]["training_source_equivalent_commit"]}`
 - Manifest audit base commit: `{manifest["git"]["manifest_audit_base_commit"]}`
 
-The exact training-time Git HEAD was not recorded by the historical run. Commit `67ef814` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
+The exact training-time Git HEAD was not recorded by the historical run. Commit `459c675` is the first repository commit containing normalized-text-identical copies of all three saved training sources and the accepted segmentation findings. The manifest excludes itself because a file cannot contain its own final SHA256; its external SHA256 is recorded above and in MLflow.
 
 ## Positional-bias follow-up
 
