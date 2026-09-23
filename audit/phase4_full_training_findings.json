@@ -46,10 +46,34 @@
     "checkpoint_reload_max_metric_difference": 0.0
   },
   "validation_distribution": {
-    "overall": {"median_dice": 0.864625, "zero_dice": 17, "below_0.5": 83, "at_least_0.8": 433, "count": 680},
-    "glioma": {"median_dice": 0.698289, "zero_dice": 12, "below_0.5": 60, "at_least_0.8": 66, "count": 204},
-    "meningioma": {"median_dice": 0.916890, "zero_dice": 2, "below_0.5": 8, "at_least_0.8": 191, "count": 227},
-    "pituitary": {"median_dice": 0.871473, "zero_dice": 3, "below_0.5": 15, "at_least_0.8": 176, "count": 249}
+    "overall": {
+      "median_dice": 0.864625,
+      "zero_dice": 17,
+      "below_0.5": 83,
+      "at_least_0.8": 433,
+      "count": 680
+    },
+    "glioma": {
+      "median_dice": 0.698289,
+      "zero_dice": 12,
+      "below_0.5": 60,
+      "at_least_0.8": 66,
+      "count": 204
+    },
+    "meningioma": {
+      "median_dice": 0.91689,
+      "zero_dice": 2,
+      "below_0.5": 8,
+      "at_least_0.8": 191,
+      "count": 227
+    },
+    "pituitary": {
+      "median_dice": 0.871473,
+      "zero_dice": 3,
+      "below_0.5": 15,
+      "at_least_0.8": 176,
+      "count": 249
+    }
   },
   "top3_checkpoints": [
     {
@@ -76,11 +100,239 @@
   ],
   "visual_review": "Fixed validation examples generally show correct localization and close overlap. Glioma commonly under-segments. Worst-case examples include complete misses, localization errors, and disconnected false-positive regions in every category.",
   "limitations": [
-    "Glioma performance is materially lower than meningioma and pituitary performance.",
-    "Seventeen of 680 validation masks have zero Dice and 83 have Dice below 0.5.",
-    "BRISC patient independence is not verified.",
-    "The sealed test set has not been evaluated.",
-    "These results do not establish clinical safety or real-patient generalization."
+    "No prospective clinical evaluation or clinician-validated deployment study was performed.",
+    "All reported segmentation metrics are from BRISC internal validation.",
+    "BRISC patient independence is unverified.",
+    "Glioma mean Dice is quantified at 0.6090, with 60/204 cases below Dice 0.50 and 12 zero-Dice cases; the limitation remains unresolved.",
+    "The sealed BRISC test partition was not accessed."
   ],
-  "phase5_started": false
+  "phase5_started": false,
+  "schema_version": 2,
+  "audit_status": "SECTION_F_CONSOLIDATED_AWAITING_USER_REVIEW",
+  "phase4_consolidation": {
+    "scope": "Consolidated Sections A-E evidence for the 680-image BRISC internal segmentation validation partition; not clinical validation",
+    "overall_metrics": {
+      "validation_images": 680,
+      "image_mean_dice": 0.7693531739806263,
+      "image_mean_iou": 0.6724482061118846,
+      "macro_type_mean_dice": 0.7626617953449699,
+      "reported_4dp": {
+        "image_mean_dice": 0.7694,
+        "image_mean_iou": 0.6724,
+        "macro_type_mean_dice": 0.7627
+      }
+    },
+    "per_category_mean_dice": {
+      "glioma": {
+        "count": 204,
+        "value": 0.608951638747171,
+        "reported_4dp": 0.609
+      },
+      "meningioma": {
+        "count": 227,
+        "value": 0.8702445032838158,
+        "reported_4dp": 0.8702
+      },
+      "pituitary": {
+        "count": 249,
+        "value": 0.808789244003923,
+        "reported_4dp": 0.8088
+      }
+    },
+    "failure_modes": {
+      "population": "83 BRISC internal-validation cases with hard-mask Dice below 0.50",
+      "case_count": 83,
+      "category_counts": {
+        "glioma": 60,
+        "meningioma": 8,
+        "pituitary": 15
+      },
+      "threshold_unchanged": 0.5,
+      "fragmented_prediction": {
+        "count": 70,
+        "fraction": 0.8433734939759037,
+        "reported_percent": 84.3
+      },
+      "disconnected_false_positive": {
+        "count": 67,
+        "fraction": 0.8072289156626506,
+        "reported_percent": 80.7
+      },
+      "interpretation": "Fragmented predictions and disconnected false-positive components are the dominant cross-category topology signals among weak cases."
+    },
+    "classifier_segmenter_agreement": {
+      "segmenter_failure_definition": "hard-mask Dice below 0.50",
+      "segmenter_failure_count": 83,
+      "failures_with_correct_classifier": {
+        "count": 78,
+        "denominator": 83,
+        "fraction": 0.9397590361445783
+      },
+      "zero_dice_with_correct_classifier": {
+        "count": 16,
+        "denominator": 17,
+        "fraction": 0.9411764705882353
+      },
+      "interpretation": "Correct tumor-type classification does not imply reliable spatial segmentation."
+    },
+    "uncertainty_signals": {
+      "finding": "Zero-Dice cases are confident spatial errors rather than globally uncertain cases. Classifier confidence cannot serve as a segmentation-reliability proxy.",
+      "spearman_correlations_all_680": {
+        "classifier_confidence_vs_segmenter_dice": 0.32524900331879836,
+        "classifier_confidence_vs_segmenter_inside_reference_probability": 0.16603542526179857,
+        "reported_4dp": {
+          "classifier_confidence_vs_segmenter_dice": 0.3252,
+          "classifier_confidence_vs_segmenter_inside_reference_probability": 0.166
+        }
+      },
+      "tumor_type_confound": {
+        "statement": "The extreme-group confidence comparison is not tumor-type-controlled.",
+        "zero_dice_group": {
+          "glioma": 12,
+          "meningioma": 2,
+          "pituitary": 3
+        },
+        "highest_dice_20_group": {
+          "glioma": 1,
+          "meningioma": 15,
+          "pituitary": 4
+        },
+        "key_imbalance": "12/17 zero-Dice cases are glioma; 15/20 highest-Dice cases are meningioma."
+      }
+    },
+    "falsified_hypotheses": [
+      {
+        "hypothesis": "Zero-Dice predictions show a consistent skull-base positional bias.",
+        "result": "NOT_CONFIRMED_BY_PREDECLARED_SUPPORT_RULE",
+        "interpretation": "The errors are spatially heterogeneous, with only a modest lower-half shift; the observed four-case visual cluster did not hold across all 17.",
+        "supporting_numbers": {
+          "zero_dice_cases": 17,
+          "centroids_below_image_midline": 11,
+          "centroids_below_normalized_y_0_60": 1,
+          "median_lower_third_predicted_pixel_fraction": 0.008298755186721992,
+          "reported_median_lower_third_fraction": 0.008
+        },
+        "predeclared_support_rule": "At least 70% of zero-Dice centroids below the midline plus median lower-half fraction >=0.70, or at least 70% of centroids below y=0.60, or median lower-third fraction >=0.50"
+      }
+    ],
+    "reproducibility_posture": {
+      "conclusion": "CONTROLLED_BUT_NOT_FULLY_GUARANTEED",
+      "training_time_git_head": {
+        "recorded": false,
+        "source_equivalent_commit": "67ef81458911e616524c6c9bab34fe371703e983",
+        "explicit_limitation": "The exact training-time Git HEAD was not recorded. Commit 67ef814 is the source-equivalent commit, not a proven launch-time commit."
+      },
+      "controls": {
+        "python_seed_42": true,
+        "numpy_seed_42": true,
+        "torch_cpu_seed_42": true,
+        "torch_cuda_seed_42": true,
+        "cudnn_benchmark_disabled": true,
+        "cudnn_deterministic_enabled": true,
+        "shuffle_generator_seeded": true,
+        "workers_seed_python_and_numpy": true,
+        "training_augmentation_disabled": true,
+        "model_dropout_zero": true,
+        "strict_deterministic_algorithms_enabled_in_training": false,
+        "cublas_workspace_config_recorded": false,
+        "tf32_policy_recorded": false
+      },
+      "current_runtime_probe": {
+        "status": "PASS_CURRENT_RUNTIME_SYNTHETIC_STEP",
+        "strict_deterministic_algorithms_enabled_for_probe": true,
+        "bitwise_repeat_match": true,
+        "first": {
+          "loss": 2.367733955383301,
+          "state_sha256": "11d768ee9d2179d0b7e5947d8d34bb7ce06d5be6815b65a3e8518acb7791b860"
+        },
+        "second": {
+          "loss": 2.367733955383301,
+          "state_sha256": "11d768ee9d2179d0b7e5947d8d34bb7ce06d5be6815b65a3e8518acb7791b860"
+        },
+        "scope": "Two repeated synthetic forward/backward/AdamW/AMP steps on the current GPU runtime; no project image or accepted checkpoint was trained"
+      },
+      "specific_unenforced_or_environment_sensitive_operations": [
+        {
+          "operations": "CUDA Conv2d and ConvTranspose2d forward/backward through cuDNN",
+          "reason": "cuDNN deterministic mode was enabled, but the original run did not enable PyTorch's global deterministic-algorithm guard. An unsupported nondeterministic path would not have failed closed."
+        },
+        {
+          "operations": "InstanceNorm2d, Dice/BCE losses, and CUDA gradient reductions",
+          "reason": "Parallel floating-point reduction order and kernel implementation can change across CUDA, cuDNN, PyTorch, driver, or GPU versions. The current runtime probe passes, but cross-runtime bitwise identity is not guaranteed."
+        },
+        {
+          "operations": "CUDA AdamW update with AMP FP16 forward and GradScaler",
+          "reason": "FP16 rounding and overflow decisions can amplify small runtime-level differences. Early stopping and top-3 selection can then follow a different path even with the same seed."
+        },
+        {
+          "operations": "CUDA library determinism enforcement",
+          "reason": "CUBLAS_WORKSPACE_CONFIG and TF32 policy were not explicitly recorded by the training run. The model path is convolution-heavy, but the environment contract is incomplete."
+        }
+      ],
+      "checkpoint_reload": {
+        "checkpoint": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\top3_checkpoints\\epoch_056_macro_dice_0.762662.pt",
+        "checkpoint_sha256": "16DC8745993EEF959D0F2924C9147A45320673F6FC0B465AB08F8AD7B2F723DE",
+        "device": "cuda",
+        "validation_images_recomputed": 680,
+        "maximum_metric_difference": 0.0,
+        "maximum_per_image_difference": 0.0,
+        "test_images_accessed": 0
+      }
+    },
+    "what_phase4_does_not_prove": [
+      {
+        "claim": "clinical validity or safety",
+        "status": "NOT_ESTABLISHED",
+        "reason": "No prospective clinical evaluation or clinician-validated deployment study was performed."
+      },
+      {
+        "claim": "cross-dataset or real-world generalization",
+        "status": "NOT_ESTABLISHED",
+        "reason": "All reported segmentation metrics are from BRISC internal validation."
+      },
+      {
+        "claim": "patient-independent performance",
+        "status": "NOT_ESTABLISHED",
+        "reason": "BRISC patient independence is unverified."
+      },
+      {
+        "claim": "resolved glioma segmentation",
+        "status": "NOT_ESTABLISHED",
+        "reason": "Glioma mean Dice is quantified at 0.6090, with 60/204 cases below Dice 0.50 and 12 zero-Dice cases; the limitation remains unresolved."
+      },
+      {
+        "claim": "sealed-test performance",
+        "status": "NOT_EVALUATED",
+        "reason": "The sealed BRISC test partition was not accessed."
+      }
+    ],
+    "constraints_verified": {
+      "retraining_performed": false,
+      "threshold_changed": false,
+      "test_images_accessed": 0,
+      "phase5_started": false
+    }
+  },
+  "source_artifacts": {
+    "result_json": {
+      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\result.json",
+      "sha256": "954bedbb86b62ecbe46bae1d8b63863360130b8d1aad6a0f0d89faaec8e74851"
+    },
+    "failure_modes_csv": {
+      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\phase4_failure_modes.csv",
+      "sha256": "e1e28e1d4bf06702c44495a88d0368843823eab003fd476bfcf705e24940212f"
+    },
+    "classifier_segmenter_agreement_json": {
+      "path": "E:\\BrainTumorProject\\audit\\phase4_classifier_segmenter_agreement.json",
+      "sha256": "a5f90d7a4e04bd7a47da6362543811508939edae92e60204fd804b1bea101efe"
+    },
+    "uncertainty_signals_json": {
+      "path": "E:\\BrainTumorProject\\audit\\phase4_uncertainty_signals.json",
+      "sha256": "8f77f23d425e5551a95c00bf7a9dd11d03431930ab1cb9d792b34c16cfe3101e"
+    },
+    "phase4_manifest_json": {
+      "path": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\phase4_manifest.json",
+      "sha256": "a0309fbf65f1ccdc9c21ea172c4fba65c46083f71b7bd0efdc4f98399eaf06f2"
+    }
+  }
 }
