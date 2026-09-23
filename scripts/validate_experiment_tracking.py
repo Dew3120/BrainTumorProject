@@ -63,6 +63,17 @@ def validate_registry(root=ROOT):
     preregistration = root / registry["preregistration"]["path"]
     if sha256(preregistration) != registry["preregistration"]["sha256"]:
         raise ValueError("Preregistration SHA256 mismatch")
+    amendments = []
+    for amendment in registry.get("amendments", []):
+        amendment_path = root / amendment["path"]
+        actual_sha256 = sha256(amendment_path)
+        if actual_sha256 != amendment["sha256"]:
+            raise ValueError(
+                f"Preregistration amendment SHA256 mismatch: {amendment['path']}"
+            )
+        amendments.append(
+            {"path": amendment["path"], "sha256": actual_sha256}
+        )
     baseline = root / registry["baseline"]["path"]
     if sha256(baseline) != registry["baseline"]["sha256"]:
         raise ValueError("Baseline manifest SHA256 mismatch")
@@ -94,6 +105,7 @@ def validate_registry(root=ROOT):
         "status": "PASS",
         "experiment_count": len(summaries),
         "preregistration_sha256": registry["preregistration"]["sha256"],
+        "amendments": amendments,
         "baseline_manifest_sha256": registry["baseline"]["sha256"],
         "experiments": summaries,
     }

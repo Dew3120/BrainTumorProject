@@ -9,6 +9,7 @@ __pycache__/
 data/
 audit/*
 !audit/preregistration.md
+!audit/preregistration_amendment_01.md
 !audit/review_log.md
 !audit/foundation_reset_verification.json
 !audit/classifier_training_findings.json
