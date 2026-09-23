@@ -1,0 +1,36 @@
+{
+  "status": "BUDGET_EXHAUSTED_DIAGNOSE_BEFORE_FULL_TRAINING",
+  "run": "20260923-063527-150497-overfit",
+  "gate": {
+    "mean_training_dice_required": 0.9,
+    "minimum_individual_training_dice_required": 0.8,
+    "consecutive_epochs_required": 5,
+    "maximum_epochs": 100
+  },
+  "configuration": {
+    "output_head": "linear logits",
+    "loss": "fixed aggregate pos_weight BCE plus unchanged foreground soft Dice",
+    "fixed_pos_weight": 85.23157894736842,
+    "foreground_pixels": 1140,
+    "background_pixels": 97164,
+    "learning_rate": 0.001,
+    "batch_size": 2,
+    "training_pairs": 6,
+    "validation_pairs_diagnostic_only": 3,
+    "test_evaluated": false
+  },
+  "observed": {
+    "best_mean_training_dice": 0.775684,
+    "best_mean_epoch": 90,
+    "worst_pair_dice_at_best_mean_epoch": 0.554913,
+    "final_mean_training_dice": 0.7349411994218826,
+    "final_worst_pair_dice": 0.48241207003593445,
+    "smallest_mask_foreground_fraction": 0.0029296875,
+    "smallest_mask_maximum_dice": 0.554913,
+    "checkpoint_reload_max_absolute_difference": 0.0
+  },
+  "visual_review": "Final-epoch predictions overlap the intended regions for most training pairs but generally over-segment. The smallest 48-pixel mask has a larger predicted focus plus several disconnected false-positive regions. Validation predictions contain substantial disconnected false positives and were not used for model selection or stopping.",
+  "interpretation": "The combined linear-logit and weighted-BCE setup can learn foreground localization across the six images, but it did not satisfy the predeclared memorization gate and became unstable late in training. The failed gate blocks full segmentation training until a controlled optimization or loss experiment passes the same unchanged rule.",
+  "full_training_started": false,
+  "patient_independence_verified": false
+}

@@ -13,6 +13,7 @@ audit/*
 !audit/phase4_overfit_findings.json
 !audit/phase4_single_pair_findings.json
 !audit/phase4_weighted_single_pair_findings.json
+!audit/phase4_six_pair_weighted_gate_findings.json
 runs/
 models/
 mlruns/

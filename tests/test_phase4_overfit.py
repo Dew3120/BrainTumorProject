@@ -3,8 +3,10 @@
 import sys
 from pathlib import Path
 
+import torch
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_overfit import decision
+from phase4_overfit import decision, foreground_statistics
 
 
 def row(mean=0.91, minimum=0.81, validation=0.0):
@@ -31,3 +33,22 @@ def test_low_plateau_and_budget_limits():
         decision([row(mean=0.7, minimum=0.3)] * 100)
         == "BUDGET_EXHAUSTED_DIAGNOSE_BEFORE_FULL_TRAINING"
     )
+
+
+def test_foreground_statistics_use_all_training_masks_once():
+    rows = [{"filename": "a.png"}, {"filename": "b.png"}]
+    targets = torch.tensor(
+        [
+            [[[1.0, 0.0], [0.0, 0.0]]],
+            [[[1.0, 1.0], [0.0, 0.0]]],
+        ]
+    )
+    per_image, aggregate = foreground_statistics(rows, targets)
+    assert [item["foreground_fraction"] for item in per_image] == [0.25, 0.5]
+    assert aggregate == {
+        "foreground_pixels": 3,
+        "background_pixels": 5,
+        "total_pixels": 8,
+        "foreground_fraction": 3 / 8,
+        "pos_weight": 5 / 3,
+    }

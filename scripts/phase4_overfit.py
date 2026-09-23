@@ -69,6 +69,39 @@ def make_diagnostic_model(head):
     return model
 
 
+def foreground_statistics(rows, targets):
+    """Describe each transformed training mask and derive one fixed BCE weight."""
+    if len(rows) != len(targets):
+        raise ValueError("Mask metadata and tensors have different lengths")
+    per_image = []
+    foreground_total = 0
+    pixel_total = 0
+    for index, (row, target) in enumerate(zip(rows, targets, strict=True), start=1):
+        foreground = int(target.sum().item())
+        pixels = target.numel()
+        if foreground <= 0 or foreground >= pixels:
+            raise ValueError(f"Training mask {index} has invalid foreground count")
+        foreground_total += foreground
+        pixel_total += pixels
+        per_image.append(
+            {
+                "pair_index": index,
+                "filename": row["filename"],
+                "foreground_pixels": foreground,
+                "total_pixels": pixels,
+                "foreground_fraction": foreground / pixels,
+            }
+        )
+    background_total = pixel_total - foreground_total
+    return per_image, {
+        "foreground_pixels": foreground_total,
+        "background_pixels": background_total,
+        "total_pixels": pixel_total,
+        "foreground_fraction": foreground_total / pixel_total,
+        "pos_weight": background_total / foreground_total,
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -78,6 +111,11 @@ def main():
     )
     parser.add_argument("--learning-rate", type=float, default=0.001)
     parser.add_argument("--head", choices=("original", "linear"), default="original")
+    parser.add_argument(
+        "--balanced-bce",
+        action="store_true",
+        help="Use one fixed pos_weight derived only from all six training masks",
+    )
     args = parser.parse_args()
     if not 0 < args.learning_rate <= 0.01:
         raise ValueError("Learning rate must be positive and at most 0.01")
@@ -117,6 +155,9 @@ def main():
         )
         for name, ds in datasets.items()
     }
+    per_image_foreground, aggregate_foreground = foreground_statistics(
+        subsets["train"], tensors["train"][1]
+    )
     random.seed(42)
     np.random.seed(42)
     torch.manual_seed(42)
@@ -153,6 +194,15 @@ def main():
         "channels": [8, 16, 32],
         "precision": "FP32 for this diagnostic",
         "augmentation": "none",
+        "loss": "fixed aggregate pos_weight BCE + unchanged foreground soft Dice"
+        if args.balanced_bce
+        else "unweighted BCE + foreground soft Dice",
+        "fixed_pos_weight": aggregate_foreground["pos_weight"]
+        if args.balanced_bce
+        else 1.0,
+        "weight_source": "all six transformed training masks only; fixed before optimization",
+        "aggregate_training_mask_statistics": aggregate_foreground,
+        "per_image_training_mask_statistics": per_image_foreground,
         "train_pairs": 6,
         "validation_pairs": 3,
         "metric_definition": "Mean foreground hard Dice per image at sigmoid >= 0.5, in eval mode after each epoch",
@@ -161,13 +211,28 @@ def main():
     }
     smoke.save_json(output / "config.json", config)
     print("PREDECLARED RULE:", json.dumps(RULE), flush=True)
+    print(
+        "TRAINING MASK STATISTICS:",
+        json.dumps(
+            {
+                "per_image": per_image_foreground,
+                "aggregate": aggregate_foreground,
+            }
+        ),
+        flush=True,
+    )
     print("RUN DIRECTORY:", output, flush=True)
     model = make_diagnostic_model(args.head).cuda()
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=args.learning_rate, weight_decay=0.0001
     )
     dice_loss = DiceLoss(sigmoid=True)
-    bce = torch.nn.BCEWithLogitsLoss()
+    pos_weight = (
+        tensors["train"][1].new_tensor(aggregate_foreground["pos_weight"])
+        if args.balanced_bce
+        else None
+    )
+    bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
     loader = DataLoader(
         TensorDataset(*tensors["train"]), batch_size=2, shuffle=True, num_workers=0
     )
@@ -236,6 +301,12 @@ def main():
                 **{
                     f"train_pair_{i + 1}_dice": value
                     for i, value in enumerate(train_dice)
+                },
+                **{
+                    f"train_pair_{item['pair_index']}_foreground_fraction": item[
+                        "foreground_fraction"
+                    ]
+                    for item in per_image_foreground
                 },
                 **{f"val_pair_{i + 1}_dice": value for i, value in enumerate(val_dice)},
             }
@@ -312,6 +383,9 @@ def main():
             "last_five_worst_train_dice": [r["train_min_dice"] for r in history[-5:]],
             "checkpoint_reload_max_absolute_difference": delta,
             "same_smoke_pairs_used": True,
+            "fixed_pos_weight": config["fixed_pos_weight"],
+            "aggregate_training_mask_statistics": aggregate_foreground,
+            "per_image_training_mask_statistics": per_image_foreground,
             "test_evaluated": False,
             "validation_used_for_selection": False,
             "interpretation": "PASS supports learnability on six known positive images only. Non-pass requires diagnosis, not a conclusion that the architecture is fundamentally broken.",
