@@ -1,0 +1,69 @@
+{
+  "status": "MEMORIZATION_PASS",
+  "successful_run": "20260923-070137-629306-overfit-128-compact",
+  "unchanged_gate": {
+    "mean_training_dice_required": 0.9,
+    "minimum_individual_training_dice_required": 0.8,
+    "consecutive_epochs_required": 5,
+    "maximum_epochs": 100,
+    "validation_used_for_selection_or_stopping": false,
+    "test_evaluated": false
+  },
+  "preceding_per_image_weight_experiment": {
+    "run": "20260923-065751-622110-overfit-128",
+    "model_parameters": 11878,
+    "best_mean_training_dice": 0.797790,
+    "worst_training_dice_at_best_mean": 0.615385,
+    "outcome": "BUDGET_EXHAUSTED_DIAGNOSE_BEFORE_FULL_TRAINING",
+    "interpretation": "Balancing BCE independently inside each image improved small-mask and overall results but was insufficient with the tiny model."
+  },
+  "controlled_capacity_experiment": {
+    "changed": "MONAI U-Net capacity",
+    "tiny_model_parameters": 11878,
+    "compact_model_parameters": 401277,
+    "compact_channels": [16, 32, 64, 128],
+    "compact_residual_units": 2,
+    "held_constant": [
+      "same six training pairs",
+      "128x128 preprocessing",
+      "linear logit head",
+      "per-image background/foreground BCE balancing",
+      "unchanged foreground Dice loss",
+      "AdamW learning rate 0.001 and weight decay 0.0001",
+      "batch size 2",
+      "seed 42",
+      "gate and 100-epoch budget"
+    ]
+  },
+  "pass_evidence": {
+    "epochs_completed": 58,
+    "optimizer_steps": 174,
+    "last_five_mean_training_dice": [
+      0.9258834421634674,
+      0.9264899094899496,
+      0.9448756277561188,
+      0.9528135061264038,
+      0.9489942193031311
+    ],
+    "last_five_worst_training_dice": [
+      0.8067227005958557,
+      0.8067227005958557,
+      0.8571428656578064,
+      0.8648648858070374,
+      0.8727272748947144
+    ],
+    "final_per_image_dice": [
+      0.9761092066764832,
+      0.9705304503440857,
+      0.9790897965431213,
+      0.8727272748947144,
+      0.9548693299293518,
+      0.9406392574310303
+    ],
+    "checkpoint_reload_max_absolute_difference": 0.0
+  },
+  "visual_review": "All six final training predictions tightly overlap their reference masks. The 48-pixel smallest mask is correctly localized with a small boundary mismatch. Diagnostic validation overlays remain poor for two of three images and were not used for selection or stopping.",
+  "interpretation": "The original six-pair memorization gate passes without relaxed thresholds. The result supports that the earlier bottleneck was primarily the deliberately tiny model's capacity, with per-image loss balancing improving the small-mask tradeoff. This is a pipeline learnability result only and is not evidence of validation or clinical performance.",
+  "full_training_started": false,
+  "patient_independence_verified": false
+}

@@ -6,7 +6,13 @@ from pathlib import Path
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from phase4_overfit import decision, foreground_statistics
+from phase4_overfit import (
+    decision,
+    foreground_statistics,
+    make_diagnostic_model,
+    per_image_balanced_bce,
+    per_image_positive_weights,
+)
 
 
 def row(mean=0.91, minimum=0.81, validation=0.0):
@@ -52,3 +58,26 @@ def test_foreground_statistics_use_all_training_masks_once():
         "foreground_fraction": 3 / 8,
         "pos_weight": 5 / 3,
     }
+
+
+def test_per_image_weighting_balances_each_mask_independently():
+    targets = torch.tensor(
+        [
+            [[[1.0, 0.0], [0.0, 0.0]]],
+            [[[1.0, 1.0], [0.0, 0.0]]],
+        ]
+    )
+    logits = torch.zeros_like(targets)
+    torch.testing.assert_close(
+        per_image_positive_weights(targets), torch.tensor([3.0, 1.0])
+    )
+    expected = torch.log(torch.tensor(2.0)) * 1.25
+    torch.testing.assert_close(per_image_balanced_bce(logits, targets), expected)
+
+
+def test_compact_linear_model_has_more_capacity_and_preserves_shape():
+    tiny = make_diagnostic_model("linear", "tiny")
+    compact = make_diagnostic_model("linear", "compact")
+    assert sum(p.numel() for p in tiny.parameters()) == 11878
+    assert sum(p.numel() for p in compact.parameters()) > 30 * 11878
+    assert compact(torch.zeros(1, 1, 128, 128)).shape == (1, 1, 128, 128)

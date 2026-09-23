@@ -16,7 +16,9 @@ import mlflow
 import numpy as np
 import phase4_segmentation_smoke as smoke
 import torch
+import torch.nn.functional as F
 from monai.losses import DiceLoss
+from monai.networks.nets import UNet
 from PIL import Image
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -59,13 +61,29 @@ def write_history(path, rows):
         writer.writerows(rows)
 
 
-def make_diagnostic_model(head):
-    model = smoke.make_model()
+def make_diagnostic_model(head, model_size="tiny"):
+    if model_size == "tiny":
+        channels = (8, 16, 32)
+        model = smoke.make_model()
+    elif model_size == "compact":
+        channels = (16, 32, 64, 128)
+        model = UNet(
+            spatial_dims=2,
+            in_channels=1,
+            out_channels=1,
+            channels=channels,
+            strides=(2, 2, 2),
+            num_res_units=2,
+            norm="INSTANCE",
+            dropout=0.0,
+        )
+    else:
+        raise ValueError(f"Unknown model size: {model_size}")
     if head == "linear":
         # Preserve the encoder and inner decoder; replace the one-channel normalized
         # residual output block with an unrestricted linear logit layer.
         model.model[2] = torch.nn.ConvTranspose2d(
-            16, 1, 3, stride=2, padding=1, output_padding=1
+            channels[0] * 2, 1, 3, stride=2, padding=1, output_padding=1
         )
     return model
 
@@ -119,6 +137,23 @@ def foreground_statistics(rows, targets):
     }
 
 
+def per_image_positive_weights(targets):
+    """Return background/foreground for each positive mask in a batch."""
+    foreground = targets.sum(dim=(1, 2, 3))
+    pixels = targets[0].numel()
+    if (foreground <= 0).any() or (foreground >= pixels).any():
+        raise ValueError("Per-image weighting requires nonempty, non-full masks")
+    return (pixels - foreground) / foreground
+
+
+def per_image_balanced_bce(logits, targets):
+    """Balance foreground/background inside each image, then average images."""
+    weights = per_image_positive_weights(targets).view(-1, 1, 1, 1)
+    raw = F.binary_cross_entropy_with_logits(logits, targets, reduction="none")
+    weighted = raw * torch.where(targets > 0.5, weights, 1.0)
+    return weighted.flatten(1).mean(1).mean()
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -128,6 +163,7 @@ def main():
     )
     parser.add_argument("--learning-rate", type=float, default=0.001)
     parser.add_argument("--head", choices=("original", "linear"), default="original")
+    parser.add_argument("--model-size", choices=("tiny", "compact"), default="tiny")
     parser.add_argument("--image-size", type=int, choices=(128, 256), default=128)
     parser.add_argument(
         "--balanced-bce",
@@ -139,6 +175,11 @@ def main():
         type=float,
         help="Freeze BCE pos_weight to this positive value instead of recomputing it",
     )
+    parser.add_argument(
+        "--per-image-pos-weight",
+        action="store_true",
+        help="Balance foreground/background separately inside every image",
+    )
     args = parser.parse_args()
     if not 0 < args.learning_rate <= 0.01:
         raise ValueError("Learning rate must be positive and at most 0.01")
@@ -149,6 +190,12 @@ def main():
     ):
         raise ValueError(
             "--fixed-pos-weight requires --balanced-bce and a positive value"
+        )
+    if args.per_image_pos_weight and (
+        not args.balanced_bce or args.fixed_pos_weight is not None
+    ):
+        raise ValueError(
+            "--per-image-pos-weight requires --balanced-bce and excludes a fixed weight"
         )
     source = args.smoke_run.resolve()
     config_before = json.loads((source / "config.json").read_text(encoding="utf-8"))
@@ -218,13 +265,15 @@ def main():
         / "runs/segmentation"
         / (
             datetime.now(UTC).strftime("%Y%m%d-%H%M%S-%f")
-            + f"-overfit-{args.image_size}"
+            + f"-overfit-{args.image_size}-{args.model_size}"
         )
     )
     output.mkdir(parents=True, exist_ok=False)
     shutil.copy2(source / "selected_pairs.csv", output / "selected_pairs.csv")
     shutil.copy2(__file__, output / "overfit_script.py")
     shutil.copy2(smoke.__file__, output / "phase4_segmentation_smoke.py")
+    model = make_diagnostic_model(args.head, args.model_size).cuda()
+    model_channels = [8, 16, 32] if args.model_size == "tiny" else [16, 32, 64, 128]
     config = {
         "purpose": "Training-set memorization diagnostic, not a generalization claim",
         "decision_rule": RULE,
@@ -240,19 +289,37 @@ def main():
         "seed": 42,
         "learning_rate": args.learning_rate,
         "output_head": args.head,
+        "model_size": args.model_size,
+        "model_parameter_count": sum(p.numel() for p in model.parameters()),
         "weight_decay": 0.0001,
         "batch_size": 2,
         "image_size": args.image_size,
-        "channels": [8, 16, 32],
+        "channels": model_channels,
+        "num_res_units": 1 if args.model_size == "tiny" else 2,
         "precision": "FP32 for this diagnostic",
         "augmentation": "none",
-        "loss": "fixed aggregate pos_weight BCE + unchanged foreground soft Dice"
-        if args.balanced_bce
-        else "unweighted BCE + foreground soft Dice",
-        "fixed_pos_weight": used_pos_weight if args.balanced_bce else 1.0,
-        "weight_source": "explicit fixed value from the prior 128x128 six-mask aggregate"
-        if args.fixed_pos_weight is not None
-        else "all six transformed training masks only; fixed before optimization",
+        "loss": "per-image pos_weight BCE + unchanged foreground soft Dice"
+        if args.per_image_pos_weight
+        else (
+            "fixed aggregate pos_weight BCE + unchanged foreground soft Dice"
+            if args.balanced_bce
+            else "unweighted BCE + foreground soft Dice"
+        ),
+        "fixed_pos_weight": None
+        if args.per_image_pos_weight
+        else (used_pos_weight if args.balanced_bce else 1.0),
+        "per_image_pos_weights": per_image_positive_weights(
+            tensors["train"][1]
+        ).tolist()
+        if args.per_image_pos_weight
+        else None,
+        "weight_source": "each transformed training mask independently"
+        if args.per_image_pos_weight
+        else (
+            "explicit fixed value from the prior 128x128 six-mask aggregate"
+            if args.fixed_pos_weight is not None
+            else "all six transformed training masks only; fixed before optimization"
+        ),
         "aggregate_training_mask_statistics": aggregate_foreground,
         "per_image_training_mask_statistics": per_image_foreground,
         "training_mask_resolution_comparison": resolution_comparison,
@@ -298,15 +365,19 @@ def main():
         flush=True,
     )
     print("RUN DIRECTORY:", output, flush=True)
-    model = make_diagnostic_model(args.head).cuda()
     optimizer = torch.optim.AdamW(
         model.parameters(), lr=args.learning_rate, weight_decay=0.0001
     )
     dice_loss = DiceLoss(sigmoid=True)
-    pos_weight = (
-        tensors["train"][1].new_tensor(used_pos_weight) if args.balanced_bce else None
-    )
-    bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
+    if args.per_image_pos_weight:
+        bce = per_image_balanced_bce
+    else:
+        pos_weight = (
+            tensors["train"][1].new_tensor(used_pos_weight)
+            if args.balanced_bce
+            else None
+        )
+        bce = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)
     loader = DataLoader(
         TensorDataset(*tensors["train"]), batch_size=2, shuffle=True, num_workers=0
     )
@@ -407,7 +478,7 @@ def main():
             },
             output / "overfit_model.pt",
         )
-        restored = make_diagnostic_model(args.head).cuda()
+        restored = make_diagnostic_model(args.head, args.model_size).cuda()
         restored.load_state_dict(
             torch.load(
                 output / "overfit_model.pt", map_location="cpu", weights_only=True
@@ -459,6 +530,9 @@ def main():
             "checkpoint_reload_max_absolute_difference": delta,
             "same_smoke_pairs_used": True,
             "fixed_pos_weight": config["fixed_pos_weight"],
+            "per_image_pos_weights": config["per_image_pos_weights"],
+            "model_size": config["model_size"],
+            "model_parameter_count": config["model_parameter_count"],
             "aggregate_training_mask_statistics": aggregate_foreground,
             "per_image_training_mask_statistics": per_image_foreground,
             "training_mask_resolution_comparison": resolution_comparison,
