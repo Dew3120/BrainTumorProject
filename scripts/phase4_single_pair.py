@@ -16,6 +16,15 @@ import torch
 from monai.losses import DiceLoss
 
 
+def make_diagnostic_model(head):
+    model = smoke.make_model()
+    if head == "linear":
+        model.model[2] = torch.nn.ConvTranspose2d(
+            16, 1, 3, stride=2, padding=1, output_padding=1
+        )
+    return model
+
+
 def stats(tensor):
     value = tensor.detach()
     return {
@@ -29,11 +38,18 @@ def stats(tensor):
     }
 
 
-def breakdown(logits, target):
+def breakdown(logits, target, pos_weight=None):
     foreground = target.bool()
     per_pixel = torch.nn.functional.binary_cross_entropy_with_logits(
+        logits, target, reduction="none", pos_weight=pos_weight
+    )
+    raw_bce = torch.nn.functional.binary_cross_entropy_with_logits(
         logits, target, reduction="none"
     )
+    expected = raw_bce * torch.where(
+        foreground, torch.ones_like(target) if pos_weight is None else pos_weight, 1.0
+    )
+    torch.testing.assert_close(per_pixel, expected)
     foreground_contribution = per_pixel[foreground].sum() / target.numel()
     background_contribution = per_pixel[~foreground].sum() / target.numel()
     dice_loss = DiceLoss(sigmoid=True)(logits, target)
@@ -54,6 +70,8 @@ def breakdown(logits, target):
         "bce_foreground_contribution": foreground_contribution.item(),
         "bce_background_contribution": background_contribution.item(),
         "bce_total": per_pixel.mean().item(),
+        "unweighted_bce_foreground_mean": raw_bce[foreground].mean().item(),
+        "unweighted_bce_background_mean": raw_bce[~foreground].mean().item(),
         "total_loss": (dice_loss + per_pixel.mean()).item(),
         "predicted_foreground_pixels": int((logits >= 0).sum().item()),
         "foreground_probability_mean": probability[foreground].mean().item(),
@@ -70,6 +88,20 @@ def breakdown(logits, target):
     )
 
 
+def component_gradient_norms(model, components):
+    gradients = {}
+    for name, component in components.items():
+        parameter_gradients = torch.autograd.grad(
+            component, tuple(model.parameters()), retain_graph=True
+        )
+        if not all(torch.isfinite(g).all() for g in parameter_gradients):
+            raise RuntimeError("Non-finite component gradient")
+        gradients[name + "_parameter_gradient_l2"] = (
+            sum(g.square().sum().item() for g in parameter_gradients) ** 0.5
+        )
+    return gradients
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -77,6 +109,12 @@ def main():
         action="store_true",
         help="Run only after reviewing the printed batch",
     )
+    parser.add_argument(
+        "--balanced-bce",
+        action="store_true",
+        help="Fixed pos_weight from this training mask; Dice unchanged",
+    )
+    parser.add_argument("--head", choices=("original", "linear"), default="original")
     args = parser.parse_args()
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable")
@@ -100,29 +138,28 @@ def main():
     assert torch.isfinite(image).all() and image.min() >= 0 and image.max() <= 1
     assert set(target.unique().tolist()) == {0.0, 1.0}
     assert 0 < target.sum() < target.numel()
+    positive_weight = (
+        float((target == 0).sum().item() / target.sum().item())
+        if args.balanced_bce
+        else 1.0
+    )
+    pos_weight = target.new_tensor(positive_weight) if args.balanced_bce else None
     torch.manual_seed(42)
     torch.cuda.manual_seed_all(42)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
-    model = smoke.make_model().cuda()
+    model = make_diagnostic_model(args.head).cuda()
     model.eval()
     logits = model(image)
     assert logits.shape == target.shape and torch.isfinite(logits).all()
-    _, metrics, components = breakdown(logits, target)
-    gradients = {}
-    for name, component in components.items():
-        parameter_gradients = torch.autograd.grad(
-            component, tuple(model.parameters()), retain_graph=True
-        )
-        if not all(torch.isfinite(g).all() for g in parameter_gradients):
-            raise RuntimeError("Non-finite component gradient")
-        gradients[name + "_parameter_gradient_l2"] = (
-            sum(g.square().sum().item() for g in parameter_gradients) ** 0.5
-        )
+    _, metrics, components = breakdown(logits, target, pos_weight)
+    gradients = component_gradient_norms(model, components)
     preflight = {
         "pair": row["filename"],
         "split": "train",
         "batch_size": 1,
+        "fixed_pos_weight": positive_weight,
+        "output_head": args.head,
         "image": stats(image),
         "mask": stats(target),
         "mask_unique_values": target.unique().tolist(),
@@ -164,7 +201,12 @@ def main():
         "seed": 42,
         "precision": "FP32",
         "architecture": "original smoke UNet",
-        "loss": "unweighted BCE + foreground soft Dice; unchanged",
+        "output_head": args.head,
+        "loss": "fixed-pos-weight BCE + unchanged foreground soft Dice"
+        if args.balanced_bce
+        else "unweighted BCE + foreground soft Dice",
+        "fixed_pos_weight": positive_weight,
+        "weight_source": "this transformed training mask only; fixed before updates",
         "image_size": 128,
         "batch_size": 1,
         "augmentation": "none",
@@ -197,12 +239,13 @@ def main():
         mlflow.log_params({k: str(v) for k, v in config.items()})
         mlflow.log_artifact(str(output / "batch_inspection.json"))
         mlflow.log_metrics(metrics, step=0)
+        mlflow.log_metrics({"initial_" + k: v for k, v in gradients.items()}, step=0)
         status = "BUDGET_EXHAUSTED_DIAGNOSE"
         for step in range(1, 301):
             model.train()
             optimizer.zero_grad(set_to_none=True)
             train_logits = model(image)
-            objective, _, _ = breakdown(train_logits, target)
+            objective, _, _ = breakdown(train_logits, target, pos_weight)
             if not torch.isfinite(objective):
                 raise RuntimeError("Non-finite loss")
             objective.backward()
@@ -216,7 +259,7 @@ def main():
             model.eval()
             with torch.inference_mode():
                 final_logits = model(image)
-                _, metrics, _ = breakdown(final_logits, target)
+                _, metrics, _ = breakdown(final_logits, target, pos_weight)
             history.append({"update": step, **metrics})
             mlflow.log_metrics(metrics, step=step)
             consecutive = consecutive + 1 if metrics["dice"] >= 0.90 else 0
@@ -232,6 +275,20 @@ def main():
             if step >= 150 and max(recent) < 0.20 and max(recent) - min(recent) < 0.02:
                 status = "STOP_AND_DIAGNOSE_LOW_PLATEAU"
                 break
+        diagnostic_logits = model(image)
+        _, _, final_components = breakdown(diagnostic_logits, target, pos_weight)
+        final_gradients = component_gradient_norms(model, final_components)
+        mlflow.log_metrics(
+            {"final_" + k: v for k, v in final_gradients.items()}, step=step
+        )
+        smoke.save_json(
+            output / "gradient_comparison.json",
+            {
+                "fixed_pos_weight": positive_weight,
+                "initial": gradients,
+                "final": final_gradients,
+            },
+        )
         with (output / "history.csv").open("w", newline="", encoding="utf-8") as stream:
             writer = csv.DictWriter(stream, fieldnames=list(history[0]))
             writer.writeheader()
@@ -275,6 +332,7 @@ def main():
             "interpretation": "One-image diagnostic only; loss contributions do not by themselves establish a root cause.",
         }
         smoke.save_json(output / "result.json", result)
+        mlflow.log_artifact(str(output / "gradient_comparison.json"))
         for name in (
             "history.csv",
             "result.json",

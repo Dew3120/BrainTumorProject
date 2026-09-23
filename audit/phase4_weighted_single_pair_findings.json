@@ -1,0 +1,54 @@
+{
+  "status": "SINGLE_PAIR_MEMORIZATION_PASS",
+  "run": "20260923-062340-683704-single-pair",
+  "purpose": "One-image optimization diagnostic only; not segmentation performance evidence",
+  "pair": "brisc2025_train_01036_gl_sa_t1.jpg",
+  "configuration": {
+    "image_size": 128,
+    "seed": 42,
+    "learning_rate": 0.001,
+    "output_head": "linear logits",
+    "dice_loss": "unchanged, unweighted foreground soft Dice",
+    "bce_pos_weight": 113.57342657342657,
+    "pos_weight_source": "fixed background/foreground ratio from the one transformed training mask",
+    "validation_used": false,
+    "test_used": false
+  },
+  "predeclared_pass_rule": {
+    "dice_threshold": 0.9,
+    "consecutive_updates": 5,
+    "maximum_updates": 300
+  },
+  "result": {
+    "updates": 218,
+    "final_hard_dice": 0.9137380123138428,
+    "reference_foreground_pixels": 143,
+    "initial_predicted_foreground_pixels": 9506,
+    "final_predicted_foreground_pixels": 170,
+    "initial_foreground_probability_mean": 0.49532198905944824,
+    "initial_background_probability_mean": 0.5435979962348938,
+    "final_foreground_probability_mean": 0.9843015670776367,
+    "final_background_probability_mean": 0.01822635717689991
+  },
+  "gradient_l2": {
+    "initial": {
+      "dice": 0.01482634923711158,
+      "weighted_bce_foreground_contribution": 1.3709583780313426,
+      "bce_background_contribution": 1.0037363815899183
+    },
+    "final": {
+      "dice": 0.7122702395667376,
+      "weighted_bce_foreground_contribution": 0.683516997977663,
+      "bce_background_contribution": 0.1139525715742957
+    }
+  },
+  "interpretation": [
+    "The same original output head with weighted BCE failed.",
+    "The same linear output head with unweighted BCE failed.",
+    "The combination of linear logits and fixed weighted BCE passed on one image, showing an interaction between output head and loss balance.",
+    "Gradient norms became similar initially but were not expected to remain equal during optimization.",
+    "This establishes capacity to memorize one known mask only. It does not establish six-image learning, validation performance, or clinical utility."
+  ],
+  "six_pair_fixed_pos_weight_precomputed": 85.23157894736842,
+  "next_gate": "Repeat the predeclared six-pair memorization check using the linear logit head and one fixed aggregate pos_weight computed from all six training masks."
+}
