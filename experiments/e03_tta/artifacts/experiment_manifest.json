@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "experiment_id": "e03_tta",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e03_tta/hypothesis.md",
+      "sha256": "66bb7e5f92089f89153def3becc51b38bf0cfbb01bdd38264ab701c35335fdb0",
+      "bytes": 818
+    },
+    {
+      "path": "experiments/e03_tta/config.json",
+      "sha256": "9be0ac56be0abd09dca0718fa1ea0e78caac4931f7921f581b61b71220289bf8",
+      "bytes": 1257
+    },
+    {
+      "path": "experiments/e03_tta/result.json",
+      "sha256": "ebd0ed6de24c6e00cfb61aeba3ce14439e27b7c866460fe6a59e68d217bc3ee9",
+      "bytes": 2118
+    },
+    {
+      "path": "experiments/e03_tta/decision.md",
+      "sha256": "e08c5ebe5853ae1a728b57586ce5c1bdb8f36db915f7f0a1e67a5ecdd933b940",
+      "bytes": 400
+    },
+    {
+      "path": "experiments/e03_tta/artifacts/per_case_metrics.csv",
+      "sha256": "2e0e77b2e5f487f1f111adfe49054dfcb58efa9a9ee9938390793a70822fd819",
+      "bytes": 197981
+    },
+    {
+      "path": "experiments/e03_tta/artifacts/dice_delta_distribution.png",
+      "sha256": "cfe5c681523899a6eac1aab64da84dbbf443fb5c8619df71a888e23c03be9c58",
+      "bytes": 64092
+    },
+    {
+      "path": "experiments/e03_tta/artifacts/summary.md",
+      "sha256": "beed428bcf4ba24a3c4e035d106495b13cf160f01a89937f9f3616eaa87e7123",
+      "bytes": 377
+    }
+  ]
+}

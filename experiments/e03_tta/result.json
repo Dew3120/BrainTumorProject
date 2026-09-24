@@ -1,5 +1,79 @@
 {
   "schema_version": 1,
   "experiment_id": "e03_tta",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "Frozen BRISC internal validation; not clinical validation",
+  "device": "cuda",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "threshold_changed": false,
+  "model_changed": false,
+  "maximum_stored_metric_difference": 2.9760288122737677e-08,
+  "transforms": [
+    "identity",
+    "rotate_90",
+    "rotate_180",
+    "rotate_270",
+    "horizontal_flip",
+    "vertical_flip",
+    "transpose",
+    "anti_transpose"
+  ],
+  "baseline_mean_dice": {
+    "glioma": 0.6089516384364825,
+    "meningioma": 0.8702445041519159,
+    "pituitary": 0.808789244403334,
+    "overall": 0.7693531743234671,
+    "macro_type": 0.7626617956639108
+  },
+  "tta_mean_dice": {
+    "glioma": 0.4486630325520106,
+    "meningioma": 0.8777696559864436,
+    "pituitary": 0.5508302088408363,
+    "overall": 0.6293201361042664,
+    "macro_type": 0.6257542991264302
+  },
+  "mean_dice_delta": {
+    "glioma": -0.16028860588447186,
+    "meningioma": 0.007525151834527732,
+    "pituitary": -0.25795903556249766,
+    "overall": -0.14003303821920066,
+    "macro_type": -0.13690749653748058
+  },
+  "paired_group_bootstrap_ci95_delta": {
+    "glioma": [
+      -0.20829453029767472,
+      -0.11696809259372423
+    ],
+    "meningioma": [
+      -0.006237250860091184,
+      0.021460480155227925
+    ],
+    "pituitary": [
+      -0.30917688610072286,
+      -0.20947348111910205
+    ]
+  },
+  "gate_checks": {
+    "glioma": false,
+    "meningioma": true,
+    "pituitary": false
+  },
+  "gate_passed": false,
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.03,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "changed_cases": 680,
+  "changed_pixels": 69020,
+  "improved_cases": 278,
+  "worsened_cases": 383,
+  "mean_view_probability_sd": 0.014140536081172553,
+  "comparison_tolerance": 1e-06,
+  "limitations": [
+    "Internal validation was reused for development.",
+    "Patient independence is unverified.",
+    "Rotations and reflections test model equivariance but are not new anatomical observations."
+  ]
 }
