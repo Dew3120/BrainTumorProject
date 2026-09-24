@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e05_glioma_weighted",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H1"
+  ],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "baseline_checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "seed": 42,
+  "image_size": 128,
+  "architecture": "v1 MONAI compact 2D U-Net with linear logit head",
+  "channels": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "num_res_units": 2,
+  "base_case_loss": "per-image background/foreground balanced BCE plus foreground Dice",
+  "training_case_weights": {
+    "glioma": 3.0,
+    "meningioma": 1.0,
+    "pituitary": 1.0
+  },
+  "batch_loss_reduction": "sum(case_weight * case_loss) / sum(case_weight)",
+  "validation_loss_weighting": "none; mean of the v1 per-case base loss",
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 8,
+  "maximum_epochs": 75,
+  "early_stopping_patience": 12,
+  "early_stopping_min_delta": 0.0001,
+  "selection_metric": "validation macro mean of glioma/meningioma/pituitary image-level hard Dice",
+  "top_checkpoints_retained": 3,
+  "precision": "CUDA AMP FP16 model forward, FP32 loss and parameters",
+  "augmentation": "none",
+  "train_pairs": 2719,
+  "validation_pairs": 680,
+  "sealed_test_pairs": 860,
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.05,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "role": "secondary uncertainty interval; not part of the local gate"
+  },
+  "required_followup": "repeat visual audit, failure analysis, pixel calibration, and case reliability on the selected checkpoint",
+  "test_images_accessed": 0
+}
