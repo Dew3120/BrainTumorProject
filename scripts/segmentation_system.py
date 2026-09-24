@@ -44,15 +44,28 @@ class RoutedSegmenter:
             dtype=torch.bool,
             device=images.device,
         )
-        output = torch.empty(
-            (len(images), 1, images.shape[-2], images.shape[-1]),
-            dtype=images.dtype,
-            device=images.device,
-        )
+        output = None
         if use_specialist.any():
-            output[use_specialist] = self.specialist(images[use_specialist])
+            specialist_logits = self.specialist(images[use_specialist])
+            output = torch.empty(
+                (len(images), *specialist_logits.shape[1:]),
+                dtype=specialist_logits.dtype,
+                device=specialist_logits.device,
+            )
+            output[use_specialist] = specialist_logits
         if (~use_specialist).any():
-            output[~use_specialist] = self.fallback(images[~use_specialist])
+            fallback_logits = self.fallback(images[~use_specialist])
+            if output is None:
+                output = torch.empty(
+                    (len(images), *fallback_logits.shape[1:]),
+                    dtype=fallback_logits.dtype,
+                    device=fallback_logits.device,
+                )
+            if fallback_logits.dtype != output.dtype:
+                raise TypeError("Specialist and fallback logit dtypes differ")
+            output[~use_specialist] = fallback_logits
+        if output is None:
+            raise ValueError("Cannot route an empty image batch")
         return output
 
 
