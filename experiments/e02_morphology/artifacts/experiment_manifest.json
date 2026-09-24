@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "experiment_id": "e02_morphology",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e02_morphology/hypothesis.md",
+      "sha256": "b015a0d6f20f4435b593ac5a6297ac9aaf7222bee28dcda3e41aafee1ee0626f",
+      "bytes": 611
+    },
+    {
+      "path": "experiments/e02_morphology/config.json",
+      "sha256": "e9545137f66c1f5f4ea7b10a761ca6ca2cb5e1d59963dcb167129fbd4bd33b24",
+      "bytes": 1413
+    },
+    {
+      "path": "experiments/e02_morphology/result.json",
+      "sha256": "fbb76876071502148acda71dbaf68be51d8a1dd250d9e8ca1704b3abafee7621",
+      "bytes": 3379
+    },
+    {
+      "path": "experiments/e02_morphology/decision.md",
+      "sha256": "fc48e1e088165aeb3d2d891a9358815732013996416c697a886fc3ecc1e4aeb8",
+      "bytes": 411
+    },
+    {
+      "path": "experiments/e02_morphology/artifacts/per_case_metrics.csv",
+      "sha256": "bb41bf6fede03a7be3969a468a528bbe433eac64c10e4588125e06f40a2a2dbc",
+      "bytes": 245758
+    },
+    {
+      "path": "experiments/e02_morphology/artifacts/dice_delta_distribution.png",
+      "sha256": "126f2e1b6f4aa34aaad7475d0aa737439bff92bd220eaf1561cdc3f163a56316",
+      "bytes": 125597
+    },
+    {
+      "path": "experiments/e02_morphology/artifacts/summary.md",
+      "sha256": "f44f58d9aac289116fdd411ecb976b4ced9e15e31851f459603e9cffdc3fc6ca",
+      "bytes": 667
+    }
+  ]
+}

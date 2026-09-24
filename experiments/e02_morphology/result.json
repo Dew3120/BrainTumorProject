@@ -1,5 +1,116 @@
 {
   "schema_version": 1,
   "experiment_id": "e02_morphology",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "Frozen BRISC internal validation; not clinical validation",
+  "device": "cuda",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "threshold_changed": false,
+  "model_changed": false,
+  "maximum_stored_metric_difference": 0.0,
+  "baseline_mean_dice": {
+    "glioma": 0.608951638747171,
+    "meningioma": 0.8702445032838158,
+    "pituitary": 0.808789244003923,
+    "overall": 0.7693531739806263,
+    "macro_type": 0.7626617953449699
+  },
+  "variants": {
+    "kernel_3": {
+      "kernel_size": 3,
+      "mean_dice": {
+        "glioma": 0.6120450379612294,
+        "meningioma": 0.8738320513720685,
+        "pituitary": 0.8090137660762378,
+        "overall": 0.7715610164096083,
+        "macro_type": 0.7649636184698453
+      },
+      "mean_dice_delta": {
+        "glioma": 0.00309339921405849,
+        "meningioma": 0.00358754808825279,
+        "pituitary": 0.00022452207231471455,
+        "overall": 0.0022078424289819765,
+        "macro_type": 0.0023018231248753684
+      },
+      "paired_group_bootstrap_ci95_delta": {
+        "glioma": [
+          0.00043315886020081574,
+          0.006058224964748216
+        ],
+        "meningioma": [
+          0.0018769304619172934,
+          0.005605424860646504
+        ],
+        "pituitary": [
+          -0.0024972690461443647,
+          0.0027976729322156586
+        ]
+      },
+      "gate_checks": {
+        "glioma": false,
+        "meningioma": true,
+        "pituitary": true
+      },
+      "gate_passed": false,
+      "changed_cases": 621,
+      "changed_pixels": 5710,
+      "improved_cases": 334,
+      "worsened_cases": 249
+    },
+    "kernel_5": {
+      "kernel_size": 5,
+      "mean_dice": {
+        "glioma": 0.6052721018075168,
+        "meningioma": 0.8755297741839974,
+        "pituitary": 0.7977086771847477,
+        "overall": 0.765956217834563,
+        "macro_type": 0.7595035177254207
+      },
+      "mean_dice_delta": {
+        "glioma": -0.003679536939654171,
+        "meningioma": 0.0052852709001816045,
+        "pituitary": -0.011080566819175353,
+        "overall": -0.003396956146063279,
+        "macro_type": -0.0031582776195492324
+      },
+      "paired_group_bootstrap_ci95_delta": {
+        "glioma": [
+          -0.012999152959735043,
+          0.003955005476238493
+        ],
+        "meningioma": [
+          0.0010825671286054004,
+          0.010345854567382826
+        ],
+        "pituitary": [
+          -0.02141812595979482,
+          -0.0037427300768956844
+        ]
+      },
+      "gate_checks": {
+        "glioma": false,
+        "meningioma": true,
+        "pituitary": false
+      },
+      "gate_passed": false,
+      "changed_cases": 675,
+      "changed_pixels": 13977,
+      "improved_cases": 322,
+      "worsened_cases": 332
+    }
+  },
+  "selected_variant": null,
+  "gate_passed": false,
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.02,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "comparison_tolerance": 1e-06,
+  "limitations": [
+    "Internal validation was reused for development.",
+    "Patient independence is unverified.",
+    "Morphology can erase small true regions or bridge distinct regions."
+  ]
 }

@@ -65,3 +65,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Glioma mean Dice changed from 0.6090 to 0.6050 (`-0.0040`, bootstrap 95% CI `-0.0149` to `+0.0074`) instead of the required `+0.0200`. Meningioma and pituitary changes were `+0.0011` and `+0.0020`, so their harm controls passed. Removing every smaller component deletes true foreground in enough glioma cases to offset false-positive cleanup.
 - **Alternatives considered:** Keep the filter because it improves some individual cases; rejected because 55 cases worsened beyond tolerance and the primary glioma mean declined. Tune a minimum component size or apply filtering by category; deferred because those are unregistered variants and cannot rescue E01 after its result is known.
 - **Who approved:** Codex by amendment 01's fixed E01 gate; the user authorized sequential execution of all registered interventions.
+
+## 2026-09-24T11:01:45+05:30 — Reject fixed morphology postprocessing
+
+- **Decision made:** Reject E02 as a glioma improvement. Neither preregistered closing-then-opening variant passed the conjunctive local gate, and the gate will not be relaxed.
+- **Triggering artifact:** `experiments/e02_morphology/artifacts/experiment_manifest.json`, SHA256 `95b0f46047d2ca97710bffb24e1763507597e9cf3e716905954cab1418839258`; both fixed variants evaluated on all 680 validation cases.
+- **Rationale:** The 3x3 variant changed glioma Dice by only `+0.0031` (95% similarity-group bootstrap CI `+0.0004` to `+0.0061`) instead of the required `+0.0200`. The 5x5 variant changed glioma Dice by `-0.0037` and pituitary Dice by `-0.0111`, exceeding the allowed category harm. Model weights and the probability threshold were unchanged, and no sealed-test image was accessed.
+- **Alternatives considered:** Accept 3x3 because its small gain is statistically stable; rejected because statistical stability does not satisfy the preregistered effect-size gate. Tune kernel shape, order, or case-specific morphology after seeing these results; rejected as unregistered post-hoc rescue variants.
+- **Who approved:** Codex by amendment 01's fixed E02 gate; the user authorized sequential execution of all registered interventions.
