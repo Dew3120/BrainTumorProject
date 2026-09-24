@@ -89,6 +89,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "c01_vector_scaling",
+      "path": "experiments/c01_vector_scaling",
+      "hypothesis_ids": [
+        "H3"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [
