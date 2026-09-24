@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "experiment_id": "c04_split_temperature",
+  "registered_decision": "PASS",
+  "operational_eligibility": "INELIGIBLE_ORACLE_REFERENCE_ROUTING",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/c04_split_temperature/artifacts/fold_parameters.csv",
+      "sha256": "f02f0e7b12e43b9979b6054bac47fdf284c6113b82dc99252983609cfdc90729",
+      "bytes": 449
+    },
+    {
+      "path": "experiments/c04_split_temperature/artifacts/lesion_centered_reliability.png",
+      "sha256": "08884e9102c5dda60775835992bd5f74136388c919445c9662fed2bfd6d21190",
+      "bytes": 105946
+    },
+    {
+      "path": "experiments/c04_split_temperature/artifacts/whole_image_reliability.png",
+      "sha256": "60724b801bea877bc484dfcd7cc780a193c7e1aad22b3055478aa4be9b03bbda",
+      "bytes": 77481
+    },
+    {
+      "path": "experiments/c04_split_temperature/config.json",
+      "sha256": "94fb3fb197c26c58d9d9ddd0a5052c077ba6193082e1c3dcd7633b49392279b7",
+      "bytes": 2175
+    },
+    {
+      "path": "experiments/c04_split_temperature/decision.md",
+      "sha256": "9bd828af313341bfb488539d2b483469120f55407f4bcb0e463d41ba2878c6bc",
+      "bytes": 523
+    },
+    {
+      "path": "experiments/c04_split_temperature/hypothesis.md",
+      "sha256": "38d4032d39a0692aa6880ad5ffb5b70cc58acf0a272c4f94c96e17d391a3d440",
+      "bytes": 993
+    },
+    {
+      "path": "experiments/c04_split_temperature/result.json",
+      "sha256": "d4c221f0df29f89e52b38b9a2e1004fd5993b569de853f01257c1fe5f63d962a",
+      "bytes": 48065
+    }
+  ]
+}

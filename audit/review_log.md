@@ -209,3 +209,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** The conjunctive gate requires lesion-centred ECE at most `0.05`, background ECE at most `0.02`, and no Brier worsening in either gated region. Whole-image and per-category metrics are descriptive. Reference-defined pixel routing makes C04 ineligible as an operational H7 calibrator regardless of its local result.
 - **Alternatives considered:** Route pixels using the unavailable reference mask in production; rejected as leakage. Treat all pixels with one temperature; already evaluated by earlier registered methods. Add whole-image performance to the gate; rejected because the registered C04 gate names foreground and background.
 - **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed the explicit gate before any C04 fit.
+
+## 2026-09-24T22:47:00+05:30 — Accept separate-region temperature diagnostic locally
+
+- **Decision made:** Accept C04 under its unchanged local gate, while retaining its preregistered oracle-only and H7-ineligible status.
+- **Triggering artifact:** `experiments/c04_split_temperature/artifacts/experiment_manifest.json`, SHA256 `60d3dc3ac35cb9813c666e52a7600c3e6e3fb4101d54abe3d0a4d8798ca376b0`; 680 segmentation-validation cases and zero sealed-test images.
+- **Rationale:** Five-fold out-of-fold lesion-centred ECE was `0.024521` (gate `<=0.05`) and background ECE was `0.001512` (gate `<=0.02`). Lesion-centred Brier improved from `0.070381` to `0.068105`, and background Brier improved from `0.000719` to `0.000667`. All four checks passed. The separate temperatures changed zero hard-mask pixels at threshold `0.50`.
+- **Alternatives considered:** Treat the local pass as operational; rejected because the reference-defined routing mask is unavailable at inference. Use its whole-image result to satisfy H7; rejected by amendment 02's operational-input rule.
+- **Who approved:** Codex by the registered C04 rule; the user authorized uninterrupted C03–C09 execution subject to fixed stop conditions.

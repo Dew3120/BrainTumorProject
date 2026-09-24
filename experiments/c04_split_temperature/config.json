@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "c04_split_temperature",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H3"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H3"
+  ],
   "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
   "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
   "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
@@ -14,7 +16,10 @@
   "seed": 42,
   "method": {
     "estimator": "two independent positive scalar temperatures fitted by image-balanced pixel NLL",
-    "temperature_bounds": [0.05, 20.0],
+    "temperature_bounds": [
+      0.05,
+      20.0
+    ],
     "lesion_centered_temperature_fit_region": "reference mask plus Euclidean radius 8 model pixels",
     "background_temperature_fit_region": "complement of lesion-centered region",
     "routing": "reference-region oracle diagnostic; not available at inference"
@@ -25,7 +30,12 @@
     "whole_image": "all 128x128 pixels"
   },
   "metrics": "image-balanced NLL and Brier; 15 equal-frequency pooled-pixel ECE and MCE; per-category metrics",
-  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired": true},
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true
+  },
   "gate": {
     "lesion_centered_ece_maximum": 0.05,
     "background_ece_maximum": 0.02,
