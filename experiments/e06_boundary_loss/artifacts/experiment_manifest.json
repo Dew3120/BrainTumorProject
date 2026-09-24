@@ -1,0 +1,124 @@
+{
+  "status": "PASS",
+  "experiment_id": "e06_boundary_loss",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/best_validation_by_category.png",
+      "sha256": "41acc201305083314f2a70e10c39252dbcfddc8fce2c5265abe99eff22df546f",
+      "bytes": 579678
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/confidence_calibration_findings.json",
+      "sha256": "acfb7c3703ac61e30adef55cb9fa66bb4754ef4c694f2feae160169fc2add2df",
+      "bytes": 1397
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/dice_and_boundary_f1_comparison.png",
+      "sha256": "26dfc7c5a7e6f3321ffa5380867a46b43eb306027f848ad7ae054d01a14ef99e",
+      "bytes": 61322
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/per_case_comparison.csv",
+      "sha256": "e19e6bf8b73ad1ffda09efcec96d5b184a1fd5c2b39b2e0863c4a65485856d30",
+      "bytes": 207093
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/run_manifest.json",
+      "sha256": "9005868948d22b261ba3c06f915f0acf7b51b6563beafbb8b3932ca1e12c7d1d",
+      "bytes": 5755
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmentation_failure_modes.csv",
+      "sha256": "d3cc082e7cc6f3525b2492723bea936a5f6fba200c8a31d7622caf5b7153dcbb",
+      "bytes": 33805
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmentation_failure_modes.md",
+      "sha256": "3a0e1892be2e710be8e9ecd9824022b00342ea3edde73b0b3fbe22a6b11d1a60",
+      "bytes": 4078
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_case_reliability.json",
+      "sha256": "96194610996d6ac9d8f42f4fdd39f84436146147c4439e3660e3d044512434ba",
+      "bytes": 22555
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_case_reliability.md",
+      "sha256": "90c8e7bd28f9598f2796d5996ddfcd7077c1c9f09c32e483fe99068ae8b5320d",
+      "bytes": 3224
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_case_reliability_diagram.png",
+      "sha256": "c2cbf7707351480c9019a1f87ab205ac5a2afde1a26bae9ff42a62d1f07e5964",
+      "bytes": 72861
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_foreground_reliability_diagram.png",
+      "sha256": "7dbbeb0c7e50ec5b73ab9b6deafa8f107f9743f8940b0763ac1dc2ae9db8484a",
+      "bytes": 140907
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_pixel_calibration.json",
+      "sha256": "678f16761fc8ccaaba3655900f0e31bad34793ac0d3caa578151abef57a01d36",
+      "bytes": 52077
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_pixel_calibration.md",
+      "sha256": "816525c4034f063242a140a9e8b844cc39d4c1d488a60fdd7fb0432b10f58a1b",
+      "bytes": 3216
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/segmenter_whole_image_reliability_diagram.png",
+      "sha256": "34d85c9ccacc7b8799fa03294277a465e3ecca171c16d730294adf69cb3d8897",
+      "bytes": 134153
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/selected_checkpoint.json",
+      "sha256": "8f42b020c248264073b513d6224a0b06e132ea83107cbc92155521add3993888",
+      "bytes": 357
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/summary.md",
+      "sha256": "9e6f3fa8ff61035e51c16635c094cca8170cc20c5c72c2e2764689806d139dad",
+      "bytes": 313
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/visual_audit_selections.csv",
+      "sha256": "7448c532db0b3990dfd9db1bae602ddab02d8023bd9d1aaf094013adec843c3f",
+      "bytes": 8752
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/visual_review.json",
+      "sha256": "0863a3b2eeaddb9ea82b0fd666d4795c87710b4c1967c3950e17838ea624645f",
+      "bytes": 400
+    },
+    {
+      "path": "experiments/e06_boundary_loss/artifacts/worst_validation_by_category.png",
+      "sha256": "1d7716a238d4e0aa81b8df1f9643e916965863aad2747b1fc07e9e5be2141b59",
+      "bytes": 715792
+    },
+    {
+      "path": "experiments/e06_boundary_loss/config.json",
+      "sha256": "f5c97963b057fed7df974d04ba54b54010218913f1de8c9547704823201d5c0c",
+      "bytes": 2325
+    },
+    {
+      "path": "experiments/e06_boundary_loss/decision.md",
+      "sha256": "72bda79836116373ca8d5a1c6bac27f423995c5ef993793fb12813bf82ab83ab",
+      "bytes": 585
+    },
+    {
+      "path": "experiments/e06_boundary_loss/hypothesis.md",
+      "sha256": "45121f74424dd8019278e133e5ee760f053f9aa952592111d765c5a17222a238",
+      "bytes": 853
+    },
+    {
+      "path": "experiments/e06_boundary_loss/result.json",
+      "sha256": "6f42a0557986e89d6e2b2e61bd568898560e42708ef7adc0f3c46dc73436e142",
+      "bytes": 4141
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "experiment_id": "e06_boundary_loss",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_boundary_loss\\20260924-063051-647842-boundary",
+  "top3_checkpoints": [
+    {
+      "rank": 1,
+      "epoch": 40,
+      "file": "epoch_040_macro_dice_0.745706.pt",
+      "sha256": "B98AFABC8118471E01F560FF6A727CE25C08001574BF12005D77D1BE773F43AB"
+    }
+  ]
+}

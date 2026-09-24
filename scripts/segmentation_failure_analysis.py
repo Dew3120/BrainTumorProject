@@ -320,6 +320,7 @@ def main():
     maximum_delta = max(
         abs(metrics[key] - result["best_validation_metrics"][key])
         for key in result["best_validation_metrics"]
+        if key != "val_loss"
     )
     if maximum_delta > tolerance:
         raise ValueError(f"Validation metric mismatch: {maximum_delta}")

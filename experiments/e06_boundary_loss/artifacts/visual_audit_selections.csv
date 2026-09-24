@@ -1,0 +1,43 @@
+panel,group,rank,path,filename,label,dice,iou,reference_pixels,predicted_pixels,duplicate_of_earlier_tile
+worst,Worst glioma,1,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00051_gl_ax_t1.jpg,brisc2025_train_00051_gl_ax_t1.jpg,glioma,0.0,0.0,124,683,False
+worst,Worst glioma,2,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00216_gl_ax_t1.jpg,brisc2025_train_00216_gl_ax_t1.jpg,glioma,0.0,0.0,171,303,False
+worst,Worst glioma,3,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00250_gl_ax_t1.jpg,brisc2025_train_00250_gl_ax_t1.jpg,glioma,0.0,0.0,22,87,False
+worst,Worst glioma,4,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00279_gl_ax_t1.jpg,brisc2025_train_00279_gl_ax_t1.jpg,glioma,0.0,0.0,78,131,False
+worst,Worst glioma,5,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00281_gl_ax_t1.jpg,brisc2025_train_00281_gl_ax_t1.jpg,glioma,0.0,0.0,134,43,False
+worst,Worst glioma,6,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00308_gl_ax_t1.jpg,brisc2025_train_00308_gl_ax_t1.jpg,glioma,0.0,0.0,66,412,False
+worst,Worst meningioma,1,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01380_me_ax_t1.jpg,brisc2025_train_01380_me_ax_t1.jpg,meningioma,0.0,0.0,1094,251,False
+worst,Worst meningioma,2,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01290_me_ax_t1.jpg,brisc2025_train_01290_me_ax_t1.jpg,meningioma,0.0235294122248888,0.011904762126505375,111,144,False
+worst,Worst meningioma,3,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02163_me_sa_t1.jpg,brisc2025_train_02163_me_sa_t1.jpg,meningioma,0.14780600368976593,0.07980050146579742,46,387,False
+worst,Worst meningioma,4,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01960_me_co_t1.jpg,brisc2025_train_01960_me_co_t1.jpg,meningioma,0.18315018713474274,0.10080645233392715,27,246,False
+worst,Worst meningioma,5,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01596_me_co_t1.jpg,brisc2025_train_01596_me_co_t1.jpg,meningioma,0.18421052396297455,0.10144927352666855,59,397,False
+worst,Worst meningioma,6,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02064_me_sa_t1.jpg,brisc2025_train_02064_me_sa_t1.jpg,meningioma,0.5306122303009033,0.3611111044883728,39,108,False
+worst,Worst pituitary,1,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03839_pi_ax_t1.jpg,brisc2025_train_03839_pi_ax_t1.jpg,pituitary,0.0,0.0,33,306,False
+worst,Worst pituitary,2,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04794_pi_sa_t1.jpg,brisc2025_train_04794_pi_sa_t1.jpg,pituitary,0.04060913622379303,0.020725388079881668,75,122,False
+worst,Worst pituitary,3,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03841_pi_ax_t1.jpg,brisc2025_train_03841_pi_ax_t1.jpg,pituitary,0.13216957449913025,0.07076101750135422,160,642,False
+worst,Worst pituitary,4,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03894_pi_ax_t1.jpg,brisc2025_train_03894_pi_ax_t1.jpg,pituitary,0.16417910158634186,0.08943089097738266,143,125,False
+worst,Worst pituitary,5,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04439_pi_co_t1.jpg,brisc2025_train_04439_pi_co_t1.jpg,pituitary,0.21201413869857788,0.11857707798480988,30,253,False
+worst,Worst pituitary,6,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04698_pi_sa_t1.jpg,brisc2025_train_04698_pi_sa_t1.jpg,pituitary,0.32460734248161316,0.19374999403953552,70,121,False
+worst,Zero-Dice validation cases,1,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00051_gl_ax_t1.jpg,brisc2025_train_00051_gl_ax_t1.jpg,glioma,0.0,0.0,124,683,True
+worst,Zero-Dice validation cases,2,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00216_gl_ax_t1.jpg,brisc2025_train_00216_gl_ax_t1.jpg,glioma,0.0,0.0,171,303,True
+worst,Zero-Dice validation cases,3,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00250_gl_ax_t1.jpg,brisc2025_train_00250_gl_ax_t1.jpg,glioma,0.0,0.0,22,87,True
+worst,Zero-Dice validation cases,4,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00279_gl_ax_t1.jpg,brisc2025_train_00279_gl_ax_t1.jpg,glioma,0.0,0.0,78,131,True
+worst,Zero-Dice validation cases,5,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00281_gl_ax_t1.jpg,brisc2025_train_00281_gl_ax_t1.jpg,glioma,0.0,0.0,134,43,True
+worst,Zero-Dice validation cases,6,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00308_gl_ax_t1.jpg,brisc2025_train_00308_gl_ax_t1.jpg,glioma,0.0,0.0,66,412,True
+best,Best glioma,1,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_01047_gl_sa_t1.jpg,brisc2025_train_01047_gl_sa_t1.jpg,glioma,0.9658119678497314,0.93388432264328,237,231,False
+best,Best glioma,2,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_01100_gl_sa_t1.jpg,brisc2025_train_01100_gl_sa_t1.jpg,glioma,0.9497206807136536,0.9042553305625916,440,455,False
+best,Best glioma,3,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00971_gl_sa_t1.jpg,brisc2025_train_00971_gl_sa_t1.jpg,glioma,0.9449275135993958,0.8956043720245361,172,173,False
+best,Best glioma,4,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00655_gl_co_t1.jpg,brisc2025_train_00655_gl_co_t1.jpg,glioma,0.9443609118461609,0.8945869207382202,329,336,False
+best,Best glioma,5,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00506_gl_co_t1.jpg,brisc2025_train_00506_gl_co_t1.jpg,glioma,0.9419568777084351,0.890282154083252,297,306,False
+best,Best glioma,6,data/raw/brisc/brisc2025/classification_task/train/glioma/brisc2025_train_00555_gl_co_t1.jpg,brisc2025_train_00555_gl_co_t1.jpg,glioma,0.9395161271095276,0.8859315514564514,242,254,False
+best,Best meningioma,1,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02032_me_sa_t1.jpg,brisc2025_train_02032_me_sa_t1.jpg,meningioma,0.9756944179534912,0.9525423645973206,566,586,False
+best,Best meningioma,2,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02473_me_sa_t1.jpg,brisc2025_train_02473_me_sa_t1.jpg,meningioma,0.9750000238418579,0.9512194991111755,434,446,False
+best,Best meningioma,3,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01775_me_co_t1.jpg,brisc2025_train_01775_me_co_t1.jpg,meningioma,0.9687235951423645,0.9393442869186401,582,601,False
+best,Best meningioma,4,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02031_me_sa_t1.jpg,brisc2025_train_02031_me_sa_t1.jpg,meningioma,0.9681648015975952,0.938293993473053,519,549,False
+best,Best meningioma,5,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02065_me_sa_t1.jpg,brisc2025_train_02065_me_sa_t1.jpg,meningioma,0.9669861793518066,0.9360824823379517,461,478,False
+best,Best meningioma,6,data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_02149_me_sa_t1.jpg,brisc2025_train_02149_me_sa_t1.jpg,meningioma,0.9667077660560608,0.9355608820915222,801,821,False
+best,Best pituitary,1,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03964_pi_ax_t1.jpg,brisc2025_train_03964_pi_ax_t1.jpg,pituitary,0.9808917045593262,0.9624999761581421,78,79,False
+best,Best pituitary,2,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04379_pi_co_t1.jpg,brisc2025_train_04379_pi_co_t1.jpg,pituitary,0.9752925634384155,0.9517766237258911,383,386,False
+best,Best pituitary,3,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03707_pi_ax_t1.jpg,brisc2025_train_03707_pi_ax_t1.jpg,pituitary,0.9743589758872986,0.949999988079071,78,78,False
+best,Best pituitary,4,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03855_pi_ax_t1.jpg,brisc2025_train_03855_pi_ax_t1.jpg,pituitary,0.9644268751144409,0.9312977194786072,124,129,False
+best,Best pituitary,5,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_04378_pi_co_t1.jpg,brisc2025_train_04378_pi_co_t1.jpg,pituitary,0.9601593613624573,0.9233716726303101,732,774,False
+best,Best pituitary,6,data/raw/brisc/brisc2025/classification_task/train/pituitary/brisc2025_train_03630_pi_ax_t1.jpg,brisc2025_train_03630_pi_ax_t1.jpg,pituitary,0.9569377899169922,0.9174311757087708,101,108,False

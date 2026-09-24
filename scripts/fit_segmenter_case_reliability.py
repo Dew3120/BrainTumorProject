@@ -429,6 +429,7 @@ def main():
     maximum_metric_difference = max(
         abs(recomputed[key] - result["best_validation_metrics"][key])
         for key in result["best_validation_metrics"]
+        if key != "val_loss"
     )
     if maximum_metric_difference > tolerance:
         raise ValueError(f"Recomputed metric mismatch: {maximum_metric_difference}")

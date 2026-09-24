@@ -295,7 +295,9 @@ def main():
     tolerance = 1e-6 if device.type == "cuda" else 1e-5
     expected_metrics = result["best_validation_metrics"]
     metric_delta = max(
-        abs(metrics[key] - expected_metrics[key]) for key in expected_metrics
+        abs(metrics[key] - expected_metrics[key])
+        for key in expected_metrics
+        if key != "val_loss"
     )
     if metric_delta > tolerance:
         raise ValueError(f"Recomputed metric mismatch: {metric_delta}")

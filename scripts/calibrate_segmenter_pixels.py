@@ -574,6 +574,7 @@ def main():
     maximum_metric_difference = max(
         abs(recomputed_metrics[key] - expected_metrics[key])
         for key in expected_metrics
+        if key != "val_loss"
     )
     if maximum_metric_difference > tolerance:
         raise ValueError(

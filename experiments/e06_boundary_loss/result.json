@@ -1,5 +1,133 @@
 {
   "schema_version": 1,
   "experiment_id": "e06_boundary_loss",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "BRISC internal validation development result; not clinical validation",
+  "launch_source_git_commit": "7251f0592a7ba0af1f4964ff96fac9e8cd1d32a9",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_boundary_loss\\20260924-063051-647842-boundary",
+  "run_name": "20260924-063051-647842-boundary",
+  "training_status": "EARLY_STOPPED",
+  "epochs_completed": 52,
+  "selected_epoch": 40,
+  "selected_checkpoint": "epoch_040_macro_dice_0.745706.pt",
+  "selected_checkpoint_sha256": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+  "checkpoint_reload_max_metric_difference": 0.0,
+  "recomputed_max_metric_difference": 0.0,
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "dice": {
+    "baseline": {
+      "glioma": 0.608951638747171,
+      "meningioma": 0.8702445032838158,
+      "pituitary": 0.808789244003923
+    },
+    "candidate": {
+      "glioma": 0.5793657813394698,
+      "meningioma": 0.8599838142566351,
+      "pituitary": 0.7977684671620289
+    },
+    "delta": {
+      "glioma": -0.029585857407701144,
+      "meningioma": -0.010260689027180692,
+      "pituitary": -0.011020776841894175
+    },
+    "paired_group_bootstrap_ci95_delta": {
+      "glioma": [
+        -0.053318853462278375,
+        -0.006990846002348659
+      ],
+      "meningioma": [
+        -0.02460614632187035,
+        0.003773415048854262
+      ],
+      "pituitary": [
+        -0.024788248078594054,
+        0.0028365214302898552
+      ]
+    }
+  },
+  "boundary_f1": {
+    "baseline": {
+      "glioma": 0.6525206635285602,
+      "meningioma": 0.9308279352008252,
+      "pituitary": 0.9002187874798728
+    },
+    "candidate": {
+      "glioma": 0.605554665726156,
+      "meningioma": 0.9258540149813189,
+      "pituitary": 0.8940488295521538
+    },
+    "delta": {
+      "glioma": -0.04696599780240418,
+      "meningioma": -0.004973920219506267,
+      "pituitary": -0.006169957927719016
+    },
+    "paired_group_bootstrap_ci95_delta": {
+      "glioma": [
+        -0.07656730083385098,
+        -0.019542553161938696
+      ],
+      "meningioma": [
+        -0.021641893501073782,
+        0.01106495339422451
+      ],
+      "pituitary": [
+        -0.020305644857613277,
+        0.008104837207203914
+      ]
+    },
+    "tolerance_pixels": 2
+  },
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.05,
+    "glioma_boundary_f1_delta_minimum": 0.05
+  },
+  "gate_checks": {
+    "glioma_dice": false,
+    "glioma_boundary_f1": false
+  },
+  "gate_passed": false,
+  "failure_analysis": {
+    "dice_below_0_50": 88,
+    "counts_by_category": {
+      "glioma": 69,
+      "meningioma": 5,
+      "pituitary": 14
+    }
+  },
+  "visual_audit": {
+    "status": "PASS_NO_SYSTEMATIC_TECHNICAL_DEFECT",
+    "selected_tiles": 42,
+    "finding": "Best cases show close reference/prediction alignment. Worst cases show mislocalization, fragmentation, and coverage errors without a repeated flip, stretch, offset, or image/mask pairing defect.",
+    "reviewer": "Codex visual inspection under the user-authorized audit protocol",
+    "test_images_accessed": 0
+  },
+  "pixel_calibration": {
+    "gate_status": "FAIL",
+    "raw_foreground_ece": 0.08246892786273058,
+    "oof_foreground_ece": 0.058363149095296225,
+    "oof_hard_mask_changed_pixels": 0
+  },
+  "case_reliability": {
+    "gate_status": "PASS",
+    "failure_detection_auroc": 0.9152526105651105,
+    "reliability_ece": 0.029544552357001617,
+    "brier_skill": 0.3380527052932417,
+    "zero_dice_capture_top20": {
+      "case_count": 136,
+      "population_fraction": 0.2,
+      "tie_break": "descending risk, then normalized path ascending",
+      "zero_dice_captured": 11,
+      "zero_dice_total": 17,
+      "failures_captured": 64,
+      "failures_total": 88
+    }
+  },
+  "required_followup_complete": true,
+  "limitations": [
+    "The same internal validation partition was used for model selection and comparison.",
+    "Patient independence is unverified.",
+    "No external dataset or sealed test image was evaluated.",
+    "This result does not establish clinical validity or deployment safety."
+  ]
 }
