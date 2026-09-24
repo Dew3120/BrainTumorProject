@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e07_glioma_specialized",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H1"
+  ],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "baseline_segmenter_checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "classifier_checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+  "classifier_validation_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "seed": 42,
+  "image_size": 128,
+  "architecture": "v1 MONAI compact 2D U-Net with linear logit head",
+  "channels": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "num_res_units": 2,
+  "loss": "per-image background/foreground balanced BCE plus foreground Dice",
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 8,
+  "maximum_epochs": 75,
+  "early_stopping_patience": 12,
+  "early_stopping_min_delta": 0.0001,
+  "selection_metric": "validation image-mean hard Dice on the 204 glioma validation pairs",
+  "top_checkpoints_retained": 3,
+  "precision": "CUDA AMP FP16 model forward, FP32 loss and parameters",
+  "augmentation": "none",
+  "specialist_train_pairs": 817,
+  "specialist_validation_pairs": 204,
+  "routed_validation_pairs": 680,
+  "sealed_test_pairs": 860,
+  "routing": {
+    "source": "frozen v1 four-class classifier raw argmax",
+    "specialist_condition": "predicted class equals glioma",
+    "fallback": "frozen v1 general segmenter for every other predicted class",
+    "accuracy_definition": "exact predicted-class agreement with dataset tumor type over all 680 positive-mask validation cases"
+  },
+  "gate": {
+    "routed_glioma_mean_dice_delta_minimum": 0.08,
+    "classifier_routing_accuracy_minimum": 0.95,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "role": "secondary uncertainty interval; not part of the local gate"
+  },
+  "required_followup": "repeat routed validation, visual audit, failure analysis, pixel calibration, and case reliability on the routed system",
+  "test_images_accessed": 0
+}

@@ -73,6 +73,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "e07_glioma_specialized",
+      "path": "experiments/e07_glioma_specialized",
+      "hypothesis_ids": [
+        "H1"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [
