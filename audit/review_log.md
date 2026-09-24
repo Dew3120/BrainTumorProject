@@ -241,3 +241,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** The gate fixes nine conjunctive checks: ECE at most `0.05` in each of three regions for each predicted glioma, meningioma, and pituitary route. Routing uses classifier prediction and never true type. The single no-tumor route uses a global fallback and is descriptive because `n=1` cannot support a stable subgroup gate.
 - **Alternatives considered:** Route by true label; rejected as target leakage. Fit a no-tumor temperature on one case; rejected as unstable. Omit region-specific checks; rejected in favor of an explicit interpretation fixed before fitting.
 - **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed routing, fallback, and gate semantics before fitting.
+
+## 2026-09-24T23:17:00+05:30 — Reject classifier-routed per-category calibration
+
+- **Decision made:** Reject C06 under its unchanged nine-check conjunctive gate and close it without a variant.
+- **Triggering artifact:** `experiments/c06_per_category/artifacts/experiment_manifest.json`, SHA256 `85750c61fa8bda94a357eb577a45c9f24b4f2e823a619d169f00885e5348a294`; 680 segmentation-validation cases and zero sealed-test images.
+- **Rationale:** Eight of nine predicted-route-by-region ECE checks passed. The predicted-glioma lesion-centred ECE was `0.055963`, exceeding the `0.05` ceiling. Predicted-meningioma and predicted-pituitary lesion-centred ECE values were `0.027328` and `0.033086`; all background and whole-image route values passed. The classifier-routed temperatures changed zero hard-mask pixels.
+- **Alternatives considered:** Exclude the glioma lesion-centred check or gate only on whole-image ECE; rejected because all nine checks were fixed before fitting. Route using true type; rejected as leakage. Tune the glioma temperature after seeing the subgroup failure; rejected as an unregistered variant.
+- **Who approved:** Codex by the registered C06 rule; the user required failures to remain documented findings.
