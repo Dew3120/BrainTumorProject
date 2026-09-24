@@ -81,6 +81,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "e08_ensemble",
+      "path": "experiments/e08_ensemble",
+      "hypothesis_ids": [
+        "H1"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [

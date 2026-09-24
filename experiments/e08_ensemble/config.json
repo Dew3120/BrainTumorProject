@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e08_ensemble",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H1"
+  ],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "baseline_manifest_sha256": "c8a36879aa6e717d60641c5930ebb083aa3b362d98d10f2601584633d4e88a80",
+  "baseline_checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "components": [
+    {
+      "experiment_id": "e05_glioma_weighted",
+      "checkpoint_sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+      "system": "single segmenter",
+      "weight": 0.3333333333333333
+    },
+    {
+      "experiment_id": "e06_boundary_loss",
+      "checkpoint_sha256": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+      "system": "single segmenter",
+      "weight": 0.3333333333333333
+    },
+    {
+      "experiment_id": "e07_glioma_specialized",
+      "checkpoint_sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+      "routing_sha256": "a8050cf3fd6b2a67f5b8b4d131b9337ce11a2ffae7329551d10cccd4634e0fe2",
+      "system": "frozen classifier-routed specialist with v1 fallback",
+      "weight": 0.3333333333333333
+    }
+  ],
+  "aggregation": "arithmetic mean of three raw 128x128 foreground probability maps",
+  "threshold": 0.5,
+  "validation_pairs": 680,
+  "sealed_test_pairs": 860,
+  "best_eligible_single_comparator": {
+    "experiment_id": "e07_glioma_specialized",
+    "glioma_mean_dice": 0.5802066652492309,
+    "required_ensemble_glioma_mean_dice": 0.6002066652492309,
+    "eligibility_rule": "amendment 01 final-selection category-harm filter"
+  },
+  "gate": {
+    "glioma_mean_dice_delta_over_best_eligible_single_minimum": 0.02,
+    "meningioma_mean_dice_delta_from_v1_minimum": -0.01,
+    "pituitary_mean_dice_delta_from_v1_minimum": -0.01
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "role": "secondary uncertainty interval; not part of the local gate"
+  },
+  "test_images_accessed": 0
+}
