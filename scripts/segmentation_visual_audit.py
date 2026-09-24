@@ -12,6 +12,7 @@ import mlflow
 import numpy as np
 import segmentation_overfit_gate as overfit
 import segmentation_smoke_test as smoke
+import segmentation_system as system
 import torch
 import train_segmenter as train
 from matplotlib import font_manager
@@ -193,7 +194,8 @@ def inference(model, rows, device, threshold):
                 else nullcontext()
             )
             with context:
-                logits = model(images)
+                batch_rows = [rows[index] for index in indices.tolist()]
+                logits = system.logits_for_rows(model, images, batch_rows)
             loss = train.segmentation_loss(logits, targets, dice_loss)
             probabilities = logits.float().sigmoid()
             predicted = probabilities >= threshold
@@ -284,11 +286,9 @@ def main():
     if any(normalized_path(row["path"]) in test_paths for row in validation_rows):
         raise ValueError("Validation/test path overlap")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = overfit.make_diagnostic_model("linear", "compact").to(device)
-    state = torch.load(checkpoint, map_location="cpu", weights_only=True)
-    if state["epoch"] != result["best_epoch"] or state["config"] != config:
-        raise ValueError("Checkpoint metadata differs from the selected run")
-    model.load_state_dict(state["model_state"])
+    model = system.load_selected_system(
+        run, checkpoint, device, args.checkpoint_sha256
+    )
     metrics, records, predictions = inference(
         model, validation_rows, device, args.threshold
     )

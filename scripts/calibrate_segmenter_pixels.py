@@ -10,8 +10,8 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import mlflow
 import numpy as np
-import segmentation_overfit_gate as overfit
 import segmentation_smoke_test as smoke
+import segmentation_system as system
 import torch
 import train_segmenter as segmenter
 from monai.losses import DiceLoss
@@ -294,7 +294,8 @@ def infer(model, rows, device):
                 else nullcontext()
             )
             with context:
-                logits = model(images)
+                batch_rows = [rows[index] for index in indices.tolist()]
+                logits = system.logits_for_rows(model, images, batch_rows)
             loss = segmenter.segmentation_loss(logits, targets_device, dice_loss)
             if not torch.isfinite(logits).all() or not torch.isfinite(loss):
                 raise RuntimeError("Non-finite segmenter validation output")
@@ -561,11 +562,9 @@ def main():
     assignment = load_fold_assignment(validation_rows)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = overfit.make_diagnostic_model("linear", "compact").to(device)
-    checkpoint = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
-    if checkpoint["epoch"] != result["best_epoch"] or checkpoint["config"] != config:
-        raise ValueError("Checkpoint metadata differs from accepted run configuration")
-    model.load_state_dict(checkpoint["model_state"])
+    model = system.load_selected_system(
+        RUN, CHECKPOINT, device, expected_checkpoint["sha256"]
+    )
     logits, targets, dice, iou, _label_indices, recomputed_metrics = infer(
         model, validation_rows, device
     )

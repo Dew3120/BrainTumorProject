@@ -9,8 +9,8 @@ import calibrate_segmenter_pixels as pixel_calibration
 import matplotlib.pyplot as plt
 import mlflow
 import numpy as np
-import segmentation_overfit_gate as overfit
 import segmentation_smoke_test as smoke
+import segmentation_system as system
 import torch
 import train_segmenter as segmenter
 from scipy.ndimage import binary_dilation, binary_erosion, label
@@ -417,11 +417,9 @@ def main():
     assignment = pixel_calibration.load_fold_assignment(rows)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = overfit.make_diagnostic_model("linear", "compact").to(device)
-    checkpoint = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
-    if checkpoint["epoch"] != result["best_epoch"] or checkpoint["config"] != config:
-        raise ValueError("Checkpoint metadata differs from accepted run")
-    model.load_state_dict(checkpoint["model_state"])
+    model = system.load_selected_system(
+        RUN, CHECKPOINT, device, expected_checkpoint["sha256"]
+    )
     logits, targets, dice, iou, _labels, recomputed = pixel_calibration.infer(
         model, rows, device
     )

@@ -9,6 +9,7 @@ import mlflow
 import numpy as np
 import segmentation_overfit_gate as overfit
 import segmentation_smoke_test as smoke
+import segmentation_system as system
 import segmentation_visual_audit as visual
 import torch
 import train_segmenter as train
@@ -305,14 +306,9 @@ def main():
     if any(row["draft_split"] != "validation" for row in validation_rows):
         raise ValueError("Non-validation row entered validation analysis")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = overfit.make_diagnostic_model("linear", "compact").to(device)
-    checkpoint_state = torch.load(checkpoint, map_location="cpu", weights_only=True)
-    if (
-        checkpoint_state["epoch"] != result["best_epoch"]
-        or checkpoint_state["config"] != config
-    ):
-        raise ValueError("Checkpoint metadata differs from the selected run")
-    model.load_state_dict(checkpoint_state["model_state"])
+    model = system.load_selected_system(
+        run, checkpoint, device, args.checkpoint_sha256
+    )
     metrics, records, predictions = visual.inference(
         model, validation_rows, device, args.threshold
     )
