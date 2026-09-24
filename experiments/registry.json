@@ -41,6 +41,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "e03_tta",
+      "path": "experiments/e03_tta",
+      "hypothesis_ids": [
+        "H1"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [
