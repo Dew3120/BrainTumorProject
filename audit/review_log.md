@@ -249,3 +249,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Eight of nine predicted-route-by-region ECE checks passed. The predicted-glioma lesion-centred ECE was `0.055963`, exceeding the `0.05` ceiling. Predicted-meningioma and predicted-pituitary lesion-centred ECE values were `0.027328` and `0.033086`; all background and whole-image route values passed. The classifier-routed temperatures changed zero hard-mask pixels.
 - **Alternatives considered:** Exclude the glioma lesion-centred check or gate only on whole-image ECE; rejected because all nine checks were fixed before fitting. Route using true type; rejected as leakage. Tune the glioma temperature after seeing the subgroup failure; rejected as an unregistered variant.
 - **Who approved:** Codex by the registered C06 rule; the user required failures to remain documented findings.
+
+## 2026-09-24T23:25:00+05:30 — Register nested hierarchical calibration
+
+- **Decision made:** Register C07 before fitting as nested selection among seven fixed combinations of region split, reliability weighting, and classifier-predicted category routing.
+- **Triggering artifact:** `experiments/c07_hierarchical/config.json`, SHA256 `9497ac7fcbd8db5781e7e7f449531789cec50ddbadcd9acfb78a95aa85fd5f9c`; hypothesis SHA256 `221dc4f1d72206483d0ab56d3a100b8dc6dfd646a25757b2e2fe0cf6c62da101`.
+- **Rationale:** Candidate selection occurs strictly inside each outer training fold, ranked by inner lesion-centred ECE, NLL, Brier, then ID. The outer held-out fold supplies reported metrics. The conjunctive gate is aggregate lesion-centred ECE `<=0.03` plus lesion-centred ECE `<=0.05` within each predicted tumor route. Any selected configuration containing reference-region split `R` is oracle-only and H7-ineligible.
+- **Alternatives considered:** Select using the already observed C04–C06 outer results; rejected as selection leakage. Route by true tumor type; rejected as target leakage. Use whole-image ECE as the primary selector; rejected because easy background would obscure the registered foreground calibration problem.
+- **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed candidates, nested selection, gate, and operational eligibility before fitting.
