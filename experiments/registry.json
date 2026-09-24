@@ -49,6 +49,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "e04_multiscale",
+      "path": "experiments/e04_multiscale",
+      "hypothesis_ids": [
+        "H1"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [
