@@ -225,3 +225,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** The fixed gate requires whole-image ECE at most `0.04` and no whole-image ECE or NLL worsening within the 136-case lowest-reliability quintile. Weighting uses a frozen prediction-only OOF score; Dice and reference geometry do not enter weights. The resulting global temperature needs only the raw E08 logit at inference and is operationally eligible if it passes.
 - **Alternatives considered:** Fit a new E08 reliability model before Stage 4; rejected as out-of-order analysis. Weight using observed Dice; rejected as target leakage. Use the final v1 in-sample reliability score; rejected in favor of the existing OOF score.
 - **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed score provenance, quintile membership, and the full gate before fitting.
+
+## 2026-09-24T23:01:00+05:30 — Reject reliability-weighted calibration
+
+- **Decision made:** Reject C05 under its unchanged conjunctive gate and close the experiment without a variant.
+- **Triggering artifact:** `experiments/c05_reliability_weighted/artifacts/experiment_manifest.json`, SHA256 `d8c1d47725e1c96a06514f1b6e29c97410ed94646a73eb2da82b49699473790c`; 680 segmentation-validation cases and zero sealed-test images.
+- **Rationale:** Whole-image ECE was `0.003427`, passing the `<=0.04` ceiling, and low-reliability-quintile whole-image NLL improved from `0.051441` to `0.042347`. However, low-quintile ECE worsened from `0.006481` to `0.007988`, so the mandatory no-worsening check failed. The calibration changed zero hard-mask pixels at threshold `0.50`.
+- **Alternatives considered:** Change the reliability weighting function or quintile after seeing the result; rejected as an unregistered variant. Ignore the ECE failure because NLL improved; rejected because the gate is conjunctive.
+- **Who approved:** Codex by the registered C05 rule; the user required honest closure without skipped or substituted experiments.
