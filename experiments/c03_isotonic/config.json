@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "c03_isotonic",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H3",
+    "H7"
+  ],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
+  "source_model": "e08_ensemble",
+  "source_result_sha256": "580846aa620234749ab15ac21a3f12df7398a96edd393564c3abfa1b9f1bf654",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "folds": 5,
+  "seed": 42,
+  "method": {
+    "estimator": "sklearn.isotonic.IsotonicRegression",
+    "increasing": true,
+    "y_min": 0.0,
+    "y_max": 1.0,
+    "out_of_bounds": "clip",
+    "fit_population": "all training-fold pixels; every 128x128 image contributes equally",
+    "tie_handling": "aggregate identical stored float32 probabilities by target mean and pixel count before deterministic PAV fit",
+    "operational_input": "raw segmenter probability only"
+  },
+  "regions": {
+    "lesion_centered": "reference mask plus Euclidean radius 8 model pixels",
+    "background": "complement of lesion-centered region",
+    "whole_image": "all 128x128 pixels"
+  },
+  "metrics": "image-balanced NLL and Brier; 15 equal-frequency pooled-pixel ECE and MCE; per-category metrics",
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true
+  },
+  "gate": {
+    "conjunctive_across_regions": [
+      "lesion_centered",
+      "background",
+      "whole_image"
+    ],
+    "ece_maximum_each_region": 0.04,
+    "brier_change_each_region_maximum": 0.0,
+    "comparison_tolerance": 1e-12,
+    "hard_mask_changes": "reported but not a C03 gate condition"
+  },
+  "hard_mask_check": "bitwise compare raw_probability >= 0.50 with OOF_calibrated_probability >= 0.50; report changed pixels and images overall and by category",
+  "reference_mask_policy": "reference masks provide calibration targets and evaluation regions during development; the fitted inference mapping accepts probability only and never receives a reference mask",
+  "threshold": 0.5,
+  "threshold_tuning": false,
+  "model_retraining": false,
+  "test_images_accessed": 0
+}

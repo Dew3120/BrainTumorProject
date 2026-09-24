@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "experiment_id": "c03_isotonic",
+  "status": "NOT_RUN",
+  "started_at": null,
+  "completed_at": null,
+  "metrics": {},
+  "gate_checks": {},
+  "artifacts": {},
+  "constraint_checks": {
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "model_retrained": false
+  }
+}

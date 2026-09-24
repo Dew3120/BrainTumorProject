@@ -109,6 +109,15 @@
       "status": "COMPLETE"
     },
     {
+      "id": "c03_isotonic",
+      "path": "experiments/c03_isotonic",
+      "hypothesis_ids": [
+        "H3",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "e08_final_selection",
       "path": "experiments/e08_final_selection",
       "hypothesis_ids": [
