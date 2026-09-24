@@ -1,5 +1,7 @@
 # Vector scaling calibration decision
 
-**Decision:** PENDING
+**Decision:** ACCEPTED
 
-Complete only after five-fold out-of-fold fitting, metric recomputation, group-bootstrap intervals, diagrams, hard-mask change counts, and all conjunctive gate checks are verified.
+The predeclared segmenter gate was satisfied and was not relaxed. Reported values use out-of-fold transformations only; the all-validation parameters are proposals and were not used for evaluation.
+
+Hard-mask changes are reported rather than hidden. Classifier vector-scaling results are descriptive and do not reverse the previously accepted raw-classifier policy. No model was retrained, no threshold was changed, and no sealed-test image was accessed.

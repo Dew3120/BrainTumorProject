@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "experiment_id": "c01_vector_scaling",
+  "registered_decision": "PASS",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/c01_vector_scaling/artifacts/classifier_reliability.png",
+      "sha256": "961fe4cf200514cb74bfad6c835b6a71140be99e0e02f2868d491fec38a20fc0",
+      "bytes": 73944
+    },
+    {
+      "path": "experiments/c01_vector_scaling/artifacts/segmenter_fold_parameters.csv",
+      "sha256": "161cd2fb35b7a31e05b29cd9783251e701c3ebde16bfd305d870ed08a37fc5c5",
+      "bytes": 296
+    },
+    {
+      "path": "experiments/c01_vector_scaling/artifacts/segmenter_lesion_centered_reliability.png",
+      "sha256": "2f366a4f661fd3365e780df1ca71fd65a6b3472f2a858ac32a4212182ecac85f",
+      "bytes": 101499
+    },
+    {
+      "path": "experiments/c01_vector_scaling/artifacts/segmenter_whole_image_reliability.png",
+      "sha256": "a7055758a5dff3f01c7138ec4670f14c806d604f8e8c30683ac7ccca3d832478",
+      "bytes": 75608
+    },
+    {
+      "path": "experiments/c01_vector_scaling/config.json",
+      "sha256": "e7898c326745690afdfe870723ccf87799c56bf14b327e67eeffd537e055cad1",
+      "bytes": 1524
+    },
+    {
+      "path": "experiments/c01_vector_scaling/decision.md",
+      "sha256": "3bb6c3dae88db0a1239164019aa2ddb4e2d801933fef2cf18ca1fc8e9181f38d",
+      "bytes": 525
+    },
+    {
+      "path": "experiments/c01_vector_scaling/hypothesis.md",
+      "sha256": "610fd580dd12e38ba96a7099e48cd54ee5d99501ca6780936d29fb71b056763f",
+      "bytes": 1064
+    },
+    {
+      "path": "experiments/c01_vector_scaling/result.json",
+      "sha256": "3d279a793bba476c8e9ddd07b060b6ba5fe06b948ee53c4f9f4ee6542cfdaf00",
+      "bytes": 77664
+    }
+  ]
+}

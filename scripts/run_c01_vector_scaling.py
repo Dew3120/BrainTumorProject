@@ -153,7 +153,7 @@ def serialize_parameters(parameters):
     }
 
 
-def classifier_experiment(assignment):
+def classifier_experiment():
     predictions = sorted(
         common.read_csv(CLASSIFIER_RUN / "validation_predictions.csv"),
         key=lambda row: common.normalized_path(row["path"]),
@@ -219,7 +219,7 @@ def classifier_experiment(assignment):
         "binary_decisions_changed": int(
             np.count_nonzero((tumor_probability >= 0.5) != (calibrated_binary >= 0.5))
         ),
-        "assignment_case_count": len(assignment),
+        "assignment_case_count": len(predictions),
     }
 
 
@@ -304,7 +304,7 @@ def main():
     hard_changes = int(
         np.count_nonzero((raw_probability >= 0.5) != (oof_probability >= 0.5))
     )
-    classifier_result = classifier_experiment(assignment)
+    classifier_result = classifier_experiment()
     common.render_binary_diagram(
         ARTIFACTS / "segmenter_lesion_centered_reliability.png",
         "C01 E08 lesion-centered pixel reliability",

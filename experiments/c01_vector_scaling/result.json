@@ -1,6 +1,2016 @@
 {
   "schema_version": 1,
   "experiment_id": "c01_vector_scaling",
-  "status": "NOT_RUN",
-  "test_images_accessed": 0
+  "status": "PASS",
+  "scope": "Internal BRISC calibration comparison; not clinical validation",
+  "source_model": "e08_ensemble",
+  "validation_cases": 680,
+  "segmenter": {
+    "fold_parameters": [
+      {
+        "fold": 1,
+        "scale": 0.5194794116218511,
+        "bias": -0.8385984893582121,
+        "fit_images": 544,
+        "evaluation_images": 136
+      },
+      {
+        "fold": 2,
+        "scale": 0.5350078859235413,
+        "bias": -0.8780097136118266,
+        "fit_images": 544,
+        "evaluation_images": 136
+      },
+      {
+        "fold": 3,
+        "scale": 0.5224973297425107,
+        "bias": -0.8490195471276644,
+        "fit_images": 543,
+        "evaluation_images": 137
+      },
+      {
+        "fold": 4,
+        "scale": 0.5235280754851004,
+        "bias": -0.8608336855534233,
+        "fit_images": 545,
+        "evaluation_images": 135
+      },
+      {
+        "fold": 5,
+        "scale": 0.5221946196211227,
+        "bias": -0.8416249663409034,
+        "fit_images": 544,
+        "evaluation_images": 136
+      }
+    ],
+    "final_all_validation": {
+      "status": "proposed operational only; not used for reported metrics",
+      "scale": 0.5243646875570587,
+      "bias": -0.8532970843446294
+    },
+    "metrics": {
+      "aggregate": {
+        "lesion_centered": {
+          "raw": {
+            "image_count": 680,
+            "pixel_count": 629978,
+            "pixel_nll": 0.317163319327499,
+            "pixel_brier": 0.0703812188607285,
+            "pixel_ece": 0.050542674857612,
+            "pixel_mce": 0.14783184702858831,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 2.7535393127935126e-13,
+                "maximum_probability": 3.2412214068244793e-07,
+                "mean_probability": 1.1641805469281694e-07,
+                "observed_frequency": 0.004642967689706898,
+                "absolute_gap": 0.004642851271652205
+              },
+              {
+                "bin": 2,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 3.2413103667749965e-07,
+                "maximum_probability": 1.3696223959414056e-06,
+                "mean_probability": 7.645267203482072e-07,
+                "observed_frequency": 0.010714540822400533,
+                "absolute_gap": 0.010713776295680185
+              },
+              {
+                "bin": 3,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 1.3696574114874238e-06,
+                "maximum_probability": 3.9611259126104414e-06,
+                "mean_probability": 2.467380750508825e-06,
+                "observed_frequency": 0.010738350913116979,
+                "absolute_gap": 0.01073588353236647
+              },
+              {
+                "bin": 4,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 3.961326910939533e-06,
+                "maximum_probability": 1.0669651601347141e-05,
+                "mean_probability": 6.76865907833419e-06,
+                "observed_frequency": 0.013690802161956237,
+                "absolute_gap": 0.013684033502877902
+              },
+              {
+                "bin": 5,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 1.0669801667972934e-05,
+                "maximum_probability": 3.058442962355912e-05,
+                "mean_probability": 1.882564419264154e-05,
+                "observed_frequency": 0.020405247743993906,
+                "absolute_gap": 0.020386422099801266
+              },
+              {
+                "bin": 6,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 3.058490256080404e-05,
+                "maximum_probability": 0.00010177290823776275,
+                "mean_probability": 5.811121127383211e-05,
+                "observed_frequency": 0.028453058406152528,
+                "absolute_gap": 0.028394947194878697
+              },
+              {
+                "bin": 7,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.00010177315562032163,
+                "maximum_probability": 0.0004549333534669131,
+                "mean_probability": 0.00022982806746292713,
+                "observed_frequency": 0.04042953403652468,
+                "absolute_gap": 0.04019970596906176
+              },
+              {
+                "bin": 8,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0004549496516119689,
+                "maximum_probability": 0.003084182506427169,
+                "mean_probability": 0.0013246957169191908,
+                "observed_frequency": 0.06807304935831805,
+                "absolute_gap": 0.06674835364139886
+              },
+              {
+                "bin": 9,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.0030842763371765614,
+                "maximum_probability": 0.0334121473133564,
+                "mean_probability": 0.01235897194474198,
+                "observed_frequency": 0.11636268393733035,
+                "absolute_gap": 0.10400371199258837
+              },
+              {
+                "bin": 10,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.033412665128707886,
+                "maximum_probability": 0.27170395851135254,
+                "mean_probability": 0.12833721175753643,
+                "observed_frequency": 0.1872470117624649,
+                "absolute_gap": 0.05890980000492846
+              },
+              {
+                "bin": 11,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.27171576023101807,
+                "maximum_probability": 0.590022623538971,
+                "mean_probability": 0.39571047218872074,
+                "observed_frequency": 0.3410638601838183,
+                "absolute_gap": 0.05464661200490245
+              },
+              {
+                "bin": 12,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.5900410413742065,
+                "maximum_probability": 0.9454485177993774,
+                "mean_probability": 0.754969069817684,
+                "observed_frequency": 0.6082432496785561,
+                "absolute_gap": 0.14672582013912783
+              },
+              {
+                "bin": 13,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.9454758167266846,
+                "maximum_probability": 0.9990315437316895,
+                "mean_probability": 0.9873718251227833,
+                "observed_frequency": 0.839539978094195,
+                "absolute_gap": 0.14783184702858831
+              },
+              {
+                "bin": 14,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.9990317225456238,
+                "maximum_probability": 0.9999656677246094,
+                "mean_probability": 0.9997174058949881,
+                "observed_frequency": 0.9608314681651507,
+                "absolute_gap": 0.038885937729837394
+              },
+              {
+                "bin": 15,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.9999656677246094,
+                "maximum_probability": 1.0,
+                "mean_probability": 0.9999919813742801,
+                "observed_frequency": 0.9883565884089719,
+                "absolute_gap": 0.011635392965308244
+              }
+            ]
+          },
+          "oof_calibrated": {
+            "image_count": 680,
+            "pixel_count": 629978,
+            "pixel_nll": 0.22738605857793734,
+            "pixel_brier": 0.06413670458638202,
+            "pixel_ece": 0.03816373262676687,
+            "pixel_mce": 0.156382531143902,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 7.474765705769456e-05,
+                "maximum_probability": 0.0001673295356358435,
+                "mean_probability": 0.0001091646350448928,
+                "observed_frequency": 0.006333484130574538,
+                "absolute_gap": 0.006224319495529645
+              },
+              {
+                "bin": 2,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0001673324732345484,
+                "maximum_probability": 0.00035653421906956645,
+                "mean_probability": 0.000257596026960756,
+                "observed_frequency": 0.010738350913116979,
+                "absolute_gap": 0.010480754886156223
+              },
+              {
+                "bin": 3,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0003565343073177328,
+                "maximum_probability": 0.0006237232123630103,
+                "mean_probability": 0.0004809738890267182,
+                "observed_frequency": 0.009595466558727589,
+                "absolute_gap": 0.009114492669700871
+              },
+              {
+                "bin": 4,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0006237284566928583,
+                "maximum_probability": 0.0010499590161602123,
+                "mean_probability": 0.0008179017705610347,
+                "observed_frequency": 0.013666992071239791,
+                "absolute_gap": 0.012849090300678757
+              },
+              {
+                "bin": 5,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.001049963700276782,
+                "maximum_probability": 0.0018181818336836819,
+                "mean_probability": 0.0013945041502196659,
+                "observed_frequency": 0.019929045929664994,
+                "absolute_gap": 0.01853454177944533
+              },
+              {
+                "bin": 6,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0018181917075057688,
+                "maximum_probability": 0.0034135206466710394,
+                "mean_probability": 0.002509703342291227,
+                "observed_frequency": 0.029072120764780114,
+                "absolute_gap": 0.02656241742248889
+              },
+              {
+                "bin": 7,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.0034135306310761762,
+                "maximum_probability": 0.007473646088162563,
+                "mean_probability": 0.005108044524543408,
+                "observed_frequency": 0.04019143312936022,
+                "absolute_gap": 0.035083388604816815
+              },
+              {
+                "bin": 8,
+                "count": 41999,
+                "weight": 0.06666740743327544,
+                "minimum_probability": 0.007473879270048419,
+                "maximum_probability": 0.020123926036721432,
+                "mean_probability": 0.012526431847135757,
+                "observed_frequency": 0.06816828972118384,
+                "absolute_gap": 0.05564185787404809
+              },
+              {
+                "bin": 9,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.02012451378859119,
+                "maximum_probability": 0.06795399305290069,
+                "mean_probability": 0.03874496356526002,
+                "observed_frequency": 0.1159340920996238,
+                "absolute_gap": 0.07718912853436377
+              },
+              {
+                "bin": 10,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.06795580421121679,
+                "maximum_probability": 0.20226807640594172,
+                "mean_probability": 0.12996598034126702,
+                "observed_frequency": 0.18781846754607362,
+                "absolute_gap": 0.057852487204806596
+              },
+              {
+                "bin": 11,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.20226976426523102,
+                "maximum_probability": 0.33997072971004305,
+                "mean_probability": 0.2548638256248338,
+                "observed_frequency": 0.34063526834611174,
+                "absolute_gap": 0.08577144272127796
+              },
+              {
+                "bin": 12,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.33997746408632873,
+                "maximum_probability": 0.6552806780351698,
+                "mean_probability": 0.4517178545887519,
+                "observed_frequency": 0.6081003857326539,
+                "absolute_gap": 0.156382531143902
+              },
+              {
+                "bin": 13,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.6552939108141173,
+                "maximum_probability": 0.9418112935624185,
+                "mean_probability": 0.8370009270064553,
+                "observed_frequency": 0.8393971141482928,
+                "absolute_gap": 0.0023961871418374248
+              },
+              {
+                "bin": 14,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.9418118882549542,
+                "maximum_probability": 0.9894042934659487,
+                "mean_probability": 0.9716631541491567,
+                "observed_frequency": 0.9608314681651507,
+                "absolute_gap": 0.010831685984005968
+              },
+              {
+                "bin": 15,
+                "count": 41998,
+                "weight": 0.06666582007625663,
+                "minimum_probability": 0.9894056999608257,
+                "maximum_probability": 0.9995674147716865,
+                "mean_probability": 0.9959251775914422,
+                "observed_frequency": 0.9883803990666222,
+                "absolute_gap": 0.0075447785248199395
+              }
+            ]
+          }
+        },
+        "background": {
+          "raw": {
+            "image_count": 680,
+            "pixel_count": 10511142,
+            "pixel_nll": 0.0027317620027477157,
+            "pixel_brier": 0.0007188602953485454,
+            "pixel_ece": 0.0017606207086728345,
+            "pixel_mce": 0.02635493967310249,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 1.7847814290936417e-14,
+                "maximum_probability": 3.61183438712942e-08,
+                "mean_probability": 1.4814404076624646e-08,
+                "observed_frequency": 0.0,
+                "absolute_gap": 1.4814404076624646e-08
+              },
+              {
+                "bin": 2,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 3.6118422030995134e-08,
+                "maximum_probability": 1.001766918307112e-07,
+                "mean_probability": 6.636778216929557e-08,
+                "observed_frequency": 0.0,
+                "absolute_gap": 6.636778216929557e-08
+              },
+              {
+                "bin": 3,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 1.0017674867413007e-07,
+                "maximum_probability": 1.863410687974465e-07,
+                "mean_probability": 1.4117615367290467e-07,
+                "observed_frequency": 0.0,
+                "absolute_gap": 1.4117615367290467e-07
+              },
+              {
+                "bin": 4,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 1.8634113985172007e-07,
+                "maximum_probability": 3.0219507607398555e-07,
+                "mean_probability": 2.4136978854793224e-07,
+                "observed_frequency": 0.0,
+                "absolute_gap": 2.4136978854793224e-07
+              },
+              {
+                "bin": 5,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 3.021952181825327e-07,
+                "maximum_probability": 4.610724886333628e-07,
+                "mean_probability": 3.772446225448821e-07,
+                "observed_frequency": 0.0,
+                "absolute_gap": 3.772446225448821e-07
+              },
+              {
+                "bin": 6,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 4.61072829693876e-07,
+                "maximum_probability": 6.818322049184644e-07,
+                "mean_probability": 5.652013379645472e-07,
+                "observed_frequency": 0.0,
+                "absolute_gap": 5.652013379645472e-07
+              },
+              {
+                "bin": 7,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 6.818326596658153e-07,
+                "maximum_probability": 9.99513076749281e-07,
+                "mean_probability": 8.306986051759107e-07,
+                "observed_frequency": 0.0,
+                "absolute_gap": 8.306986051759107e-07
+              },
+              {
+                "bin": 8,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 9.995136451834696e-07,
+                "maximum_probability": 1.4699074881718843e-06,
+                "mean_probability": 1.2186209371303993e-06,
+                "observed_frequency": 0.0,
+                "absolute_gap": 1.2186209371303993e-06
+              },
+              {
+                "bin": 9,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 1.469908397666586e-06,
+                "maximum_probability": 2.188263579228078e-06,
+                "mean_probability": 1.8029501183574412e-06,
+                "observed_frequency": 0.0,
+                "absolute_gap": 1.8029501183574412e-06
+              },
+              {
+                "bin": 10,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 2.188264033975429e-06,
+                "maximum_probability": 3.314726882308605e-06,
+                "mean_probability": 2.7090016089986846e-06,
+                "observed_frequency": 0.0,
+                "absolute_gap": 2.7090016089986846e-06
+              },
+              {
+                "bin": 11,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 3.3147280191769823e-06,
+                "maximum_probability": 5.155433427717071e-06,
+                "mean_probability": 4.156373262154804e-06,
+                "observed_frequency": 0.0,
+                "absolute_gap": 4.156373262154804e-06
+              },
+              {
+                "bin": 12,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 5.155434337211773e-06,
+                "maximum_probability": 8.407778295804746e-06,
+                "mean_probability": 6.61507667567537e-06,
+                "observed_frequency": 0.0,
+                "absolute_gap": 6.61507667567537e-06
+              },
+              {
+                "bin": 13,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 8.40779011923587e-06,
+                "maximum_probability": 1.5308203728636727e-05,
+                "mean_probability": 1.1351493343773157e-05,
+                "observed_frequency": 0.0,
+                "absolute_gap": 1.1351493343773157e-05
+              },
+              {
+                "bin": 14,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 1.5308207366615534e-05,
+                "maximum_probability": 4.0376533434027806e-05,
+                "mean_probability": 2.4310691718453332e-05,
+                "observed_frequency": 0.0,
+                "absolute_gap": 2.4310691718453332e-05
+              },
+              {
+                "bin": 15,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 4.0376595279667526e-05,
+                "maximum_probability": 0.9999995231628418,
+                "mean_probability": 0.02635493967310249,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.02635493967310249
+              }
+            ]
+          },
+          "oof_calibrated": {
+            "image_count": 680,
+            "pixel_count": 10511142,
+            "pixel_nll": 0.0024385303788394693,
+            "pixel_brier": 0.0003587868305116014,
+            "pixel_ece": 0.002138193337191163,
+            "pixel_mce": 0.025549963181093763,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 7.474765705769456e-05,
+                "maximum_probability": 9.413547659183423e-05,
+                "mean_probability": 8.415902020677841e-05,
+                "observed_frequency": 0.0,
+                "absolute_gap": 8.415902020677841e-05
+              },
+              {
+                "bin": 2,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 9.413547659183423e-05,
+                "maximum_probability": 9.986241692619744e-05,
+                "mean_probability": 9.572225398208809e-05,
+                "observed_frequency": 0.0,
+                "absolute_gap": 9.572225398208809e-05
+              },
+              {
+                "bin": 3,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 9.986241692619744e-05,
+                "maximum_probability": 0.00012522653250463767,
+                "mean_probability": 0.00010909644683059074,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.00010909644683059074
+              },
+              {
+                "bin": 4,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.00012522653497107014,
+                "maximum_probability": 0.00016159864641912138,
+                "mean_probability": 0.00014319002630427082,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.00014319002630427082
+              },
+              {
+                "bin": 5,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0001615987296376038,
+                "maximum_probability": 0.00020183580815599856,
+                "mean_probability": 0.0001812725727957169,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0001812725727957169
+              },
+              {
+                "bin": 6,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.00020183604400278928,
+                "maximum_probability": 0.00024815796556434705,
+                "mean_probability": 0.00022441360997455453,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.00022441360997455453
+              },
+              {
+                "bin": 7,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0002481581352405315,
+                "maximum_probability": 0.000303455225190928,
+                "mean_probability": 0.0002748915738364931,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0002748915738364931
+              },
+              {
+                "bin": 8,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.00030345526188040164,
+                "maximum_probability": 0.0003716482992747549,
+                "mean_probability": 0.00033630619459656534,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.00033630619459656534
+              },
+              {
+                "bin": 9,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0003716487042804282,
+                "maximum_probability": 0.00045800824974242404,
+                "mean_probability": 0.00041309825684547526,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.00041309825684547526
+              },
+              {
+                "bin": 10,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0004580084204381636,
+                "maximum_probability": 0.0005696236667133333,
+                "mean_probability": 0.0005114173137319666,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0005114173137319666
+              },
+              {
+                "bin": 11,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0005696239196900152,
+                "maximum_probability": 0.0007183311061250708,
+                "mean_probability": 0.0006401314673614157,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0006401314673614157
+              },
+              {
+                "bin": 12,
+                "count": 700743,
+                "weight": 0.0666666856940949,
+                "minimum_probability": 0.0007183312243089247,
+                "maximum_probability": 0.0009290863921745852,
+                "mean_probability": 0.0008168347615115757,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0008168347615115757
+              },
+              {
+                "bin": 13,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 0.0009290864220724839,
+                "maximum_probability": 0.0012729872083918094,
+                "mean_probability": 0.0010840134569866107,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0010840134569866107
+              },
+              {
+                "bin": 14,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 0.0012729888884956716,
+                "maximum_probability": 0.0021189849375606333,
+                "mean_probability": 0.0016084210713432875,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.0016084210713432875
+              },
+              {
+                "bin": 15,
+                "count": 700742,
+                "weight": 0.06666659055695376,
+                "minimum_probability": 0.0021189895974186475,
+                "maximum_probability": 0.999002851686098,
+                "mean_probability": 0.025549963181093763,
+                "observed_frequency": 0.0,
+                "absolute_gap": 0.025549963181093763
+              }
+            ]
+          }
+        },
+        "whole_image": {
+          "raw": {
+            "image_count": 680,
+            "pixel_count": 11141120,
+            "pixel_nll": 0.023230538068035423,
+            "pixel_brier": 0.005059608074241839,
+            "pixel_ece": 0.0025031314775693526,
+            "pixel_mce": 0.032399181914949005,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 1.7847814290936417e-14,
+                "maximum_probability": 3.841331874809839e-08,
+                "mean_probability": 1.5733064252035474e-08,
+                "observed_frequency": 4.442996356742988e-05,
+                "absolute_gap": 4.441423050317784e-05
+              },
+              {
+                "bin": 2,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 3.841332940623943e-08,
+                "maximum_probability": 1.0677166528694215e-07,
+                "mean_probability": 7.065824467812038e-08,
+                "observed_frequency": 4.1737238502737156e-05,
+                "absolute_gap": 4.1666580258059033e-05
+              },
+              {
+                "bin": 3,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 1.0677166528694215e-07,
+                "maximum_probability": 1.999308381073206e-07,
+                "mean_probability": 1.5096912724640534e-07,
+                "observed_frequency": 7.808902687608887e-05,
+                "absolute_gap": 7.793805774884246e-05
+              },
+              {
+                "bin": 4,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 1.999308523181753e-07,
+                "maximum_probability": 3.2696729590497853e-07,
+                "mean_probability": 2.600734353978184e-07,
+                "observed_frequency": 0.00010097718992597698,
+                "absolute_gap": 0.00010071711649057916
+              },
+              {
+                "bin": 5,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 3.2696729590497853e-07,
+                "maximum_probability": 5.042045359004987e-07,
+                "mean_probability": 4.106222523946766e-07,
+                "observed_frequency": 0.00013867534083167505,
+                "absolute_gap": 0.00013826471857928036
+              },
+              {
+                "bin": 6,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 5.042045927439176e-07,
+                "maximum_probability": 7.556151331300498e-07,
+                "mean_probability": 6.223184006008319e-07,
+                "observed_frequency": 0.00015887099271482254,
+                "absolute_gap": 0.0001582486743142217
+              },
+              {
+                "bin": 7,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 7.556155878774007e-07,
+                "maximum_probability": 1.124995606005541e-06,
+                "mean_probability": 9.281108173353921e-07,
+                "observed_frequency": 0.00019522283003092599,
+                "absolute_gap": 0.00019429471921359059
+              },
+              {
+                "bin": 8,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 1.124996856560756e-06,
+                "maximum_probability": 1.685376219029422e-06,
+                "mean_probability": 1.3852968686366947e-06,
+                "observed_frequency": 0.00022618920996686598,
+                "absolute_gap": 0.00022480391309822928
+              },
+              {
+                "bin": 9,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 1.6853764464030974e-06,
+                "maximum_probability": 2.562490408308804e-06,
+                "mean_probability": 2.090494423490871e-06,
+                "observed_frequency": 0.00022618920996686598,
+                "absolute_gap": 0.00022409871554337512
+              },
+              {
+                "bin": 10,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 2.5624910904298304e-06,
+                "maximum_probability": 3.973596449213801e-06,
+                "mean_probability": 3.2099336224623984e-06,
+                "observed_frequency": 0.00026658014031809204,
+                "absolute_gap": 0.00026337020669562965
+              },
+              {
+                "bin": 11,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 3.973597813455854e-06,
+                "maximum_probability": 6.377060344675556e-06,
+                "mean_probability": 5.0615751828865554e-06,
+                "observed_frequency": 0.00033524472191517635,
+                "absolute_gap": 0.0003301831467322898
+              },
+              {
+                "bin": 12,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 6.377063527907012e-06,
+                "maximum_probability": 1.0957475751638412e-05,
+                "mean_probability": 8.393020151626918e-06,
+                "observed_frequency": 0.0004631493346940589,
+                "absolute_gap": 0.000454756314542432
+              },
+              {
+                "bin": 13,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 1.0957501217490062e-05,
+                "maximum_probability": 2.2663076379103586e-05,
+                "mean_probability": 1.5710597309440712e-05,
+                "observed_frequency": 0.0007687740410183361,
+                "absolute_gap": 0.0007530634437088955
+              },
+              {
+                "bin": 14,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 2.2663163690594956e-05,
+                "maximum_probability": 0.00011814309254987165,
+                "mean_probability": 4.8548070169729744e-05,
+                "observed_frequency": 0.002190534789381494,
+                "absolute_gap": 0.002141986719211764
+              },
+              {
+                "bin": 15,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0001181441402877681,
+                "maximum_probability": 1.0,
+                "mean_probability": 0.2668456444099506,
+                "observed_frequency": 0.23444646249500162,
+                "absolute_gap": 0.032399181914949005
+              }
+            ]
+          },
+          "oof_calibrated": {
+            "image_count": 680,
+            "pixel_count": 11141120,
+            "pixel_nll": 0.017759728610422788,
+            "pixel_brier": 0.004603036776013999,
+            "pixel_ece": 0.0003313766774767997,
+            "pixel_mce": 0.002482345598069785,
+            "binning": "15 equal-frequency pooled-pixel bins",
+            "bins": [
+              {
+                "bin": 1,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 7.474765705769456e-05,
+                "maximum_probability": 9.413547659183423e-05,
+                "mean_probability": 8.459446587764151e-05,
+                "observed_frequency": 0.00010366991499066971,
+                "absolute_gap": 1.9075449113028196e-05
+              },
+              {
+                "bin": 2,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 9.413547659183423e-05,
+                "maximum_probability": 9.986241692619744e-05,
+                "mean_probability": 9.614023202771556e-05,
+                "observed_frequency": 3.096633824396628e-05,
+                "absolute_gap": 6.517389378374929e-05
+              },
+              {
+                "bin": 3,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 9.986241692619744e-05,
+                "maximum_probability": 0.0001299609574688818,
+                "mean_probability": 0.00011223516263928488,
+                "observed_frequency": 8.751356460251338e-05,
+                "absolute_gap": 2.4721598036771494e-05
+              },
+              {
+                "bin": 4,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 0.00012996095826791335,
+                "maximum_probability": 0.00016846765029174206,
+                "mean_probability": 0.00014892785159095789,
+                "observed_frequency": 0.0001413680658963678,
+                "absolute_gap": 7.559785694590091e-06
+              },
+              {
+                "bin": 5,
+                "count": 742742,
+                "weight": 0.06666672650505515,
+                "minimum_probability": 0.00016846791877421402,
+                "maximum_probability": 0.0002116281485084449,
+                "mean_probability": 0.00018952581406018445,
+                "observed_frequency": 0.00014675351602575322,
+                "absolute_gap": 4.277229803443123e-05
+              },
+              {
+                "bin": 6,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0002116281547963516,
+                "maximum_probability": 0.00026190636754365156,
+                "mean_probability": 0.0002360687693514436,
+                "observed_frequency": 0.00015887099271482254,
+                "absolute_gap": 7.719777663662108e-05
+              },
+              {
+                "bin": 7,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0002619064087854623,
+                "maximum_probability": 0.0003230210393537108,
+                "mean_probability": 0.0002913595787401439,
+                "observed_frequency": 0.00020868647348133468,
+                "absolute_gap": 8.267310525880922e-05
+              },
+              {
+                "bin": 8,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.00032302118023548994,
+                "maximum_probability": 0.00039936455947337803,
+                "mean_probability": 0.0003596511314263371,
+                "observed_frequency": 0.00017098827182019034,
+                "absolute_gap": 0.00018866285960614677
+              },
+              {
+                "bin": 9,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.00039936460421107785,
+                "maximum_probability": 0.0004975539010722825,
+                "mean_probability": 0.00044635929347763625,
+                "observed_frequency": 0.00020599374479125294,
+                "absolute_gap": 0.0002403655486863833
+              },
+              {
+                "bin": 10,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0004975540656855787,
+                "maximum_probability": 0.0006264926475064769,
+                "mean_probability": 0.000558898289516316,
+                "observed_frequency": 0.0002598483185928877,
+                "absolute_gap": 0.0002990499709234283
+              },
+              {
+                "bin": 11,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0006264927929951131,
+                "maximum_probability": 0.0008030569651446696,
+                "mean_probability": 0.0007096828271515471,
+                "observed_frequency": 0.0003460156366755033,
+                "absolute_gap": 0.0003636671904760438
+              },
+              {
+                "bin": 12,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.000803057088444255,
+                "maximum_probability": 0.0010682696076229849,
+                "mean_probability": 0.0009252965091013472,
+                "observed_frequency": 0.00044833932689860933,
+                "absolute_gap": 0.00047695718220273784
+              },
+              {
+                "bin": 13,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.001068270299776231,
+                "maximum_probability": 0.0015645481514703873,
+                "mean_probability": 0.0012834080095284297,
+                "observed_frequency": 0.0007606958549480909,
+                "absolute_gap": 0.0005227121545803388
+              },
+              {
+                "bin": 14,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.0015645489356447212,
+                "maximum_probability": 0.003709604749860161,
+                "mean_probability": 0.0022669061923743876,
+                "observed_frequency": 0.002189188425036453,
+                "absolute_gap": 7.771776733793466e-05
+              },
+              {
+                "bin": 15,
+                "count": 742741,
+                "weight": 0.06666663674747243,
+                "minimum_probability": 0.003709620801801623,
+                "maximum_probability": 0.9995674147716865,
+                "mean_probability": 0.2319398823387211,
+                "observed_frequency": 0.23442222793679088,
+                "absolute_gap": 0.002482345598069785
+              }
+            ]
+          }
+        }
+      },
+      "per_category": {
+        "glioma": {
+          "lesion_centered": {
+            "raw": {
+              "pixel_nll": 0.5366305079956153,
+              "pixel_brier": 0.12118109203235955,
+              "pixel_ece": 0.08285023123201284,
+              "pixel_mce": 0.1767627768564489
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.4059082039298785,
+              "pixel_brier": 0.11632817486055412,
+              "pixel_ece": 0.09214715910802748,
+              "pixel_mce": 0.20825401389313358
+            }
+          },
+          "background": {
+            "raw": {
+              "pixel_nll": 0.006731311096350173,
+              "pixel_brier": 0.0018129002197033576,
+              "pixel_ece": 0.004291343612945819,
+              "pixel_mce": 0.0641760808820703
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.005401450246051936,
+              "pixel_brier": 0.0008930787211270114,
+              "pixel_ece": 0.004691805694649715,
+              "pixel_mce": 0.056619880674900626
+            }
+          },
+          "whole_image": {
+            "raw": {
+              "pixel_nll": 0.04594745446885854,
+              "pixel_brier": 0.010259767103816783,
+              "pixel_ece": 0.004685601290871931,
+              "pixel_mce": 0.0497751771539886
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.035885872975879286,
+              "pixel_brier": 0.00955600728885747,
+              "pixel_ece": 0.0017361227757877614,
+              "pixel_mce": 0.015866598640823792
+            }
+          }
+        },
+        "meningioma": {
+          "lesion_centered": {
+            "raw": {
+              "pixel_nll": 0.19874108109115052,
+              "pixel_brier": 0.04213115150813572,
+              "pixel_ece": 0.03663134348823279,
+              "pixel_mce": 0.20162025958827406
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.1379366181835547,
+              "pixel_brier": 0.036338652100400916,
+              "pixel_ece": 0.017026228085711786,
+              "pixel_mce": 0.06997154768972169
+            }
+          },
+          "background": {
+            "raw": {
+              "pixel_nll": 0.0009362238842177206,
+              "pixel_brier": 0.00024724981467512,
+              "pixel_ece": 0.0007234994539214015,
+              "pixel_mce": 0.010836428315168234
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.0011086465809041727,
+              "pixel_brier": 0.00012119100762892647,
+              "pixel_ece": 0.0010387541291200452,
+              "pixel_mce": 0.011893901948063246
+            }
+          },
+          "whole_image": {
+            "raw": {
+              "pixel_nll": 0.015043213977109407,
+              "pixel_brier": 0.0029490889021825304,
+              "pixel_ece": 0.0024182408863370713,
+              "pixel_mce": 0.03161832429006073
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.011105825996893963,
+              "pixel_brier": 0.002586604452783009,
+              "pixel_ece": 0.0003923885485472602,
+              "pixel_mce": 0.004634396519244355
+            }
+          }
+        },
+        "pituitary": {
+          "lesion_centered": {
+            "raw": {
+              "pixel_nll": 0.24531810483495048,
+              "pixel_brier": 0.05451612312589244,
+              "pixel_ece": 0.03786656407471188,
+              "pixel_mce": 0.21218456331009183
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.1626732285286556,
+              "pixel_brier": 0.04671942739114746,
+              "pixel_ece": 0.014099997295936752,
+              "pixel_mce": 0.08313223816422882
+            }
+          },
+          "background": {
+            "raw": {
+              "pixel_nll": 0.0010919191827132087,
+              "pixel_brier": 0.0002524805144027059,
+              "pixel_ece": 0.0006584895498466979,
+              "pixel_mce": 0.009853388613499539
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.0012234619821325176,
+              "pixel_brier": 0.00013765713616952738,
+              "pixel_ece": 0.0010736071145796158,
+              "pixel_mce": 0.011645709450703626
+            }
+          },
+          "whole_image": {
+            "raw": {
+              "pixel_nll": 0.012083034545434183,
+              "pixel_brier": 0.0027232844197204527,
+              "pixel_ece": 0.0017969114760421209,
+              "pixel_mce": 0.026408707346975008
+            },
+            "oof_calibrated": {
+              "pixel_nll": 0.008975401071137316,
+              "pixel_brier": 0.002383455060164068,
+              "pixel_ece": 0.0007809786896622883,
+              "pixel_mce": 0.00734086045961313
+            }
+          }
+        }
+      },
+      "paired_group_bootstrap": {
+        "lesion_centered": {
+          "nll_change": {
+            "mean_change": -0.08977726074956169,
+            "ci95_lower": -0.10377217663119331,
+            "ci95_upper": -0.07633343213141855
+          },
+          "brier_change": {
+            "mean_change": -0.006244514274346482,
+            "ci95_lower": -0.008052464652393896,
+            "ci95_upper": -0.004487504940599705
+          }
+        },
+        "background": {
+          "nll_change": {
+            "mean_change": -0.00029323162390824687,
+            "ci95_lower": -0.000651161800741088,
+            "ci95_upper": 1.68302849033964e-05
+          },
+          "brier_change": {
+            "mean_change": -0.00036007346483694425,
+            "ci95_lower": -0.0004521549904123874,
+            "ci95_upper": -0.0002747019727617459
+          }
+        },
+        "whole_image": {
+          "nll_change": {
+            "mean_change": -0.005470809457612637,
+            "ci95_lower": -0.007004821255765332,
+            "ci95_upper": -0.004228234729702283
+          },
+          "brier_change": {
+            "mean_change": -0.0004565712982278395,
+            "ci95_lower": -0.0005948510886923838,
+            "ci95_upper": -0.0003184251576518642
+          }
+        }
+      }
+    },
+    "hard_mask_changed_pixels": 43935,
+    "hard_mask_changed_images": 680
+  },
+  "classifier_descriptive": {
+    "folds": [
+      {
+        "fold": 1,
+        "four_class": {
+          "scale": [
+            1.1819356206102718,
+            0.43958016061802824,
+            2.385013278466673,
+            0.951676771368262
+          ],
+          "bias": [
+            1.0151181162077538,
+            -0.6234404566621139,
+            -0.6041954187641833,
+            0.2125177592185433
+          ]
+        },
+        "binary": {
+          "scale": 0.7205167257755182,
+          "bias": 0.5244570613387357
+        },
+        "fit_cases": 714,
+        "evaluation_cases": 179
+      },
+      {
+        "fold": 2,
+        "four_class": {
+          "scale": [
+            0.9638457692058826,
+            0.594353988952384,
+            0.9749863089776108,
+            1.2770105575488437
+          ],
+          "bias": [
+            0.43655864811809747,
+            -0.46820764028658357,
+            -1.3420632952709517,
+            1.3737122874394379
+          ]
+        },
+        "binary": {
+          "scale": 1.1020631624171604,
+          "bias": -1.1190455188914044
+        },
+        "fit_cases": 714,
+        "evaluation_cases": 179
+      },
+      {
+        "fold": 3,
+        "four_class": {
+          "scale": [
+            1.2213102044185895,
+            0.45876364214130144,
+            1.1038514929838674,
+            0.9466072554180566
+          ],
+          "bias": [
+            0.7480933143308545,
+            -0.536868980002002,
+            -0.4949064399195562,
+            0.2836821055907037
+          ]
+        },
+        "binary": {
+          "scale": 0.7256508721327485,
+          "bias": 0.5043120278075788
+        },
+        "fit_cases": 714,
+        "evaluation_cases": 179
+      },
+      {
+        "fold": 4,
+        "four_class": {
+          "scale": [
+            1.3500029709984955,
+            0.4862426283002741,
+            1.0914704193556206,
+            2.9218182586968457
+          ],
+          "bias": [
+            1.18738586316004,
+            -0.5782844088790315,
+            -0.7502216102122036,
+            0.14112015593119506
+          ]
+        },
+        "binary": {
+          "scale": 0.807674177075685,
+          "bias": 1.2673406874268232
+        },
+        "fit_cases": 715,
+        "evaluation_cases": 178
+      },
+      {
+        "fold": 5,
+        "four_class": {
+          "scale": [
+            1.024740760307159,
+            0.5601319276303633,
+            1.070281560006497,
+            0.9017476823024122
+          ],
+          "bias": [
+            0.6351297710150786,
+            -0.11849992042440961,
+            -0.6136341671217561,
+            0.09700431653108718
+          ]
+        },
+        "binary": {
+          "scale": 0.7221431686336174,
+          "bias": 0.4894519224865267
+        },
+        "fit_cases": 715,
+        "evaluation_cases": 178
+      }
+    ],
+    "raw_four_class": {
+      "nll": 0.08469409969427676,
+      "brier": 0.036498037993527924,
+      "ece": 0.008471254689780137,
+      "mce": 0.05781543302807601,
+      "accuracy": 0.9776035834266518,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.44642274415753586,
+          "maximum_probability": 0.9724511801526922,
+          "mean_probability": 0.807815433028076,
+          "observed_frequency": 0.75,
+          "absolute_gap": 0.05781543302807601
+        },
+        {
+          "bin": 2,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9727522433846868,
+          "maximum_probability": 0.99301475907819,
+          "mean_probability": 0.9853689284933267,
+          "observed_frequency": 0.9666666666666667,
+          "absolute_gap": 0.018702261826660016
+        },
+        {
+          "bin": 3,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9931586024372049,
+          "maximum_probability": 0.9969512559775158,
+          "mean_probability": 0.995321224208584,
+          "observed_frequency": 0.9833333333333333,
+          "absolute_gap": 0.011987890875250762
+        },
+        {
+          "bin": 4,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9970036590645748,
+          "maximum_probability": 0.9981642396394307,
+          "mean_probability": 0.9976366534031104,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0023633465968896372
+        },
+        {
+          "bin": 5,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9981931346370352,
+          "maximum_probability": 0.9989735662576795,
+          "mean_probability": 0.9986151930003421,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0013848069996579282
+        },
+        {
+          "bin": 6,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9990267182947108,
+          "maximum_probability": 0.9993830075837489,
+          "mean_probability": 0.9992260039827088,
+          "observed_frequency": 0.9833333333333333,
+          "absolute_gap": 0.015892670649375495
+        },
+        {
+          "bin": 7,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.999386358640142,
+          "maximum_probability": 0.9995948898155671,
+          "mean_probability": 0.9995139724176078,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00048602758239224553
+        },
+        {
+          "bin": 8,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9995956843483458,
+          "maximum_probability": 0.999753033802845,
+          "mean_probability": 0.9996875849602949,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0003124150397051384
+        },
+        {
+          "bin": 9,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9997546564252393,
+          "maximum_probability": 0.99982325148586,
+          "mean_probability": 0.9997903903418401,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00020960965815985944
+        },
+        {
+          "bin": 10,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9998251077212003,
+          "maximum_probability": 0.9998903265144286,
+          "mean_probability": 0.99985481255042,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00014518744958003094
+        },
+        {
+          "bin": 11,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9998909693300723,
+          "maximum_probability": 0.9999353875819632,
+          "mean_probability": 0.9999140118251976,
+          "observed_frequency": 1.0,
+          "absolute_gap": 8.59881748024316e-05
+        },
+        {
+          "bin": 12,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.999936065224621,
+          "maximum_probability": 0.9999670168472989,
+          "mean_probability": 0.9999530019670443,
+          "observed_frequency": 1.0,
+          "absolute_gap": 4.699803295571403e-05
+        },
+        {
+          "bin": 13,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999670341001978,
+          "maximum_probability": 0.9999846818437276,
+          "mean_probability": 0.9999774170189256,
+          "observed_frequency": 0.9830508474576272,
+          "absolute_gap": 0.016926569561298455
+        },
+        {
+          "bin": 14,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999851266025152,
+          "maximum_probability": 0.9999947537487462,
+          "mean_probability": 0.9999904711716403,
+          "observed_frequency": 1.0,
+          "absolute_gap": 9.52882835969504e-06
+        },
+        {
+          "bin": 15,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999949825476089,
+          "maximum_probability": 0.9999999814128399,
+          "mean_probability": 0.9999977921781523,
+          "observed_frequency": 1.0,
+          "absolute_gap": 2.207821847677316e-06
+        }
+      ]
+    },
+    "oof_four_class": {
+      "nll": 0.08594371184798599,
+      "brier": 0.03240034340808456,
+      "ece": 0.008835068858857618,
+      "mce": 0.04588382921754541,
+      "accuracy": 0.9764837625979843,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.33618452108443536,
+          "maximum_probability": 0.9418992523705664,
+          "mean_probability": 0.7792171625508787,
+          "observed_frequency": 0.7333333333333333,
+          "absolute_gap": 0.04588382921754541
+        },
+        {
+          "bin": 2,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9452892226761134,
+          "maximum_probability": 0.9786535362452634,
+          "mean_probability": 0.9675164381554247,
+          "observed_frequency": 0.9666666666666667,
+          "absolute_gap": 0.0008497714887579777
+        },
+        {
+          "bin": 3,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9791319668505007,
+          "maximum_probability": 0.9867027027804494,
+          "mean_probability": 0.9834663310100794,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.01653366898992059
+        },
+        {
+          "bin": 4,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9867339595997269,
+          "maximum_probability": 0.9911930536562918,
+          "mean_probability": 0.9891233863997849,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.01087661360021508
+        },
+        {
+          "bin": 5,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9912205532250803,
+          "maximum_probability": 0.9941937587759112,
+          "mean_probability": 0.9928402724618056,
+          "observed_frequency": 0.9833333333333333,
+          "absolute_gap": 0.009506939128472336
+        },
+        {
+          "bin": 6,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9943128484025852,
+          "maximum_probability": 0.9958620027217135,
+          "mean_probability": 0.9951672141617729,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.004832785838227105
+        },
+        {
+          "bin": 7,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.995867196772357,
+          "maximum_probability": 0.9970200618714407,
+          "mean_probability": 0.9964783655378354,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00352163446216458
+        },
+        {
+          "bin": 8,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9970590327516063,
+          "maximum_probability": 0.9978369436594038,
+          "mean_probability": 0.9975083164598765,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0024916835401235238
+        },
+        {
+          "bin": 9,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9978485318063554,
+          "maximum_probability": 0.9985046806638619,
+          "mean_probability": 0.99818712466629,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0018128753337099957
+        },
+        {
+          "bin": 10,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9985078036712023,
+          "maximum_probability": 0.9989696730435704,
+          "mean_probability": 0.9987576964631141,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0012423035368859248
+        },
+        {
+          "bin": 11,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9989743851129308,
+          "maximum_probability": 0.999323898405411,
+          "mean_probability": 0.999164483665909,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0008355163340909577
+        },
+        {
+          "bin": 12,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9993279344250785,
+          "maximum_probability": 0.9996541506046162,
+          "mean_probability": 0.9995032603013697,
+          "observed_frequency": 0.9830508474576272,
+          "absolute_gap": 0.016452412843742548
+        },
+        {
+          "bin": 13,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9996628014153652,
+          "maximum_probability": 0.9998261303645374,
+          "mean_probability": 0.9997588556206226,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0002411443793773893
+        },
+        {
+          "bin": 14,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9998284025674613,
+          "maximum_probability": 0.9999280105878257,
+          "mean_probability": 0.9998863590260327,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00011364097396726613
+        },
+        {
+          "bin": 15,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999381695303703,
+          "maximum_probability": 0.999999783067629,
+          "mean_probability": 0.9999783932937218,
+          "observed_frequency": 0.9830508474576272,
+          "absolute_gap": 0.016927545836094682
+        }
+      ]
+    },
+    "raw_binary": {
+      "nll": 0.019244405098267334,
+      "brier": 0.0022459456823497835,
+      "ece": 0.002404388412886284,
+      "mce": 0.01666142299193246,
+      "accuracy": 0.9977603583426652,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 1.858716020132989e-08,
+          "maximum_probability": 1.5440046497962383e-05,
+          "mean_probability": 5.243674734206835e-06,
+          "observed_frequency": 0.016666666666666666,
+          "absolute_gap": 0.01666142299193246
+        },
+        {
+          "bin": 2,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 1.6765283737032177e-05,
+          "maximum_probability": 0.00017416464228673997,
+          "mean_probability": 7.726485515000006e-05,
+          "observed_frequency": 0.0,
+          "absolute_gap": 7.726485515000006e-05
+        },
+        {
+          "bin": 3,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.0001748922787997103,
+          "maximum_probability": 0.001465875794037585,
+          "mean_probability": 0.000599727880199749,
+          "observed_frequency": 0.0,
+          "absolute_gap": 0.000599727880199749
+        },
+        {
+          "bin": 4,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.0014660298690101121,
+          "maximum_probability": 0.9931694984120746,
+          "mean_probability": 0.4464343369056506,
+          "observed_frequency": 0.45,
+          "absolute_gap": 0.003565663094349414
+        },
+        {
+          "bin": 5,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9934804621690325,
+          "maximum_probability": 0.9985959324486442,
+          "mean_probability": 0.9967363250774226,
+          "observed_frequency": 0.9833333333333333,
+          "absolute_gap": 0.013402991744089321
+        },
+        {
+          "bin": 6,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9986068655358662,
+          "maximum_probability": 0.9995341080549722,
+          "mean_probability": 0.9991066745625435,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0008933254374564603
+        },
+        {
+          "bin": 7,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9995345900711363,
+          "maximum_probability": 0.9997762616779668,
+          "mean_probability": 0.9996740194029119,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0003259805970881047
+        },
+        {
+          "bin": 8,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9997765358753126,
+          "maximum_probability": 0.9998969191359056,
+          "mean_probability": 0.9998458547899758,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00015414521002421466
+        },
+        {
+          "bin": 9,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9998970005969524,
+          "maximum_probability": 0.9999627006776597,
+          "mean_probability": 0.9999369874553732,
+          "observed_frequency": 1.0,
+          "absolute_gap": 6.301254462681705e-05
+        },
+        {
+          "bin": 10,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999629880585857,
+          "maximum_probability": 0.9999819793459973,
+          "mean_probability": 0.9999742781823996,
+          "observed_frequency": 1.0,
+          "absolute_gap": 2.5721817600410368e-05
+        },
+        {
+          "bin": 11,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999821536532408,
+          "maximum_probability": 0.9999924198731188,
+          "mean_probability": 0.9999876653052653,
+          "observed_frequency": 1.0,
+          "absolute_gap": 1.2334694734716933e-05
+        },
+        {
+          "bin": 12,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999924869871162,
+          "maximum_probability": 0.9999980592169259,
+          "mean_probability": 0.9999957622043997,
+          "observed_frequency": 1.0,
+          "absolute_gap": 4.237795600325889e-06
+        },
+        {
+          "bin": 13,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999981044075934,
+          "maximum_probability": 0.9999995635248448,
+          "mean_probability": 0.9999989575497882,
+          "observed_frequency": 1.0,
+          "absolute_gap": 1.0424502118189238e-06
+        },
+        {
+          "bin": 14,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999995899780967,
+          "maximum_probability": 0.9999999414033957,
+          "mean_probability": 0.9999997975817388,
+          "observed_frequency": 1.0,
+          "absolute_gap": 2.0241826115263706e-07
+        },
+        {
+          "bin": 15,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999999420880303,
+          "maximum_probability": 0.9999999999188282,
+          "mean_probability": 0.9999999831771358,
+          "observed_frequency": 1.0,
+          "absolute_gap": 1.682286421278434e-08
+        }
+      ]
+    },
+    "oof_binary": {
+      "nll": 0.024568591183130345,
+      "brier": 0.0024316486872064244,
+      "ece": 0.003185163970987328,
+      "mce": 0.0166124907432093,
+      "accuracy": 0.9977603583426652,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 1.272319354875211e-08,
+          "maximum_probability": 0.00021932433449476158,
+          "mean_probability": 5.4175923457364703e-05,
+          "observed_frequency": 0.016666666666666666,
+          "absolute_gap": 0.0166124907432093
+        },
+        {
+          "bin": 2,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.00023022526407827707,
+          "maximum_probability": 0.0020046222611133403,
+          "mean_probability": 0.000772073151043758,
+          "observed_frequency": 0.0,
+          "absolute_gap": 0.000772073151043758
+        },
+        {
+          "bin": 3,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.0020453719948376426,
+          "maximum_probability": 0.011825571856191843,
+          "mean_probability": 0.005722317333729508,
+          "observed_frequency": 0.0,
+          "absolute_gap": 0.005722317333729508
+        },
+        {
+          "bin": 4,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.011944276067820704,
+          "maximum_probability": 0.9874905375583938,
+          "mean_probability": 0.45955601748095304,
+          "observed_frequency": 0.45,
+          "absolute_gap": 0.009556017480953027
+        },
+        {
+          "bin": 5,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9881132946231207,
+          "maximum_probability": 0.9957450392894697,
+          "mean_probability": 0.992923528295849,
+          "observed_frequency": 0.9833333333333333,
+          "absolute_gap": 0.009590194962515675
+        },
+        {
+          "bin": 6,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9958197260929642,
+          "maximum_probability": 0.9982934797472154,
+          "mean_probability": 0.9973735922816741,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.002626407718325896
+        },
+        {
+          "bin": 7,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9982936551997726,
+          "maximum_probability": 0.9990315138485489,
+          "mean_probability": 0.9987213892587644,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0012786107412355863
+        },
+        {
+          "bin": 8,
+          "count": 60,
+          "weight": 0.0671892497200448,
+          "minimum_probability": 0.9990383676735304,
+          "maximum_probability": 0.9995686261657458,
+          "mean_probability": 0.9993360088233726,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0006639911766274098
+        },
+        {
+          "bin": 9,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9995764893866287,
+          "maximum_probability": 0.9997648018176262,
+          "mean_probability": 0.9996865462681286,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.0003134537318714159
+        },
+        {
+          "bin": 10,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9997660864689769,
+          "maximum_probability": 0.9998962093630296,
+          "mean_probability": 0.9998311013008041,
+          "observed_frequency": 1.0,
+          "absolute_gap": 0.00016889869919589628
+        },
+        {
+          "bin": 11,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9998975879375875,
+          "maximum_probability": 0.9999552090464376,
+          "mean_probability": 0.9999293851135097,
+          "observed_frequency": 1.0,
+          "absolute_gap": 7.061488649029446e-05
+        },
+        {
+          "bin": 12,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999562810737705,
+          "maximum_probability": 0.9999833109278647,
+          "mean_probability": 0.9999712276608878,
+          "observed_frequency": 1.0,
+          "absolute_gap": 2.8772339112248524e-05
+        },
+        {
+          "bin": 13,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999833616319094,
+          "maximum_probability": 0.9999953986774509,
+          "mean_probability": 0.9999903882850447,
+          "observed_frequency": 1.0,
+          "absolute_gap": 9.611714955282125e-06
+        },
+        {
+          "bin": 14,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.999995428087706,
+          "maximum_probability": 0.9999993493992797,
+          "mean_probability": 0.9999978935326245,
+          "observed_frequency": 1.0,
+          "absolute_gap": 2.1064673755288865e-06
+        },
+        {
+          "bin": 15,
+          "count": 59,
+          "weight": 0.06606942889137737,
+          "minimum_probability": 0.9999993631915572,
+          "maximum_probability": 0.999999999531767,
+          "mean_probability": 0.999999809913013,
+          "observed_frequency": 1.0,
+          "absolute_gap": 1.9008698703970595e-07
+        }
+      ]
+    },
+    "final_all_validation": {
+      "status": "proposed operational only; not used for reported metrics",
+      "four_class": {
+        "scale": [
+          1.1104121339737867,
+          0.5123843529135241,
+          1.1339311096220286,
+          1.0062598382375896
+        ],
+        "bias": [
+          0.8337175633289824,
+          -0.3758212752220527,
+          -0.7553498521550119,
+          0.2974535640480824
+        ]
+      },
+      "binary": {
+        "scale": 0.7572340666926365,
+        "bias": 0.5262000524441709
+      }
+    },
+    "four_class_decisions_changed": 4,
+    "binary_decisions_changed": 0,
+    "assignment_case_count": 893
+  },
+  "gate": {
+    "status": "PASS",
+    "checks": {
+      "lesion_centered_nll_improved": true,
+      "lesion_centered_ece_at_most_0_05": true,
+      "background_nll_improved": true,
+      "background_ece_at_most_0_05": true,
+      "whole_image_nll_improved": true,
+      "whole_image_ece_at_most_0_05": true
+    },
+    "rule": "Every regional NLL must improve and every regional ECE must be at most 0.05."
+  },
+  "verification": {
+    "cache_run": "E:\\BrainTumorProject\\runs\\segmentation_v2_ensemble\\20260924-122739-908245-calibration-cache",
+    "cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+    "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+    "calibration_outputs_are_out_of_fold": true,
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "model_retrained": false,
+    "script_sha256": "0f599cc0cb7ae115c144e8e9e2583fd784e9f8208c9939ee7664ba95a46e0d49",
+    "metadata_correction": {
+      "field": "classifier_descriptive.assignment_case_count",
+      "from": 680,
+      "to": 893,
+      "reason": "The executed calibration used and verified all 893 classifier validation rows; the field had mistakenly reported the separate 680-case segmentation assignment count.",
+      "metrics_affected": false
+    }
+  },
+  "limitations": [
+    "All metrics use the internal validation partition used during model development.",
+    "Lesion-centered and background regions use reference masks for evaluation and are unavailable operationally.",
+    "Patient independence and external generalization are unverified.",
+    "Classifier results are descriptive and do not reverse the accepted raw-classifier decision."
+  ]
 }

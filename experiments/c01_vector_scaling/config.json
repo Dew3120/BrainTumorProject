@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "c01_vector_scaling",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H3"
   ],
