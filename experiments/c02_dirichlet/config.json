@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "experiment_id": "c02_dirichlet",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H3"
+  ],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "source_model": "e08_ensemble",
+  "source_result_sha256": "580846aa620234749ab15ac21a3f12df7398a96edd393564c3abfa1b9f1bf654",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "folds": 5,
+  "seed": 42,
+  "method": "identifiable binary Dirichlet map sigmoid(a*log(p_fg)+b*log(p_bg)+c), fit by image-balanced pixel NLL",
+  "parameter_bounds": {
+    "a": [
+      -20.0,
+      20.0
+    ],
+    "b": [
+      -20.0,
+      20.0
+    ],
+    "c": [
+      -20.0,
+      20.0
+    ]
+  },
+  "regions": {
+    "lesion_centered": "reference mask plus Euclidean radius 8 model pixels",
+    "background": "complement of lesion-centered region",
+    "whole_image": "all 128x128 pixels"
+  },
+  "metrics": "image-balanced NLL and Brier; 15 equal-frequency pooled-pixel ECE and MCE",
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true
+  },
+  "gate": {
+    "nll_improves_in_every_region": true,
+    "ece_maximum_each_region": 0.05,
+    "hard_mask_changed_pixels": 0,
+    "hard_mask_changed_images": 0
+  },
+  "threshold": 0.5,
+  "test_images_accessed": 0,
+  "amendment_02_sha256": "c3627c7e25b89441c883ced726ca5f531d5c7833c2799017b9ce53c3e5a66891"
+}

@@ -9,6 +9,10 @@
     {
       "path": "audit/preregistration_amendment_01.md",
       "sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb"
+    },
+    {
+      "path": "audit/preregistration_amendment_02.md",
+      "sha256": "c3627c7e25b89441c883ced726ca5f531d5c7833c2799017b9ce53c3e5a66891"
     }
   ],
   "baseline": {
@@ -95,6 +99,22 @@
         "H3"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "c02_dirichlet",
+      "path": "experiments/c02_dirichlet",
+      "hypothesis_ids": [
+        "H3"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "e08_final_selection",
+      "path": "experiments/e08_final_selection",
+      "hypothesis_ids": [
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "sealed_final_evaluation",

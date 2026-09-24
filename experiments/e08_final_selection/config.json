@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e08_final_selection",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H7"
+  ],
+  "amendment_02_sha256": "c3627c7e25b89441c883ced726ca5f531d5c7833c2799017b9ce53c3e5a66891",
+  "calibration_condition": "at least one eligible operational C01-C07 method passes; select by amendment 02",
+  "reliability_condition": {
+    "selected_candidate_gate_passes": true,
+    "oof_auroc_minimum": 0.941
+  },
+  "test_images_accessed": 0
+}
