@@ -1,1 +1,11 @@
-{}
+{
+  "schema_version": 1,
+  "experiment_id": "e08_final_selection",
+  "status": "NOT_RUN",
+  "calibration_condition": {},
+  "reliability_condition": {},
+  "decision": "PENDING",
+  "constraint_checks": {
+    "test_images_accessed": 0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "experiment_id": "c02_dirichlet",
+  "registered_decision": "FAIL",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/c02_dirichlet/artifacts/fold_parameters.csv",
+      "sha256": "be684353232bbaa0471e1dd94aa86eabc92a9793c91a55961ba24967d1fc077a",
+      "bytes": 450
+    },
+    {
+      "path": "experiments/c02_dirichlet/artifacts/lesion_centered_reliability.png",
+      "sha256": "e6da311dd7689df8a7400b8b208b372f0d9d4d7cbf7b76cbf8f32010b11ab6a0",
+      "bytes": 104751
+    },
+    {
+      "path": "experiments/c02_dirichlet/artifacts/whole_image_reliability.png",
+      "sha256": "ea652dd3899ddee349918ab5d6a5cea5d14ffb962718b923ad663004f99e7543",
+      "bytes": 75388
+    },
+    {
+      "path": "experiments/c02_dirichlet/config.json",
+      "sha256": "36c4247047098f303a727fe38f3a5c3ca912de0ac7af9592cf8751bc3b145bc1",
+      "bytes": 1645
+    },
+    {
+      "path": "experiments/c02_dirichlet/decision.md",
+      "sha256": "9015563f25f199bc18299d632d479807ddebf207564810dc06adf5aa1c846974",
+      "bytes": 359
+    },
+    {
+      "path": "experiments/c02_dirichlet/hypothesis.md",
+      "sha256": "88798ca78ea1199dd00cd0ae69fe43e5886e9e8fa8f0484b6a7fc2530d3e9007",
+      "bytes": 1235
+    },
+    {
+      "path": "experiments/c02_dirichlet/result.json",
+      "sha256": "ccf36b36a75819529071f2b7df5ce5d720849e76ded416696fd7ffb5c04919e3",
+      "bytes": 47992
+    }
+  ]
+}

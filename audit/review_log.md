@@ -165,7 +165,7 @@ This log is append-only. Each decision records the evidence available at the tim
 ## 2026-09-24T18:16:04+05:30 — Register conditional E08 final-model pathway
 
 - **Decision made:** Register amendment 02 and H7 before any Stage 4 result is inspected. E08 may be nominated for the one-time sealed evaluation only when an eligible operational calibration passes its fixed gate and the selected gate-passing E08 reliability model has out-of-fold AUROC at least `0.941`.
-- **Triggering artifact:** `audit/preregistration_amendment_02.md`, SHA256 `c3627c7e25b89441c883ced726ca5f531d5c7833c2799017b9ce53c3e5a66891`; selection config SHA256 `f326f3385b4e9bc8363140fa5d8f9112945e0fa945e06dfc190870553c35d78c`.
+- **Triggering artifact:** `audit/preregistration_amendment_02.md`, SHA256 `0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43`; selection config SHA256 `f326f3385b4e9bc8363140fa5d8f9112945e0fa945e06dfc190870553c35d78c`.
 - **Rationale:** This is a new prospective selection pathway requested after Stage 2 closed. It does not change G1. C01 was already known to pass locally; C02–C09 and all E08 reliability results remain unobserved. Both H7 conditions are conjunctive, and passing only nominates E08 for sealed evaluation.
 - **Alternatives considered:** Retroactively declare E08 final from its local ensemble pass; rejected. Lower G1; rejected. Use a reference-mask-dependent calibrator operationally; prohibited.
 - **Who approved:** User explicitly requested and defined the new conditional hypothesis; Codex fixed the operational selection and tie-break rules before Stage 4.
@@ -173,7 +173,15 @@ This log is append-only. Each decision records the evidence available at the tim
 ## 2026-09-24T18:16:04+05:30 — Register two-class Dirichlet pixel calibration
 
 - **Decision made:** Register C02 before implementation using the identifiable binary Dirichlet map and five-fold similarity-aware cross-fitting.
-- **Triggering artifact:** `experiments/c02_dirichlet/config.json`, SHA256 `474eff902969a6be58cace7e35e934ba23c2a50d78fb8714d0461714129389ac`; hypothesis SHA256 `88798ca78ea1199dd00cd0ae69fe43e5886e9e8fa8f0484b6a7fc2530d3e9007`.
+- **Triggering artifact:** `experiments/c02_dirichlet/config.json`, SHA256 `36c4247047098f303a727fe38f3a5c3ca912de0ac7af9592cf8751bc3b145bc1`; hypothesis SHA256 `88798ca78ea1199dd00cd0ae69fe43e5886e9e8fa8f0484b6a7fc2530d3e9007`.
 - **Rationale:** C02 must improve NLL in all three fixed regions, keep all three ECE values at or below `0.05`, and change zero hard-mask pixels at threshold `0.50`. The gate is conjunctive and will not be relaxed.
 - **Alternatives considered:** Fit and evaluate on all validation pixels; rejected as leakage. Omit the hard-mask identity rule; rejected because it is explicitly registered.
 - **Who approved:** User through the sequential C02–C09 instruction; Codex fixed the identifiable parameterization before fitting.
+
+## 2026-09-24T21:41:17+05:30 — Reject two-class Dirichlet pixel calibration
+
+- **Decision made:** Reject C02 under its unchanged conjunctive gate. NLL improvement passed in all three registered regions, ECE at most `0.05` passed in all three regions, zero changed hard-mask pixels failed, and zero changed hard-mask images failed.
+- **Triggering artifact:** `experiments/c02_dirichlet/artifacts/experiment_manifest.json`, SHA256 `af2b470c045f8376780fe96b53b81af5838a4001463e650c5994e3fb480b2dbd`; 680 segmentation-validation cases and zero sealed-test images.
+- **Rationale:** Five-fold similarity-aware out-of-fold Dirichlet calibration reduced lesion-centered NLL from `0.317163` to `0.226449`, background NLL from `0.002732` to `0.002435`, and whole-image NLL from `0.023231` to `0.017734`. Calibrated ECE was `0.036148`, `0.002162`, and `0.000210`, satisfying every ECE ceiling. However, the calibrated mapping changed `43,228` hard-mask pixels across all `680` images at the unchanged `0.50` threshold. Both mandatory identity checks therefore failed, and the gate was not relaxed.
+- **Alternatives considered:** Ignore the identity checks because probability metrics improved; rejected because C02 explicitly requires bitwise-identical masks. Retune the mapping to preserve the decision boundary after seeing the result; rejected as an unregistered variant. Change the threshold to recover the original masks; prohibited.
+- **Who approved:** Codex by the registered C02 rule; the user authorized sequential C02–C09 execution and required failures to remain findings.

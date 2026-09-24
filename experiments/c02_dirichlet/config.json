@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "c02_dirichlet",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H3"
   ],
@@ -48,5 +48,5 @@
   },
   "threshold": 0.5,
   "test_images_accessed": 0,
-  "amendment_02_sha256": "c3627c7e25b89441c883ced726ca5f531d5c7833c2799017b9ce53c3e5a66891"
+  "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43"
 }

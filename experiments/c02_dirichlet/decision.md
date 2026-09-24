@@ -1,5 +1,7 @@
 # Two-class Dirichlet pixel calibration decision
 
-**Decision:** PENDING
+**Decision:** REJECTED
 
-No result exists yet. The registered conjunctive gate will control the decision.
+The predeclared conjunctive gate was not satisfied and was not relaxed. Reported metrics use only out-of-fold probabilities. Hard-mask identity at threshold 0.50 is a mandatory condition.
+
+No model was retrained, no threshold was changed, and no sealed-test image was accessed.
