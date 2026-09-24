@@ -1,6 +1,85 @@
 {
   "schema_version": 1,
   "experiment_id": "e08_ensemble",
-  "status": "NOT_RUN",
-  "test_images_accessed": 0
+  "status": "PASS",
+  "scope": "BRISC internal validation development result; not clinical validation",
+  "evaluation_source_git_commit": "07153d5402dce5e41ca1a291211b200acef2ddcc",
+  "evaluation_script_sha256": "775cdbb37f03189905ca7139e4c72d98528cdbf48ee99bbfd20c51e8bb5a7b0c",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "component_maximum_recomputed_metric_difference": {
+    "e05_glioma_weighted": 0.0,
+    "e06_boundary_loss": 0.0,
+    "e07_glioma_specialized": 0.0
+  },
+  "mean_dice": {
+    "baseline_v1": {
+      "glioma": 0.608951638747171,
+      "meningioma": 0.8702445032838158,
+      "pituitary": 0.808789244003923
+    },
+    "best_eligible_single_e07": {
+      "glioma": 0.5802066652492309,
+      "meningioma": 0.8668649640377397,
+      "pituitary": 0.808789244003923
+    },
+    "ensemble": {
+      "glioma": 0.6323744899333071,
+      "meningioma": 0.882178088576258,
+      "pituitary": 0.818345864942993
+    },
+    "ensemble_delta_vs_v1": {
+      "glioma": 0.023422851186136184,
+      "meningioma": 0.011933585292442261,
+      "pituitary": 0.009556620939069949
+    },
+    "ensemble_delta_vs_best_eligible_single": {
+      "glioma": 0.052167824684076214,
+      "meningioma": 0.015313124538518297,
+      "pituitary": 0.009556620939069949
+    }
+  },
+  "paired_similarity_group_bootstrap_ci95": {
+    "glioma_vs_best_eligible_single": [
+      0.03221975535079852,
+      0.0744016033722726
+    ],
+    "meningioma_vs_v1": [
+      0.0027836575665469046,
+      0.023064208197686363
+    ],
+    "pituitary_vs_v1": [
+      0.0007095489665776131,
+      0.019070354224021088
+    ]
+  },
+  "weak_cases_dice_below_0_50": {
+    "glioma": 56,
+    "meningioma": 2,
+    "pituitary": 11
+  },
+  "gate": {
+    "status": "PASS",
+    "checks": {
+      "glioma_delta_over_best_eligible_single_at_least_0_02": true,
+      "meningioma_delta_from_v1_at_least_minus_0_01": true,
+      "pituitary_delta_from_v1_at_least_minus_0_01": true
+    },
+    "rule": "All three registered checks must pass."
+  },
+  "visual_review": {
+    "status": "PASS_NO_SYSTEMATIC_TECHNICAL_DEFECT",
+    "selected_tiles": 42,
+    "finding": "Best cases show close reference/prediction alignment. Worst cases show mislocalization, fragmentation, and coverage errors without a repeated flip, stretch, offset, or image/mask pairing defect.",
+    "reviewer": "Codex visual inspection under the user-authorized audit protocol",
+    "test_images_accessed": 0
+  },
+  "test_evaluated": false,
+  "gate_passed": true,
+  "parent_g1": {
+    "status": "FAIL",
+    "required_glioma_dice_delta_over_v1": 0.05,
+    "observed_glioma_dice_delta_over_v1": 0.023422851186136184,
+    "consequence": "E08 passes its local gate but cannot replace frozen v1 under the parent model-replacement rule."
+  }
 }

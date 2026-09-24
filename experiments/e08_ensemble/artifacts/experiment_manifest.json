@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "experiment_id": "e08_ensemble",
+  "registered_decision": "PASS_LOCAL_FAIL_PARENT_G1",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e08_ensemble/artifacts/best_validation_by_category.png",
+      "sha256": "c1ad41a2dd3b7b462af7b04375af44fb4c0114bbb38ac487c1014fdbfcf3d0fb",
+      "bytes": 584754
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/dice_comparison.png",
+      "sha256": "715b424c5f63e949dc6d56c2324e59e9a26e5735e6f1398cd7eee3812e0c4f00",
+      "bytes": 43407
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/per_case_comparison.csv",
+      "sha256": "be5a27886e7526b2ca11fdc0adabd4c494dfea5a2734944fdecf80283b93cbdc",
+      "bytes": 258259
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/summary.md",
+      "sha256": "e578a19428ee71c4603cdc606d0bd7995cec13161898f26a98cf18f2c1cdabb4",
+      "bytes": 329
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/visual_audit_selections.csv",
+      "sha256": "1de9da6fd8191fc2421f2377017c16e4d1c959f3fcac1661379eb8b5540c438d",
+      "bytes": 8667
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/visual_review.json",
+      "sha256": "0863a3b2eeaddb9ea82b0fd666d4795c87710b4c1967c3950e17838ea624645f",
+      "bytes": 400
+    },
+    {
+      "path": "experiments/e08_ensemble/artifacts/worst_validation_by_category.png",
+      "sha256": "d3b9f5fef4da87b603479bd64f0d994e2ee1f43d866d1a8c5847b7cc0ffdd50a",
+      "bytes": 745417
+    },
+    {
+      "path": "experiments/e08_ensemble/config.json",
+      "sha256": "9235fa11e7b9fe1e7884a9307fbc89f9b99705f2db6d57cf9281f3ca21026eff",
+      "bytes": 2266
+    },
+    {
+      "path": "experiments/e08_ensemble/decision.md",
+      "sha256": "9cae65e0a458a9da6dba8d5a3b51cdfad9cca01eeef2f4762c23e907db134a61",
+      "bytes": 769
+    },
+    {
+      "path": "experiments/e08_ensemble/hypothesis.md",
+      "sha256": "a479d158af3b2449f3bfa785483325aa709c57653214295c105995be4f49b3e4",
+      "bytes": 1585
+    },
+    {
+      "path": "experiments/e08_ensemble/result.json",
+      "sha256": "580846aa620234749ab15ac21a3f12df7398a96edd393564c3abfa1b9f1bf654",
+      "bytes": 2816
+    }
+  ]
+}
