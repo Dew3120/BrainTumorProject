@@ -217,3 +217,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Five-fold out-of-fold lesion-centred ECE was `0.024521` (gate `<=0.05`) and background ECE was `0.001512` (gate `<=0.02`). Lesion-centred Brier improved from `0.070381` to `0.068105`, and background Brier improved from `0.000719` to `0.000667`. All four checks passed. The separate temperatures changed zero hard-mask pixels at threshold `0.50`.
 - **Alternatives considered:** Treat the local pass as operational; rejected because the reference-defined routing mask is unavailable at inference. Use its whole-image result to satisfy H7; rejected by amendment 02's operational-input rule.
 - **Who approved:** Codex by the registered C04 rule; the user authorized uninterrupted C03–C09 execution subject to fixed stop conditions.
+
+## 2026-09-24T22:53:00+05:30 — Register reliability-weighted calibration
+
+- **Decision made:** Register C05 before fitting as a five-fold similarity-aware scalar temperature whose fitting cases are weighted by frozen v1 out-of-fold reliability scores.
+- **Triggering artifact:** `experiments/c05_reliability_weighted/config.json`, SHA256 `9c623b2ed999f383a52a2ae712f31c0fe9378fb92074106189fcbeb66e041b98`; hypothesis SHA256 `114f05fd37a073a3123c364db97e797c1c707a4655b40ae65670c755685f9829`; reliability source SHA256 `e017695027231e9ce08d8c363d61dbeac7baf0f33e421881ca852697783e92ff`.
+- **Rationale:** The fixed gate requires whole-image ECE at most `0.04` and no whole-image ECE or NLL worsening within the 136-case lowest-reliability quintile. Weighting uses a frozen prediction-only OOF score; Dice and reference geometry do not enter weights. The resulting global temperature needs only the raw E08 logit at inference and is operationally eligible if it passes.
+- **Alternatives considered:** Fit a new E08 reliability model before Stage 4; rejected as out-of-order analysis. Weight using observed Dice; rejected as target leakage. Use the final v1 in-sample reliability score; rejected in favor of the existing OOF score.
+- **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed score provenance, quintile membership, and the full gate before fitting.

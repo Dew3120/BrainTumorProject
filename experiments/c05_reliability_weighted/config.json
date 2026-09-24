@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "c05_reliability_weighted",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H3", "H7"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
+  "source_model": "e08_ensemble",
+  "source_result_sha256": "580846aa620234749ab15ac21a3f12df7398a96edd393564c3abfa1b9f1bf654",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "reliability_score_path": "runs/segmentation/20260923-072439-397263-full/segmenter_case_reliability_oof.csv",
+  "reliability_score_sha256": "e017695027231e9ce08d8c363d61dbeac7baf0f33e421881ca852697783e92ff",
+  "reliability_score_column": "oof_reliability_score",
+  "reliability_score_provenance": "frozen v1 prediction-only five-fold OOF score; no reference-derived feature",
+  "folds": 5,
+  "seed": 42,
+  "method": {
+    "estimator": "one positive scalar temperature fitted by reliability-weighted image-balanced pixel NLL",
+    "temperature_bounds": [0.05, 20.0],
+    "case_weight": "frozen v1 OOF reliability score, normalized to sum one in each fitting fold",
+    "pixel_weight": "case weight divided equally across that case's 16384 pixels",
+    "operational_input": "raw E08 segmenter logit only"
+  },
+  "low_reliability_quintile": {"cases": 136, "ordering": "ascending reliability score, then normalized path"},
+  "regions": {
+    "lesion_centered": "reference mask plus Euclidean radius 8 model pixels",
+    "background": "complement of lesion-centered region",
+    "whole_image": "all 128x128 pixels"
+  },
+  "metrics": "image-balanced NLL and Brier; 15 equal-frequency pooled-pixel ECE and MCE; all regions and per-category",
+  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired": true},
+  "gate": {
+    "whole_image_ece_maximum": 0.04,
+    "low_reliability_quintile_whole_image_ece_change_maximum": 0.0,
+    "low_reliability_quintile_whole_image_nll_change_maximum": 0.0,
+    "comparison_tolerance": 1e-12,
+    "conjunctive": true
+  },
+  "hard_mask_check": "bitwise compare raw_probability >= 0.50 with OOF_calibrated_probability >= 0.50; descriptive only",
+  "threshold": 0.5,
+  "threshold_tuning": false,
+  "model_retraining": false,
+  "test_images_accessed": 0
+}
