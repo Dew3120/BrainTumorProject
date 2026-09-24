@@ -19,31 +19,43 @@
     {
       "id": "glioma_segmentation_improvement",
       "path": "experiments/glioma_segmentation_improvement",
-      "hypothesis_ids": ["H1"],
+      "hypothesis_ids": [
+        "H1"
+      ],
       "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e01_lcc_filter",
       "path": "experiments/e01_lcc_filter",
-      "hypothesis_ids": ["H1"],
-      "status": "REGISTERED_NOT_STARTED"
+      "hypothesis_ids": [
+        "H1"
+      ],
+      "status": "COMPLETE"
     },
     {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
-      "hypothesis_ids": ["H2", "H3", "H4"],
+      "hypothesis_ids": [
+        "H2",
+        "H3",
+        "H4"
+      ],
       "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "application_integrity_validation",
       "path": "experiments/application_integrity_validation",
-      "hypothesis_ids": ["H5"],
+      "hypothesis_ids": [
+        "H5"
+      ],
       "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "measurement_engine_validation",
       "path": "experiments/measurement_engine_validation",
-      "hypothesis_ids": ["H6"],
+      "hypothesis_ids": [
+        "H6"
+      ],
       "status": "REGISTERED_NOT_STARTED"
     }
   ]

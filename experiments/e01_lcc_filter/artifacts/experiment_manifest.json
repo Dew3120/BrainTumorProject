@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "experiment_id": "e01_lcc_filter",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e01_lcc_filter/hypothesis.md",
+      "sha256": "ae50f3586129ac6bcf211ce7ad3a60142c2883045ddf37af7142153a697445f0",
+      "bytes": 635
+    },
+    {
+      "path": "experiments/e01_lcc_filter/config.json",
+      "sha256": "c193bee2c4a007be30c6eee5ca17b05e6a1310a299cbfd2b1b7b70f63c62d80e",
+      "bytes": 1209
+    },
+    {
+      "path": "experiments/e01_lcc_filter/result.json",
+      "sha256": "5eca0f821d4c2b87e73235b694548f5540138351dd2193c1b39c392137efae97",
+      "bytes": 2060
+    },
+    {
+      "path": "experiments/e01_lcc_filter/decision.md",
+      "sha256": "0fee801a895356ef582b663a5734edf88f529d9c2d6e349ffd0015c110237125",
+      "bytes": 385
+    },
+    {
+      "path": "experiments/e01_lcc_filter/artifacts/per_case_metrics.csv",
+      "sha256": "d26fe86c1467e36596f9d19b311fc7884d86f6defe3bb07adf7b511b13cd07eb",
+      "bytes": 190166
+    },
+    {
+      "path": "experiments/e01_lcc_filter/artifacts/dice_delta_distribution.png",
+      "sha256": "9d285aa072555d5b9fa62b37034656327a925a5959e5d58ac63636997a52e978",
+      "bytes": 61738
+    },
+    {
+      "path": "experiments/e01_lcc_filter/artifacts/summary.md",
+      "sha256": "c85054fb7abed2ad075a961d9da61e04a81e4e8984174e8a3c26b3eb5dade4cf",
+      "bytes": 587
+    }
+  ]
+}

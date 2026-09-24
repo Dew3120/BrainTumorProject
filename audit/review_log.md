@@ -57,3 +57,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** All 680 validation predictions reproduce stored Dice and IoU with maximum difference 0.0, all 60 failure panels passed image/reference alignment review, all requested geometric fields are populated, and the verifier records zero sealed-test access. The small-mask risk difference is +0.430 with a 95% similarity-group bootstrap interval of +0.258 to +0.592.
 - **Alternatives considered:** Attribute failures primarily to diffuse glioma boundaries; rejected because the sharp/diffuse risk-difference interval includes zero. Record edema, enhancement, or ventricle proximity from appearance; rejected because unverified single JPEG slices are insufficient. Treat fragmentation as a preprocessing error; rejected because file pairing and spatial alignment checks passed.
 - **Who approved:** Codex by the registered mechanical and evidence rules; the user authorized Stage 1 execution and requested an evidence-based explanation.
+
+## 2026-09-24T10:55:31+05:30 — Reject largest-component filtering
+
+- **Decision made:** Reject E01 as a glioma improvement. The conjunctive local gate failed and will not be relaxed.
+- **Triggering artifact:** `experiments/e01_lcc_filter/artifacts/experiment_manifest.json`, SHA256 `7143c62deb6490d813f016243fa4ca51f0d69ba0e82d45b66abeb7fa9df281c2`; all 680 validation cases evaluated.
+- **Rationale:** Glioma mean Dice changed from 0.6090 to 0.6050 (`-0.0040`, bootstrap 95% CI `-0.0149` to `+0.0074`) instead of the required `+0.0200`. Meningioma and pituitary changes were `+0.0011` and `+0.0020`, so their harm controls passed. Removing every smaller component deletes true foreground in enough glioma cases to offset false-positive cleanup.
+- **Alternatives considered:** Keep the filter because it improves some individual cases; rejected because 55 cases worsened beyond tolerance and the primary glioma mean declined. Tune a minimum component size or apply filtering by category; deferred because those are unregistered variants and cannot rescue E01 after its result is known.
+- **Who approved:** Codex by amendment 01's fixed E01 gate; the user authorized sequential execution of all registered interventions.

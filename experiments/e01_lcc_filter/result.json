@@ -1,5 +1,73 @@
 {
   "schema_version": 1,
   "experiment_id": "e01_lcc_filter",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "Frozen BRISC internal validation; not clinical validation",
+  "device": "cuda",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "threshold_changed": false,
+  "model_changed": false,
+  "maximum_stored_metric_difference": 0.0,
+  "baseline_mean_dice": {
+    "glioma": 0.608951638747171,
+    "meningioma": 0.8702445032838158,
+    "pituitary": 0.808789244003923,
+    "overall": 0.7693531739806263,
+    "macro_type": 0.7626617953449699
+  },
+  "filtered_mean_dice": {
+    "glioma": 0.6049925037268383,
+    "meningioma": 0.8713662304433938,
+    "pituitary": 0.810817027450089,
+    "overall": 0.7692824189794082,
+    "macro_type": 0.762391920540107
+  },
+  "mean_dice_delta": {
+    "glioma": -0.003959135020332627,
+    "meningioma": 0.0011217271595780343,
+    "pituitary": 0.0020277834461659427,
+    "overall": -7.075500121811462e-05,
+    "macro_type": -0.00026987480486295734
+  },
+  "paired_group_bootstrap_ci95_delta": {
+    "glioma": [
+      -0.014920396834751076,
+      0.007372736323113884
+    ],
+    "meningioma": [
+      -0.005926552007870385,
+      0.00778585769012863
+    ],
+    "pituitary": [
+      -0.0014798100564707391,
+      0.005701300237558159
+    ]
+  },
+  "mask_change_summary": {
+    "changed_cases": 196,
+    "unchanged_cases": 484,
+    "improved_cases": 126,
+    "worsened_cases": 55,
+    "equal_cases": 499,
+    "components_removed": 423,
+    "pixels_removed": 5751,
+    "comparison_tolerance": 1e-06
+  },
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.02,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "gate_checks": {
+    "glioma": false,
+    "meningioma": true,
+    "pituitary": true
+  },
+  "gate_passed": false,
+  "limitations": [
+    "Internal validation was reused for development.",
+    "Patient independence is unverified.",
+    "Filtering can delete true multifocal or satellite tumor regions."
+  ]
 }

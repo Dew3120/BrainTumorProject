@@ -69,8 +69,15 @@ def test_freeze_is_create_once_and_detects_mutation(tmp_path):
 
 def test_registered_experiment_directories_are_complete_and_frozen():
     result = validate_registry(ROOT)
+    registry = json.loads(
+        (ROOT / "experiments" / "registry.json").read_text(encoding="utf-8")
+    )
     assert result["status"] == "PASS"
-    assert result["experiment_count"] == 4
+    assert result["experiment_count"] == len(registry["experiments"])
+    assert {item["id"] for item in result["experiments"]} == {
+        item["id"] for item in registry["experiments"]
+    }
     assert all(
-        item["status"] == "REGISTERED_NOT_STARTED" for item in result["experiments"]
+        item["status"] in {"REGISTERED_NOT_STARTED", "COMPLETE"}
+        for item in result["experiments"]
     )
