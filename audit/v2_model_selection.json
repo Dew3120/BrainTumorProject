@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE",
+  "scope": "BRISC internal validation model selection; not clinical validation",
+  "candidates": [
+    {
+      "experiment_id": "e01_lcc_filter",
+      "name": "Largest component",
+      "dice": {
+        "glioma": 0.6049925037268383,
+        "meningioma": 0.8713662304433938,
+        "pituitary": 0.810817027450089
+      },
+      "delta_vs_v1": {
+        "glioma": -0.003959135020332627,
+        "meningioma": 0.0011217271595780343,
+        "pituitary": 0.0020277834461659427
+      },
+      "macro_type_dice": 0.762391920540107,
+      "category_harm_safe": true,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": null,
+      "case_reliability_auroc": null
+    },
+    {
+      "experiment_id": "e02_morphology",
+      "name": "Morphology 3x3",
+      "dice": {
+        "glioma": 0.6120450379612294,
+        "meningioma": 0.8738320513720685,
+        "pituitary": 0.8090137660762378,
+        "overall": 0.7715610164096083,
+        "macro_type": 0.7649636184698453
+      },
+      "delta_vs_v1": {
+        "glioma": 0.00309339921405849,
+        "meningioma": 0.00358754808825279,
+        "pituitary": 0.00022452207231471455
+      },
+      "macro_type_dice": 0.7649636184698453,
+      "category_harm_safe": true,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": null,
+      "case_reliability_auroc": null
+    },
+    {
+      "experiment_id": "e03_tta",
+      "name": "Eight-view TTA",
+      "dice": {
+        "glioma": 0.4486630325520106,
+        "meningioma": 0.8777696559864436,
+        "pituitary": 0.5508302088408363,
+        "overall": 0.6293201361042664,
+        "macro_type": 0.6257542991264302
+      },
+      "delta_vs_v1": {
+        "glioma": -0.16028860619516033,
+        "meningioma": 0.00752515270262788,
+        "pituitary": -0.2579590351630867
+      },
+      "macro_type_dice": 0.6257542991264302,
+      "category_harm_safe": false,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": null,
+      "case_reliability_auroc": null
+    },
+    {
+      "experiment_id": "e04_multiscale",
+      "name": "128/256 multiscale",
+      "dice": {
+        "glioma": 0.5686798490270453,
+        "meningioma": 0.8785186514550715,
+        "pituitary": 0.7668616484291899,
+        "overall": 0.7446808434421864,
+        "macro_type": 0.7380200496371022
+      },
+      "delta_vs_v1": {
+        "glioma": -0.040271789720125684,
+        "meningioma": 0.008274148171255713,
+        "pituitary": -0.041927595574733134
+      },
+      "macro_type_dice": 0.7380200496371022,
+      "category_harm_safe": false,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": null,
+      "case_reliability_auroc": null
+    },
+    {
+      "experiment_id": "e05_glioma_weighted",
+      "name": "Glioma-weighted retraining",
+      "dice": {
+        "glioma": 0.597238963113769,
+        "meningioma": 0.8390555681849498,
+        "pituitary": 0.7800514899553305
+      },
+      "delta_vs_v1": {
+        "glioma": -0.011712675633401948,
+        "meningioma": -0.031188935098866,
+        "pituitary": -0.02873775404859258
+      },
+      "macro_type_dice": 0.7387820070846831,
+      "category_harm_safe": false,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": 0.05796845051184708,
+      "case_reliability_auroc": 0.9422691861149904
+    },
+    {
+      "experiment_id": "e06_boundary_loss",
+      "name": "Boundary-loss retraining",
+      "dice": {
+        "glioma": 0.5793657813394698,
+        "meningioma": 0.8599838142566351,
+        "pituitary": 0.7977684671620289
+      },
+      "delta_vs_v1": {
+        "glioma": -0.029585857407701144,
+        "meningioma": -0.010260689027180692,
+        "pituitary": -0.011020776841894175
+      },
+      "macro_type_dice": 0.7457060209193779,
+      "category_harm_safe": false,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": 0.058363149095296225,
+      "case_reliability_auroc": 0.9152526105651105
+    },
+    {
+      "experiment_id": "e07_glioma_specialized",
+      "name": "Classifier-routed specialist",
+      "dice": {
+        "glioma": 0.5802066652492309,
+        "meningioma": 0.8668649640377397,
+        "pituitary": 0.808789244003923
+      },
+      "delta_vs_v1": {
+        "glioma": -0.02874497349794003,
+        "meningioma": -0.0033795392460760354,
+        "pituitary": 0.0
+      },
+      "macro_type_dice": 0.751953624430298,
+      "category_harm_safe": true,
+      "local_gate_passed": false,
+      "accepted_pixel_foreground_ece": 0.0604046745240773,
+      "case_reliability_auroc": 0.9410254947812697
+    },
+    {
+      "experiment_id": "e08_ensemble",
+      "name": "Fixed E05-E07 ensemble",
+      "dice": {
+        "glioma": 0.6323744899333071,
+        "meningioma": 0.882178088576258,
+        "pituitary": 0.818345864942993
+      },
+      "delta_vs_v1": {
+        "glioma": 0.023422851186136184,
+        "meningioma": 0.011933585292442261,
+        "pituitary": 0.009556620939069949
+      },
+      "macro_type_dice": 0.7776328144841861,
+      "category_harm_safe": true,
+      "local_gate_passed": true,
+      "accepted_pixel_foreground_ece": null,
+      "case_reliability_auroc": null
+    }
+  ],
+  "category_harm_eligible_ids": [
+    "e08_ensemble",
+    "e02_morphology",
+    "e01_lcc_filter",
+    "e07_glioma_specialized"
+  ],
+  "selected_experimental_v2": "e08_ensemble",
+  "selection_rule": "filter category harm; then highest glioma Dice, lowest accepted pixel ECE, highest reliability AUROC, highest macro Dice, experiment ID",
+  "parent_g1": {
+    "required_glioma_dice_delta_over_v1": 0.05,
+    "observed": 0.023422851186136184,
+    "passed": false
+  },
+  "accepted_final_model": "baseline_v1",
+  "stage3_and_stage4_analysis_target": "e08_ensemble",
+  "result_sha256": {
+    "e01_lcc_filter": "5eca0f821d4c2b87e73235b694548f5540138351dd2193c1b39c392137efae97",
+    "e02_morphology": "fbb76876071502148acda71dbaf68be51d8a1dd250d9e8ca1704b3abafee7621",
+    "e03_tta": "ebd0ed6de24c6e00cfb61aeba3ce14439e27b7c866460fe6a59e68d217bc3ee9",
+    "e04_multiscale": "d2295b4d1705bc4d67edce7efee40c23566e2b6db33eb9eb29108d6aa5304445",
+    "e05_glioma_weighted": "2398f50e9a3243260c1c8ccdf71fbe2dabd11eacec627edbc6f77c2749bcfefe",
+    "e06_boundary_loss": "6f42a0557986e89d6e2b2e61bd568898560e42708ef7adc0f3c46dc73436e142",
+    "e07_glioma_specialized": "fe1d3e818f06800dda88ce7ebd2b70c746784bb5334e1b45dd9c2b255d79d2df",
+    "e08_ensemble": "580846aa620234749ab15ac21a3f12df7398a96edd393564c3abfa1b9f1bf654"
+  },
+  "test_images_accessed": 0
+}
