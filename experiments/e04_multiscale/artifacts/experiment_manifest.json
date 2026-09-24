@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "experiment_id": "e04_multiscale",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e04_multiscale/hypothesis.md",
+      "sha256": "9cdef62ee61b9cc65292b907422af974c8676da9f5b72cdd24ff7d0c62fc9134",
+      "bytes": 690
+    },
+    {
+      "path": "experiments/e04_multiscale/config.json",
+      "sha256": "a9f76e8603653ceb3d6858b50fd9339cd7f51ee09fb659fcf9e2107d981789e4",
+      "bytes": 1244
+    },
+    {
+      "path": "experiments/e04_multiscale/result.json",
+      "sha256": "d2295b4d1705bc4d67edce7efee40c23566e2b6db33eb9eb29108d6aa5304445",
+      "bytes": 2207
+    },
+    {
+      "path": "experiments/e04_multiscale/decision.md",
+      "sha256": "725969957225b9ba447dfac610ea1918f358543f682bbca9d5d44d34dbade358",
+      "bytes": 415
+    },
+    {
+      "path": "experiments/e04_multiscale/artifacts/per_case_metrics.csv",
+      "sha256": "3c5d34ddeb764f147fed9bf696f17e7038caeb791ae21c88081a7c829d88030f",
+      "bytes": 229007
+    },
+    {
+      "path": "experiments/e04_multiscale/artifacts/dice_delta_distribution.png",
+      "sha256": "1cd6a9420fb12168b8d588fca40af5b5626b4e0b3a40f314d5ff67ba9f390ad7",
+      "bytes": 57676
+    },
+    {
+      "path": "experiments/e04_multiscale/artifacts/summary.md",
+      "sha256": "982d261bb3b8ebcc053a61d05e6883cd51c97c5b2f47105c9a0d85f1cc51f226",
+      "bytes": 435
+    }
+  ]
+}

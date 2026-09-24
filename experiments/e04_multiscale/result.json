@@ -1,5 +1,76 @@
 {
   "schema_version": 1,
   "experiment_id": "e04_multiscale",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "Frozen BRISC internal validation; not clinical validation",
+  "device": "cuda",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "threshold_changed": false,
+  "model_changed": false,
+  "maximum_stored_metric_difference": 2.9760288122737677e-08,
+  "baseline_mean_dice": {
+    "glioma": 0.6089516384364825,
+    "meningioma": 0.8702445041519159,
+    "pituitary": 0.808789244403334,
+    "overall": 0.7693531743234671,
+    "macro_type": 0.7626617956639108
+  },
+  "scale_256_mean_dice_descriptive": {
+    "glioma": 0.4389294916237181,
+    "meningioma": 0.7907602358767081,
+    "pituitary": 0.5469424169408343,
+    "overall": 0.5959306641963514,
+    "macro_type": 0.5922107148137535
+  },
+  "multiscale_mean_dice": {
+    "glioma": 0.5686798490270453,
+    "meningioma": 0.8785186514550715,
+    "pituitary": 0.7668616484291899,
+    "overall": 0.7446808434421864,
+    "macro_type": 0.7380200496371022
+  },
+  "mean_dice_delta": {
+    "glioma": -0.04027178940943721,
+    "meningioma": 0.008274147303155566,
+    "pituitary": -0.04192759597414408,
+    "overall": -0.024672330881280624,
+    "macro_type": -0.024641746026808575
+  },
+  "paired_group_bootstrap_ci95_delta": {
+    "glioma": [
+      -0.06754978445908025,
+      -0.016532250742180645
+    ],
+    "meningioma": [
+      -0.006131015347002883,
+      0.024682772905497412
+    ],
+    "pituitary": [
+      -0.05825783659126325,
+      -0.025975744354177502
+    ]
+  },
+  "gate_checks": {
+    "glioma": false,
+    "meningioma": true,
+    "pituitary": false
+  },
+  "gate_passed": false,
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.02,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "changed_cases": 679,
+  "changed_pixels": 50967,
+  "improved_cases": 363,
+  "worsened_cases": 302,
+  "mean_absolute_probability_difference": 0.011601307532135466,
+  "comparison_tolerance": 1e-06,
+  "limitations": [
+    "Internal validation was reused for development.",
+    "Patient independence is unverified.",
+    "The model was trained at 128 pixels; 256-pixel inference is an out-of-training-scale intervention."
+  ]
 }
