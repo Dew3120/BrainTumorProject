@@ -1,0 +1,12 @@
+{
+  "experiment_id": "e05_glioma_weighted",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted",
+  "top3_checkpoints": [
+    {
+      "rank": 1,
+      "epoch": 45,
+      "file": "epoch_045_macro_dice_0.738782.pt",
+      "sha256": "E17E7F5AFEC1C56E9FAF12E12DB263EFF4A3EBC184CFCD7BDFCFFF0C1A977C6A"
+    }
+  ]
+}

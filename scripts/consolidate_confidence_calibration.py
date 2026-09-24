@@ -14,7 +14,9 @@ SOURCE_PATHS = {
 }
 FINDINGS_PATH = AUDIT / "confidence_calibration_findings.json"
 REPORT_PATH = AUDIT / "confidence_calibration_completion.md"
-CASE_RELIABILITY_SCRIPT = ROOT / "scripts" / "fit_segmenter_case_reliability.py"
+CASE_RELIABILITY_SCRIPT = (
+    ROOT / "scripts" / "snapshots" / "fit_segmenter_case_reliability_v1.py"
+)
 
 
 def load_json(path):

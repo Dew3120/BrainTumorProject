@@ -1,0 +1,1339 @@
+{
+  "schema_version": 1,
+  "status": "SEGMENTER_PIXEL_TEMPERATURE_SCALING_COMPLETE",
+  "scope": "Post-hoc BRISC internal-validation calibration; not clinical validation",
+  "method": {
+    "name": "single positive pixel temperature scaling",
+    "fit_objective": "whole-image binary pixel NLL averaged equally over images",
+    "cross_fitting": "five held-out folds; exact path-to-fold assignment reused from the accepted classifier calibration",
+    "fold_assignment_origin": "StratifiedGroupKFold, shuffle=True, seed=42",
+    "binning": {
+      "count": 15,
+      "type": "fixed equal-width over [0,1]",
+      "rationale": "dense pixel probabilities concentrate near 0 and 1; equal-width bins retain visibility of the smaller middle-confidence range",
+      "weighting": "every image has equal total weight within each region"
+    },
+    "regions": {
+      "lesion_centered": "accepted 128x128 reference mask plus pixels within Euclidean distance 8 in model space; clipped at image boundaries",
+      "background": "complement of lesion_centered region",
+      "whole_image": "all 128x128 pixels"
+    },
+    "bootstrap": {
+      "repetitions": 2000,
+      "seed": 42,
+      "unit": "similarity group with all member images retained",
+      "fold_stratified": false,
+      "same_structure_as_classifier": true
+    }
+  },
+  "validation_images": 680,
+  "category_counts": {
+    "glioma": 204,
+    "meningioma": 227,
+    "pituitary": 249
+  },
+  "similarity_groups": 583,
+  "multi_image_similarity_groups": 69,
+  "largest_similarity_group": 6,
+  "folds": [
+    {
+      "fold": 1,
+      "temperature": 2.302811770368848,
+      "fit_images": 544,
+      "evaluation_images": 136,
+      "fit_similarity_groups": 467,
+      "evaluation_similarity_groups": 116,
+      "evaluation_glioma": 40,
+      "evaluation_meningioma": 46,
+      "evaluation_pituitary": 50
+    },
+    {
+      "fold": 2,
+      "temperature": 2.2414861339290852,
+      "fit_images": 544,
+      "evaluation_images": 136,
+      "fit_similarity_groups": 467,
+      "evaluation_similarity_groups": 116,
+      "evaluation_glioma": 41,
+      "evaluation_meningioma": 45,
+      "evaluation_pituitary": 50
+    },
+    {
+      "fold": 3,
+      "temperature": 2.3071835691476785,
+      "fit_images": 543,
+      "evaluation_images": 137,
+      "fit_similarity_groups": 465,
+      "evaluation_similarity_groups": 118,
+      "evaluation_glioma": 41,
+      "evaluation_meningioma": 46,
+      "evaluation_pituitary": 50
+    },
+    {
+      "fold": 4,
+      "temperature": 2.2845009654284336,
+      "fit_images": 545,
+      "evaluation_images": 135,
+      "fit_similarity_groups": 468,
+      "evaluation_similarity_groups": 115,
+      "evaluation_glioma": 41,
+      "evaluation_meningioma": 45,
+      "evaluation_pituitary": 49
+    },
+    {
+      "fold": 5,
+      "temperature": 2.292020001585392,
+      "fit_images": 544,
+      "evaluation_images": 136,
+      "fit_similarity_groups": 465,
+      "evaluation_similarity_groups": 118,
+      "evaluation_glioma": 41,
+      "evaluation_meningioma": 45,
+      "evaluation_pituitary": 50
+    }
+  ],
+  "final_temperature_all_validation": 2.2859599042223384,
+  "final_temperature_role": {
+    "status": "proposed operational value only",
+    "used_for_reported_metrics": false,
+    "eligible_for_application_integration": false
+  },
+  "metrics": {
+    "aggregate": {
+      "lesion_centered": {
+        "raw": {
+          "image_count": 680,
+          "pixel_nll": 0.5582398908135001,
+          "pixel_brier": 0.09051087121929649,
+          "pixel_ece": 0.08425938588635634,
+          "pixel_mce": 0.46843696543110486,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 339,
+            "median_per_image": 854.5,
+            "maximum_per_image": 2899,
+            "total": 629978
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.6836407123129571,
+              "mean_confidence": 0.0021787306570772635,
+              "observed_foreground_frequency": 0.04155652414663639,
+              "absolute_gap": 0.039377793489559124
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.014808586535294448,
+              "mean_confidence": 0.09644752068062235,
+              "observed_foreground_frequency": 0.20631027192298193,
+              "absolute_gap": 0.10986275124235959
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.00880751959655128,
+              "mean_confidence": 0.1649320521243469,
+              "observed_foreground_frequency": 0.23644878981891096,
+              "absolute_gap": 0.07151673769456407
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.006553960594245963,
+              "mean_confidence": 0.23132712570526803,
+              "observed_foreground_frequency": 0.2613666353848499,
+              "absolute_gap": 0.030039509679581855
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.005376234612051907,
+              "mean_confidence": 0.29937160619547043,
+              "observed_foreground_frequency": 0.27259223459218174,
+              "absolute_gap": 0.026779371603288693
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.0048414258077142235,
+              "mean_confidence": 0.36589277481966936,
+              "observed_foreground_frequency": 0.269398764039202,
+              "absolute_gap": 0.09649401078046738
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.004565876743083296,
+              "mean_confidence": 0.43335854986330824,
+              "observed_foreground_frequency": 0.276593387802715,
+              "absolute_gap": 0.15676516206059327
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.004317805524483314,
+              "mean_confidence": 0.5005549125896649,
+              "observed_foreground_frequency": 0.2961254691295558,
+              "absolute_gap": 0.2044294434601091
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.004260957414865512,
+              "mean_confidence": 0.5672012149328519,
+              "observed_foreground_frequency": 0.3240354255111782,
+              "absolute_gap": 0.24316578942167372
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.004452865808068743,
+              "mean_confidence": 0.6337343204450241,
+              "observed_foreground_frequency": 0.33849028096641964,
+              "absolute_gap": 0.29524403947860445
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.005214279304882936,
+              "mean_confidence": 0.7000392641053431,
+              "observed_foreground_frequency": 0.3386348696767792,
+              "absolute_gap": 0.3614043944285639
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.005703422316797259,
+              "mean_confidence": 0.7671698823351153,
+              "observed_foreground_frequency": 0.3452715532341526,
+              "absolute_gap": 0.4218983291009627
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.007268230430292522,
+              "mean_confidence": 0.8359370925361032,
+              "observed_foreground_frequency": 0.40700806348530555,
+              "absolute_gap": 0.4289290290507976
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.011534567286032681,
+              "mean_confidence": 0.9036246999918012,
+              "observed_foreground_frequency": 0.4351877345606963,
+              "absolute_gap": 0.46843696543110486
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.2286535557126787,
+              "mean_confidence": 0.9953487036518934,
+              "observed_foreground_frequency": 0.8312858766308885,
+              "absolute_gap": 0.16406282702100494
+            }
+          ]
+        },
+        "oof_calibrated": {
+          "image_count": 680,
+          "pixel_nll": 0.30015479805235323,
+          "pixel_brier": 0.0806395515055989,
+          "pixel_ece": 0.05796845051184708,
+          "pixel_mce": 0.2938521972172685,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 339,
+            "median_per_image": 854.5,
+            "maximum_per_image": 2899,
+            "total": 629978
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.6053308397912468,
+              "mean_confidence": 0.009296429799302224,
+              "observed_foreground_frequency": 0.02898471731813507,
+              "absolute_gap": 0.019688287518832847
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.043791026507127795,
+              "mean_confidence": 0.09545735405206754,
+              "observed_foreground_frequency": 0.11790822492059015,
+              "absolute_gap": 0.022450870868522613
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.023960916398887946,
+              "mean_confidence": 0.1639676511792798,
+              "observed_foreground_frequency": 0.156821792407964,
+              "absolute_gap": 0.007145858771315794
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.01690174061017638,
+              "mean_confidence": 0.2322366384020984,
+              "observed_foreground_frequency": 0.19111346790550643,
+              "absolute_gap": 0.041123170496591976
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.01367724659957059,
+              "mean_confidence": 0.2988214011866716,
+              "observed_foreground_frequency": 0.21517283282754676,
+              "absolute_gap": 0.08364856835912485
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.011568626030860065,
+              "mean_confidence": 0.3655114652541271,
+              "observed_foreground_frequency": 0.2576692435483221,
+              "absolute_gap": 0.10784222170580499
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.010460878383365834,
+              "mean_confidence": 0.43297335746154486,
+              "observed_foreground_frequency": 0.2728400236482336,
+              "absolute_gap": 0.16013333381331124
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.009912396221896935,
+              "mean_confidence": 0.49962859595090336,
+              "observed_foreground_frequency": 0.2968496343758165,
+              "absolute_gap": 0.20277896157508685
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.009920881158594795,
+              "mean_confidence": 0.5673798366161679,
+              "observed_foreground_frequency": 0.3380786434819587,
+              "absolute_gap": 0.22930119313420916
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.009863606605570703,
+              "mean_confidence": 0.6331527266367,
+              "observed_foreground_frequency": 0.3629814629918781,
+              "absolute_gap": 0.27017126364482186
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.011036675719550523,
+              "mean_confidence": 0.7008519868107547,
+              "observed_foreground_frequency": 0.4165246428336599,
+              "absolute_gap": 0.28432734397709475
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.012982707647432846,
+              "mean_confidence": 0.7678407939977053,
+              "observed_foreground_frequency": 0.4739885967804368,
+              "absolute_gap": 0.2938521972172685
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.016792790101310115,
+              "mean_confidence": 0.835110643602265,
+              "observed_foreground_frequency": 0.5568332829670763,
+              "absolute_gap": 0.2782773606351886
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.028521306587256202,
+              "mean_confidence": 0.9039348493849331,
+              "observed_foreground_frequency": 0.6681568217040303,
+              "absolute_gap": 0.23577802768090272
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.17527836163715257,
+              "mean_confidence": 0.984567371199227,
+              "observed_foreground_frequency": 0.8999376263439991,
+              "absolute_gap": 0.0846297448552279
+            }
+          ]
+        }
+      },
+      "background": {
+        "raw": {
+          "image_count": 680,
+          "pixel_nll": 0.007794617313497653,
+          "pixel_brier": 0.0015077070813334544,
+          "pixel_ece": 0.0019976639248463425,
+          "pixel_mce": 0.9861054162925876,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 13485,
+            "median_per_image": 15529.5,
+            "maximum_per_image": 16045,
+            "total": 10511142
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.9965974304071863,
+              "mean_confidence": 8.736679098330573e-05,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 8.736679098330573e-05
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0005876906972641689,
+              "mean_confidence": 0.09536516505263286,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.09536516505263286
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.00030977067151363946,
+              "mean_confidence": 0.16358547365496723,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.16358547365496723
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.0002052701488555014,
+              "mean_confidence": 0.2313322339297261,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.2313322339297261
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00016825417295845475,
+              "mean_confidence": 0.29935547515686645,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.29935547515686645
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.00014277999798794196,
+              "mean_confidence": 0.3659357284756374,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.3659357284756374
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.00012304883126059582,
+              "mean_confidence": 0.43165464500173845,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.43165464500173845
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0001154726672261322,
+              "mean_confidence": 0.4986670882378915,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.4986670882378915
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.00010657292194071477,
+              "mean_confidence": 0.5663957448183502,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.5663957448183502
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.00010832013400315474,
+              "mean_confidence": 0.6332336880911479,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.6332336880911479
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00011442725243643223,
+              "mean_confidence": 0.6998035214676332,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.6998035214676332
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.000127061013316159,
+              "mean_confidence": 0.7676970974954072,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.7676970974954072
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.00014600927709200259,
+              "mean_confidence": 0.8347800906602757,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.8347800906602757
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0002076887351008726,
+              "mean_confidence": 0.9026783286570608,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.9026783286570608
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.0009402030718562658,
+              "mean_confidence": 0.9861054162925876,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.9861054162925876
+            }
+          ]
+        },
+        "oof_calibrated": {
+          "image_count": 680,
+          "pixel_nll": 0.007316928921667813,
+          "pixel_brier": 0.0014350357941770807,
+          "pixel_ece": 0.004910951398154102,
+          "pixel_mce": 0.9731932502450696,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 13485,
+            "median_per_image": 15529.5,
+            "maximum_per_image": 16045,
+            "total": 10511142
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.9914316644673055,
+              "mean_confidence": 0.0023580902394265022,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.0023580902394265022
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0034134114131508923,
+              "mean_confidence": 0.09281238840456932,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.09281238840456932
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.001294900225690723,
+              "mean_confidence": 0.1627241250044937,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.1627241250044937
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.000727320456455424,
+              "mean_confidence": 0.2314749314956015,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.2314749314956015
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0005111379104471457,
+              "mean_confidence": 0.2983833974450618,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.2983833974450618
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.00036468758832009743,
+              "mean_confidence": 0.36503934528189863,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.36503934528189863
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.000316966529253756,
+              "mean_confidence": 0.432265976587259,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.432265976587259
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00025680009035512595,
+              "mean_confidence": 0.49886127218577025,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.49886127218577025
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.00023314824612982775,
+              "mean_confidence": 0.5663042077286823,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.5663042077286823
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.00021603508508086296,
+              "mean_confidence": 0.6329254706149707,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.6329254706149707
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00020739192667726465,
+              "mean_confidence": 0.7000823291032716,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.7000823291032716
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.00020309710981191492,
+              "mean_confidence": 0.7663385208819231,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.7663385208819231
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.000199268563828987,
+              "mean_confidence": 0.834199252392217,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.834199252392217
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0002302421612240013,
+              "mean_confidence": 0.9000606575792487,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.9000606575792487
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.0003939282262677796,
+              "mean_confidence": 0.9731932502450696,
+              "observed_foreground_frequency": 0.0,
+              "absolute_gap": 0.9731932502450696
+            }
+          ]
+        }
+      },
+      "whole_image": {
+        "raw": {
+          "image_count": 680,
+          "pixel_nll": 0.0423590210119661,
+          "pixel_brier": 0.0069426984603739705,
+          "pixel_ece": 0.006498013297273975,
+          "pixel_mce": 0.519531183165179,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 16384,
+            "median_per_image": 16384.0,
+            "maximum_per_image": 16384,
+            "total": 11141120
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.9778742173138789,
+              "mean_confidence": 0.000171220528403223,
+              "observed_foreground_frequency": 0.0022738758803203104,
+              "absolute_gap": 0.0021026553519170876
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0014072193818933877,
+              "mean_confidence": 0.09608242175062232,
+              "observed_foreground_frequency": 0.15837479270315002,
+              "absolute_gap": 0.06229237095252771
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.0008025225471047861,
+              "mean_confidence": 0.16453262143040087,
+              "observed_foreground_frequency": 0.18778660105133463,
+              "absolute_gap": 0.023253979620933757
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.0005760641659007413,
+              "mean_confidence": 0.23155925403700653,
+              "observed_foreground_frequency": 0.2125272670613872,
+              "absolute_gap": 0.019031986975619336
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0004725736730239019,
+              "mean_confidence": 0.299347679387636,
+              "observed_foreground_frequency": 0.21880341880341608,
+              "absolute_gap": 0.08054426058421993
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.000415577607996328,
+              "mean_confidence": 0.3659278683487858,
+              "observed_foreground_frequency": 0.22224622030237295,
+              "absolute_gap": 0.14368164804641287
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.0003814697265625035,
+              "mean_confidence": 0.4328721400587024,
+              "observed_foreground_frequency": 0.23694117647058557,
+              "absolute_gap": 0.19593096358811682
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00035759420955882676,
+              "mean_confidence": 0.49992017167291386,
+              "observed_foreground_frequency": 0.24824297188754743,
+              "absolute_gap": 0.2516771997853664
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.000350054572610297,
+              "mean_confidence": 0.56703794669281,
+              "observed_foreground_frequency": 0.2710256410256382,
+              "absolute_gap": 0.29601230566717185
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.0003610947552849297,
+              "mean_confidence": 0.6335135561386356,
+              "observed_foreground_frequency": 0.28113348247576114,
+              "absolute_gap": 0.35238007366287444
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.00040821748621323954,
+              "mean_confidence": 0.7001811366486757,
+              "observed_foreground_frequency": 0.2937554969217201,
+              "absolute_gap": 0.40642563972695556
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.0004526474896599309,
+              "mean_confidence": 0.7673449170132597,
+              "observed_foreground_frequency": 0.3014078921276981,
+              "absolute_gap": 0.4659370248855616
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.0005652932559742701,
+              "mean_confidence": 0.8355168856413423,
+              "observed_foreground_frequency": 0.35217529374404144,
+              "absolute_gap": 0.48334159189730086
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0008763032801011093,
+              "mean_confidence": 0.9033271475203978,
+              "observed_foreground_frequency": 0.38379596435521873,
+              "absolute_gap": 0.519531183165179
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.014699150534237137,
+              "mean_confidence": 0.9947526082697773,
+              "observed_foreground_frequency": 0.8093060177693642,
+              "absolute_gap": 0.18544659050041312
+            }
+          ]
+        },
+        "oof_calibrated": {
+          "image_count": 680,
+          "pixel_nll": 0.025516218277912107,
+          "pixel_brier": 0.0062774286107259636,
+          "pixel_ece": 0.005256897213541116,
+          "pixel_mce": 0.33970848489600414,
+          "binning": "15 fixed equal-width bins over [0,1] with image-balanced pixel weights",
+          "pixel_count": {
+            "minimum_per_image": 16384,
+            "median_per_image": 16384.0,
+            "maximum_per_image": 16384,
+            "total": 11141120
+          },
+          "bins": [
+            {
+              "bin": 1,
+              "lower": 0.0,
+              "upper": 0.06666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.9685155531939333,
+              "mean_confidence": 0.0026136860333866646,
+              "observed_foreground_frequency": 0.0014459218553470193,
+              "absolute_gap": 0.0011677641780396453
+            },
+            {
+              "bin": 2,
+              "lower": 0.06666666666666667,
+              "upper": 0.13333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0057308421415441175,
+              "mean_confidence": 0.09399897272566109,
+              "observed_foreground_frequency": 0.0701353213882978,
+              "absolute_gap": 0.02386365133736329
+            },
+            {
+              "bin": 3,
+              "lower": 0.13333333333333333,
+              "upper": 0.2,
+              "occupied": true,
+              "image_balanced_weight": 0.0025922887465533143,
+              "mean_confidence": 0.16339213350260645,
+              "observed_foreground_frequency": 0.10806412520342128,
+              "absolute_gap": 0.055328008299185175
+            },
+            {
+              "bin": 4,
+              "lower": 0.2,
+              "upper": 0.26666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.0016536937040441233,
+              "mean_confidence": 0.2318346742634269,
+              "observed_foreground_frequency": 0.14052323056882257,
+              "absolute_gap": 0.09131144369460434
+            },
+            {
+              "bin": 5,
+              "lower": 0.26666666666666666,
+              "upper": 0.3333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0012718649471507419,
+              "mean_confidence": 0.29861924163497505,
+              "observed_foreground_frequency": 0.16986591390260997,
+              "absolute_gap": 0.12875332773236509
+            },
+            {
+              "bin": 6,
+              "lower": 0.3333333333333333,
+              "upper": 0.4,
+              "occupied": true,
+              "image_balanced_weight": 0.001020184685202211,
+              "mean_confidence": 0.36546073579177674,
+              "observed_foreground_frequency": 0.20983635403835849,
+              "absolute_gap": 0.15562438175341825
+            },
+            {
+              "bin": 7,
+              "lower": 0.4,
+              "upper": 0.4666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.0009067311006433876,
+              "mean_confidence": 0.43274823285485664,
+              "observed_foreground_frequency": 0.22401504652543872,
+              "absolute_gap": 0.20873318632941792
+            },
+            {
+              "bin": 8,
+              "lower": 0.4666666666666667,
+              "upper": 0.5333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0008149090935202268,
+              "mean_confidence": 0.49935169799633417,
+              "observed_foreground_frequency": 0.24991739178323363,
+              "absolute_gap": 0.24943430621310053
+            },
+            {
+              "bin": 9,
+              "lower": 0.5333333333333333,
+              "upper": 0.6,
+              "occupied": true,
+              "image_balanced_weight": 0.0007965087890625051,
+              "mean_confidence": 0.5669352102527478,
+              "observed_foreground_frequency": 0.28668018931710365,
+              "absolute_gap": 0.2802550209356442
+            },
+            {
+              "bin": 10,
+              "lower": 0.6,
+              "upper": 0.6666666666666666,
+              "occupied": true,
+              "image_balanced_weight": 0.0007823270909926537,
+              "mean_confidence": 0.6332268065235116,
+              "observed_foreground_frequency": 0.31333180357962026,
+              "absolute_gap": 0.31989500294389134
+            },
+            {
+              "bin": 11,
+              "lower": 0.6666666666666666,
+              "upper": 0.7333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0008446188534007407,
+              "mean_confidence": 0.7007295300392553,
+              "observed_foreground_frequency": 0.367375132837406,
+              "absolute_gap": 0.3333543972018493
+            },
+            {
+              "bin": 12,
+              "lower": 0.7333333333333333,
+              "upper": 0.8,
+              "occupied": true,
+              "image_balanced_weight": 0.0009604958926930192,
+              "mean_confidence": 0.7676124191077613,
+              "observed_foreground_frequency": 0.4279039342117572,
+              "absolute_gap": 0.33970848489600414
+            },
+            {
+              "bin": 13,
+              "lower": 0.8,
+              "upper": 0.8666666666666667,
+              "occupied": true,
+              "image_balanced_weight": 0.001214420094209564,
+              "mean_confidence": 0.8350609998177265,
+              "observed_foreground_frequency": 0.5260901699926113,
+              "absolute_gap": 0.30897082982511526
+            },
+            {
+              "bin": 14,
+              "lower": 0.8666666666666667,
+              "upper": 0.9333333333333333,
+              "occupied": true,
+              "image_balanced_weight": 0.0020289701573989014,
+              "mean_confidence": 0.9038328838517601,
+              "observed_foreground_frequency": 0.6541915505419166,
+              "absolute_gap": 0.2496413333098435
+            },
+            {
+              "bin": 15,
+              "lower": 0.9333333333333333,
+              "upper": 1.0,
+              "occupied": true,
+              "image_balanced_weight": 0.01086659150965074,
+              "mean_confidence": 0.9830667167451417,
+              "observed_foreground_frequency": 0.8895148101035787,
+              "absolute_gap": 0.09355190664156299
+            }
+          ]
+        }
+      }
+    },
+    "per_category": {
+      "glioma": {
+        "lesion_centered": {
+          "raw": {
+            "image_count": 204,
+            "pixel_nll": 1.0008278244969302,
+            "pixel_brier": 0.15233769622792506,
+            "pixel_ece": 0.14251791381944315,
+            "pixel_mce": 0.45271388972715515
+          },
+          "oof_calibrated": {
+            "image_count": 204,
+            "pixel_nll": 0.5111273823043585,
+            "pixel_brier": 0.13526106506682686,
+            "pixel_ece": 0.10145481447245197,
+            "pixel_mce": 0.29846356494210224
+          }
+        },
+        "background": {
+          "raw": {
+            "image_count": 204,
+            "pixel_nll": 0.016644302455493563,
+            "pixel_brier": 0.003218547301427249,
+            "pixel_ece": 0.004226729096444327,
+            "pixel_mce": 0.9862522655647635
+          },
+          "oof_calibrated": {
+            "image_count": 204,
+            "pixel_nll": 0.012870627403864097,
+            "pixel_brier": 0.0030130658759201304,
+            "pixel_ece": 0.007761958698232724,
+            "pixel_mce": 0.9731969916141195
+          }
+        },
+        "whole_image": {
+          "raw": {
+            "image_count": 204,
+            "pixel_nll": 0.08561334813224726,
+            "pixel_brier": 0.013579352034707184,
+            "pixel_ece": 0.012738221139218568,
+            "pixel_mce": 0.5301583672255804
+          },
+          "oof_calibrated": {
+            "image_count": 204,
+            "pixel_nll": 0.04749892067600888,
+            "pixel_brier": 0.012196594892791825,
+            "pixel_ece": 0.007325369221043192,
+            "pixel_mce": 0.35902173842372115
+          }
+        }
+      },
+      "meningioma": {
+        "lesion_centered": {
+          "raw": {
+            "image_count": 227,
+            "pixel_nll": 0.3255741985495999,
+            "pixel_brier": 0.05583739073816286,
+            "pixel_ece": 0.05243318654485988,
+            "pixel_mce": 0.4622269271631463
+          },
+          "oof_calibrated": {
+            "image_count": 227,
+            "pixel_nll": 0.1883026728264419,
+            "pixel_brier": 0.05015614212783053,
+            "pixel_ece": 0.03779288550670015,
+            "pixel_mce": 0.2966987515507345
+          }
+        },
+        "background": {
+          "raw": {
+            "image_count": 227,
+            "pixel_nll": 0.003841520592699234,
+            "pixel_brier": 0.0007676806097468665,
+            "pixel_ece": 0.0010167290492980644,
+            "pixel_mce": 0.9853797196726669
+          },
+          "oof_calibrated": {
+            "image_count": 227,
+            "pixel_nll": 0.004654182418453765,
+            "pixel_brier": 0.0007436099794439122,
+            "pixel_ece": 0.003470669550579137,
+            "pixel_mce": 0.9710642647595509
+          }
+        },
+        "whole_image": {
+          "raw": {
+            "image_count": 227,
+            "pixel_nll": 0.02586821264067745,
+            "pixel_brier": 0.004254925575815689,
+            "pixel_ece": 0.004042188138208463,
+            "pixel_mce": 0.5039484312355218
+          },
+          "oof_calibrated": {
+            "image_count": 227,
+            "pixel_nll": 0.017023111135682896,
+            "pixel_brier": 0.0038906449629921235,
+            "pixel_ece": 0.004665705628534413,
+            "pixel_mce": 0.33412079141474077
+          }
+        }
+      },
+      "pituitary": {
+        "lesion_centered": {
+          "raw": {
+            "image_count": 249,
+            "pixel_nll": 0.4077466123897474,
+            "pixel_brier": 0.07146752891992747,
+            "pixel_ece": 0.06676271353907076,
+            "pixel_mce": 0.49122638459612566
+          },
+          "oof_calibrated": {
+            "image_count": 249,
+            "pixel_nll": 0.22927939740525616,
+            "pixel_brier": 0.06367949191629334,
+            "pixel_ece": 0.05013170662876947,
+            "pixel_mce": 0.3049399409187533
+          }
+        },
+        "background": {
+          "raw": {
+            "image_count": 249,
+            "pixel_nll": 0.004148099990823258,
+            "pixel_brier": 0.0007806974594500057,
+            "pixel_ece": 0.0010657077872699172,
+            "pixel_mce": 0.9862824567245925
+          },
+          "oof_calibrated": {
+            "image_count": 249,
+            "pixel_nll": 0.005194394648019402,
+            "pixel_brier": 0.0007725278554977518,
+            "pixel_ece": 0.0038882144109391504,
+            "pixel_mce": 0.9749582083948855
+          }
+        },
+        "whole_image": {
+          "raw": {
+            "image_count": 249,
+            "pixel_nll": 0.0219555301193764,
+            "pixel_brier": 0.003955739085397082,
+            "pixel_ece": 0.0037167438312076793,
+            "pixel_mce": 0.5149450417401864
+          },
+          "oof_calibrated": {
+            "image_count": 249,
+            "pixel_nll": 0.015249005555318891,
+            "pixel_brier": 0.0036038943396181134,
+            "pixel_ece": 0.005434735537428557,
+            "pixel_mce": 0.3288635461613255
+          }
+        }
+      }
+    },
+    "brier_paired_similarity_group_bootstrap": {
+      "lesion_centered": {
+        "point_estimate": -0.00987131971369759,
+        "bootstrap_mean": -0.0098820973652029,
+        "ci95_lower": -0.01076111600800227,
+        "ci95_upper": -0.009029996201284706
+      },
+      "background": {
+        "point_estimate": -7.267128715637361e-05,
+        "bootstrap_mean": -7.263741238828578e-05,
+        "ci95_lower": -0.00011785998970037203,
+        "ci95_upper": -3.2467214950048435e-05
+      },
+      "whole_image": {
+        "point_estimate": -0.0006652698496480069,
+        "bootstrap_mean": -0.0006660745804796151,
+        "ci95_lower": -0.0007633362363394179,
+        "ci95_upper": -0.0005763121311320251
+      }
+    }
+  },
+  "gate": {
+    "status": "FAIL",
+    "checks": {
+      "lesion_centered_nll_improved": true,
+      "lesion_centered_brier_improved": true,
+      "lesion_centered_ece_at_most_0.05": false,
+      "lesion_centered_brier_bootstrap_ci95_upper_below_zero": true,
+      "background_nll_improved": true,
+      "background_brier_improved": true,
+      "background_ece_at_most_0.02": true,
+      "background_brier_bootstrap_ci95_upper_below_zero": true,
+      "whole_image_nll_improved": true,
+      "whole_image_brier_improved": true,
+      "whole_image_ece_at_most_0.02": true,
+      "whole_image_brier_bootstrap_ci95_upper_below_zero": true,
+      "oof_hard_masks_bitwise_identical": true,
+      "final_temperature_hard_masks_bitwise_identical": true
+    },
+    "ece_limits": {
+      "lesion_centered": 0.05,
+      "background": 0.02,
+      "whole_image": 0.02
+    },
+    "rule": "All checks must pass; there is no metric tie-break."
+  },
+  "verification": {
+    "segmenter_run": "20260924-055049-892543-weighted",
+    "checkpoint_sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+    "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "reused_fold_assignments_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+    "validation_predictions_sha256": "e1d933d9c29ed52bbdc181e4ef186c61775176cac7461b5accdf6c236c70aaa4",
+    "source_images_and_masks_verified_against_manifest": 1360,
+    "inference_device": "cuda",
+    "maximum_recomputed_metric_difference": 1.4199930120639692e-08,
+    "maximum_recomputed_per_image_difference": 0.0,
+    "oof_changed_mask_pixels": 0,
+    "oof_changed_mask_images": 0,
+    "final_temperature_changed_mask_pixels": 0,
+    "final_temperature_changed_mask_images": 0,
+    "test_images_accessed": 0,
+    "test_predictions_accessed": 0,
+    "model_retrained": false,
+    "threshold": 0.5,
+    "threshold_changed": false,
+    "application_integration_performed": false,
+    "script_sha256": "18bf11de888ff8ab20c790610771a3d1d3a3e330778a4f2814e65eb65193fef4"
+  },
+  "artifacts": {
+    "foreground_reliability_diagram": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_foreground_reliability_diagram.png",
+    "whole_image_reliability_diagram": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_whole_image_reliability_diagram.png",
+    "fold_results": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_pixel_calibration_fold_results.csv",
+    "oof_metrics": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_pixel_calibration_oof_metrics.csv"
+  },
+  "limitations": [
+    "The segmenter checkpoint was selected using this validation partition before calibration.",
+    "The proposed all-validation temperature is not used for reported metrics.",
+    "Reference masks define evaluation regions only and are unavailable at inference time.",
+    "Similarity groups are not verified patient identifiers.",
+    "Patient independence and cross-dataset generalization remain unverified."
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "e05_glioma_weighted",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H1"
   ],

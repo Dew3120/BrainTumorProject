@@ -1,5 +1,104 @@
 {
   "schema_version": 1,
   "experiment_id": "e05_glioma_weighted",
-  "status": "NOT_RUN"
+  "status": "FAIL",
+  "scope": "BRISC internal validation development result; not clinical validation",
+  "launch_source_git_commit": "5402699a1900b4fc3ef8ffeebd7954070cdc1187",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted",
+  "run_name": "20260924-055049-892543-weighted",
+  "training_status": "EARLY_STOPPED",
+  "epochs_completed": 57,
+  "selected_epoch": 45,
+  "selected_checkpoint": "epoch_045_macro_dice_0.738782.pt",
+  "selected_checkpoint_sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+  "checkpoint_reload_max_metric_difference": 0.0,
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "baseline_mean_dice": {
+    "glioma": 0.608951638747171,
+    "meningioma": 0.8702445032838158,
+    "pituitary": 0.808789244003923
+  },
+  "candidate_mean_dice": {
+    "glioma": 0.597238963113769,
+    "meningioma": 0.8390555681849498,
+    "pituitary": 0.7800514899553305
+  },
+  "mean_dice_delta": {
+    "glioma": -0.011712675633401948,
+    "meningioma": -0.031188935098866,
+    "pituitary": -0.02873775404859258
+  },
+  "paired_group_bootstrap_ci95_delta": {
+    "glioma": [
+      -0.03621953624537331,
+      0.011142712834069472
+    ],
+    "meningioma": [
+      -0.046321119884542954,
+      -0.016860353436126664
+    ],
+    "pituitary": [
+      -0.043946437801273594,
+      -0.014346092810295653
+    ]
+  },
+  "gate": {
+    "glioma_mean_dice_delta_minimum": 0.05,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "gate_checks": {
+    "glioma": false,
+    "meningioma": false,
+    "pituitary": false
+  },
+  "gate_passed": false,
+  "failure_analysis": {
+    "dice_below_0_50": 103,
+    "counts_by_category": {
+      "glioma": 69,
+      "meningioma": 14,
+      "pituitary": 20
+    }
+  },
+  "visual_audit": {
+    "status": "PASS_NO_SYSTEMATIC_TECHNICAL_DEFECT",
+    "reviewed_panels": [
+      "worst_validation_by_category.png",
+      "best_validation_by_category.png"
+    ],
+    "selected_tiles": 42,
+    "finding": "Best cases show close reference/prediction alignment. Worst cases show mislocalization, fragmentation, under-coverage, and over-coverage without a repeated flip, stretch, offset, or image/mask pairing defect.",
+    "reviewer": "Codex visual inspection under the user-authorized audit protocol",
+    "test_images_accessed": 0
+  },
+  "pixel_calibration": {
+    "gate_status": "FAIL",
+    "raw_foreground_ece": 0.08425938588635634,
+    "oof_foreground_ece": 0.05796845051184708,
+    "oof_hard_mask_changed_pixels": 0
+  },
+  "case_reliability": {
+    "gate_status": "PASS",
+    "failure_detection_auroc": 0.9422691861149904,
+    "reliability_ece": 0.015471484075959217,
+    "brier_skill": 0.5073092839357567,
+    "zero_dice_capture_top20": {
+      "case_count": 136,
+      "population_fraction": 0.2,
+      "tie_break": "descending risk, then normalized path ascending",
+      "zero_dice_captured": 13,
+      "zero_dice_total": 17,
+      "failures_captured": 82,
+      "failures_total": 103
+    }
+  },
+  "required_followup_complete": true,
+  "limitations": [
+    "The same internal validation partition was used for model selection and comparison.",
+    "Patient independence is unverified.",
+    "No external dataset or sealed test image was evaluated.",
+    "This result does not establish clinical validity or deployment safety."
+  ]
 }

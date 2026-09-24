@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "status": "SEGMENTER_CASE_RELIABILITY_COMPLETE",
+  "scope": "Internal BRISC validation reliability experiment; not clinical validation",
+  "target": {
+    "model_output": "P(Dice >= 0.50)",
+    "success_definition": "hard-mask Dice >= 0.50",
+    "failure_definition": "hard-mask Dice < 0.50",
+    "success_cases": 577,
+    "failure_cases": 103,
+    "zero_dice_cases": 17,
+    "reference_mask_use": "target creation and evaluation only; no reference-derived model feature"
+  },
+  "model": {
+    "type": "L2-regularized logistic regression",
+    "C": 1.0,
+    "class_weight": null,
+    "solver": "lbfgs",
+    "feature_standardization": "fit independently inside each outer training fold",
+    "hyperparameter_search": false,
+    "post_hoc_probability_calibration": false,
+    "feature_source": "raw segmenter probability map and unchanged 0.50 hard mask only",
+    "excluded_sources": [
+      "reference-mask geometry or pixels",
+      "Dice or IoU",
+      "true tumor type",
+      "patient or similarity-group identity",
+      "filename or path",
+      "dataset metadata",
+      "input-image intensity",
+      "classifier probabilities",
+      "rejected pixel-calibrated segmenter probabilities"
+    ],
+    "features": [
+      "empty_prediction",
+      "predicted_area_fraction",
+      "whole_probability_mean",
+      "whole_probability_sd",
+      "predicted_region_probability_mean",
+      "predicted_region_entropy_mean",
+      "boundary_entropy_mean",
+      "high_confidence_foreground_fraction",
+      "uncertain_pixel_fraction",
+      "log1p_component_count",
+      "largest_component_fraction",
+      "bounding_box_fill_ratio",
+      "normalized_perimeter",
+      "border_touch_fraction"
+    ]
+  },
+  "cross_fitting": {
+    "folds": [
+      {
+        "fold": 1,
+        "fit_cases": 544,
+        "evaluation_cases": 136,
+        "fit_similarity_groups": 467,
+        "evaluation_similarity_groups": 116,
+        "fit_failure_prevalence": 0.14705882352941177,
+        "evaluation_failures": 23,
+        "evaluation_zero_dice": 3,
+        "intercept": 3.053565358517045,
+        "iterations": 22
+      },
+      {
+        "fold": 2,
+        "fit_cases": 544,
+        "evaluation_cases": 136,
+        "fit_similarity_groups": 467,
+        "evaluation_similarity_groups": 116,
+        "fit_failure_prevalence": 0.15441176470588236,
+        "evaluation_failures": 19,
+        "evaluation_zero_dice": 5,
+        "intercept": 3.0713424735007497,
+        "iterations": 28
+      },
+      {
+        "fold": 3,
+        "fit_cases": 543,
+        "evaluation_cases": 137,
+        "fit_similarity_groups": 465,
+        "evaluation_similarity_groups": 118,
+        "fit_failure_prevalence": 0.15469613259668508,
+        "evaluation_failures": 19,
+        "evaluation_zero_dice": 2,
+        "intercept": 2.9547726530897624,
+        "iterations": 23
+      },
+      {
+        "fold": 4,
+        "fit_cases": 545,
+        "evaluation_cases": 135,
+        "fit_similarity_groups": 468,
+        "evaluation_similarity_groups": 115,
+        "fit_failure_prevalence": 0.14862385321100918,
+        "evaluation_failures": 22,
+        "evaluation_zero_dice": 5,
+        "intercept": 3.130532950381847,
+        "iterations": 25
+      },
+      {
+        "fold": 5,
+        "fit_cases": 544,
+        "evaluation_cases": 136,
+        "fit_similarity_groups": 465,
+        "evaluation_similarity_groups": 118,
+        "fit_failure_prevalence": 0.15257352941176472,
+        "evaluation_failures": 20,
+        "evaluation_zero_dice": 2,
+        "intercept": 3.0691059124424727,
+        "iterations": 24
+      }
+    ],
+    "assignment": "exact five-fold path-to-fold mapping reused from the similarity-aware classifier calibration",
+    "reported_scores": "out-of-fold only"
+  },
+  "validation_cases": 680,
+  "similarity_groups": 583,
+  "multi_image_similarity_groups": 69,
+  "largest_similarity_group": 6,
+  "metrics": {
+    "failure_detection_auroc": 0.9422691861149904,
+    "reliability": {
+      "ece": 0.015471484075959217,
+      "mce": 0.06260968545917978,
+      "brier": 0.06336660617598258,
+      "prevalence_baseline_brier": 0.12861335541731628,
+      "brier_skill": 0.5073092839357567,
+      "bins": [
+        {
+          "bin": 1,
+          "count": 68,
+          "minimum_confidence": 0.012336424968854353,
+          "maximum_confidence": 0.38963955391408506,
+          "mean_confidence": 0.16037310609823555,
+          "observed_accuracy": 0.16176470588235295,
+          "absolute_gap": 0.0013915997841174033
+        },
+        {
+          "bin": 2,
+          "count": 68,
+          "minimum_confidence": 0.4031614166386253,
+          "maximum_confidence": 0.7762319769530824,
+          "mean_confidence": 0.6200472327093668,
+          "observed_accuracy": 0.6323529411764706,
+          "absolute_gap": 0.01230570846710377
+        },
+        {
+          "bin": 3,
+          "count": 68,
+          "minimum_confidence": 0.7784781439378063,
+          "maximum_confidence": 0.9158127213027438,
+          "mean_confidence": 0.8567273325180033,
+          "observed_accuracy": 0.7941176470588235,
+          "absolute_gap": 0.06260968545917978
+        },
+        {
+          "bin": 4,
+          "count": 68,
+          "minimum_confidence": 0.917108596821417,
+          "maximum_confidence": 0.9635441164609311,
+          "mean_confidence": 0.9460835175524959,
+          "observed_accuracy": 0.9558823529411765,
+          "absolute_gap": 0.009798835388680649
+        },
+        {
+          "bin": 5,
+          "count": 68,
+          "minimum_confidence": 0.9637981635747669,
+          "maximum_confidence": 0.9772969257515173,
+          "mean_confidence": 0.9705913617829505,
+          "observed_accuracy": 0.9558823529411765,
+          "absolute_gap": 0.014709008841773952
+        },
+        {
+          "bin": 6,
+          "count": 68,
+          "minimum_confidence": 0.9772989766225701,
+          "maximum_confidence": 0.9836239905042968,
+          "mean_confidence": 0.9805656281451879,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.019434371854812116
+        },
+        {
+          "bin": 7,
+          "count": 68,
+          "minimum_confidence": 0.9837454727977932,
+          "maximum_confidence": 0.9888451640519,
+          "mean_confidence": 0.9865632469635183,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.01343675303648173
+        },
+        {
+          "bin": 8,
+          "count": 68,
+          "minimum_confidence": 0.9888553166572387,
+          "maximum_confidence": 0.9920937701278292,
+          "mean_confidence": 0.9904628945299491,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.009537105470050933
+        },
+        {
+          "bin": 9,
+          "count": 68,
+          "minimum_confidence": 0.9921186375755034,
+          "maximum_confidence": 0.9954194009636467,
+          "mean_confidence": 0.9938373354498912,
+          "observed_accuracy": 0.9852941176470589,
+          "absolute_gap": 0.008543217802832292
+        },
+        {
+          "bin": 10,
+          "count": 68,
+          "minimum_confidence": 0.9954640805141627,
+          "maximum_confidence": 0.9994026748493213,
+          "mean_confidence": 0.9970514453454404,
+          "observed_accuracy": 1.0,
+          "absolute_gap": 0.0029485546545595653
+        }
+      ]
+    },
+    "bootstrap": {
+      "auroc": {
+        "bootstrap_mean": 0.9424582169707301,
+        "ci95_lower": 0.9160044874470974,
+        "ci95_upper": 0.9633857149681916
+      },
+      "brier_skill": {
+        "bootstrap_mean": 0.507096513065528,
+        "ci95_lower": 0.40999242862231733,
+        "ci95_upper": 0.5983450756164189
+      }
+    },
+    "top20_risk": {
+      "case_count": 136,
+      "population_fraction": 0.2,
+      "tie_break": "descending risk, then normalized path ascending",
+      "zero_dice_captured": 13,
+      "zero_dice_total": 17,
+      "failures_captured": 82,
+      "failures_total": 103
+    },
+    "per_category": {
+      "glioma": {
+        "count": 204,
+        "failures": 69,
+        "zero_dice": 9,
+        "failure_detection_auroc": 0.8839506172839506,
+        "ece": 0.053683302411850355,
+        "mce": 0.17160025351745034,
+        "brier": 0.13059450322908916,
+        "prevalence_baseline_brier": 0.2588238004428395,
+        "brier_skill": 0.49543085680047183,
+        "cases_in_global_top20_risk": 83,
+        "failures_in_global_top20_risk": 56,
+        "zero_dice_in_global_top20_risk": 7
+      },
+      "meningioma": {
+        "count": 227,
+        "failures": 14,
+        "zero_dice": 4,
+        "failure_detection_auroc": 0.9872568745808182,
+        "ece": 0.021681200395231442,
+        "mce": 0.07581821873661099,
+        "brier": 0.024017569447011482,
+        "prevalence_baseline_brier": 0.06601038707827991,
+        "brier_skill": 0.6361546945857217,
+        "cases_in_global_top20_risk": 18,
+        "failures_in_global_top20_risk": 12,
+        "zero_dice_in_global_top20_risk": 3
+      },
+      "pituitary": {
+        "count": 249,
+        "failures": 20,
+        "zero_dice": 4,
+        "failure_detection_auroc": 0.9486899563318777,
+        "ece": 0.0253355879469636,
+        "mce": 0.0959826004297391,
+        "brier": 0.04416074408217816,
+        "prevalence_baseline_brier": 0.07900670091030634,
+        "brier_skill": 0.44105065047188374,
+        "cases_in_global_top20_risk": 35,
+        "failures_in_global_top20_risk": 14,
+        "zero_dice_in_global_top20_risk": 3
+      }
+    }
+  },
+  "coefficients": {
+    "meaning": "standardized coefficients; positive increases predicted reliability, negative increases predicted failure risk",
+    "features": {
+      "empty_prediction": {
+        "fold_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0,
+        "positive_folds": 0,
+        "negative_folds": 0,
+        "zero_folds": 5,
+        "dominant_sign": "zero",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "predicted_area_fraction": {
+        "fold_coefficients": [
+          -0.02783153044941849,
+          0.3181113862786899,
+          0.034446770295376745,
+          0.19059824922388036,
+          0.2016428304227053
+        ],
+        "mean": 0.14339354115424677,
+        "sample_sd": 0.13904586796755614,
+        "positive_folds": 4,
+        "negative_folds": 1,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 0.8,
+        "all_folds_same_sign": false
+      },
+      "whole_probability_mean": {
+        "fold_coefficients": [
+          -0.08859911314136984,
+          0.18982138795495002,
+          0.008306290823560101,
+          0.05049622844492305,
+          0.059056727745872506
+        ],
+        "mean": 0.043816304365587165,
+        "sample_sd": 0.10048529765561422,
+        "positive_folds": 4,
+        "negative_folds": 1,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 0.8,
+        "all_folds_same_sign": false
+      },
+      "whole_probability_sd": {
+        "fold_coefficients": [
+          0.5648906260650032,
+          0.5535787876003235,
+          0.8370839954205469,
+          0.6631633333269027,
+          0.7781333056614803
+        ],
+        "mean": 0.6793700096148513,
+        "sample_sd": 0.1263126152793903,
+        "positive_folds": 5,
+        "negative_folds": 0,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "predicted_region_probability_mean": {
+        "fold_coefficients": [
+          -0.46100574316281384,
+          -0.951947574381054,
+          -0.5021582007995499,
+          -0.8480994775762337,
+          -0.7283748964807545
+        ],
+        "mean": -0.6983171784800812,
+        "sample_sd": 0.2135776457847557,
+        "positive_folds": 0,
+        "negative_folds": 5,
+        "zero_folds": 0,
+        "dominant_sign": "negative",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "predicted_region_entropy_mean": {
+        "fold_coefficients": [
+          -0.7008313708860668,
+          -0.6608024990172459,
+          -0.41038028080397587,
+          -1.0066022465175817,
+          -0.09733207995725635
+        ],
+        "mean": -0.5751896954364254,
+        "sample_sd": 0.340860021049712,
+        "positive_folds": 0,
+        "negative_folds": 5,
+        "zero_folds": 0,
+        "dominant_sign": "negative",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "boundary_entropy_mean": {
+        "fold_coefficients": [
+          -0.6939326573734876,
+          -1.6163955143323567,
+          -1.0382329542508975,
+          -1.4441563023611321,
+          -1.3593099753571887
+        ],
+        "mean": -1.2304054807350124,
+        "sample_sd": 0.3660694806511779,
+        "positive_folds": 0,
+        "negative_folds": 5,
+        "zero_folds": 0,
+        "dominant_sign": "negative",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "high_confidence_foreground_fraction": {
+        "fold_coefficients": [
+          0.18418197055018928,
+          -0.1351154877089816,
+          0.1672785605313216,
+          -0.3833198061523711,
+          0.025367706031673782
+        ],
+        "mean": -0.028321411349633608,
+        "sample_sd": 0.23649967901766947,
+        "positive_folds": 3,
+        "negative_folds": 2,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 0.6,
+        "all_folds_same_sign": false
+      },
+      "uncertain_pixel_fraction": {
+        "fold_coefficients": [
+          0.10455573347218908,
+          0.1894431405268656,
+          -0.2859002816812322,
+          0.05295973311903725,
+          -0.3329701888907024
+        ],
+        "mean": -0.054382372690768545,
+        "sample_sd": 0.23845662272442686,
+        "positive_folds": 3,
+        "negative_folds": 2,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 0.6,
+        "all_folds_same_sign": false
+      },
+      "log1p_component_count": {
+        "fold_coefficients": [
+          0.5851140413864182,
+          0.29640940391584636,
+          0.483438801646048,
+          0.4140298642376945,
+          0.42131848804169686
+        ],
+        "mean": 0.4400621198455408,
+        "sample_sd": 0.10557781647430856,
+        "positive_folds": 5,
+        "negative_folds": 0,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "largest_component_fraction": {
+        "fold_coefficients": [
+          0.12536562584913344,
+          0.06121688576920295,
+          0.13725852618825823,
+          0.1533529070119929,
+          0.2547203966300949
+        ],
+        "mean": 0.14638286828973648,
+        "sample_sd": 0.0699353704572433,
+        "positive_folds": 5,
+        "negative_folds": 0,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "bounding_box_fill_ratio": {
+        "fold_coefficients": [
+          0.8783414267144817,
+          0.5417507940306577,
+          0.6610315796500861,
+          0.6691272856869962,
+          0.677478228578358
+        ],
+        "mean": 0.685545862932116,
+        "sample_sd": 0.12122577875826049,
+        "positive_folds": 5,
+        "negative_folds": 0,
+        "zero_folds": 0,
+        "dominant_sign": "positive",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "normalized_perimeter": {
+        "fold_coefficients": [
+          -0.9872687145289736,
+          -1.191124629290446,
+          -0.8289637631171787,
+          -0.9498555831572292,
+          -1.0600794178830326
+        ],
+        "mean": -1.0034584215953721,
+        "sample_sd": 0.13417181100384004,
+        "positive_folds": 0,
+        "negative_folds": 5,
+        "zero_folds": 0,
+        "dominant_sign": "negative",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      },
+      "border_touch_fraction": {
+        "fold_coefficients": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean": 0.0,
+        "sample_sd": 0.0,
+        "positive_folds": 0,
+        "negative_folds": 0,
+        "zero_folds": 5,
+        "dominant_sign": "zero",
+        "sign_agreement_fraction": 1.0,
+        "all_folds_same_sign": true
+      }
+    },
+    "fold_intercepts": [
+      3.053565358517045,
+      3.0713424735007497,
+      2.9547726530897624,
+      3.130532950381847,
+      3.0691059124424727
+    ]
+  },
+  "final_all_validation_model": {
+    "status": "proposed operational model only",
+    "used_for_reported_metrics": false,
+    "eligible_for_application_integration": true,
+    "standardizer_mean": {
+      "empty_prediction": 0.0,
+      "predicted_area_fraction": 0.017892994600183825,
+      "whole_probability_mean": 0.018151841268293882,
+      "whole_probability_sd": 0.12193534877951621,
+      "predicted_region_probability_mean": 0.9514454325626714,
+      "predicted_region_entropy_mean": 0.11176853076462759,
+      "boundary_entropy_mean": 0.1554298215975815,
+      "high_confidence_foreground_fraction": 0.8468133055482433,
+      "uncertain_pixel_fraction": 0.0010891185087316176,
+      "log1p_component_count": 0.9136386499100686,
+      "largest_component_fraction": 0.9446429514671256,
+      "bounding_box_fill_ratio": 0.5774279363965851,
+      "normalized_perimeter": 5.363119901736541,
+      "border_touch_fraction": 0.0
+    },
+    "standardizer_scale": {
+      "empty_prediction": 1.0,
+      "predicted_area_fraction": 0.011020316822223406,
+      "whole_probability_mean": 0.010986261871382685,
+      "whole_probability_sd": 0.03734891078616894,
+      "predicted_region_probability_mean": 0.03532445536079988,
+      "predicted_region_entropy_mean": 0.07412830743828505,
+      "boundary_entropy_mean": 0.07002488002537456,
+      "high_confidence_foreground_fraction": 0.11407035656505848,
+      "uncertain_pixel_fraction": 0.0011374009342387974,
+      "log1p_component_count": 0.38180335880985544,
+      "largest_component_fraction": 0.1292048371681455,
+      "bounding_box_fill_ratio": 0.22248297366716352,
+      "normalized_perimeter": 1.4562250309758789,
+      "border_touch_fraction": 1.0
+    },
+    "standardized_coefficients": {
+      "empty_prediction": 0.0,
+      "predicted_area_fraction": 0.11190664821039985,
+      "whole_probability_mean": 0.0064940807506157884,
+      "whole_probability_sd": 0.8053260834130261,
+      "predicted_region_probability_mean": -0.860085472320108,
+      "predicted_region_entropy_mean": -0.6506670461660593,
+      "boundary_entropy_mean": -1.3339612575762776,
+      "high_confidence_foreground_fraction": -0.05511467610443159,
+      "uncertain_pixel_fraction": -0.03458422488237076,
+      "log1p_component_count": 0.45069118112105977,
+      "largest_component_fraction": 0.1431384837446988,
+      "bounding_box_fill_ratio": 0.6932171506256444,
+      "normalized_perimeter": -1.051648219714981,
+      "border_touch_fraction": 0.0
+    },
+    "intercept": 3.0804818316746356
+  },
+  "gate": {
+    "status": "PASS",
+    "checks": {
+      "failure_detection_auroc_at_least_0_75": true,
+      "top20_risk_captures_more_than_half_of_zero_dice": true,
+      "reliability_ece_at_most_0_05": true,
+      "brier_skill_positive": true,
+      "brier_skill_bootstrap_ci95_lower_above_zero": true
+    },
+    "rule": "All checks must pass; there is no metric tie-break.",
+    "on_failure": "Document and close; do not attempt model variants."
+  },
+  "verification": {
+    "checkpoint_sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+    "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "reused_fold_assignments_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+    "raw_validation_predictions_sha256": "e1d933d9c29ed52bbdc181e4ef186c61775176cac7461b5accdf6c236c70aaa4",
+    "pixel_calibration_sha256": "cda8f9539dd5e4331915dc5d66d5435a9dfd387539cd6226054e59c8362664b1",
+    "source_images_and_masks_verified_against_manifest": 1360,
+    "maximum_recomputed_metric_difference": 1.4199930120639692e-08,
+    "maximum_recomputed_per_image_difference": 0.0,
+    "feature_matrix_shape": [
+      680,
+      14
+    ],
+    "feature_matrix_all_finite": true,
+    "inference_device": "cuda",
+    "base_model_is_retrained_candidate": true,
+    "case_reliability_model_fitted": true,
+    "test_images_accessed": 0,
+    "test_predictions_accessed": 0,
+    "threshold": 0.5,
+    "threshold_changed": false,
+    "application_integration_performed": false,
+    "script_sha256": "6c8ec1a971232964108a0b5561edcba8ce52b590bda11339a6c52efe2470e994"
+  },
+  "artifacts": {
+    "oof_scores": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_case_reliability_oof.csv",
+    "coefficient_table": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_case_reliability_coefficients.csv",
+    "top20_risk_cases": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_case_reliability_top20_risk.csv",
+    "reliability_diagram": "E:\\BrainTumorProject\\runs\\segmentation_v2_weighted\\20260924-055049-892543-weighted\\segmenter_case_reliability_diagram.png"
+  },
+  "limitations": [
+    "The base segmenter checkpoint was selected using this validation partition.",
+    "Similarity groups are not verified patient identifiers.",
+    "Patient independence and cross-dataset generalization remain unverified.",
+    "Reference masks are required to create the development target but are not model features."
+  ]
+}

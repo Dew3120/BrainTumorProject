@@ -1,0 +1,11 @@
+{
+  "status": "PASS_NO_SYSTEMATIC_TECHNICAL_DEFECT",
+  "reviewed_panels": [
+    "worst_validation_by_category.png",
+    "best_validation_by_category.png"
+  ],
+  "selected_tiles": 42,
+  "finding": "Best cases show close reference/prediction alignment. Worst cases show mislocalization, fragmentation, under-coverage, and over-coverage without a repeated flip, stretch, offset, or image/mask pairing defect.",
+  "reviewer": "Codex visual inspection under the user-authorized audit protocol",
+  "test_images_accessed": 0
+}
