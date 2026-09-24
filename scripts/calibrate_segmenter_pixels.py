@@ -563,7 +563,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = overfit.make_diagnostic_model("linear", "compact").to(device)
     checkpoint = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
-    if checkpoint["epoch"] != 56 or checkpoint["config"] != config:
+    if checkpoint["epoch"] != result["best_epoch"] or checkpoint["config"] != config:
         raise ValueError("Checkpoint metadata differs from accepted run configuration")
     model.load_state_dict(checkpoint["model_state"])
     logits, targets, dice, iou, _label_indices, recomputed_metrics = infer(

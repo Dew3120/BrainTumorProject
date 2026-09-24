@@ -227,7 +227,7 @@ def write_markdown(path, summary, verification):
     disconnected = summary["all"]["disconnected_false_positive"]["fraction"]
     content = f"""# Segmentation failure-mode analysis
 
-This analysis covers the 83 held-out BRISC validation cases with hard-mask Dice below 0.50 at the unchanged probability threshold of 0.50. The epoch-56 checkpoint was reloaded, all 680 validation predictions were recomputed exactly, and no test image was accessed.
+This analysis covers the {verification["failure_count"]} held-out BRISC validation cases with hard-mask Dice below 0.50 at the unchanged probability threshold of 0.50. The selected epoch-{verification["checkpoint_epoch"]} checkpoint was reloaded, all 680 validation predictions were recomputed exactly, and no test image was accessed.
 
 Foreground pixel counts, overlap, area ratios, edge checks, and connected components are computed on the {verification["model_size"]}x{verification["model_size"]} hard masks used by the model. `original_width` and `original_height` preserve each source image's dimensions.
 
@@ -281,6 +281,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--checkpoint", type=Path, required=True)
+    parser.add_argument("--checkpoint-sha256", required=True)
+    parser.add_argument("--output-markdown", type=Path)
     parser.add_argument("--threshold", type=float, default=0.5)
     args = parser.parse_args()
     if args.threshold != 0.5:
@@ -290,14 +292,10 @@ def main():
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     model_size = int(config["image_size"])
     result = json.loads((run / "result.json").read_text(encoding="utf-8"))
-    findings = json.loads(
-        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
-    )
-    accepted = findings["top3_checkpoints"][0]
-    if (
-        checkpoint.name != accepted["file"]
-        or visual.sha256(checkpoint) != accepted["sha256"]
-    ):
+    accepted = result["top3"][0]
+    if checkpoint.name != accepted["checkpoint"]:
+        raise ValueError("Checkpoint is not the selected rank-1 checkpoint")
+    if visual.sha256(checkpoint) != args.checkpoint_sha256.upper():
         raise ValueError("Accepted checkpoint identity or SHA256 mismatch")
     split = run / "split_snapshot.csv"
     if smoke.digest(split) != config["split_sha256"]:
@@ -308,9 +306,13 @@ def main():
         raise ValueError("Non-validation row entered validation analysis")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = overfit.make_diagnostic_model("linear", "compact").to(device)
-    model.load_state_dict(
-        torch.load(checkpoint, map_location="cpu", weights_only=True)["model_state"]
-    )
+    checkpoint_state = torch.load(checkpoint, map_location="cpu", weights_only=True)
+    if (
+        checkpoint_state["epoch"] != result["best_epoch"]
+        or checkpoint_state["config"] != config
+    ):
+        raise ValueError("Checkpoint metadata differs from the selected run")
+    model.load_state_dict(checkpoint_state["model_state"])
     metrics, records, predictions = visual.inference(
         model, validation_rows, device, args.threshold
     )
@@ -322,14 +324,11 @@ def main():
     if maximum_delta > tolerance:
         raise ValueError(f"Validation metric mismatch: {maximum_delta}")
     failures = [row for row in records if row["dice"] < 0.5]
-    expected_counts = {"glioma": 60, "meningioma": 8, "pituitary": 15}
     actual_counts = {
         label: sum(row["label"] == label for row in failures) for label in LABELS
     }
-    if len(failures) != 83 or actual_counts != expected_counts:
-        raise ValueError(
-            f"Failure-set membership changed: total={len(failures)}, {actual_counts}"
-        )
+    if not failures or not all(actual_counts.values()):
+        raise ValueError(f"Invalid failure-set membership: {actual_counts}")
     row_lookup = {row["path"]: row for row in validation_rows}
     analyzed = []
     for record in sorted(
@@ -368,9 +367,15 @@ def main():
         writer.writeheader()
         writer.writerows(analyzed)
     summary = summarize(analyzed)
-    markdown_path = ROOT / "audit/segmentation_failure_modes.md"
+    markdown_path = (
+        args.output_markdown.resolve()
+        if args.output_markdown
+        else run / "segmentation_failure_modes.md"
+    )
     verification = {
-        "checkpoint_sha256": accepted["sha256"],
+        "checkpoint_sha256": args.checkpoint_sha256.lower(),
+        "checkpoint_epoch": result["best_epoch"],
+        "failure_count": len(failures),
         "split_sha256": config["split_sha256"],
         "validation_images_recomputed": len(records),
         "maximum_metric_difference": maximum_delta,

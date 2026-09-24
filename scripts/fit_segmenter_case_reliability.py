@@ -38,7 +38,6 @@ SEED = 42
 BOOTSTRAP_REPETITIONS = 2000
 FAILURE_DICE_THRESHOLD = 0.50
 TOP_RISK_CASES = 136
-ZERO_DICE_CAPTURE_REQUIRED = 9
 AUROC_REQUIRED = 0.75
 ECE_REQUIRED = 0.05
 EPSILON = 1e-12
@@ -359,8 +358,8 @@ def markdown_report(result):
         "## Performance",
         "",
         f"- Failure-detection AUROC: `{metrics['failure_detection_auroc']:.6f}` (95% group-bootstrap interval `[{metrics['bootstrap']['auroc']['ci95_lower']:.6f}, {metrics['bootstrap']['auroc']['ci95_upper']:.6f}]`)",
-        f"- Zero-Dice cases captured in top 20% risk: `{metrics['top20_risk']['zero_dice_captured']}/17`",
-        f"- All Dice-below-0.50 failures captured in top 20% risk: `{metrics['top20_risk']['failures_captured']}/83`",
+        f"- Zero-Dice cases captured in top 20% risk: `{metrics['top20_risk']['zero_dice_captured']}/{metrics['top20_risk']['zero_dice_total']}`",
+        f"- All Dice-below-0.50 failures captured in top 20% risk: `{metrics['top20_risk']['failures_captured']}/{metrics['top20_risk']['failures_total']}`",
         f"- Reliability ECE: `{metrics['reliability']['ece']:.6f}`",
         f"- Reliability Brier: `{metrics['reliability']['brier']:.6f}`",
         f"- Fold-prevalence baseline Brier: `{metrics['reliability']['prevalence_baseline_brier']:.6f}`",
@@ -390,7 +389,7 @@ def markdown_report(result):
             "",
             f"Reliability diagram: `{result['artifacts']['reliability_diagram']}`",
             "",
-            "No base model was retrained, no test image or test prediction was accessed, the segmentation threshold remained 0.50, and no application integration was performed.",
+            "No base model was changed during reliability fitting, no test image or test prediction was accessed, the segmentation threshold remained 0.50, and no application integration was performed.",
             "",
         ]
     )
@@ -402,10 +401,8 @@ def main():
     result = read_json(RUN / "result.json")
     findings = read_json(pixel_calibration.FINDINGS)
     pixel_result = read_json(PIXEL_CALIBRATION)
-    if pixel_result["gate"]["status"] != "FAIL":
-        raise ValueError("Expected rejected segmenter pixel calibration")
-    if pixel_result["final_temperature_role"]["eligible_for_application_integration"]:
-        raise ValueError("Rejected pixel temperature was unexpectedly accepted")
+    if pixel_result["gate"]["status"] not in {"PASS", "FAIL"}:
+        raise ValueError("Pixel calibration lacks a final gate decision")
     split = RUN / "split_snapshot.csv"
     if sha256(split) != config["split_sha256"]:
         raise ValueError("Segmenter split SHA256 mismatch")
@@ -422,7 +419,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = overfit.make_diagnostic_model("linear", "compact").to(device)
     checkpoint = torch.load(CHECKPOINT, map_location="cpu", weights_only=True)
-    if checkpoint["epoch"] != 56 or checkpoint["config"] != config:
+    if checkpoint["epoch"] != result["best_epoch"] or checkpoint["config"] != config:
         raise ValueError("Checkpoint metadata differs from accepted run")
     model.load_state_dict(checkpoint["model_state"])
     logits, targets, dice, iou, _labels, recomputed = pixel_calibration.infer(
@@ -451,8 +448,9 @@ def main():
     success = dice >= FAILURE_DICE_THRESHOLD
     failure = ~success
     zero_dice = dice == 0.0
-    if int(failure.sum()) != 83 or int(zero_dice.sum()) != 17:
-        raise ValueError("Frozen reliability target counts changed")
+    if not failure.any() or not success.any() or not zero_dice.any():
+        raise ValueError("Reliability target lacks required outcome diversity")
+    required_zero_capture = int(zero_dice.sum()) // 2 + 1
     reliability, baseline_reliability, coefficient_matrix, folds = cross_fit(
         feature_matrix, success, assignment, rows
     )
@@ -476,8 +474,8 @@ def main():
 
     checks = {
         "failure_detection_auroc_at_least_0_75": auroc >= AUROC_REQUIRED,
-        "top20_risk_captures_at_least_9_of_17_zero_dice": (
-            zero_captured >= ZERO_DICE_CAPTURE_REQUIRED
+        "top20_risk_captures_more_than_half_of_zero_dice": (
+            zero_captured >= required_zero_capture
         ),
         "reliability_ece_at_most_0_05": calibration["ece"] <= ECE_REQUIRED,
         "brier_skill_positive": calibration["brier_skill"] > 0.0,
@@ -667,14 +665,14 @@ def main():
             "raw_validation_predictions_sha256": sha256(
                 RUN / "validation_predictions.csv"
             ),
-            "rejected_pixel_calibration_sha256": sha256(PIXEL_CALIBRATION),
+            "pixel_calibration_sha256": sha256(PIXEL_CALIBRATION),
             "source_images_and_masks_verified_against_manifest": verified_sources,
             "maximum_recomputed_metric_difference": maximum_metric_difference,
             "maximum_recomputed_per_image_difference": maximum_per_image_difference,
             "feature_matrix_shape": list(feature_matrix.shape),
             "feature_matrix_all_finite": True,
             "inference_device": str(device),
-            "base_models_retrained": False,
+            "base_model_is_retrained_candidate": "segmentation_v2" in str(RUN),
             "case_reliability_model_fitted": True,
             "test_images_accessed": 0,
             "test_predictions_accessed": 0,
@@ -707,7 +705,7 @@ def main():
         "result_path": str(OUTPUT_JSON),
         "failure_detection_auroc": auroc,
         "zero_dice_captured_top20_risk": zero_captured,
-        "zero_dice_total": 17,
+        "zero_dice_total": int(zero_dice.sum()),
         "reliability_ece": calibration["ece"],
         "brier_skill": calibration["brier_skill"],
         "accepted_for_application": gate_passed,
@@ -755,7 +753,7 @@ def main():
         f"[{bootstrap['auroc']['ci95_lower']:.8f}, "
         f"{bootstrap['auroc']['ci95_upper']:.8f}]"
     )
-    print(f"Zero-Dice top-20% capture: {zero_captured}/17")
+    print(f"Zero-Dice top-20% capture: {zero_captured}/{int(zero_dice.sum())}")
     print(
         f"ECE {calibration['ece']:.8f}; Brier {calibration['brier']:.8f}; "
         f"baseline {calibration['prevalence_baseline_brier']:.8f}; "

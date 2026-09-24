@@ -257,6 +257,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--checkpoint", type=Path, required=True)
+    parser.add_argument("--checkpoint-sha256", required=True)
     parser.add_argument("--worst-per-category", type=int, default=6)
     parser.add_argument("--zero-dice", type=int, default=6)
     parser.add_argument("--best-per-category", type=int, default=6)
@@ -268,13 +269,10 @@ def main():
     checkpoint = args.checkpoint.resolve()
     config = json.loads((run / "config.json").read_text(encoding="utf-8"))
     result = json.loads((run / "result.json").read_text(encoding="utf-8"))
-    findings = json.loads(
-        (ROOT / "audit/segmentation_training_findings.json").read_text(encoding="utf-8")
-    )
-    expected_checkpoint = findings["top3_checkpoints"][0]
-    if checkpoint.name != expected_checkpoint["file"]:
+    expected_checkpoint = result["top3"][0]
+    if checkpoint.name != expected_checkpoint["checkpoint"]:
         raise ValueError("Checkpoint is not the accepted rank-1 epoch")
-    if sha256(checkpoint) != expected_checkpoint["sha256"]:
+    if sha256(checkpoint) != args.checkpoint_sha256.upper():
         raise ValueError("Checkpoint SHA256 mismatch")
     split = run / "split_snapshot.csv"
     if smoke.digest(split) != config["split_sha256"]:
@@ -288,6 +286,8 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = overfit.make_diagnostic_model("linear", "compact").to(device)
     state = torch.load(checkpoint, map_location="cpu", weights_only=True)
+    if state["epoch"] != result["best_epoch"] or state["config"] != config:
+        raise ValueError("Checkpoint metadata differs from the selected run")
     model.load_state_dict(state["model_state"])
     metrics, records, predictions = inference(
         model, validation_rows, device, args.threshold
