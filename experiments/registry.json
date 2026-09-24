@@ -118,6 +118,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "c04_split_temperature",
+      "path": "experiments/c04_split_temperature",
+      "hypothesis_ids": [
+        "H3"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "e08_final_selection",
       "path": "experiments/e08_final_selection",
       "hypothesis_ids": [
