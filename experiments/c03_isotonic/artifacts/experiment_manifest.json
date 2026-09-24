@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "experiment_id": "c03_isotonic",
+  "registered_decision": "PASS",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+      "sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+      "bytes": 160380
+    },
+    {
+      "path": "experiments/c03_isotonic/artifacts/lesion_centered_reliability.png",
+      "sha256": "316d9ca93cf61a0fdff72472952f3169919e431d52a2faaa7865267e29e0160a",
+      "bytes": 105731
+    },
+    {
+      "path": "experiments/c03_isotonic/artifacts/mapping_summary.csv",
+      "sha256": "2e05aa613f5f4366e7e77a4b03d8fdb890943d84a9700a73d459c01401e29a1c",
+      "bytes": 242
+    },
+    {
+      "path": "experiments/c03_isotonic/artifacts/whole_image_reliability.png",
+      "sha256": "692fc6dc43d7f01f914db2327c338d0dfa7352aa094dfd476b2ef6b5cc7785a3",
+      "bytes": 74952
+    },
+    {
+      "path": "experiments/c03_isotonic/config.json",
+      "sha256": "b903ccf1538a5e0d182f0ef9ccc5787f676723deed41dadde1c4f6295296bde2",
+      "bytes": 2422
+    },
+    {
+      "path": "experiments/c03_isotonic/decision.md",
+      "sha256": "b2a2163a76ca8d3dd71b15f4ae079dfdb29f7f97b016081d9cbf8eca1efe12df",
+      "bytes": 578
+    },
+    {
+      "path": "experiments/c03_isotonic/hypothesis.md",
+      "sha256": "b65f6a5ad02e931498768bbbbef7df91b87fa0dd6577aea250a4f750e37f9632",
+      "bytes": 1256
+    },
+    {
+      "path": "experiments/c03_isotonic/result.json",
+      "sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+      "bytes": 48020
+    }
+  ]
+}
