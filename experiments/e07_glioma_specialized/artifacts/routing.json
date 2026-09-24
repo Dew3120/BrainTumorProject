@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "classifier_predicted_glioma_specialist",
+  "specialist_checkpoint": "E:\\BrainTumorProject\\runs\\segmentation_v2_glioma_specialized\\20260924-105229-241365-specialist\\top3_checkpoints\\epoch_031_glioma_dice_0.580685.pt",
+  "specialist_checkpoint_sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+  "fallback_checkpoint": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\top3_checkpoints\\epoch_056_macro_dice_0.762662.pt",
+  "fallback_checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "classifier_checkpoint": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\best_model.pt",
+  "classifier_checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+  "classifier_validation_predictions": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\validation_predictions.csv",
+  "classifier_validation_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "assignments_file": "routing_assignments.csv",
+  "assignments_sha256": "43cda344fd1c2b7f29734ff8bd470314b609a9369dd2869ef230a07617e3f5d7",
+  "routing_accuracy": 0.9720588235294118,
+  "specialist_cases": 203,
+  "fallback_cases": 477,
+  "threshold": 0.5,
+  "test_images_accessed": 0
+}

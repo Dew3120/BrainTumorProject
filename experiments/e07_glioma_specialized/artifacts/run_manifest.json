@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_glioma_specialized\\20260924-105229-241365-specialist",
+  "file_count": 34,
+  "total_bytes": 10820879,
+  "files": [
+    {
+      "path": "best_validation_by_category.png",
+      "sha256": "f57e767a60d3d0c85c8b582eb70a70a047050fe58c41a119bfda66972fc878aa",
+      "bytes": 595615
+    },
+    {
+      "path": "config.json",
+      "sha256": "204f3b5e966822bc22c2a5d3f77ce988d6b9f292985b1510e560ec2f36e7b4c7",
+      "bytes": 2365
+    },
+    {
+      "path": "fixed_overlay_pairs.csv",
+      "sha256": "c2d93bf485413a9a203075fe91074dce8186d9d298a23af4f224bb7544157629",
+      "bytes": 4320
+    },
+    {
+      "path": "fixed_validation_overlays.png",
+      "sha256": "4647c19b888be6d4a2a56457e7b88899832cfab3185c30668786424f55da333f",
+      "bytes": 208873
+    },
+    {
+      "path": "history.csv",
+      "sha256": "817e8848e208d9cd0a731db50184aa1fcfbeff140b807e5f9412682b430fd939",
+      "bytes": 6234
+    },
+    {
+      "path": "result.json",
+      "sha256": "12f3b4be7909bc4f512daf63b5d4b9a00617c6ff3e5c9afbb392055565d8ab8a",
+      "bytes": 5139
+    },
+    {
+      "path": "routing.json",
+      "sha256": "a8050cf3fd6b2a67f5b8b4d131b9337ce11a2ffae7329551d10cccd4634e0fe2",
+      "bytes": 1374
+    },
+    {
+      "path": "routing_assignments.csv",
+      "sha256": "43cda344fd1c2b7f29734ff8bd470314b609a9369dd2869ef230a07617e3f5d7",
+      "bytes": 147522
+    },
+    {
+      "path": "segmentation_failure_modes.csv",
+      "sha256": "e55eaa5b2734bd0dafb99abdb2ba2b10bd619ac33cc33b63e2f5ef7fdde04faa",
+      "bytes": 34372
+    },
+    {
+      "path": "segmentation_failure_modes.md",
+      "sha256": "8126f4d6d0de4f3d2eae2a58aa163f5f33af1af52719303ac7c1bb81db119e59",
+      "bytes": 4075
+    },
+    {
+      "path": "segmentation_overfit_gate.py",
+      "sha256": "2d26d919cf4024829cf0a19222ded85db3653a20f2b9182a94742f337d07b8f0",
+      "bytes": 22632
+    },
+    {
+      "path": "segmentation_smoke_test.py",
+      "sha256": "defa28dc8f94dc6fd3c41f5928fba1dbb6959d685acc32972711526ce3341dca",
+      "bytes": 16922
+    },
+    {
+      "path": "segmenter_case_reliability_coefficients.csv",
+      "sha256": "ed70f2d438624b2c99665a26e61e32fab378dd02966565b8b1093e99f94bb7f7",
+      "bytes": 2589
+    },
+    {
+      "path": "segmenter_case_reliability_diagram.png",
+      "sha256": "916a46ff9c063dc511f5634763bd3d003f719cd5f2f1bcfdfc3d88cc751f2340",
+      "bytes": 73582
+    },
+    {
+      "path": "segmenter_case_reliability_oof.csv",
+      "sha256": "83690a52b9381cedb9d4b5e26af4d2b6ae1b1c2e4667e9e3458da69ed35c9b87",
+      "bytes": 281226
+    },
+    {
+      "path": "segmenter_case_reliability_top20_risk.csv",
+      "sha256": "17c94e55690ed134124c8b70ab9da8cc6a6aaa3a88e13d8801eb569107dce5ec",
+      "bytes": 22646
+    },
+    {
+      "path": "segmenter_foreground_reliability_diagram.png",
+      "sha256": "bd076d053e483f1015397f5db5e0c5e408697ead7adaa13da5b06d8fadb059ee",
+      "bytes": 139980
+    },
+    {
+      "path": "segmenter_pixel_calibration_fold_results.csv",
+      "sha256": "7e2f80435cf344092c7ef67ad2e1d695bbcbc3c28c90711d9e59a876267dd418",
+      "bytes": 391
+    },
+    {
+      "path": "segmenter_pixel_calibration_oof_metrics.csv",
+      "sha256": "ceeaee2bfe457a2384c3c756764402fd1ccd494f50ffa0ea0d4fa0b96323b942",
+      "bytes": 351658
+    },
+    {
+      "path": "segmenter_whole_image_reliability_diagram.png",
+      "sha256": "5ced77bff0d792ea5b8dc095deb2afa3e5c254d8b2ee94f273761de6708ce9f8",
+      "bytes": 134172
+    },
+    {
+      "path": "specialist_training_result.json",
+      "sha256": "b11fa1681848a8993fb797719f1c510ada10348288a8df964eb04f98dd50fb3f",
+      "bytes": 1875
+    },
+    {
+      "path": "specialist_validation_predictions.csv",
+      "sha256": "19d5f6ca9c3a972734d93eb08c202446fb3206b918f4a0057ae281de8841939d",
+      "bytes": 36851
+    },
+    {
+      "path": "split_snapshot.csv",
+      "sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+      "bytes": 2609562
+    },
+    {
+      "path": "top3_checkpoints/epoch_031_glioma_dice_0.580685.pt",
+      "sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+      "bytes": 1624261
+    },
+    {
+      "path": "top3_checkpoints/epoch_041_glioma_dice_0.578384.pt",
+      "sha256": "42b17642d9a75e3b95ec56a41e13b707ec97f781e6a871ecc09a6e83f93ffb6a",
+      "bytes": 1624261
+    },
+    {
+      "path": "top3_checkpoints/epoch_042_glioma_dice_0.574527.pt",
+      "sha256": "303b521a5928480d21cdc3bc0fbc143e7b0662a3f2f3f89957bb5b32066d2b0c",
+      "bytes": 1624261
+    },
+    {
+      "path": "top3_checkpoints.json",
+      "sha256": "bac45292877c7a0f0445c33603bd7332fb7a2d639dc833b6401662c73874d48e",
+      "bytes": 1582
+    },
+    {
+      "path": "top3_comparison.csv",
+      "sha256": "998d207ac7ab6089ece3ce30b70d0ed1a9f1820c40e228d5e1f7dadb30feaf40",
+      "bytes": 534
+    },
+    {
+      "path": "training_script.py",
+      "sha256": "2e4feaed248cf6270077f7784c6cbd3b9e71dd6c1800e4163322b1a6830af34f",
+      "bytes": 21385
+    },
+    {
+      "path": "validation_dice_curve.png",
+      "sha256": "f7a23869eccec34116afcb1a514d0b2d8c723c2d3147dd7660bb486a482848ad",
+      "bytes": 92670
+    },
+    {
+      "path": "validation_predictions.csv",
+      "sha256": "847d073b23ea4f25a650d3121df2964344071110076d9df8f0b02b03d934f3fc",
+      "bytes": 140156
+    },
+    {
+      "path": "visual_audit_selections.csv",
+      "sha256": "f65e41902b4401437feb6c29e7a573f9c6d52a2ad1987f3793a955ae6fdbd26d",
+      "bytes": 8659
+    },
+    {
+      "path": "worst_validation_by_category.png",
+      "sha256": "1699de21edb08eeba9662dd36a543a3d80decd39aa253674e44351c9977cbf4d",
+      "bytes": 757960
+    },
+    {
+      "path": "worst_validation_overlays.png",
+      "sha256": "24091000f9399b9a334d39911859126045fba99f134e44aeb5a76f14b7094a00",
+      "bytes": 221175
+    }
+  ]
+}

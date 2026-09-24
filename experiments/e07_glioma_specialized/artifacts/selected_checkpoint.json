@@ -1,0 +1,12 @@
+{
+  "experiment_id": "e07_glioma_specialized",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_glioma_specialized\\20260924-105229-241365-specialist",
+  "top3_checkpoints": [
+    {
+      "rank": 1,
+      "epoch": 31,
+      "file": "epoch_031_glioma_dice_0.580685.pt",
+      "sha256": "BB68CE4F0A9203D74A5EC9DEA2E83468D3D833AC285A13EBBDB1D793A0D3BBE0"
+    }
+  ]
+}

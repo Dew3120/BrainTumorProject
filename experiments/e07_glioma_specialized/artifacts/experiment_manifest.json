@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "experiment_id": "e07_glioma_specialized",
+  "registered_decision": "FAIL",
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/best_validation_by_category.png",
+      "sha256": "f57e767a60d3d0c85c8b582eb70a70a047050fe58c41a119bfda66972fc878aa",
+      "bytes": 595615
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/confidence_calibration_findings.json",
+      "sha256": "6a543d65add1fdf3c9fbd1f37d4907f341227a354cddd53e962484b85bcae1e7",
+      "bytes": 1406
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/per_case_comparison.csv",
+      "sha256": "20a2adbc3ca5f918729c7778d02e016016c554fe6dcaf007be7d8b73083451f4",
+      "bytes": 151783
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/routed_dice_comparison.png",
+      "sha256": "29f4e64687976e710760b9a915d1386e51709cabe3827cfc1dbd27ec7fa8a152",
+      "bytes": 38973
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/routing.json",
+      "sha256": "a8050cf3fd6b2a67f5b8b4d131b9337ce11a2ffae7329551d10cccd4634e0fe2",
+      "bytes": 1374
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/routing_assignments.csv",
+      "sha256": "43cda344fd1c2b7f29734ff8bd470314b609a9369dd2869ef230a07617e3f5d7",
+      "bytes": 147522
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/run_manifest.json",
+      "sha256": "be0d4999e61e1b61a4fd575ae805eea4bd40ec6da8138a5612acdd2f3d7266d4",
+      "bytes": 5858
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmentation_failure_modes.csv",
+      "sha256": "e55eaa5b2734bd0dafb99abdb2ba2b10bd619ac33cc33b63e2f5ef7fdde04faa",
+      "bytes": 34372
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmentation_failure_modes.md",
+      "sha256": "8126f4d6d0de4f3d2eae2a58aa163f5f33af1af52719303ac7c1bb81db119e59",
+      "bytes": 4075
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_case_reliability.json",
+      "sha256": "94b4aecb7dc786df335005a0f723ec26b6cac3c7d25e4bde01f15c0a9b1bfce2",
+      "bytes": 22557
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_case_reliability.md",
+      "sha256": "ea93ac5b280e357b07b148819f3ff739e533d1833cf5069b2d60a20876991221",
+      "bytes": 3229
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_case_reliability_diagram.png",
+      "sha256": "916a46ff9c063dc511f5634763bd3d003f719cd5f2f1bcfdfc3d88cc751f2340",
+      "bytes": 73582
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_foreground_reliability_diagram.png",
+      "sha256": "bd076d053e483f1015397f5db5e0c5e408697ead7adaa13da5b06d8fadb059ee",
+      "bytes": 139980
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_pixel_calibration.json",
+      "sha256": "5ec0c929be47a3020011674282129b51c139c9c3c238e044284f84e54351abb8",
+      "bytes": 52117
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_pixel_calibration.md",
+      "sha256": "4ce2d163aec0f3182cef037c5f17549887d356e0546b172864f147548fa385e3",
+      "bytes": 3230
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/segmenter_whole_image_reliability_diagram.png",
+      "sha256": "5ced77bff0d792ea5b8dc095deb2afa3e5c254d8b2ee94f273761de6708ce9f8",
+      "bytes": 134172
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/selected_checkpoint.json",
+      "sha256": "226356d07f47bbcd2cbf8254a6da31e571f20cdd0920375d94474461fdc5cda1",
+      "bytes": 370
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/summary.md",
+      "sha256": "21a38eb18e5f59273bff3fcd76e6cbb21649ccdc9c79a7207f3f7e43eb2bad88",
+      "bytes": 341
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/visual_audit_selections.csv",
+      "sha256": "f65e41902b4401437feb6c29e7a573f9c6d52a2ad1987f3793a955ae6fdbd26d",
+      "bytes": 8659
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/visual_review.json",
+      "sha256": "03ac6ecdd39955d3c3760380c2ce42cc1a46d48cd6a574227a596f29ac8f6570",
+      "bytes": 402
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/artifacts/worst_validation_by_category.png",
+      "sha256": "1699de21edb08eeba9662dd36a543a3d80decd39aa253674e44351c9977cbf4d",
+      "bytes": 757960
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/config.json",
+      "sha256": "73cd024d119770f318cb23adb3ac997a294f202d8590aa2980310289c2773130",
+      "bytes": 2556
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/decision.md",
+      "sha256": "1630dd6f0a2aff1d5c72519e60d8e79609c16f9600186a1ba513463fe44a9324",
+      "bytes": 654
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/hypothesis.md",
+      "sha256": "8c57bf5d9bc095e18e1714e3bad4ebca8d8680803032f45ef014eb6c9323a01d",
+      "bytes": 1305
+    },
+    {
+      "path": "experiments/e07_glioma_specialized/result.json",
+      "sha256": "fe1d3e818f06800dda88ce7ebd2b70c746784bb5334e1b45dd9c2b255d79d2df",
+      "bytes": 6168
+    }
+  ]
+}

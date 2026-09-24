@@ -1,6 +1,150 @@
 {
   "schema_version": 1,
   "experiment_id": "e07_glioma_specialized",
-  "status": "NOT_RUN",
-  "test_images_accessed": 0
+  "status": "FAIL",
+  "scope": "BRISC internal validation development result; not clinical validation",
+  "training_source_git_commit": "97478d7950a6706fd1fd506c1e61e7c60387aff5",
+  "routed_evaluation_source_git_commit": "82d30695647bee5b88d58b4c9057def859462586",
+  "run": "E:\\BrainTumorProject\\runs\\segmentation_v2_glioma_specialized\\20260924-105229-241365-specialist",
+  "run_name": "20260924-105229-241365-specialist",
+  "training_status": "EARLY_STOPPED",
+  "epochs_completed": 43,
+  "selected_epoch": 31,
+  "selected_checkpoint": "epoch_031_glioma_dice_0.580685.pt",
+  "selected_checkpoint_sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+  "checkpoint_reload_max_metric_difference": 0.0,
+  "classifier_recompute_max_probability_difference": 1.1920928955078125e-07,
+  "validation_cases": 680,
+  "test_images_accessed": 0,
+  "routing": {
+    "schema_version": 1,
+    "kind": "classifier_predicted_glioma_specialist",
+    "specialist_checkpoint": "E:\\BrainTumorProject\\runs\\segmentation_v2_glioma_specialized\\20260924-105229-241365-specialist\\top3_checkpoints\\epoch_031_glioma_dice_0.580685.pt",
+    "specialist_checkpoint_sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+    "fallback_checkpoint": "E:\\BrainTumorProject\\runs\\segmentation\\20260923-072439-397263-full\\top3_checkpoints\\epoch_056_macro_dice_0.762662.pt",
+    "fallback_checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+    "classifier_checkpoint": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\best_model.pt",
+    "classifier_checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+    "classifier_validation_predictions": "E:\\BrainTumorProject\\runs\\classifier\\20260921-170607-243133-baseline\\validation_predictions.csv",
+    "classifier_validation_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+    "assignments_file": "routing_assignments.csv",
+    "assignments_sha256": "43cda344fd1c2b7f29734ff8bd470314b609a9369dd2869ef230a07617e3f5d7",
+    "routing_accuracy": 0.9720588235294118,
+    "specialist_cases": 203,
+    "fallback_cases": 477,
+    "threshold": 0.5,
+    "test_images_accessed": 0
+  },
+  "specialist_validation": {
+    "val_dice_image_mean": 0.5806853495670629,
+    "val_iou_image_mean": 0.4534921412431525,
+    "val_dice_glioma": 0.5806853495670629,
+    "val_iou_glioma": 0.4534921412431525,
+    "val_count_glioma": 204,
+    "val_loss": 2.301084707765018
+  },
+  "routed_validation": {
+    "val_dice_image_mean": 0.7596015122123336,
+    "val_iou_image_mean": 0.6588222270560972,
+    "val_dice_glioma": 0.5802066652492309,
+    "val_iou_glioma": 0.45331544400416496,
+    "val_count_glioma": 204,
+    "val_dice_meningioma": 0.8668649640377397,
+    "val_iou_meningioma": 0.7884709183208742,
+    "val_count_meningioma": 227,
+    "val_dice_pituitary": 0.808789244003923,
+    "val_iou_pituitary": 0.7089954432227226,
+    "val_count_pituitary": 249,
+    "val_dice_macro_type_mean": 0.751953624430298,
+    "val_iou_macro_type_mean": 0.6502606018492539,
+    "val_loss": 1.3046583463163937
+  },
+  "comparison": {
+    "baseline_dice": {
+      "glioma": 0.608951638747171,
+      "meningioma": 0.8702445032838158,
+      "pituitary": 0.808789244003923
+    },
+    "routed_dice": {
+      "glioma": 0.5802066652492309,
+      "meningioma": 0.8668649640377397,
+      "pituitary": 0.808789244003923
+    },
+    "dice_delta": {
+      "glioma": -0.02874497349794003,
+      "meningioma": -0.0033795392460760354,
+      "pituitary": 0.0
+    },
+    "paired_similarity_group_bootstrap_ci95_delta": {
+      "glioma": [
+        -0.0596048509170158,
+        0.0015138309682526004
+      ],
+      "meningioma": [
+        -0.008656972411066987,
+        -3.2228748376215593e-06
+      ],
+      "pituitary": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "gate": {
+    "routed_glioma_mean_dice_delta_minimum": 0.08,
+    "classifier_routing_accuracy_minimum": 0.95,
+    "meningioma_mean_dice_delta_minimum": -0.01,
+    "pituitary_mean_dice_delta_minimum": -0.01
+  },
+  "gate_checks": {
+    "routed_glioma_dice_delta_at_least_0_08": false,
+    "classifier_routing_accuracy_at_least_0_95": true,
+    "meningioma_dice_delta_at_least_minus_0_01": true,
+    "pituitary_dice_delta_at_least_minus_0_01": true
+  },
+  "gate_passed": false,
+  "failure_analysis": {
+    "dice_below_0_50": 89,
+    "counts_by_category": {
+      "glioma": 65,
+      "meningioma": 9,
+      "pituitary": 15
+    }
+  },
+  "visual_audit": {
+    "status": "PASS_NO_SYSTEMATIC_TECHNICAL_DEFECT",
+    "selected_tiles": 42,
+    "finding": "Best cases show close reference/prediction alignment. Worst cases show mislocalization, over-segmentation, and fragmentation without a repeated flip, stretch, offset, or image/mask pairing defect.",
+    "reviewer": "Codex visual inspection under the user-authorized audit protocol",
+    "test_images_accessed": 0
+  },
+  "pixel_calibration": {
+    "gate_status": "FAIL",
+    "raw_foreground_ece": 0.08203547628371866,
+    "oof_foreground_ece": 0.0604046745240773,
+    "oof_hard_mask_changed_pixels": 0
+  },
+  "case_reliability": {
+    "gate_status": "PASS",
+    "failure_detection_auroc": 0.9410254947812697,
+    "reliability_ece": 0.017102723999231174,
+    "brier_skill": 0.4490335526648599,
+    "zero_dice_capture_top20": {
+      "case_count": 136,
+      "population_fraction": 0.2,
+      "tie_break": "descending risk, then normalized path ascending",
+      "zero_dice_captured": 10,
+      "zero_dice_total": 13,
+      "failures_captured": 70,
+      "failures_total": 89
+    }
+  },
+  "required_followup_complete": true,
+  "limitations": [
+    "The same internal validation partition was used for specialist checkpoint selection and routed comparison.",
+    "The classifier route and segmenters were developed on the same BRISC split framework.",
+    "Patient independence is unverified.",
+    "No external dataset or sealed test image was evaluated.",
+    "This result does not establish clinical validity or deployment safety."
+  ]
 }
