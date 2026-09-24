@@ -135,6 +135,15 @@
       "status": "COMPLETE"
     },
     {
+      "id": "c06_per_category",
+      "path": "experiments/c06_per_category",
+      "hypothesis_ids": [
+        "H3",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "e08_final_selection",
       "path": "experiments/e08_final_selection",
       "hypothesis_ids": [

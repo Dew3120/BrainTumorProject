@@ -233,3 +233,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Whole-image ECE was `0.003427`, passing the `<=0.04` ceiling, and low-reliability-quintile whole-image NLL improved from `0.051441` to `0.042347`. However, low-quintile ECE worsened from `0.006481` to `0.007988`, so the mandatory no-worsening check failed. The calibration changed zero hard-mask pixels at threshold `0.50`.
 - **Alternatives considered:** Change the reliability weighting function or quintile after seeing the result; rejected as an unregistered variant. Ignore the ECE failure because NLL improved; rejected because the gate is conjunctive.
 - **Who approved:** Codex by the registered C05 rule; the user required honest closure without skipped or substituted experiments.
+
+## 2026-09-24T23:08:00+05:30 — Register classifier-routed per-category calibration
+
+- **Decision made:** Register C06 before fitting with one scalar temperature for each frozen classifier-predicted tumor route and a global fallback for the single no-tumor prediction.
+- **Triggering artifact:** `experiments/c06_per_category/config.json`, SHA256 `302336b7e78689836da788f15a37340d78d3facc04a434d3ca85ef67c86572b7`; hypothesis SHA256 `6df20cf36cf0f6cfde98f20b848319f8ec5b5fee0e76b3167df433b34c05de61`; classifier predictions SHA256 `8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344`.
+- **Rationale:** The gate fixes nine conjunctive checks: ECE at most `0.05` in each of three regions for each predicted glioma, meningioma, and pituitary route. Routing uses classifier prediction and never true type. The single no-tumor route uses a global fallback and is descriptive because `n=1` cannot support a stable subgroup gate.
+- **Alternatives considered:** Route by true label; rejected as target leakage. Fit a no-tumor temperature on one case; rejected as unstable. Omit region-specific checks; rejected in favor of an explicit interpretation fixed before fitting.
+- **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed routing, fallback, and gate semantics before fitting.
