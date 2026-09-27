@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "experiment_id": "c08_unified_ece",
+  "registered_decision": "VERIFIED",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "audit/unified_ece_comparison.json",
+      "sha256": "7c0cac2268ef133126166d187e9d842520b5a0d9b5238e6a2c138cac983cecbe",
+      "bytes": 17728
+    },
+    {
+      "path": "audit/unified_ece_comparison.md",
+      "sha256": "c5953df0e36f5a917a9efa873ab2366e6de16e90f7bc45fed00e8c8a190cc716",
+      "bytes": 2692
+    },
+    {
+      "path": "experiments/c08_unified_ece/artifacts/segmenter_ece_table.csv",
+      "sha256": "8a3c803e89141d1404985b152b589d801710e0981767d63ae5e33fd3fb91cdf6",
+      "bytes": 3345
+    },
+    {
+      "path": "experiments/c08_unified_ece/config.json",
+      "sha256": "d9a0567307f22a0f40e2e213ef10bf51f7cdfc24f5cf49817e1ffee65d451c23",
+      "bytes": 1754
+    },
+    {
+      "path": "experiments/c08_unified_ece/decision.md",
+      "sha256": "7d4ea7a72f866a6c4f4a0539cd56caf41c9bc16361d80ada78289d1e8a79387b",
+      "bytes": 518
+    },
+    {
+      "path": "experiments/c08_unified_ece/hypothesis.md",
+      "sha256": "5c192d9a312f288e34260724950283ecdd0bd29092df5590baef881e622a2833",
+      "bytes": 986
+    },
+    {
+      "path": "experiments/c08_unified_ece/result.json",
+      "sha256": "b193c9a6a7198d5e4764c40eaa40bdf489c7e4fb4bc3c6bfc0554487118546a5",
+      "bytes": 670
+    }
+  ]
+}

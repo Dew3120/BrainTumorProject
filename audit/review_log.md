@@ -273,3 +273,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** C08 will verify all C01–C07 result hashes, require 15 non-empty equal-frequency bins with exact pixel coverage, and independently recompute every stored ECE within `1e-12`. It also standardizes the frozen classifier and accepted case-reliability ECE to 15 equal-frequency bins without changing any earlier decision.
 - **Alternatives considered:** Refit the calibrators; rejected because C08 is descriptive and must not alter their outputs. Compare mixed bin definitions; rejected because the purpose is one fixed 15-bin definition.
 - **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed the integrity checks before reading consolidated outcomes.
+
+## 2026-09-27T09:05:59+05:30 — Verify unified ECE comparison
+
+- **Decision made:** Accept C08 as a verified descriptive standardization; leave every C01–C07 decision unchanged.
+- **Triggering artifact:** `experiments/c08_unified_ece/artifacts/experiment_manifest.json`, SHA256 `62ed2aa80bcbf42a1e6eef49e66aaec7b86a1ffe86d3da5b71bfe21968c6ae19`; comparison report `audit/unified_ece_comparison.md`.
+- **Rationale:** All seven source hashes matched. Forty-two segmenter summaries and four classifier summaries contained exactly 15 non-empty equal-frequency bins with complete observation coverage. Independently recomputed ECE differed from stored values by at most `6.94e-18`, below `1e-12`. The accepted v1 case-reliability score has standardized 15-bin ECE `0.031665` across 680 OOF cases.
+- **Alternatives considered:** Refit calibrators or reinterpret failures under the unified table; rejected because C08 is descriptive. Use whole-image ECE alone for ranking; rejected because it is dominated by background pixels.
+- **Who approved:** Codex by C08's registered integrity rule; the user authorized completion through C09 without relaxing earlier decisions.

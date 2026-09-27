@@ -1,5 +1,22 @@
 {
   "schema_version": 1,
   "experiment_id": "c08_unified_ece",
-  "status": "NOT_RUN"
+  "status": "PASS",
+  "decision": "VERIFIED",
+  "outputs": [
+    "audit/unified_ece_comparison.md",
+    "audit/unified_ece_comparison.json"
+  ],
+  "verification": {
+    "source_results_verified": 7,
+    "segmenter_summaries_verified": 42,
+    "classifier_summaries_verified": 4,
+    "maximum_allowed_ece_difference": 1e-12,
+    "maximum_observed_ece_difference": 6.938893903907228e-18,
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "model_retrained": false,
+    "calibrator_refitted": false,
+    "script_sha256": "ba5aa7e3fc696b3ce261ad8cce20f033c3d033f3374f6b9c2d3eba0f844ce4c3"
+  }
 }

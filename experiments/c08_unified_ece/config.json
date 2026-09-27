@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "c08_unified_ece",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H3"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H3"
+  ],
   "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
   "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
   "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
@@ -17,9 +19,16 @@
   },
   "case_reliability_oof_path": "runs/segmentation/20260923-072439-397263-full/segmenter_case_reliability_oof.csv",
   "case_reliability_oof_sha256": "e017695027231e9ce08d8c363d61dbeac7baf0f33e421881ca852697783e92ff",
-  "binning": {"bins": 15, "method": "equal-frequency", "stable_sort": true},
+  "binning": {
+    "bins": 15,
+    "method": "equal-frequency",
+    "stable_sort": true
+  },
   "verification_tolerance": 1e-12,
-  "outputs": ["audit/unified_ece_comparison.md", "audit/unified_ece_comparison.json"],
+  "outputs": [
+    "audit/unified_ece_comparison.md",
+    "audit/unified_ece_comparison.json"
+  ],
   "decision_rule": "VERIFIED only if every source hash, bin-count, pixel-coverage, and ECE-recomputation check passes",
   "threshold": 0.5,
   "threshold_tuning": false,
