@@ -281,3 +281,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** All seven source hashes matched. Forty-two segmenter summaries and four classifier summaries contained exactly 15 non-empty equal-frequency bins with complete observation coverage. Independently recomputed ECE differed from stored values by at most `6.94e-18`, below `1e-12`. The accepted v1 case-reliability score has standardized 15-bin ECE `0.031665` across 680 OOF cases.
 - **Alternatives considered:** Refit calibrators or reinterpret failures under the unified table; rejected because C08 is descriptive. Use whole-image ECE alone for ranking; rejected because it is dominated by background pixels.
 - **Who approved:** Codex by C08's registered integrity rule; the user authorized completion through C09 without relaxing earlier decisions.
+
+## 2026-09-27T09:07:54+05:30 — Register per-category reliability diagrams
+
+- **Decision made:** Register C09 before rendering six category-specific diagrams using the selected operational C03 calibrator and frozen v1 case-reliability OOF scores.
+- **Triggering artifact:** `experiments/c09_category_diagrams/config.json`, SHA256 `ac770b919475a52cc4576b3160dc348e77b928a0f792efba9e6fbae1d0ea7bb2`; hypothesis SHA256 `130ca650deab45782d76999e38d57f084b58b0a8bb008ffac327c31df3fcc5a4`; C03 mappings SHA256 `fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa`.
+- **Rationale:** C03 is the passing operational C01–C07 method with the lowest whole-image OOF ECE. Pixel diagrams use held-out fold mappings and the lesion-centred evaluation region. Case diagrams use existing OOF reliability scores. All diagrams use 15 equal-frequency bins.
+- **Alternatives considered:** Use C07 because it has lower lesion-centred ECE; rejected because it needs reference-mask routing. Use true tumor type to route calibration; rejected as leakage. Fit category-specific curves; rejected because C09 is descriptive only.
+- **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex applied the fixed operational ranking before rendering.
