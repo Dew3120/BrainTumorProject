@@ -1,0 +1,73 @@
+{
+  "status": "FAIL",
+  "experiment_id": "r03_extended_features",
+  "registered_decision": "FAIL",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r03_extended_features/artifacts/bootstrap_comparison.csv",
+      "sha256": "a18a2d32e68e96ab8c7fb69eb32bbe99386fadf85875e9954b716b6b0009b3b2",
+      "bytes": 130580
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/extended_features.csv",
+      "sha256": "fe7de153e181c54eb0e79d74dd0fd6412ecf9d7229d23e039143850687a7eea3",
+      "bytes": 137582
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/extended_fold_coefficients.csv",
+      "sha256": "a8753de1e034abd302b1c80d71651e9b8ad5e6e774fc3eece31f99a0eef56183",
+      "bytes": 3874
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/model_metrics.csv",
+      "sha256": "6d8e8d3b8bc44d1f91f82ca461bd1afaa186ecfd1576721a31dac6b04f80784c",
+      "bytes": 538
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/new_feature_ablation.csv",
+      "sha256": "10a36d7a466bc726e0bd7778b65d5abe39487dfe79ea31a4600af56282142836",
+      "bytes": 659
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/new_feature_permutation_importance.csv",
+      "sha256": "a54773c5c68e1c4ef7617398610665e678efae524f9fcb91736f01600d049d32",
+      "bytes": 1119
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/oof_model_comparison.csv",
+      "sha256": "c1534bcbe26c296abcc1e14d4ab3a9a766d4ec25cc8ee031a529c4cbc6dc843e",
+      "bytes": 152381
+    },
+    {
+      "path": "experiments/r03_extended_features/artifacts/raw_image_verification.csv",
+      "sha256": "1ccb10e269be41cc5ca6ceff524211f63be9d891eebe7767d0600c5b5119f17f",
+      "bytes": 168358
+    },
+    {
+      "path": "experiments/r03_extended_features/config.json",
+      "sha256": "8fc7289dc8574c2ff19cd605bc2681c51df83920d2074d4b55c025dc61a2e644",
+      "bytes": 9233
+    },
+    {
+      "path": "experiments/r03_extended_features/decision.md",
+      "sha256": "d7276a5c8ebaf36ada0160dd4fda6f08f3766cd11633d861ca113809810070da",
+      "bytes": 1047
+    },
+    {
+      "path": "experiments/r03_extended_features/hypothesis.md",
+      "sha256": "91d1512ca11e468545a3cebf7723848a6532f6735bf5d3ddca725ae903299c58",
+      "bytes": 615
+    },
+    {
+      "path": "experiments/r03_extended_features/implementation_plan.md",
+      "sha256": "77ef13b52b928194c984b83657d7ff185538404bbc1013a989260b94b33ea635",
+      "bytes": 2236
+    },
+    {
+      "path": "experiments/r03_extended_features/result.json",
+      "sha256": "eba95d46886f1fad3bf47822ed38f5a5b48fdc74922c084b4bfa013f932ff740",
+      "bytes": 37726
+    }
+  ]
+}
