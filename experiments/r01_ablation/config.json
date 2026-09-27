@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r01_ablation",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
   "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
   "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
@@ -17,7 +20,10 @@
   "feature_reference_script_sha256": "55195f84453df4e2eaca76d3d633f4db3fc19a5ca31a01d897fa550201d001e5",
   "classifier_predictions_path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
   "classifier_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
-  "population": {"cases": 680, "source": "BRISC internal segmentation validation"},
+  "population": {
+    "cases": 680,
+    "source": "BRISC internal segmentation validation"
+  },
   "target": {
     "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
     "failure": "C03-calibrated hard-mask Dice < 0.50",
@@ -53,7 +59,10 @@
     "rejected calibration artifacts"
   ],
   "baseline_estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -62,7 +71,11 @@
     "random_state": 42,
     "post_hoc_probability_calibration": false
   },
-  "cross_fitting": {"folds": 5, "similarity_aware": true, "reported_scores": "out-of-fold only"},
+  "cross_fitting": {
+    "folds": 5,
+    "similarity_aware": true,
+    "reported_scores": "out-of-fold only"
+  },
   "ablation": {
     "variants": 14,
     "method": "remove exactly one feature, refit the entire five-fold pipeline",
@@ -78,13 +91,33 @@
   "metrics": {
     "primary": "failure-detection AUROC using risk=1-reliability",
     "calibration": "15 equal-frequency ECE and MCE",
-    "proper_scores": ["Brier", "training-prevalence baseline Brier", "Brier skill"],
-    "subgroups": ["true category descriptive", "classifier-predicted category descriptive"],
+    "proper_scores": [
+      "Brier",
+      "training-prevalence baseline Brier",
+      "Brier skill"
+    ],
+    "subgroups": [
+      "true category descriptive",
+      "classifier-predicted category descriptive"
+    ],
     "catastrophic_capture": "zero-Dice cases captured in top 20% risk"
   },
-  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired": true, "ci": "percentile 95%"},
-  "gate": {"type": "DESCRIPTIVE", "selectable": false, "pass_fail_performance_gate": false},
-  "expected_c03_hard_mask_changes": {"pixels": 22891, "images": 679},
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "ci": "percentile 95%"
+  },
+  "gate": {
+    "type": "DESCRIPTIVE",
+    "selectable": false,
+    "pass_fail_performance_gate": false
+  },
+  "expected_c03_hard_mask_changes": {
+    "pixels": 22891,
+    "images": 679
+  },
   "neural_model_retraining": false,
   "reliability_estimator_refitting": true,
   "threshold_changed": false,

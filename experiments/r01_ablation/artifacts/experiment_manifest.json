@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "experiment_id": "r01_ablation",
+  "registered_decision": "DESCRIPTIVE_COMPLETE",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r01_ablation/artifacts/ablation_importance.png",
+      "sha256": "5e67e9dfe25ea394f9d0a1d5a0a4afbe688a3b72466a683d1cfc9b4e09164973",
+      "bytes": 97111
+    },
+    {
+      "path": "experiments/r01_ablation/artifacts/ablation_results.csv",
+      "sha256": "6aa20575d2237df9969e76420eacbdae3e3f566920df9ccd4231a6fb15594cfb",
+      "bytes": 1331
+    },
+    {
+      "path": "experiments/r01_ablation/artifacts/fold_coefficients.csv",
+      "sha256": "4381d14b8e3ba8cbae49a848a93b1c6cef3d9ed627ca6a5f407d4ae3ab94c32a",
+      "bytes": 2714
+    },
+    {
+      "path": "experiments/r01_ablation/artifacts/oof_scores_and_features.csv",
+      "sha256": "b9b2c245f932d93f844085fdd4a2c2050cd6facab758831906f06c9bc0a41768",
+      "bytes": 272074
+    },
+    {
+      "path": "experiments/r01_ablation/artifacts/permutation_importance.csv",
+      "sha256": "8507106a9265eb3d7c25a337d6e53cd5a78bfeb534dccab30595d5020924d85b",
+      "bytes": 2338
+    },
+    {
+      "path": "experiments/r01_ablation/artifacts/permutation_importance.png",
+      "sha256": "cdce488e7c3b47a783cbc51cb0f9d4bc40c9385e745419b9f90abb7a36c6b102",
+      "bytes": 97710
+    },
+    {
+      "path": "experiments/r01_ablation/config.json",
+      "sha256": "9850a70ac70abfd3926905e313e32e70a161950e69b85967bc504764cf2a1803",
+      "bytes": 4481
+    },
+    {
+      "path": "experiments/r01_ablation/decision.md",
+      "sha256": "581431c7e7e361452138d4d492e30e5fbc889663d1ce385540b0ca70deb55b20",
+      "bytes": 1124
+    },
+    {
+      "path": "experiments/r01_ablation/hypothesis.md",
+      "sha256": "8a039f1bbded90953801a1bdbd4235dee325c23a86646d722dbcd2bdc1969373",
+      "bytes": 1105
+    },
+    {
+      "path": "experiments/r01_ablation/implementation_plan.md",
+      "sha256": "c0f9c4ac79b25f3fb640d10c73059f7e791563cb956295df55a8a7cc48a6dccf",
+      "bytes": 2152
+    },
+    {
+      "path": "experiments/r01_ablation/result.json",
+      "sha256": "d53b160a7aec1ab2c8b0d612576530cdcc530e1b7b30bb789d3e49bee3d9499d",
+      "bytes": 30580
+    }
+  ]
+}
