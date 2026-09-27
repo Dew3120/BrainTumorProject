@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "r04_per_category",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H4",
     "H7"
@@ -43,12 +43,20 @@
     "A_descriptive": {
       "router": "true tumor category",
       "operationally_eligible": false,
-      "categories": ["glioma", "meningioma", "pituitary"]
+      "categories": [
+        "glioma",
+        "meningioma",
+        "pituitary"
+      ]
     },
     "B_operational": {
       "router": "frozen classifier predicted category",
       "operationally_eligible": true,
-      "categories": ["glioma", "meningioma", "pituitary"],
+      "categories": [
+        "glioma",
+        "meningioma",
+        "pituitary"
+      ],
       "no_tumor_policy": "exclude the one predicted no_tumor case; record it; no fallback"
     }
   },
@@ -82,7 +90,10 @@
     "reference_mask_role": "target creation and evaluation only"
   },
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -110,10 +121,19 @@
   "metrics": {
     "primary": "failure-detection AUROC using risk=1-reliability",
     "calibration": "15 equal-frequency ECE and MCE",
-    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "proper_scores": [
+      "Brier",
+      "fold-training-prevalence baseline Brier",
+      "Brier skill"
+    ],
     "coefficients": "per-fold standardized coefficient, mean, sample SD, sign counts, all-fold sign stability",
     "paired_comparison": "category model AUROC minus R02 aggregate-model AUROC on the identical category cases",
-    "routing": ["four-class accuracy", "three-tumor-route accuracy", "coverage", "confusion matrix"]
+    "routing": [
+      "four-class accuracy",
+      "three-tumor-route accuracy",
+      "coverage",
+      "confusion matrix"
+    ]
   },
   "r02_comparator_aurocs": {
     "A_true_category": {

@@ -1,0 +1,4 @@
+true_label,predicted_glioma,predicted_meningioma,predicted_pituitary,predicted_no_tumor
+glioma,200,3,1,0
+meningioma,3,214,9,1
+pituitary,0,2,247,0

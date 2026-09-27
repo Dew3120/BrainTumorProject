@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "experiment_id": "r04_per_category",
+  "registered_decision": "PASS",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r04_per_category/artifacts/category_bootstrap_comparisons.csv",
+      "sha256": "e1ab244c6713bb9282fc6817d6171ae671aefa05bef715ddb24cb844ab04bda6",
+      "bytes": 1064200
+    },
+    {
+      "path": "experiments/r04_per_category/artifacts/category_fold_coefficients.csv",
+      "sha256": "7302e18e83214a24792b8e6bb4db066f9cbc0297006d4d04eaa88bc71bf8fd2e",
+      "bytes": 12317
+    },
+    {
+      "path": "experiments/r04_per_category/artifacts/category_fold_support.csv",
+      "sha256": "95a091345f0abea8ff61a95683ff0482d60d4ee7046f5c913d88c13b2c4a30da",
+      "bytes": 2063
+    },
+    {
+      "path": "experiments/r04_per_category/artifacts/category_metrics.csv",
+      "sha256": "51804e6392cc65514bda2e064ef5000b008930835614be3196b54ff00e2e39da",
+      "bytes": 1794
+    },
+    {
+      "path": "experiments/r04_per_category/artifacts/oof_category_scores.csv",
+      "sha256": "beabad3c068d62b58f8048fd23126edb44a95942a3eade639837fe78c94c8b58",
+      "bytes": 137083
+    },
+    {
+      "path": "experiments/r04_per_category/artifacts/routing_confusion_matrix.csv",
+      "sha256": "3cfc2a0728c0bf2bf62e31b1628b9f7926f3a97f97b347ebf52aa7e951607732",
+      "bytes": 150
+    },
+    {
+      "path": "experiments/r04_per_category/config.json",
+      "sha256": "c32eac96b201113ef55e5bf09495eb69eaf517388e81217ddfcdf5b5c628249c",
+      "bytes": 6205
+    },
+    {
+      "path": "experiments/r04_per_category/decision.md",
+      "sha256": "8ed9046963e44a9133bc88c647cbf6cbd2be9752177c1d432540f2c03a53c858",
+      "bytes": 1408
+    },
+    {
+      "path": "experiments/r04_per_category/hypothesis.md",
+      "sha256": "6789167ea919594404eb8423118a0a655f03a7126ff9e3b573bc36aa5f3d750d",
+      "bytes": 646
+    },
+    {
+      "path": "experiments/r04_per_category/implementation_plan.md",
+      "sha256": "1a2b7b1f3e0c675c41ac763b15671d69ff759d8488b8ee4ff67557f8221038f6",
+      "bytes": 2561
+    },
+    {
+      "path": "experiments/r04_per_category/result.json",
+      "sha256": "e47d380024953f9e77be1d1916f4eeb0f103a72a12070ecc3a5708d43fc39046",
+      "bytes": 87002
+    }
+  ]
+}
