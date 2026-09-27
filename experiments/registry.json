@@ -17,6 +17,10 @@
     {
       "path": "audit/preregistration_amendment_03.md",
       "sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40"
+    },
+    {
+      "path": "audit/preregistration_amendment_04.md",
+      "sha256": "1603be8a4d6b4415ebac4162260968def6b9c539ec03bb67c18d7bb4016f9629"
     }
   ],
   "baseline": {
@@ -180,6 +184,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r02_reduced_features",
+      "path": "experiments/r02_reduced_features",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r02_reduced_features",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
+  "registration_commit_parent": "ff08266d86a5069a3e183132ca6543712c8ab202",
+  "amendment_04_path": "audit/preregistration_amendment_04.md",
+  "amendment_04_sha256": "1603be8a4d6b4415ebac4162260968def6b9c539ec03bb67c18d7bb4016f9629",
+  "r01_result_path": "experiments/r01_ablation/result.json",
+  "r01_result_sha256": "d53b160a7aec1ab2c8b0d612576530cdcc530e1b7b30bb789d3e49bee3d9499d",
+  "r01_manifest_path": "experiments/r01_ablation/artifacts/experiment_manifest.json",
+  "r01_manifest_sha256": "7e7162d4d1b33349c7944a8d8045898dbe37966d2c407b5feec556dbcfa51a7a",
+  "r01_oof_path": "experiments/r01_ablation/artifacts/oof_scores_and_features.csv",
+  "r01_oof_sha256": "b9b2c245f932d93f844085fdd4a2c2050cd6facab758831906f06c9bc0a41768",
+  "r01_config_sha256": "9850a70ac70abfd3926905e313e32e70a161950e69b85967bc504764cf2a1803",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "fold_assignment_path": "runs/classifier/20260921-170607-243133-baseline/classifier_calibration_folds.csv",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "feature_reference_script_path": "scripts/fit_segmenter_case_reliability.py",
+  "feature_reference_script_sha256": "55195f84453df4e2eaca76d3d633f4db3fc19a5ca31a01d897fa550201d001e5",
+  "stage4_common_path": "scripts/stage4_reliability_common.py",
+  "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
+  "classifier_predictions_path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
+  "classifier_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "population": {
+    "cases": 680,
+    "source": "same BRISC internal segmentation validation population as R01"
+  },
+  "candidate_selection": {
+    "source": "committed R01 candidate screen",
+    "rule": "ablation delta >=0.005 OR identical non-zero coefficient sign in all five folds",
+    "retained_features": [
+      "empty_prediction",
+      "predicted_area_fraction",
+      "whole_probability_mean",
+      "whole_probability_sd",
+      "predicted_region_entropy_mean",
+      "boundary_entropy_mean",
+      "high_confidence_foreground_fraction",
+      "uncertain_pixel_fraction",
+      "bounding_box_fill_ratio",
+      "normalized_perimeter"
+    ],
+    "excluded_features": [
+      "predicted_region_probability_mean",
+      "log1p_component_count",
+      "largest_component_fraction",
+      "border_touch_fraction"
+    ],
+    "order_is_locked": true
+  },
+  "feature_source": "C03 OOF calibrated probability map and threshold-0.50 prediction only",
+  "prohibited_feature_sources": [
+    "reference mask",
+    "Dice or IoU",
+    "true tumor type",
+    "patient or similarity-group identity",
+    "filename or path",
+    "dataset metadata",
+    "raw image intensity",
+    "classifier probabilities",
+    "rejected calibration artifacts"
+  ],
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5,
+    "reference_mask_role": "target creation and evaluation only"
+  },
+  "estimator": {
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42,
+    "post_hoc_probability_calibration": false
+  },
+  "cross_fitting": {
+    "folds": 5,
+    "similarity_aware": true,
+    "reported_scores": "out-of-fold only"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "ci": "percentile 95%"
+  },
+  "metrics": {
+    "models_reported": [
+      "fourteen-feature R01 reproduction",
+      "ten-feature R02 reduced model"
+    ],
+    "primary": "failure-detection AUROC using risk=1-reliability",
+    "calibration": "15 equal-frequency ECE and MCE",
+    "proper_scores": [
+      "Brier",
+      "training-prevalence baseline Brier",
+      "Brier skill"
+    ],
+    "catastrophic_capture": "zero-Dice cases captured in top 20% risk",
+    "subgroups": [
+      "true category descriptive",
+      "classifier-predicted category descriptive"
+    ],
+    "coefficients": "per-fold standardized coefficient, mean, sample SD, sign counts, all-fold sign stability"
+  },
+  "gate": {
+    "type": "NONINFERIORITY",
+    "comparator_auroc": 0.9545028142589118,
+    "maximum_allowed_auroc_loss": 0.005,
+    "minimum_reduced_auroc": 0.9495028142589118,
+    "operator": ">=",
+    "equality_passes": true
+  },
+  "fail_closed": {
+    "baseline_reproduction_absolute_tolerance": 1e-12,
+    "expected_c03_changed_pixels": 22891,
+    "expected_c03_changed_images": 679,
+    "candidate_list_must_match_r01": true,
+    "feature_contract_required": true,
+    "fold_and_group_integrity_required": true,
+    "finite_values_required": true
+  },
+  "neural_model_retraining": false,
+  "reliability_estimator_refitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}
