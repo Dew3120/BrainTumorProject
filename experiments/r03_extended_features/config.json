@@ -113,7 +113,7 @@
     "resampling": "PIL.Image.Resampling.BILINEAR",
     "placement": "centered with integer floor offsets",
     "canvas_fill": 0,
-    "output_dtype": "float64",
+    "output_dtype": "float32 before division, exactly matching segmenter; feature arithmetic promotes afterward",
     "scale_divisor": 255.0
   },
   "new_feature_definitions": {
@@ -213,5 +213,11 @@
   "neural_model_retraining": false,
   "reliability_estimator_refitting": true,
   "threshold_changed": false,
-  "test_images_accessed": 0
+  "test_images_accessed": 0,
+  "amendment_06_path": "audit/preregistration_amendment_06.md",
+  "amendment_06_sha256": "47ee34350db79c44d0a5d74bf9cb809029b8781f930959c030705e03e4e4b394",
+  "segmenter_preprocessing_path": "scripts/segmentation_smoke_test.py",
+  "segmenter_preprocessing_sha256": "defa28dc8f94dc6fd3c41f5928fba1dbb6959d685acc32972711526ce3341dca",
+  "r03_feature_contract_path": "scripts/r03_extended_feature_contract.py",
+  "r03_feature_contract_sha256": "da3b1666adb644dead7f1588b9c8434de2b18732755f470eaf8b3be00943e3b9"
 }
