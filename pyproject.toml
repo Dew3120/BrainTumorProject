@@ -21,6 +21,7 @@ dependencies = [
     "ipykernel",
     "pytest",
     "ruff",
+    "xgboost==3.1.2",
 ]
 
 [tool.uv.sources]
