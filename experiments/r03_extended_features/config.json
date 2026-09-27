@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r03_extended_features",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
+  "registration_commit_parent": "da5b2e2a6dd0d6f353804d6ab0b7126b9da93e7d",
+  "amendment_05_path": "audit/preregistration_amendment_05.md",
+  "amendment_05_sha256": "a5c8ff14dea6349c7b3be334e27edf6323f1e0e23a772f530223e89f6bfc03a3",
+  "r01_result_path": "experiments/r01_ablation/result.json",
+  "r01_result_sha256": "d53b160a7aec1ab2c8b0d612576530cdcc530e1b7b30bb789d3e49bee3d9499d",
+  "r01_manifest_path": "experiments/r01_ablation/artifacts/experiment_manifest.json",
+  "r01_manifest_sha256": "7e7162d4d1b33349c7944a8d8045898dbe37966d2c407b5feec556dbcfa51a7a",
+  "r01_oof_path": "experiments/r01_ablation/artifacts/oof_scores_and_features.csv",
+  "r01_oof_sha256": "b9b2c245f932d93f844085fdd4a2c2050cd6facab758831906f06c9bc0a41768",
+  "r01_config_path": "experiments/r01_ablation/config.json",
+  "r01_config_sha256": "9850a70ac70abfd3926905e313e32e70a161950e69b85967bc504764cf2a1803",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "calibration_cache_order_sha256": "fa780dd5739236db044312f4aa1d692332b36a2503fe4dbc1e873fe4b1c4e7eb",
+  "fold_assignment_path": "runs/classifier/20260921-170607-243133-baseline/classifier_calibration_folds.csv",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "classifier_predictions_path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
+  "classifier_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "split_snapshot_path": "runs/segmentation/20260923-072439-397263-full/split_snapshot.csv",
+  "split_snapshot_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "feature_reference_script_path": "scripts/fit_segmenter_case_reliability.py",
+  "feature_reference_script_sha256": "55195f84453df4e2eaca76d3d633f4db3fc19a5ca31a01d897fa550201d001e5",
+  "stage4_common_path": "scripts/stage4_reliability_common.py",
+  "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
+  "population": {
+    "cases": 680,
+    "source": "same BRISC internal segmentation validation population as R01/R02"
+  },
+  "baseline_features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_probability_mean",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "log1p_component_count",
+    "largest_component_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter",
+    "border_touch_fraction"
+  ],
+  "new_features": [
+    "mask_circularity",
+    "mask_solidity",
+    "boundary_fractal_dimension",
+    "predicted_boundary_image_gradient_mean",
+    "predicted_centroid_to_image_center_distance",
+    "predicted_vertical_symmetry"
+  ],
+  "extended_features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_probability_mean",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "log1p_component_count",
+    "largest_component_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter",
+    "border_touch_fraction",
+    "mask_circularity",
+    "mask_solidity",
+    "boundary_fractal_dimension",
+    "predicted_boundary_image_gradient_mean",
+    "predicted_centroid_to_image_center_distance",
+    "predicted_vertical_symmetry"
+  ],
+  "feature_contract": {
+    "probability_and_mask_only": [
+      "mask_circularity",
+      "mask_solidity",
+      "boundary_fractal_dimension",
+      "predicted_centroid_to_image_center_distance",
+      "predicted_vertical_symmetry"
+    ],
+    "raw_image_and_prediction_only": [
+      "predicted_boundary_image_gradient_mean"
+    ],
+    "prohibited": [
+      "reference mask",
+      "Dice or IoU",
+      "true tumor type",
+      "patient or similarity-group identity",
+      "filename or path as a numeric feature",
+      "dataset metadata as a numeric feature",
+      "classifier probabilities",
+      "rejected calibration artifacts"
+    ]
+  },
+  "image_transform": {
+    "mode": "L",
+    "canvas": [
+      128,
+      128
+    ],
+    "resize_rule": "aspect-preserving min scale with Python round",
+    "resampling": "PIL.Image.Resampling.BILINEAR",
+    "placement": "centered with integer floor offsets",
+    "canvas_fill": 0,
+    "output_dtype": "float64",
+    "scale_divisor": 255.0
+  },
+  "new_feature_definitions": {
+    "mask_circularity": "4*pi*area/perimeter^2; skimage.measure.perimeter neighborhood=8; empty or zero perimeter -> 0; no clipping",
+    "mask_solidity": "area/convex hull area; convex_hull_image offset_coordinates=True tolerance=1e-10 include_borders=True; empty -> 0",
+    "boundary_fractal_dimension": "OLS slope log(nonempty box count) vs log(128/box width), widths [2,4,8,16,32], one-pixel 8-connected erosion boundary; insufficient scales -> 0",
+    "predicted_boundary_image_gradient_mean": "mean sqrt(gx^2+gy^2) from numpy.gradient of registered model-space grayscale image over predicted one-pixel boundary; empty -> 0",
+    "predicted_centroid_to_image_center_distance": "Euclidean centroid distance to (63.5,63.5)/(sqrt(2)*63.5); empty -> 0",
+    "predicted_vertical_symmetry": "intersection of mask and left-right reflection divided by mask area; empty -> 0"
+  },
+  "library_versions": {
+    "scikit_image": "0.26.0",
+    "numpy": "2.5.3",
+    "pillow": "12.3.0",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.9.1"
+  },
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5,
+    "reference_mask_role": "target creation and evaluation only"
+  },
+  "estimator": {
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42,
+    "post_hoc_probability_calibration": false
+  },
+  "cross_fitting": {
+    "folds": 5,
+    "similarity_aware": true,
+    "reported_scores": "out-of-fold only"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "ci": "percentile 95%"
+  },
+  "new_feature_ablation": {
+    "variants": 6,
+    "method": "remove exactly one new feature from the twenty-feature model and refit all five folds",
+    "importance": "extended AUROC minus ablated AUROC"
+  },
+  "new_feature_permutation": {
+    "repetitions_per_feature": 30,
+    "scope": "within each held-out outer fold",
+    "seed_rule": "42 + 1000 * new_feature_index + repetition_index",
+    "importance": "extended AUROC minus mean permuted AUROC",
+    "ci": "2,000 paired similarity-group bootstrap samples; average all 30 repetitions inside each sample"
+  },
+  "metrics": {
+    "models_reported": [
+      "fourteen-feature R01 reproduction",
+      "twenty-feature R03 extended model"
+    ],
+    "primary": "failure-detection AUROC using risk=1-reliability",
+    "calibration": "15 equal-frequency ECE and MCE",
+    "proper_scores": [
+      "Brier",
+      "training-prevalence baseline Brier",
+      "Brier skill"
+    ],
+    "catastrophic_capture": "zero-Dice cases captured in top 20% risk",
+    "subgroups": [
+      "true category descriptive",
+      "classifier-predicted category descriptive"
+    ],
+    "coefficients": "all twenty per-fold standardized coefficients, mean, sample SD, sign counts, all-fold sign stability"
+  },
+  "gate": {
+    "type": "SUPERIORITY",
+    "comparator_auroc": 0.9545028142589118,
+    "minimum_required_improvement": 0.005,
+    "minimum_extended_auroc": 0.9595028142589118,
+    "operator": ">=",
+    "equality_passes": true
+  },
+  "fail_closed": {
+    "baseline_reproduction_absolute_tolerance": 1e-12,
+    "expected_c03_changed_pixels": 22891,
+    "expected_c03_changed_images": 679,
+    "raw_image_sha256_must_match_split_snapshot": true,
+    "feature_contract_required": true,
+    "fold_and_group_integrity_required": true,
+    "finite_values_required": true
+  },
+  "neural_model_retraining": false,
+  "reliability_estimator_refitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}

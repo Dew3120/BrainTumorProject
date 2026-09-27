@@ -21,6 +21,10 @@
     {
       "path": "audit/preregistration_amendment_04.md",
       "sha256": "1603be8a4d6b4415ebac4162260968def6b9c539ec03bb67c18d7bb4016f9629"
+    },
+    {
+      "path": "audit/preregistration_amendment_05.md",
+      "sha256": "a5c8ff14dea6349c7b3be334e27edf6323f1e0e23a772f530223e89f6bfc03a3"
     }
   ],
   "baseline": {
@@ -193,6 +197,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r03_extended_features",
+      "path": "experiments/r03_extended_features",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",
