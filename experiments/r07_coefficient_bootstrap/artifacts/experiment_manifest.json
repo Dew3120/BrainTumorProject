@@ -1,0 +1,63 @@
+{
+  "status": "DESCRIPTIVE_COMPLETE",
+  "experiment_id": "r07_coefficient_bootstrap",
+  "registered_decision": "DESCRIPTIVE_ONLY",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/bootstrap_coefficients.csv",
+      "sha256": "1bbf2ae21bfd04a372113fa849364bdb0a8b801b878d1c5469e573ba7e90e307",
+      "bytes": 982949
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/bootstrap_diagnostics.csv",
+      "sha256": "7f396c3263ffd23af12e2522ddf8848724dbdd2c1c3f482481baa42acd056eb1",
+      "bytes": 41024
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/coefficient_bootstrap_distributions.png",
+      "sha256": "c7f61dfa24cd4d1331502646f554aad6933288cb0b74170e31f142419e77372d",
+      "bytes": 389362
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/coefficient_summary.csv",
+      "sha256": "b1f72477a76afa2ed74cb01481d3e514d339d405f38cc2ced5576a22cbbe2b52",
+      "bytes": 2377
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/full_population_coefficients.csv",
+      "sha256": "4fc8b84762aeb03a43faa905d10318eb91292ed79260a98357a74e7e84812d0c",
+      "bytes": 499
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/artifacts/r01_r02_comparison.csv",
+      "sha256": "b53dfdf9aa54297eef816b016f5ee80e6693055bb27e375b20d45c4c84453980",
+      "bytes": 1613
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/config.json",
+      "sha256": "cb502934a0883decdaef99deb003b49b754b197acd7ebc5100501a6ab95ac8d7",
+      "bytes": 5963
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/decision.md",
+      "sha256": "ca7d9da9a05182c79046865e4b6aa2a4caa9becd54e264247f1f91cf854083d2",
+      "bytes": 635
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/hypothesis.md",
+      "sha256": "376cefcb56bc33ee846c84d214e5141d8a5ea0e8e430cb656b9718273f967226",
+      "bytes": 597
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/implementation_plan.md",
+      "sha256": "3870fafd71eb743b84a39a2b8ac46926a8b184e1aedebe2a9144ee30592e6ab4",
+      "bytes": 2275
+    },
+    {
+      "path": "experiments/r07_coefficient_bootstrap/result.json",
+      "sha256": "fc8b1bd80826913ff990ea993bf1c0c8bdf028b614101f967afc4282c01cb948",
+      "bytes": 17564
+    }
+  ]
+}

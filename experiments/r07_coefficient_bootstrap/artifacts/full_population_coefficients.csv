@@ -1,0 +1,11 @@
+feature,full_population_standardized_coefficient
+empty_prediction,-0.6319540188577428
+predicted_area_fraction,0.9809906354132327
+whole_probability_mean,-0.6354294730230855
+whole_probability_sd,0.5944196958965807
+predicted_region_entropy_mean,0.2796412355159913
+boundary_entropy_mean,-2.0749172607845643
+high_confidence_foreground_fraction,0.47150297049170076
+uncertain_pixel_fraction,0.5078687717944398
+bounding_box_fill_ratio,0.15956213248762355
+normalized_perimeter,-0.3887452381732838
