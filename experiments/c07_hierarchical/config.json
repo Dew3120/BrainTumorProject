@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "c07_hierarchical",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H3", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H3",
+    "H7"
+  ],
   "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
   "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
   "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
@@ -17,20 +20,56 @@
   "folds": 5,
   "seed": 42,
   "candidates": {
-    "R": {"region_split": true, "reliability_weighted": false, "category_routed": false},
-    "W": {"region_split": false, "reliability_weighted": true, "category_routed": false},
-    "C": {"region_split": false, "reliability_weighted": false, "category_routed": true},
-    "RW": {"region_split": true, "reliability_weighted": true, "category_routed": false},
-    "RC": {"region_split": true, "reliability_weighted": false, "category_routed": true},
-    "WC": {"region_split": false, "reliability_weighted": true, "category_routed": true},
-    "RWC": {"region_split": true, "reliability_weighted": true, "category_routed": true}
+    "R": {
+      "region_split": true,
+      "reliability_weighted": false,
+      "category_routed": false
+    },
+    "W": {
+      "region_split": false,
+      "reliability_weighted": true,
+      "category_routed": false
+    },
+    "C": {
+      "region_split": false,
+      "reliability_weighted": false,
+      "category_routed": true
+    },
+    "RW": {
+      "region_split": true,
+      "reliability_weighted": true,
+      "category_routed": false
+    },
+    "RC": {
+      "region_split": true,
+      "reliability_weighted": false,
+      "category_routed": true
+    },
+    "WC": {
+      "region_split": false,
+      "reliability_weighted": true,
+      "category_routed": true
+    },
+    "RWC": {
+      "region_split": true,
+      "reliability_weighted": true,
+      "category_routed": true
+    }
   },
   "estimator": "positive scalar temperature per selected cell, fitted by image-balanced pixel NLL with optional frozen reliability case weights",
-  "temperature_bounds": [0.05, 20.0],
+  "temperature_bounds": [
+    0.05,
+    20.0
+  ],
   "nested_selection": {
     "outer": "five existing similarity-aware folds",
     "inner": "leave-one-of-the-four-outer-training-folds out",
-    "ranking": ["lowest lesion-centered ECE", "lowest lesion-centered NLL", "lowest lesion-centered Brier", "candidate ID ascending"]
+    "ranking": [
+      "lowest lesion-centered ECE",
+      "lowest lesion-centered NLL",
+      "lowest lesion-centered Brier",
+      "candidate ID ascending"
+    ]
   },
   "regions": {
     "lesion_centered": "reference mask plus Euclidean radius 8 model pixels",
@@ -38,11 +77,20 @@
     "whole_image": "all 128x128 pixels"
   },
   "metrics": "image-balanced NLL and Brier; 15 equal-frequency pooled-pixel ECE and MCE; predicted-route and true-label breakdowns",
-  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired": true},
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true
+  },
   "gate": {
     "aggregate_lesion_centered_ece_maximum": 0.03,
     "predicted_route_lesion_centered_ece_maximum": 0.05,
-    "predicted_tumor_routes": ["glioma", "meningioma", "pituitary"],
+    "predicted_tumor_routes": [
+      "glioma",
+      "meningioma",
+      "pituitary"
+    ],
     "conjunctive_checks": 4
   },
   "operational_eligibility": "only if every selected outer configuration and final proposal omit reference-region split R",

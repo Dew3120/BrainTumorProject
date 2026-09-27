@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "experiment_id": "c07_hierarchical",
+  "registered_decision": "PASS",
+  "operational_eligibility": "INELIGIBLE",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/c07_hierarchical/artifacts/inner_selection_summary.csv",
+      "sha256": "6fa27965368c0b99a18d17731ed85e377e3d5a48aa60f9708286506595059926",
+      "bytes": 2617
+    },
+    {
+      "path": "experiments/c07_hierarchical/artifacts/lesion_centered_reliability.png",
+      "sha256": "5dd5155050fcad2df6f7df03a8545cc3814ac888e90c952dad720b2d176b273b",
+      "bytes": 104969
+    },
+    {
+      "path": "experiments/c07_hierarchical/artifacts/nested_models.json",
+      "sha256": "0ce5aac505e3e73d2283b7aca89a844641c01e1afdbd6ce1b316b4c5b4ad0453",
+      "bytes": 72169
+    },
+    {
+      "path": "experiments/c07_hierarchical/artifacts/whole_image_reliability.png",
+      "sha256": "37ebcfc81f28bef89fac5246b885d00c099fbbe742c5a3a62b87d57be41d1981",
+      "bytes": 77452
+    },
+    {
+      "path": "experiments/c07_hierarchical/config.json",
+      "sha256": "08da9e2fa41488b2ceef8592360c16d5b77a2390fe123ed534e51d2d5aea8765",
+      "bytes": 3445
+    },
+    {
+      "path": "experiments/c07_hierarchical/decision.md",
+      "sha256": "086813d1a57dc13f172a75e4316bb2858576ddea2c13d7061e98050ca0aaca98",
+      "bytes": 616
+    },
+    {
+      "path": "experiments/c07_hierarchical/hypothesis.md",
+      "sha256": "221dc4f1d72206483d0ab56d3a100b8dc6dfd646a25757b2e2fe0cf6c62da101",
+      "bytes": 1844
+    },
+    {
+      "path": "experiments/c07_hierarchical/result.json",
+      "sha256": "18458f2d5dbb884c5855fd69590b350326ff457f5fbae9f33f15852e8c21747c",
+      "bytes": 51871
+    }
+  ]
+}

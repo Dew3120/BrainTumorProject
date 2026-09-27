@@ -1,0 +1,2040 @@
+{
+  "outer_selections": [
+    {
+      "outer_fold": 1,
+      "selected_candidate": "RC",
+      "selected_is_oracle": true,
+      "fit_temperatures": {
+        "all::lesion_centered": 2.4892645722133198,
+        "glioma::lesion_centered": 2.8910454577838887,
+        "meningioma::lesion_centered": 2.015803024996914,
+        "pituitary::lesion_centered": 2.349201497180084,
+        "all::background": 0.8219593659415654,
+        "glioma::background": 0.8969315159074501,
+        "meningioma::background": 0.4529578722342913,
+        "pituitary::background": 0.8044277190826685
+      },
+      "inner_comparisons": [
+        {
+          "candidate": "RC",
+          "pixel_ece": 0.0236006412520801,
+          "pixel_nll": 0.22800750109237033,
+          "pixel_brier": 0.06834525110313884
+        },
+        {
+          "candidate": "R",
+          "pixel_ece": 0.02362013568260157,
+          "pixel_nll": 0.22980832764403497,
+          "pixel_brier": 0.06848743074799424
+        },
+        {
+          "candidate": "RWC",
+          "pixel_ece": 0.024123123797455685,
+          "pixel_nll": 0.22821402766570387,
+          "pixel_brier": 0.06829653497265525
+        },
+        {
+          "candidate": "RW",
+          "pixel_ece": 0.025014687647146962,
+          "pixel_nll": 0.23000786571163842,
+          "pixel_brier": 0.06836832185697005
+        },
+        {
+          "candidate": "WC",
+          "pixel_ece": 0.03740766964943615,
+          "pixel_nll": 0.2464507522127874,
+          "pixel_brier": 0.06855763656721227
+        },
+        {
+          "candidate": "C",
+          "pixel_ece": 0.03764339698120129,
+          "pixel_nll": 0.24734004568353085,
+          "pixel_brier": 0.06858957246726274
+        },
+        {
+          "candidate": "W",
+          "pixel_ece": 0.03770529982270594,
+          "pixel_nll": 0.24655617058616416,
+          "pixel_brier": 0.06858290674605237
+        }
+      ],
+      "inner_fold_models": {
+        "C": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6700040995856082,
+              "glioma::whole_image": 1.7529336341346646,
+              "meningioma::whole_image": 1.5787848534565967,
+              "pituitary::whole_image": 1.5716315621351398
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.7194469471470335,
+              "glioma::whole_image": 1.7575964065950147,
+              "meningioma::whole_image": 1.5083656948981077,
+              "pituitary::whole_image": 1.6239735342930228
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.71134324509604,
+              "glioma::whole_image": 1.7206904354196413,
+              "meningioma::whole_image": 1.5723905945323262,
+              "pituitary::whole_image": 1.626006098696829
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.7183998932144362,
+              "glioma::whole_image": 1.773132710863418,
+              "meningioma::whole_image": 1.5559086378912095,
+              "pituitary::whole_image": 1.5466793685461775
+            }
+          }
+        ],
+        "R": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.452738739814785,
+              "all::background": 0.8236713067573593
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.500183094867523,
+              "all::background": 0.8240386140327285
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.5168824161156325,
+              "all::background": 0.8037131579563953
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.486734640099075,
+              "all::background": 0.8352688005361091
+            }
+          }
+        ],
+        "RC": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.452738739814785,
+              "glioma::lesion_centered": 2.883193124358472,
+              "meningioma::lesion_centered": 2.08213704213002,
+              "pituitary::lesion_centered": 2.345454766865581,
+              "all::background": 0.8236713067573593,
+              "glioma::background": 0.9520928356831667,
+              "meningioma::background": 0.2951868306921213,
+              "pituitary::background": 0.5236986311431799
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.500183094867523,
+              "glioma::lesion_centered": 2.8879408793790757,
+              "meningioma::lesion_centered": 1.929741958779517,
+              "pituitary::lesion_centered": 2.405382436942659,
+              "all::background": 0.8240386140327285,
+              "glioma::background": 0.8876550178287614,
+              "meningioma::background": 0.4771643992005935,
+              "pituitary::background": 0.8802853708311432
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.5168824161156325,
+              "glioma::lesion_centered": 2.8584562331420913,
+              "meningioma::lesion_centered": 2.0301021197639244,
+              "pituitary::lesion_centered": 2.407920309578733,
+              "all::background": 0.8037131579563953,
+              "glioma::background": 0.823651717940548,
+              "meningioma::background": 0.5294998244583198,
+              "pituitary::background": 0.9272865047922264
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.486734640099075,
+              "glioma::lesion_centered": 2.93358698136985,
+              "meningioma::lesion_centered": 2.0188171266731914,
+              "pituitary::lesion_centered": 2.232601745793337,
+              "all::background": 0.8352688005361091,
+              "glioma::background": 0.9181407593841666,
+              "meningioma::background": 0.4987066378311475,
+              "pituitary::background": 0.8015357432453887
+            }
+          }
+        ],
+        "RW": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.387310234874453,
+              "all::background": 0.8714142273789193
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3731827661201867,
+              "all::background": 0.8890236982463847
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4128787869347943,
+              "all::background": 0.8853340127689191
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.3349172654835875,
+              "all::background": 0.9352284793988734
+            }
+          }
+        ],
+        "RWC": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.387310234874453,
+              "glioma::lesion_centered": 2.746226291030044,
+              "meningioma::lesion_centered": 2.1046510116118493,
+              "pituitary::lesion_centered": 2.3341265264159747,
+              "all::background": 0.8714142273789193,
+              "glioma::background": 1.0003369113803497,
+              "meningioma::background": 0.34609611104999105,
+              "pituitary::background": 0.4981614170719505
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3731827661201867,
+              "glioma::lesion_centered": 2.7660587351846018,
+              "meningioma::lesion_centered": 1.9533900515002145,
+              "pituitary::lesion_centered": 2.3955265271492823,
+              "all::background": 0.8890236982463847,
+              "glioma::background": 0.9269368941777881,
+              "meningioma::background": 0.4050745417827164,
+              "pituitary::background": 0.9785473582972916
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4128787869347943,
+              "glioma::lesion_centered": 2.801985058127051,
+              "meningioma::lesion_centered": 2.041428642385479,
+              "pituitary::lesion_centered": 2.4114326098924566,
+              "all::background": 0.8853340127689191,
+              "glioma::background": 0.902040151827751,
+              "meningioma::background": 0.33623440682154443,
+              "pituitary::background": 1.0290378365290875
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.3349172654835875,
+              "glioma::lesion_centered": 2.7843194215783234,
+              "meningioma::lesion_centered": 2.0387901786830844,
+              "pituitary::lesion_centered": 2.201313378270012,
+              "all::background": 0.9352284793988734,
+              "glioma::background": 1.017111194597439,
+              "meningioma::background": 0.39949998936867415,
+              "pituitary::background": 0.9119463020738857
+            }
+          }
+        ],
+        "W": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.681157579472058
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6855688779085238
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.678108529667413
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.676522178734597
+            }
+          }
+        ],
+        "WC": [
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.681157579472058,
+              "glioma::whole_image": 1.7678880056727264,
+              "meningioma::whole_image": 1.6150474579720124,
+              "pituitary::whole_image": 1.586013082835588
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6855688779085238,
+              "glioma::whole_image": 1.7691577967849215,
+              "meningioma::whole_image": 1.5480746125873752,
+              "pituitary::whole_image": 1.6439204395862947
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.678108529667413,
+              "glioma::whole_image": 1.7394399809352565,
+              "meningioma::whole_image": 1.5879024379514968,
+              "pituitary::whole_image": 1.6469948943617216
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.676522178734597,
+              "glioma::whole_image": 1.7823280246505933,
+              "meningioma::whole_image": 1.584435715082202,
+              "pituitary::whole_image": 1.5582119104861112
+            }
+          }
+        ]
+      }
+    },
+    {
+      "outer_fold": 2,
+      "selected_candidate": "RC",
+      "selected_is_oracle": true,
+      "fit_temperatures": {
+        "all::lesion_centered": 2.4277395278807012,
+        "glioma::lesion_centered": 2.819041445394192,
+        "meningioma::lesion_centered": 2.073910816612675,
+        "pituitary::lesion_centered": 2.342339009636546,
+        "all::background": 0.7735288356763744,
+        "glioma::background": 0.8725256234370081,
+        "meningioma::background": 0.29969223068038386,
+        "pituitary::background": 0.6109069110011918
+      },
+      "inner_comparisons": [
+        {
+          "candidate": "RC",
+          "pixel_ece": 0.024522048748685205,
+          "pixel_nll": 0.2231768926292037,
+          "pixel_brier": 0.06727968153233826
+        },
+        {
+          "candidate": "RWC",
+          "pixel_ece": 0.02513101800604469,
+          "pixel_nll": 0.22329746197068007,
+          "pixel_brier": 0.06720570152228358
+        },
+        {
+          "candidate": "R",
+          "pixel_ece": 0.025236036537341695,
+          "pixel_nll": 0.2244291582674235,
+          "pixel_brier": 0.06727055258409669
+        },
+        {
+          "candidate": "RW",
+          "pixel_ece": 0.026014093587843765,
+          "pixel_nll": 0.22455157939538165,
+          "pixel_brier": 0.0672003464436608
+        },
+        {
+          "candidate": "WC",
+          "pixel_ece": 0.03735902058413034,
+          "pixel_nll": 0.23981077370950785,
+          "pixel_brier": 0.06736891449749498
+        },
+        {
+          "candidate": "C",
+          "pixel_ece": 0.037512030595692296,
+          "pixel_nll": 0.24033021157169715,
+          "pixel_brier": 0.06738675606110703
+        },
+        {
+          "candidate": "W",
+          "pixel_ece": 0.03767492999575254,
+          "pixel_nll": 0.23957786408662757,
+          "pixel_brier": 0.06734795091602962
+        }
+      ],
+      "inner_fold_models": {
+        "C": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.6700040995856082,
+              "glioma::whole_image": 1.7529336341346646,
+              "meningioma::whole_image": 1.5787848534565967,
+              "pituitary::whole_image": 1.5716315621351398
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6544391313006879,
+              "glioma::whole_image": 1.7212424547684382,
+              "meningioma::whole_image": 1.5524920250414076,
+              "pituitary::whole_image": 1.596968465386967
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6451592929824341,
+              "glioma::whole_image": 1.6821747439007548,
+              "meningioma::whole_image": 1.6112128753112298,
+              "pituitary::whole_image": 1.599475103338221
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.653345276480185,
+              "glioma::whole_image": 1.7375650591163807,
+              "meningioma::whole_image": 1.5954660561099432,
+              "pituitary::whole_image": 1.5143754554434956
+            }
+          }
+        ],
+        "R": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.452738739814785,
+              "all::background": 0.8236713067573593
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.418223700632791,
+              "all::background": 0.7602792996613866
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4355246927971117,
+              "all::background": 0.7321936659387523
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.403961577524407,
+              "all::background": 0.7726639030385706
+            }
+          }
+        ],
+        "RC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.452738739814785,
+              "glioma::lesion_centered": 2.883193124358472,
+              "meningioma::lesion_centered": 2.08213704213002,
+              "pituitary::lesion_centered": 2.345454766865581,
+              "all::background": 0.8236713067573593,
+              "glioma::background": 0.9520928356831667,
+              "meningioma::background": 0.2951868306921213,
+              "pituitary::background": 0.5236986311431799
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.418223700632791,
+              "glioma::lesion_centered": 2.7915066416502574,
+              "meningioma::lesion_centered": 2.010246060913289,
+              "pituitary::lesion_centered": 2.397804356696997,
+              "all::background": 0.7602792996613866,
+              "glioma::background": 0.8536868797798408,
+              "meningioma::background": 0.3099340602503197,
+              "pituitary::background": 0.6657531483194732
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4355246927971117,
+              "glioma::lesion_centered": 2.760982422105221,
+              "meningioma::lesion_centered": 2.1065372871860872,
+              "pituitary::lesion_centered": 2.4005529105035395,
+              "all::background": 0.7321936659387523,
+              "glioma::background": 0.7845171114122069,
+              "meningioma::background": 0.23974070162721972,
+              "pituitary::background": 0.6972323919478305
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.403961577524407,
+              "glioma::lesion_centered": 2.8390816980413383,
+              "meningioma::lesion_centered": 2.096765757802925,
+              "pituitary::lesion_centered": 2.219350356312023,
+              "all::background": 0.7726639030385706,
+              "glioma::background": 0.8869914937572136,
+              "meningioma::background": 0.3241966848201663,
+              "pituitary::background": 0.5405285346784945
+            }
+          }
+        ],
+        "RW": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.387310234874453,
+              "all::background": 0.8714142273789193
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3515192889394068,
+              "all::background": 0.7457617769771325
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.392108118228019,
+              "all::background": 0.7380864794047469
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.312450492567486,
+              "all::background": 0.8125883913432794
+            }
+          }
+        ],
+        "RWC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.387310234874453,
+              "glioma::lesion_centered": 2.746226291030044,
+              "meningioma::lesion_centered": 2.1046510116118493,
+              "pituitary::lesion_centered": 2.3341265264159747,
+              "all::background": 0.8714142273789193,
+              "glioma::background": 1.0003369113803497,
+              "meningioma::background": 0.34609611104999105,
+              "pituitary::background": 0.4981614170719505
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3515192889394068,
+              "glioma::lesion_centered": 2.6439340059454444,
+              "meningioma::lesion_centered": 2.0342655576924984,
+              "pituitary::lesion_centered": 2.385034401392072,
+              "all::background": 0.7457617769771325,
+              "glioma::background": 0.8654473921615936,
+              "meningioma::background": 0.3536424281128839,
+              "pituitary::background": 0.45411765444615027
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.392108118228019,
+              "glioma::lesion_centered": 2.6786850371110784,
+              "meningioma::lesion_centered": 2.1172820229951146,
+              "pituitary::lesion_centered": 2.401867034915365,
+              "all::background": 0.7380864794047469,
+              "glioma::background": 0.8365603387485382,
+              "meningioma::background": 0.2097897776293341,
+              "pituitary::background": 0.5029333638275594
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.312450492567486,
+              "glioma::lesion_centered": 2.6620226804122535,
+              "meningioma::lesion_centered": 2.116176285849152,
+              "pituitary::lesion_centered": 2.18254882851567,
+              "all::background": 0.8125883913432794,
+              "glioma::background": 0.9740121433842743,
+              "meningioma::background": 0.35009773871365446,
+              "pituitary::background": 0.26611408575211926
+            }
+          }
+        ],
+        "W": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.681157579472058
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6594213107043807
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6517985790701433
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6499756632123137
+            }
+          }
+        ],
+        "WC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.681157579472058,
+              "glioma::whole_image": 1.7678880056727264,
+              "meningioma::whole_image": 1.6150474579720124,
+              "pituitary::whole_image": 1.586013082835588
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6594213107043807,
+              "glioma::whole_image": 1.7218833786836345,
+              "meningioma::whole_image": 1.5920733579883335,
+              "pituitary::whole_image": 1.6084832278026566
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6517985790701433,
+              "glioma::whole_image": 1.6889766944521656,
+              "meningioma::whole_image": 1.627224771238399,
+              "pituitary::whole_image": 1.6129389371706746
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6499756632123137,
+              "glioma::whole_image": 1.735395749063511,
+              "meningioma::whole_image": 1.6239682846884487,
+              "pituitary::whole_image": 1.5154118642212302
+            }
+          }
+        ]
+      }
+    },
+    {
+      "outer_fold": 3,
+      "selected_candidate": "R",
+      "selected_is_oracle": true,
+      "fit_temperatures": {
+        "all::lesion_centered": 2.4640876205611795,
+        "all::background": 0.7762162373861224
+      },
+      "inner_comparisons": [
+        {
+          "candidate": "R",
+          "pixel_ece": 0.025020862177418408,
+          "pixel_nll": 0.2301699131134553,
+          "pixel_brier": 0.0684387102983929
+        },
+        {
+          "candidate": "RC",
+          "pixel_ece": 0.025068106567056308,
+          "pixel_nll": 0.22829830681959024,
+          "pixel_brier": 0.06830377387169856
+        },
+        {
+          "candidate": "RWC",
+          "pixel_ece": 0.025695318745935045,
+          "pixel_nll": 0.22853437405351956,
+          "pixel_brier": 0.0682377855440111
+        },
+        {
+          "candidate": "RW",
+          "pixel_ece": 0.026446211293469662,
+          "pixel_nll": 0.23036797109629392,
+          "pixel_brier": 0.06828899916167394
+        },
+        {
+          "candidate": "WC",
+          "pixel_ece": 0.03830227958473865,
+          "pixel_nll": 0.24645763133474835,
+          "pixel_brier": 0.06828500016133103
+        },
+        {
+          "candidate": "C",
+          "pixel_ece": 0.03839210088030665,
+          "pixel_nll": 0.2469830456278405,
+          "pixel_brier": 0.06829702848963136
+        },
+        {
+          "candidate": "W",
+          "pixel_ece": 0.038443928881457416,
+          "pixel_nll": 0.2466645598928673,
+          "pixel_brier": 0.06830187035138964
+        }
+      ],
+      "inner_fold_models": {
+        "C": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.7194469471470335,
+              "glioma::whole_image": 1.7575964065950147,
+              "meningioma::whole_image": 1.5083656948981077,
+              "pituitary::whole_image": 1.6239735342930228
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6544391313006879,
+              "glioma::whole_image": 1.7212424547684382,
+              "meningioma::whole_image": 1.5524920250414076,
+              "pituitary::whole_image": 1.596968465386967
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.697155952975319,
+              "glioma::whole_image": 1.688175621280276,
+              "meningioma::whole_image": 1.5446324511460146,
+              "pituitary::whole_image": 1.6504719634304028
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.7044371898895256,
+              "glioma::whole_image": 1.7424666092443735,
+              "meningioma::whole_image": 1.5278476834002168,
+              "pituitary::whole_image": 1.5733335866775642
+            }
+          }
+        ],
+        "R": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.500183094867523,
+              "all::background": 0.8240386140327285
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.418223700632791,
+              "all::background": 0.7602792996613866
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4837670879183253,
+              "all::background": 0.7389971823278749
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.452980793239708,
+              "all::background": 0.7762173732905603
+            }
+          }
+        ],
+        "RC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.500183094867523,
+              "glioma::lesion_centered": 2.8879408793790757,
+              "meningioma::lesion_centered": 1.929741958779517,
+              "pituitary::lesion_centered": 2.405382436942659,
+              "all::background": 0.8240386140327285,
+              "glioma::background": 0.8876550178287614,
+              "meningioma::background": 0.4771643992005935,
+              "pituitary::background": 0.8802853708311432
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.418223700632791,
+              "glioma::lesion_centered": 2.7915066416502574,
+              "meningioma::lesion_centered": 2.010246060913289,
+              "pituitary::lesion_centered": 2.397804356696997,
+              "all::background": 0.7602792996613866,
+              "glioma::background": 0.8536868797798408,
+              "meningioma::background": 0.3099340602503197,
+              "pituitary::background": 0.6657531483194732
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.4837670879183253,
+              "glioma::lesion_centered": 2.7655702898759325,
+              "meningioma::lesion_centered": 1.9563182707549276,
+              "pituitary::lesion_centered": 2.461228143724328,
+              "all::background": 0.7389971823278749,
+              "glioma::background": 0.7029755337892029,
+              "meningioma::background": 0.5440829285770071,
+              "pituitary::background": 0.9752688100756608
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.452980793239708,
+              "glioma::lesion_centered": 2.8436944546920273,
+              "meningioma::lesion_centered": 1.9438981070140826,
+              "pituitary::lesion_centered": 2.283659103485607,
+              "all::background": 0.7762173732905603,
+              "glioma::background": 0.8136249204334549,
+              "meningioma::background": 0.5088462844258186,
+              "pituitary::background": 0.8692849121257415
+            }
+          }
+        ],
+        "RW": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.3731827661201867,
+              "all::background": 0.8890236982463847
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.3515192889394068,
+              "all::background": 0.7457617769771325
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.3779501918946973,
+              "all::background": 0.763070894373497
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.2973898713868097,
+              "all::background": 0.8333770587609229
+            }
+          }
+        ],
+        "RWC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.3731827661201867,
+              "glioma::lesion_centered": 2.7660587351846018,
+              "meningioma::lesion_centered": 1.9533900515002145,
+              "pituitary::lesion_centered": 2.3955265271492823,
+              "all::background": 0.8890236982463847,
+              "glioma::background": 0.9269368941777881,
+              "meningioma::background": 0.4050745417827164,
+              "pituitary::background": 0.9785473582972916
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.3515192889394068,
+              "glioma::lesion_centered": 2.6439340059454444,
+              "meningioma::lesion_centered": 2.0342655576924984,
+              "pituitary::lesion_centered": 2.385034401392072,
+              "all::background": 0.7457617769771325,
+              "glioma::background": 0.8654473921615936,
+              "meningioma::background": 0.3536424281128839,
+              "pituitary::background": 0.45411765444615027
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.3779501918946973,
+              "glioma::lesion_centered": 2.6988664969848664,
+              "meningioma::lesion_centered": 1.9696727960422629,
+              "pituitary::lesion_centered": 2.463770797884219,
+              "all::background": 0.763070894373497,
+              "glioma::background": 0.7283469394124551,
+              "meningioma::background": 0.3442288656779836,
+              "pituitary::background": 1.0091522190971056
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.2973898713868097,
+              "glioma::lesion_centered": 2.68202246055255,
+              "meningioma::lesion_centered": 1.9655946287361359,
+              "pituitary::lesion_centered": 2.2488670729813696,
+              "all::background": 0.8333770587609229,
+              "glioma::background": 0.8886857082323464,
+              "meningioma::background": 0.4062312315049938,
+              "pituitary::background": 0.8813456406028037
+            }
+          }
+        ],
+        "W": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.6855688779085238
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6594213107043807
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.656119656948757
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6543132728425072
+            }
+          }
+        ],
+        "WC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.6855688779085238,
+              "glioma::whole_image": 1.7691577967849215,
+              "meningioma::whole_image": 1.5480746125873752,
+              "pituitary::whole_image": 1.6439204395862947
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6594213107043807,
+              "glioma::whole_image": 1.7218833786836345,
+              "meningioma::whole_image": 1.5920733579883335,
+              "pituitary::whole_image": 1.6084832278026566
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.656119656948757,
+              "glioma::whole_image": 1.6915200121088534,
+              "meningioma::whole_image": 1.5630369280932113,
+              "pituitary::whole_image": 1.6693671922916642
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6543132728425072,
+              "glioma::whole_image": 1.7371841186751515,
+              "meningioma::whole_image": 1.5594638376372645,
+              "pituitary::whole_image": 1.5814247703724509
+            }
+          }
+        ]
+      }
+    },
+    {
+      "outer_fold": 4,
+      "selected_candidate": "R",
+      "selected_is_oracle": true,
+      "fit_temperatures": {
+        "all::lesion_centered": 2.4768426288991052,
+        "all::background": 0.7574465434390857
+      },
+      "inner_comparisons": [
+        {
+          "candidate": "R",
+          "pixel_ece": 0.025209701343275957,
+          "pixel_nll": 0.23051312133060278,
+          "pixel_brier": 0.06900481959219841
+        },
+        {
+          "candidate": "RC",
+          "pixel_ece": 0.02549783136163413,
+          "pixel_nll": 0.22917132057126505,
+          "pixel_brier": 0.0689372953292489
+        },
+        {
+          "candidate": "RWC",
+          "pixel_ece": 0.025791826025562462,
+          "pixel_nll": 0.22931360494734715,
+          "pixel_brier": 0.06890388234843302
+        },
+        {
+          "candidate": "RW",
+          "pixel_ece": 0.026445464333576883,
+          "pixel_nll": 0.23062362585154755,
+          "pixel_brier": 0.06889935050214313
+        },
+        {
+          "candidate": "WC",
+          "pixel_ece": 0.03797932609429651,
+          "pixel_nll": 0.247728625218093,
+          "pixel_brier": 0.06913360117107822
+        },
+        {
+          "candidate": "C",
+          "pixel_ece": 0.038131630656050776,
+          "pixel_nll": 0.24828372955708167,
+          "pixel_brier": 0.06915178726836613
+        },
+        {
+          "candidate": "W",
+          "pixel_ece": 0.03813480424309589,
+          "pixel_nll": 0.247782697767906,
+          "pixel_brier": 0.06913203358995622
+        }
+      ],
+      "inner_fold_models": {
+        "C": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.71134324509604,
+              "glioma::whole_image": 1.7206904354196413,
+              "meningioma::whole_image": 1.5723905945323262,
+              "pituitary::whole_image": 1.626006098696829
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6451592929824341,
+              "glioma::whole_image": 1.6821747439007548,
+              "meningioma::whole_image": 1.6112128753112298,
+              "pituitary::whole_image": 1.599475103338221
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.697155952975319,
+              "glioma::whole_image": 1.688175621280276,
+              "meningioma::whole_image": 1.5446324511460146,
+              "pituitary::whole_image": 1.6504719634304028
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6961005448662172,
+              "glioma::whole_image": 1.7050677751001266,
+              "meningioma::whole_image": 1.5899351777122657,
+              "pituitary::whole_image": 1.5763441439420143
+            }
+          }
+        ],
+        "R": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.5168824161156325,
+              "all::background": 0.8037131579563953
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.4355246927971117,
+              "all::background": 0.7321936659387523
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.4837670879183253,
+              "all::background": 0.7389971823278749
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.470076106674809,
+              "all::background": 0.7513634197671525
+            }
+          }
+        ],
+        "RC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.5168824161156325,
+              "glioma::lesion_centered": 2.8584562331420913,
+              "meningioma::lesion_centered": 2.0301021197639244,
+              "pituitary::lesion_centered": 2.407920309578733,
+              "all::background": 0.8037131579563953,
+              "glioma::background": 0.823651717940548,
+              "meningioma::background": 0.5294998244583198,
+              "pituitary::background": 0.9272865047922264
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.4355246927971117,
+              "glioma::lesion_centered": 2.760982422105221,
+              "meningioma::lesion_centered": 2.1065372871860872,
+              "pituitary::lesion_centered": 2.4005529105035395,
+              "all::background": 0.7321936659387523,
+              "glioma::background": 0.7845171114122069,
+              "meningioma::background": 0.23974070162721972,
+              "pituitary::background": 0.6972323919478305
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.4837670879183253,
+              "glioma::lesion_centered": 2.7655702898759325,
+              "meningioma::lesion_centered": 1.9563182707549276,
+              "pituitary::lesion_centered": 2.461228143724328,
+              "all::background": 0.7389971823278749,
+              "glioma::background": 0.7029755337892029,
+              "meningioma::background": 0.5440829285770071,
+              "pituitary::background": 0.9752688100756608
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.470076106674809,
+              "glioma::lesion_centered": 2.8140876426957853,
+              "meningioma::lesion_centered": 2.0447970120487704,
+              "pituitary::lesion_centered": 2.2887457250037913,
+              "all::background": 0.7513634197671525,
+              "glioma::background": 0.7425153969239241,
+              "meningioma::background": 0.5821911933244173,
+              "pituitary::background": 0.9139899144457243
+            }
+          }
+        ],
+        "RW": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.4128787869347943,
+              "all::background": 0.8853340127689191
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.392108118228019,
+              "all::background": 0.7380864794047469
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3779501918946973,
+              "all::background": 0.763070894373497
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.339568038742511,
+              "all::background": 0.828401000597618
+            }
+          }
+        ],
+        "RWC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.4128787869347943,
+              "glioma::lesion_centered": 2.801985058127051,
+              "meningioma::lesion_centered": 2.041428642385479,
+              "pituitary::lesion_centered": 2.4114326098924566,
+              "all::background": 0.8853340127689191,
+              "glioma::background": 0.902040151827751,
+              "meningioma::background": 0.33623440682154443,
+              "pituitary::background": 1.0290378365290875
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.392108118228019,
+              "glioma::lesion_centered": 2.6786850371110784,
+              "meningioma::lesion_centered": 2.1172820229951146,
+              "pituitary::lesion_centered": 2.401867034915365,
+              "all::background": 0.7380864794047469,
+              "glioma::background": 0.8365603387485382,
+              "meningioma::background": 0.2097897776293341,
+              "pituitary::background": 0.5029333638275594
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.3779501918946973,
+              "glioma::lesion_centered": 2.6988664969848664,
+              "meningioma::lesion_centered": 1.9696727960422629,
+              "pituitary::lesion_centered": 2.463770797884219,
+              "all::background": 0.763070894373497,
+              "glioma::background": 0.7283469394124551,
+              "meningioma::background": 0.3442288656779836,
+              "pituitary::background": 1.0091522190971056
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::lesion_centered": 2.339568038742511,
+              "glioma::lesion_centered": 2.7173064537112355,
+              "meningioma::lesion_centered": 2.053241075964453,
+              "pituitary::lesion_centered": 2.271482742561368,
+              "all::background": 0.828401000597618,
+              "glioma::background": 0.8603901831198697,
+              "meningioma::background": 0.34101968389750464,
+              "pituitary::background": 0.942625243383265
+            }
+          }
+        ],
+        "W": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.678108529667413
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6517985790701433
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.656119656948757
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6465924468716542
+            }
+          }
+        ],
+        "WC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.678108529667413,
+              "glioma::whole_image": 1.7394399809352565,
+              "meningioma::whole_image": 1.5879024379514968,
+              "pituitary::whole_image": 1.6469948943617216
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6517985790701433,
+              "glioma::whole_image": 1.6889766944521656,
+              "meningioma::whole_image": 1.627224771238399,
+              "pituitary::whole_image": 1.6129389371706746
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.656119656948757,
+              "glioma::whole_image": 1.6915200121088534,
+              "meningioma::whole_image": 1.5630369280932113,
+              "pituitary::whole_image": 1.6693671922916642
+            }
+          },
+          {
+            "inner_evaluation_fold": 5,
+            "temperatures": {
+              "all::whole_image": 1.6465924468716542,
+              "glioma::whole_image": 1.7050777701087916,
+              "meningioma::whole_image": 1.597785640636295,
+              "pituitary::whole_image": 1.587143429647385
+            }
+          }
+        ]
+      }
+    },
+    {
+      "outer_fold": 5,
+      "selected_candidate": "RC",
+      "selected_is_oracle": true,
+      "fit_temperatures": {
+        "all::lesion_centered": 2.4537328283115114,
+        "glioma::lesion_centered": 2.8578519687787516,
+        "meningioma::lesion_centered": 2.0267260296416003,
+        "pituitary::lesion_centered": 2.256091172983264,
+        "all::background": 0.7851586608400297,
+        "glioma::background": 0.8435612238172591,
+        "meningioma::background": 0.47949544183098575,
+        "pituitary::background": 0.7976207916474831
+      },
+      "inner_comparisons": [
+        {
+          "candidate": "RC",
+          "pixel_ece": 0.02298186815185821,
+          "pixel_nll": 0.22338144990717163,
+          "pixel_brier": 0.06720740726709681
+        },
+        {
+          "candidate": "R",
+          "pixel_ece": 0.023638764562086936,
+          "pixel_nll": 0.2252939904345151,
+          "pixel_brier": 0.06732781120627236
+        },
+        {
+          "candidate": "RWC",
+          "pixel_ece": 0.023696486728254872,
+          "pixel_nll": 0.22366727964636107,
+          "pixel_brier": 0.06714340738072631
+        },
+        {
+          "candidate": "RW",
+          "pixel_ece": 0.02511866075880942,
+          "pixel_nll": 0.2255466294246034,
+          "pixel_brier": 0.06719638904990631
+        },
+        {
+          "candidate": "WC",
+          "pixel_ece": 0.03679978057413478,
+          "pixel_nll": 0.24139636224541305,
+          "pixel_brier": 0.06742038230203948
+        },
+        {
+          "candidate": "C",
+          "pixel_ece": 0.036873204017021696,
+          "pixel_nll": 0.24168662539445543,
+          "pixel_brier": 0.06743066654020557
+        },
+        {
+          "candidate": "W",
+          "pixel_ece": 0.03706992283991698,
+          "pixel_nll": 0.24161381827427703,
+          "pixel_brier": 0.06742254238594307
+        }
+      ],
+      "inner_fold_models": {
+        "C": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.7183998932144362,
+              "glioma::whole_image": 1.773132710863418,
+              "meningioma::whole_image": 1.5559086378912095,
+              "pituitary::whole_image": 1.5466793685461775
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.653345276480185,
+              "glioma::whole_image": 1.7375650591163807,
+              "meningioma::whole_image": 1.5954660561099432,
+              "pituitary::whole_image": 1.5143754554434956
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.7044371898895256,
+              "glioma::whole_image": 1.7424666092443735,
+              "meningioma::whole_image": 1.5278476834002168,
+              "pituitary::whole_image": 1.5733335866775642
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6961005448662172,
+              "glioma::whole_image": 1.7050677751001266,
+              "meningioma::whole_image": 1.5899351777122657,
+              "pituitary::whole_image": 1.5763441439420143
+            }
+          }
+        ],
+        "R": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.486734640099075,
+              "all::background": 0.8352688005361091
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.403961577524407,
+              "all::background": 0.7726639030385706
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.452980793239708,
+              "all::background": 0.7762173732905603
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.470076106674809,
+              "all::background": 0.7513634197671525
+            }
+          }
+        ],
+        "RC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.486734640099075,
+              "glioma::lesion_centered": 2.93358698136985,
+              "meningioma::lesion_centered": 2.0188171266731914,
+              "pituitary::lesion_centered": 2.232601745793337,
+              "all::background": 0.8352688005361091,
+              "glioma::background": 0.9181407593841666,
+              "meningioma::background": 0.4987066378311475,
+              "pituitary::background": 0.8015357432453887
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.403961577524407,
+              "glioma::lesion_centered": 2.8390816980413383,
+              "meningioma::lesion_centered": 2.096765757802925,
+              "pituitary::lesion_centered": 2.219350356312023,
+              "all::background": 0.7726639030385706,
+              "glioma::background": 0.8869914937572136,
+              "meningioma::background": 0.3241966848201663,
+              "pituitary::background": 0.5405285346784945
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.452980793239708,
+              "glioma::lesion_centered": 2.8436944546920273,
+              "meningioma::lesion_centered": 1.9438981070140826,
+              "pituitary::lesion_centered": 2.283659103485607,
+              "all::background": 0.7762173732905603,
+              "glioma::background": 0.8136249204334549,
+              "meningioma::background": 0.5088462844258186,
+              "pituitary::background": 0.8692849121257415
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.470076106674809,
+              "glioma::lesion_centered": 2.8140876426957853,
+              "meningioma::lesion_centered": 2.0447970120487704,
+              "pituitary::lesion_centered": 2.2887457250037913,
+              "all::background": 0.7513634197671525,
+              "glioma::background": 0.7425153969239241,
+              "meningioma::background": 0.5821911933244173,
+              "pituitary::background": 0.9139899144457243
+            }
+          }
+        ],
+        "RW": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.3349172654835875,
+              "all::background": 0.9352284793988734
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.312450492567486,
+              "all::background": 0.8125883913432794
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.2973898713868097,
+              "all::background": 0.8333770587609229
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.339568038742511,
+              "all::background": 0.828401000597618
+            }
+          }
+        ],
+        "RWC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::lesion_centered": 2.3349172654835875,
+              "glioma::lesion_centered": 2.7843194215783234,
+              "meningioma::lesion_centered": 2.0387901786830844,
+              "pituitary::lesion_centered": 2.201313378270012,
+              "all::background": 0.9352284793988734,
+              "glioma::background": 1.017111194597439,
+              "meningioma::background": 0.39949998936867415,
+              "pituitary::background": 0.9119463020738857
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::lesion_centered": 2.312450492567486,
+              "glioma::lesion_centered": 2.6620226804122535,
+              "meningioma::lesion_centered": 2.116176285849152,
+              "pituitary::lesion_centered": 2.18254882851567,
+              "all::background": 0.8125883913432794,
+              "glioma::background": 0.9740121433842743,
+              "meningioma::background": 0.35009773871365446,
+              "pituitary::background": 0.26611408575211926
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::lesion_centered": 2.2973898713868097,
+              "glioma::lesion_centered": 2.68202246055255,
+              "meningioma::lesion_centered": 1.9655946287361359,
+              "pituitary::lesion_centered": 2.2488670729813696,
+              "all::background": 0.8333770587609229,
+              "glioma::background": 0.8886857082323464,
+              "meningioma::background": 0.4062312315049938,
+              "pituitary::background": 0.8813456406028037
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::lesion_centered": 2.339568038742511,
+              "glioma::lesion_centered": 2.7173064537112355,
+              "meningioma::lesion_centered": 2.053241075964453,
+              "pituitary::lesion_centered": 2.271482742561368,
+              "all::background": 0.828401000597618,
+              "glioma::background": 0.8603901831198697,
+              "meningioma::background": 0.34101968389750464,
+              "pituitary::background": 0.942625243383265
+            }
+          }
+        ],
+        "W": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.676522178734597
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6499756632123137
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6543132728425072
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6465924468716542
+            }
+          }
+        ],
+        "WC": [
+          {
+            "inner_evaluation_fold": 1,
+            "temperatures": {
+              "all::whole_image": 1.676522178734597,
+              "glioma::whole_image": 1.7823280246505933,
+              "meningioma::whole_image": 1.584435715082202,
+              "pituitary::whole_image": 1.5582119104861112
+            }
+          },
+          {
+            "inner_evaluation_fold": 2,
+            "temperatures": {
+              "all::whole_image": 1.6499756632123137,
+              "glioma::whole_image": 1.735395749063511,
+              "meningioma::whole_image": 1.6239682846884487,
+              "pituitary::whole_image": 1.5154118642212302
+            }
+          },
+          {
+            "inner_evaluation_fold": 3,
+            "temperatures": {
+              "all::whole_image": 1.6543132728425072,
+              "glioma::whole_image": 1.7371841186751515,
+              "meningioma::whole_image": 1.5594638376372645,
+              "pituitary::whole_image": 1.5814247703724509
+            }
+          },
+          {
+            "inner_evaluation_fold": 4,
+            "temperatures": {
+              "all::whole_image": 1.6465924468716542,
+              "glioma::whole_image": 1.7050777701087916,
+              "meningioma::whole_image": 1.597785640636295,
+              "pituitary::whole_image": 1.587143429647385
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "final_all_validation_selection": {
+    "selected_candidate": "RC",
+    "comparisons": [
+      {
+        "candidate": "RC",
+        "pixel_ece": 0.02431846757509027,
+        "pixel_nll": 0.2263610405383241,
+        "pixel_brier": 0.06801152905105959
+      },
+      {
+        "candidate": "R",
+        "pixel_ece": 0.024521247872299208,
+        "pixel_nll": 0.22803004045397912,
+        "pixel_brier": 0.06810521057898514
+      },
+      {
+        "candidate": "RWC",
+        "pixel_ece": 0.02492050723230198,
+        "pixel_nll": 0.22654894123004665,
+        "pixel_brier": 0.06795370348063608
+      },
+      {
+        "candidate": "RW",
+        "pixel_ece": 0.02581651168598776,
+        "pixel_nll": 0.22820280788210476,
+        "pixel_brier": 0.0679899385629001
+      },
+      {
+        "candidate": "WC",
+        "pixel_ece": 0.03756585913262662,
+        "pixel_nll": 0.2442920217597277,
+        "pixel_brier": 0.0681504818860107
+      },
+      {
+        "candidate": "C",
+        "pixel_ece": 0.037724948015379275,
+        "pixel_nll": 0.2448616616395578,
+        "pixel_brier": 0.06816905683129666
+      },
+      {
+        "candidate": "W",
+        "pixel_ece": 0.03783593941582498,
+        "pixel_nll": 0.24442447575437376,
+        "pixel_brier": 0.06815723069931423
+      }
+    ],
+    "inner_fold_models": {
+      "C": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::whole_image": 1.7052390213781967,
+            "glioma::whole_image": 1.7513347922123772,
+            "meningioma::whole_image": 1.5546161998294372,
+            "pituitary::whole_image": 1.593246432546789
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::whole_image": 1.6558253042170685,
+            "glioma::whole_image": 1.7239094336921323,
+            "meningioma::whole_image": 1.5848151873430871,
+            "pituitary::whole_image": 1.5719416869412164
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::whole_image": 1.694493867437038,
+            "glioma::whole_image": 1.7278016664583726,
+            "meningioma::whole_image": 1.5336482882733729,
+            "pituitary::whole_image": 1.6121601280032785
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::whole_image": 1.68812090301394,
+            "glioma::whole_image": 1.6991915378912386,
+            "meningioma::whole_image": 1.5802867430766327,
+            "pituitary::whole_image": 1.6138621494243863
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::whole_image": 1.693700825895203,
+            "glioma::whole_image": 1.7398957368329988,
+            "meningioma::whole_image": 1.5680389655813134,
+            "pituitary::whole_image": 1.5531366320849453
+          }
+        }
+      ],
+      "R": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::lesion_centered": 2.4892645722133198,
+            "all::background": 0.8219593659415654
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::lesion_centered": 2.4277395278807012,
+            "all::background": 0.7735288356763744
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::lesion_centered": 2.4640876205611795,
+            "all::background": 0.7762162373861224
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::lesion_centered": 2.4768426288991052,
+            "all::background": 0.7574465434390857
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::lesion_centered": 2.4537328283115114,
+            "all::background": 0.7851586608400297
+          }
+        }
+      ],
+      "RC": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::lesion_centered": 2.4892645722133198,
+            "glioma::lesion_centered": 2.8910454577838887,
+            "meningioma::lesion_centered": 2.015803024996914,
+            "pituitary::lesion_centered": 2.349201497180084,
+            "all::background": 0.8219593659415654,
+            "glioma::background": 0.8969315159074501,
+            "meningioma::background": 0.4529578722342913,
+            "pituitary::background": 0.8044277190826685
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::lesion_centered": 2.4277395278807012,
+            "glioma::lesion_centered": 2.819041445394192,
+            "meningioma::lesion_centered": 2.073910816612675,
+            "pituitary::lesion_centered": 2.342339009636546,
+            "all::background": 0.7735288356763744,
+            "glioma::background": 0.8725256234370081,
+            "meningioma::background": 0.29969223068038386,
+            "pituitary::background": 0.6109069110011918
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::lesion_centered": 2.4640876205611795,
+            "glioma::lesion_centered": 2.822514887819912,
+            "meningioma::lesion_centered": 1.960549381303491,
+            "pituitary::lesion_centered": 2.3884640086265727,
+            "all::background": 0.7762162373861224,
+            "glioma::background": 0.817365692221113,
+            "meningioma::background": 0.4613533080490468,
+            "pituitary::background": 0.8579928862675484
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::lesion_centered": 2.4768426288991052,
+            "glioma::lesion_centered": 2.799938563327472,
+            "meningioma::lesion_centered": 2.0350335936429356,
+            "pituitary::lesion_centered": 2.390661933229266,
+            "all::background": 0.7574465434390857,
+            "glioma::background": 0.7647289486210934,
+            "meningioma::background": 0.4985378147556458,
+            "pituitary::background": 0.8923920450532647
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::lesion_centered": 2.4537328283115114,
+            "glioma::lesion_centered": 2.8578519687787516,
+            "meningioma::lesion_centered": 2.0267260296416003,
+            "pituitary::lesion_centered": 2.256091172983264,
+            "all::background": 0.7851586608400297,
+            "glioma::background": 0.8435612238172591,
+            "meningioma::background": 0.47949544183098575,
+            "pituitary::background": 0.7976207916474831
+          }
+        }
+      ],
+      "RW": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::lesion_centered": 2.3773371731711754,
+            "all::background": 0.8961198520290133
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::lesion_centered": 2.361239497095012,
+            "all::background": 0.7962011656919016
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::lesion_centered": 2.350391664932324,
+            "all::background": 0.812436580424996
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::lesion_centered": 2.3809115659719517,
+            "all::background": 0.8083309787070158
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::lesion_centered": 2.3212187037938756,
+            "all::background": 0.8564461527406485
+          }
+        }
+      ],
+      "RWC": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::lesion_centered": 2.3773371731711754,
+            "glioma::lesion_centered": 2.774554115001685,
+            "meningioma::lesion_centered": 2.035321574055054,
+            "pituitary::lesion_centered": 2.3374917920486085,
+            "all::background": 0.8961198520290133,
+            "glioma::background": 0.9638478689136356,
+            "meningioma::background": 0.37599451530381833,
+            "pituitary::background": 0.8985366120372953
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::lesion_centered": 2.361239497095012,
+            "glioma::lesion_centered": 2.682870390808752,
+            "meningioma::lesion_centered": 2.093243871191063,
+            "pituitary::lesion_centered": 2.328107607889638,
+            "all::background": 0.7962011656919016,
+            "glioma::background": 0.9252775088835692,
+            "meningioma::background": 0.3286391531070274,
+            "pituitary::background": 0.4319147904830769
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::lesion_centered": 2.350391664932324,
+            "glioma::lesion_centered": 2.6978566751608355,
+            "meningioma::lesion_centered": 1.9812050705820738,
+            "pituitary::lesion_centered": 2.375466500900254,
+            "all::background": 0.812436580424996,
+            "glioma::background": 0.8576438986742994,
+            "meningioma::background": 0.38141946068567933,
+            "pituitary::background": 0.8737154348480922
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::lesion_centered": 2.3809115659719517,
+            "glioma::lesion_centered": 2.7243511235148654,
+            "meningioma::lesion_centered": 2.0461295335564156,
+            "pituitary::lesion_centered": 2.388359632768632,
+            "all::background": 0.8083309787070158,
+            "glioma::background": 0.8363848858778778,
+            "meningioma::background": 0.3195037682369477,
+            "pituitary::background": 0.9223960902032107
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::lesion_centered": 2.3212187037938756,
+            "glioma::lesion_centered": 2.7115368601610177,
+            "meningioma::lesion_centered": 2.0442473828309784,
+            "pituitary::lesion_centered": 2.2262507144309382,
+            "all::background": 0.8564461527406485,
+            "glioma::background": 0.9406286571467674,
+            "meningioma::background": 0.37781226403282225,
+            "pituitary::background": 0.8065497884251993
+          }
+        }
+      ],
+      "W": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::whole_image": 1.6803438549825955
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::whole_image": 1.6607907975203224
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::whole_image": 1.6640582031595912
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::whole_image": 1.658346519251933
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::whole_image": 1.6570201806593103
+          }
+        }
+      ],
+      "WC": [
+        {
+          "inner_evaluation_fold": 1,
+          "temperatures": {
+            "all::whole_image": 1.6803438549825955,
+            "glioma::whole_image": 1.7648457972955307,
+            "meningioma::whole_image": 1.5846865399270114,
+            "pituitary::whole_image": 1.6101914771371317
+          }
+        },
+        {
+          "inner_evaluation_fold": 2,
+          "temperatures": {
+            "all::whole_image": 1.6607907975203224,
+            "glioma::whole_image": 1.7292210021938406,
+            "meningioma::whole_image": 1.6148625444634648,
+            "pituitary::whole_image": 1.5824162803570585
+          }
+        },
+        {
+          "inner_evaluation_fold": 3,
+          "temperatures": {
+            "all::whole_image": 1.6640582031595912,
+            "glioma::whole_image": 1.7306254153043374,
+            "meningioma::whole_image": 1.566063968197727,
+            "pituitary::whole_image": 1.6271704563940397
+          }
+        },
+        {
+          "inner_evaluation_fold": 4,
+          "temperatures": {
+            "all::whole_image": 1.658346519251933,
+            "glioma::whole_image": 1.7066573469993558,
+            "meningioma::whole_image": 1.594780883027721,
+            "pituitary::whole_image": 1.6300033465636403
+          }
+        },
+        {
+          "inner_evaluation_fold": 5,
+          "temperatures": {
+            "all::whole_image": 1.6570201806593103,
+            "glioma::whole_image": 1.7406765363180037,
+            "meningioma::whole_image": 1.5922166199164034,
+            "pituitary::whole_image": 1.5611698119059367
+          }
+        }
+      ]
+    },
+    "fit_temperatures": {
+      "all::lesion_centered": 2.462469223862374,
+      "glioma::lesion_centered": 2.8382391825028783,
+      "meningioma::lesion_centered": 2.0226794698303965,
+      "pituitary::lesion_centered": 2.346023980188774,
+      "all::background": 0.7834739689522809,
+      "glioma::background": 0.8405147699215328,
+      "meningioma::background": 0.44118358604190333,
+      "pituitary::background": 0.8006003683174882
+    }
+  }
+}
