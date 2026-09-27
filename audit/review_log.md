@@ -297,3 +297,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** All registered hashes matched and six non-empty 15-bin OOF diagrams were produced. C03 lesion-centred ECE improved for meningioma (`0.036631` to `0.013591`) and pituitary (`0.037867` to `0.009881`) but worsened for glioma (`0.082850` to `0.085523`). Case-reliability ECE was `0.097247` for glioma, `0.020790` for meningioma, and `0.027838` for pituitary. The subgroup weakness qualifies the aggregate C03 pass and must remain explicit.
 - **Alternatives considered:** Hide the glioma worsening because C03 passed in aggregate; rejected. Fit category-specific curves after seeing the diagrams; rejected because C09 is descriptive and C06 already closed under its fixed gate.
 - **Who approved:** Codex by C09's registered integrity rule; the user required honest per-category reporting and no post-hoc variants.
+
+## 2026-09-27T09:13:42+05:30 — Close Stage 3 calibration program
+
+- **Decision made:** Close Stage 3 with C03 isotonic calibration as the selected operational E08 calibrator. Mark H7's calibration condition passed and its reliability condition pending Stage 4; do not nominate E08 or open the sealed test yet.
+- **Triggering artifact:** `audit/stage3_calibration_report.json`, SHA256 `97d9c1dced6cd28fa68e1f552e8af38784fcd216aa3670df06dbc454e9b6460d`; human-readable report SHA256 `f56999605329d92808fc3925e05ebbf7ef53b87046bd66e2336096d18effc255`.
+- **Rationale:** C01–C09 are complete with fixed outcomes. C03 passed its gate and ranks first among passing operational methods by whole-image OOF ECE. Its OOF transform changes 22,891 hard-mask pixels across 679 images, so later E08 reliability work must use the locked calibrated probabilities and masks. Glioma lesion-centred ECE worsens from `0.082850` to `0.085523`, which remains an explicit subgroup limitation.
+- **Alternatives considered:** Select the better-calibrated C07 oracle; rejected because reference-mask routing is unavailable at inference. Keep raw E08 probabilities despite the registered selection rule; rejected because C03 passed and ranks first. Start Stage 4 automatically; rejected because the user required a pause after C09 and Stage 3 reporting.
+- **Who approved:** Codex by amendments 01 and 02's fixed operational ranking; awaiting user review before Stage 4.
