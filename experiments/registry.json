@@ -13,6 +13,10 @@
     {
       "path": "audit/preregistration_amendment_02.md",
       "sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43"
+    },
+    {
+      "path": "audit/preregistration_amendment_03.md",
+      "sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40"
     }
   ],
   "baseline": {
@@ -167,6 +171,15 @@
         "H3"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r01_ablation",
+      "path": "experiments/r01_ablation",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",

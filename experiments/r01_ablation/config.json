@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r01_ablation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H4", "H7"],
+  "preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "amendment_01_sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+  "amendment_02_sha256": "0153a8709f16ee38e4e2e2cea6044c840bb8b775971e2d090a02537a473e6a43",
+  "amendment_03_sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40",
+  "source_model": "e08_ensemble_with_c03_oof_isotonic_calibration",
+  "stage3_report_sha256": "97d9c1dced6cd28fa68e1f552e8af38784fcd216aa3670df06dbc454e9b6460d",
+  "c03_result_sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "calibration_cache_manifest_sha256": "1e2be5ec0ec3c0d3d05c083acbf004fe4a730cc06b4390d61310f23b7e960178",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "feature_reference_script_sha256": "55195f84453df4e2eaca76d3d633f4db3fc19a5ca31a01d897fa550201d001e5",
+  "classifier_predictions_path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
+  "classifier_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "population": {"cases": 680, "source": "BRISC internal segmentation validation"},
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5,
+    "reference_mask_role": "target creation and evaluation only"
+  },
+  "features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_probability_mean",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "log1p_component_count",
+    "largest_component_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter",
+    "border_touch_fraction"
+  ],
+  "feature_source": "C03 OOF calibrated probability map and its threshold-0.50 hard mask only",
+  "prohibited_feature_sources": [
+    "reference mask",
+    "Dice or IoU",
+    "true tumor type",
+    "patient or similarity-group identity",
+    "filename or path",
+    "dataset metadata",
+    "raw image intensity",
+    "classifier probabilities",
+    "rejected calibration artifacts"
+  ],
+  "baseline_estimator": {
+    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42,
+    "post_hoc_probability_calibration": false
+  },
+  "cross_fitting": {"folds": 5, "similarity_aware": true, "reported_scores": "out-of-fold only"},
+  "ablation": {
+    "variants": 14,
+    "method": "remove exactly one feature, refit the entire five-fold pipeline",
+    "importance": "full baseline AUROC minus ablated AUROC"
+  },
+  "permutation_importance": {
+    "repetitions_per_feature": 30,
+    "permutation_scope": "within each held-out outer fold",
+    "seed_rule": "42 + 1000 * feature_index + repetition_index",
+    "importance": "baseline AUROC minus mean permuted AUROC",
+    "ci": "2,000 paired similarity-group bootstrap samples; mean across all 30 permutations inside each sample"
+  },
+  "metrics": {
+    "primary": "failure-detection AUROC using risk=1-reliability",
+    "calibration": "15 equal-frequency ECE and MCE",
+    "proper_scores": ["Brier", "training-prevalence baseline Brier", "Brier skill"],
+    "subgroups": ["true category descriptive", "classifier-predicted category descriptive"],
+    "catastrophic_capture": "zero-Dice cases captured in top 20% risk"
+  },
+  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired": true, "ci": "percentile 95%"},
+  "gate": {"type": "DESCRIPTIVE", "selectable": false, "pass_fail_performance_gate": false},
+  "expected_c03_hard_mask_changes": {"pixels": 22891, "images": 679},
+  "neural_model_retraining": false,
+  "reliability_estimator_refitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}
