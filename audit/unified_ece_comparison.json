@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "status": "VERIFIED",
+  "scope": "Descriptive unified 15-bin equal-frequency ECE comparison; earlier gates unchanged",
+  "binning": "15 equal-frequency bins with stable probability ordering",
+  "segmenter_pixel_ece": [
+    {
+      "experiment_id": "c01_vector_scaling",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.03816373262676687,
+      "ece_change": -0.012378942230845125,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c01_vector_scaling",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.0021381933371911635,
+      "ece_change": 0.000377572628518329,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 4.336808689942018e-19
+    },
+    {
+      "experiment_id": "c01_vector_scaling",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.0003313766774767997,
+      "ece_change": -0.0021717548000925527,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c02_dirichlet",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "see experiment decision",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.0361481879916084,
+      "ece_change": -0.0143944868660036,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 6.938893903907228e-18
+    },
+    {
+      "experiment_id": "c02_dirichlet",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "see experiment decision",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.002128984436321753,
+      "ece_change": 0.0003683637276489186,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c02_dirichlet",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "see experiment decision",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.0002100504767381773,
+      "ece_change": -0.002293081000831175,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c03_isotonic",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.03350925723838701,
+      "ece_change": -0.017033417619224986,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c03_isotonic",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.0020053504389140235,
+      "ece_change": 0.0002447297302411891,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c03_isotonic",
+      "registered_decision": "PASS",
+      "operational_eligibility": "see experiment decision",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 7.560190069695048e-05,
+      "ece_change": -0.002427529576872402,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 1.3552527156068805e-20
+    },
+    {
+      "experiment_id": "c04_split_temperature",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE_ORACLE_REFERENCE_ROUTING",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.024521247946929673,
+      "ece_change": -0.026021426910682325,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 3.469446951953614e-18
+    },
+    {
+      "experiment_id": "c04_split_temperature",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE_ORACLE_REFERENCE_ROUTING",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.0015121536851713645,
+      "ece_change": -0.0002484670235014699,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c04_split_temperature",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE_ORACLE_REFERENCE_ROUTING",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.0023883702151236913,
+      "ece_change": -0.00011476126244566124,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c05_reliability_weighted",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.037835939415802954,
+      "ece_change": -0.012706735441809044,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 6.938893903907228e-18
+    },
+    {
+      "experiment_id": "c05_reliability_weighted",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.00312543872453526,
+      "ece_change": 0.0013648180158624254,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c05_reliability_weighted",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.0034267280412598575,
+      "ece_change": 0.0009235965636905049,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c06_per_category",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.03772494807817912,
+      "ece_change": -0.01281772677943288,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c06_per_category",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.003144782569967972,
+      "ece_change": 0.0013841618612951377,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 4.336808689942018e-19
+    },
+    {
+      "experiment_id": "c06_per_category",
+      "registered_decision": "FAIL",
+      "operational_eligibility": "ELIGIBLE_IF_GATE_PASSES",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.003462664898050424,
+      "ece_change": 0.0009595334204810712,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c07_hierarchical",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE",
+      "region": "lesion_centered",
+      "raw_ece": 0.050542674857612,
+      "oof_calibrated_ece": 0.024576980088582938,
+      "ece_change": -0.02596569476902906,
+      "raw_observations": 629978,
+      "calibrated_observations": 629978,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c07_hierarchical",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE",
+      "region": "background",
+      "raw_ece": 0.0017606207086728345,
+      "oof_calibrated_ece": 0.0015155927740483038,
+      "ece_change": -0.00024502793462453064,
+      "raw_observations": 10511142,
+      "calibrated_observations": 10511142,
+      "maximum_recomputation_difference": 0.0
+    },
+    {
+      "experiment_id": "c07_hierarchical",
+      "registered_decision": "PASS",
+      "operational_eligibility": "INELIGIBLE",
+      "region": "whole_image",
+      "raw_ece": 0.0025031314775693526,
+      "oof_calibrated_ece": 0.002442227606800203,
+      "ece_change": -6.0903870769149666e-05,
+      "raw_observations": 11141120,
+      "calibrated_observations": 11141120,
+      "maximum_recomputation_difference": 0.0
+    }
+  ],
+  "classifier_ece": [
+    {
+      "output": "four_class",
+      "state": "raw",
+      "ece": 0.008471254689780137,
+      "observations": 893,
+      "absolute_difference": 0.0
+    },
+    {
+      "output": "four_class",
+      "state": "oof",
+      "ece": 0.008835068858857618,
+      "observations": 893,
+      "absolute_difference": 0.0
+    },
+    {
+      "output": "binary",
+      "state": "raw",
+      "ece": 0.0024043884128862837,
+      "observations": 893,
+      "absolute_difference": 4.336808689942018e-19
+    },
+    {
+      "output": "binary",
+      "state": "oof",
+      "ece": 0.0031851639709873283,
+      "observations": 893,
+      "absolute_difference": 4.336808689942018e-19
+    }
+  ],
+  "case_reliability_ece": {
+    "source_model": "accepted v1 case-level logistic reliability model",
+    "cases": 680,
+    "ece": 0.031665407580711825,
+    "mce": 0.16249091150665995,
+    "bins": [
+      {
+        "bin": 1,
+        "count": 46,
+        "weight": 0.06764705882352941,
+        "minimum_probability": 0.0006819998169493624,
+        "maximum_probability": 0.3154769499060958,
+        "mean_probability": 0.12764663066865792,
+        "observed_frequency": 0.10869565217391304,
+        "absolute_gap": 0.018950978494744877
+      },
+      {
+        "bin": 2,
+        "count": 46,
+        "weight": 0.06764705882352941,
+        "minimum_probability": 0.3158179411911849,
+        "maximum_probability": 0.7088949184163689,
+        "mean_probability": 0.5331612624063835,
+        "observed_frequency": 0.6956521739130435,
+        "absolute_gap": 0.16249091150665995
+      },
+      {
+        "bin": 3,
+        "count": 46,
+        "weight": 0.06764705882352941,
+        "minimum_probability": 0.7120182109341032,
+        "maximum_probability": 0.8699032636317644,
+        "mean_probability": 0.7924525288042247,
+        "observed_frequency": 0.717391304347826,
+        "absolute_gap": 0.07506122445639862
+      },
+      {
+        "bin": 4,
+        "count": 46,
+        "weight": 0.06764705882352941,
+        "minimum_probability": 0.8714082600719593,
+        "maximum_probability": 0.9386139936595522,
+        "mean_probability": 0.9101002369764264,
+        "observed_frequency": 0.8695652173913043,
+        "absolute_gap": 0.04053501958512207
+      },
+      {
+        "bin": 5,
+        "count": 46,
+        "weight": 0.06764705882352941,
+        "minimum_probability": 0.9395421260986546,
+        "maximum_probability": 0.9643850671289784,
+        "mean_probability": 0.9536083975694588,
+        "observed_frequency": 0.9130434782608695,
+        "absolute_gap": 0.0405649193085893
+      },
+      {
+        "bin": 6,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9645742400009701,
+        "maximum_probability": 0.9735877069175649,
+        "mean_probability": 0.9689637988214683,
+        "observed_frequency": 0.9111111111111111,
+        "absolute_gap": 0.05785268771035723
+      },
+      {
+        "bin": 7,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9736453330264052,
+        "maximum_probability": 0.981145614442449,
+        "mean_probability": 0.9777086415598155,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.022291358440184483
+      },
+      {
+        "bin": 8,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9812268136196938,
+        "maximum_probability": 0.9850456583771251,
+        "mean_probability": 0.9833767063941151,
+        "observed_frequency": 0.9777777777777777,
+        "absolute_gap": 0.005598928616337373
+      },
+      {
+        "bin": 9,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.985178078419811,
+        "maximum_probability": 0.9882592191444758,
+        "mean_probability": 0.9869540509482456,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.01304594905175438
+      },
+      {
+        "bin": 10,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9883073068650614,
+        "maximum_probability": 0.9906496949941606,
+        "mean_probability": 0.9894285562418721,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.010571443758127907
+      },
+      {
+        "bin": 11,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9906633124996658,
+        "maximum_probability": 0.9927005232104151,
+        "mean_probability": 0.9915084727692202,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.008491527230779838
+      },
+      {
+        "bin": 12,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9927275858127663,
+        "maximum_probability": 0.9943533909577261,
+        "mean_probability": 0.9936533742667512,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.006346625733248845
+      },
+      {
+        "bin": 13,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9944051053233837,
+        "maximum_probability": 0.9960466032708684,
+        "mean_probability": 0.9953271120145913,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.004672887985408658
+      },
+      {
+        "bin": 14,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9960741204819903,
+        "maximum_probability": 0.9974984193220069,
+        "mean_probability": 0.9967914393763252,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.0032085606236748054
+      },
+      {
+        "bin": 15,
+        "count": 45,
+        "weight": 0.0661764705882353,
+        "minimum_probability": 0.9975550968289811,
+        "maximum_probability": 0.9999098549241557,
+        "mean_probability": 0.9986858202451101,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.0013141797548898992
+      }
+    ]
+  },
+  "source_verification": {
+    "c01_vector_scaling": {
+      "path": "experiments/c01_vector_scaling/result.json",
+      "sha256": "3d279a793bba476c8e9ddd07b060b6ba5fe06b948ee53c4f9f4ee6542cfdaf00",
+      "decision": "PASS"
+    },
+    "c02_dirichlet": {
+      "path": "experiments/c02_dirichlet/result.json",
+      "sha256": "ccf36b36a75819529071f2b7df5ce5d720849e76ded416696fd7ffb5c04919e3",
+      "decision": "FAIL"
+    },
+    "c03_isotonic": {
+      "path": "experiments/c03_isotonic/result.json",
+      "sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+      "decision": "PASS"
+    },
+    "c04_split_temperature": {
+      "path": "experiments/c04_split_temperature/result.json",
+      "sha256": "d4c221f0df29f89e52b38b9a2e1004fd5993b569de853f01257c1fe5f63d962a",
+      "decision": "PASS"
+    },
+    "c05_reliability_weighted": {
+      "path": "experiments/c05_reliability_weighted/result.json",
+      "sha256": "82540635ee7b74e5a93a645249020d3911778b22d7a04c91f594390362d6a2e8",
+      "decision": "FAIL"
+    },
+    "c06_per_category": {
+      "path": "experiments/c06_per_category/result.json",
+      "sha256": "87437901222b2370b12cdd9d3f952b32ee3de1666b49048e35d799fcb9312277",
+      "decision": "FAIL"
+    },
+    "c07_hierarchical": {
+      "path": "experiments/c07_hierarchical/result.json",
+      "sha256": "18458f2d5dbb884c5855fd69590b350326ff457f5fbae9f33f15852e8c21747c",
+      "decision": "PASS"
+    }
+  },
+  "verification": {
+    "source_results_verified": 7,
+    "segmenter_summaries_verified": 42,
+    "classifier_summaries_verified": 4,
+    "maximum_allowed_ece_difference": 1e-12,
+    "maximum_observed_ece_difference": 6.938893903907228e-18,
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "model_retrained": false,
+    "calibrator_refitted": false,
+    "script_sha256": "ba5aa7e3fc696b3ce261ad8cce20f033c3d033f3374f6b9c2d3eba0f844ce4c3"
+  },
+  "interpretation": [
+    "C08 standardizes reporting and does not retroactively alter any C01-C07 gate or decision.",
+    "Whole-image ECE is dominated by background pixels and must be read with lesion-centered ECE.",
+    "Oracle calibrators remain operationally ineligible even when their ECE is low."
+  ]
+}
