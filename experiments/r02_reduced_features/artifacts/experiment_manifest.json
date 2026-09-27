@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "experiment_id": "r02_reduced_features",
+  "registered_decision": "PASS",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r02_reduced_features/artifacts/bootstrap_comparison.csv",
+      "sha256": "21725fb723cdecf05ac2dfbba623dda40ca38033e3d7dd9fc740d565ffb253f1",
+      "bytes": 130160
+    },
+    {
+      "path": "experiments/r02_reduced_features/artifacts/model_metrics.csv",
+      "sha256": "531404e38dfcbb2a6c310740dddadaf4ac7eea8baee9b62498c0049e04059daa",
+      "bytes": 533
+    },
+    {
+      "path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+      "sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+      "bytes": 152296
+    },
+    {
+      "path": "experiments/r02_reduced_features/artifacts/reduced_fold_coefficients.csv",
+      "sha256": "d3f7cb42c75f546db120ae8be76f65da1f7d5193a3867a7661655e12614ea282",
+      "bytes": 2115
+    },
+    {
+      "path": "experiments/r02_reduced_features/config.json",
+      "sha256": "55b3599573d77032a31b9cfc878f8a6f9a64f40e57329e3d75642b7c8df8d832",
+      "bytes": 5363
+    },
+    {
+      "path": "experiments/r02_reduced_features/decision.md",
+      "sha256": "32a2a88ccd8d5107aa6c32118cb72ee4de8e5b3e098f3325889568b4ff65b1e5",
+      "bytes": 885
+    },
+    {
+      "path": "experiments/r02_reduced_features/hypothesis.md",
+      "sha256": "bef3f90276d1005f7ed6346bda622d05408affe695d84e2831e8feba002167ba",
+      "bytes": 589
+    },
+    {
+      "path": "experiments/r02_reduced_features/implementation_plan.md",
+      "sha256": "403ca997efbe0a015fd2e6c515c63c7b6c2f9bf61c54af43c28c7a1902276497",
+      "bytes": 2249
+    },
+    {
+      "path": "experiments/r02_reduced_features/result.json",
+      "sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+      "bytes": 25106
+    }
+  ]
+}

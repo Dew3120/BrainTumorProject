@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "r02_reduced_features",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H4",
     "H7"
