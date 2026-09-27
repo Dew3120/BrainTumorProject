@@ -289,3 +289,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** C03 is the passing operational C01–C07 method with the lowest whole-image OOF ECE. Pixel diagrams use held-out fold mappings and the lesion-centred evaluation region. Case diagrams use existing OOF reliability scores. All diagrams use 15 equal-frequency bins.
 - **Alternatives considered:** Use C07 because it has lower lesion-centred ECE; rejected because it needs reference-mask routing. Use true tumor type to route calibration; rejected as leakage. Fit category-specific curves; rejected because C09 is descriptive only.
 - **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex applied the fixed operational ranking before rendering.
+
+## 2026-09-27T09:10:12+05:30 — Verify per-category reliability diagrams
+
+- **Decision made:** Accept C09 as a verified descriptive study and close Stage 3 experimentation pending consolidation review.
+- **Triggering artifact:** `experiments/c09_category_diagrams/artifacts/experiment_manifest.json`, SHA256 `7e6b3d7bbe1f38b18320feddee3b87e161840db2c9bddf67674b9c5c52bd3628`; six PNG files under `audit/figures/`.
+- **Rationale:** All registered hashes matched and six non-empty 15-bin OOF diagrams were produced. C03 lesion-centred ECE improved for meningioma (`0.036631` to `0.013591`) and pituitary (`0.037867` to `0.009881`) but worsened for glioma (`0.082850` to `0.085523`). Case-reliability ECE was `0.097247` for glioma, `0.020790` for meningioma, and `0.027838` for pituitary. The subgroup weakness qualifies the aggregate C03 pass and must remain explicit.
+- **Alternatives considered:** Hide the glioma worsening because C03 passed in aggregate; rejected. Fit category-specific curves after seeing the diagrams; rejected because C09 is descriptive and C06 already closed under its fixed gate.
+- **Who approved:** Codex by C09's registered integrity rule; the user required honest per-category reporting and no post-hoc variants.

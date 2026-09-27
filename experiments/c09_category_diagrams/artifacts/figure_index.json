@@ -1,0 +1,34 @@
+{
+  "figures": [
+    {
+      "path": "audit/figures/pixel_reliability_glioma.png",
+      "sha256": "0ba7e71206e861f5be6a2dd1484d21c10d7d5c85766ccdc02a017a8babf1838b",
+      "bytes": 111863
+    },
+    {
+      "path": "audit/figures/case_reliability_glioma.png",
+      "sha256": "72df047c005f5fc23e22636e8c9b940b4fcde1cab182857020320220755094e5",
+      "bytes": 100622
+    },
+    {
+      "path": "audit/figures/pixel_reliability_meningioma.png",
+      "sha256": "792e6bd8f3384576a1bb032b99f157267e874b06ea445e12472d56230fce1b66",
+      "bytes": 113537
+    },
+    {
+      "path": "audit/figures/case_reliability_meningioma.png",
+      "sha256": "62b0b414e009b7aaad204dfc071453ab3795fba3546abd47c5c9c52cdd0870d8",
+      "bytes": 77914
+    },
+    {
+      "path": "audit/figures/pixel_reliability_pituitary.png",
+      "sha256": "a275eb790754c1ae72ce0d410c20b3b0fa07525a93d1fe7823a4d26a847e9f40",
+      "bytes": 112955
+    },
+    {
+      "path": "audit/figures/case_reliability_pituitary.png",
+      "sha256": "2293d0cb900bfa76be1af4f0ff938f38b437761d54998d119f37717050cc71ab",
+      "bytes": 85080
+    }
+  ]
+}

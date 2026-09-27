@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "experiment_id": "c09_category_diagrams",
+  "registered_decision": "VERIFIED",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "audit/category_reliability_diagrams.json",
+      "sha256": "3e9934b36a3ac22e2c58fdf185053512a033986f74b56259f99b747686f1a901",
+      "bytes": 20052
+    },
+    {
+      "path": "audit/category_reliability_diagrams.md",
+      "sha256": "a60c1453c1925ec7a9fa89ff0edd45c4ae09509f56a0bc3ab7a26266cb228f0b",
+      "bytes": 672
+    },
+    {
+      "path": "audit/figures/case_reliability_glioma.png",
+      "sha256": "72df047c005f5fc23e22636e8c9b940b4fcde1cab182857020320220755094e5",
+      "bytes": 100622
+    },
+    {
+      "path": "audit/figures/case_reliability_meningioma.png",
+      "sha256": "62b0b414e009b7aaad204dfc071453ab3795fba3546abd47c5c9c52cdd0870d8",
+      "bytes": 77914
+    },
+    {
+      "path": "audit/figures/case_reliability_pituitary.png",
+      "sha256": "2293d0cb900bfa76be1af4f0ff938f38b437761d54998d119f37717050cc71ab",
+      "bytes": 85080
+    },
+    {
+      "path": "audit/figures/pixel_reliability_glioma.png",
+      "sha256": "0ba7e71206e861f5be6a2dd1484d21c10d7d5c85766ccdc02a017a8babf1838b",
+      "bytes": 111863
+    },
+    {
+      "path": "audit/figures/pixel_reliability_meningioma.png",
+      "sha256": "792e6bd8f3384576a1bb032b99f157267e874b06ea445e12472d56230fce1b66",
+      "bytes": 113537
+    },
+    {
+      "path": "audit/figures/pixel_reliability_pituitary.png",
+      "sha256": "a275eb790754c1ae72ce0d410c20b3b0fa07525a93d1fe7823a4d26a847e9f40",
+      "bytes": 112955
+    },
+    {
+      "path": "experiments/c09_category_diagrams/artifacts/figure_index.json",
+      "sha256": "c1710c0793be0a542a134f8c7a380a6e311513d692586fd639b13184304c6b43",
+      "bytes": 1105
+    },
+    {
+      "path": "experiments/c09_category_diagrams/config.json",
+      "sha256": "f051a24a53fde949e7046d1a49f61ba0b59fa0f4841fd159d8619174de12016d",
+      "bytes": 2072
+    },
+    {
+      "path": "experiments/c09_category_diagrams/decision.md",
+      "sha256": "b3b2def56bf6b7ade64a1e6cb8fa662419c5ec099e9274e8200967cb7894df2f",
+      "bytes": 499
+    },
+    {
+      "path": "experiments/c09_category_diagrams/hypothesis.md",
+      "sha256": "130ca650deab45782d76999e38d57f084b58b0a8bb008ffac327c31df3fcc5a4",
+      "bytes": 1091
+    },
+    {
+      "path": "experiments/c09_category_diagrams/result.json",
+      "sha256": "622db209ae920754871b96e77527d0f2e2637670375037780feca1b4b31d883e",
+      "bytes": 19887
+    }
+  ]
+}
