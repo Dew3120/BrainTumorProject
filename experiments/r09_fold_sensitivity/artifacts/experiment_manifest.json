@@ -1,0 +1,68 @@
+{
+  "status": "DESCRIPTIVE_COMPLETE",
+  "experiment_id": "r09_fold_sensitivity",
+  "registered_decision": "DESCRIPTIVE_ONLY",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/alternative_fold_assignments.csv",
+      "sha256": "3523c67b160e65ea1b5344159ee5d0b8222cbbda0d3540c07d9055a2b96577a2",
+      "bytes": 217158
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/comparisons_to_original.csv",
+      "sha256": "060653276b874cdd66c80e211e0249aeaca5fa0b9cb0cdc1d1145bd00182b6ac",
+      "bytes": 444
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/fold_support.csv",
+      "sha256": "896e95378dae8d747c65edc1be89446bd83e36cadc5c78f4bba6d8b648758956",
+      "bytes": 695
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/oof_scores.csv",
+      "sha256": "1dae9ecbefeffae8d501926fa3eb2f0522978fa64c8135de7cf77d4032bd9b28",
+      "bytes": 360181
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/paired_bootstrap_comparisons.csv",
+      "sha256": "38c117387b37a4a1b07ea89e37287b39430c4920591dc7fb9c600be548541907",
+      "bytes": 409322
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/split_metrics.csv",
+      "sha256": "5aa49d1ebd15bc243a9b4a92b1f4fbc7e15608334aa8912e7a882aeca516ee3b",
+      "bytes": 448
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/artifacts/subgroup_aurocs.csv",
+      "sha256": "b7affe5e7c3db29662de25bc6a97f2fd2d069e06a6a2054b7e55290f95fee617",
+      "bytes": 451
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/config.json",
+      "sha256": "334260c4266c0213e764bed7b1ffab6bb9474e151e1d3aa8646c5a5c2832943c",
+      "bytes": 4033
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/decision.md",
+      "sha256": "5b46c442a8bd7471a8b3f137ab5397b6927ba07dbf7265019495e3dbb0d3ee8b",
+      "bytes": 460
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/hypothesis.md",
+      "sha256": "0b8ee2debe1865800f6158d7ad7e7439bcaa58ba77d2e71aa0ef6168ced8f3a1",
+      "bytes": 425
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/implementation_plan.md",
+      "sha256": "6076e757b34c2bdd60635d372542bb4b0f16e284a31df853fe272be97532dd9d",
+      "bytes": 1370
+    },
+    {
+      "path": "experiments/r09_fold_sensitivity/result.json",
+      "sha256": "29311b740b0ca9ae2806c7eb54ac0c86a93255d8706e324fb52f3262d61274bc",
+      "bytes": 24568
+    }
+  ]
+}

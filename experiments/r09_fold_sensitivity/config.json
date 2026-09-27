@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r09_fold_sensitivity",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "registration_commit_parent": "c36ac075ee51747a7c18d43ce8729c8a93a687c6",
   "amendment_12_path": "audit/preregistration_amendment_12.md",
   "amendment_12_sha256": "5902598fae407dcd56bb0084c01098974e0cc78e20fb406d8d733dbf7015ec7a",
@@ -24,7 +27,10 @@
   "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
   "stage4_common_path": "scripts/stage4_reliability_common.py",
   "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
-  "population": {"cases": 680, "similarity_groups": 583},
+  "population": {
+    "cases": 680,
+    "similarity_groups": 583
+  },
   "features": [
     "empty_prediction",
     "predicted_area_fraction",
@@ -37,9 +43,15 @@
     "bounding_box_fill_ratio",
     "normalized_perimeter"
   ],
-  "target": {"reliability": "P(Dice >= 0.50)", "threshold": 0.5},
+  "target": {
+    "reliability": "P(Dice >= 0.50)",
+    "threshold": 0.5
+  },
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -51,7 +63,11 @@
     "class": "sklearn.model_selection.StratifiedGroupKFold",
     "n_splits": 5,
     "shuffle": true,
-    "seeds": [17, 42, 93],
+    "seeds": [
+      17,
+      42,
+      93
+    ],
     "stratify_on": "Dice >= 0.50",
     "group_on": "similarity_group"
   },
@@ -63,11 +79,21 @@
     "ci": "percentile 95%"
   },
   "descriptive_label": {
-    "narrow": {"maximum_auroc_sample_sd": 0.01, "maximum_absolute_original_difference": 0.02},
-    "moderate": {"maximum_auroc_sample_sd": 0.02, "maximum_absolute_original_difference": 0.04},
+    "narrow": {
+      "maximum_auroc_sample_sd": 0.01,
+      "maximum_absolute_original_difference": 0.02
+    },
+    "moderate": {
+      "maximum_auroc_sample_sd": 0.02,
+      "maximum_absolute_original_difference": 0.04
+    },
     "otherwise": "MATERIAL"
   },
-  "gate": {"type": "DESCRIPTIVE_ONLY", "performance_pass_fail": false, "can_change_model_selection": false},
+  "gate": {
+    "type": "DESCRIPTIVE_ONLY",
+    "performance_pass_fail": false,
+    "can_change_model_selection": false
+  },
   "fail_closed": {
     "r02_reproduction_absolute_tolerance": 1e-12,
     "expected_r02_aggregate_auroc": 0.9555020801044132,
