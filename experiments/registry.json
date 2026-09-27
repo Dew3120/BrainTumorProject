@@ -37,6 +37,10 @@
     {
       "path": "audit/preregistration_amendment_08.md",
       "sha256": "3864f8dab879d8bf7821b91551127380fd636d1b68a170193721ccba860223c0"
+    },
+    {
+      "path": "audit/preregistration_amendment_09.md",
+      "sha256": "84305f4e04404d238407cc8650317d111aa871c72b67d62844cdd7ece921cdb7"
     }
   ],
   "baseline": {
@@ -236,6 +240,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r06_nonlinear_comparison",
+      "path": "experiments/r06_nonlinear_comparison",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",
