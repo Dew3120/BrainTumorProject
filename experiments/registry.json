@@ -29,6 +29,10 @@
     {
       "path": "audit/preregistration_amendment_06.md",
       "sha256": "47ee34350db79c44d0a5d74bf9cb809029b8781f930959c030705e03e4e4b394"
+    },
+    {
+      "path": "audit/preregistration_amendment_07.md",
+      "sha256": "cd960ba0167f3982722667651a2dd0da12e2c2437160df7b6c0cee1f65be2a40"
     }
   ],
   "baseline": {
@@ -210,6 +214,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r04_per_category",
+      "path": "experiments/r04_per_category",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",
