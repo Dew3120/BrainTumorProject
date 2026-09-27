@@ -45,6 +45,10 @@
     {
       "path": "audit/preregistration_amendment_10.md",
       "sha256": "2f96675d8616605cb9794928e4b7dfa1fd9a76361f09d9ddcd802fa7f86ed4cc"
+    },
+    {
+      "path": "audit/preregistration_amendment_11.md",
+      "sha256": "79e3e5d49230b4ec0409f98842b2e40d836981aa82e34e6269a7589f58d9ad7a"
     }
   ],
   "baseline": {
@@ -262,6 +266,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r08_prospective_fold_evaluation",
+      "path": "experiments/r08_prospective_fold_evaluation",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",

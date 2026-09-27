@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r08_prospective_fold_evaluation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H4", "H7"],
+  "registration_commit_parent": "72cd5e16123b096e4655813ff144f46cddc58c55",
+  "amendment_11_path": "audit/preregistration_amendment_11.md",
+  "amendment_11_sha256": "79e3e5d49230b4ec0409f98842b2e40d836981aa82e34e6269a7589f58d9ad7a",
+  "parent_preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "stage4_parent_amendment_sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40",
+  "r02_result_path": "experiments/r02_reduced_features/result.json",
+  "r02_result_sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+  "r02_manifest_path": "experiments/r02_reduced_features/artifacts/experiment_manifest.json",
+  "r02_manifest_sha256": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819",
+  "r02_oof_path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+  "r02_oof_sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+  "r07_result_path": "experiments/r07_coefficient_bootstrap/result.json",
+  "r07_result_sha256": "fc8b1bd80826913ff990ea993bf1c0c8bdf028b614101f967afc4282c01cb948",
+  "r07_manifest_path": "experiments/r07_coefficient_bootstrap/artifacts/experiment_manifest.json",
+  "r07_manifest_sha256": "afddd3023655ec9fc539611a50eef3335d36923894e49aa99e831f9743e5dd10",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "fold_assignment_path": "runs/classifier/20260921-170607-243133-baseline/classifier_calibration_folds.csv",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "stage4_common_path": "scripts/stage4_reliability_common.py",
+  "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
+  "population": {"cases": 680, "similarity_groups": 583},
+  "features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "feature_source": "C03 OOF calibrated probability map and threshold-0.50 prediction only",
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5
+  },
+  "estimator": {
+    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42
+  },
+  "cross_fitting": {
+    "folds": 5,
+    "similarity_aware": true,
+    "fit_on_four_evaluate_on_fifth": true,
+    "reported_scores": "out-of-fold only",
+    "fold_summary": "unweighted mean and sample SD"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "ci": "percentile 95%",
+    "minimum_valid_subgroup_repetitions": 1900
+  },
+  "metrics": {
+    "primary_per_fold": "failure-detection AUROC",
+    "calibration": "15-bin equal-frequency ECE and MCE",
+    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "aggregate": "overall OOF AUROC with group-bootstrap CI",
+    "subgroups": "true tumor category",
+    "catastrophic_capture": "zero-Dice capture in top 136 failure risks"
+  },
+  "gate": {
+    "type": "MEAN_HELD_OUT_FOLD_AUROC",
+    "minimum_mean_fold_auroc": 0.941,
+    "operator": ">=",
+    "equality_passes": true
+  },
+  "fail_closed": {
+    "r02_reproduction_absolute_tolerance": 1e-12,
+    "expected_r02_aggregate_auroc": 0.9555020801044132,
+    "expected_c03_changed_pixels": 22891,
+    "expected_c03_changed_images": 679,
+    "population_must_equal": 680,
+    "group_count_must_equal": 583,
+    "all_folds_require_both_outcomes": true,
+    "feature_contract_required": true
+  },
+  "neural_classifier_or_segmenter_retraining": false,
+  "reliability_estimator_fitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}
