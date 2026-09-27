@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "experiment_id": "r08_prospective_fold_evaluation",
+  "registered_decision": "PASS",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/artifacts/fold_metrics.csv",
+      "sha256": "43f05c23bb451d7db6ed718935acefece58a29f1197d9f2e625299ac11361f1e",
+      "bytes": 874
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/artifacts/oof_scores.csv",
+      "sha256": "5a733ad3241642ef6f7b56141f0a90d28f096b0e133df510d03f27ab3dcbe4d7",
+      "bytes": 130059
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/artifacts/overall_bootstrap_aurocs.csv",
+      "sha256": "bbaa3458ac9133e666402e8e44e0132a877d5aba1f9253bcb842cf631006b4d8",
+      "bytes": 48657
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/artifacts/subgroup_aurocs.csv",
+      "sha256": "cdf160b08662d6071380583155561f55ae21a68f82116a8a6cf33e69714a3865",
+      "bytes": 628
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/artifacts/subgroup_bootstrap_aurocs.csv",
+      "sha256": "1222b96eb0fffa18a14996a61b03a697ae26c05b9978422c6409a391f5e1cbed",
+      "bytes": 198819
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/config.json",
+      "sha256": "89c2d82d67fbe54f64be901839db937eb91111a240481b6201cb45b7b2620b38",
+      "bytes": 4353
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/decision.md",
+      "sha256": "1d732bc993ab66755cd4b8e8b5edcc3552611a27ad99f324fcde41dab8295c64",
+      "bytes": 482
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/hypothesis.md",
+      "sha256": "3f1d23fc1754df044b5e960d09cf770a16b9c30791ec60086260d8583953093e",
+      "bytes": 471
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/implementation_plan.md",
+      "sha256": "f75d1c9ae211bc08223d2aff5e5943efa2b5a40e49e6b653a0bb722a460b21ac",
+      "bytes": 1752
+    },
+    {
+      "path": "experiments/r08_prospective_fold_evaluation/result.json",
+      "sha256": "8e6ea05a18937949aa55aa4d285e535047e3c1dba3a5a98bc12b7b3e523f34a4",
+      "bytes": 13277
+    }
+  ]
+}

@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r08_prospective_fold_evaluation",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "registration_commit_parent": "72cd5e16123b096e4655813ff144f46cddc58c55",
   "amendment_11_path": "audit/preregistration_amendment_11.md",
   "amendment_11_sha256": "79e3e5d49230b4ec0409f98842b2e40d836981aa82e34e6269a7589f58d9ad7a",
@@ -24,7 +27,10 @@
   "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
   "stage4_common_path": "scripts/stage4_reliability_common.py",
   "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
-  "population": {"cases": 680, "similarity_groups": 583},
+  "population": {
+    "cases": 680,
+    "similarity_groups": 583
+  },
   "features": [
     "empty_prediction",
     "predicted_area_fraction",
@@ -44,7 +50,10 @@
     "threshold": 0.5
   },
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -69,7 +78,11 @@
   "metrics": {
     "primary_per_fold": "failure-detection AUROC",
     "calibration": "15-bin equal-frequency ECE and MCE",
-    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "proper_scores": [
+      "Brier",
+      "fold-training-prevalence baseline Brier",
+      "Brier skill"
+    ],
     "aggregate": "overall OOF AUROC with group-bootstrap CI",
     "subgroups": "true tumor category",
     "catastrophic_capture": "zero-Dice capture in top 136 failure risks"

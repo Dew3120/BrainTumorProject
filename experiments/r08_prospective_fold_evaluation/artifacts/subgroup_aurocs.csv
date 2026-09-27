@@ -1,0 +1,4 @@
+category,cases,successes,failures,failure_detection_auroc,bootstrap
+glioma,204,141,63,0.8768434087583024,"{'valid_repetitions': 2000, 'invalid_repetitions': 0, 'mean': 0.8769995700413018, 'ci95_lower': 0.82550999000999, 'ci95_upper': 0.9240559053092298}"
+meningioma,227,220,7,0.9941558441558441,"{'valid_repetitions': 1994, 'invalid_repetitions': 6, 'mean': 0.9939073423073819, 'ci95_lower': 0.9815404143387301, 'ci95_upper': 1.0}"
+pituitary,249,237,12,0.9571026722925458,"{'valid_repetitions': 2000, 'invalid_repetitions': 0, 'mean': 0.9561503552616469, 'ci95_lower': 0.9182765423242468, 'ci95_upper': 0.9842299143302181}"
