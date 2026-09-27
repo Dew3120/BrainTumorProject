@@ -153,6 +153,14 @@
       "status": "COMPLETE"
     },
     {
+      "id": "c08_unified_ece",
+      "path": "experiments/c08_unified_ece",
+      "hypothesis_ids": [
+        "H3"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "e08_final_selection",
       "path": "experiments/e08_final_selection",
       "hypothesis_ids": [

@@ -265,3 +265,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Nested outer-fold calibration achieved aggregate lesion-centred ECE `0.024577`, below the `0.03` gate. Predicted-route lesion-centred ECE was `0.034287` for glioma, `0.027104` for meningioma, and `0.034934` for pituitary, all below `0.05`. All four checks passed and zero hard-mask pixels changed. Inner selection chose `RC` for outer folds 1, 2, and 5 and `R` for folds 3 and 4; the final all-validation proposal also selected `RC`. Every selected configuration requires reference-mask routing and therefore cannot operate at inference or satisfy H7.
 - **Alternatives considered:** Promote C07 because its local metrics passed; rejected by amendment 02's operational-input rule. Replace the nested selections with the best operational candidate after observing results; rejected as post-hoc selection. Treat the reference lesion region as available at inference; rejected as leakage.
 - **Who approved:** Codex by the registered C07 gate and operational-eligibility rule; the user required fixed gates and fail-closed selection.
+
+## 2026-09-27T09:04:05+05:30 — Register unified ECE comparison
+
+- **Decision made:** Register C08 as a non-fitting integrity and standardization study before generating the comparison report.
+- **Triggering artifact:** `experiments/c08_unified_ece/config.json`, SHA256 `160e0e967ca5778ceb70aee9be15ed8b3708ee8f1dc9e53e4fa0490730317524`; hypothesis SHA256 `5c192d9a312f288e34260724950283ecdd0bd29092df5590baef881e622a2833`.
+- **Rationale:** C08 will verify all C01–C07 result hashes, require 15 non-empty equal-frequency bins with exact pixel coverage, and independently recompute every stored ECE within `1e-12`. It also standardizes the frozen classifier and accepted case-reliability ECE to 15 equal-frequency bins without changing any earlier decision.
+- **Alternatives considered:** Refit the calibrators; rejected because C08 is descriptive and must not alter their outputs. Compare mixed bin definitions; rejected because the purpose is one fixed 15-bin definition.
+- **Who approved:** User through the approved uninterrupted C03–C09 sequence; Codex fixed the integrity checks before reading consolidated outcomes.
