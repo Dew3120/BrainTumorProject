@@ -1,0 +1,68 @@
+{
+  "status": "FAIL",
+  "experiment_id": "r05_category_aware",
+  "registered_decision": "FAIL",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r05_category_aware/artifacts/analysis_metrics.csv",
+      "sha256": "9470c013daf5826690b2b1e14e266f51795c92387dbe5a97889096aabeb39d82",
+      "bytes": 1470
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/bootstrap_comparisons.csv",
+      "sha256": "c5680983a76b4c2bd4ec0b50a213c9ba447c513f8bdb9fab1577534c3b226377",
+      "bytes": 2826740
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/category_aware_features.csv",
+      "sha256": "323eaae335fb416000ffcaf310b070447a69d69dfea2675aae68766069b34d5f",
+      "bytes": 187805
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/excluded_case.csv",
+      "sha256": "bfa83740e86ab9df8a17614ba3a3e8332815c7c20a9d99007d858c0c9926c694",
+      "bytes": 241
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/fold_coefficients.csv",
+      "sha256": "d31aa32be0b4427f5e96e942c41d888c5f198358a329bc065a7e12f9ae65d7c4",
+      "bytes": 2696
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/fold_support.csv",
+      "sha256": "955a192ff04e75c552f898e4bfb419987f73b25fd8e975768cec01224999f8bf",
+      "bytes": 356
+    },
+    {
+      "path": "experiments/r05_category_aware/artifacts/oof_scores_and_comparators.csv",
+      "sha256": "0f9e4f1ece3fa2deb8ed8332cb1891177a1e494fc3849ad70a0db418f3ec73d4",
+      "bytes": 149961
+    },
+    {
+      "path": "experiments/r05_category_aware/config.json",
+      "sha256": "70cec0487c48fd933fc99ce83f1015009ec364ba4668551d556b2a2ee7c7ae81",
+      "bytes": 6907
+    },
+    {
+      "path": "experiments/r05_category_aware/decision.md",
+      "sha256": "5e8c854fe16ef55149e9d1c6abecf9a8868410525d38b573eb501e552e3fc874",
+      "bytes": 980
+    },
+    {
+      "path": "experiments/r05_category_aware/hypothesis.md",
+      "sha256": "9c313b8cc28adfa74d37ea04bbc72c4e0803faf388bea0d5c0bce34ae014ef5d",
+      "bytes": 594
+    },
+    {
+      "path": "experiments/r05_category_aware/implementation_plan.md",
+      "sha256": "cb36bfe2d8572e0e5cb0f4f55f1cae0296a85d76f237904302b8b0f9b3b6655f",
+      "bytes": 2279
+    },
+    {
+      "path": "experiments/r05_category_aware/result.json",
+      "sha256": "3f08ad6dde731209c53d84c4b01c6709bcec64dca536b801cd4e78d94abf2d8d",
+      "bytes": 63056
+    }
+  ]
+}

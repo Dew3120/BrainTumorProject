@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r05_category_aware",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "registration_commit_parent": "a2d302705635dca9ae6a6b70800b1af53426d59c",
   "amendment_08_path": "audit/preregistration_amendment_08.md",
   "amendment_08_sha256": "3864f8dab879d8bf7821b91551127380fd636d1b68a170193721ccba860223c0",
@@ -74,7 +77,10 @@
     "reference_mask_role": "target creation and evaluation only"
   },
   "estimator": {
-    "pipeline": ["StandardScaler_all_13_columns", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler_all_13_columns",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -101,7 +107,11 @@
     "primary_gate_metric": "failure-detection AUROC among classifier-predicted glioma cases",
     "overall_and_subgroup_auroc": true,
     "calibration": "15 equal-frequency ECE and MCE",
-    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "proper_scores": [
+      "Brier",
+      "fold-training-prevalence baseline Brier",
+      "Brier skill"
+    ],
     "coefficients": "all 13 per-fold standardized coefficients, mean, sample SD, sign counts, and all-fold sign stability",
     "comparisons": "paired identical-case R02 and R04 OOF comparisons"
   },

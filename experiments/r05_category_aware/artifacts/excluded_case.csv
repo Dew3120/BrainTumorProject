@@ -1,0 +1,2 @@
+path,true_label,classifier_predicted_label,reason,received_r05_score
+data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01380_me_ax_t1.jpg,meningioma,no_tumor,registered classifier-predicted no_tumor exclusion,0
