@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r05_category_aware",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H4", "H7"],
+  "registration_commit_parent": "a2d302705635dca9ae6a6b70800b1af53426d59c",
+  "amendment_08_path": "audit/preregistration_amendment_08.md",
+  "amendment_08_sha256": "3864f8dab879d8bf7821b91551127380fd636d1b68a170193721ccba860223c0",
+  "parent_preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "stage4_parent_amendment_sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40",
+  "r02_result_path": "experiments/r02_reduced_features/result.json",
+  "r02_result_sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+  "r02_manifest_path": "experiments/r02_reduced_features/artifacts/experiment_manifest.json",
+  "r02_manifest_sha256": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819",
+  "r02_oof_path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+  "r02_oof_sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+  "r04_result_path": "experiments/r04_per_category/result.json",
+  "r04_result_sha256": "e47d380024953f9e77be1d1916f4eeb0f103a72a12070ecc3a5708d43fc39046",
+  "r04_manifest_path": "experiments/r04_per_category/artifacts/experiment_manifest.json",
+  "r04_manifest_sha256": "b5180fb40c4663502c41cce03e83f174721897b74f145d8519c677287f47a047",
+  "r04_oof_path": "experiments/r04_per_category/artifacts/oof_category_scores.csv",
+  "r04_oof_sha256": "beabad3c068d62b58f8048fd23126edb44a95942a3eade639837fe78c94c8b58",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "fold_assignment_path": "runs/classifier/20260921-170607-243133-baseline/classifier_calibration_folds.csv",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "classifier_predictions_path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
+  "classifier_predictions_sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344",
+  "stage4_common_path": "scripts/stage4_reliability_common.py",
+  "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
+  "population": {
+    "source_cases": 680,
+    "included_cases": 679,
+    "predicted_route_counts": {
+      "glioma": 203,
+      "meningioma": 219,
+      "pituitary": 257,
+      "no_tumor_excluded": 1
+    },
+    "excluded_path": "data/raw/brisc/brisc2025/classification_task/train/meningioma/brisc2025_train_01380_me_ax_t1.jpg"
+  },
+  "numeric_features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "category_features": [
+    "predicted_category_glioma",
+    "predicted_category_meningioma",
+    "predicted_category_pituitary"
+  ],
+  "feature_source": "ten C03 prediction-derived R02 features plus frozen-classifier discrete predicted-category one-hot indicators",
+  "prohibited_model_inputs": [
+    "true tumor type",
+    "reference mask or reference geometry",
+    "Dice or IoU",
+    "classifier probabilities",
+    "patient or similarity-group identity",
+    "filename or path",
+    "dataset metadata",
+    "raw image intensity"
+  ],
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5,
+    "reference_mask_role": "target creation and evaluation only"
+  },
+  "estimator": {
+    "pipeline": ["StandardScaler_all_13_columns", "LogisticRegression"],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42,
+    "post_hoc_probability_calibration": false
+  },
+  "cross_fitting": {
+    "folds": 5,
+    "similarity_aware": true,
+    "reported_scores": "out-of-fold only",
+    "scaling_encoding_and_fitting": "inside each included outer-training partition",
+    "every_training_partition_requires_both_outcomes": true
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "ci": "percentile 95%",
+    "minimum_valid_subgroup_replicates": 1900
+  },
+  "metrics": {
+    "primary_gate_metric": "failure-detection AUROC among classifier-predicted glioma cases",
+    "overall_and_subgroup_auroc": true,
+    "calibration": "15 equal-frequency ECE and MCE",
+    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "coefficients": "all 13 per-fold standardized coefficients, mean, sample SD, sign counts, and all-fold sign stability",
+    "comparisons": "paired identical-case R02 and R04 OOF comparisons"
+  },
+  "comparators": {
+    "r02_matched_overall": 0.9550146579132087,
+    "r02_published_true_category": {
+      "glioma": 0.8768434087583024,
+      "meningioma": 0.9941558441558441,
+      "pituitary": 0.9571026722925458
+    },
+    "r02_matched_true_category": {
+      "glioma": 0.8768434087583024,
+      "meningioma": 0.9931818181818182,
+      "pituitary": 0.9571026722925458
+    },
+    "r02_predicted_category": {
+      "glioma": 0.8709790209790209,
+      "meningioma": 0.996870109546166,
+      "pituitary": 0.9639118457300275
+    },
+    "r04_matched_overall_version_a": 0.929600726702176,
+    "r04_matched_overall_version_b": 0.9308600685412279,
+    "r04_published_version_a": {
+      "glioma": 0.8573680063041765,
+      "meningioma": 0.8454545454545455,
+      "pituitary": 0.9254571026722925
+    },
+    "r04_matched_true_version_a": {
+      "glioma": 0.8573680063041765,
+      "meningioma": 0.8204545454545455,
+      "pituitary": 0.9254571026722925
+    },
+    "r04_predicted_version_b": {
+      "glioma": 0.8677156177156177,
+      "meningioma": 0.9029733959311425,
+      "pituitary": 0.9578512396694214
+    }
+  },
+  "gate": {
+    "metric": "classifier-predicted-glioma failure-detection AUROC",
+    "minimum_auroc": 0.88,
+    "operator": ">=",
+    "equality_passes": true
+  },
+  "fail_closed": {
+    "comparator_reproduction_absolute_tolerance": 1e-12,
+    "expected_c03_changed_pixels": 22891,
+    "expected_c03_changed_images": 679,
+    "source_population_must_equal": 680,
+    "included_population_must_equal": 679,
+    "expected_excluded_no_tumor_cases": 1,
+    "one_hot_rows_must_sum_to_one": true,
+    "feature_contract_required": true,
+    "fold_and_group_integrity_required": true,
+    "finite_values_required": true
+  },
+  "neural_model_retraining": false,
+  "reliability_estimator_refitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}
