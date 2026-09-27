@@ -1,0 +1,16 @@
+model,fold,training_cases,training_successes,training_failures,evaluation_cases,evaluation_successes,evaluation_failures,training_prevalence,convergence_warning_count,convergence_warnings,other_warning_count,other_warnings,iterations
+xgboost,1,544,480,64,136,118,18,0.8823529411764706,0,,0,,200
+xgboost,2,544,475,69,136,123,13,0.8731617647058824,0,,0,,200
+xgboost,3,543,479,64,137,119,18,0.8821362799263351,0,,0,,200
+xgboost,4,545,482,63,135,116,19,0.8844036697247707,0,,0,,200
+xgboost,5,544,476,68,136,122,14,0.875,0,,0,,200
+mlp,1,544,480,64,136,118,18,0.8823529411764706,1,Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.,0,,1000
+mlp,2,544,475,69,136,123,13,0.8731617647058824,1,Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.,0,,1000
+mlp,3,543,479,64,137,119,18,0.8821362799263351,0,,0,,803
+mlp,4,545,482,63,135,116,19,0.8844036697247707,0,,0,,904
+mlp,5,544,476,68,136,122,14,0.875,0,,0,,829
+random_forest,1,544,480,64,136,118,18,0.8823529411764706,0,,0,,100
+random_forest,2,544,475,69,136,123,13,0.8731617647058824,0,,0,,100
+random_forest,3,543,479,64,137,119,18,0.8821362799263351,0,,0,,100
+random_forest,4,545,482,63,135,116,19,0.8844036697247707,0,,0,,100
+random_forest,5,544,476,68,136,122,14,0.875,0,,0,,100

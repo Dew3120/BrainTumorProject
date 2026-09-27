@@ -1,0 +1,83 @@
+{
+  "status": "FAIL",
+  "experiment_id": "r06_nonlinear_comparison",
+  "registered_decision": "FAIL",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/bootstrap_aurocs.csv",
+      "sha256": "ac512f54b404fadae54d35948e636b7d72a2934897152373b21ecf1710a49720",
+      "bytes": 1337160
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/fold_diagnostics.csv",
+      "sha256": "83651cd6e970e8d759b37a1dbf8a8db858b8b86a85e00f51358369981623e5a9",
+      "bytes": 1334
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/model_metrics.csv",
+      "sha256": "723d6c1f572cb35266d4fb825e0e6cd4ccaac43696d7dd31aedf3c06f582de01",
+      "bytes": 884
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/native_importance_folds.csv",
+      "sha256": "a72b5d3828c7e496b33cc4525d27c156867e6d29c5f82c0f597024b5815cb14c",
+      "bytes": 9550
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/native_importance_summary.csv",
+      "sha256": "6632496eb1f9e98b348c781fe36d18fc38dbc2544a975628d8bc91912ee413db",
+      "bytes": 2762
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/oof_model_scores.csv",
+      "sha256": "09d4b50c838a4879b89c00c6d9dab58881595144462e6c1e8c5f9e717353c947",
+      "bytes": 136405
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/paired_comparisons.csv",
+      "sha256": "e1ba1abf88d70df8686d02f97d3a5d2ca373d596249c99d19a1a9da094d93814",
+      "bytes": 593
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/permutation_importance_repetitions.csv",
+      "sha256": "4c8fac4e131a688d08436eee2258dec33282ab96fe542e5c24e44a700bdf8aed",
+      "bytes": 89273
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/permutation_importance_summary.csv",
+      "sha256": "7a8543ef8f6c1adc82d748f7ef7420773779edfab75ae4dcf922de7c9a40f2e9",
+      "bytes": 3590
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/artifacts/subgroup_aurocs.csv",
+      "sha256": "a9b304e72d256979e8e2468e75590f9729ef6acf730d3ee2aa768cdd1d1d0721",
+      "bytes": 2639
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/config.json",
+      "sha256": "e2dd51568b288a690df20f1421cd16023a7a3a8ddc4274f2534fda95ef953da9",
+      "bytes": 6789
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/decision.md",
+      "sha256": "757a143f4153544f25c66f4982ff18ccbc10005dc97652f806afcfab4af51ebb",
+      "bytes": 837
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/hypothesis.md",
+      "sha256": "db419877de241c371cedab63f05d0b84871dbe1f32b32f20b37bb1c6c991ced0",
+      "bytes": 626
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/implementation_plan.md",
+      "sha256": "d156ce4f5dfd1b551ad38845ec8e5897092de3500ac86308e42fb910c6af0157",
+      "bytes": 2168
+    },
+    {
+      "path": "experiments/r06_nonlinear_comparison/result.json",
+      "sha256": "aa09898ee9e46f4d3edeecae34ec87d90d7107416b95376c2a7dee7a77eefb73",
+      "bytes": 52083
+    }
+  ]
+}

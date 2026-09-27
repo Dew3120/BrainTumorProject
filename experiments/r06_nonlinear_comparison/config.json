@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r06_nonlinear_comparison",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "registration_commit_parent": "d4f0e77e74d413bd9d3317049edd5b6c38bafa52",
   "amendment_09_path": "audit/preregistration_amendment_09.md",
   "amendment_09_sha256": "84305f4e04404d238407cc8650317d111aa871c72b67d62844cdd7ece921cdb7",
@@ -85,7 +88,10 @@
     "mlp": {
       "class": "sklearn.neural_network.MLPClassifier",
       "scale_features": true,
-      "hidden_layer_sizes": [32, 32],
+      "hidden_layer_sizes": [
+        32,
+        32
+      ],
       "activation": "relu",
       "solver": "adam",
       "alpha": 0.0001,
@@ -138,10 +144,21 @@
   "metrics": {
     "primary": "failure-detection AUROC using risk=1-reliability",
     "calibration": "15 equal-frequency ECE and MCE",
-    "proper_scores": ["Brier", "fold-training-prevalence baseline Brier", "Brier skill"],
+    "proper_scores": [
+      "Brier",
+      "fold-training-prevalence baseline Brier",
+      "Brier skill"
+    ],
     "catastrophic_capture": "zero-Dice cases captured in top 20% risk",
-    "subgroups": ["true category", "classifier-predicted category"],
-    "tree_importance": ["XGBoost gain", "random-forest impurity", "held-out permutation"]
+    "subgroups": [
+      "true category",
+      "classifier-predicted category"
+    ],
+    "tree_importance": [
+      "XGBoost gain",
+      "random-forest impurity",
+      "held-out permutation"
+    ]
   },
   "comparators": {
     "r02_full_680_auroc": 0.9555020801044132,
@@ -154,7 +171,12 @@
     "equality_passes": true,
     "r06_passes_when_any_model_passes": true
   },
-  "selection_if_multiple_pass": ["highest AUROC", "lowest ECE", "lowest Brier", "xgboost then mlp then random_forest"],
+  "selection_if_multiple_pass": [
+    "highest AUROC",
+    "lowest ECE",
+    "lowest Brier",
+    "xgboost then mlp then random_forest"
+  ],
   "fail_closed": {
     "r02_reproduction_absolute_tolerance": 1e-12,
     "expected_c03_changed_pixels": 22891,
@@ -167,5 +189,7 @@
   "neural_classifier_or_segmenter_retraining": false,
   "reliability_estimator_fitting": true,
   "threshold_changed": false,
-  "test_images_accessed": 0
+  "test_images_accessed": 0,
+  "environment_commit": "38ee068e775f07b66b0d675b044ab407e6c34098",
+  "installed_xgboost_version": "3.1.2"
 }
