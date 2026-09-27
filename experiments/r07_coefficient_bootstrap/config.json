@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r07_coefficient_bootstrap",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
+  "registration_commit_parent": "75f13e0dc6aa3aa622be2a2ab762353536cec3b6",
+  "amendment_10_path": "audit/preregistration_amendment_10.md",
+  "amendment_10_sha256": "2f96675d8616605cb9794928e4b7dfa1fd9a76361f09d9ddcd802fa7f86ed4cc",
+  "parent_preregistration_sha256": "7293d48c4eaa683a25a060681e44ec6838203703e1e588da439b7470ecf88fda",
+  "stage4_parent_amendment_sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40",
+  "r01_result_path": "experiments/r01_ablation/result.json",
+  "r01_result_sha256": "d53b160a7aec1ab2c8b0d612576530cdcc530e1b7b30bb789d3e49bee3d9499d",
+  "r01_manifest_path": "experiments/r01_ablation/artifacts/experiment_manifest.json",
+  "r01_manifest_sha256": "7e7162d4d1b33349c7944a8d8045898dbe37966d2c407b5feec556dbcfa51a7a",
+  "r01_fold_coefficients_path": "experiments/r01_ablation/artifacts/fold_coefficients.csv",
+  "r01_fold_coefficients_sha256": "4381d14b8e3ba8cbae49a848a93b1c6cef3d9ed627ca6a5f407d4ae3ab94c32a",
+  "r02_result_path": "experiments/r02_reduced_features/result.json",
+  "r02_result_sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+  "r02_manifest_path": "experiments/r02_reduced_features/artifacts/experiment_manifest.json",
+  "r02_manifest_sha256": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819",
+  "r02_oof_path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+  "r02_oof_sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+  "r02_fold_coefficients_path": "experiments/r02_reduced_features/artifacts/reduced_fold_coefficients.csv",
+  "r02_fold_coefficients_sha256": "d3f7cb42c75f546db120ae8be76f65da1f7d5193a3867a7661655e12614ea282",
+  "r06_result_path": "experiments/r06_nonlinear_comparison/result.json",
+  "r06_result_sha256": "aa09898ee9e46f4d3edeecae34ec87d90d7107416b95376c2a7dee7a77eefb73",
+  "r06_manifest_path": "experiments/r06_nonlinear_comparison/artifacts/experiment_manifest.json",
+  "r06_manifest_sha256": "bafd8a2076564ea0bb563e47e6814660ddc95098ce976b154b2889c828aed634",
+  "c03_mappings_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+  "c03_mappings_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+  "fold_assignment_path": "runs/classifier/20260921-170607-243133-baseline/classifier_calibration_folds.csv",
+  "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
+  "stage4_common_path": "scripts/stage4_reliability_common.py",
+  "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
+  "population": {
+    "cases": 680,
+    "similarity_groups": 583
+  },
+  "features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "feature_source": "C03 OOF calibrated probability map and threshold-0.50 prediction only",
+  "prohibited_model_inputs": [
+    "true tumor type",
+    "reference mask pixels or geometry",
+    "Dice or IoU",
+    "classifier prediction or probability",
+    "patient or similarity-group identity",
+    "filename or path",
+    "dataset metadata",
+    "raw image intensity"
+  ],
+  "target": {
+    "reliability": "P(C03-calibrated hard-mask Dice >= 0.50)",
+    "failure": "C03-calibrated hard-mask Dice < 0.50",
+    "threshold": 0.5,
+    "reference_mask_role": "target creation and evaluation only"
+  },
+  "estimator": {
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
+    "penalty": "L2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42,
+    "post_hoc_probability_calibration": false
+  },
+  "fold_coefficients": {
+    "folds": 5,
+    "similarity_aware": true,
+    "reproduction_absolute_tolerance": 1e-12,
+    "sign_reference": "full-population standardized R02 coefficient"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "groups_drawn_per_repetition": 583,
+    "group_sampling": "with replacement",
+    "case_inclusion": "all cases in each selected group, repeated by group multiplicity",
+    "refit_scaler_each_repetition": true,
+    "refit_logistic_each_repetition": true,
+    "ci": "percentile 95%",
+    "sd_ddof": 1,
+    "required_valid_repetitions": 2000,
+    "invalid_draw_policy": "INVALID/STOP; do not replace"
+  },
+  "ranking": {
+    "primary": "descending absolute bootstrap mean coefficient",
+    "tie_breaker": "feature name ascending"
+  },
+  "r01_comparison": {
+    "features": "ten shared R02 features",
+    "values": "five-fold standardized coefficient means",
+    "reports_signed_and_magnitude_change": true,
+    "causal_interpretation_prohibited": true
+  },
+  "gate": {
+    "type": "DESCRIPTIVE_ONLY",
+    "performance_pass_fail": false,
+    "can_change_model_selection": false
+  },
+  "completion": {
+    "status_on_success": "DESCRIPTIVE_COMPLETE",
+    "all_2000_bootstraps_valid": true,
+    "all_10_feature_statistics_required": true,
+    "all_10_distributions_required": true,
+    "r01_comparison_required": true,
+    "feature_contract_required": true
+  },
+  "fail_closed": {
+    "expected_c03_changed_pixels": 22891,
+    "expected_c03_changed_images": 679,
+    "population_must_equal": 680,
+    "group_count_must_equal": 583,
+    "all_resamples_require_both_outcomes": true,
+    "all_coefficients_must_be_finite": true,
+    "feature_contract_required": true,
+    "fold_and_group_integrity_required": true
+  },
+  "neural_classifier_or_segmenter_retraining": false,
+  "reliability_estimator_fitting": true,
+  "threshold_changed": false,
+  "test_images_accessed": 0
+}

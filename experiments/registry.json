@@ -41,6 +41,10 @@
     {
       "path": "audit/preregistration_amendment_09.md",
       "sha256": "84305f4e04404d238407cc8650317d111aa871c72b67d62844cdd7ece921cdb7"
+    },
+    {
+      "path": "audit/preregistration_amendment_10.md",
+      "sha256": "2f96675d8616605cb9794928e4b7dfa1fd9a76361f09d9ddcd802fa7f86ed4cc"
     }
   ],
   "baseline": {
@@ -249,6 +253,15 @@
         "H7"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r07_coefficient_bootstrap",
+      "path": "experiments/r07_coefficient_bootstrap",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "e08_final_selection",
