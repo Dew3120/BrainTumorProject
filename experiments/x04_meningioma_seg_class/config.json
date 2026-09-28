@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x04_meningioma_seg_class",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H8"],
+  "amendment": "audit/preregistration_amendment_13.md",
+  "dataset": {
+    "name": "Meningioma-SEG-CLASS",
+    "version": 1,
+    "doi": "10.7937/0TKV-1A36",
+    "role": "independent meningioma evaluation candidate",
+    "access_state": "CONTROLLED_ACCESS_PENDING_HUMAN_REQUEST"
+  },
+  "execution_order": 4,
+  "audit_required_before_inference": true,
+  "access_blocked_rule": "If access is not granted after X01-X03 complete, record ACCESS_BLOCKED and omit performance metrics from X05",
+  "segmentation_threshold": 0.5,
+  "reliability_policy_threshold": "0.9490250173235835",
+  "r02_external_inference_state": "BLOCKED_ARTIFACT_MISSING",
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false
+}

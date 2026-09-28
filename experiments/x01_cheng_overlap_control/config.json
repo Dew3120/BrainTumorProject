@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x01_cheng_overlap_control",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H8"],
+  "amendment": "audit/preregistration_amendment_13.md",
+  "dataset": {
+    "name": "Cheng/Figshare brain_tumor_dataset",
+    "article_id": "1512427",
+    "candidate_version": 8,
+    "role": "overlap control unless independence is proven",
+    "access_state": "PUBLIC_NOT_ACCESSED"
+  },
+  "execution_order": 1,
+  "audit_required_before_inference": true,
+  "segmentation_threshold": 0.5,
+  "reliability_policy_threshold": "0.9490250173235835",
+  "r02_external_inference_state": "BLOCKED_ARTIFACT_MISSING",
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false
+}

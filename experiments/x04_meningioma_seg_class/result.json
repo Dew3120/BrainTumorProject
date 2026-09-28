@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x04_meningioma_seg_class",
+  "status": "NOT_RUN",
+  "access_state": "CONTROLLED_ACCESS_PENDING_HUMAN_REQUEST",
+  "test_images_accessed": 0
+}

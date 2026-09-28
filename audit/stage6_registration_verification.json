@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "stage": "6.0",
+  "status": "REGISTERED_WITH_FAIL_CLOSED_R02_ARTIFACT_BLOCK",
+  "registration_commit_parent": "6c8f69ade88099c3d73f1a758891c8b5a15aaec2",
+  "amendment": {
+    "path": "audit/preregistration_amendment_13.md",
+    "sha256": "728d8c0f92a357c1ecbc78e586fce3af940e12fc8fef74bd3a3c0b93f8958da5"
+  },
+  "hypothesis_registered": "H8",
+  "experiment_order": [
+    "x01_cheng_overlap_control",
+    "x02_openneuro_pituitary",
+    "x03_upenn_gbm",
+    "x04_meningioma_seg_class",
+    "x05_cross_dataset_synthesis"
+  ],
+  "disk_at_registration": {
+    "drive": "E:",
+    "used_bytes": 8578449408,
+    "free_bytes": 350710870016,
+    "free_gib": 326.62495,
+    "sequential_processing_trigger_projected_bytes": 250000000000
+  },
+  "frozen_artifact_hashes_verified": {
+    "classifier_checkpoint": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+    "e08_v1_fallback_checkpoint": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+    "e08_e05_checkpoint": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+    "e08_e06_checkpoint": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+    "e08_e07_checkpoint": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+    "c03_all_validation_mapping": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa"
+  },
+  "r02_deployable_artifact": {
+    "status": "BLOCKED_ARTIFACT_MISSING",
+    "serialized_estimator_found": false,
+    "required_missing_state": [
+      "fitted scaler means",
+      "fitted scaler scales",
+      "logistic intercept",
+      "complete deployable estimator",
+      "reference prediction checksum tied to that estimator"
+    ],
+    "prohibited_workarounds": [
+      "refit without a separately approved amendment",
+      "reconstruct fold models",
+      "average fold coefficients",
+      "infer scaler values",
+      "treat OOF scores as a transferable estimator"
+    ]
+  },
+  "thresholds": {
+    "segmentation": 0.5,
+    "reliability_policy_exact_decimal": "0.9490250173235835"
+  },
+  "meningioma_access": {
+    "status": "CONTROLLED_ACCESS_PENDING_HUMAN_REQUEST",
+    "request_submitted": false,
+    "reason": "The TCIA controlled-access request requires the responsible human account holder's identity, credentials, and attestations."
+  },
+  "external_images_accessed": 0,
+  "brisc_test_images_accessed": 0,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false
+}

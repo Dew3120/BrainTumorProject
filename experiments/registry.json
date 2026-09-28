@@ -53,6 +53,10 @@
     {
       "path": "audit/preregistration_amendment_12.md",
       "sha256": "5902598fae407dcd56bb0084c01098974e0cc78e20fb406d8d733dbf7015ec7a"
+    },
+    {
+      "path": "audit/preregistration_amendment_13.md",
+      "sha256": "728d8c0f92a357c1ecbc78e586fce3af940e12fc8fef74bd3a3c0b93f8958da5"
     }
   ],
   "baseline": {
@@ -335,6 +339,46 @@
       "path": "experiments/p05_threshold_sensitivity",
       "hypothesis_ids": [],
       "status": "COMPLETE"
+    },
+    {
+      "id": "x01_cheng_overlap_control",
+      "path": "experiments/x01_cheng_overlap_control",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "x02_openneuro_pituitary",
+      "path": "experiments/x02_openneuro_pituitary",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "x03_upenn_gbm",
+      "path": "experiments/x03_upenn_gbm",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "x04_meningioma_seg_class",
+      "path": "experiments/x04_meningioma_seg_class",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "x05_cross_dataset_synthesis",
+      "path": "experiments/x05_cross_dataset_synthesis",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "sealed_final_evaluation",
