@@ -1,6 +1,120 @@
 {
   "schema_version": 1,
   "experiment_id": "x02_openneuro_pituitary",
-  "status": "NOT_RUN",
-  "test_images_accessed": 0
+  "status": "AUDIT_COMPLETE",
+  "audit_outcome": "ELIGIBLE_INDEPENDENT",
+  "independent_external_evidence": true,
+  "release": {
+    "dataset": "Open-Access Multimodal Dataset of Pituitary Adenoma",
+    "accession": "ds006248",
+    "version": "1.0.0",
+    "doi": "doi:10.18112/openneuro.ds006248.v1.0.0",
+    "git_commit": "1b8ebd1f1171049c7f4258ea41933e7b8ee6c06e",
+    "git_tag": "1.0.0",
+    "dataset_description_license": "CC0",
+    "readme_license": "CC BY-NC 4.0",
+    "governance_license": "CC BY-NC 4.0 (conservative resolution pending source clarification)",
+    "dataset_description_sha256": "3d8971166b0cdd63ff81ea14c61cbaa7b3c5f106d3d44381d32c1ddcb432e19b",
+    "readme_sha256": "16ae6f3e327591e748d031e7b6a6afd5bc388745492fe66e637ebbcd2fae36df",
+    "participants_tsv_sha256": "2c01f6add3c873619a7f166cbd33ff82c25cfbe43554e42e26dc0702a46d5082"
+  },
+  "dataset": {
+    "subjects": 50,
+    "tumor_bearing_coronal_slices": 425,
+    "shape_counts": {
+      "1024x14x1024": 1,
+      "1024x15x1024": 1,
+      "1024x16x1024": 3,
+      "512x11x512": 24,
+      "512x12x512": 2,
+      "512x13x512": 11,
+      "512x14x512": 5,
+      "512x15x512": 2,
+      "512x16x512": 1
+    },
+    "label_voxel_counts": {
+      "0": 222182567,
+      "1": 1383533,
+      "2": 67759,
+      "3": 143221,
+      "4": 140176,
+      "5": 215864
+    },
+    "duplicate_image_volumes": 0,
+    "duplicate_mask_volumes": 0,
+    "duplicate_tumor_slice_arrays_beyond_first": 0,
+    "tumor_voxels": 1383533,
+    "tumor_slices_per_subject": {
+      "minimum": 5,
+      "median": 8.0,
+      "maximum": 12
+    },
+    "brisc_overlap": {
+      "exact_slice_candidates": 0,
+      "within_2_slice_candidates": 0,
+      "within_4_slice_candidates": 0,
+      "minimum_distance": 12
+    },
+    "x01_overlap": {
+      "exact_slice_candidates": 0,
+      "within_2_slice_candidates": 0,
+      "within_4_slice_candidates": 0,
+      "minimum_distance": 12
+    }
+  },
+  "input_contract": {
+    "image": "coronal contrast-enhanced T1-weighted NIfTI",
+    "target": "ground-truth label 1 (tumor) only",
+    "canonical_orientation": "RAS",
+    "primary_slice_axis": "canonical axis 1 (coronal)",
+    "primary_view": "tumor-bearing 2D coronal slices",
+    "secondary_view": "whole volume including reference-empty slices"
+  },
+  "licence_conflict": {
+    "present": true,
+    "dataset_description": "CC0",
+    "readme": "CC BY-NC 4.0",
+    "handling": "Use the more restrictive CC BY-NC 4.0 terms unless the publisher resolves the conflict.",
+    "technical_eligibility_affected": false
+  },
+  "overlap_detection": {
+    "brisc_inventory_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+    "x01_manifest_sha256": "85d3c91f5a3bad870fd8e8c503d4dd47e883e25ba222dfbf808b59974c0efcde",
+    "brisc_pixels_opened": 0,
+    "comparison": "Tumor-bearing slice display pHashes compared with frozen pituitary pHash metadata only.",
+    "brisc": {
+      "exact_slice_candidates": 0,
+      "within_2_slice_candidates": 0,
+      "within_4_slice_candidates": 0,
+      "minimum_distance": 12
+    },
+    "x01": {
+      "exact_slice_candidates": 0,
+      "within_2_slice_candidates": 0,
+      "within_4_slice_candidates": 0,
+      "minimum_distance": 12
+    }
+  },
+  "visual_alignment_review": {
+    "status": "PASS_NO_SYSTEMATIC_DEFECT",
+    "panel": "experiments/x02_openneuro_pituitary/artifacts/source_alignment_panel.png",
+    "panel_sha256": "e29c0cbd16f5b21cc1000ea83913798be4f1a5f5dce276d92d7cce37d91a346d",
+    "selection": "12 evenly spaced subjects; maximum tumor-area coronal slice per subject",
+    "review_scope": "Reference label 1 follows visible sellar anatomy; no recurring flip, shift, transpose, or detached-mask pattern."
+  },
+  "constraints": {
+    "inference_runs": 0,
+    "performance_metrics_computed": false,
+    "brisc_test_pixels_accessed": 0,
+    "neural_retraining": false,
+    "segmentation_threshold": 0.5,
+    "threshold_changed": false
+  },
+  "disk": {
+    "required_payload_bytes": 289608226,
+    "snapshot_metadata_bytes": 869825,
+    "projected_total_below_250_gb": true,
+    "drive_e_free_bytes_after_audit": 348584640512,
+    "drive_e_free_gib_after_audit": 324.6447448730469
+  }
 }

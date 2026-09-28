@@ -612,3 +612,14 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Independent recomputation over 3,064 rows had maximum metric difference `2.220446049250313e-16`. Frozen hashes matched; 2,000 patient-cluster bootstraps used seed 42. No BRISC sealed-test file was opened. Neural retraining, calibrator/reliability refit, segmentation-threshold changes, and gate relaxation were zero.
 - **Alternatives considered:** Relax the glioma or ECE gates because ranking AUROC was strong; rejected. Present X01 as independent external validation; rejected because Cheng is an upstream BRISC source. Tune the C03 mapping or reliability threshold on Cheng; rejected as forbidden external-data fitting.
 - **Who approved:** User approved Amendment 13, the frozen X01 overlap-control evaluation, and unchanged fail-closed gates.
+
+
+## 2026-09-28T19:08:23+05:30 — Audit OpenNeuro ds006248 v1.0.0 before inference
+
+- **Decision made:** Classify X02 as `ELIGIBLE_INDEPENDENT` and authorize one frozen-stack evaluation.
+- **Triggering artifact:** `experiments/x02_openneuro_pituitary/artifacts/dataset_audit.json`, SHA256 `999ff3a09f2918024924c9a16151b9ef5b60a6527752bdec36a0fc0b3b3737d4`; snapshot commit `1b8ebd1f1171049c7f4258ea41933e7b8ee6c06e`.
+- **Rationale:** All 50 subjects and 100 required annex payloads passed exact hash, size, modality, finite-value, image/mask geometry, integer-label, tumor-presence, and subject-uniqueness checks. Exact display-pHash candidates against frozen BRISC/X01 pituitary metadata: 0/0.
+- **Licence handling:** The frozen release conflicts internally (`CC0` in `dataset_description.json`; `CC BY-NC 4.0` in `README.md`). The project applies the more restrictive `CC BY-NC 4.0` statement unless the publisher clarifies it.
+- **Verification:** BRISC comparison opened zero BRISC pixels. Inference, performance evaluation, neural retraining, refitting, threshold changes, and BRISC test-pixel access were zero.
+- **Alternatives considered:** Download the entire multimodal dataset; rejected because the registered input contract requires only CE-cor T1 and expert ground truth. Treat the licence conflict as permission to use CC0; rejected as insufficiently conservative.
+- **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations unless a registered stop condition occurs.

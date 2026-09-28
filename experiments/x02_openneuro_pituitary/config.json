@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "x02_openneuro_pituitary",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H8"],
+  "status": "AUDIT_COMPLETE",
+  "hypothesis_ids": [
+    "H8"
+  ],
   "amendment": "audit/preregistration_amendment_13.md",
   "dataset": {
     "name": "Open-Access Multimodal Dataset of Pituitary Adenoma",
@@ -10,13 +12,19 @@
     "version": "1.0.0",
     "doi": "10.18112/openneuro.ds006248.v1.0.0",
     "role": "independent pituitary evaluation candidate",
-    "access_state": "PUBLIC_NOT_ACCESSED"
+    "access_state": "MINIMAL_PAYLOAD_DOWNLOADED_AUDITED",
+    "resolved_commit": "1b8ebd1f1171049c7f4258ea41933e7b8ee6c06e",
+    "audit_outcome": "ELIGIBLE_INDEPENDENT",
+    "independent_external_evidence": true,
+    "licence_discrepancy": true,
+    "governance_license": "CC BY-NC 4.0"
   },
   "execution_order": 2,
   "audit_required_before_inference": true,
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
-  "r02_external_inference_state": "BLOCKED_ARTIFACT_MISSING",
+  "r02_external_inference_state": "OPERATIONAL_ARTIFACT_FROZEN",
   "test_images_accessed": 0,
-  "model_retrained_or_refit": false
+  "model_retrained_or_refit": false,
+  "r02_manifest_sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
 }
