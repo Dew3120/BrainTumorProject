@@ -4,6 +4,7 @@ from scripts.evaluate_x02_openneuro import (
     boundary_metrics_physical,
     build_evaluation_rows,
     js_divergence,
+    nonrepresentable_failure_statistics,
 )
 
 
@@ -36,3 +37,11 @@ def test_boundary_metrics_are_exact_for_identical_masks() -> None:
 def test_js_divergence_is_zero_for_equal_distributions() -> None:
     values = np.asarray([0.1, 0.2, 0.3, 0.4])
     assert js_divergence(values, values, np.linspace(0, 1, 6)) == 0.0
+
+
+def test_nonrepresentable_target_is_explicit_failure_mode() -> None:
+    prediction = np.zeros((8, 8), dtype=bool)
+    values = nonrepresentable_failure_statistics(prediction)
+    assert values["target_not_representable_at_128"] is True
+    assert values["primary_failure_mode"] == "target_not_representable_at_128"
+    assert values["reference_foreground_pixels"] == 0
