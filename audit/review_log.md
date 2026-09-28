@@ -645,3 +645,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Independent recomputation covered `45` decision-driving values with maximum absolute difference `0.0`. Visual review found no systematic flip, transpose, offset, or source-mask alignment defect. No BRISC sealed-test image was opened. Neural retraining, calibration/reliability refit, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
 - **Alternatives considered:** Drop the five nonrepresentable targets or report only the 420-slice sensitivity; rejected by Amendment 15. Tune preprocessing/calibration/reliability on X02; rejected because external data are evaluation-only. Relax the top-20% gate because failure prevalence makes it infeasible; rejected because gates remain fixed after results.
 - **Who approved:** User approved Amendment 15 and one restart with fail-closed handling.
+
+## 2026-09-28 — Register Amendment 16 for the UPENN-GBM curated derivative
+
+- **Decision made:** Authorize the complete 147-scan expert-labelled subset from GitHub `data-nih/tcia` tag `upenn-gbm` at commit `a8140bcfa512241fde2475cc3c4640b5cb97dc2b` as the frozen X03 derivative source, with whole tumor defined as derivative labels `{1,2,3}`.
+- **Triggering artifact:** Local source-file manifest SHA256 `fe488d87a48bfcce1c4c735793ccccb28a9ba68a7d7400241692d7e45a68dfae`; 294 release assets matched published byte counts and SHA256 digests. The first fail-closed audit stopped because the derivative uses enhancing-tumor value 3 instead of native BraTS value 4.
+- **Rationale:** Release metadata attributes the derivative to TCIA UPENN-GBM v2. A source-equivalent subject-002 mask comparison proved exact spatial equality after only `4 -> 3`, establishing label 3 as enhancing tumor while preserving labels 1 and 2.
+- **Alternatives considered:** Silently accept label 3; rejected. Treat the derivative as byte-identical to the original Aspera package; rejected. Download the full 69 GB source archive; unnecessary for the fixed 147 expert CE-T1/mask pairs after prospective derivative registration and exact per-file verification.
+- **Constraints:** No X03 inference or performance result existed before registration. Frozen models, adapter, thresholds, gates, and the coarse `glioblastoma -> glioma` caveat remain unchanged.
+- **Who approved:** User explicitly approved Amendment 16 and sequential Stage 6 completion.
