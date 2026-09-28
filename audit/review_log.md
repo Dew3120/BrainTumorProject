@@ -634,3 +634,14 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Read-only preprocessing verification identified exactly five cases. BRISC sealed-test access, neural retraining, calibrator/reliability refitting, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
 - **Alternatives considered:** Drop the five slices; rejected as post-discovery attrition. Preserve small masks by dilation or different interpolation; rejected because the adapter is frozen. Stop X02 permanently; rejected because native source-coordinate and strict sensitivity views permit a transparent evaluation without altering inputs or targets.
 - **Who approved:** User explicitly approved Amendment 15, the strict all-425 primary metric, the required five-case artifact, source-coordinate and exploratory whole-volume reporting, and one clean restart.
+
+
+## 2026-09-28T19:46:18+05:30 — Reject X02 transport gates and retain independent external findings
+
+- **Decision made:** Complete X02 as `FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL`. Reject H8 for this cohort without tuning on X02.
+- **Triggering artifact:** `experiments/x02_openneuro_pituitary/artifacts/evaluation_result.json`, SHA256 `a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59`; deterministic prediction panel SHA256 `cdd17034ea4daa58ecea45056844ffbf01f3df50325c91934805fcd974a16b84`.
+- **Rationale:** Pituitary recall passed at `0.940000`, but classifier ECE was `0.076187`. Strict all-425 subject-macro Dice was `0.127242` against `0.75`. Reliability AUROC passed at `0.871890`, while ECE was `0.255096` and top-20% captured `85/357` failures. Complete misses accounted for `309/357` failures.
+- **Target representability:** The five Amendment-15 cases remain in the strict gate with zero scores. Representable-only Dice `0.129501` and native source-coordinate Dice `0.127327` show that these five cases do not explain the broad failure.
+- **Verification:** Independent recomputation covered `45` decision-driving values with maximum absolute difference `0.0`. Visual review found no systematic flip, transpose, offset, or source-mask alignment defect. No BRISC sealed-test image was opened. Neural retraining, calibration/reliability refit, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
+- **Alternatives considered:** Drop the five nonrepresentable targets or report only the 420-slice sensitivity; rejected by Amendment 15. Tune preprocessing/calibration/reliability on X02; rejected because external data are evaluation-only. Relax the top-20% gate because failure prevalence makes it infeasible; rejected because gates remain fixed after results.
+- **Who approved:** User approved Amendment 15 and one restart with fail-closed handling.

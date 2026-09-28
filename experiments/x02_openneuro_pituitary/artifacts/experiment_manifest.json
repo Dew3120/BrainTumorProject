@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "x02_openneuro_pituitary",
-  "status": "AUDIT_COMPLETE",
+  "status": "COMPLETE",
   "files": [
     {
       "path": "audit/preregistration_amendment_15.md",
@@ -9,9 +9,19 @@
       "sha256": "4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e"
     },
     {
-      "path": "audit/x02_openneuro_dataset_audit.md",
-      "bytes": 3137,
-      "sha256": "4b4ec371bda8497df2fbab92d492ba3066431d1beed5b8aa21a97b9139275bd1"
+      "path": "audit/x02_openneuro_evaluation.md",
+      "bytes": 6509,
+      "sha256": "7ccbf8b0b625c01f55dd64b3156925fc436f4a95a8b8dd9c786986e8a169b4ef"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/case_reliability.png",
+      "bytes": 80115,
+      "sha256": "b55b31bbe1def29ec53818b0ac2635d412006616111a4c8aec86b90ff50cdc96"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/classifier_reliability.png",
+      "bytes": 69537,
+      "sha256": "145d36c18e2618a761e8cba702fabd837c52f725a14604675ffaf3ea6cd44a05"
     },
     {
       "path": "experiments/x02_openneuro_pituitary/artifacts/cross_dataset_overlap_candidates.csv",
@@ -22,6 +32,36 @@
       "path": "experiments/x02_openneuro_pituitary/artifacts/dataset_audit.json",
       "bytes": 4254,
       "sha256": "999ff3a09f2918024924c9a16151b9ef5b60a6527752bdec36a0fc0b3b3737d4"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/domain_gap.json",
+      "bytes": 3447,
+      "sha256": "c8eb11d5a443868575c89bb4d1db70e7e12a64cf8f340df370e179d2553595a4"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/evaluation_result.json",
+      "bytes": 31860,
+      "sha256": "a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/failure_taxonomy.csv",
+      "bytes": 127964,
+      "sha256": "22b8d413907af276baf419c4e259eafb38642f62182c8ba065914321b1899783"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/failure_taxonomy_summary.json",
+      "bytes": 3357,
+      "sha256": "4471ab3214c4d822239065ae5f8af189450ff6e7bddaed8b60fb38d24321d6a6"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/per_case_predictions.csv",
+      "bytes": 109618,
+      "sha256": "57d448e0cc84f67385de9cffcdba63863ff70a368c7f245edab6ea005982cbdf"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/pixel_calibration.json",
+      "bytes": 4255,
+      "sha256": "f1daca7be3515d531df8071883c32ef4968f4e4cb03a45615c1410243d2d3a70"
     },
     {
       "path": "experiments/x02_openneuro_pituitary/artifacts/source_alignment_panel.png",
@@ -39,19 +79,39 @@
       "sha256": "b60c64803b6e4171b63f0b1a9014ad0eab11713a4c2ea53c8862d8ebefeb6642"
     },
     {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/target_not_representable.csv",
+      "bytes": 261,
+      "sha256": "bf845536ee8bda3f38f9cdd386ba8310b1b272210c94c173cfdb18b71f379e8c"
+    },
+    {
       "path": "experiments/x02_openneuro_pituitary/artifacts/tumor_slice_manifest.csv",
       "bytes": 94418,
       "sha256": "bd85dfce6a62884c081ed73af8f6c4b5f7d963a8e273c6ebf4d99fbb068cabd8"
     },
     {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/visual_audit_panel.png",
+      "bytes": 693245,
+      "sha256": "cdd17034ea4daa58ecea45056844ffbf01f3df50325c91934805fcd974a16b84"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/whole_volume_slice_counts.csv",
+      "bytes": 38005,
+      "sha256": "9aeab5c4b3b15771ca2a444a7b7559c99406c1c2606491eb78eb6b678b7661d1"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/artifacts/whole_volume_subject_metrics.csv",
+      "bytes": 2841,
+      "sha256": "f2ee9c9096e076bbfb0db5391b50ddb84d40802bea12545b929b8b903f8e825d"
+    },
+    {
       "path": "experiments/x02_openneuro_pituitary/config.json",
-      "bytes": 1108,
-      "sha256": "cbcb812b28d7c4eac5ded6a76a8ed124189f0ddf0dc93c386d6dfd7b92d5ae09"
+      "bytes": 1313,
+      "sha256": "0a6469f0c4faea97720c39a2aadd7167c544e6282fbaee37a62cd8d22757565d"
     },
     {
       "path": "experiments/x02_openneuro_pituitary/decision.md",
-      "bytes": 1262,
-      "sha256": "f07a4f1c55e56ef68217d05f4b2e1bc0f081bf000e771fbae31b16fb2f1c0a39"
+      "bytes": 1788,
+      "sha256": "9f84144771475014724331c64033c2f6868136c7289b19ddaee3aea5641cd703"
     },
     {
       "path": "experiments/x02_openneuro_pituitary/hypothesis.md",
@@ -60,28 +120,28 @@
     },
     {
       "path": "experiments/x02_openneuro_pituitary/result.json",
-      "bytes": 4254,
-      "sha256": "999ff3a09f2918024924c9a16151b9ef5b60a6527752bdec36a0fc0b3b3737d4"
+      "bytes": 31860,
+      "sha256": "a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59"
     },
     {
-      "path": "scripts/audit_x02_openneuro.py",
-      "bytes": 29677,
-      "sha256": "34e1ac35ff9b740a43c7599d712c269f453280227311c151ed429af172561740"
+      "path": "scripts/evaluate_x02_openneuro.py",
+      "bytes": 48704,
+      "sha256": "382b83e9f004f98a41dfc158cf7970e7fbc2bc3e53ae29876d9d83c30785376a"
     },
     {
-      "path": "scripts/download_x02_openneuro.py",
-      "bytes": 4704,
-      "sha256": "2ac734fdfcb4f566a14b0a6695ad2a8f6379062d71d8ce9ea941c145c3c69e70"
+      "path": "scripts/finalize_x02_openneuro.py",
+      "bytes": 29972,
+      "sha256": "795903b454feba7f39b4d0c1f8c1eb9dc58cb6c6f4da5d52fa488c3d47803c36"
     },
     {
-      "path": "tests/test_audit_x02_openneuro.py",
-      "bytes": 422,
-      "sha256": "47edfc9261c43bd7dc35597d4c5d1bd745ae004d736e8b19230022d9d1a21d1b"
+      "path": "tests/test_evaluate_x02_openneuro.py",
+      "bytes": 1602,
+      "sha256": "3fbff0ec4b11f7edcc7efc4a575fc177365501934693cfc50f940cc21da542aa"
     },
     {
-      "path": "tests/test_download_x02_openneuro.py",
-      "bytes": 746,
-      "sha256": "b9b344e5f5e0536a08e70d62a07a2e8978ca69f6587544c585d22a2c2b7e4f27"
+      "path": "tests/test_finalize_x02_openneuro.py",
+      "bytes": 989,
+      "sha256": "40c83136250b1d0c9090d537e1d86ba19d8d1ddb523341d6a5006f4d97e1abdc"
     }
   ]
 }

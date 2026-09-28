@@ -1,0 +1,106 @@
+{
+  "reference": "BRISC development validation only; sealed test pixels unopened",
+  "cohort": {
+    "modality": "3T coronal contrast-enhanced T1 MRI",
+    "orientation": "coronal; canonical RAS axis 1",
+    "subjects": 50,
+    "tumor_bearing_slices": 425,
+    "model_space_representable_slices": 420,
+    "target_not_representable_at_128": 5,
+    "canonical_shape_counts": {
+      "1024x14x1024": 1,
+      "1024x15x1024": 1,
+      "1024x16x1024": 3,
+      "512x11x512": 24,
+      "512x12x512": 2,
+      "512x13x512": 11,
+      "512x14x512": 5,
+      "512x15x512": 2,
+      "512x16x512": 1
+    },
+    "voxel_spacing_mm": {
+      "x_range": [
+        0.15629998544669788,
+        0.3125000346214312
+      ],
+      "y_range": [
+        2.2999977724612344,
+        2.800008976384415
+      ],
+      "z_range": [
+        0.1562999908288082,
+        0.3125000198274743
+      ]
+    }
+  },
+  "continuous_distribution_shift": {
+    "model_input_mean": {
+      "wasserstein": 0.13531777764287065,
+      "jensen_shannon_divergence": 0.938862280199731,
+      "external_mean": 0.2988731278742061,
+      "brisc_validation_mean": 0.16355535023133544
+    },
+    "model_input_sd": {
+      "wasserstein": 0.03659948446952245,
+      "jensen_shannon_divergence": 0.49095810681803376,
+      "external_mean": 0.19410010418471169,
+      "brisc_validation_mean": 0.15782308930202443
+    },
+    "nonzero_mean": {
+      "wasserstein": 0.11465531436178614,
+      "jensen_shannon_divergence": 0.9152951921281696,
+      "external_mean": 0.30051523934392366,
+      "brisc_validation_mean": 0.18608203502919743
+    },
+    "foreground_fraction": {
+      "wasserstein": 0.005556400416611957,
+      "jensen_shannon_divergence": 0.05910156001923169,
+      "external_mean": 0.010422334216889881,
+      "brisc_validation_mean": 0.01597873463350184
+    },
+    "centroid_y": {
+      "wasserstein": 0.05703230692626826,
+      "jensen_shannon_divergence": 0.26161193503927826,
+      "external_mean": 0.4565771336995035,
+      "brisc_validation_mean": 0.4590606391625986
+    },
+    "centroid_x": {
+      "wasserstein": 0.06095838537671967,
+      "jensen_shannon_divergence": 0.2716012886528927,
+      "external_mean": 0.5010824030623316,
+      "brisc_validation_mean": 0.4897988303243524
+    },
+    "component_count": {
+      "wasserstein": 0.14635854341736687,
+      "jensen_shannon_divergence": 0.025818605149525407,
+      "external_mean": 1.1904761904761905,
+      "brisc_validation_mean": 1.0441176470588236
+    },
+    "reference_boundary_gradient": {
+      "wasserstein": 0.025803071438578937,
+      "jensen_shannon_divergence": 0.116109452576883,
+      "external_mean": 0.11339621054775488,
+      "brisc_validation_mean": 0.08760007411924725
+    }
+  },
+  "fragmented_reference_fraction": {
+    "openneuro": 0.1380952380952381,
+    "brisc_validation": 0.041176470588235294
+  },
+  "encoder_representation_shift": {
+    "centroid_euclidean": 18.76917266845703,
+    "dimension_mean_wasserstein": 0.7362475455955,
+    "dimension_median_wasserstein": 0.6215140743465986,
+    "encoder": "frozen classifier ResNet18 avgpool (512 dimensions)"
+  },
+  "reliability_score_shift": {
+    "wasserstein": 0.46430961377563246,
+    "jensen_shannon_divergence": 0.39093088165627266,
+    "external_mean": 0.41509601671837143,
+    "brisc_validation_mean": 0.8794056304940038
+  },
+  "policy_review_rate": {
+    "openneuro": 0.9058823529411765,
+    "brisc_operational_reference": 0.28823529411764703
+  }
+}

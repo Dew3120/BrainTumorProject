@@ -1,0 +1,6 @@
+subject_id,coronal_index_ras,case_id,source_tumor_pixels,post_resize_tumor_pixels
+sub-008,3,sub-008:coronal:003,10,0
+sub-015,13,sub-015:coronal:013,2,0
+sub-017,0,sub-017:coronal:000,9,0
+sub-025,8,sub-025:coronal:008,9,0
+sub-028,13,sub-028:coronal:013,7,0

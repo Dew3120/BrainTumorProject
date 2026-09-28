@@ -1,0 +1,1017 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x02_openneuro_pituitary",
+  "status": "FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL",
+  "audit_outcome": "ELIGIBLE_INDEPENDENT",
+  "independent_external_evidence": true,
+  "scope": "Independent OpenNeuro pituitary transport; retrospective research evaluation, not clinical validation",
+  "population": {
+    "subjects": 50,
+    "primary_tumor_bearing_slices": 425,
+    "model_space_representable_slices": 420,
+    "target_not_representable_at_128": 5,
+    "secondary_all_coronal_slices": 624,
+    "true_category": "pituitary"
+  },
+  "analytical_views": {
+    "1_strict_model_space": "425 source-positive slices; registered gate; five nonrepresentable targets receive zero",
+    "2_representable_model_space": "420 slices; secondary sensitivity only",
+    "3_source_coordinate": "425 source-positive slices at native resolution after restoring frozen hard predictions",
+    "4_whole_volume": "624 slices; exploratory and not used for the registered gate",
+    "5_confidence_transport": "pixel calibration on 420 representable slices; R02 reliability on strict 425-slice outcomes"
+  },
+  "classifier": {
+    "accuracy": 0.94,
+    "pituitary_recall": 0.94,
+    "nll": 0.11082621264290099,
+    "brier": 0.0538550213961601,
+    "top_label_ece": 0.07618693215463411,
+    "top_label_mce": 0.30938089086068055,
+    "reliability_bins": [
+      {
+        "bin": 1,
+        "count": 4,
+        "mean_probability": 0.5593808908606805,
+        "observed_frequency": 0.25,
+        "absolute_gap": 0.30938089086068055
+      },
+      {
+        "bin": 2,
+        "count": 4,
+        "mean_probability": 0.7581746079253429,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.24182539207465714
+      },
+      {
+        "bin": 3,
+        "count": 4,
+        "mean_probability": 0.8428681079475653,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.15713189205243472
+      },
+      {
+        "bin": 4,
+        "count": 4,
+        "mean_probability": 0.9196098584972032,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.08039014150279677
+      },
+      {
+        "bin": 5,
+        "count": 4,
+        "mean_probability": 0.9543781181821576,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.045621881817842436
+      },
+      {
+        "bin": 6,
+        "count": 3,
+        "mean_probability": 0.9630989571412404,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.036901042858759614
+      },
+      {
+        "bin": 7,
+        "count": 3,
+        "mean_probability": 0.9705974868050328,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.029402513194967228
+      },
+      {
+        "bin": 8,
+        "count": 3,
+        "mean_probability": 0.9762436650969364,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.023756334903063614
+      },
+      {
+        "bin": 9,
+        "count": 3,
+        "mean_probability": 0.9811160811986873,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.018883918801312682
+      },
+      {
+        "bin": 10,
+        "count": 3,
+        "mean_probability": 0.9850081244158365,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.014991875584163483
+      },
+      {
+        "bin": 11,
+        "count": 3,
+        "mean_probability": 0.9887231150861542,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.01127688491384582
+      },
+      {
+        "bin": 12,
+        "count": 3,
+        "mean_probability": 0.9910564558215874,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.008943544178412588
+      },
+      {
+        "bin": 13,
+        "count": 3,
+        "mean_probability": 0.9933873459144875,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.006612654085512482
+      },
+      {
+        "bin": 14,
+        "count": 3,
+        "mean_probability": 0.9955554600115176,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.004444539988482377
+      },
+      {
+        "bin": 15,
+        "count": 3,
+        "mean_probability": 0.9978980370091669,
+        "observed_frequency": 1.0,
+        "absolute_gap": 0.002101962990833095
+      }
+    ],
+    "confusion": {
+      "glioma": 0,
+      "meningioma": 0,
+      "pituitary": 47,
+      "no_tumor": 3
+    },
+    "one_vs_rest_auroc": "NOT_ESTIMABLE: single true category",
+    "no_tumor_specificity": "NOT_ESTIMABLE: no no-tumor subjects",
+    "binary_tumor_auroc": "NOT_ESTIMABLE: no no-tumor subjects",
+    "bootstrap_ci95": {
+      "accuracy": [
+        0.86,
+        1.0
+      ],
+      "pituitary_recall": [
+        0.86,
+        1.0
+      ],
+      "nll": [
+        0.061336778827680564,
+        0.1695062004037606
+      ],
+      "brier": [
+        0.019756995603472147,
+        0.09764690989077517
+      ],
+      "top_label_ece": [
+        0.036051329889229114,
+        0.12039883019486698
+      ],
+      "top_label_mce": [
+        0.14354709749893538,
+        0.554402534509935
+      ]
+    },
+    "subjects": 50,
+    "aggregation": "Mean slice probability per subject over tumor-bearing slices"
+  },
+  "segmentation": {
+    "primary_view": "tumor-bearing 2D coronal slices",
+    "registered_gate_view": "strict_all_425_model_space; five TARGET_NOT_REPRESENTABLE_AT_128 cases receive zero",
+    "slice_macro": {
+      "dice": 0.13797254796986835,
+      "iou": 0.1067327026915157,
+      "raw_dice": 0.16354682198029064,
+      "raw_iou": 0.12453332222051927,
+      "boundary_f1_tolerance_2": 0.1668439314055571,
+      "hausdorff_mm_nonempty_predictions": 48.738047559482155
+    },
+    "subject_macro": {
+      "dice": {
+        "subject_macro_mean": 0.12724200117054443,
+        "bootstrap_ci95": [
+          0.08235864220425743,
+          0.1777634374606488
+        ],
+        "subjects": 50,
+        "slices": 425
+      },
+      "iou": {
+        "subject_macro_mean": 0.0977028117054753,
+        "bootstrap_ci95": [
+          0.06153139426010806,
+          0.1402792474167734
+        ],
+        "subjects": 50,
+        "slices": 425
+      },
+      "boundary_f1_tolerance_2": {
+        "subject_macro_mean": 0.15710027925411005,
+        "bootstrap_ci95": [
+          0.10730170806595653,
+          0.21329208167633523
+        ],
+        "subjects": 50,
+        "slices": 425
+      }
+    },
+    "representable_only_model_space": {
+      "role": "secondary sensitivity; does not replace the strict gate",
+      "cases": 420,
+      "dice": {
+        "subject_macro_mean": 0.1295014580756381,
+        "bootstrap_ci95": [
+          0.08374459773366885,
+          0.1813083861903949
+        ],
+        "subjects": 50,
+        "slices": 420
+      },
+      "iou": {
+        "subject_macro_mean": 0.09938781337619362,
+        "bootstrap_ci95": [
+          0.06254637148166087,
+          0.14257942025532364
+        ],
+        "subjects": 50,
+        "slices": 420
+      },
+      "boundary_f1_tolerance_2": {
+        "subject_macro_mean": 0.15952455195297247,
+        "bootstrap_ci95": [
+          0.10854395157248181,
+          0.21645841758646164
+        ],
+        "subjects": 50,
+        "slices": 420
+      },
+      "slice_mean_dice": 0.13961507830284298,
+      "slice_mean_iou": 0.10800333010450995
+    },
+    "source_coordinate_all_425": {
+      "role": "secondary native-resolution view; restored frozen hard predictions",
+      "cases": 425,
+      "dice": {
+        "subject_macro_mean": 0.12732668433273708,
+        "bootstrap_ci95": [
+          0.08264098650222584,
+          0.17778211544231967
+        ],
+        "subjects": 50,
+        "slices": 425
+      },
+      "iou": {
+        "subject_macro_mean": 0.09777592937115852,
+        "bootstrap_ci95": [
+          0.06159106561700244,
+          0.14032898446531686
+        ],
+        "subjects": 50,
+        "slices": 425
+      },
+      "slice_mean_dice": 0.13807697269154182,
+      "slice_mean_iou": 0.10684256332105731
+    },
+    "per_category": {
+      "glioma": "NOT_ESTIMABLE",
+      "meningioma": "NOT_ESTIMABLE",
+      "pituitary": {
+        "dice": {
+          "subject_macro_mean": 0.12724200117054443,
+          "bootstrap_ci95": [
+            0.08235864220425743,
+            0.1777634374606488
+          ],
+          "subjects": 50,
+          "slices": 425
+        },
+        "iou": {
+          "subject_macro_mean": 0.0977028117054753,
+          "bootstrap_ci95": [
+            0.06153139426010806,
+            0.1402792474167734
+          ],
+          "subjects": 50,
+          "slices": 425
+        },
+        "slice_mean_dice": 0.13797254796986835,
+        "slice_mean_iou": 0.1067327026915157,
+        "boundary_f1_tolerance_2": {
+          "subject_macro_mean": 0.15710027925411005,
+          "bootstrap_ci95": [
+            0.10730170806595653,
+            0.21329208167633523
+          ],
+          "subjects": 50,
+          "slices": 425
+        },
+        "failures_below_0_50": 357,
+        "zero_dice": 309
+      }
+    },
+    "zero_dice": 309,
+    "empty_prediction": 81,
+    "dice_below_0_50": 357,
+    "target_not_representable_at_128": 5,
+    "exploratory_whole_volume": {
+      "subject_macro_dice": 0.14475211036919372,
+      "subject_macro_dice_ci95": [
+        0.09216494642804327,
+        0.20679739528817567
+      ],
+      "subject_macro_iou": 0.09477736286235215,
+      "subject_macro_iou_ci95": [
+        0.056313165234303214,
+        0.14215462122654093
+      ],
+      "cohort_global_dice": 0.2081852938409299,
+      "cohort_global_iou": 0.11618684293935472,
+      "subjects": 50,
+      "coronal_slices_including_empty_reference": 624,
+      "role": "exploratory; not the registered gate because training used annotated 2D slices"
+    }
+  },
+  "pixel_calibration": {
+    "lesion_centered": {
+      "raw": {
+        "nll": 1.5332058010273344,
+        "brier": 0.14778446815754662,
+        "ece": 0.13484935156306524,
+        "mce": 0.25482510242478285,
+        "bootstrap_ci95": {
+          "nll": [
+            1.2626265758863962,
+            1.8312184081463614
+          ],
+          "brier": [
+            0.1313636511440675,
+            0.16481811567457844
+          ],
+          "ece": [
+            0.11752296497702902,
+            0.15545624531245378
+          ],
+          "mce": [
+            0.22892979346500658,
+            0.3808306674434046
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      },
+      "c03_operational": {
+        "nll": 1.045101164203741,
+        "brier": 0.1511420179848943,
+        "ece": 0.1413670915640238,
+        "mce": 0.4371932491636203,
+        "bootstrap_ci95": {
+          "nll": [
+            0.8673830736553524,
+            1.240767951022744
+          ],
+          "brier": [
+            0.13530262444058191,
+            0.16813825420887815
+          ],
+          "ece": [
+            0.12233842243039801,
+            0.16116241452478497
+          ],
+          "mce": [
+            0.3228156977238062,
+            0.544300277921516
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      }
+    },
+    "background": {
+      "raw": {
+        "nll": 0.02505741865831941,
+        "brier": 0.006116964007398934,
+        "ece": 0.012404989085516363,
+        "mce": 0.9866240484716811,
+        "bootstrap_ci95": {
+          "nll": [
+            0.02049098995598416,
+            0.030038897050335925
+          ],
+          "brier": [
+            0.005095260303143883,
+            0.007287175806386876
+          ],
+          "ece": [
+            0.011048907265690558,
+            0.013907610136543822
+          ],
+          "mce": [
+            0.9852012148460535,
+            0.9880209203959256
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      },
+      "c03_operational": {
+        "nll": 0.014312969266155946,
+        "brier": 0.0032282999824550383,
+        "ece": 0.010534431910818626,
+        "mce": 0.9686693757447017,
+        "bootstrap_ci95": {
+          "nll": [
+            0.0124802557690435,
+            0.016330610707686752
+          ],
+          "brier": [
+            0.0026022747741543542,
+            0.003955605418797461
+          ],
+          "ece": [
+            0.009595430049588596,
+            0.011622871231921565
+          ],
+          "mce": [
+            0.9646456785768537,
+            0.9720202587104082
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      }
+    },
+    "whole_image": {
+      "raw": {
+        "nll": 0.10267312587706749,
+        "brier": 0.013332016502970284,
+        "ece": 0.016186382594068353,
+        "mce": 0.6901949710748427,
+        "bootstrap_ci95": {
+          "nll": [
+            0.08331960387912671,
+            0.12338689467538327
+          ],
+          "brier": [
+            0.011663831128398743,
+            0.015109136358349762
+          ],
+          "ece": [
+            0.014149911064117823,
+            0.01833544705241101
+          ],
+          "mce": [
+            0.5910306978706616,
+            0.7880763195009287
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      },
+      "c03_operational": {
+        "nll": 0.06722271365260431,
+        "brier": 0.010784344329461624,
+        "ece": 0.009801512726830566,
+        "mce": 0.588033718486737,
+        "bootstrap_ci95": {
+          "nll": [
+            0.054706242317146034,
+            0.08073569938839249
+          ],
+          "brier": [
+            0.009301903417036515,
+            0.012343848632221623
+          ],
+          "ece": [
+            0.007925593349703785,
+            0.011853485258592578
+          ],
+          "mce": [
+            0.4382700503515747,
+            0.743424970192028
+          ]
+        },
+        "weighting": "each patient equal; each slice equal within patient"
+      }
+    },
+    "evaluation_membership": {
+      "model_space_representable_cases": 420,
+      "excluded_target_not_representable_at_128": 5,
+      "excluded_case_ids": [
+        "sub-008:coronal:003",
+        "sub-015:coronal:013",
+        "sub-017:coronal:000",
+        "sub-025:coronal:008",
+        "sub-028:coronal:013"
+      ],
+      "reason": "Lesion-centred regions are undefined when the frozen model-space reference is empty."
+    }
+  },
+  "reliability_transfer": {
+    "failure_detection_auroc": 0.8718899324435657,
+    "ece": 0.25509601671837145,
+    "mce": 0.5888090997888258,
+    "brier": 0.19229498671512685,
+    "prevalence_baseline_brier": 0.6519532871972318,
+    "brier_skill": 0.7050479068188931,
+    "bins": [
+      {
+        "bin": 1,
+        "count": 29,
+        "mean_probability": 0.011214885509382768,
+        "observed_frequency": 0.0,
+        "absolute_gap": 0.011214885509382768
+      },
+      {
+        "bin": 2,
+        "count": 29,
+        "mean_probability": 0.012588599901430339,
+        "observed_frequency": 0.0,
+        "absolute_gap": 0.012588599901430339
+      },
+      {
+        "bin": 3,
+        "count": 29,
+        "mean_probability": 0.023171090842812866,
+        "observed_frequency": 0.0,
+        "absolute_gap": 0.023171090842812866
+      },
+      {
+        "bin": 4,
+        "count": 29,
+        "mean_probability": 0.10269444285798736,
+        "observed_frequency": 0.034482758620689655,
+        "absolute_gap": 0.0682116842372977
+      },
+      {
+        "bin": 5,
+        "count": 29,
+        "mean_probability": 0.14651899451022202,
+        "observed_frequency": 0.0,
+        "absolute_gap": 0.14651899451022202
+      },
+      {
+        "bin": 6,
+        "count": 28,
+        "mean_probability": 0.19697061374799385,
+        "observed_frequency": 0.03571428571428571,
+        "absolute_gap": 0.16125632803370815
+      },
+      {
+        "bin": 7,
+        "count": 28,
+        "mean_probability": 0.26264211447039654,
+        "observed_frequency": 0.03571428571428571,
+        "absolute_gap": 0.22692782875611084
+      },
+      {
+        "bin": 8,
+        "count": 28,
+        "mean_probability": 0.3388773586127915,
+        "observed_frequency": 0.03571428571428571,
+        "absolute_gap": 0.3031630728985058
+      },
+      {
+        "bin": 9,
+        "count": 28,
+        "mean_probability": 0.41935585962793853,
+        "observed_frequency": 0.10714285714285714,
+        "absolute_gap": 0.3122130024850814
+      },
+      {
+        "bin": 10,
+        "count": 28,
+        "mean_probability": 0.5353545723856789,
+        "observed_frequency": 0.21428571428571427,
+        "absolute_gap": 0.32106885809996455
+      },
+      {
+        "bin": 11,
+        "count": 28,
+        "mean_probability": 0.6639023309899431,
+        "observed_frequency": 0.10714285714285714,
+        "absolute_gap": 0.556759473847086
+      },
+      {
+        "bin": 12,
+        "count": 28,
+        "mean_probability": 0.7694752941761195,
+        "observed_frequency": 0.35714285714285715,
+        "absolute_gap": 0.41233243703326233
+      },
+      {
+        "bin": 13,
+        "count": 28,
+        "mean_probability": 0.871339270638085,
+        "observed_frequency": 0.42857142857142855,
+        "absolute_gap": 0.4427678420666565
+      },
+      {
+        "bin": 14,
+        "count": 28,
+        "mean_probability": 0.945951956931683,
+        "observed_frequency": 0.35714285714285715,
+        "absolute_gap": 0.5888090997888258
+      },
+      {
+        "bin": 15,
+        "count": 28,
+        "mean_probability": 0.9899290109291784,
+        "observed_frequency": 0.7142857142857143,
+        "absolute_gap": 0.2756432966434641
+      }
+    ],
+    "bootstrap_ci95": {
+      "failure_detection_auroc": [
+        0.8112022485736097,
+        0.9161683310211312
+      ],
+      "ece": [
+        0.20431209359314398,
+        0.3060001494022624
+      ],
+      "mce": [
+        0.4941431291041177,
+        0.7846106881602015
+      ],
+      "brier": [
+        0.15819455811118138,
+        0.22669580937080822
+      ],
+      "brier_skill": [
+        0.6587030379330359,
+        0.7514411987487697
+      ]
+    },
+    "per_category": {
+      "glioma": "NOT_ESTIMABLE",
+      "meningioma": "NOT_ESTIMABLE",
+      "pituitary": {
+        "failure_detection_auroc": 0.8718899324435657,
+        "bootstrap_ci95": [
+          0.8112022485736097,
+          0.9161683310211312
+        ],
+        "valid_bootstrap_draws": 2000
+      }
+    },
+    "top20_risk": {
+      "cases": 85,
+      "failures_captured": 85,
+      "failures_total": 357,
+      "zero_dice_captured": 85,
+      "zero_dice_total": 309
+    },
+    "policy": {
+      "threshold": "0.9490250173235835",
+      "review_required": 385,
+      "standard": 40,
+      "review_rate": 0.9058823529411765,
+      "failures_caught": 340,
+      "failures_missed": 17,
+      "acceptable_reviewed": 45,
+      "p01_total_cost": 555
+    }
+  },
+  "failure_taxonomy": {
+    "all": {
+      "count": 357,
+      "empty_prediction": {
+        "count": 81,
+        "fraction": 0.226890756302521
+      },
+      "nonempty_zero_overlap": {
+        "count": 228,
+        "fraction": 0.6386554621848739
+      },
+      "severe_under_prediction": {
+        "count": 32,
+        "fraction": 0.0896358543417367
+      },
+      "severe_over_prediction": {
+        "count": 8,
+        "fraction": 0.022408963585434174
+      },
+      "fragmented_prediction": {
+        "count": 153,
+        "fraction": 0.42857142857142855
+      },
+      "disconnected_false_positive": {
+        "count": 147,
+        "fraction": 0.4117647058823529
+      },
+      "reference_touches_model_edge": {
+        "count": 0,
+        "fraction": 0.0
+      },
+      "prediction_touches_model_edge": {
+        "count": 3,
+        "fraction": 0.008403361344537815
+      },
+      "complete_miss": {
+        "count": 309,
+        "fraction": 0.865546218487395
+      },
+      "primary_failure_modes": {
+        "empty_prediction": {
+          "count": 80,
+          "fraction": 0.22408963585434175
+        },
+        "fragmented_prediction": {
+          "count": 7,
+          "fraction": 0.0196078431372549
+        },
+        "nonempty_zero_overlap": {
+          "count": 224,
+          "fraction": 0.6274509803921569
+        },
+        "other_partial_overlap": {
+          "count": 1,
+          "fraction": 0.0028011204481792717
+        },
+        "severe_over_prediction": {
+          "count": 8,
+          "fraction": 0.022408963585434174
+        },
+        "severe_under_prediction": {
+          "count": 32,
+          "fraction": 0.0896358543417367
+        },
+        "target_not_representable_at_128": {
+          "count": 5,
+          "fraction": 0.014005602240896359
+        }
+      }
+    },
+    "pituitary": {
+      "count": 357,
+      "empty_prediction": {
+        "count": 81,
+        "fraction": 0.226890756302521
+      },
+      "nonempty_zero_overlap": {
+        "count": 228,
+        "fraction": 0.6386554621848739
+      },
+      "severe_under_prediction": {
+        "count": 32,
+        "fraction": 0.0896358543417367
+      },
+      "severe_over_prediction": {
+        "count": 8,
+        "fraction": 0.022408963585434174
+      },
+      "fragmented_prediction": {
+        "count": 153,
+        "fraction": 0.42857142857142855
+      },
+      "disconnected_false_positive": {
+        "count": 147,
+        "fraction": 0.4117647058823529
+      },
+      "reference_touches_model_edge": {
+        "count": 0,
+        "fraction": 0.0
+      },
+      "prediction_touches_model_edge": {
+        "count": 3,
+        "fraction": 0.008403361344537815
+      },
+      "complete_miss": {
+        "count": 309,
+        "fraction": 0.865546218487395
+      },
+      "primary_failure_modes": {
+        "empty_prediction": {
+          "count": 80,
+          "fraction": 0.22408963585434175
+        },
+        "fragmented_prediction": {
+          "count": 7,
+          "fraction": 0.0196078431372549
+        },
+        "nonempty_zero_overlap": {
+          "count": 224,
+          "fraction": 0.6274509803921569
+        },
+        "other_partial_overlap": {
+          "count": 1,
+          "fraction": 0.0028011204481792717
+        },
+        "severe_over_prediction": {
+          "count": 8,
+          "fraction": 0.022408963585434174
+        },
+        "severe_under_prediction": {
+          "count": 32,
+          "fraction": 0.0896358543417367
+        },
+        "target_not_representable_at_128": {
+          "count": 5,
+          "fraction": 0.014005602240896359
+        }
+      }
+    },
+    "glioma": "NOT_ESTIMABLE",
+    "meningioma": "NOT_ESTIMABLE"
+  },
+  "domain_gap": {
+    "reference": "BRISC development validation only; sealed test pixels unopened",
+    "cohort": {
+      "modality": "3T coronal contrast-enhanced T1 MRI",
+      "orientation": "coronal; canonical RAS axis 1",
+      "subjects": 50,
+      "tumor_bearing_slices": 425,
+      "model_space_representable_slices": 420,
+      "target_not_representable_at_128": 5,
+      "canonical_shape_counts": {
+        "1024x14x1024": 1,
+        "1024x15x1024": 1,
+        "1024x16x1024": 3,
+        "512x11x512": 24,
+        "512x12x512": 2,
+        "512x13x512": 11,
+        "512x14x512": 5,
+        "512x15x512": 2,
+        "512x16x512": 1
+      },
+      "voxel_spacing_mm": {
+        "x_range": [
+          0.15629998544669788,
+          0.3125000346214312
+        ],
+        "y_range": [
+          2.2999977724612344,
+          2.800008976384415
+        ],
+        "z_range": [
+          0.1562999908288082,
+          0.3125000198274743
+        ]
+      }
+    },
+    "continuous_distribution_shift": {
+      "model_input_mean": {
+        "wasserstein": 0.13531777764287065,
+        "jensen_shannon_divergence": 0.938862280199731,
+        "external_mean": 0.2988731278742061,
+        "brisc_validation_mean": 0.16355535023133544
+      },
+      "model_input_sd": {
+        "wasserstein": 0.03659948446952245,
+        "jensen_shannon_divergence": 0.49095810681803376,
+        "external_mean": 0.19410010418471169,
+        "brisc_validation_mean": 0.15782308930202443
+      },
+      "nonzero_mean": {
+        "wasserstein": 0.11465531436178614,
+        "jensen_shannon_divergence": 0.9152951921281696,
+        "external_mean": 0.30051523934392366,
+        "brisc_validation_mean": 0.18608203502919743
+      },
+      "foreground_fraction": {
+        "wasserstein": 0.005556400416611957,
+        "jensen_shannon_divergence": 0.05910156001923169,
+        "external_mean": 0.010422334216889881,
+        "brisc_validation_mean": 0.01597873463350184
+      },
+      "centroid_y": {
+        "wasserstein": 0.05703230692626826,
+        "jensen_shannon_divergence": 0.26161193503927826,
+        "external_mean": 0.4565771336995035,
+        "brisc_validation_mean": 0.4590606391625986
+      },
+      "centroid_x": {
+        "wasserstein": 0.06095838537671967,
+        "jensen_shannon_divergence": 0.2716012886528927,
+        "external_mean": 0.5010824030623316,
+        "brisc_validation_mean": 0.4897988303243524
+      },
+      "component_count": {
+        "wasserstein": 0.14635854341736687,
+        "jensen_shannon_divergence": 0.025818605149525407,
+        "external_mean": 1.1904761904761905,
+        "brisc_validation_mean": 1.0441176470588236
+      },
+      "reference_boundary_gradient": {
+        "wasserstein": 0.025803071438578937,
+        "jensen_shannon_divergence": 0.116109452576883,
+        "external_mean": 0.11339621054775488,
+        "brisc_validation_mean": 0.08760007411924725
+      }
+    },
+    "fragmented_reference_fraction": {
+      "openneuro": 0.1380952380952381,
+      "brisc_validation": 0.041176470588235294
+    },
+    "encoder_representation_shift": {
+      "centroid_euclidean": 18.76917266845703,
+      "dimension_mean_wasserstein": 0.7362475455955,
+      "dimension_median_wasserstein": 0.6215140743465986,
+      "encoder": "frozen classifier ResNet18 avgpool (512 dimensions)"
+    },
+    "reliability_score_shift": {
+      "wasserstein": 0.46430961377563246,
+      "jensen_shannon_divergence": 0.39093088165627266,
+      "external_mean": 0.41509601671837143,
+      "brisc_validation_mean": 0.8794056304940038
+    },
+    "policy_review_rate": {
+      "openneuro": 0.9058823529411765,
+      "brisc_operational_reference": 0.28823529411764703
+    }
+  },
+  "gates": {
+    "status": "FAIL",
+    "checks": {
+      "classifier_pituitary_recall_at_least_0_85": true,
+      "classifier_top_label_ece_at_most_0_05": false,
+      "pituitary_subject_macro_dice_at_least_0_75": false,
+      "reliability_auroc_at_least_0_75": true,
+      "reliability_auroc_ci_lower_at_least_0_70": true,
+      "reliability_ece_at_most_0_05": false,
+      "reliability_brier_skill_positive": true,
+      "reliability_brier_skill_ci_lower_positive": true,
+      "top20_failure_capture_at_least_half": false
+    },
+    "unidentifiable_metrics": [
+      "classifier OVR AUROC",
+      "no-tumor specificity",
+      "binary tumor/no-tumor AUROC",
+      "glioma metrics",
+      "meningioma metrics"
+    ]
+  },
+  "verification": {
+    "frozen_hashes": {
+      "models/r02_reliability_scaler.pkl": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8",
+      "models/r02_reliability_logistic.pkl": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044",
+      "models/r02_reliability_manifest.json": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f",
+      "experiments/c03_isotonic/artifacts/isotonic_mappings.json": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+      "classifier": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+      "v1": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+      "e05": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+      "e06": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+      "e07": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0"
+    },
+    "audit_result_sha256": "999ff3a09f2918024924c9a16151b9ef5b60a6527752bdec36a0fc0b3b3737d4",
+    "subject_manifest_sha256": "b60c64803b6e4171b63f0b1a9014ad0eab11713a4c2ea53c8862d8ebefeb6642",
+    "tumor_slice_manifest_sha256": "bd85dfce6a62884c081ed73af8f6c4b5f7d963a8e273c6ebf4d99fbb068cabd8",
+    "amendment_15_sha256": "4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e",
+    "device": "cuda",
+    "bootstrap_repetitions": 2000,
+    "bootstrap_seed": 42,
+    "bootstrap_unit": "subject_id",
+    "segmentation_threshold": 0.5,
+    "reliability_threshold": "0.9490250173235835",
+    "brisc_files_opened": {
+      "development_validation": 680,
+      "sealed_test": 0
+    },
+    "external_subjects_evaluated": 50,
+    "external_slices_inferred": 624,
+    "inference_attempts": {
+      "aborted_before_results": 1,
+      "aborted_slices_inferred": 80,
+      "completed": 1
+    },
+    "neural_retraining": false,
+    "calibrator_refit": false,
+    "reliability_refit": false,
+    "threshold_changed": false,
+    "source_commit": "99f17f7ca02af5adf735bd511cb66f9154043110"
+  },
+  "limitations": [
+    "The cohort contains only pituitary adenoma subjects, so no-tumor specificity and binary tumor/no-tumor AUROC are not estimable.",
+    "The cohort cannot estimate glioma or meningioma performance.",
+    "Primary 2D analysis selects tumor-bearing slices using the reference mask; whole-volume analysis including empty-reference slices is reported separately.",
+    "Five native source-positive edge slices lose all reference foreground under the frozen 128x128 nearest-neighbor transform. They receive zero in the strict primary gate and are excluded only from lesion-region calibration, where the region is undefined.",
+    "Reliability transfer may be affected if target-representability loss is associated with prediction-derived R02 inputs; the five cases remain strict reliability failures and no reference-mask feature enters R02.",
+    "This single-site retrospective cohort does not establish prospective performance, clinical validity, diagnostic safety, or suitability for patient care.",
+    "The frozen release contains conflicting CC0 and CC BY-NC 4.0 statements; project governance applies the more restrictive statement."
+  ],
+  "decision": "Reject H8 transport for X02. Preserve the independent external result as evidence of severe domain shift; do not tune on X02.",
+  "visual_review": {
+    "status": "PASS_NO_SYSTEMATIC_TRANSFORM_DEFECT",
+    "source_alignment_panel": "experiments/x02_openneuro_pituitary/artifacts/source_alignment_panel.png",
+    "prediction_panel": "experiments/x02_openneuro_pituitary/artifacts/visual_audit_panel.png",
+    "finding": "The source panel shows label-1 masks on visible sellar lesions. Best predictions overlap the reference closely. Worst predictions are empty or spatial misses without a common flip, transpose, or fixed offset. The deterministic six worst rows come from sub-001 because tied zero-Dice rows use case ID as the tie-breaker; the source-alignment panel supplies cross-patient coverage."
+  },
+  "independent_recompute": {
+    "maximum_absolute_metric_difference": 0.0,
+    "metrics_recomputed": 45,
+    "rows": 425,
+    "subjects": 50,
+    "strict_failures": 357,
+    "gates": {
+      "classifier_pituitary_recall_at_least_0_85": true,
+      "classifier_top_label_ece_at_most_0_05": false,
+      "pituitary_subject_macro_dice_at_least_0_75": false,
+      "reliability_auroc_at_least_0_75": true,
+      "reliability_auroc_ci_lower_at_least_0_70": true,
+      "reliability_ece_at_most_0_05": false,
+      "reliability_brier_skill_positive": true,
+      "reliability_brier_skill_ci_lower_positive": true,
+      "top20_failure_capture_at_least_half": false
+    },
+    "target_not_representable": {
+      "count": 5,
+      "all_review_required": true,
+      "mean_reliability": 0.7196833741904104,
+      "representable_mean_reliability": 0.4114699767484662,
+      "captured_in_top20_risk": 1
+    },
+    "pixel_calibration_verification": "Result and standalone JSON are byte-equivalent data; per-pixel probabilities were not persisted, so the descriptive calibration aggregates cannot be independently regenerated without forbidden repeat inference."
+  }
+}
