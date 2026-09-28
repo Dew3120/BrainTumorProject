@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p05_threshold_sensitivity",
+  "status": "REGISTERED",
+  "scope": "Internal BRISC development reliability-policy sensitivity analysis",
+  "selected_threshold": 0.9490250173235835,
+  "nominal_perturbations": [
+    -0.1,
+    -0.05,
+    -0.02,
+    0.0,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "threshold_clipping": [
+    0.0,
+    1.0
+  ],
+  "review_rule": "reliability < threshold",
+  "costs": {
+    "true_positive": 1,
+    "false_positive": 1,
+    "true_negative": 0,
+    "false_negative": 10
+  },
+  "population": {
+    "path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+    "sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "expected_cases": 680,
+    "expected_acceptable": 598,
+    "expected_bad": 82
+  },
+  "governing_results": {
+    "p01_result_sha256": "d66042c2ce9ea848c6e98e8a06a26c9aace02a4f54b253de893b1ccafb531109",
+    "p01_manifest_sha256": "ef52545bc645be0a453978046cdf094546408091d68c6ad8f15b5f99230bab50",
+    "p02_result_sha256": "ab86f12bb3116429bbfeb633cdef0ea0f636623757202d821e3f5b52a2fac05c",
+    "p02_manifest_sha256": "80e1b9f3f655d43c451a194b7a9b5ddd6b6cc3de930cbd961855f880fe8196ef",
+    "p03_result_sha256": "5b7573987e92b1a82461e92e37efd68ba46bdfc0bc0cc426c1128218e1944011",
+    "p03_manifest_sha256": "2a2bbc1198ae08e4b206ee91c0bdf9c0ac7d45c4d80ffff7eaf982a769038377",
+    "p04_result_sha256": "a03b36297132aee490a74d03cf5cfa787495243a738ea2cef1f78ed1ee3f3fdb",
+    "p04_manifest_sha256": "655e4b2abaa9769c33295980bdcdb8e041ea2abb0fedf01198ba08160ff02d8a"
+  },
+  "robustness_rule": {
+    "locally_flat_max_cost_increase_fraction_at_plus_or_minus_0_02": 0.1,
+    "robust_max_cost_increase_fraction_at_plus_or_minus_0_05": 0.25,
+    "fragile_when_either_condition_fails": true,
+    "descriptive_only": true
+  },
+  "cost_change_per_0_01_formula": "(perturbed_total_cost - selected_total_cost) / (abs(applied_shift) / 0.01)",
+  "segmentation_threshold": 0.5,
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false,
+  "calibrator_retrained_or_refit": false,
+  "reliability_model_retrained_or_refit": false,
+  "hypothesis_ids": []
+}

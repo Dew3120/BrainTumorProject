@@ -331,6 +331,12 @@
       "status": "COMPLETE"
     },
     {
+      "id": "p05_threshold_sensitivity",
+      "path": "experiments/p05_threshold_sensitivity",
+      "hypothesis_ids": [],
+      "status": "REGISTERED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [

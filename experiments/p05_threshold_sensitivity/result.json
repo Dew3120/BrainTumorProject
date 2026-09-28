@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p05_threshold_sensitivity",
+  "status": "REGISTERED_NOT_RUN",
+  "decision": "PENDING_EXECUTION",
+  "results_inspected": false,
+  "test_images_accessed": 0,
+  "segmentation_threshold": 0.5,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false
+}
