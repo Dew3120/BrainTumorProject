@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "p05_threshold_sensitivity",
-  "status": "REGISTERED",
+  "status": "COMPLETE",
   "scope": "Internal BRISC development reliability-policy sensitivity analysis",
   "selected_threshold": 0.9490250173235835,
   "nominal_perturbations": [

@@ -334,7 +334,7 @@
       "id": "p05_threshold_sensitivity",
       "path": "experiments/p05_threshold_sensitivity",
       "hypothesis_ids": [],
-      "status": "REGISTERED"
+      "status": "COMPLETE"
     },
     {
       "id": "sealed_final_evaluation",

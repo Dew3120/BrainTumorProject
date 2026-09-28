@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p05_threshold_sensitivity",
+  "status": "PASS",
+  "decision": "THRESHOLD_SENSITIVITY_FRAGILE",
+  "selected_threshold": 0.9490250173235835,
+  "classification": "FRAGILE",
+  "test_images_accessed": 0,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false,
+  "files": [
+    {
+      "path": "audit/threshold_sensitivity.md",
+      "sha256": "a830e02e06ece64b4b03d021b2a1567913b123826dc9c1a01fa409c46525d525",
+      "bytes": 2402
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/hypothesis.md",
+      "sha256": "df75a7473c537d9c88770586ea67e97b9f2ec823006219883bd7a9e1555f8194",
+      "bytes": 2153
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/config.json",
+      "sha256": "5b89870adfdaa133da79d649e3adf8b0000de88b1c4cf05d5e6987c6d4656134",
+      "bytes": 2160
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/result.json",
+      "sha256": "fa99058527d645d2d85d2b2bb02f63be97916a968bf9a777be0b9914c31e3711",
+      "bytes": 7902
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/decision.md",
+      "sha256": "5d7e314f4c0a4246004b4edac28e260269ee8edfe93c8af95e65cd2c0494221b",
+      "bytes": 371
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/artifacts/sensitivity_curve.csv",
+      "sha256": "36b8d0fc2aba5ae4d0b032f84356b1fd28d7efd8707317a0142280cf110c7236",
+      "bytes": 53866
+    },
+    {
+      "path": "experiments/p05_threshold_sensitivity/artifacts/sensitivity_curve.png",
+      "sha256": "1501b109521fcfaf2c5567ed570313d42df2738ab0a54b4f2c519feeb27e58bd",
+      "bytes": 117642
+    },
+    {
+      "path": "scripts/run_p05_threshold_sensitivity.py",
+      "sha256": "9330bfacfe4e52a275ec4e997c27778723949ce0a93ae326d1965379f15f7a38",
+      "bytes": 23673
+    },
+    {
+      "path": "tests/test_run_p05_threshold_sensitivity.py",
+      "sha256": "ccf6f842d00308159d78a81d08e1ac395069bc2233da7d63900047877b2be76f",
+      "bytes": 4021
+    }
+  ]
+}
