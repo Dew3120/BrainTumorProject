@@ -322,7 +322,7 @@
       "id": "p03_decision_rule",
       "path": "experiments/p03_decision_rule",
       "hypothesis_ids": [],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "COMPLETE"
     },
     {
       "id": "sealed_final_evaluation",

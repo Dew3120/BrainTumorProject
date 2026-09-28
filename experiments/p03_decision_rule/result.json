@@ -1,5 +1,80 @@
 {
   "schema_version": 1,
   "experiment_id": "p03_decision_rule",
-  "status": "NOT_RUN"
+  "status": "PASS",
+  "decision": "ADOPT_TWO_STATE_POLICY_CONTRACT",
+  "policy": {
+    "version": "p03_decision_rule",
+    "threshold": 0.9490250173235835,
+    "states": [
+      "STANDARD",
+      "REVIEW_REQUIRED"
+    ],
+    "review_rule": "r < threshold",
+    "standard_rule": "r >= threshold",
+    "warning_state": null,
+    "warning_absence_reason": "P02 selected theta_low equal to theta_high after exhaustive registered cost minimization.",
+    "invalid_or_unavailable_fallback": "REVIEW_REQUIRED"
+  },
+  "oof_behavior": {
+    "review_required": 195,
+    "standard": 485,
+    "failures_caught": 81,
+    "failures_missed": 1,
+    "acceptable_reviewed": 114,
+    "total_cost": 205
+  },
+  "glioma": {
+    "global_threshold": 0.9490250173235835,
+    "descriptive_optimum": 0.950106439123928,
+    "assignment_differences": 0,
+    "cost_difference": 0,
+    "separate_policy_required": false,
+    "true_category_reliability_auroc": 0.8768434087583024
+  },
+  "ui_contract": {
+    "schema": "artifacts/policy_contract.schema.json",
+    "standard_behavior": "Display prediction normally with score and policy status.",
+    "review_required_behavior": "Keep prediction visible and display a prominent manual-review warning.",
+    "missing_or_invalid_behavior": "Fail closed to REVIEW_REQUIRED with a reason code and normalized null score."
+  },
+  "verification": {
+    "status": "PASS",
+    "hashes_verified": 6,
+    "cases": 680,
+    "unique_cases": 680,
+    "folds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "threshold_unchanged_from_p02": true,
+    "cost_vector_unchanged": true,
+    "segmentation_threshold": 0.5,
+    "segmentation_threshold_changed": false,
+    "test_images_accessed": 0,
+    "model_retrained_or_refit": false,
+    "source_hashes": {
+      "experiments/p01_cost_model/result.json": "d66042c2ce9ea848c6e98e8a06a26c9aace02a4f54b253de893b1ccafb531109",
+      "experiments/p01_cost_model/artifacts/experiment_manifest.json": "ef52545bc645be0a453978046cdf094546408091d68c6ad8f15b5f99230bab50",
+      "experiments/p02_threshold_selection/result.json": "ab86f12bb3116429bbfeb633cdef0ea0f636623757202d821e3f5b52a2fac05c",
+      "experiments/p02_threshold_selection/artifacts/experiment_manifest.json": "80e1b9f3f655d43c451a194b7a9b5ddd6b6cc3de930cbd961855f880fe8196ef",
+      "experiments/r02_reduced_features/result.json": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+      "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a"
+    },
+    "boundary_tests_required": true,
+    "oof_behavior_reproduced": true,
+    "only_registered_states_emitted": true,
+    "true_category_used_by_policy": false,
+    "reference_mask_used_by_policy": false,
+    "script_sha256": "212d66b658c61ccb63385f0442e82691fa4f43d52fee1b43ccb7fc53c1acb4a6"
+  },
+  "limitations": [
+    "The policy is optimized on internal BRISC validation and awaits sealed evaluation.",
+    "The costs are engineering preferences rather than clinically elicited utilities.",
+    "Glioma reliability ranking remains weaker even though its threshold assignments match the global policy.",
+    "The policy does not establish the effectiveness or consistency of human review."
+  ]
 }

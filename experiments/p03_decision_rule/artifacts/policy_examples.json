@@ -1,0 +1,174 @@
+{
+  "policy_version": "p03_decision_rule",
+  "examples": [
+    {
+      "case": "immediately_below",
+      "input_kind": "number",
+      "input_display": "0.9490250173235834",
+      "output": {
+        "reliability_score": 0.9490250173235834,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case": "exact_threshold",
+      "input_kind": "number",
+      "input_display": "0.9490250173235835",
+      "output": {
+        "reliability_score": 0.9490250173235835,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "STANDARD",
+        "requires_manual_review": false,
+        "status_reason": "AT_OR_ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case": "immediately_above",
+      "input_kind": "number",
+      "input_display": "0.9490250173235836",
+      "output": {
+        "reliability_score": 0.9490250173235836,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "STANDARD",
+        "requires_manual_review": false,
+        "status_reason": "AT_OR_ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case": "minimum_valid",
+      "input_kind": "number",
+      "input_display": "0.0",
+      "output": {
+        "reliability_score": 0.0,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "BELOW_THRESHOLD"
+      }
+    },
+    {
+      "case": "maximum_valid",
+      "input_kind": "number",
+      "input_display": "1.0",
+      "output": {
+        "reliability_score": 1.0,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "STANDARD",
+        "requires_manual_review": false,
+        "status_reason": "AT_OR_ABOVE_THRESHOLD"
+      }
+    },
+    {
+      "case": "unavailable",
+      "input_kind": "null",
+      "input_display": "null",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_UNAVAILABLE"
+      }
+    },
+    {
+      "case": "negative",
+      "input_kind": "number",
+      "input_display": "-0.1",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "above_one",
+      "input_kind": "number",
+      "input_display": "1.1",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "nan",
+      "input_kind": "non_finite_number",
+      "input_display": "NaN",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "positive_infinity",
+      "input_kind": "non_finite_number",
+      "input_display": "+Infinity",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "negative_infinity",
+      "input_kind": "non_finite_number",
+      "input_display": "-Infinity",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "string",
+      "input_kind": "string",
+      "input_display": "\"0.99\"",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    },
+    {
+      "case": "boolean",
+      "input_kind": "boolean",
+      "input_display": "true",
+      "output": {
+        "reliability_score": null,
+        "reliability_threshold": 0.9490250173235835,
+        "policy_version": "p03_decision_rule",
+        "reliability_status": "REVIEW_REQUIRED",
+        "requires_manual_review": true,
+        "status_reason": "RELIABILITY_INVALID"
+      }
+    }
+  ]
+}

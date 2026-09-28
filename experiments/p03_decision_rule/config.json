@@ -2,7 +2,7 @@
   "schema_version": 1,
   "experiment_id": "p03_decision_rule",
   "hypothesis_ids": [],
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "scope": "Formalize the internal-development reliability policy for Phase 6 integration",
   "policy_version": "p03_decision_rule",
   "reliability_threshold": 0.9490250173235835,

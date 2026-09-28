@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/brain-tumor/reliability-policy-output.schema.json",
+  "title": "Reliability policy output",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "reliability_score": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "reliability_threshold": {
+      "const": 0.9490250173235835
+    },
+    "reliability_status": {
+      "enum": [
+        "STANDARD",
+        "REVIEW_REQUIRED"
+      ]
+    },
+    "requires_manual_review": {
+      "type": "boolean"
+    },
+    "status_reason": {
+      "enum": [
+        "AT_OR_ABOVE_THRESHOLD",
+        "BELOW_THRESHOLD",
+        "RELIABILITY_UNAVAILABLE",
+        "RELIABILITY_INVALID"
+      ]
+    },
+    "policy_version": {
+      "const": "p03_decision_rule"
+    }
+  },
+  "required": [
+    "reliability_score",
+    "reliability_threshold",
+    "reliability_status",
+    "requires_manual_review",
+    "status_reason",
+    "policy_version"
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "reliability_score": {
+          "type": "number",
+          "minimum": 0.9490250173235835,
+          "maximum": 1
+        },
+        "reliability_status": {
+          "const": "STANDARD"
+        },
+        "requires_manual_review": {
+          "const": false
+        },
+        "status_reason": {
+          "const": "AT_OR_ABOVE_THRESHOLD"
+        }
+      }
+    },
+    {
+      "properties": {
+        "reliability_score": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 0.9490250173235835
+        },
+        "reliability_status": {
+          "const": "REVIEW_REQUIRED"
+        },
+        "requires_manual_review": {
+          "const": true
+        },
+        "status_reason": {
+          "const": "BELOW_THRESHOLD"
+        }
+      }
+    },
+    {
+      "properties": {
+        "reliability_score": {
+          "type": "null"
+        },
+        "reliability_status": {
+          "const": "REVIEW_REQUIRED"
+        },
+        "requires_manual_review": {
+          "const": true
+        },
+        "status_reason": {
+          "const": "RELIABILITY_UNAVAILABLE"
+        }
+      }
+    },
+    {
+      "properties": {
+        "reliability_score": {
+          "type": "null"
+        },
+        "reliability_status": {
+          "const": "REVIEW_REQUIRED"
+        },
+        "requires_manual_review": {
+          "const": true
+        },
+        "status_reason": {
+          "const": "RELIABILITY_INVALID"
+        }
+      }
+    }
+  ]
+}

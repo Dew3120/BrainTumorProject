@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p03_decision_rule",
+  "status": "PASS",
+  "decision": "ADOPT_TWO_STATE_POLICY_CONTRACT",
+  "threshold": 0.9490250173235835,
+  "states": [
+    "STANDARD",
+    "REVIEW_REQUIRED"
+  ],
+  "test_images_accessed": 0,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false,
+  "files": [
+    {
+      "path": "docs/decision_rule.md",
+      "sha256": "43290ba09ec991819dbbc21346b447cd70c0cfcda1e75b0d21e99b502fd744c5",
+      "bytes": 3363
+    },
+    {
+      "path": "experiments/p03_decision_rule/hypothesis.md",
+      "sha256": "56b421688770a66eb76e58e98beaf5ea788be4090badf13859f5b1858c0e2591",
+      "bytes": 1021
+    },
+    {
+      "path": "experiments/p03_decision_rule/config.json",
+      "sha256": "b7abf8a389e2eb5e175249f41c71624e51cfab33a9e14f69eefd97a40be80044",
+      "bytes": 1523
+    },
+    {
+      "path": "experiments/p03_decision_rule/result.json",
+      "sha256": "5b7573987e92b1a82461e92e37efd68ba46bdfc0bc0cc426c1128218e1944011",
+      "bytes": 3331
+    },
+    {
+      "path": "experiments/p03_decision_rule/decision.md",
+      "sha256": "0a358d13618dca27101606b2c283eb5eacef16c3f466040dcff98b6fc1271a5a",
+      "bytes": 607
+    },
+    {
+      "path": "experiments/p03_decision_rule/artifacts/policy_contract.schema.json",
+      "sha256": "2900e509422a70bda6de3c2043e3b2707f67abd2f9fe717f95b09476cad3fad2",
+      "bytes": 2526
+    },
+    {
+      "path": "experiments/p03_decision_rule/artifacts/oof_policy_assignments.csv",
+      "sha256": "d5e16e57eef25cace1ece366adbb8584b82596d24d4090cd0bdf1da4c6103c93",
+      "bytes": 153894
+    },
+    {
+      "path": "experiments/p03_decision_rule/artifacts/policy_examples.json",
+      "sha256": "31ebc8cb123c4b270354b68bd76654d0ad232a902bfecea39445dceb8e7f6ca7",
+      "bytes": 5382
+    },
+    {
+      "path": "scripts/formalize_p03_decision_rule.py",
+      "sha256": "212d66b658c61ccb63385f0442e82691fa4f43d52fee1b43ccb7fc53c1acb4a6",
+      "bytes": 21318
+    },
+    {
+      "path": "tests/test_formalize_p03_decision_rule.py",
+      "sha256": "1e12e3ee5483c5e7e01840239c2fe8f4968496b21f8f37c51ac13a7cc88dcc8f",
+      "bytes": 2003
+    }
+  ]
+}
