@@ -1,0 +1,7 @@
+experiment,model,registered_outcome,gate_passed,selection_eligible,cases,aggregate_oof_auroc,ece,brier,selection_note,matched_r02_auroc
+R01,14-feature logistic baseline,DESCRIPTIVE_COMPLETE,,False,680,0.9545028142589118,0.01707162736377,0.05370771310451019,Descriptive by registration; cannot be selected.,
+R02,10-feature aggregate logistic,PASS,True,True,680,0.9555020801044132,0.017133460802129376,0.05275733072581438,Passed noninferiority gate.,
+R03,20-feature extended logistic,FAIL,False,False,680,0.9514234440003263,0.017258430484973348,0.05286611482570424,Failed registered superiority gate.,
+R04,Predicted-category routed logistic,PASS,True,True,679,0.9308600685412279,0.017658935037508854,0.057901408821025166,Passed category gates; aggregate operational ranking is lower than R02. One no-tumor route excluded as registered.,0.9550146579132087
+R05,Category-aware aggregate logistic,FAIL,False,False,679,0.9548082084313968,0.01859774095139583,0.053587669749557844,Failed predicted-glioma AUROC gate.,
+R06,Best nonlinear candidate (XGBoost),FAIL,False,False,680,0.9402683742556488,0.025109659190125314,0.05912366604825346,No nonlinear candidate reached 0.975; R02 retained.,

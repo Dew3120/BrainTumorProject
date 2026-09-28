@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "experiment_id": "e08_final_selection",
+  "decision": "NOMINATE_C03_CALIBRATED_E08_WITH_R02_RELIABILITY",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/e08_final_selection/artifacts/model_selection_table.csv",
+      "sha256": "08947c6237b29dfc9c5a4bbdb7fff4b0358add90c11b5e3f03bc7693aefe73d1",
+      "bytes": 1189
+    },
+    {
+      "path": "experiments/e08_final_selection/config.json",
+      "sha256": "98d20b64662f9ce40e78b3b229fffe7ea06e4174cd2bcd5690441ebb0558eb67",
+      "bytes": 3072
+    },
+    {
+      "path": "experiments/e08_final_selection/decision.md",
+      "sha256": "ebdd477f2f0d37589a9dde21d68a4b419ed95d78e680a8b33ce5a7e5287e1cf3",
+      "bytes": 538
+    },
+    {
+      "path": "experiments/e08_final_selection/hypothesis.md",
+      "sha256": "9e9b6e98ee690b26a72e3295fe38772a50a6397b0cdc14dc9e1b75233a85e9cb",
+      "bytes": 372
+    },
+    {
+      "path": "experiments/e08_final_selection/result.json",
+      "sha256": "dc2bb7f305d97830b499dc2599050e52c7119c4a3b1ae4997c240cc73edb11b9",
+      "bytes": 9341
+    }
+  ]
+}
