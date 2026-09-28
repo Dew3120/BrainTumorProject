@@ -623,3 +623,14 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** BRISC comparison opened zero BRISC pixels. Inference, performance evaluation, neural retraining, refitting, threshold changes, and BRISC test-pixel access were zero.
 - **Alternatives considered:** Download the entire multimodal dataset; rejected because the registered input contract requires only CE-cor T1 and expert ground truth. Treat the licence conflict as permission to use CC0; rejected as insufficiently conservative.
 - **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations unless a registered stop condition occurs.
+
+
+## 2026-09-28T19:30:30+05:30 — Register X02 target-representability handling and one restart
+
+- **Decision made:** Register Amendment 15 before restarting X02. Preserve all 425 source-positive slices, assign Dice/IoU/boundary F1 zero to the five targets erased by frozen 128×128 nearest-neighbor preprocessing, use the strict all-425 subject-macro Dice for the unchanged gate, and report representable-only, source-coordinate, and exploratory whole-volume views separately.
+- **Triggering artifact:** `audit/preregistration_amendment_15.md`, SHA256 `4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e`; X02 audit result SHA256 `999ff3a09f2918024924c9a16151b9ef5b60a6527752bdec36a0fc0b3b3737d4`.
+- **Rationale:** Five of 425 native source-positive edge slices contain only 2–10 tumor pixels and become empty after the already frozen nearest-neighbor resize. Excluding them from the primary gate would favor the model after observing a transport limitation; changing interpolation or adding mask dilation would change the frozen adapter. Conservative zero scores preserve membership and make the limitation visible.
+- **Aborted attempt:** The first launch stopped at `sub-008:coronal:003`. Five complete batches (80/624 slices) were inferred before the next data-loader batch failed. No X02 performance output was saved or inspected. This is one aborted inference attempt, not a completed evaluation.
+- **Verification:** Read-only preprocessing verification identified exactly five cases. BRISC sealed-test access, neural retraining, calibrator/reliability refitting, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
+- **Alternatives considered:** Drop the five slices; rejected as post-discovery attrition. Preserve small masks by dilation or different interpolation; rejected because the adapter is frozen. Stop X02 permanently; rejected because native source-coordinate and strict sensitivity views permit a transparent evaluation without altering inputs or targets.
+- **Who approved:** User explicitly approved Amendment 15, the strict all-425 primary metric, the required five-case artifact, source-coordinate and exploratory whole-volume reporting, and one clean restart.

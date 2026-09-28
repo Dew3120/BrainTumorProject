@@ -4,6 +4,11 @@
   "status": "AUDIT_COMPLETE",
   "files": [
     {
+      "path": "audit/preregistration_amendment_15.md",
+      "bytes": 6370,
+      "sha256": "4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e"
+    },
+    {
       "path": "audit/x02_openneuro_dataset_audit.md",
       "bytes": 3137,
       "sha256": "4b4ec371bda8497df2fbab92d492ba3066431d1beed5b8aa21a97b9139275bd1"
@@ -45,8 +50,8 @@
     },
     {
       "path": "experiments/x02_openneuro_pituitary/decision.md",
-      "bytes": 349,
-      "sha256": "73e960dd6bf74654ed8d849e1b0b5e439d270c5c4002ea2b443eecd4d997b78d"
+      "bytes": 1262,
+      "sha256": "f07a4f1c55e56ef68217d05f4b2e1bc0f081bf000e771fbae31b16fb2f1c0a39"
     },
     {
       "path": "experiments/x02_openneuro_pituitary/hypothesis.md",

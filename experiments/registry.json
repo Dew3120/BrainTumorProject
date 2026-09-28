@@ -61,6 +61,10 @@
     {
       "path": "audit/preregistration_amendment_14.md",
       "sha256": "8abe7d0fb56c116f2c3f3f667e0263564dcb89b5021b8a3dc61959487849b7d5"
+    },
+    {
+      "path": "audit/preregistration_amendment_15.md",
+      "sha256": "4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e"
     }
   ],
   "baseline": {
