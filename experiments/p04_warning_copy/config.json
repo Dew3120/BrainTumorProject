@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p04_warning_copy",
+  "hypothesis_ids": [],
+  "status": "REGISTERED_NOT_STARTED",
+  "scope": "User-facing copy for the frozen P03 two-state reliability policy",
+  "policy_version": "p03_decision_rule",
+  "reliability_threshold": 0.9490250173235835,
+  "required_disclaimer": "Research prototype — not for clinical use",
+  "supported_combinations": [
+    "STANDARD/AT_OR_ABOVE_THRESHOLD/ANY",
+    "STANDARD/AT_OR_ABOVE_THRESHOLD/PREDICTED_GLIOMA",
+    "REVIEW_REQUIRED/BELOW_THRESHOLD/ANY",
+    "REVIEW_REQUIRED/BELOW_THRESHOLD/PREDICTED_GLIOMA",
+    "REVIEW_REQUIRED/RELIABILITY_UNAVAILABLE/ANY",
+    "REVIEW_REQUIRED/RELIABILITY_UNAVAILABLE/PREDICTED_GLIOMA",
+    "REVIEW_REQUIRED/RELIABILITY_INVALID/ANY",
+    "REVIEW_REQUIRED/RELIABILITY_INVALID/PREDICTED_GLIOMA"
+  ],
+  "allowed_states": [
+    "STANDARD",
+    "REVIEW_REQUIRED"
+  ],
+  "prohibited_claim_terms": [
+    "diagnosed",
+    "diagnosis",
+    "confirmed",
+    "accurate",
+    "safe",
+    "guaranteed",
+    "clinically validated"
+  ],
+  "source_hashes": {
+    "p03_result": "5b7573987e92b1a82461e92e37efd68ba46bdfc0bc0cc426c1128218e1944011",
+    "p03_manifest": "2a2bbc1198ae08e4b206ee91c0bdf9c0ac7d45c4d80ffff7eaf982a769038377",
+    "decision_rule_document": "43290ba09ec991819dbbc21346b447cd70c0cfcda1e75b0d21e99b502fd744c5"
+  },
+  "segmentation_threshold": 0.5,
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false,
+  "gate_or_policy_relaxed": false
+}
