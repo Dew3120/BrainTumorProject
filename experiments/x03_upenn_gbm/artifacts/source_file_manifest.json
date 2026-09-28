@@ -1,0 +1,2959 @@
+{
+  "schema_version": 1,
+  "dataset": "UPENN-GBM",
+  "dataset_version": 2,
+  "doi": "10.7937/TCIA.709X-DN49",
+  "source_repository": "data-nih/tcia",
+  "release_id": 222317008,
+  "tag_name": "upenn-gbm",
+  "published_at": "2025-06-02T02:42:11Z",
+  "release_api_url": "https://api.github.com/repos/data-nih/tcia/releases/tags/upenn-gbm",
+  "release_html_url": "https://github.com/data-nih/tcia/releases/tag/upenn-gbm",
+  "license": "CC BY 4.0",
+  "selection": "147 expert segmentation assets and their paired CE-Gd T1w volumes",
+  "files": [
+    {
+      "subject_id": "sub-002",
+      "kind": "image",
+      "name": "sub-002_ce-gd_T1w.nii.gz",
+      "bytes": 3230110,
+      "sha256": "23fa90d5f6024e3bc2e95ef47b3150a17d6c9036a8fd982121913191442fee67",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-002_ce-gd_T1w.nii.gz",
+      "asset_id": 260213620,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-002",
+      "kind": "mask",
+      "name": "sub-002_seg.nii.gz",
+      "bytes": 42421,
+      "sha256": "322c019da6f6bab864f80636e8663e7425581fe0a5bc78e139356bd532595093",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-002_seg.nii.gz",
+      "asset_id": 260213647,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-006",
+      "kind": "image",
+      "name": "sub-006_ce-gd_T1w.nii.gz",
+      "bytes": 3069693,
+      "sha256": "ee597315d91c8e650cc2e83ed92c4f2cc4ea3addce55765e7b71916204871b67",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-006_ce-gd_T1w.nii.gz",
+      "asset_id": 260213786,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-006",
+      "kind": "mask",
+      "name": "sub-006_seg.nii.gz",
+      "bytes": 22960,
+      "sha256": "5971f38976a9141307961066e18ede109aa8e9e979e9b83e5f58eaf3c7303c5c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-006_seg.nii.gz",
+      "asset_id": 260213798,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-008",
+      "kind": "image",
+      "name": "sub-008_ce-gd_T1w.nii.gz",
+      "bytes": 2484267,
+      "sha256": "cf8ba04dd095fb673fa5e4fd62afc1ba07a04bf91f56c98904c331d0ee22b1fa",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-008_ce-gd_T1w.nii.gz",
+      "asset_id": 260213882,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-008",
+      "kind": "mask",
+      "name": "sub-008_seg.nii.gz",
+      "bytes": 16701,
+      "sha256": "63297a7819d3a22303596fa575612f0f11a2c8d247bfb8f072df6cbe5686da81",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-008_seg.nii.gz",
+      "asset_id": 260213906,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-009",
+      "kind": "image",
+      "name": "sub-009_ce-gd_T1w.nii.gz",
+      "bytes": 3386463,
+      "sha256": "9a6ac9afc563f03358cc450c89e9736908f722ad4a7988eafedf40a26646ffa3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-009_ce-gd_T1w.nii.gz",
+      "asset_id": 260213938,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-009",
+      "kind": "mask",
+      "name": "sub-009_seg.nii.gz",
+      "bytes": 36711,
+      "sha256": "6c7fa6c91e86f4ab90a802dbc9f6c223650403f5316c27363bcd9f17b0e0ba3c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-009_seg.nii.gz",
+      "asset_id": 260213976,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-011",
+      "kind": "image",
+      "name": "sub-011_ce-gd_T1w.nii.gz",
+      "bytes": 2930986,
+      "sha256": "56d5176fdb9dca59ed746e3c49946557a43fad23db02cbb5e75f8e8ed5b788a6",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-011_ce-gd_T1w.nii.gz",
+      "asset_id": 260214090,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-011",
+      "kind": "mask",
+      "name": "sub-011_seg.nii.gz",
+      "bytes": 27991,
+      "sha256": "a75a914d5b1be4a433c548bada6ae205f2e480d670edcd339e601812790ac554",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-011_seg.nii.gz",
+      "asset_id": 260214124,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-013",
+      "kind": "image",
+      "name": "sub-013_ce-gd_T1w.nii.gz",
+      "bytes": 2848919,
+      "sha256": "dad0d6876a9a92a9048a82eb131ea12178a353810f2c2b71d9696dc97bef0c16",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-013_ce-gd_T1w.nii.gz",
+      "asset_id": 260214337,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-013",
+      "kind": "mask",
+      "name": "sub-013_seg.nii.gz",
+      "bytes": 16396,
+      "sha256": "f5fe4cde246d0979f958ee6ca4680ab39dc50ce97aa2cedf63ae73f35957f4a5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-013_seg.nii.gz",
+      "asset_id": 260214380,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-014",
+      "kind": "image",
+      "name": "sub-014_ce-gd_T1w.nii.gz",
+      "bytes": 3001910,
+      "sha256": "accdf3378d58f6a9fe1c78c1c21fda9e63c7b8ed88dac5d0472f1f0a18b2a9bc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-014_ce-gd_T1w.nii.gz",
+      "asset_id": 260214435,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-014",
+      "kind": "mask",
+      "name": "sub-014_seg.nii.gz",
+      "bytes": 38013,
+      "sha256": "617e1749adcc6f32b74d107cbe0828cfde5aaf2675750ceff319483024069f1a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-014_seg.nii.gz",
+      "asset_id": 260214487,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-016",
+      "kind": "image",
+      "name": "sub-016_ce-gd_T1w.nii.gz",
+      "bytes": 2935189,
+      "sha256": "f9ddc679b539eee65937c998b6b6b3f2f510985319ca2bfb2fe57fbaaa43b6b7",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-016_ce-gd_T1w.nii.gz",
+      "asset_id": 260214610,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-016",
+      "kind": "mask",
+      "name": "sub-016_seg.nii.gz",
+      "bytes": 18287,
+      "sha256": "bab27b8eabe9629ccd1241df7b5259a7d479df1fb5ad5091113b130211333c1c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-016_seg.nii.gz",
+      "asset_id": 260214650,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-017",
+      "kind": "image",
+      "name": "sub-017_ce-gd_T1w.nii.gz",
+      "bytes": 3032419,
+      "sha256": "b38ae0b7b2b11755ac4241257be20c904ea5af68f4e999ca35b02dc9c7947b1f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-017_ce-gd_T1w.nii.gz",
+      "asset_id": 260214706,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-017",
+      "kind": "mask",
+      "name": "sub-017_seg.nii.gz",
+      "bytes": 17658,
+      "sha256": "3cd7f6cd502d887076ec52d1d0b7a676edb23209cded924b5faa5bfb691e51cd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-017_seg.nii.gz",
+      "asset_id": 260214731,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-018",
+      "kind": "image",
+      "name": "sub-018_ce-gd_T1w.nii.gz",
+      "bytes": 2558860,
+      "sha256": "6e3a6d9386c36bc5f88fc6a299499f567fa265701dc80e7b2d2fbbfe6f56fe9b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-018_ce-gd_T1w.nii.gz",
+      "asset_id": 260214789,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-018",
+      "kind": "mask",
+      "name": "sub-018_seg.nii.gz",
+      "bytes": 49129,
+      "sha256": "4320c74b8ff5976ddeef033dfdb3c784c243520e0f9d2e45efb83a6fad90d9a9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-018_seg.nii.gz",
+      "asset_id": 260214827,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-020",
+      "kind": "image",
+      "name": "sub-020_ce-gd_T1w.nii.gz",
+      "bytes": 3206131,
+      "sha256": "f7a11667900600fa5bfabc66f0622f8d5a5ee1b6b518f716d8d573499e3e59b9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-020_ce-gd_T1w.nii.gz",
+      "asset_id": 260214969,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-020",
+      "kind": "mask",
+      "name": "sub-020_seg.nii.gz",
+      "bytes": 15537,
+      "sha256": "79a4c896932b5db772926c788cf1b52bbb6a15d5b36bf0afb5b46a7a278683aa",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-020_seg.nii.gz",
+      "asset_id": 260214996,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-021",
+      "kind": "image",
+      "name": "sub-021_ce-gd_T1w.nii.gz",
+      "bytes": 2416092,
+      "sha256": "91ece53de55f21c8526111ccad2ffbf3e9a6dc14be7c20fd042823aa3a6d5830",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-021_ce-gd_T1w.nii.gz",
+      "asset_id": 260215034,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-021",
+      "kind": "mask",
+      "name": "sub-021_seg.nii.gz",
+      "bytes": 22286,
+      "sha256": "c0ca9f886ee60493bdcf920b08163f5a8f92cf7c51f330ef4ed897eb359e7cc8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-021_seg.nii.gz",
+      "asset_id": 260215067,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-026",
+      "kind": "image",
+      "name": "sub-026_ce-gd_T1w.nii.gz",
+      "bytes": 2682876,
+      "sha256": "a5b7f66c73fa5c56d9984bc0af44c8b759770462320ed69d01ec88b6d7786016",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-026_ce-gd_T1w.nii.gz",
+      "asset_id": 260215299,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-026",
+      "kind": "mask",
+      "name": "sub-026_seg.nii.gz",
+      "bytes": 18628,
+      "sha256": "ace697e8a152e129be209d5e6d925c63b1f2f827984d59d1b04cd1b20566d67e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-026_seg.nii.gz",
+      "asset_id": 260215325,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-029",
+      "kind": "image",
+      "name": "sub-029_ce-gd_T1w.nii.gz",
+      "bytes": 2934334,
+      "sha256": "aba28c2ea3075ab26e6924dbe76fbd29a198b4e4d63a526f08fb972c1f1bec9b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-029_ce-gd_T1w.nii.gz",
+      "asset_id": 260215491,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-029",
+      "kind": "mask",
+      "name": "sub-029_seg.nii.gz",
+      "bytes": 39218,
+      "sha256": "0d7a02f05b93533ace86b54e126f53c18b07ca7080879cbbfbaf4dcdeca8d586",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-029_seg.nii.gz",
+      "asset_id": 260215502,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-030",
+      "kind": "image",
+      "name": "sub-030_ce-gd_T1w.nii.gz",
+      "bytes": 3052197,
+      "sha256": "51edadd1a0512b8d3cabbdd764178c88ee3d5e58e058918a5b209738379ca8d4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-030_ce-gd_T1w.nii.gz",
+      "asset_id": 260215527,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-030",
+      "kind": "mask",
+      "name": "sub-030_seg.nii.gz",
+      "bytes": 18791,
+      "sha256": "a4478b777c8b0ddb985518e11d77dee3c4153455269ce87c065ed5d89c208228",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-030_seg.nii.gz",
+      "asset_id": 260215552,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-031",
+      "kind": "image",
+      "name": "sub-031_ce-gd_T1w.nii.gz",
+      "bytes": 2829866,
+      "sha256": "7e93890df4520f9a9c7240119dd9dba428ba689771361b5f3e597b401f7e1265",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-031_ce-gd_T1w.nii.gz",
+      "asset_id": 260215633,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-031",
+      "kind": "mask",
+      "name": "sub-031_seg.nii.gz",
+      "bytes": 19877,
+      "sha256": "a09a1a2a3c1c1718208c75a6a25f2eb286e6056a72ac0b464e59879d8fdd9897",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-031_seg.nii.gz",
+      "asset_id": 260215652,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-033",
+      "kind": "image",
+      "name": "sub-033_ce-gd_T1w.nii.gz",
+      "bytes": 3038207,
+      "sha256": "20bbc22793506f763c57b740a7d0eabec1ecd56ee70a981550991988c04f8ab9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-033_ce-gd_T1w.nii.gz",
+      "asset_id": 260215696,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-033",
+      "kind": "mask",
+      "name": "sub-033_seg.nii.gz",
+      "bytes": 21567,
+      "sha256": "2e39e0a5d1cbfbb4ace708ad8542a5da8b261074f033ee2398a431ebcfd6aa07",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-033_seg.nii.gz",
+      "asset_id": 260215722,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-035",
+      "kind": "image",
+      "name": "sub-035_ce-gd_T1w.nii.gz",
+      "bytes": 3086106,
+      "sha256": "a3aa2dd8c0a83d15079253c9b0cb3cc82b95d73061606e3703a6b3e0b5244b2c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-035_ce-gd_T1w.nii.gz",
+      "asset_id": 260215766,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-035",
+      "kind": "mask",
+      "name": "sub-035_seg.nii.gz",
+      "bytes": 27947,
+      "sha256": "7617670acd099fe4d33457b5a249b7b6c7178ee9be9b6e904a8d80a0efef7abd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-035_seg.nii.gz",
+      "asset_id": 260215783,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-040",
+      "kind": "image",
+      "name": "sub-040_ce-gd_T1w.nii.gz",
+      "bytes": 3071667,
+      "sha256": "f828335ecdb5ddbd7a4f2b66870d8496d31c85aed4e15fa55e039d5c11d67744",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-040_ce-gd_T1w.nii.gz",
+      "asset_id": 260216024,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-040",
+      "kind": "mask",
+      "name": "sub-040_seg.nii.gz",
+      "bytes": 28871,
+      "sha256": "a7d0dfdb3dfe69a239fd9184556e6956628191724034ad81fc8f88b5f969bbac",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-040_seg.nii.gz",
+      "asset_id": 260216064,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-041",
+      "kind": "image",
+      "name": "sub-041_ce-gd_T1w.nii.gz",
+      "bytes": 2981812,
+      "sha256": "f926b953965824f7f5edc85e34f499432942bf9341d601a11f89e10a180a9c4b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-041_ce-gd_T1w.nii.gz",
+      "asset_id": 260216128,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-041",
+      "kind": "mask",
+      "name": "sub-041_seg.nii.gz",
+      "bytes": 32169,
+      "sha256": "dec45f359c6fdf8ae18f45b98440aac02bdc18715355cf6ba943e3c1a5213672",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-041_seg.nii.gz",
+      "asset_id": 260216159,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-043",
+      "kind": "image",
+      "name": "sub-043_ce-gd_T1w.nii.gz",
+      "bytes": 3116748,
+      "sha256": "4344a785094d80729c85f9dc854a0cd7768450dd1487aadbe6eda57d5f709139",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-043_ce-gd_T1w.nii.gz",
+      "asset_id": 260216271,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-043",
+      "kind": "mask",
+      "name": "sub-043_seg.nii.gz",
+      "bytes": 30539,
+      "sha256": "dca1f196d88a4c511ad6e59b18e068a97bcc8ae93fbcad9aa9b66efd68925b9e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-043_seg.nii.gz",
+      "asset_id": 260216293,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-054",
+      "kind": "image",
+      "name": "sub-054_ce-gd_T1w.nii.gz",
+      "bytes": 3278604,
+      "sha256": "aaa18187692d30b79c8ee9aa7cfe1d2862a775718bc5a44b3c69c7c9dbd9ebcd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-054_ce-gd_T1w.nii.gz",
+      "asset_id": 260216996,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-054",
+      "kind": "mask",
+      "name": "sub-054_seg.nii.gz",
+      "bytes": 38544,
+      "sha256": "56685f5463c7bac97e262124b3d0abd0ddbd62fcd763e328b41a442b596bd2c8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-054_seg.nii.gz",
+      "asset_id": 260217006,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-059",
+      "kind": "image",
+      "name": "sub-059_ce-gd_T1w.nii.gz",
+      "bytes": 3058228,
+      "sha256": "29b30c072d4a22ba3df3ffebd18caad90d523c017cfee461ae72dbd1278d5eed",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-059_ce-gd_T1w.nii.gz",
+      "asset_id": 260217239,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-059",
+      "kind": "mask",
+      "name": "sub-059_seg.nii.gz",
+      "bytes": 34769,
+      "sha256": "d9ef2c5ea0ce948f1b95c75e233e4f4d784d6e27638b81539c4e61ab86098dd3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-059_seg.nii.gz",
+      "asset_id": 260217248,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-060",
+      "kind": "image",
+      "name": "sub-060_ce-gd_T1w.nii.gz",
+      "bytes": 3012178,
+      "sha256": "0cf1ee55f58d05d1928e93a8c40d7824a1e1600bbec0bc33d7b17f7873b635a1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-060_ce-gd_T1w.nii.gz",
+      "asset_id": 260217265,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-060",
+      "kind": "mask",
+      "name": "sub-060_seg.nii.gz",
+      "bytes": 28249,
+      "sha256": "7cd3dac6de321c3b2fb6835654438309595d9b9a7ab3c2fbbae855bb651ccdcc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-060_seg.nii.gz",
+      "asset_id": 260217292,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-062",
+      "kind": "image",
+      "name": "sub-062_ce-gd_T1w.nii.gz",
+      "bytes": 2931738,
+      "sha256": "833e2293a7787045f4d3e2951b2227dbb2fee46d9ef7163c2bc8520af9290e8f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-062_ce-gd_T1w.nii.gz",
+      "asset_id": 260217396,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-062",
+      "kind": "mask",
+      "name": "sub-062_seg.nii.gz",
+      "bytes": 21768,
+      "sha256": "3c80c9ac2a7631bc04c12a2c9b0ffd2e610c671e034d7795ee161e3a24791322",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-062_seg.nii.gz",
+      "asset_id": 260217422,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-066",
+      "kind": "image",
+      "name": "sub-066_ce-gd_T1w.nii.gz",
+      "bytes": 2593380,
+      "sha256": "00dc28b4f9dd06e32601040440b02fd7b36774470053299b4a60b4f599951916",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-066_ce-gd_T1w.nii.gz",
+      "asset_id": 260217637,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-066",
+      "kind": "mask",
+      "name": "sub-066_seg.nii.gz",
+      "bytes": 21480,
+      "sha256": "fb7622a5e328e5188ded23ce133f89130114f360119237c984a88cd7cfd76517",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-066_seg.nii.gz",
+      "asset_id": 260217652,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-069",
+      "kind": "image",
+      "name": "sub-069_ce-gd_T1w.nii.gz",
+      "bytes": 3086591,
+      "sha256": "953a2dbec93df1a06af91d9232caa0c262831555cd640928b7a65d80f4e5afe1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-069_ce-gd_T1w.nii.gz",
+      "asset_id": 260217761,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-069",
+      "kind": "mask",
+      "name": "sub-069_seg.nii.gz",
+      "bytes": 29843,
+      "sha256": "2044d4c4f88c5e9e0ee6bd61f6c0eeeeb691d324c8d66611580e668324101454",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-069_seg.nii.gz",
+      "asset_id": 260217851,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-073",
+      "kind": "image",
+      "name": "sub-073_ce-gd_T1w.nii.gz",
+      "bytes": 2494613,
+      "sha256": "c45983b53591ce84a14a0c599a2799bf2a7cb93dd7fdccc237c467d8aec7ea9f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-073_ce-gd_T1w.nii.gz",
+      "asset_id": 260218035,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-073",
+      "kind": "mask",
+      "name": "sub-073_seg.nii.gz",
+      "bytes": 22205,
+      "sha256": "42571583ab13c6f823be704a4d3e9b26dcbb95e440599c9d83850118c0b47417",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-073_seg.nii.gz",
+      "asset_id": 260218093,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-075",
+      "kind": "image",
+      "name": "sub-075_ce-gd_T1w.nii.gz",
+      "bytes": 2731956,
+      "sha256": "abe530ec83521e5aef023931ef0ed8a1ff2dc7bf7797e506ba4db9eb029e9155",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-075_ce-gd_T1w.nii.gz",
+      "asset_id": 260218205,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-075",
+      "kind": "mask",
+      "name": "sub-075_seg.nii.gz",
+      "bytes": 16167,
+      "sha256": "167bb6fb669d09f382bfc67918c30901cc1fdd9f533faa4356c41860f9f7e9cd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-075_seg.nii.gz",
+      "asset_id": 260218235,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-076",
+      "kind": "image",
+      "name": "sub-076_ce-gd_T1w.nii.gz",
+      "bytes": 3244815,
+      "sha256": "87a0c9b79a5f225bf34e572b36a2e00ef8f8c874d33d76fc474762b0a533c998",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-076_ce-gd_T1w.nii.gz",
+      "asset_id": 260218279,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-076",
+      "kind": "mask",
+      "name": "sub-076_seg.nii.gz",
+      "bytes": 47021,
+      "sha256": "44eea6409f6b3365bcea8643ab992db8cc9964d85572917a56ea7c05632b6cfe",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-076_seg.nii.gz",
+      "asset_id": 260218312,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-080",
+      "kind": "image",
+      "name": "sub-080_ce-gd_T1w.nii.gz",
+      "bytes": 2593799,
+      "sha256": "35b562afa2bf02d6a7dba4a1f3667b846d747d178a4528aa20afcaaebdf235dd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-080_ce-gd_T1w.nii.gz",
+      "asset_id": 260218458,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-080",
+      "kind": "mask",
+      "name": "sub-080_seg.nii.gz",
+      "bytes": 21077,
+      "sha256": "20b022768ae01f6c43aa0390965ae646cd4b0eec1ecdee65ecfde6c9cc8938ec",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-080_seg.nii.gz",
+      "asset_id": 260218480,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-082",
+      "kind": "image",
+      "name": "sub-082_ce-gd_T1w.nii.gz",
+      "bytes": 2907025,
+      "sha256": "65c400c996af4c6897ea2d970069bc1780e6941c2fc5f1ce2a4f73f6bed6d717",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-082_ce-gd_T1w.nii.gz",
+      "asset_id": 260218575,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-082",
+      "kind": "mask",
+      "name": "sub-082_seg.nii.gz",
+      "bytes": 24226,
+      "sha256": "b0131e8922c29997447da29c6cca35b41a976d15420e5c2384e4449f3018d286",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-082_seg.nii.gz",
+      "asset_id": 260218610,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-083",
+      "kind": "image",
+      "name": "sub-083_ce-gd_T1w.nii.gz",
+      "bytes": 3119343,
+      "sha256": "45e8140a00eb684bbc8aae7cdeaa9f8800268785a8f550a6527e4003a5ea065f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-083_ce-gd_T1w.nii.gz",
+      "asset_id": 260218712,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-083",
+      "kind": "mask",
+      "name": "sub-083_seg.nii.gz",
+      "bytes": 20617,
+      "sha256": "4787ef8263c909e706ce3f60d21a46b00e65e4a638cab1c9d698dabb795252b3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-083_seg.nii.gz",
+      "asset_id": 260218742,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-086",
+      "kind": "image",
+      "name": "sub-086_ce-gd_T1w.nii.gz",
+      "bytes": 2772905,
+      "sha256": "012e0be6dab0c71aee593d6d141460e77cf0255edfd55f5d865ca598427e0109",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-086_ce-gd_T1w.nii.gz",
+      "asset_id": 260218986,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-086",
+      "kind": "mask",
+      "name": "sub-086_seg.nii.gz",
+      "bytes": 32729,
+      "sha256": "ddf6ecce43ca9699e01dd212128e7f121ac2a7dc9b04bacb4dc9dd09dd9ac381",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-086_seg.nii.gz",
+      "asset_id": 260219009,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-088",
+      "kind": "image",
+      "name": "sub-088_ce-gd_T1w.nii.gz",
+      "bytes": 2855246,
+      "sha256": "84532cf071a7d5e1802486d773be1352721936374fd7ae0c95d6659490bb2109",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-088_ce-gd_T1w.nii.gz",
+      "asset_id": 260219129,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-088",
+      "kind": "mask",
+      "name": "sub-088_seg.nii.gz",
+      "bytes": 29957,
+      "sha256": "e93fb79a86ba2d2266325ea09019d4749e29ce4edbfb306b00b31f2a25818f93",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-088_seg.nii.gz",
+      "asset_id": 260219156,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-091",
+      "kind": "image",
+      "name": "sub-091_ce-gd_T1w.nii.gz",
+      "bytes": 3259955,
+      "sha256": "50ede666e93a709c029d2a72e25814da91a20e4e7124b5bcafd5fa33db42baa5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-091_ce-gd_T1w.nii.gz",
+      "asset_id": 260219315,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-091",
+      "kind": "mask",
+      "name": "sub-091_seg.nii.gz",
+      "bytes": 25143,
+      "sha256": "a4051685991f814aa5ffc789e14d44ef956062a048ec1d8fd46759b38b7ce65d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-091_seg.nii.gz",
+      "asset_id": 260219343,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-093",
+      "kind": "image",
+      "name": "sub-093_ce-gd_T1w.nii.gz",
+      "bytes": 2760357,
+      "sha256": "9b24fe75971c008981816142ac08494f8df6b81e430f0a2711780aba2775a529",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-093_ce-gd_T1w.nii.gz",
+      "asset_id": 260219531,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-093",
+      "kind": "mask",
+      "name": "sub-093_seg.nii.gz",
+      "bytes": 31274,
+      "sha256": "2fb5f6739e75a0385e0f889add7774fbc159afd80782c6f84f640bc66e31c3ac",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-093_seg.nii.gz",
+      "asset_id": 260219560,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-096",
+      "kind": "image",
+      "name": "sub-096_ce-gd_T1w.nii.gz",
+      "bytes": 2702213,
+      "sha256": "92a8569836e622e47475190ca49771624223990bdf1815576f72f4dcb3a0f99b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-096_ce-gd_T1w.nii.gz",
+      "asset_id": 260219696,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-096",
+      "kind": "mask",
+      "name": "sub-096_seg.nii.gz",
+      "bytes": 24814,
+      "sha256": "a7ef68a1c94593d9559ef9cc7237efe348f794c2c8adb28fa978d8b23abb96bb",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-096_seg.nii.gz",
+      "asset_id": 260219710,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-100",
+      "kind": "image",
+      "name": "sub-100_ce-gd_T1w.nii.gz",
+      "bytes": 3032555,
+      "sha256": "8380aa8e2a6f4b8ca49c262ad12bc608b5975fd8d4e3b3c7274bf6f67bcb82ce",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-100_ce-gd_T1w.nii.gz",
+      "asset_id": 260219892,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-100",
+      "kind": "mask",
+      "name": "sub-100_seg.nii.gz",
+      "bytes": 40278,
+      "sha256": "f166a42e092cfdf95a457d3ef7069b7202a947b7b0d49cde1057af5d033e83f4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-100_seg.nii.gz",
+      "asset_id": 260219922,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-101",
+      "kind": "image",
+      "name": "sub-101_ce-gd_T1w.nii.gz",
+      "bytes": 3050564,
+      "sha256": "342ba7b0a7ae1069d5d7b122b7c885df857e7c6ca78874824114659a03fa37f1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-101_ce-gd_T1w.nii.gz",
+      "asset_id": 260219984,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-101",
+      "kind": "mask",
+      "name": "sub-101_seg.nii.gz",
+      "bytes": 27195,
+      "sha256": "da90d195f5f2ecae92e308153b4adb44a1bedae81e6b29e5d5c7edcee535c86a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-101_seg.nii.gz",
+      "asset_id": 260220024,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-102",
+      "kind": "image",
+      "name": "sub-102_ce-gd_T1w.nii.gz",
+      "bytes": 3385279,
+      "sha256": "38c778aabb4000c60226951b07a26e6c10c4fbb5b7cc4163b8e679eda6dbb575",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-102_ce-gd_T1w.nii.gz",
+      "asset_id": 260220070,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-102",
+      "kind": "mask",
+      "name": "sub-102_seg.nii.gz",
+      "bytes": 16032,
+      "sha256": "04b9db2c1ae11f85a1e21ef2e769dcb18c78982691afc65c354c6b04d0e55c00",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-102_seg.nii.gz",
+      "asset_id": 260220102,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-105",
+      "kind": "image",
+      "name": "sub-105_ce-gd_T1w.nii.gz",
+      "bytes": 2978433,
+      "sha256": "15db94caa955607e24673d2c05cd8a5ed5614b9848a3335fa41c34ced0f9d5cd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-105_ce-gd_T1w.nii.gz",
+      "asset_id": 260220424,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-105",
+      "kind": "mask",
+      "name": "sub-105_seg.nii.gz",
+      "bytes": 20960,
+      "sha256": "d1c2dc6f628f481bd7c9b3d0c52c952f77fb759a94612d00859a792a3147b6d3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-105_seg.nii.gz",
+      "asset_id": 260220447,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-106",
+      "kind": "image",
+      "name": "sub-106_ce-gd_T1w.nii.gz",
+      "bytes": 2586997,
+      "sha256": "521aa88fe7ee9a5c2cc9742a4a4c2efae8056276da7319bd75fafc1856df9607",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-106_ce-gd_T1w.nii.gz",
+      "asset_id": 260220489,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-106",
+      "kind": "mask",
+      "name": "sub-106_seg.nii.gz",
+      "bytes": 12236,
+      "sha256": "7976ad91a9e001ce83e4f51ad8c5bfa82746ee70f8df28c6729dc51a5c6b5766",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-106_seg.nii.gz",
+      "asset_id": 260220526,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-107",
+      "kind": "image",
+      "name": "sub-107_ce-gd_T1w.nii.gz",
+      "bytes": 3273498,
+      "sha256": "acb7023cd64f3393857a5f485de1bcc47d657b57fa83c6705e49bb94378d7698",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-107_ce-gd_T1w.nii.gz",
+      "asset_id": 260220589,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-107",
+      "kind": "mask",
+      "name": "sub-107_seg.nii.gz",
+      "bytes": 35374,
+      "sha256": "a0b2f8fede94c54f921bd6b42cefa6ff402e7da7d155e27f7625d3db06152482",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-107_seg.nii.gz",
+      "asset_id": 260220662,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-108",
+      "kind": "image",
+      "name": "sub-108_ce-gd_T1w.nii.gz",
+      "bytes": 3050890,
+      "sha256": "850931c7f89192c12535755ab8a2ac7d5d69d0f167bf1b3841b01f99277694b8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-108_ce-gd_T1w.nii.gz",
+      "asset_id": 260220725,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-108",
+      "kind": "mask",
+      "name": "sub-108_seg.nii.gz",
+      "bytes": 31523,
+      "sha256": "e3c6a2323b1f6fd726ea1d649b28ec4bd7b9225a7e07d25941a75060244b2f88",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-108_seg.nii.gz",
+      "asset_id": 260220741,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-112",
+      "kind": "image",
+      "name": "sub-112_ce-gd_T1w.nii.gz",
+      "bytes": 3070191,
+      "sha256": "5cc85c0883bde0539146207686e774bf40347bd01198d193b6e5f691f564d4f7",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-112_ce-gd_T1w.nii.gz",
+      "asset_id": 260220909,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-112",
+      "kind": "mask",
+      "name": "sub-112_seg.nii.gz",
+      "bytes": 17693,
+      "sha256": "0795dba4c29701c073f18e830f280c37cffceb490462dbe1dcec1e636a2ff616",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-112_seg.nii.gz",
+      "asset_id": 260220920,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-113",
+      "kind": "image",
+      "name": "sub-113_ce-gd_T1w.nii.gz",
+      "bytes": 2396758,
+      "sha256": "e7e49486b1e2b34c83b90d5488dc2ff66fd427fd1a1e93fbb0948b731da7d70d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-113_ce-gd_T1w.nii.gz",
+      "asset_id": 260220946,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-113",
+      "kind": "mask",
+      "name": "sub-113_seg.nii.gz",
+      "bytes": 30292,
+      "sha256": "c757e481070e333356e5e3bc6493644e3c26903d59da4cf8dff4662e95a29520",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-113_seg.nii.gz",
+      "asset_id": 260220976,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-114",
+      "kind": "image",
+      "name": "sub-114_ce-gd_T1w.nii.gz",
+      "bytes": 2471855,
+      "sha256": "95def24b0317ca0b6f20765bb9a059f10cc2c32a725fc472da2e7621981e0474",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-114_ce-gd_T1w.nii.gz",
+      "asset_id": 260221001,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-114",
+      "kind": "mask",
+      "name": "sub-114_seg.nii.gz",
+      "bytes": 27978,
+      "sha256": "20358ffd572df39462d86c958feeeec953147b14b9abe7b6ca2718918f419d02",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-114_seg.nii.gz",
+      "asset_id": 260221020,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-115",
+      "kind": "image",
+      "name": "sub-115_ce-gd_T1w.nii.gz",
+      "bytes": 2542903,
+      "sha256": "b75ee9a1e7d6351b94779344d41f79d066804a791a2665a5bc644314e7407553",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-115_ce-gd_T1w.nii.gz",
+      "asset_id": 260221067,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-115",
+      "kind": "mask",
+      "name": "sub-115_seg.nii.gz",
+      "bytes": 12811,
+      "sha256": "edf4efbbf5cf23450cba44fff11f17503096247960be2ad5ba8e17c2a3580ee8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-115_seg.nii.gz",
+      "asset_id": 260221085,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-117",
+      "kind": "image",
+      "name": "sub-117_ce-gd_T1w.nii.gz",
+      "bytes": 2738253,
+      "sha256": "be5026e06ca2fc01b9f716a62aa281047d2b7f6ed1f9dd5bdabdaf80c8507314",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-117_ce-gd_T1w.nii.gz",
+      "asset_id": 260221247,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-117",
+      "kind": "mask",
+      "name": "sub-117_seg.nii.gz",
+      "bytes": 35658,
+      "sha256": "dc50cc8d7b693d35a05139a4ab702649316550ab48a017fc6ff322897fb992cc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-117_seg.nii.gz",
+      "asset_id": 260221274,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-118",
+      "kind": "image",
+      "name": "sub-118_ce-gd_T1w.nii.gz",
+      "bytes": 3216654,
+      "sha256": "6fbc59606d7380e6477987d6b942332ba37a32f56de8695e1391c163e6e30098",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-118_ce-gd_T1w.nii.gz",
+      "asset_id": 260221306,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-118",
+      "kind": "mask",
+      "name": "sub-118_seg.nii.gz",
+      "bytes": 34074,
+      "sha256": "572740866db172625277fccde7de74053fb566173a0d87783edb77d6e37dc24d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-118_seg.nii.gz",
+      "asset_id": 260221329,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-119",
+      "kind": "image",
+      "name": "sub-119_ce-gd_T1w.nii.gz",
+      "bytes": 2456334,
+      "sha256": "beac68d33b22c47baecf489bf31a9f3ee95d43280f1443ea8d8169201f35c4f8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-119_ce-gd_T1w.nii.gz",
+      "asset_id": 260221372,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-119",
+      "kind": "mask",
+      "name": "sub-119_seg.nii.gz",
+      "bytes": 18447,
+      "sha256": "b6fe3ef5517903aa030f552964c6a5c537402e96a6208fa6a4142638ab74241d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-119_seg.nii.gz",
+      "asset_id": 260221499,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-121",
+      "kind": "image",
+      "name": "sub-121_ce-gd_T1w.nii.gz",
+      "bytes": 3290328,
+      "sha256": "668d7478cfbd39f957024f2cf92317fc9316bed233bbf8552e79b879f5edf178",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-121_ce-gd_T1w.nii.gz",
+      "asset_id": 260221585,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-121",
+      "kind": "mask",
+      "name": "sub-121_seg.nii.gz",
+      "bytes": 35941,
+      "sha256": "b8acbbd77ba0b80c11fc9f249a54256ba71779605f61c99c9ea41986742bb7ed",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-121_seg.nii.gz",
+      "asset_id": 260221612,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-122",
+      "kind": "image",
+      "name": "sub-122_ce-gd_T1w.nii.gz",
+      "bytes": 3063631,
+      "sha256": "4004d62fd293c5558559e47ce5df2f8352dbf87ebfb2f854cdccb2c99507633a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-122_ce-gd_T1w.nii.gz",
+      "asset_id": 260221709,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-122",
+      "kind": "mask",
+      "name": "sub-122_seg.nii.gz",
+      "bytes": 29910,
+      "sha256": "f451e4d46563a95a01d873341eddfd07e2138a98ab49ca69e342e0a060c44259",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-122_seg.nii.gz",
+      "asset_id": 260221746,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-124",
+      "kind": "image",
+      "name": "sub-124_ce-gd_T1w.nii.gz",
+      "bytes": 2585328,
+      "sha256": "ac09e4b9e8a66297f810d9c9cda96d921c0f8d9c9d42e402bcb40d2c3153be20",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-124_ce-gd_T1w.nii.gz",
+      "asset_id": 260221816,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-124",
+      "kind": "mask",
+      "name": "sub-124_seg.nii.gz",
+      "bytes": 25066,
+      "sha256": "9c25b17f3345a04e261cfeace37490a7b0d298193ecd79ad044eb3e69135c323",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-124_seg.nii.gz",
+      "asset_id": 260221879,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-131",
+      "kind": "image",
+      "name": "sub-131_ce-gd_T1w.nii.gz",
+      "bytes": 2979560,
+      "sha256": "0ec72cb9745813e0fad07b6164a2692288bc23d7f8d7b469af9fa8ea5697ff74",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-131_ce-gd_T1w.nii.gz",
+      "asset_id": 260222674,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-131",
+      "kind": "mask",
+      "name": "sub-131_seg.nii.gz",
+      "bytes": 20419,
+      "sha256": "e4d818879b8954ca85ead5b2fb59127a187de44e438af8178c20c22fbd6c2a40",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-131_seg.nii.gz",
+      "asset_id": 260222717,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-134",
+      "kind": "image",
+      "name": "sub-134_ce-gd_T1w.nii.gz",
+      "bytes": 3295430,
+      "sha256": "a513ef3d7e57882f69f2d5c4c9fdf04ef1dbe63a1f5c6057c9bd69377aaaf5f5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-134_ce-gd_T1w.nii.gz",
+      "asset_id": 260222993,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-134",
+      "kind": "mask",
+      "name": "sub-134_seg.nii.gz",
+      "bytes": 20924,
+      "sha256": "d42dba70847022bce9e6e57714b510e47ad1b41cc2d851996cbc7b6dc16a79d3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-134_seg.nii.gz",
+      "asset_id": 260223010,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-135",
+      "kind": "image",
+      "name": "sub-135_ce-gd_T1w.nii.gz",
+      "bytes": 2817538,
+      "sha256": "5bf670921a520cc4c7a2fc37e51abc3530d48bc62f25df98c3145db128934aae",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-135_ce-gd_T1w.nii.gz",
+      "asset_id": 260223040,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-135",
+      "kind": "mask",
+      "name": "sub-135_seg.nii.gz",
+      "bytes": 17074,
+      "sha256": "dc3fbdf42352dbbfef72a88e5be18fe2761af37250d0b2a9dd956c4f51fff98d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-135_seg.nii.gz",
+      "asset_id": 260223099,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-136",
+      "kind": "image",
+      "name": "sub-136_ce-gd_T1w.nii.gz",
+      "bytes": 3018131,
+      "sha256": "a225df30f46926d46e8892992f760eb57a7920347c7628d70d14e38cc5435e29",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-136_ce-gd_T1w.nii.gz",
+      "asset_id": 260223152,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-136",
+      "kind": "mask",
+      "name": "sub-136_seg.nii.gz",
+      "bytes": 33912,
+      "sha256": "e0f08530da83caf10024ac2ed900ba5fff00eb0af80946b5e697aadeca3c80e6",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-136_seg.nii.gz",
+      "asset_id": 260223183,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-137",
+      "kind": "image",
+      "name": "sub-137_ce-gd_T1w.nii.gz",
+      "bytes": 2749081,
+      "sha256": "05f8f7680b948ee069e1e9d715721c3f5962c1b2cd27b8c883c5ca436bbe7dc8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-137_ce-gd_T1w.nii.gz",
+      "asset_id": 260223213,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-137",
+      "kind": "mask",
+      "name": "sub-137_seg.nii.gz",
+      "bytes": 21078,
+      "sha256": "a20cefc0784b890ae60c909acc41852381fea19c41e750da3649365e4e9e0d3c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-137_seg.nii.gz",
+      "asset_id": 260223268,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-138",
+      "kind": "image",
+      "name": "sub-138_ce-gd_T1w.nii.gz",
+      "bytes": 2652687,
+      "sha256": "ff61152f13bef1562494a13eb9a5d10ce9063f5db81fb129997a2a4dd0dc973e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-138_ce-gd_T1w.nii.gz",
+      "asset_id": 260223301,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-138",
+      "kind": "mask",
+      "name": "sub-138_seg.nii.gz",
+      "bytes": 26829,
+      "sha256": "596720fbea8595c1efaf6c23cdf728f1083bb0b94850e584a5bcefb07f4d1536",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-138_seg.nii.gz",
+      "asset_id": 260223329,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-139",
+      "kind": "image",
+      "name": "sub-139_ce-gd_T1w.nii.gz",
+      "bytes": 3044924,
+      "sha256": "ccfd8ae6aaf69afa59ed13266e90e1eac49efa7243bf313c0c1c031e94c25dca",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-139_ce-gd_T1w.nii.gz",
+      "asset_id": 260223378,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-139",
+      "kind": "mask",
+      "name": "sub-139_seg.nii.gz",
+      "bytes": 40354,
+      "sha256": "1c130cae2f312a375b1dc602d1a3a559099a795ef7ad6395ed5f8825c637096a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-139_seg.nii.gz",
+      "asset_id": 260223404,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-140",
+      "kind": "image",
+      "name": "sub-140_ce-gd_T1w.nii.gz",
+      "bytes": 2993924,
+      "sha256": "f31c19eea31f2f43d766717ed0e81918001df7b8316bcd8ff88f0e00929120c9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-140_ce-gd_T1w.nii.gz",
+      "asset_id": 260223491,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-140",
+      "kind": "mask",
+      "name": "sub-140_seg.nii.gz",
+      "bytes": 19637,
+      "sha256": "b5359897e675b76ab746ad579c9cf03a9fe4e98671bf5a25f748ddecc782967c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-140_seg.nii.gz",
+      "asset_id": 260223510,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-141",
+      "kind": "image",
+      "name": "sub-141_ce-gd_T1w.nii.gz",
+      "bytes": 3682674,
+      "sha256": "58402e92bcee8511079bafe3064b21396118d60a700a3db3c3701b6b81c7dc7c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-141_ce-gd_T1w.nii.gz",
+      "asset_id": 260223585,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-141",
+      "kind": "mask",
+      "name": "sub-141_seg.nii.gz",
+      "bytes": 23590,
+      "sha256": "a5359f6046acc17f7e7662f23b25a7486cfa8aeaa1b76098c70f12cd63876032",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-141_seg.nii.gz",
+      "asset_id": 260223620,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-143",
+      "kind": "image",
+      "name": "sub-143_ce-gd_T1w.nii.gz",
+      "bytes": 2890051,
+      "sha256": "5b3dbd60716628574dc1b60042a2c1c704ad5aa8063cc356290f78201c692f26",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-143_ce-gd_T1w.nii.gz",
+      "asset_id": 260223697,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-143",
+      "kind": "mask",
+      "name": "sub-143_seg.nii.gz",
+      "bytes": 30405,
+      "sha256": "7c30ed0615dcc6e1ea83552c4f5d9667f127d60c06ece114e0ccc891b41dd85d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-143_seg.nii.gz",
+      "asset_id": 260223725,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-144",
+      "kind": "image",
+      "name": "sub-144_ce-gd_T1w.nii.gz",
+      "bytes": 2543082,
+      "sha256": "9d75de8f30a099f1592435382381d888593f08b32434e9d9401a0a18e747e88f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-144_ce-gd_T1w.nii.gz",
+      "asset_id": 260223753,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-144",
+      "kind": "mask",
+      "name": "sub-144_seg.nii.gz",
+      "bytes": 31658,
+      "sha256": "133c3b24f7f08f9fc2265b2d006088e36799e867448174d78f723ab4df72dd2f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-144_seg.nii.gz",
+      "asset_id": 260223771,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-146",
+      "kind": "image",
+      "name": "sub-146_ce-gd_T1w.nii.gz",
+      "bytes": 2815940,
+      "sha256": "b8b586f1153b21ef58bfdbcfaa6629216fc9b214e78513f7f07d505da38be721",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-146_ce-gd_T1w.nii.gz",
+      "asset_id": 260223924,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-146",
+      "kind": "mask",
+      "name": "sub-146_seg.nii.gz",
+      "bytes": 12898,
+      "sha256": "47a99600969f2b05a0fb3e45e596e7d74f669e63adb48195420a4d77641ef6c5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-146_seg.nii.gz",
+      "asset_id": 260223979,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-147",
+      "kind": "image",
+      "name": "sub-147_ce-gd_T1w.nii.gz",
+      "bytes": 2807728,
+      "sha256": "be77fdc20e0c693e1644fcdde53b2468d387c2518b74f39fa1277f52a0f5bc8b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-147_ce-gd_T1w.nii.gz",
+      "asset_id": 260224034,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-147",
+      "kind": "mask",
+      "name": "sub-147_seg.nii.gz",
+      "bytes": 20065,
+      "sha256": "39d08619e6e5386b69a64a3ce1bdd3507d7d40456415fe5044ffa72b8a48c84a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-147_seg.nii.gz",
+      "asset_id": 260224068,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-148",
+      "kind": "image",
+      "name": "sub-148_ce-gd_T1w.nii.gz",
+      "bytes": 3372604,
+      "sha256": "6ec5eb1d3529f0e7f6e09d6b51c7d1d194d3a0869a3c4c5ac1345b025b9cc9fa",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-148_ce-gd_T1w.nii.gz",
+      "asset_id": 260224129,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-148",
+      "kind": "mask",
+      "name": "sub-148_seg.nii.gz",
+      "bytes": 32039,
+      "sha256": "9e41fe2325cff3d12be903911dab6b36848c7fa20e6f623633b5b12b2cfbc2d1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-148_seg.nii.gz",
+      "asset_id": 260224157,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-149",
+      "kind": "image",
+      "name": "sub-149_ce-gd_T1w.nii.gz",
+      "bytes": 2531903,
+      "sha256": "6032054749e05a31272bef52798d6e33eff29166957d24933933b6c172e61980",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-149_ce-gd_T1w.nii.gz",
+      "asset_id": 260224196,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-149",
+      "kind": "mask",
+      "name": "sub-149_seg.nii.gz",
+      "bytes": 28433,
+      "sha256": "9b18baa84d568581b0d020c868c26a7194515515612170e8a7a85def8315931e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-149_seg.nii.gz",
+      "asset_id": 260224214,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-151",
+      "kind": "image",
+      "name": "sub-151_ce-gd_T1w.nii.gz",
+      "bytes": 2960909,
+      "sha256": "97175b52c57945ac26958fb1300dbcaa9c5edd87975397479df0e5e0187e8f3f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-151_ce-gd_T1w.nii.gz",
+      "asset_id": 260224343,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-151",
+      "kind": "mask",
+      "name": "sub-151_seg.nii.gz",
+      "bytes": 28344,
+      "sha256": "e17cc872236b3be2dc17ed8ec25b37ba167ebd4c1a58866eaa6f857deb8535be",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-151_seg.nii.gz",
+      "asset_id": 260224369,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-154",
+      "kind": "image",
+      "name": "sub-154_ce-gd_T1w.nii.gz",
+      "bytes": 2440216,
+      "sha256": "0f3ca32281fe114b18313597294ad049ffc872131098be7f97c1bdccd29d5134",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-154_ce-gd_T1w.nii.gz",
+      "asset_id": 260224555,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-154",
+      "kind": "mask",
+      "name": "sub-154_seg.nii.gz",
+      "bytes": 26375,
+      "sha256": "afe082ccb47e7d37ad104aeefebdca5b7d87f8d696378f178c181f4e304cf089",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-154_seg.nii.gz",
+      "asset_id": 260224578,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-156",
+      "kind": "image",
+      "name": "sub-156_ce-gd_T1w.nii.gz",
+      "bytes": 2980291,
+      "sha256": "9f51e33266c3b62d81d5be93243ada92715d5e282f58ed46a2e54159ebee398b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-156_ce-gd_T1w.nii.gz",
+      "asset_id": 260224659,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-156",
+      "kind": "mask",
+      "name": "sub-156_seg.nii.gz",
+      "bytes": 23308,
+      "sha256": "a28d3bb6b7dbcddb9b2cc91b3cbe964fd3911a34e103b39ec1c75913a36652c2",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-156_seg.nii.gz",
+      "asset_id": 260224676,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-158",
+      "kind": "image",
+      "name": "sub-158_ce-gd_T1w.nii.gz",
+      "bytes": 3429213,
+      "sha256": "0d3831dd395f4fee49ee37636c06ff019abb4dbee3194cbdcade8abf9cd16037",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-158_ce-gd_T1w.nii.gz",
+      "asset_id": 260224782,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-158",
+      "kind": "mask",
+      "name": "sub-158_seg.nii.gz",
+      "bytes": 32394,
+      "sha256": "51eba6e7741b18fbdcc2a193b2be23678bfa63d4d32b38bca1a49d7ba3f344f9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-158_seg.nii.gz",
+      "asset_id": 260224808,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-166",
+      "kind": "image",
+      "name": "sub-166_ce-gd_T1w.nii.gz",
+      "bytes": 2587548,
+      "sha256": "2ef42c6b3de2b06a2a870fe5dcabd01a1ca7e9d3c37a01eb3b73bf74594d7b54",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-166_ce-gd_T1w.nii.gz",
+      "asset_id": 260225402,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-166",
+      "kind": "mask",
+      "name": "sub-166_seg.nii.gz",
+      "bytes": 16949,
+      "sha256": "58c1a22523d5acf6f368a1440a3e06a89a73df5aebf456588953be57a8fd3424",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-166_seg.nii.gz",
+      "asset_id": 260225422,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-172",
+      "kind": "image",
+      "name": "sub-172_ce-gd_T1w.nii.gz",
+      "bytes": 2949595,
+      "sha256": "15c1dd1375d7a83b6d31cd78fcbd625693cea77945bc0acb7ba32e0a608fe975",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-172_ce-gd_T1w.nii.gz",
+      "asset_id": 260225746,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-172",
+      "kind": "mask",
+      "name": "sub-172_seg.nii.gz",
+      "bytes": 27765,
+      "sha256": "3891264f0e7fe905b7eb44020a7907d5b2d0f04baf012fdc1ed3c7ed6ab00e6b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-172_seg.nii.gz",
+      "asset_id": 260225799,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-173",
+      "kind": "image",
+      "name": "sub-173_ce-gd_T1w.nii.gz",
+      "bytes": 2779644,
+      "sha256": "b14c059f07ff11577c16219d1a4aa2e0a9ee372d183f7b835df66479b90356ec",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-173_ce-gd_T1w.nii.gz",
+      "asset_id": 260225879,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-173",
+      "kind": "mask",
+      "name": "sub-173_seg.nii.gz",
+      "bytes": 29335,
+      "sha256": "b3fc27e55e4a54d023b003010f6be12414988ad7fb2ff24dd3f3b5a5f2bdf6c9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-173_seg.nii.gz",
+      "asset_id": 260225919,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-174",
+      "kind": "image",
+      "name": "sub-174_ce-gd_T1w.nii.gz",
+      "bytes": 2977550,
+      "sha256": "80f6b9f49fcbc3c7e26b96b02ac560b2e641d1410b91b9945587174f56b2cfa4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-174_ce-gd_T1w.nii.gz",
+      "asset_id": 260225979,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-174",
+      "kind": "mask",
+      "name": "sub-174_seg.nii.gz",
+      "bytes": 15473,
+      "sha256": "d75baafe196484f5d24229ec0791f5fb44aa75b2cc3af4c6a01205d32c5d6767",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-174_seg.nii.gz",
+      "asset_id": 260226022,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-176",
+      "kind": "image",
+      "name": "sub-176_ce-gd_T1w.nii.gz",
+      "bytes": 2655189,
+      "sha256": "63d50550aa917bf646cdd7a0ab88f34b311f78eac94965c5301199270c4ad4ba",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-176_ce-gd_T1w.nii.gz",
+      "asset_id": 260226125,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-176",
+      "kind": "mask",
+      "name": "sub-176_seg.nii.gz",
+      "bytes": 24438,
+      "sha256": "f73d112defea8de394b96f33657d51bf95b488703c22ad902cbe046d3c91b197",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-176_seg.nii.gz",
+      "asset_id": 260226150,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-178",
+      "kind": "image",
+      "name": "sub-178_ce-gd_T1w.nii.gz",
+      "bytes": 2623128,
+      "sha256": "ebb381ba10f4675a2026b7ed4d96286515b8bc8b4edba14f88b4771ad211594e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-178_ce-gd_T1w.nii.gz",
+      "asset_id": 260226244,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-178",
+      "kind": "mask",
+      "name": "sub-178_seg.nii.gz",
+      "bytes": 19296,
+      "sha256": "ec7500cd4b52d4a1c53d4f8090f444dcdb735f4b31d229413dca9f663af2a550",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-178_seg.nii.gz",
+      "asset_id": 260226267,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-180",
+      "kind": "image",
+      "name": "sub-180_ce-gd_T1w.nii.gz",
+      "bytes": 2634769,
+      "sha256": "97e4d0bcb9e6c518914a6e4cec56832b7ff6073788635b5ce72ff84936ff1e29",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-180_ce-gd_T1w.nii.gz",
+      "asset_id": 260226462,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-180",
+      "kind": "mask",
+      "name": "sub-180_seg.nii.gz",
+      "bytes": 41274,
+      "sha256": "5a31f0f77a81fc40cd089739bdec6dbc7efbee6731bf81c236136a752b00661d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-180_seg.nii.gz",
+      "asset_id": 260226498,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-189",
+      "kind": "image",
+      "name": "sub-189_ce-gd_T1w.nii.gz",
+      "bytes": 2605937,
+      "sha256": "0600f563e4a2e126e0f5bca5a8486e3767b96f9b900bee922e2d1f5ae5d7fdb2",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-189_ce-gd_T1w.nii.gz",
+      "asset_id": 260227375,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-189",
+      "kind": "mask",
+      "name": "sub-189_seg.nii.gz",
+      "bytes": 36560,
+      "sha256": "b38b0c8caf0e67a28be6ef9a53a80c83f531c781d411d93a5d42a33d3c3fd235",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-189_seg.nii.gz",
+      "asset_id": 260227407,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-192",
+      "kind": "image",
+      "name": "sub-192_ce-gd_T1w.nii.gz",
+      "bytes": 2974230,
+      "sha256": "f0fcf583ca54771213b95706e508840560f486b14e2e61f8b3c02b51e4e0023c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-192_ce-gd_T1w.nii.gz",
+      "asset_id": 260227553,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-192",
+      "kind": "mask",
+      "name": "sub-192_seg.nii.gz",
+      "bytes": 13676,
+      "sha256": "9c23993274c4524222a369a076ee915fcb47ad02c08130a29abba28f0946b629",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-192_seg.nii.gz",
+      "asset_id": 260227581,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-193",
+      "kind": "image",
+      "name": "sub-193_ce-gd_T1w.nii.gz",
+      "bytes": 2729427,
+      "sha256": "de6847ea68dc62aa54bf0e435015634b1462f7ca7488667e82c9c785d21ad0cb",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-193_ce-gd_T1w.nii.gz",
+      "asset_id": 260227624,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-193",
+      "kind": "mask",
+      "name": "sub-193_seg.nii.gz",
+      "bytes": 32054,
+      "sha256": "84c07c934fe833fa8a8f5d516e59510804b6794938e825df913e1c35e000da4f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-193_seg.nii.gz",
+      "asset_id": 260227661,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-196",
+      "kind": "image",
+      "name": "sub-196_ce-gd_T1w.nii.gz",
+      "bytes": 2593553,
+      "sha256": "07d8b5220532e05821b97393ed1ce613e8b5760e76e67589fb6708a8cced9144",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-196_ce-gd_T1w.nii.gz",
+      "asset_id": 260227879,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-196",
+      "kind": "mask",
+      "name": "sub-196_seg.nii.gz",
+      "bytes": 27068,
+      "sha256": "0947fb6308fc1a848148057944779e8dbb8a06543dc6e3875f11fe1c8f59fa83",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-196_seg.nii.gz",
+      "asset_id": 260227917,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-197",
+      "kind": "image",
+      "name": "sub-197_ce-gd_T1w.nii.gz",
+      "bytes": 3224390,
+      "sha256": "9a5ffb6aa5c9a1b71285e3223e3f412d099fd3202ff59d41ad351fc8bca8c81d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-197_ce-gd_T1w.nii.gz",
+      "asset_id": 260227996,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-197",
+      "kind": "mask",
+      "name": "sub-197_seg.nii.gz",
+      "bytes": 30554,
+      "sha256": "56b404b83e30978f0ec643dce19da64c27c32d69c14079bac40afd9c48303d9c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-197_seg.nii.gz",
+      "asset_id": 260228040,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-201",
+      "kind": "image",
+      "name": "sub-201_ce-gd_T1w.nii.gz",
+      "bytes": 2962351,
+      "sha256": "ba3729a897bc542785e0327337aaeb7b2a1b008a8c8d920091cf0465b5fc706b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-201_ce-gd_T1w.nii.gz",
+      "asset_id": 260228245,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-201",
+      "kind": "mask",
+      "name": "sub-201_seg.nii.gz",
+      "bytes": 11275,
+      "sha256": "965a2af00e3b77288171e5b5ebabbd9ae0540a672b4b00ffa90549ddae89aad7",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-201_seg.nii.gz",
+      "asset_id": 260228261,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-205",
+      "kind": "image",
+      "name": "sub-205_ce-gd_T1w.nii.gz",
+      "bytes": 2703653,
+      "sha256": "8683e0fa893e8222547da474f4564c2cb665673810357248299532a3d3dff30c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-205_ce-gd_T1w.nii.gz",
+      "asset_id": 260228462,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-205",
+      "kind": "mask",
+      "name": "sub-205_seg.nii.gz",
+      "bytes": 33408,
+      "sha256": "86611f98dcb0c6068af3c2038082d6df7c3d5c777c7d85ccd1195627a2a15427",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-205_seg.nii.gz",
+      "asset_id": 260228484,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-206",
+      "kind": "image",
+      "name": "sub-206_ce-gd_T1w.nii.gz",
+      "bytes": 2514766,
+      "sha256": "47160a4d7f4272c6e1543b45ac446cf42ecb1495c88c82eab38872d8d4957d0f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-206_ce-gd_T1w.nii.gz",
+      "asset_id": 260228529,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-206",
+      "kind": "mask",
+      "name": "sub-206_seg.nii.gz",
+      "bytes": 14651,
+      "sha256": "027383d97b962b6688e7fd1dabfbd4e658b58d58628730f147ed0f79d0bbe9b6",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-206_seg.nii.gz",
+      "asset_id": 260228556,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-208",
+      "kind": "image",
+      "name": "sub-208_ce-gd_T1w.nii.gz",
+      "bytes": 2781503,
+      "sha256": "88c0afcc0bea20c20612f5f22a687731871b18ef50e575bb7bb7f4cff4e43110",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-208_ce-gd_T1w.nii.gz",
+      "asset_id": 260228658,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-208",
+      "kind": "mask",
+      "name": "sub-208_seg.nii.gz",
+      "bytes": 23257,
+      "sha256": "807dc03037ecc8ded465473b24ca7c3082d6970ddbee9e1a50aebccbeec86b1a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-208_seg.nii.gz",
+      "asset_id": 260228699,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-215",
+      "kind": "image",
+      "name": "sub-215_ce-gd_T1w.nii.gz",
+      "bytes": 2821722,
+      "sha256": "7c6f6494916cd26c037648b1f71e44cb33c643760468c9e3ad8788e84d69d21c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-215_ce-gd_T1w.nii.gz",
+      "asset_id": 260229071,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-215",
+      "kind": "mask",
+      "name": "sub-215_seg.nii.gz",
+      "bytes": 23317,
+      "sha256": "70da523501f1593140cf2a2688a5758d13c73e800d1c715bcd5f79e0b66ad803",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-215_seg.nii.gz",
+      "asset_id": 260229087,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-217",
+      "kind": "image",
+      "name": "sub-217_ce-gd_T1w.nii.gz",
+      "bytes": 2972764,
+      "sha256": "98c98795324c32fe343fa4dddcceb8cacc582edd5f96b39bcbdb182fb3cf0ac3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-217_ce-gd_T1w.nii.gz",
+      "asset_id": 260229178,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-217",
+      "kind": "mask",
+      "name": "sub-217_seg.nii.gz",
+      "bytes": 33642,
+      "sha256": "5c28bf65d638bcbb42561bfdaf6176e6fcd2d8d2b0c05f8980fb96b7b8a762fc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-217_seg.nii.gz",
+      "asset_id": 260229195,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-226",
+      "kind": "image",
+      "name": "sub-226_ce-gd_T1w.nii.gz",
+      "bytes": 3203538,
+      "sha256": "9b63c8164dc1a6347804c4366fa5eea49c8847a6139c5c219fa5df6a9d2023b6",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-226_ce-gd_T1w.nii.gz",
+      "asset_id": 260229761,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-226",
+      "kind": "mask",
+      "name": "sub-226_seg.nii.gz",
+      "bytes": 24166,
+      "sha256": "7ac5cb38de8be135182f2f4ce8864d518087f92fb7c21f2b66212002022c5cea",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-226_seg.nii.gz",
+      "asset_id": 260229786,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-227",
+      "kind": "image",
+      "name": "sub-227_ce-gd_T1w.nii.gz",
+      "bytes": 2426739,
+      "sha256": "ea8e38cd4786e459904a088844df8cb55bcd35b1a0524dcad342e347f34f0591",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-227_ce-gd_T1w.nii.gz",
+      "asset_id": 260230380,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-227",
+      "kind": "mask",
+      "name": "sub-227_seg.nii.gz",
+      "bytes": 57280,
+      "sha256": "6e7dc373e2e8c5887afb76f4fd1ba2f228af28cb2ca3f5bfaba5f21b01e3c7fc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-227_seg.nii.gz",
+      "asset_id": 260230408,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-228",
+      "kind": "image",
+      "name": "sub-228_ce-gd_T1w.nii.gz",
+      "bytes": 2785312,
+      "sha256": "7bae82dff392c13869b17b3bf637adc493f5e6b91f9fac44e3fe7c1093467b46",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-228_ce-gd_T1w.nii.gz",
+      "asset_id": 260230445,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-228",
+      "kind": "mask",
+      "name": "sub-228_seg.nii.gz",
+      "bytes": 27002,
+      "sha256": "f543d9c2b640e5a7878c2f5d77c58e00603127b956f2a7d339a9fce3e976c0ce",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-228_seg.nii.gz",
+      "asset_id": 260230462,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-238",
+      "kind": "image",
+      "name": "sub-238_ce-gd_T1w.nii.gz",
+      "bytes": 2699481,
+      "sha256": "6c2bf8bdeb1c82f9a92893bda8591f104769a0e162a7c417effa6e9957a36ad5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-238_ce-gd_T1w.nii.gz",
+      "asset_id": 260231436,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-238",
+      "kind": "mask",
+      "name": "sub-238_seg.nii.gz",
+      "bytes": 15524,
+      "sha256": "babaacf5d500d5c9e4a023d4e753d0f2a6b5b1dbdbd37ffca44434b954695a24",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-238_seg.nii.gz",
+      "asset_id": 260231473,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-240",
+      "kind": "image",
+      "name": "sub-240_ce-gd_T1w.nii.gz",
+      "bytes": 3023468,
+      "sha256": "7d420de41c2ff52b0587fd678bcffbb439b8bd29c3b60d32475f61d1a341fdbb",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-240_ce-gd_T1w.nii.gz",
+      "asset_id": 260231569,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-240",
+      "kind": "mask",
+      "name": "sub-240_seg.nii.gz",
+      "bytes": 22679,
+      "sha256": "78e9fc044a9249e6a682c8d9ba704866ca0dc8291d5218944238faf7dc96e1b8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-240_seg.nii.gz",
+      "asset_id": 260231592,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-249",
+      "kind": "image",
+      "name": "sub-249_ce-gd_T1w.nii.gz",
+      "bytes": 2499344,
+      "sha256": "97580e3658b4477cdc30e902f1a4f2185138c01a9b1994a82c3ce2a6a9b607dd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-249_ce-gd_T1w.nii.gz",
+      "asset_id": 260232091,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-249",
+      "kind": "mask",
+      "name": "sub-249_seg.nii.gz",
+      "bytes": 30524,
+      "sha256": "0e5ab0eadbb678ec934c0955a403f76d5c47a65877066249cc6708896c0edba5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-249_seg.nii.gz",
+      "asset_id": 260232114,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-251",
+      "kind": "image",
+      "name": "sub-251_ce-gd_T1w.nii.gz",
+      "bytes": 2807504,
+      "sha256": "19604416012593402871eb52aac1afef1aa6fd00c9bf8037f3df551dd767363c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-251_ce-gd_T1w.nii.gz",
+      "asset_id": 260232217,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-251",
+      "kind": "mask",
+      "name": "sub-251_seg.nii.gz",
+      "bytes": 33751,
+      "sha256": "0e2364cd8b9c99ad5d7b9cd3e549e312e7f749e9d92972b13c186e68cdcf9e76",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-251_seg.nii.gz",
+      "asset_id": 260232234,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-252",
+      "kind": "image",
+      "name": "sub-252_ce-gd_T1w.nii.gz",
+      "bytes": 2790474,
+      "sha256": "c2d9988f73b07b5e4d19b191bd6a339750d389c660ab0895655dfc3af9d27850",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-252_ce-gd_T1w.nii.gz",
+      "asset_id": 260232269,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-252",
+      "kind": "mask",
+      "name": "sub-252_seg.nii.gz",
+      "bytes": 19321,
+      "sha256": "d61931a4fc7ee995dc4e012cbf89c21e9fd8ed18b11071d90c1d7dd36044c0a5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-252_seg.nii.gz",
+      "asset_id": 260232286,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-253",
+      "kind": "image",
+      "name": "sub-253_ce-gd_T1w.nii.gz",
+      "bytes": 3276975,
+      "sha256": "c5c06f9db938ce3800acc8a642b724ed32ee23c4800a135c69c3736d651c95df",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-253_ce-gd_T1w.nii.gz",
+      "asset_id": 260232318,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-253",
+      "kind": "mask",
+      "name": "sub-253_seg.nii.gz",
+      "bytes": 29664,
+      "sha256": "28d18f1112cd143c00e8539bcf0b008bdcecc0f064f63262f7887a0b9fb34df4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-253_seg.nii.gz",
+      "asset_id": 260232336,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-254",
+      "kind": "image",
+      "name": "sub-254_ce-gd_T1w.nii.gz",
+      "bytes": 3204916,
+      "sha256": "df2fa8d7c5e5e53aa81954b229a2bf33d715fc51c4ed305ad6efb4106a72abc6",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-254_ce-gd_T1w.nii.gz",
+      "asset_id": 260232378,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-254",
+      "kind": "mask",
+      "name": "sub-254_seg.nii.gz",
+      "bytes": 42918,
+      "sha256": "1452bffdeb26bce04974812d7f3e7b5cbdb9e26fa0774a294edb9da8d4464ae2",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-254_seg.nii.gz",
+      "asset_id": 260232397,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-256",
+      "kind": "image",
+      "name": "sub-256_ce-gd_T1w.nii.gz",
+      "bytes": 2386165,
+      "sha256": "73b137ebc84d660253e384234f978cebd718df1aff9c34fb5239f9019b075b02",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-256_ce-gd_T1w.nii.gz",
+      "asset_id": 260232507,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-256",
+      "kind": "mask",
+      "name": "sub-256_seg.nii.gz",
+      "bytes": 20932,
+      "sha256": "3e51045469bbf1e4f81fdf38cbd8b52be755ba2fa4922102e3a2e8f315f4cd30",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-256_seg.nii.gz",
+      "asset_id": 260232519,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-259",
+      "kind": "image",
+      "name": "sub-259_ce-gd_T1w.nii.gz",
+      "bytes": 2614011,
+      "sha256": "c32efa913198704ebb9c0109ed7e06e02284bb85acfd5aa8eada9c26669b4fce",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-259_ce-gd_T1w.nii.gz",
+      "asset_id": 260232640,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-259",
+      "kind": "mask",
+      "name": "sub-259_seg.nii.gz",
+      "bytes": 20408,
+      "sha256": "98e6222adeed727ba67d884d3a932c08032b54d9b3b124dba54d52a135d9f684",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-259_seg.nii.gz",
+      "asset_id": 260232656,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-261",
+      "kind": "image",
+      "name": "sub-261_ce-gd_T1w.nii.gz",
+      "bytes": 3019795,
+      "sha256": "5726e9df6d235be9f646a5d5c4dd3c45802d8f0b6ea6be37389e2384e91b3e57",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-261_ce-gd_T1w.nii.gz",
+      "asset_id": 260232723,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-261",
+      "kind": "mask",
+      "name": "sub-261_seg.nii.gz",
+      "bytes": 22150,
+      "sha256": "9748db6f155757e405ae183ab22956e5985c3b042baf4195f55c4fc72f4d1e9a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-261_seg.nii.gz",
+      "asset_id": 260232752,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-262",
+      "kind": "image",
+      "name": "sub-262_ce-gd_T1w.nii.gz",
+      "bytes": 3151383,
+      "sha256": "51a4d872ead9729533bd8d5ba189ef5c9958c62455cc97be7f6c37ffdbb9615c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-262_ce-gd_T1w.nii.gz",
+      "asset_id": 260232794,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-262",
+      "kind": "mask",
+      "name": "sub-262_seg.nii.gz",
+      "bytes": 37547,
+      "sha256": "69905ea666e85bb6cded052c9dd60fda5c80f3432fd9383d114e94f1283cd8ed",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-262_seg.nii.gz",
+      "asset_id": 260232833,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-264",
+      "kind": "image",
+      "name": "sub-264_ce-gd_T1w.nii.gz",
+      "bytes": 2338392,
+      "sha256": "75f38548856ba360c2a52728a34306213bec29ba9e0c8aa07bea81eb8a908763",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-264_ce-gd_T1w.nii.gz",
+      "asset_id": 260232913,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-264",
+      "kind": "mask",
+      "name": "sub-264_seg.nii.gz",
+      "bytes": 15531,
+      "sha256": "0c264af91b9111a44c3daa232db8557ed7c8dfc18377bbb144cb8cc0f10fb853",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-264_seg.nii.gz",
+      "asset_id": 260232931,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-266",
+      "kind": "image",
+      "name": "sub-266_ce-gd_T1w.nii.gz",
+      "bytes": 2976448,
+      "sha256": "bf464a15d6a0206d4d7a5d696df9f1833fd3bf239d8e0cfb217b9861b191d4d0",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-266_ce-gd_T1w.nii.gz",
+      "asset_id": 260233036,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-266",
+      "kind": "mask",
+      "name": "sub-266_seg.nii.gz",
+      "bytes": 11714,
+      "sha256": "19f5944a7ff5d84fadd2cbbdce5b30e4948a526788a2dd970e7a5554612c9c14",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-266_seg.nii.gz",
+      "asset_id": 260233060,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-270",
+      "kind": "image",
+      "name": "sub-270_ce-gd_T1w.nii.gz",
+      "bytes": 2670794,
+      "sha256": "6e66f957ad244d8115f6f04a561e9bc684df6dfdb348a3bb2bd30aa38f3a7f00",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-270_ce-gd_T1w.nii.gz",
+      "asset_id": 260233328,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-270",
+      "kind": "mask",
+      "name": "sub-270_seg.nii.gz",
+      "bytes": 18418,
+      "sha256": "91e159facc6f82ecef1e22015b4b7c1b58fd1d033d88e1c09e5dc9e64165beb9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-270_seg.nii.gz",
+      "asset_id": 260233360,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-272",
+      "kind": "image",
+      "name": "sub-272_ce-gd_T1w.nii.gz",
+      "bytes": 3020537,
+      "sha256": "0ebee87d2f616f196e8a74976655f6abfdaeca894e3b2d2a4e708206fa34bf2c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-272_ce-gd_T1w.nii.gz",
+      "asset_id": 260233462,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-272",
+      "kind": "mask",
+      "name": "sub-272_seg.nii.gz",
+      "bytes": 17016,
+      "sha256": "2ed65136ebbc777c9f1e950dfe0c5ab840e832e41b146c923c5b39e3026e96b4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-272_seg.nii.gz",
+      "asset_id": 260233482,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-274",
+      "kind": "image",
+      "name": "sub-274_ce-gd_T1w.nii.gz",
+      "bytes": 3609001,
+      "sha256": "905fdbf6ecbe798fc9cc706276c31e68d33aafe7d9b08336f400568fb4602b6b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-274_ce-gd_T1w.nii.gz",
+      "asset_id": 260233576,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-274",
+      "kind": "mask",
+      "name": "sub-274_seg.nii.gz",
+      "bytes": 32984,
+      "sha256": "75ce1be206d3c9c3d01ab05688c8bd1625848702c2c4c9b12a0806ad968e8562",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-274_seg.nii.gz",
+      "asset_id": 260233626,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-275",
+      "kind": "image",
+      "name": "sub-275_ce-gd_T1w.nii.gz",
+      "bytes": 2834014,
+      "sha256": "2b53c546200380a1af1175a4e100c7bbd251385c2a33741fde84f61d3c948f74",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-275_ce-gd_T1w.nii.gz",
+      "asset_id": 260233693,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-275",
+      "kind": "mask",
+      "name": "sub-275_seg.nii.gz",
+      "bytes": 13220,
+      "sha256": "70677092ed315dca2ec0f68fd3d38ecb30d7aadec603dd104704907882fcd1de",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-275_seg.nii.gz",
+      "asset_id": 260233742,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-277",
+      "kind": "image",
+      "name": "sub-277_ce-gd_T1w.nii.gz",
+      "bytes": 3238501,
+      "sha256": "fbe35ce162a9e4e6b89ee2f73b4578852eff9f0ff3ea2a714b158b3c743c7bc9",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-277_ce-gd_T1w.nii.gz",
+      "asset_id": 260233832,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-277",
+      "kind": "mask",
+      "name": "sub-277_seg.nii.gz",
+      "bytes": 22008,
+      "sha256": "ba8a3ff078304cecd1e971f40488a03b2313a40eb975c1d33bef5a7f4a46623b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-277_seg.nii.gz",
+      "asset_id": 260233842,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-284",
+      "kind": "image",
+      "name": "sub-284_ce-gd_T1w.nii.gz",
+      "bytes": 2516883,
+      "sha256": "73b9e3eb2c03e4cc2d328e240e107881ea2780d7235ed9441fb3f9fbe851f1e1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-284_ce-gd_T1w.nii.gz",
+      "asset_id": 260234684,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-284",
+      "kind": "mask",
+      "name": "sub-284_seg.nii.gz",
+      "bytes": 33436,
+      "sha256": "63ab5bbc75cb110b0a9b681c384dee39b280be5220054a551b3ddd45b3db8f6c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-284_seg.nii.gz",
+      "asset_id": 260234719,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-285",
+      "kind": "image",
+      "name": "sub-285_ce-gd_T1w.nii.gz",
+      "bytes": 2954449,
+      "sha256": "92979074c7d4974d2f5168c9fb58f69a62484a30ddb171c6943fbe8ab5e6ce61",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-285_ce-gd_T1w.nii.gz",
+      "asset_id": 260234826,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-285",
+      "kind": "mask",
+      "name": "sub-285_seg.nii.gz",
+      "bytes": 16721,
+      "sha256": "3407d13bc37831a1b9e038abf51ea2d97cc5d3b530c0173e81d86eb22ec88916",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-285_seg.nii.gz",
+      "asset_id": 260234859,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-290",
+      "kind": "image",
+      "name": "sub-290_ce-gd_T1w.nii.gz",
+      "bytes": 2705772,
+      "sha256": "1f38aa9b886e8222897767d9ae80c8fbc02d9398f4fd37efb0fef9181cf2eecc",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-290_ce-gd_T1w.nii.gz",
+      "asset_id": 260235165,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-290",
+      "kind": "mask",
+      "name": "sub-290_seg.nii.gz",
+      "bytes": 13275,
+      "sha256": "e973e1502cc3ad208f1484538bda7ac94ca357fa655ffdf42a93009267178f19",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-290_seg.nii.gz",
+      "asset_id": 260235190,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-294",
+      "kind": "image",
+      "name": "sub-294_ce-gd_T1w.nii.gz",
+      "bytes": 2928250,
+      "sha256": "10f0d27d943acbcb71b4d22c68f32c21c48ae08d9e6b38af81eb4d744a45410f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-294_ce-gd_T1w.nii.gz",
+      "asset_id": 260235464,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-294",
+      "kind": "mask",
+      "name": "sub-294_seg.nii.gz",
+      "bytes": 30538,
+      "sha256": "539169b7667571ae3daa602b78200d4faf232bd6cf3b2e7b5bf10546a0d3c490",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-294_seg.nii.gz",
+      "asset_id": 260235501,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-307",
+      "kind": "image",
+      "name": "sub-307_ce-gd_T1w.nii.gz",
+      "bytes": 2573156,
+      "sha256": "a4cbaf59ce6182976020e4c8e646a2af20e24547ee1d69f7d0a12535d540a358",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-307_ce-gd_T1w.nii.gz",
+      "asset_id": 260237013,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-307",
+      "kind": "mask",
+      "name": "sub-307_seg.nii.gz",
+      "bytes": 13491,
+      "sha256": "106803b3918b5897bcdaac3e2f72d7902f2cbf82d4e39980d77d81c3359d50d5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-307_seg.nii.gz",
+      "asset_id": 260237050,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-312",
+      "kind": "image",
+      "name": "sub-312_ce-gd_T1w.nii.gz",
+      "bytes": 3039329,
+      "sha256": "91c9552ef6783e628c7708e5fb8dbf1872c6987e39c171cb8b5c093d6ed520db",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-312_ce-gd_T1w.nii.gz",
+      "asset_id": 260237635,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-312",
+      "kind": "mask",
+      "name": "sub-312_seg.nii.gz",
+      "bytes": 19766,
+      "sha256": "b7e0dba7b81ce6b5fe14e6c73487ed82fb07ab5615db7523cc30e24d211aa623",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-312_seg.nii.gz",
+      "asset_id": 260237693,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-330",
+      "kind": "image",
+      "name": "sub-330_ce-gd_T1w.nii.gz",
+      "bytes": 2957919,
+      "sha256": "c31e8ca82e43578c82035c542df6cc3d68be2089af9f64c9a1793586db5091bd",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-330_ce-gd_T1w.nii.gz",
+      "asset_id": 260239297,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-330",
+      "kind": "mask",
+      "name": "sub-330_seg.nii.gz",
+      "bytes": 37681,
+      "sha256": "c30931d748d237b289f848af9c32d318c03057010ecbae0a5a73a52fd2f0dc4f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-330_seg.nii.gz",
+      "asset_id": 260239333,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-344",
+      "kind": "image",
+      "name": "sub-344_ce-gd_T1w.nii.gz",
+      "bytes": 2831860,
+      "sha256": "159d296f6bde8caa7a172f61964c1da5c1da7cc4a76aaa6146d4fbf19d523d34",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-344_ce-gd_T1w.nii.gz",
+      "asset_id": 260240718,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-344",
+      "kind": "mask",
+      "name": "sub-344_seg.nii.gz",
+      "bytes": 26285,
+      "sha256": "48682f0dca0d204fe19d44a7b0e23b23beda65d406f266b7b98d59560a058ea2",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-344_seg.nii.gz",
+      "asset_id": 260240745,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-351",
+      "kind": "image",
+      "name": "sub-351_ce-gd_T1w.nii.gz",
+      "bytes": 2694654,
+      "sha256": "328511bcacb0b9b7d048694e4e1a88301b168e89115383efbd4b3833f896217b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-351_ce-gd_T1w.nii.gz",
+      "asset_id": 260241325,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-351",
+      "kind": "mask",
+      "name": "sub-351_seg.nii.gz",
+      "bytes": 23663,
+      "sha256": "6e1ba67a8594441a500f47b3dfa70f819ebe034fc9d3972cacbd9bf93f841338",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-351_seg.nii.gz",
+      "asset_id": 260241430,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-356",
+      "kind": "image",
+      "name": "sub-356_ce-gd_T1w.nii.gz",
+      "bytes": 3029642,
+      "sha256": "423247f5185ba914f547102da2b4045f1b522e66a215e84aff063e519915714d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-356_ce-gd_T1w.nii.gz",
+      "asset_id": 260242054,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-356",
+      "kind": "mask",
+      "name": "sub-356_seg.nii.gz",
+      "bytes": 17947,
+      "sha256": "7c30f84246002c6d08cd4c29eacc2998bfc0fa26ed428eead83089b5ba90f8b7",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-356_seg.nii.gz",
+      "asset_id": 260242131,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-360",
+      "kind": "image",
+      "name": "sub-360_ce-gd_T1w.nii.gz",
+      "bytes": 2947151,
+      "sha256": "3434f8ccf71bae7db575fbe7d990a0264ad78fa2951ae49ac050d9e528139903",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-360_ce-gd_T1w.nii.gz",
+      "asset_id": 260242421,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-360",
+      "kind": "mask",
+      "name": "sub-360_seg.nii.gz",
+      "bytes": 28384,
+      "sha256": "a12a000f75c8aaf8ce15845d3a9f722781bebf7d7493d04eb4bea06a63b89d9a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-360_seg.nii.gz",
+      "asset_id": 260242467,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-362",
+      "kind": "image",
+      "name": "sub-362_ce-gd_T1w.nii.gz",
+      "bytes": 2793162,
+      "sha256": "b0338888d6cce9f1bacdfe1816b9910c073e725f65ccb0c18e832f7a33e4e127",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-362_ce-gd_T1w.nii.gz",
+      "asset_id": 260242641,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-362",
+      "kind": "mask",
+      "name": "sub-362_seg.nii.gz",
+      "bytes": 23356,
+      "sha256": "2b58ccc1601520b7e102dc651dce61406b9eab20c02a50c88b9027d9ab3fc329",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-362_seg.nii.gz",
+      "asset_id": 260242688,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-367",
+      "kind": "image",
+      "name": "sub-367_ce-gd_T1w.nii.gz",
+      "bytes": 2783586,
+      "sha256": "5d1afd51bb60615f4daef35779e560b576b557aadca506ac154ab5cf3f9e6038",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-367_ce-gd_T1w.nii.gz",
+      "asset_id": 260243017,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-367",
+      "kind": "mask",
+      "name": "sub-367_seg.nii.gz",
+      "bytes": 27932,
+      "sha256": "39828315fede044704c0b6100f300d7d85cb412c8055944c391c75146efb1e5e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-367_seg.nii.gz",
+      "asset_id": 260243045,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-368",
+      "kind": "image",
+      "name": "sub-368_ce-gd_T1w.nii.gz",
+      "bytes": 3208944,
+      "sha256": "f50f8858bd9be8f07e651507e9a033cecc5e4cc1a1a577774e23a36ff590e90a",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-368_ce-gd_T1w.nii.gz",
+      "asset_id": 260243077,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-368",
+      "kind": "mask",
+      "name": "sub-368_seg.nii.gz",
+      "bytes": 22758,
+      "sha256": "26d152e440c33be0c90b18ea4ea95b1c86db5eff51c714cf69ef02443d714a2b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-368_seg.nii.gz",
+      "asset_id": 260243091,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-371",
+      "kind": "image",
+      "name": "sub-371_ce-gd_T1w.nii.gz",
+      "bytes": 3205100,
+      "sha256": "20b5013797be1271e90bfbfa1e08d1ad55300674524c17077af729452d212a7b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-371_ce-gd_T1w.nii.gz",
+      "asset_id": 260243271,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-371",
+      "kind": "mask",
+      "name": "sub-371_seg.nii.gz",
+      "bytes": 19638,
+      "sha256": "feeed9128d31104abb4d10dc24a631b841c530da051def0152b9a7fe5f29cfb8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-371_seg.nii.gz",
+      "asset_id": 260243297,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-373",
+      "kind": "image",
+      "name": "sub-373_ce-gd_T1w.nii.gz",
+      "bytes": 2689728,
+      "sha256": "632ed06b7b3986780a639a3d97bb7842d0f97dfced9511f978e7df11ea662c45",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-373_ce-gd_T1w.nii.gz",
+      "asset_id": 260243396,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-373",
+      "kind": "mask",
+      "name": "sub-373_seg.nii.gz",
+      "bytes": 17696,
+      "sha256": "0361b35f11895084111f731bda7e67ca1a79cabefa67e201fdbceabd88534e40",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-373_seg.nii.gz",
+      "asset_id": 260243426,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-375",
+      "kind": "image",
+      "name": "sub-375_ce-gd_T1w.nii.gz",
+      "bytes": 2558888,
+      "sha256": "d92c974f8e16c1ec909044e103469d6672d70b39b20926c5b7561d9b25fe488d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-375_ce-gd_T1w.nii.gz",
+      "asset_id": 260243505,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-375",
+      "kind": "mask",
+      "name": "sub-375_seg.nii.gz",
+      "bytes": 30782,
+      "sha256": "9a0e5008cf1b8856bd4c6444dc3df73562b9286a11ffd4aa39e449ad321cdd40",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-375_seg.nii.gz",
+      "asset_id": 260243525,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-376",
+      "kind": "image",
+      "name": "sub-376_ce-gd_T1w.nii.gz",
+      "bytes": 2818687,
+      "sha256": "94869c574f2817ad756bdf8b1fb8efdcd078063d32787d4ddd24cd0f0e743817",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-376_ce-gd_T1w.nii.gz",
+      "asset_id": 260243566,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-376",
+      "kind": "mask",
+      "name": "sub-376_seg.nii.gz",
+      "bytes": 30185,
+      "sha256": "68f7646f92096a5a1b6353544d8ac49bf3bf709b328b7f9728133883f02d8092",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-376_seg.nii.gz",
+      "asset_id": 260243603,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-380",
+      "kind": "image",
+      "name": "sub-380_ce-gd_T1w.nii.gz",
+      "bytes": 3160390,
+      "sha256": "3f238e78097824234801cacbc6101b6be40adc38e085cf2aebe7836048ede49d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-380_ce-gd_T1w.nii.gz",
+      "asset_id": 260243852,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-380",
+      "kind": "mask",
+      "name": "sub-380_seg.nii.gz",
+      "bytes": 15432,
+      "sha256": "953c04e2e637871956989ee1178f316cbceae72653f2e9c9d0ab349b526678d5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-380_seg.nii.gz",
+      "asset_id": 260243897,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-384",
+      "kind": "image",
+      "name": "sub-384_ce-gd_T1w.nii.gz",
+      "bytes": 2722161,
+      "sha256": "c1660aca516d52bb850f07bc350bebe443286f13553f6a8ed25c84c156f2c4e4",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-384_ce-gd_T1w.nii.gz",
+      "asset_id": 260244215,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-384",
+      "kind": "mask",
+      "name": "sub-384_seg.nii.gz",
+      "bytes": 23597,
+      "sha256": "7b0ac642c18e3a2d39fd46fcc5fd7f34664634646bdf9d6622f176fd0eee3e34",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-384_seg.nii.gz",
+      "asset_id": 260244257,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-388",
+      "kind": "image",
+      "name": "sub-388_ce-gd_T1w.nii.gz",
+      "bytes": 3319491,
+      "sha256": "faa57f63d9a69fd109d883b621cb327104d59c81e19b31fcdfcb4233faacd1f8",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-388_ce-gd_T1w.nii.gz",
+      "asset_id": 260244493,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-388",
+      "kind": "mask",
+      "name": "sub-388_seg.nii.gz",
+      "bytes": 14512,
+      "sha256": "27ff934122d7245832f45321256870d21bd7ac4e197c3808a78f89a1d4019363",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-388_seg.nii.gz",
+      "asset_id": 260244554,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-390",
+      "kind": "image",
+      "name": "sub-390_ce-gd_T1w.nii.gz",
+      "bytes": 2959758,
+      "sha256": "442ddd4a68e5e89b7fe5f6ef1470627f1102f16c7dc394d9c5779ba548570006",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-390_ce-gd_T1w.nii.gz",
+      "asset_id": 260244646,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-390",
+      "kind": "mask",
+      "name": "sub-390_seg.nii.gz",
+      "bytes": 17374,
+      "sha256": "ebdb396190141a957b98348a8f0c3c8d6654167058d098b719e49c6b2a221b14",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-390_seg.nii.gz",
+      "asset_id": 260244684,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-391",
+      "kind": "image",
+      "name": "sub-391_ce-gd_T1w.nii.gz",
+      "bytes": 2746485,
+      "sha256": "9fd725b4315ad91b6e2ddddefd4fa3b645c1c79e29a536e2097c63a9eb7449ae",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-391_ce-gd_T1w.nii.gz",
+      "asset_id": 260244717,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-391",
+      "kind": "mask",
+      "name": "sub-391_seg.nii.gz",
+      "bytes": 26378,
+      "sha256": "6cac397c266475feb316934406c645c0cd7f310d3d959eca8cf6da89c382efad",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-391_seg.nii.gz",
+      "asset_id": 260244834,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-393",
+      "kind": "image",
+      "name": "sub-393_ce-gd_T1w.nii.gz",
+      "bytes": 2723043,
+      "sha256": "270ce9be67792cf9fcfaa2ceb72ab4d20c2e28b256c2124588463aaba22a702f",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-393_ce-gd_T1w.nii.gz",
+      "asset_id": 260244959,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-393",
+      "kind": "mask",
+      "name": "sub-393_seg.nii.gz",
+      "bytes": 12863,
+      "sha256": "518f0969cc5439c1a3a852325bb5ee2c18a065a9768f6f6ddc9d26dedbf27177",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-393_seg.nii.gz",
+      "asset_id": 260245002,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-398",
+      "kind": "image",
+      "name": "sub-398_ce-gd_T1w.nii.gz",
+      "bytes": 3044271,
+      "sha256": "53289408480a8876e2c340d94d393a8faf10b210760529e0006b3a971c26455d",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-398_ce-gd_T1w.nii.gz",
+      "asset_id": 260245306,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-398",
+      "kind": "mask",
+      "name": "sub-398_seg.nii.gz",
+      "bytes": 33409,
+      "sha256": "a7b4dc2d4ac5c50644b1fbcdb32f0df51e3d51936f09e23da2c04ee30d0b4d02",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-398_seg.nii.gz",
+      "asset_id": 260245347,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-402",
+      "kind": "image",
+      "name": "sub-402_ce-gd_T1w.nii.gz",
+      "bytes": 2476260,
+      "sha256": "e0afefdb3607ee48a4421acfa08128347935a8a785e8d088f5edb777d50a2b35",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-402_ce-gd_T1w.nii.gz",
+      "asset_id": 260245658,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-402",
+      "kind": "mask",
+      "name": "sub-402_seg.nii.gz",
+      "bytes": 36912,
+      "sha256": "c6a42f13bdb277f4dd31b5068f5408f9cb3e7228a0119199825f11ea017dc35e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-402_seg.nii.gz",
+      "asset_id": 260245691,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-404",
+      "kind": "image",
+      "name": "sub-404_ce-gd_T1w.nii.gz",
+      "bytes": 2869947,
+      "sha256": "cebe27911821162fac2220169f374892da88d88b5546a70449ca4583344865ea",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-404_ce-gd_T1w.nii.gz",
+      "asset_id": 260245839,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-404",
+      "kind": "mask",
+      "name": "sub-404_seg.nii.gz",
+      "bytes": 33725,
+      "sha256": "ac5297a93e67afb712943f2786c7fd79e11d6ba18c9e9a38d87f3feceba95e08",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-404_seg.nii.gz",
+      "asset_id": 260245866,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-418",
+      "kind": "image",
+      "name": "sub-418_ce-gd_T1w.nii.gz",
+      "bytes": 2658361,
+      "sha256": "2683f3262e9bb5b961756eaf75729a312ec3545f89ca0ea8504c59d46bc4946c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-418_ce-gd_T1w.nii.gz",
+      "asset_id": 260246849,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-418",
+      "kind": "mask",
+      "name": "sub-418_seg.nii.gz",
+      "bytes": 18831,
+      "sha256": "b73065f21b86223fae9d1f9e0a16cc79461f502c496a4e5ca69d600825b2e5d5",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-418_seg.nii.gz",
+      "asset_id": 260246873,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-428",
+      "kind": "image",
+      "name": "sub-428_ce-gd_T1w.nii.gz",
+      "bytes": 3453746,
+      "sha256": "8158b7158badabc714ad24d1487c9a133656e59350d1d7b84e77e769ac39954b",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-428_ce-gd_T1w.nii.gz",
+      "asset_id": 260247655,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-428",
+      "kind": "mask",
+      "name": "sub-428_seg.nii.gz",
+      "bytes": 16157,
+      "sha256": "d51d120abda4f382d6ca94c1daeac9d26cfaae59050a41a4ec086e597cdaf7a1",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-428_seg.nii.gz",
+      "asset_id": 260247691,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-430",
+      "kind": "image",
+      "name": "sub-430_ce-gd_T1w.nii.gz",
+      "bytes": 2288658,
+      "sha256": "e9e95c3821ee3f402582911a56ded036b1e04fb2e1f8d13346235ab673f38bb3",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-430_ce-gd_T1w.nii.gz",
+      "asset_id": 260247801,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-430",
+      "kind": "mask",
+      "name": "sub-430_seg.nii.gz",
+      "bytes": 27949,
+      "sha256": "5d8b0ee6b3021407b38d88ce629e0a1b748832051e32fabad95ce28e1beeff22",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-430_seg.nii.gz",
+      "asset_id": 260247831,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-437",
+      "kind": "image",
+      "name": "sub-437_ce-gd_T1w.nii.gz",
+      "bytes": 2643132,
+      "sha256": "79cb9c105f8a8ae50c758f79f04eb706a9439ed85c50859e88062b082824214c",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-437_ce-gd_T1w.nii.gz",
+      "asset_id": 260248340,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-437",
+      "kind": "mask",
+      "name": "sub-437_seg.nii.gz",
+      "bytes": 30811,
+      "sha256": "1ef48cf4e564371a518aec48e7979076d6b79919afc4fe26241cdb8d36abcec7",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-437_seg.nii.gz",
+      "asset_id": 260248373,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-438",
+      "kind": "image",
+      "name": "sub-438_ce-gd_T1w.nii.gz",
+      "bytes": 2774731,
+      "sha256": "2ed4c86203d0080c761b46bf3311c6010c4b4fab69818c8be78d9fc5446c8aa0",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-438_ce-gd_T1w.nii.gz",
+      "asset_id": 260248402,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-438",
+      "kind": "mask",
+      "name": "sub-438_seg.nii.gz",
+      "bytes": 16069,
+      "sha256": "1190461150e6ea35e3d4db506d52a03188e2a516af7708b9252f55e85c5a8f2e",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-438_seg.nii.gz",
+      "asset_id": 260248442,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-439",
+      "kind": "image",
+      "name": "sub-439_ce-gd_T1w.nii.gz",
+      "bytes": 2691394,
+      "sha256": "735a3822821186f87a6ccc5298167a11db5c15eed02fc7bd6818939551b1c3df",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-439_ce-gd_T1w.nii.gz",
+      "asset_id": 260248496,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-439",
+      "kind": "mask",
+      "name": "sub-439_seg.nii.gz",
+      "bytes": 19145,
+      "sha256": "1d81c505c7edc7687c97a9d5ca117913ea817efb264f4e8693ed95922230e489",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-439_seg.nii.gz",
+      "asset_id": 260248524,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-474",
+      "kind": "image",
+      "name": "sub-474_ce-gd_T1w.nii.gz",
+      "bytes": 2981516,
+      "sha256": "585254b98fadb0d817e7869d2a4c618667dc0882aa0f9ad87dd21f6a727aefab",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-474_ce-gd_T1w.nii.gz",
+      "asset_id": 260250763,
+      "download_state": "downloaded_verified"
+    },
+    {
+      "subject_id": "sub-474",
+      "kind": "mask",
+      "name": "sub-474_seg.nii.gz",
+      "bytes": 22459,
+      "sha256": "2402e4b8f9a6aa73766357f6d54ccfd260a1d3481fe618f928e482789baa7855",
+      "url": "https://github.com/data-nih/tcia/releases/download/upenn-gbm/sub-474_seg.nii.gz",
+      "asset_id": 260250788,
+      "download_state": "downloaded_verified"
+    }
+  ],
+  "total_bytes": 427673840,
+  "drive_e_free_bytes_before": 348581036032,
+  "drive_e_free_bytes_after": 348152369152
+}

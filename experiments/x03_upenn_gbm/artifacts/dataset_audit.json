@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x03_upenn_gbm",
+  "status": "AUDIT_COMPLETE",
+  "audit_outcome": "ELIGIBLE_INDEPENDENT",
+  "independent_external_evidence": true,
+  "release": {
+    "dataset": "UPENN-GBM",
+    "version": 2,
+    "doi": "10.7937/TCIA.709X-DN49",
+    "release_id": 222317008,
+    "tag": "upenn-gbm",
+    "tag_commit": "a8140bcfa512241fde2475cc3c4640b5cb97dc2b",
+    "published_at": "2025-06-02T02:42:11Z",
+    "license": "CC BY 4.0",
+    "source_manifest_sha256": "fe488d87a48bfcce1c4c735793ccccb28a9ba68a7d7400241692d7e45a68dfae"
+  },
+  "dataset": {
+    "scans": 147,
+    "patients": 147,
+    "tumor_bearing_axial_slices": 9464,
+    "shape_counts": {
+      "240x240x155": 147
+    },
+    "label_voxel_counts": {
+      "0": 1300773353,
+      "1": 1668823,
+      "2": 7677366,
+      "3": 2296458
+    },
+    "duplicate_image_volumes": 0,
+    "duplicate_mask_volumes": 0,
+    "whole_tumor_voxels": 11642647,
+    "source_image_dtypes": {
+      "uint8": 147
+    },
+    "source_mask_dtypes": {
+      "uint8": 147
+    },
+    "whole_tumor_component_counts": {
+      "1": 41,
+      "2": 27,
+      "3": 19,
+      "4": 9,
+      "5": 12,
+      "6": 13,
+      "7": 5,
+      "8": 4,
+      "9": 1,
+      "10": 3,
+      "11": 4,
+      "12": 2,
+      "15": 3,
+      "17": 1,
+      "19": 1,
+      "20": 1,
+      "31": 1
+    },
+    "slices_per_scan": {
+      "minimum": 24,
+      "median": 65.0,
+      "maximum": 116
+    },
+    "overlap": {
+      "exact_slice_candidates": 0,
+      "within_2_slice_candidates": 0,
+      "within_4_slice_candidates": 7,
+      "minimum_distance": 4
+    }
+  },
+  "input_contract": {
+    "image": "atlas-aligned skull-stripped CE-Gd T1w NIfTI",
+    "target": "whole tumor union of derivative labels 1, 2, and 3",
+    "canonical_orientation": "RAS",
+    "primary_slice_axis": "canonical axis 2 (axial)",
+    "primary_view": "whole-tumor-bearing 2D axial slices",
+    "secondary_view": "whole volume including reference-empty slices",
+    "category_mapping": "glioblastoma -> glioma (coarse; not directly comparable to heterogeneous BRISC glioma)"
+  },
+  "overlap_detection": {
+    "frozen_metadata_hashes": {
+      "audit/runs/20260921-182736-884368/inventory.csv": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+      "experiments/x01_cheng_overlap_control/artifacts/dataset_manifest.csv": "85d3c91f5a3bad870fd8e8c503d4dd47e883e25ba222dfbf808b59974c0efcde",
+      "experiments/x02_openneuro_pituitary/artifacts/tumor_slice_manifest.csv": "bd85dfce6a62884c081ed73af8f6c4b5f7d963a8e273c6ebf4d99fbb068cabd8"
+    },
+    "brisc_pixels_opened": 0,
+    "comparison_population": 3252,
+    "x04_comparison_status": "PENDING_ACCESS_NO_X04_PIXELS_OR_HASHES_AVAILABLE",
+    "exact_slice_candidates": 0,
+    "within_2_slice_candidates": 0,
+    "within_4_slice_candidates": 7,
+    "minimum_distance": 4
+  },
+  "visual_alignment_review": {
+    "status": "PASS_NO_SYSTEMATIC_DEFECT",
+    "panel": "experiments/x03_upenn_gbm/artifacts/source_alignment_panel.png",
+    "panel_sha256": "a790977ebefbb86c8287977ef3d739ab2642216d2db8819941974a39ffa2dcd3",
+    "selection": "12 evenly spaced scans; maximum whole-tumor-area axial slice"
+  },
+  "constraints": {
+    "inference_runs": 0,
+    "performance_metrics_computed": false,
+    "brisc_test_pixels_accessed": 0,
+    "neural_retraining": false,
+    "segmentation_threshold": 0.5,
+    "threshold_changed": false
+  },
+  "disk": {
+    "minimal_payload_bytes": 427673840,
+    "drive_e_free_bytes_after_audit": 348148006912,
+    "drive_e_free_gib_after_audit": 324.23809814453125,
+    "projected_total_below_250_gb": true
+  }
+}

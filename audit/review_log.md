@@ -654,3 +654,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Silently accept label 3; rejected. Treat the derivative as byte-identical to the original Aspera package; rejected. Download the full 69 GB source archive; unnecessary for the fixed 147 expert CE-T1/mask pairs after prospective derivative registration and exact per-file verification.
 - **Constraints:** No X03 inference or performance result existed before registration. Frozen models, adapter, thresholds, gates, and the coarse `glioblastoma -> glioma` caveat remain unchanged.
 - **Who approved:** User explicitly approved Amendment 16 and sequential Stage 6 completion.
+
+
+## 2026-09-28T20:36:39+05:30 — Audit UPENN-GBM v2 before inference
+
+- **Decision made:** Classify X03 as `ELIGIBLE_INDEPENDENT` and authorize one frozen-stack evaluation.
+- **Triggering artifact:** `experiments/x03_upenn_gbm/artifacts/dataset_audit.json`, SHA256 `44d4f030ff6830ab9e58d0ccb856a3fbb03df774352d054251352a87a2a3190a`.
+- **Rationale:** All 147 expert masks and paired CE-Gd T1 volumes passed published SHA256, size, modality, geometry, label, tumor-presence, duplicate, and overlap checks. Exact cross-dataset pHash candidates: 0.
+- **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
+- **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
+- **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.

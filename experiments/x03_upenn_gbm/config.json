@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "x03_upenn_gbm",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H8"],
+  "status": "AUDIT_COMPLETE",
+  "hypothesis_ids": [
+    "H8"
+  ],
   "amendment": "audit/preregistration_amendment_13.md",
   "dataset": {
     "name": "UPENN-GBM",
@@ -10,14 +12,18 @@
     "doi": "10.7937/TCIA.709X-DN49",
     "release": "aligned NIfTI MR and segmentation",
     "role": "independent glioblastoma evaluation candidate with coarse glioma mapping",
-    "access_state": "PUBLIC_NOT_ACCESSED"
+    "access_state": "MINIMAL_EXPERT_PAYLOAD_DOWNLOADED_AUDITED",
+    "audit_outcome": "ELIGIBLE_INDEPENDENT",
+    "independent_external_evidence": true,
+    "release_id": 222317008
   },
   "execution_order": 3,
   "audit_required_before_inference": true,
   "gbm_to_glioma_mapping": "COARSE_MANDATORY_CAVEAT",
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
-  "r02_external_inference_state": "BLOCKED_ARTIFACT_MISSING",
+  "r02_external_inference_state": "OPERATIONAL_ARTIFACT_FROZEN",
   "test_images_accessed": 0,
-  "model_retrained_or_refit": false
+  "model_retrained_or_refit": false,
+  "r02_manifest_sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
 }

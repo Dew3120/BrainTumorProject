@@ -65,6 +65,10 @@
     {
       "path": "audit/preregistration_amendment_15.md",
       "sha256": "4fea798e9a50ef12d5ea2d9cc627cfd8594207860cba10f3bb82e2b7ec782d9e"
+    },
+    {
+      "path": "audit/preregistration_amendment_16.md",
+      "sha256": "802ade9daecfdbc11fcd9344c7aee28e9199562f46fc1990624c940ad8b6bf34"
     }
   ],
   "baseline": {
@@ -378,7 +382,7 @@
       "hypothesis_ids": [
         "H8"
       ],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "AUDIT_COMPLETE"
     },
     {
       "id": "x04_meningioma_seg_class",
