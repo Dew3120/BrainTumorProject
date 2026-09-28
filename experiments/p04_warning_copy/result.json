@@ -42,7 +42,7 @@
       "experiments/p03_decision_rule/artifacts/experiment_manifest.json": "2a2bbc1198ae08e4b206ee91c0bdf9c0ac7d45c4d80ffff7eaf982a769038377",
       "docs/decision_rule.md": "43290ba09ec991819dbbc21346b447cd70c0cfcda1e75b0d21e99b502fd744c5"
     },
-    "script_sha256": "17b1af7e1f020b169cc87f7b0a80374d01ce3c4080836279895c439e35565b28"
+    "script_sha256": "f4eceab9d28dbbb711544d852f464f441738b73dc2ad5706b49a3bcedfcf9ef0"
   },
   "limitations": [
     "The messages describe an internal research policy and do not establish clinical validity.",

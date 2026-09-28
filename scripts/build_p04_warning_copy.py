@@ -263,8 +263,8 @@ def catalogue_document(messages):
             f"- Reason: `{message['reason']}`\n"
             f"- Category condition: `{message['predicted_category_condition']}`\n"
             f"- Severity: `{message['severity']}`\n\n"
-            f"> **{message['title']}**  \n"
-            f"> {message['body']}  \n"
+            f"> **{message['title']}**\n>\n"
+            f"> {message['body']}\n>\n"
             f"> **{message['disclaimer']}**\n"
         )
     return """# User-facing reliability messages

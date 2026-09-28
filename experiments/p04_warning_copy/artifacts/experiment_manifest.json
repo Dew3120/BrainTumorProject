@@ -12,7 +12,7 @@
   "files": [
     {
       "path": "docs/warning_copy.md",
-      "sha256": "9475079d7961baea0e6fe0b62ed285a5347413b3f2bdbaf5121e59a8c1b4bc20",
+      "sha256": "ef2744da08948cf682c191b89d6299b2121cf5f599ef654a306f5705eedb1d99",
       "bytes": 5335
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "path": "experiments/p04_warning_copy/result.json",
-      "sha256": "e4d60b71076c84ea38f20158b813a683841521db3b3578759b3ad49fba8b5d40",
+      "sha256": "a03b36297132aee490a74d03cf5cfa787495243a738ea2cef1f78ed1ee3f3fdb",
       "bytes": 2083
     },
     {
@@ -42,8 +42,8 @@
     },
     {
       "path": "scripts/build_p04_warning_copy.py",
-      "sha256": "17b1af7e1f020b169cc87f7b0a80374d01ce3c4080836279895c439e35565b28",
-      "bytes": 18274
+      "sha256": "f4eceab9d28dbbb711544d852f464f441738b73dc2ad5706b49a3bcedfcf9ef0",
+      "bytes": 18276
     },
     {
       "path": "tests/test_build_p04_warning_copy.py",

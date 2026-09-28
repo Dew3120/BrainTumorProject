@@ -15,8 +15,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `ANY`
 - Severity: `INFO`
 
-> **Result ready for review**  
-> This output met the research prototype's internal reliability threshold of 0.9490250173235835 and can be shown in the standard view. Review the uploaded image, category label, and highlighted region before using the output.  
+> **Result ready for review**
+>
+> This output met the research prototype's internal reliability threshold of 0.9490250173235835 and can be shown in the standard view. Review the uploaded image, category label, and highlighted region before using the output.
+>
 > **Research prototype — not for clinical use**
 
 ## `standard_predicted_glioma`
@@ -26,8 +28,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `PREDICTED_GLIOMA`
 - Severity: `INFO`
 
-> **Result ready for review**  
-> This output met the research prototype's internal reliability threshold of 0.9490250173235835 and can be shown in the standard view. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. This does not change the threshold or status. Review the image, category label, and highlighted region carefully.  
+> **Result ready for review**
+>
+> This output met the research prototype's internal reliability threshold of 0.9490250173235835 and can be shown in the standard view. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. This does not change the threshold or status. Review the image, category label, and highlighted region carefully.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_below_threshold_default`
@@ -37,8 +41,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `ANY`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> This output did not meet the research prototype's internal reliability threshold of 0.9490250173235835. Inspect the uploaded image and predicted region carefully before relying on the output.  
+> **Manual review required**
+>
+> This output did not meet the research prototype's internal reliability threshold of 0.9490250173235835. Inspect the uploaded image and predicted region carefully before relying on the output.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_below_threshold_predicted_glioma`
@@ -48,8 +54,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `PREDICTED_GLIOMA`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> This output did not meet the research prototype's internal reliability threshold of 0.9490250173235835. The model-predicted category is glioma, where reliability ranking was weaker in internal development testing. Inspect the uploaded image, category label, and predicted region carefully before relying on the output.  
+> **Manual review required**
+>
+> This output did not meet the research prototype's internal reliability threshold of 0.9490250173235835. The model-predicted category is glioma, where reliability ranking was weaker in internal development testing. Inspect the uploaded image, category label, and predicted region carefully before relying on the output.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_unavailable_default`
@@ -59,8 +67,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `ANY`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> A reliability score could not be computed. The output has been placed in Review Required. The policy threshold is 0.9490250173235835, but no valid score was available for comparison. Inspect the uploaded image and predicted region carefully.  
+> **Manual review required**
+>
+> A reliability score could not be computed. The output has been placed in Review Required. The policy threshold is 0.9490250173235835, but no valid score was available for comparison. Inspect the uploaded image and predicted region carefully.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_unavailable_predicted_glioma`
@@ -70,8 +80,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `PREDICTED_GLIOMA`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> A reliability score could not be computed. The output has been placed in Review Required. The policy threshold is 0.9490250173235835, but no valid score was available for comparison. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. Inspect the uploaded image, category label, and predicted region carefully.  
+> **Manual review required**
+>
+> A reliability score could not be computed. The output has been placed in Review Required. The policy threshold is 0.9490250173235835, but no valid score was available for comparison. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. Inspect the uploaded image, category label, and predicted region carefully.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_invalid_default`
@@ -81,8 +93,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `ANY`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> The reliability output was invalid. The output has been placed in Review Required. A finite score between 0 and 1 was expected, so the policy threshold of 0.9490250173235835 could not be applied. Inspect the uploaded image and predicted region carefully.  
+> **Manual review required**
+>
+> The reliability output was invalid. The output has been placed in Review Required. A finite score between 0 and 1 was expected, so the policy threshold of 0.9490250173235835 could not be applied. Inspect the uploaded image and predicted region carefully.
+>
 > **Research prototype — not for clinical use**
 
 ## `review_invalid_predicted_glioma`
@@ -92,8 +106,10 @@ Meeting the threshold means only that the output reached the registered internal
 - Category condition: `PREDICTED_GLIOMA`
 - Severity: `HIGH`
 
-> **Manual review required**  
-> The reliability output was invalid. The output has been placed in Review Required. A finite score between 0 and 1 was expected, so the policy threshold of 0.9490250173235835 could not be applied. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. Inspect the uploaded image, category label, and predicted region carefully.  
+> **Manual review required**
+>
+> The reliability output was invalid. The output has been placed in Review Required. A finite score between 0 and 1 was expected, so the policy threshold of 0.9490250173235835 could not be applied. The model-predicted category is glioma. In internal development testing, reliability ranking was weaker for glioma images. Inspect the uploaded image, category label, and predicted region carefully.
+>
 > **Research prototype — not for clinical use**
 
 ## Integration notes
