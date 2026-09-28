@@ -6,7 +6,7 @@
   "scope": "User-facing copy for the frozen P03 two-state reliability policy",
   "policy_version": "p03_decision_rule",
   "reliability_threshold": 0.9490250173235835,
-  "required_disclaimer": "Research prototype — not for clinical use",
+  "required_disclaimer": "Research prototype \u2014 not for clinical use",
   "supported_combinations": [
     "STANDARD/AT_OR_ABOVE_THRESHOLD/ANY",
     "STANDARD/AT_OR_ABOVE_THRESHOLD/PREDICTED_GLIOMA",
