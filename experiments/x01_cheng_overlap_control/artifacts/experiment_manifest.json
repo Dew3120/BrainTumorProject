@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x01_cheng_overlap_control",
+  "status": "AUDIT_COMPLETE",
+  "files": [
+    {
+      "path": "audit/x01_cheng_dataset_audit.md",
+      "bytes": 3059,
+      "sha256": "52995f337f8fef12a9716b9ea8c772f4dda7661bc8b40ec36f4a103d2155357d"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/brisc_overlap_candidates.csv",
+      "bytes": 422462,
+      "sha256": "adf2bfe35b1590164d4e60e1855f3524d7ec00ab2ad95f41d98112b3c55f4948"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/dataset_audit.json",
+      "bytes": 3188,
+      "sha256": "376475408891a18e2eb8491eedbe84f673b346ac460f180de24d0c5522eefaff"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/dataset_manifest.csv",
+      "bytes": 897455,
+      "sha256": "85d3c91f5a3bad870fd8e8c503d4dd47e883e25ba222dfbf808b59974c0efcde"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/source_file_manifest.json",
+      "bytes": 2336,
+      "sha256": "f7bd08b490284a4bff64d20cb3546edfc7e81b09b6643d2d142759a5ee7cbd7b"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/config.json",
+      "bytes": 979,
+      "sha256": "28b4961f08051a86f904f49c39ae72a6c6adbe26c855f5e2ae665ee7365558b2"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/decision.md",
+      "bytes": 287,
+      "sha256": "16e2880524a12eefea0946c8a88746d9e568bed6ab526b6c6b29a3a73c6bf9a5"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/hypothesis.md",
+      "bytes": 388,
+      "sha256": "f7618d7a03c24926d7b8b65329ac4c1f5e2e85757fb87da843f19565722636e9"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/result.json",
+      "bytes": 3188,
+      "sha256": "376475408891a18e2eb8491eedbe84f673b346ac460f180de24d0c5522eefaff"
+    },
+    {
+      "path": "scripts/audit_x01_cheng.py",
+      "bytes": 27745,
+      "sha256": "58f71e62d4dd51cb75634c23180b6036ca6125707d59057bbdf1d01c573aebbd"
+    },
+    {
+      "path": "scripts/validate_experiment_tracking.py",
+      "bytes": 5242,
+      "sha256": "6974fac4094da94d385896dc6cff15d1a53d802254068540ef50491e873eb9f2"
+    },
+    {
+      "path": "tests/test_foundation_controls.py",
+      "bytes": 2987,
+      "sha256": "59928470042cd5b8404c428e7778b8279c54568d1a6f7d0f11a5b2bd80349663"
+    }
+  ]
+}

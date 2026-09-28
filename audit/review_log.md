@@ -592,3 +592,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Ten focused synthetic tests and 165 repository tests passed; Ruff passed. Frozen C03 and R02 hashes matched. Segmenter threshold remained `0.50`, reliability-policy threshold remained exactly `0.9490250173235835`, and external/BRISC sealed-test image access and retraining were zero. Drive E retained 350,710,026,240 free bytes (`326.624165 GiB`).
 - **Alternatives considered:** Let each dataset invent preprocessing; rejected because outcome-dependent adapters would invalidate comparison. Reuse BRISC path-based E07 routing; rejected because external routing must use the frozen classifier prediction. Infer physical measurements without spatial metadata; rejected fail closed.
 - **Who approved:** User approved the Stage 6 plan and authorized Stage 6.1 after Amendment 14 passed.
+
+
+## 2026-09-28T17:14:07+05:30 — Audit Cheng/Figshare v8 before inference
+
+- **Decision made:** Classify X01 as `ELIGIBLE_OVERLAP_CONTROL` and authorize one frozen-stack evaluation under that label. Do not treat it as independent external validation.
+- **Triggering artifact:** `experiments/x01_cheng_overlap_control/artifacts/dataset_audit.json`, SHA256 `376475408891a18e2eb8491eedbe84f673b346ac460f180de24d0c5522eefaff`; official Figshare metadata SHA256 `b02780e0c61b9150c8eac7ee090411f33f1b57ecf3088c0bb5e33cb68752d252`.
+- **Rationale:** All 3,064 images and masks, 233 patient identifiers, five patient-separated official folds, release hashes, archive membership, mask encoding, and tumor-border alignment passed. The official BRISC publication documents Cheng as an upstream source of BRISC's Nickparvar aggregate, establishing source overlap regardless of re-encoding differences.
+- **Verification:** All source files matched byte, MD5, and SHA256 checks. BRISC overlap comparison used only the existing frozen inventory and opened zero BRISC pixels. Inference, performance evaluation, neural retraining, threshold changes, and BRISC test-pixel access were zero.
+- **Alternatives considered:** Declare Cheng independent because filenames and encodings differ; rejected because provenance overlap is documented. Stop X01 as ineligible; rejected because the image/mask contract is technically valid for an explicitly labeled overlap control.
+- **Who approved:** User approved Amendment 13 and authorized progression through eligible audits and evaluations unless a registered stop condition occurs.

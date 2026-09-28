@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = ROOT / "experiments"
 REGISTRY = EXPERIMENTS / "registry.json"
 REQUIRED_FILES = {"hypothesis.md", "config.json", "result.json", "decision.md"}
+VALID_STATUSES = {"REGISTERED_NOT_STARTED", "AUDIT_COMPLETE", "COMPLETE"}
 
 
 def sha256(path):
@@ -40,12 +41,20 @@ def validate_experiment(directory, registry_item):
         raise ValueError(f"{registry_item['id']} hypothesis registration mismatch")
     if config["status"] != registry_item["status"]:
         raise ValueError(f"{registry_item['id']} config status mismatch")
+    if registry_item["status"] not in VALID_STATUSES:
+        raise ValueError(f"{registry_item['id']} has unknown lifecycle status")
     if registry_item["status"] == "REGISTERED_NOT_STARTED":
         if result["status"] != "NOT_RUN":
             raise ValueError(f"{registry_item['id']} has results before start")
         decision = (directory / "decision.md").read_text(encoding="utf-8")
         if "**Decision:** PENDING" not in decision:
             raise ValueError(f"{registry_item['id']} has a premature decision")
+    if registry_item["status"] == "AUDIT_COMPLETE":
+        if result["status"] != "AUDIT_COMPLETE":
+            raise ValueError(f"{registry_item['id']} audit result status mismatch")
+        decision = (directory / "decision.md").read_text(encoding="utf-8")
+        if "**Audit decision:**" not in decision:
+            raise ValueError(f"{registry_item['id']} lacks an audit decision")
     return {
         "id": registry_item["id"],
         "status": registry_item["status"],

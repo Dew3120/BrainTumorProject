@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "dataset": "Cheng/Figshare brain_tumor_dataset",
+  "article_id": 1512427,
+  "version": 8,
+  "doi": "10.6084/m9.figshare.1512427.v8",
+  "license": "CC BY 4.0",
+  "metadata_sha256": "b02780e0c61b9150c8eac7ee090411f33f1b57ecf3088c0bb5e33cb68752d252",
+  "files": [
+    {
+      "filename": "brainTumorDataPublic_1-766.zip",
+      "bytes": 214401279,
+      "md5": "74b949ad33f042e6e103523091cd1428",
+      "sha256": "cdac0a7f4152cb34dd79b13543da96c37a6928ad8cb823e2662150b1a73ade54",
+      "figshare_file_id": 3381290,
+      "download_url": "https://ndownloader.figshare.com/files/3381290"
+    },
+    {
+      "filename": "brainTumorDataPublic_1533-2298.zip",
+      "bytes": 215563856,
+      "md5": "8227bf6080cb71f15a88be8d25c79ae7",
+      "sha256": "612d9f506c55c54db5f2f38b6d50741ef97a6d7c32b3e1be76e789674a97aefb",
+      "figshare_file_id": 3381293,
+      "download_url": "https://ndownloader.figshare.com/files/3381293"
+    },
+    {
+      "filename": "brainTumorDataPublic_767-1532.zip",
+      "bytes": 217848429,
+      "md5": "7e8a875500d2c8a346f270538e29890e",
+      "sha256": "d18e896d14f7af791cdd3d9b9342f9f974742a06132effde5a5219209862b4ce",
+      "figshare_file_id": 3381296,
+      "download_url": "https://ndownloader.figshare.com/files/3381296"
+    },
+    {
+      "filename": "brainTumorDataPublic_2299-3064.zip",
+      "bytes": 231679762,
+      "md5": "b378a80d6174e5317d59eb28430c6652",
+      "sha256": "9a673c55d139133cfbc57097bf155b5ac9f33684ee97f40bf2afba332d416a3a",
+      "figshare_file_id": 3381302,
+      "download_url": "https://ndownloader.figshare.com/files/3381302"
+    },
+    {
+      "filename": "cvind.mat",
+      "bytes": 5736,
+      "md5": "5ea82eb3212c9fcb84290ccf0beb486d",
+      "sha256": "b4310122ee77e08cab74332c11d77ee4c34754fbcd9d5376cbbb88f7debbd5e8",
+      "figshare_file_id": 7005344,
+      "download_url": "https://ndownloader.figshare.com/files/7005344"
+    },
+    {
+      "filename": "README 2024.txt",
+      "bytes": 3303,
+      "md5": "4188f7c30957e9673c3611613071bd6e",
+      "sha256": "1fcb55d9dbc5c9b4d650e53fa8e606af356f0eefd3df32c04a2aaff1d237aa95",
+      "figshare_file_id": 51340418,
+      "download_url": "https://ndownloader.figshare.com/files/51340418"
+    }
+  ],
+  "zip_audit": {
+    "members": 3064,
+    "unique_members": 3064,
+    "corrupt_members": 0
+  }
+}

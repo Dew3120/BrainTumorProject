@@ -78,6 +78,6 @@ def test_registered_experiment_directories_are_complete_and_frozen():
         item["id"] for item in registry["experiments"]
     }
     assert all(
-        item["status"] in {"REGISTERED_NOT_STARTED", "COMPLETE"}
+        item["status"] in {"REGISTERED_NOT_STARTED", "AUDIT_COMPLETE", "COMPLETE"}
         for item in result["experiments"]
     )

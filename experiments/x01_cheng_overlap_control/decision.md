@@ -1,5 +1,5 @@
 # X01 decision
 
-**Decision:** PENDING
+**Audit decision:** `ELIGIBLE_OVERLAP_CONTROL`
 
-The dataset has not been accessed, audited, or evaluated.
+The frozen stack may proceed to one evaluation. Cheng is a documented upstream source of BRISC and therefore cannot provide independent external evidence. No inference or performance computation occurred during this audit.
