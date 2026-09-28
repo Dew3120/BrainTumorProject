@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p02_threshold_selection",
+  "hypothesis_ids": [],
+  "status": "REGISTERED_NOT_STARTED",
+  "scope": "Internal BRISC development reliability-policy threshold selection",
+  "source_registration": {
+    "path": "audit/preregistration_amendment_01.md",
+    "sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+    "section": "E. Reliability policy"
+  },
+  "cost_model": {
+    "path": "experiments/p01_cost_model/result.json",
+    "result_sha256": "d66042c2ce9ea848c6e98e8a06a26c9aace02a4f54b253de893b1ccafb531109",
+    "manifest_sha256": "ef52545bc645be0a453978046cdf094546408091d68c6ad8f15b5f99230bab50",
+    "binary": {
+      "true_positive": 1,
+      "false_positive": 1,
+      "true_negative": 0,
+      "false_negative": 10
+    },
+    "three_state": {
+      "review_acceptable": 1,
+      "review_bad": 1,
+      "warning_acceptable": 0.25,
+      "warning_bad": 5,
+      "standard_acceptable": 0,
+      "standard_bad": 10
+    }
+  },
+  "population": {
+    "path": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+    "sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "expected_cases": 680,
+    "expected_acceptable": 598,
+    "expected_bad": 82
+  },
+  "binary_sweep": {
+    "candidates": "0, every distinct OOF reliability score, 1",
+    "review_rule": "reliability < threshold",
+    "objective": "minimize mean (TP + FP + 10*FN)",
+    "tie_breakers": [
+      "fewer false negatives",
+      "lower review count",
+      "higher threshold"
+    ]
+  },
+  "three_state_sweep": {
+    "constraint": "theta_low <= theta_high",
+    "states": "review below theta_low; warning [theta_low, theta_high); standard at or above theta_high",
+    "tie_breakers": [
+      "fewer standard-state failures",
+      "fewer failures outside review required",
+      "lower mandatory-review count",
+      "higher theta_high",
+      "higher theta_low"
+    ]
+  },
+  "reliability_bins": 15,
+  "reliability_binning": "equal-frequency",
+  "conventional_reference_threshold": 0.5,
+  "segmentation_threshold": 0.5,
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false
+}
