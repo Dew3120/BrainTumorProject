@@ -1,0 +1,254 @@
+{
+  "all": {
+    "count": 817,
+    "empty_prediction": {
+      "count": 64,
+      "fraction": 0.07833537331701346
+    },
+    "nonempty_zero_overlap": {
+      "count": 272,
+      "fraction": 0.3329253365973072
+    },
+    "severe_under_prediction": {
+      "count": 327,
+      "fraction": 0.40024479804161567
+    },
+    "severe_over_prediction": {
+      "count": 69,
+      "fraction": 0.08445532435740515
+    },
+    "fragmented_prediction": {
+      "count": 392,
+      "fraction": 0.47980416156670747
+    },
+    "disconnected_false_positive": {
+      "count": 314,
+      "fraction": 0.3843329253365973
+    },
+    "reference_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "prediction_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "complete_miss": {
+      "count": 336,
+      "fraction": 0.4112607099143207
+    },
+    "primary_failure_modes": {
+      "empty_prediction": {
+        "count": 64,
+        "fraction": 0.07833537331701346
+      },
+      "fragmented_prediction": {
+        "count": 62,
+        "fraction": 0.07588739290085679
+      },
+      "nonempty_zero_overlap": {
+        "count": 272,
+        "fraction": 0.3329253365973072
+      },
+      "other_partial_overlap": {
+        "count": 23,
+        "fraction": 0.028151774785801713
+      },
+      "severe_over_prediction": {
+        "count": 69,
+        "fraction": 0.08445532435740515
+      },
+      "severe_under_prediction": {
+        "count": 327,
+        "fraction": 0.40024479804161567
+      }
+    }
+  },
+  "glioma": {
+    "count": 737,
+    "empty_prediction": {
+      "count": 60,
+      "fraction": 0.0814111261872456
+    },
+    "nonempty_zero_overlap": {
+      "count": 263,
+      "fraction": 0.3568521031207598
+    },
+    "severe_under_prediction": {
+      "count": 318,
+      "fraction": 0.4314789687924016
+    },
+    "severe_over_prediction": {
+      "count": 20,
+      "fraction": 0.027137042062415198
+    },
+    "fragmented_prediction": {
+      "count": 370,
+      "fraction": 0.5020352781546812
+    },
+    "disconnected_false_positive": {
+      "count": 294,
+      "fraction": 0.3989145183175034
+    },
+    "reference_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "prediction_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "complete_miss": {
+      "count": 323,
+      "fraction": 0.43826322930800543
+    },
+    "primary_failure_modes": {
+      "empty_prediction": {
+        "count": 60,
+        "fraction": 0.0814111261872456
+      },
+      "fragmented_prediction": {
+        "count": 58,
+        "fraction": 0.07869742198100407
+      },
+      "nonempty_zero_overlap": {
+        "count": 263,
+        "fraction": 0.3568521031207598
+      },
+      "other_partial_overlap": {
+        "count": 18,
+        "fraction": 0.024423337856173677
+      },
+      "severe_over_prediction": {
+        "count": 20,
+        "fraction": 0.027137042062415198
+      },
+      "severe_under_prediction": {
+        "count": 318,
+        "fraction": 0.4314789687924016
+      }
+    }
+  },
+  "meningioma": {
+    "count": 10,
+    "empty_prediction": {
+      "count": 2,
+      "fraction": 0.2
+    },
+    "nonempty_zero_overlap": {
+      "count": 2,
+      "fraction": 0.2
+    },
+    "severe_under_prediction": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "severe_over_prediction": {
+      "count": 5,
+      "fraction": 0.5
+    },
+    "fragmented_prediction": {
+      "count": 4,
+      "fraction": 0.4
+    },
+    "disconnected_false_positive": {
+      "count": 4,
+      "fraction": 0.4
+    },
+    "reference_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "prediction_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "complete_miss": {
+      "count": 4,
+      "fraction": 0.4
+    },
+    "primary_failure_modes": {
+      "empty_prediction": {
+        "count": 2,
+        "fraction": 0.2
+      },
+      "fragmented_prediction": {
+        "count": 1,
+        "fraction": 0.1
+      },
+      "nonempty_zero_overlap": {
+        "count": 2,
+        "fraction": 0.2
+      },
+      "severe_over_prediction": {
+        "count": 5,
+        "fraction": 0.5
+      }
+    }
+  },
+  "pituitary": {
+    "count": 70,
+    "empty_prediction": {
+      "count": 2,
+      "fraction": 0.02857142857142857
+    },
+    "nonempty_zero_overlap": {
+      "count": 7,
+      "fraction": 0.1
+    },
+    "severe_under_prediction": {
+      "count": 9,
+      "fraction": 0.12857142857142856
+    },
+    "severe_over_prediction": {
+      "count": 44,
+      "fraction": 0.6285714285714286
+    },
+    "fragmented_prediction": {
+      "count": 18,
+      "fraction": 0.2571428571428571
+    },
+    "disconnected_false_positive": {
+      "count": 16,
+      "fraction": 0.22857142857142856
+    },
+    "reference_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "prediction_touches_model_edge": {
+      "count": 0,
+      "fraction": 0.0
+    },
+    "complete_miss": {
+      "count": 9,
+      "fraction": 0.12857142857142856
+    },
+    "primary_failure_modes": {
+      "empty_prediction": {
+        "count": 2,
+        "fraction": 0.02857142857142857
+      },
+      "fragmented_prediction": {
+        "count": 3,
+        "fraction": 0.04285714285714286
+      },
+      "nonempty_zero_overlap": {
+        "count": 7,
+        "fraction": 0.1
+      },
+      "other_partial_overlap": {
+        "count": 5,
+        "fraction": 0.07142857142857142
+      },
+      "severe_over_prediction": {
+        "count": 44,
+        "fraction": 0.6285714285714286
+      },
+      "severe_under_prediction": {
+        "count": 9,
+        "fraction": 0.12857142857142856
+      }
+    }
+  }
+}

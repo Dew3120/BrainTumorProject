@@ -1,5 +1,5 @@
 # X01 decision
 
-**Audit decision:** `ELIGIBLE_OVERLAP_CONTROL`
+**Decision:** `FAIL_REGISTERED_TRANSPORT_GATES_OVERLAP_CONTROL_ONLY`
 
-The frozen stack may proceed to one evaluation. Cheng is a documented upstream source of BRISC and therefore cannot provide independent external evidence. No inference or performance computation occurred during this audit.
+The classifier and two segmentation categories passed, but glioma subject-macro Dice and R02 reliability ECE failed their registered gates. The gate was not relaxed. Cheng remains an overlap control and supplies no independent external generalization evidence.

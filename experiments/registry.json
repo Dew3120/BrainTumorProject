@@ -358,7 +358,7 @@
       "hypothesis_ids": [
         "H8"
       ],
-      "status": "AUDIT_COMPLETE"
+      "status": "COMPLETE"
     },
     {
       "id": "x02_openneuro_pituitary",

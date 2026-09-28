@@ -602,3 +602,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** All source files matched byte, MD5, and SHA256 checks. BRISC overlap comparison used only the existing frozen inventory and opened zero BRISC pixels. Inference, performance evaluation, neural retraining, threshold changes, and BRISC test-pixel access were zero.
 - **Alternatives considered:** Declare Cheng independent because filenames and encodings differ; rejected because provenance overlap is documented. Stop X01 as ineligible; rejected because the image/mask contract is technically valid for an explicitly labeled overlap control.
 - **Who approved:** User approved Amendment 13 and authorized progression through eligible audits and evaluations unless a registered stop condition occurs.
+
+
+## 2026-09-28T17:36:04+05:30 — Reject X01 transport gates and retain overlap-control findings
+
+- **Decision made:** Complete X01 as `FAIL_REGISTERED_TRANSPORT_GATES_OVERLAP_CONTROL_ONLY`. Accept the technically valid frozen run and visual review, but reject the registered transport gate because glioma Dice and R02 ECE failed.
+- **Triggering artifact:** `experiments/x01_cheng_overlap_control/artifacts/evaluation_result.json`, SHA256 `c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f`; deterministic visual panel SHA256 `efa0fbc53438e63c2296a82cb72c86b71bc3772fbbaba753715275392f234c56`.
+- **Rationale:** Glioma subject-macro Dice was `0.414165` against `0.55`. Reliability AUROC remained `0.938719`, but ECE was `0.061323` against `0.05`. Meningioma and pituitary Dice and all classifier gates passed. Visual inspection found aligned references/predictions and no common transform defect.
+- **Verification:** Independent recomputation over 3,064 rows had maximum metric difference `2.220446049250313e-16`. Frozen hashes matched; 2,000 patient-cluster bootstraps used seed 42. No BRISC sealed-test file was opened. Neural retraining, calibrator/reliability refit, segmentation-threshold changes, and gate relaxation were zero.
+- **Alternatives considered:** Relax the glioma or ECE gates because ranking AUROC was strong; rejected. Present X01 as independent external validation; rejected because Cheng is an upstream BRISC source. Tune the C03 mapping or reliability threshold on Cheng; rejected as forbidden external-data fitting.
+- **Who approved:** User approved Amendment 13, the frozen X01 overlap-control evaluation, and unchanged fail-closed gates.

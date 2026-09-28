@@ -1,0 +1,24 @@
+{
+  "reference": "BRISC development validation only; sealed test pixels unopened",
+  "intensity_wasserstein": {
+    "model_input_mean": 0.04993459156171836,
+    "model_input_sd": 0.05719521646448667,
+    "nonzero_mean": 0.06212883218170252
+  },
+  "foreground_area_fraction_wasserstein": 0.0010786515559455872,
+  "encoder_representation_shift": {
+    "centroid_euclidean": 4.161630153656006,
+    "dimension_mean_wasserstein": 0.17028654465452275,
+    "dimension_median_wasserstein": 0.15186937166933745,
+    "encoder": "frozen classifier ResNet18 avgpool (512 dimensions)"
+  },
+  "reliability_score_wasserstein": 0.08528889843868341,
+  "policy_review_rate": {
+    "cheng": 0.39327676240208875,
+    "brisc_operational_reference": 0.28823529411764703
+  },
+  "counts": {
+    "cheng_slices": 3064,
+    "brisc_validation_slices": 680
+  }
+}

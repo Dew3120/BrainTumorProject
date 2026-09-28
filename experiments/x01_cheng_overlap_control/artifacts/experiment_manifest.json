@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "x01_cheng_overlap_control",
-  "status": "AUDIT_COMPLETE",
+  "status": "COMPLETE",
   "files": [
     {
       "path": "audit/x01_cheng_dataset_audit.md",
@@ -9,9 +9,24 @@
       "sha256": "52995f337f8fef12a9716b9ea8c772f4dda7661bc8b40ec36f4a103d2155357d"
     },
     {
+      "path": "audit/x01_cheng_evaluation.md",
+      "bytes": 4505,
+      "sha256": "cc286a9cb250b93d5f484f2ebd9fce235118f9606579e58abfad7ed6abc7cd47"
+    },
+    {
       "path": "experiments/x01_cheng_overlap_control/artifacts/brisc_overlap_candidates.csv",
       "bytes": 422462,
       "sha256": "adf2bfe35b1590164d4e60e1855f3524d7ec00ab2ad95f41d98112b3c55f4948"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/case_reliability.png",
+      "bytes": 79405,
+      "sha256": "9364799b35ecdc4f7b08182c794d1c35f506eb3835a6adde0e4e6666ce55316d"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/classifier_reliability.png",
+      "bytes": 65665,
+      "sha256": "99a5105bb36482a60a42b365d76276d3df9921c6b228007fcde24f9f5fd0b257"
     },
     {
       "path": "experiments/x01_cheng_overlap_control/artifacts/dataset_audit.json",
@@ -24,19 +39,54 @@
       "sha256": "85d3c91f5a3bad870fd8e8c503d4dd47e883e25ba222dfbf808b59974c0efcde"
     },
     {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/domain_gap.json",
+      "bytes": 834,
+      "sha256": "fa8a97e92abf192ed3ba220c0991e3a4d93ccc25b2470e6be4535f9086f38ac3"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/evaluation_result.json",
+      "bytes": 29064,
+      "sha256": "c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/failure_taxonomy.csv",
+      "bytes": 312249,
+      "sha256": "2e04ce8d6d47a47be9a3a3dcc673f86eb860d3bd86ee13b73e3f47f32ec7d1fa"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/failure_taxonomy_summary.json",
+      "bytes": 5656,
+      "sha256": "3bd2a2151c70e1c6a73f929371efa48f0d2c63d4c2dce901a230400638e79a9b"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/per_case_predictions.csv",
+      "bytes": 834191,
+      "sha256": "76723f2a84f0a5d0f05fcffe8d164bba7dde93237811e662756f3e1d232fa993"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/pixel_calibration.json",
+      "bytes": 3880,
+      "sha256": "da08afdc4b4f4d1995de24db6d5bc0726be47b10439830a30a17f1a95f2c2e51"
+    },
+    {
       "path": "experiments/x01_cheng_overlap_control/artifacts/source_file_manifest.json",
       "bytes": 2336,
       "sha256": "f7bd08b490284a4bff64d20cb3546edfc7e81b09b6643d2d142759a5ee7cbd7b"
     },
     {
+      "path": "experiments/x01_cheng_overlap_control/artifacts/visual_audit_panel.png",
+      "bytes": 2639512,
+      "sha256": "efa0fbc53438e63c2296a82cb72c86b71bc3772fbbaba753715275392f234c56"
+    },
+    {
       "path": "experiments/x01_cheng_overlap_control/config.json",
-      "bytes": 979,
-      "sha256": "28b4961f08051a86f904f49c39ae72a6c6adbe26c855f5e2ae665ee7365558b2"
+      "bytes": 1022,
+      "sha256": "48a7a824c068ea0185cd9e89a418f7b3c3a14904f91077facc5ee520fc3b0110"
     },
     {
       "path": "experiments/x01_cheng_overlap_control/decision.md",
-      "bytes": 287,
-      "sha256": "16e2880524a12eefea0946c8a88746d9e568bed6ab526b6c6b29a3a73c6bf9a5"
+      "bytes": 347,
+      "sha256": "6b4dd73128ab3ed681dd4ace31874248ee1f9b7d5b68a10c75293a72ba488295"
     },
     {
       "path": "experiments/x01_cheng_overlap_control/hypothesis.md",
@@ -45,13 +95,23 @@
     },
     {
       "path": "experiments/x01_cheng_overlap_control/result.json",
-      "bytes": 3188,
-      "sha256": "376475408891a18e2eb8491eedbe84f673b346ac460f180de24d0c5522eefaff"
+      "bytes": 29064,
+      "sha256": "c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f"
     },
     {
       "path": "scripts/audit_x01_cheng.py",
       "bytes": 27745,
       "sha256": "58f71e62d4dd51cb75634c23180b6036ca6125707d59057bbdf1d01c573aebbd"
+    },
+    {
+      "path": "scripts/evaluate_x01_cheng.py",
+      "bytes": 43948,
+      "sha256": "5757873e272f72e604e28f61fb958da530afc0da86a4d32017c3d9de9685fb28"
+    },
+    {
+      "path": "scripts/finalize_x01_cheng.py",
+      "bytes": 19716,
+      "sha256": "e5874a4c02deefe5fff9b22a6917a6aa35136c90613da4166d0001aafdc95a71"
     },
     {
       "path": "scripts/validate_experiment_tracking.py",
@@ -62,6 +122,16 @@
       "path": "tests/test_foundation_controls.py",
       "bytes": 2987,
       "sha256": "59928470042cd5b8404c428e7778b8279c54568d1a6f7d0f11a5b2bd80349663"
+    },
+    {
+      "path": "tests/test_x01_cheng_audit.py",
+      "bytes": 1106,
+      "sha256": "204d5e723bd1f40a2538988d12bee98b6bd67018f7e98b6a9f65e8e14b3971fb"
+    },
+    {
+      "path": "tests/test_x01_cheng_evaluation.py",
+      "bytes": 1193,
+      "sha256": "ae9003803d9112e096d35d9a1f37c1b3414add58d53efe54250a2c01f41b1279"
     }
   ]
 }
