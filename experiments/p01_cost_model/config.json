@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p01_cost_model",
+  "hypothesis_ids": [],
+  "status": "COMPLETE",
+  "scope": "Stage 5 reliability-policy cost definition; internal BRISC development validation only",
+  "source_registration": {
+    "path": "audit/preregistration_amendment_01.md",
+    "sha256": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+    "section": "E. Reliability policy / Cost model"
+  },
+  "selected_system": {
+    "segmenter": "C03-calibrated E08",
+    "reliability_model": "R02 ten-feature aggregate logistic regression",
+    "selection_result": "experiments/e08_final_selection/result.json",
+    "selection_result_sha256": "dc2bb7f305d97830b499dc2599050e52c7119c4a3b1ae4997c240cc73edb11b9"
+  },
+  "population": {
+    "source": "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv",
+    "source_sha256": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "expected_cases": 680,
+    "expected_acceptable": 598,
+    "expected_bad": 82,
+    "failure_definition": "calibrated Dice < 0.50"
+  },
+  "costs": {
+    "true_positive_reviewed_bad": 1,
+    "false_positive_reviewed_acceptable": 1,
+    "true_negative_accepted_acceptable": 0,
+    "false_negative_accepted_bad": 10,
+    "unit": "relative engineering cost"
+  },
+  "mean_cost_formula": "(TP + FP + 10*FN) / N",
+  "segmentation_threshold": 0.5,
+  "threshold_optimization_performed": false,
+  "test_images_accessed": 0,
+  "neural_model_retrained": false,
+  "reliability_estimator_refit": false
+}

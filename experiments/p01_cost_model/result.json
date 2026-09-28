@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p01_cost_model",
+  "status": "DESCRIPTIVE_COMPLETE",
+  "decision": "ACCEPT_REGISTERED_COST_MODEL",
+  "scope": "Internal BRISC development reliability-policy governance; not clinical utility estimation",
+  "outcome_definition": {
+    "bad": "calibrated Dice < 0.50",
+    "acceptable": "calibrated Dice >= 0.50",
+    "positive_policy_decision": "manual review required",
+    "negative_policy_decision": "accepted without mandatory review",
+    "reliability": "P(Dice >= 0.50)"
+  },
+  "cost_matrix": {
+    "true_positive_reviewed_bad": 1,
+    "false_positive_reviewed_acceptable": 1,
+    "true_negative_accepted_acceptable": 0,
+    "false_negative_accepted_bad": 10,
+    "unit": "relative engineering cost",
+    "mean_cost_formula": "(TP + FP + 10*FN) / N"
+  },
+  "interpretation": {
+    "review_cost": "One unit represents manual inspection, decision, correction or rejection effort, and workflow delay.",
+    "false_alarm_cost": "One unit is the review effort for an acceptable prediction; no extra penalty is added.",
+    "missed_failure_cost": "Ten units encode the preference for additional review over silent acceptance of Dice < 0.50; this is not a clinical or monetary estimate.",
+    "true_negative_cost": "Zero additional policy cost for an acceptable result accepted normally."
+  },
+  "assumptions": [
+    "Cases are equally weighted.",
+    "All mandatory reviews have equal relative cost.",
+    "Flagged cases receive competent review before downstream use.",
+    "Review prevents the silent-acceptance cost of a missed failure.",
+    "Costs are additive across cases.",
+    "Failure severity and tumor category do not change the initial cost.",
+    "Reviewer capacity, delay variation, disagreement, and residual reviewer error are not modeled.",
+    "Internal BRISC validation prevalence is not assumed to equal clinical prevalence.",
+    "The weights are engineering preferences, not clinical utility, monetary, or patient-harm estimates."
+  ],
+  "threshold_selection_performed": false,
+  "performance_gate": null,
+  "verification": {
+    "status": "PASS",
+    "hashes_verified": 8,
+    "selected_segmenter": "C03-calibrated E08",
+    "selected_reliability_model": "R02 ten-feature aggregate logistic regression",
+    "cases": 680,
+    "acceptable_cases": 598,
+    "bad_cases": 82,
+    "unique_cases": 680,
+    "folds": [1, 2, 3, 4, 5],
+    "minimum_oof_reliability": 0.0192690757211816,
+    "maximum_oof_reliability": 0.9998579794906828,
+    "all_scores_finite_and_bounded": true,
+    "target_matches_dice_threshold_0_50": true,
+    "source_hashes": {
+      "preregistration_amendment_01": "62abb1d13d3ffd16d3fdf41b461ad48aafc746caf4639f18e4545467ebf8c0fb",
+      "e08_final_selection_result": "dc2bb7f305d97830b499dc2599050e52c7119c4a3b1ae4997c240cc73edb11b9",
+      "e08_final_selection_manifest": "cc1be855c11b98378bf708504921e330030fc854d0ff5fc4dbdd772cfaf092b0",
+      "r02_result": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+      "r02_manifest": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819",
+      "r02_oof_scores": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+      "c03_result": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+      "c03_manifest": "beec6f5526204b1dc5c44bef17048d56ad7f999d15b4dde308d9303f38a9abe4"
+    },
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "segmentation_threshold": 0.5,
+    "neural_model_retrained": false,
+    "reliability_estimator_refit": false
+  },
+  "limitations": [
+    "The cost ratio is a development preference rather than a clinically elicited utility.",
+    "Threshold performance will be estimated on internal validation data and may change under different prevalence or workflow costs.",
+    "Equal costs across tumor types do not model the weaker glioma subgroup separately.",
+    "Clinical deployment requires prospective workflow and human-review validation."
+  ]
+}

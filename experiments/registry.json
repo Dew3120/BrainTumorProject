@@ -307,6 +307,12 @@
       "status": "COMPLETE"
     },
     {
+      "id": "p01_cost_model",
+      "path": "experiments/p01_cost_model",
+      "hypothesis_ids": [],
+      "status": "COMPLETE"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [

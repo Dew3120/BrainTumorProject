@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p01_cost_model",
+  "status": "DESCRIPTIVE_COMPLETE",
+  "decision": "ACCEPT_REGISTERED_COST_MODEL",
+  "registered_costs": {
+    "true_positive": 1,
+    "false_positive": 1,
+    "true_negative": 0,
+    "false_negative": 10
+  },
+  "threshold_selection_performed": false,
+  "verification_status": "PASS",
+  "test_images_accessed": 0,
+  "threshold_changed": false,
+  "neural_model_retrained": false,
+  "reliability_estimator_refit": false,
+  "files": [
+    {
+      "path": "docs/cost_model.md",
+      "sha256": "06d60c9cfd702df8b510be83aa3c4c0de792a159934c5b0aefa8edcce8b09045",
+      "bytes": 3977
+    },
+    {
+      "path": "experiments/p01_cost_model/hypothesis.md",
+      "sha256": "9d7b1405b91dc9f35b38b03cac1144353829e5b7117185fdac29f3e6c43e1e7f",
+      "bytes": 1228
+    },
+    {
+      "path": "experiments/p01_cost_model/config.json",
+      "sha256": "41082e17a760128718dc2f6746c03536699472bac734e5fe39dcfe7e692cdba4",
+      "bytes": 1525
+    },
+    {
+      "path": "experiments/p01_cost_model/result.json",
+      "sha256": "d66042c2ce9ea848c6e98e8a06a26c9aace02a4f54b253de893b1ccafb531109",
+      "bytes": 3990
+    },
+    {
+      "path": "experiments/p01_cost_model/decision.md",
+      "sha256": "e1eee5597ca663d60ace3aed7bf0d6ca07227eb3b8e19fc6560270c104ea5759",
+      "bytes": 615
+    }
+  ]
+}
