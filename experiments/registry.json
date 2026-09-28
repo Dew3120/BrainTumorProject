@@ -319,6 +319,12 @@
       "status": "COMPLETE"
     },
     {
+      "id": "p03_decision_rule",
+      "path": "experiments/p03_decision_rule",
+      "hypothesis_ids": [],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "sealed_final_evaluation",
       "path": "experiments/sealed_final_evaluation",
       "hypothesis_ids": [

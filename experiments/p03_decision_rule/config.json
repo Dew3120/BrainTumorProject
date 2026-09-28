@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p03_decision_rule",
+  "hypothesis_ids": [],
+  "status": "REGISTERED_NOT_STARTED",
+  "scope": "Formalize the internal-development reliability policy for Phase 6 integration",
+  "policy_version": "p03_decision_rule",
+  "reliability_threshold": 0.9490250173235835,
+  "states": [
+    "STANDARD",
+    "REVIEW_REQUIRED"
+  ],
+  "valid_score_rule": {
+    "review_required": "r < threshold",
+    "standard": "r >= threshold"
+  },
+  "invalid_score_rule": "REVIEW_REQUIRED",
+  "reason_codes": [
+    "AT_OR_ABOVE_THRESHOLD",
+    "BELOW_THRESHOLD",
+    "RELIABILITY_UNAVAILABLE",
+    "RELIABILITY_INVALID"
+  ],
+  "source_hashes": {
+    "p01_result": "d66042c2ce9ea848c6e98e8a06a26c9aace02a4f54b253de893b1ccafb531109",
+    "p01_manifest": "ef52545bc645be0a453978046cdf094546408091d68c6ad8f15b5f99230bab50",
+    "p02_result": "ab86f12bb3116429bbfeb633cdef0ea0f636623757202d821e3f5b52a2fac05c",
+    "p02_manifest": "80e1b9f3f655d43c451a194b7a9b5ddd6b6cc3de930cbd961855f880fe8196ef",
+    "r02_oof_scores": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a"
+  },
+  "expected_oof_behavior": {
+    "cases": 680,
+    "review_required": 195,
+    "standard": 485,
+    "failures_caught": 81,
+    "failures_missed": 1,
+    "acceptable_reviewed": 114,
+    "total_cost": 205
+  },
+  "binary_costs": {
+    "true_positive": 1,
+    "false_positive": 1,
+    "true_negative": 0,
+    "false_negative": 10
+  },
+  "segmentation_threshold": 0.5,
+  "test_images_accessed": 0,
+  "model_retrained_or_refit": false
+}
