@@ -1,8 +1,11 @@
 {
   "schema_version": 1,
   "experiment_id": "r10_seed_stability",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H4", "H7"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H4",
+    "H7"
+  ],
   "registration_commit_parent": "bf8eafc028716e15dd735df711adcbb715ff66c0",
   "stage4_parent_amendment_path": "audit/preregistration_amendment_03.md",
   "stage4_parent_amendment_sha256": "0235d8553a3a4c67a1e1ee293679f53c4984c72a102f7ed84fd8acef561f0a40",
@@ -23,7 +26,10 @@
   "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4",
   "stage4_common_path": "scripts/stage4_reliability_common.py",
   "stage4_common_sha256": "cd2510e1c9dec789e3fe77cc37a13b9059491bcfd8daa3303226ea7a55702746",
-  "population": {"cases": 680, "similarity_groups": 583},
+  "population": {
+    "cases": 680,
+    "similarity_groups": 583
+  },
   "features": [
     "empty_prediction",
     "predicted_area_fraction",
@@ -36,24 +42,50 @@
     "bounding_box_fill_ratio",
     "normalized_perimeter"
   ],
-  "target": {"reliability": "P(Dice >= 0.50)", "threshold": 0.5},
+  "target": {
+    "reliability": "P(Dice >= 0.50)",
+    "threshold": 0.5
+  },
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "L2",
     "C": 1.0,
     "solver": "lbfgs",
     "class_weight": null,
     "max_iter": 5000,
-    "seeds": [7, 21, 42, 84, 168]
+    "seeds": [
+      7,
+      21,
+      42,
+      84,
+      168
+    ]
   },
-  "cross_fitting": {"folds": 5, "use_original_similarity_aware_folds": true, "reported_scores": "out-of-fold only"},
-  "bootstrap": {"repetitions": 2000, "seed": 42, "unit": "similarity_group", "paired_to_r02": true, "ci": "percentile 95%"},
+  "cross_fitting": {
+    "folds": 5,
+    "use_original_similarity_aware_folds": true,
+    "reported_scores": "out-of-fold only"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired_to_r02": true,
+    "ci": "percentile 95%"
+  },
   "descriptive_label": {
     "exact_probability_tolerance": 1e-12,
     "numerically_stable_maximum_auroc_sample_sd": 0.001,
     "numerically_stable_maximum_absolute_r02_auroc_difference": 0.001
   },
-  "gate": {"type": "DESCRIPTIVE_ONLY", "performance_pass_fail": false, "can_change_model_selection": false},
+  "gate": {
+    "type": "DESCRIPTIVE_ONLY",
+    "performance_pass_fail": false,
+    "can_change_model_selection": false
+  },
   "fail_closed": {
     "r02_reproduction_absolute_tolerance": 1e-12,
     "expected_r02_aggregate_auroc": 0.9555020801044132,

@@ -1,0 +1,48 @@
+{
+  "status": "DESCRIPTIVE_COMPLETE",
+  "experiment_id": "r10_seed_stability",
+  "registered_decision": "DESCRIPTIVE_ONLY",
+  "test_images_accessed": 0,
+  "files": [
+    {
+      "path": "experiments/r10_seed_stability/artifacts/oof_scores.csv",
+      "sha256": "d04721dbad7bf6162055a1b33ca6481f6b0b080482a24e00aeb54f8b42b64e2c",
+      "bytes": 503533
+    },
+    {
+      "path": "experiments/r10_seed_stability/artifacts/paired_bootstrap_comparisons.csv",
+      "sha256": "d6d5ee1c1dd20b6c4c5f7e55c10a748b47ade405151c0b125ba253270aaa46db",
+      "bytes": 501822
+    },
+    {
+      "path": "experiments/r10_seed_stability/artifacts/seed_metrics.csv",
+      "sha256": "40d4f7a04a9c092b90a24a8b7303b3ad8229a9626540c8c7c9ebbc2c06ed6c4e",
+      "bytes": 779
+    },
+    {
+      "path": "experiments/r10_seed_stability/config.json",
+      "sha256": "aed6e853c9d2bd5bbd0c45855a0cdbe82f2bfa4c03e65b8eaff3b4228a15b4df",
+      "bytes": 3717
+    },
+    {
+      "path": "experiments/r10_seed_stability/decision.md",
+      "sha256": "20bd7d470e8d91d28723cf065333f948c3e9b9a03b8b2ebc3d04f7770f2f314d",
+      "bytes": 439
+    },
+    {
+      "path": "experiments/r10_seed_stability/hypothesis.md",
+      "sha256": "2c59fa61075df7b463fb9fb2915e224cfc140c6db4f9394d7b2d224d64c429be",
+      "bytes": 430
+    },
+    {
+      "path": "experiments/r10_seed_stability/implementation_plan.md",
+      "sha256": "47853c1863c47efa73f7bd395cd18a25d6054dace434c986c0fce8c45e80d6d6",
+      "bytes": 1475
+    },
+    {
+      "path": "experiments/r10_seed_stability/result.json",
+      "sha256": "59245caf1f2d8aba0221503a08466b990a6d70318afdaa71c2d87de52e12c888",
+      "bytes": 35287
+    }
+  ]
+}
