@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x00_r02_deployable_model",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H8"],
+  "amendment": "audit/preregistration_amendment_14.md",
+  "purpose": "deterministic operational fit and serialization; not evaluation",
+  "population": {
+    "cases": 680,
+    "successes": 598,
+    "failures": 82,
+    "similarity_groups": 583,
+    "source": "C03 OOF-calibrated E08 BRISC development validation"
+  },
+  "features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "target": "C03-calibrated hard-mask Dice >= 0.50",
+  "estimator": {
+    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "penalty": "l2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42
+  },
+  "verification": {
+    "absolute_tolerance": 1e-12,
+    "r07_coefficient_reproduction": true,
+    "independent_second_fit": true,
+    "serialization_round_trip": true,
+    "historical_probability_vector_exists": false
+  },
+  "expected_c03_hard_mask_changes": {"pixels": 22891, "images": 679},
+  "segmentation_threshold": 0.5,
+  "reliability_policy_threshold": "0.9490250173235835",
+  "external_images_accessed": 0,
+  "brisc_test_images_accessed": 0,
+  "neural_model_retrained": false,
+  "status_after_success": "OPERATIONAL_ARTIFACT_FROZEN"
+}

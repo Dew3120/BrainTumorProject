@@ -57,6 +57,10 @@
     {
       "path": "audit/preregistration_amendment_13.md",
       "sha256": "728d8c0f92a357c1ecbc78e586fce3af940e12fc8fef74bd3a3c0b93f8958da5"
+    },
+    {
+      "path": "audit/preregistration_amendment_14.md",
+      "sha256": "8abe7d0fb56c116f2c3f3f667e0263564dcb89b5021b8a3dc61959487849b7d5"
     }
   ],
   "baseline": {
@@ -339,6 +343,14 @@
       "path": "experiments/p05_threshold_sensitivity",
       "hypothesis_ids": [],
       "status": "COMPLETE"
+    },
+    {
+      "id": "x00_r02_deployable_model",
+      "path": "experiments/x00_r02_deployable_model",
+      "hypothesis_ids": [
+        "H8"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     },
     {
       "id": "x01_cheng_overlap_control",
