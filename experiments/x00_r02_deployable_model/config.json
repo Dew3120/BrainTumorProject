@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "x00_r02_deployable_model",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H8"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H8"
+  ],
   "amendment": "audit/preregistration_amendment_14.md",
   "purpose": "deterministic operational fit and serialization; not evaluation",
   "population": {
@@ -26,7 +28,10 @@
   ],
   "target": "C03-calibrated hard-mask Dice >= 0.50",
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "penalty": "l2",
     "C": 1.0,
     "solver": "lbfgs",
@@ -41,11 +46,15 @@
     "serialization_round_trip": true,
     "historical_probability_vector_exists": false
   },
-  "expected_c03_hard_mask_changes": {"pixels": 22891, "images": 679},
+  "expected_c03_hard_mask_changes": {
+    "pixels": 22891,
+    "images": 679
+  },
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "external_images_accessed": 0,
   "brisc_test_images_accessed": 0,
   "neural_model_retrained": false,
-  "status_after_success": "OPERATIONAL_ARTIFACT_FROZEN"
+  "status_after_success": "OPERATIONAL_ARTIFACT_FROZEN",
+  "verification_result": "PASS"
 }

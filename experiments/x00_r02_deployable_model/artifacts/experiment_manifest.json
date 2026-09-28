@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x00_r02_deployable_model",
+  "status": "COMPLETE",
+  "files": [
+    {
+      "path": "experiments/x00_r02_deployable_model/artifacts/operational_reference_predictions.csv",
+      "bytes": 82600,
+      "sha256": "b9cfacaa4ef65424e38a1e85111b363f28e95bc439b2290f70266e8269c1b691"
+    },
+    {
+      "path": "experiments/x00_r02_deployable_model/config.json",
+      "bytes": 1651,
+      "sha256": "bf344e3c4b8670a8d5f72f626a666a420ff062c3b490abad30bc6bd9fb3d8493"
+    },
+    {
+      "path": "experiments/x00_r02_deployable_model/decision.md",
+      "bytes": 448,
+      "sha256": "dc21aec6ee1d557b3e7958499a5f5804b4a3aac768345baf8be245092a2ec295"
+    },
+    {
+      "path": "experiments/x00_r02_deployable_model/hypothesis.md",
+      "bytes": 479,
+      "sha256": "c29c0702bdcabb1aad61c3c0f461d1763eb67af45072b20630cd5b5772214400"
+    },
+    {
+      "path": "experiments/x00_r02_deployable_model/result.json",
+      "bytes": 2535,
+      "sha256": "e97ec7c46a317b1e2aef5671e29a11d58ec4c2b6f36f1b85ab089fdfe124d655"
+    },
+    {
+      "path": "models/r02_reliability_logistic.pkl",
+      "bytes": 736,
+      "sha256": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044"
+    },
+    {
+      "path": "models/r02_reliability_manifest.json",
+      "bytes": 4901,
+      "sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
+    },
+    {
+      "path": "models/r02_reliability_scaler.pkl",
+      "bytes": 648,
+      "sha256": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8"
+    },
+    {
+      "path": "scripts/freeze_r02_operational_model.py",
+      "bytes": 15084,
+      "sha256": "4b77511c52f34861a3d2d6fd1840194da66b3dbb0447371b2ac9b7f5109b09b4"
+    },
+    {
+      "path": "tests/test_r02_operational_model.py",
+      "bytes": 2445,
+      "sha256": "28ec38e0e836c1845dc2fd28834432acfa3fba1e4b1352fad9102bbbe90158da"
+    }
+  ]
+}

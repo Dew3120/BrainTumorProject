@@ -1,7 +1,80 @@
 {
   "schema_version": 1,
   "experiment_id": "x00_r02_deployable_model",
-  "status": "NOT_RUN",
-  "external_images_accessed": 0,
-  "brisc_test_images_accessed": 0
+  "status": "PASS",
+  "decision": "OPERATIONAL_ARTIFACT_FROZEN",
+  "scope": "Operational fitting only; R02 OOF metrics remain reported evidence",
+  "population": {
+    "cases": 680,
+    "successes": 598,
+    "failures": 82,
+    "similarity_groups": 583,
+    "source": "C03 OOF-calibrated E08 BRISC development validation"
+  },
+  "verification": {
+    "absolute_tolerance": 1e-12,
+    "r07_coefficient_max_abs_error": 0.0,
+    "independent_fit_max_abs_errors": {
+      "mean": 0.0,
+      "scale": 0.0,
+      "coefficients": 0.0,
+      "intercept": 0.0,
+      "classes": 0.0,
+      "probabilities": 0.0
+    },
+    "serialization_reload_probability_max_abs_error": 0.0,
+    "historical_full_population_probability_vector_existed": false,
+    "feature_contract": {
+      "feature_count": 14,
+      "function_parameters": [
+        "probability",
+        "threshold"
+      ],
+      "inference_time_only": true,
+      "reference_mask_feature_input": false,
+      "classifier_probability_feature_input": false,
+      "raw_image_feature_input": false
+    },
+    "second_feature_contract": {
+      "feature_count": 14,
+      "function_parameters": [
+        "probability",
+        "threshold"
+      ],
+      "inference_time_only": true,
+      "reference_mask_feature_input": false,
+      "classifier_probability_feature_input": false,
+      "raw_image_feature_input": false
+    },
+    "c03_changed_pixels": 22891,
+    "c03_changed_images": 679,
+    "external_images_accessed": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_model_retrained": false,
+    "segmentation_threshold_changed": false
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "model_artifacts": {
+    "scaler": {
+      "path": "models/r02_reliability_scaler.pkl",
+      "sha256": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8"
+    },
+    "logistic": {
+      "path": "models/r02_reliability_logistic.pkl",
+      "sha256": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044"
+    },
+    "reference_predictions": {
+      "path": "experiments/x00_r02_deployable_model/artifacts/operational_reference_predictions.csv",
+      "sha256": "b9cfacaa4ef65424e38a1e85111b363f28e95bc439b2290f70266e8269c1b691"
+    }
+  },
+  "model_manifest": {
+    "path": "models/r02_reliability_manifest.json",
+    "sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
+  }
 }

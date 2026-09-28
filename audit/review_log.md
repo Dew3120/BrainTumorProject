@@ -574,3 +574,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification rule:** Reproduce R07's recorded full-population standardized coefficients and independently reproduce scaler state, intercept, and all 680 probabilities within `1e-12`; then reproduce the probabilities after serialization and reload within `1e-12`. R07 did not save a historical full-population probability vector, so no nonexistent comparison is claimed.
 - **Alternatives considered:** Average fold estimators or reconstruct a model from mean coefficients; rejected because neither is the registered R02 estimator. Treat OOF predictions as a transferable estimator; rejected because they are case-specific evaluation outputs. Fit during external evaluation; rejected because it would mix fitting and transport evaluation.
 - **Who approved:** User explicitly authorized Amendment 14, its exact estimator, verification, serialization, constraints, deliverables, commit, and push.
+
+## 2026-09-28T16:37:15+05:30 — Freeze the selected R02 reliability estimator
+
+- **Decision made:** Accept X00 as `PASS` and freeze the deterministic full-population R02 estimator for operational inference. Preserve R02 OOF results as the reported performance evidence.
+- **Triggering artifact:** `models/r02_reliability_manifest.json`, SHA256 `0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f`; X00 result SHA256 `e97ec7c46a317b1e2aef5671e29a11d58ec4c2b6f36f1b85ab089fdfe124d655`.
+- **Rationale:** R07 coefficients reproduced with maximum absolute error `0`. Independent feature reconstruction and fitting reproduced probabilities with error `0`; serialization reload error was `0`, all within `1e-12`.
+- **Verification:** Frozen source hashes, 680 cases, 598 successes, 82 failures, 583 groups, locked ten-feature order, feature contract, 22,891 C03 changed pixels across 679 images, and threshold `0.50` matched. External and sealed-test image access, neural retraining, and threshold changes were zero.
+- **Alternatives considered:** Fold-model averaging and coefficient-only reconstruction remained rejected. The exact fixed specification was fitted once for deployment under Amendment 14.
+- **Who approved:** User explicitly authorized Amendment 14 and the fit-and-freeze operation. Codex applied the predeclared deterministic checks without relaxation.

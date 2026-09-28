@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "status": "OPERATIONAL_ARTIFACT_FROZEN",
+  "scope": "Operational full-population fit; not OOF evaluation",
+  "feature_order": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "target": "C03-calibrated hard-mask Dice >= 0.50",
+  "population": {
+    "cases": 680,
+    "successes": 598,
+    "failures": 82,
+    "similarity_groups": 583,
+    "source": "C03 OOF-calibrated E08 BRISC development validation"
+  },
+  "estimator": {
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
+    "penalty": "l2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "class_weight": null,
+    "max_iter": 5000,
+    "random_state": 42
+  },
+  "scaler_mean": [
+    0.0029411764705882353,
+    0.014455099666819854,
+    0.01597598615289188,
+    0.09968990161973369,
+    0.3360995778732763,
+    0.3581835898786854,
+    0.544339452523257,
+    0.0026030596564797794,
+    0.6644085100902207,
+    4.744264417719057
+  ],
+  "scaler_scale": [
+    0.05415280188094697,
+    0.01022703268621976,
+    0.008875018301246691,
+    0.0345057206345962,
+    0.15153720440715826,
+    0.12779711971731228,
+    0.2607822983397998,
+    0.0030038324168874535,
+    0.1606121940617423,
+    0.8273014888325436
+  ],
+  "standardized_coefficients": [
+    -0.6319540188577428,
+    0.9809906354132327,
+    -0.6354294730230855,
+    0.5944196958965807,
+    0.2796412355159913,
+    -2.0749172607845643,
+    0.47150297049170076,
+    0.5078687717944398,
+    0.15956213248762355,
+    -0.3887452381732838
+  ],
+  "intercept": 3.963481216911019,
+  "classes": [
+    false,
+    true
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "source_hashes": {
+    "audit/preregistration_amendment_14.md": "8abe7d0fb56c116f2c3f3f667e0263564dcb89b5021b8a3dc61959487849b7d5",
+    "experiments/r02_reduced_features/result.json": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+    "experiments/r02_reduced_features/artifacts/experiment_manifest.json": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819",
+    "experiments/r02_reduced_features/artifacts/oof_model_comparison.csv": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "experiments/r07_coefficient_bootstrap/result.json": "fc8b1bd80826913ff990ea993bf1c0c8bdf028b614101f967afc4282c01cb948",
+    "experiments/r07_coefficient_bootstrap/artifacts/coefficient_summary.csv": "b1f72477a76afa2ed74cb01481d3e514d339d405f38cc2ced5576a22cbbe2b52",
+    "experiments/r07_coefficient_bootstrap/artifacts/experiment_manifest.json": "afddd3023655ec9fc539611a50eef3335d36923894e49aa99e831f9743e5dd10",
+    "experiments/c03_isotonic/artifacts/isotonic_mappings.json": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa"
+  },
+  "artifacts": {
+    "scaler": {
+      "path": "models/r02_reliability_scaler.pkl",
+      "sha256": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8"
+    },
+    "logistic": {
+      "path": "models/r02_reliability_logistic.pkl",
+      "sha256": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044"
+    },
+    "reference_predictions": {
+      "path": "experiments/x00_r02_deployable_model/artifacts/operational_reference_predictions.csv",
+      "sha256": "b9cfacaa4ef65424e38a1e85111b363f28e95bc439b2290f70266e8269c1b691"
+    }
+  },
+  "verification": {
+    "absolute_tolerance": 1e-12,
+    "r07_coefficient_max_abs_error": 0.0,
+    "independent_fit_max_abs_errors": {
+      "mean": 0.0,
+      "scale": 0.0,
+      "coefficients": 0.0,
+      "intercept": 0.0,
+      "classes": 0.0,
+      "probabilities": 0.0
+    },
+    "serialization_reload_probability_max_abs_error": 0.0,
+    "historical_full_population_probability_vector_existed": false,
+    "feature_contract": {
+      "feature_count": 14,
+      "function_parameters": [
+        "probability",
+        "threshold"
+      ],
+      "inference_time_only": true,
+      "reference_mask_feature_input": false,
+      "classifier_probability_feature_input": false,
+      "raw_image_feature_input": false
+    },
+    "second_feature_contract": {
+      "feature_count": 14,
+      "function_parameters": [
+        "probability",
+        "threshold"
+      ],
+      "inference_time_only": true,
+      "reference_mask_feature_input": false,
+      "classifier_probability_feature_input": false,
+      "raw_image_feature_input": false
+    },
+    "c03_changed_pixels": 22891,
+    "c03_changed_images": 679,
+    "external_images_accessed": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_model_retrained": false,
+    "segmentation_threshold_changed": false
+  }
+}
