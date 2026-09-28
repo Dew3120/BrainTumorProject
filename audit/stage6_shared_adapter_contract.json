@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETE_SYNTHETIC_VERIFICATION_ONLY",
+  "external_images_accessed": 0,
+  "brisc_test_images_accessed": 0,
+  "segmenter": {
+    "size": 128,
+    "mode": "grayscale",
+    "resize": "aspect_preserving_bilinear_python_round",
+    "padding": "centered_black",
+    "normalization": "divide_by_255"
+  },
+  "classifier": {
+    "size": 224,
+    "mode": "grayscale_replicated_to_rgb",
+    "resize": "aspect_preserving_bilinear_python_round",
+    "padding": "centered_black",
+    "normalization": "ImageNet mean and std"
+  },
+  "external_intensity_bridge": "native uint8 unchanged; otherwise nonzero percentile 0.5/99.5, clipped and converted to uint8",
+  "mask": {
+    "interpolation": "nearest",
+    "threshold": 0.5,
+    "positive_slice_must_remain_nonempty": true
+  },
+  "nifti_orientation": "closest canonical RAS with affine and voxel sizes retained",
+  "dicom_ordering": "ImageOrientationPatient cross product projected against ImagePositionPatient",
+  "c03_mapping": "final_all_validation_mapping",
+  "r02_features": [
+    "empty_prediction",
+    "predicted_area_fraction",
+    "whole_probability_mean",
+    "whole_probability_sd",
+    "predicted_region_entropy_mean",
+    "boundary_entropy_mean",
+    "high_confidence_foreground_fraction",
+    "uncertain_pixel_fraction",
+    "bounding_box_fill_ratio",
+    "normalized_perimeter"
+  ],
+  "reliability_policy_threshold": "0.9490250173235835",
+  "verification": {
+    "focused_tests_passed": 10,
+    "full_tests_passed": 165,
+    "ruff": "PASS",
+    "adapter_sha256": "f510219315c8ea8c31b7da7c4b4def6710a9f6fd17351ac8b602a04212d571ad",
+    "adapter_test_sha256": "0d98c480122b78f5842f0c6343c5fc86c554c9b518619ed2fda2d48cddd73b73",
+    "contract_markdown_sha256": "9e22bc6a90a7b2c6f508200e0beba2c69892cfbfbddcc09ee7d94e95ddc156f1",
+    "free_disk_bytes_after_verification": 350710026240,
+    "free_disk_gib_after_verification": 326.624165
+  },
+  "neural_retraining": false,
+  "threshold_changed": false
+}
