@@ -290,6 +290,15 @@
       "status": "COMPLETE"
     },
     {
+      "id": "r10_seed_stability",
+      "path": "experiments/r10_seed_stability",
+      "hypothesis_ids": [
+        "H4",
+        "H7"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
       "id": "e08_final_selection",
       "path": "experiments/e08_final_selection",
       "hypothesis_ids": [
