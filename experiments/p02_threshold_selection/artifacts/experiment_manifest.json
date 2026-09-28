@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p02_threshold_selection",
+  "status": "PASS",
+  "decision": "SELECT_INTERNAL_DEVELOPMENT_POLICY_THRESHOLDS",
+  "binary_threshold": 0.9490250173235835,
+  "theta_low": 0.9490250173235835,
+  "theta_high": 0.9490250173235835,
+  "test_images_accessed": 0,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false,
+  "files": [
+    {
+      "path": "audit/threshold_selection.md",
+      "sha256": "49a5d515aff3d32b3ebebc224ce8d30ef168ea0d0bc103e26a11ac720f0d3067",
+      "bytes": 3409
+    },
+    {
+      "path": "experiments/p02_threshold_selection/hypothesis.md",
+      "sha256": "b363cf1e4d2238034b38e4a3b49a113367cb92f6b40f6de2e67db2b4273e32fe",
+      "bytes": 1349
+    },
+    {
+      "path": "experiments/p02_threshold_selection/implementation_plan.md",
+      "sha256": "376995a459a66083fb8f623965885ab8f067acb56af43ab3f2b14050a1fb0d96",
+      "bytes": 1249
+    },
+    {
+      "path": "experiments/p02_threshold_selection/config.json",
+      "sha256": "4ea959d4bb00969168fecf386c6ca09e568a4d057110c08dc1593295f151e1dd",
+      "bytes": 2154
+    },
+    {
+      "path": "experiments/p02_threshold_selection/result.json",
+      "sha256": "ab86f12bb3116429bbfeb633cdef0ea0f636623757202d821e3f5b52a2fac05c",
+      "bytes": 14387
+    },
+    {
+      "path": "experiments/p02_threshold_selection/decision.md",
+      "sha256": "f4516fc01c98e51c1dd1edbb7ee244edb24520c67bd5dc1e46d4f2e1f58398d5",
+      "bytes": 662
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/binary_threshold_curve.csv",
+      "sha256": "e02d5602e098db2c28451ff07a6e1840721702535f6e3c3258d44bf48c74ccfc",
+      "bytes": 77917
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/operating_points.csv",
+      "sha256": "f127fe2dd058030eac99def692173f99a1fd8a74ebfc9d92ab0032b6f6fb9ba1",
+      "bytes": 635
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/three_state_threshold_grid.csv",
+      "sha256": "8ad37f80c41ae819048fe82896cbdd1445226755ab042b38c193ef22907f60a9",
+      "bytes": 35022566
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/category_thresholds.csv",
+      "sha256": "fd2071b380eed88556157ada7bdeeb63f63bbc85f31721b61385c8f1929ad5e0",
+      "bytes": 950
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/expected_cost_curve.png",
+      "sha256": "7c56b9ab81c898485b813f7facecbaa706ffa962a9c883413762e298ea2f8e22",
+      "bytes": 72691
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/roc_curve.png",
+      "sha256": "bb6b660ef84b5adf8ff38bc24149cb8f0ea999ca12f9b3660f44b15f05dc7165",
+      "bytes": 72379
+    },
+    {
+      "path": "experiments/p02_threshold_selection/artifacts/reliability_diagram.png",
+      "sha256": "926a797871f7bdc2d2fd77c118c289779787c70dda6e41839a3263f6d2cd6cde",
+      "bytes": 96382
+    },
+    {
+      "path": "scripts/run_p02_threshold_selection.py",
+      "sha256": "35bc360f93f93660b1debee47b10d20b8f78804964475d3ebac2c9e716efc770",
+      "bytes": 27615
+    },
+    {
+      "path": "tests/test_run_p02_threshold_selection.py",
+      "sha256": "a80ed1238fd298d548a03d89e6061a9b23be9ab638428da85a4fa12e3e874051",
+      "bytes": 1696
+    }
+  ]
+}

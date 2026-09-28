@@ -316,7 +316,7 @@
       "id": "p02_threshold_selection",
       "path": "experiments/p02_threshold_selection",
       "hypothesis_ids": [],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "COMPLETE"
     },
     {
       "id": "sealed_final_evaluation",

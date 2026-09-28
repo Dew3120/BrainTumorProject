@@ -2,7 +2,7 @@
   "schema_version": 1,
   "experiment_id": "p02_threshold_selection",
   "hypothesis_ids": [],
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "scope": "Internal BRISC development reliability-policy threshold selection",
   "source_registration": {
     "path": "audit/preregistration_amendment_01.md",

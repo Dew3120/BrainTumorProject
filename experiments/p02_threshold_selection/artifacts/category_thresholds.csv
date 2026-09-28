@@ -1,0 +1,4 @@
+category,cases,acceptable_cases,bad_cases,category_optimal_threshold,category_optimal_total_cost,category_optimal_mean_cost,category_optimal_flagged,category_optimal_failures_caught,category_optimal_failures_missed,global_threshold,global_total_cost_in_category,global_mean_cost_in_category,global_flagged_in_category,global_failures_caught_in_category,global_failures_missed_in_category,threshold_difference,decision_assignments_changed,cost_reduction_vs_global,operationally_material_difference
+glioma,204,141,63,0.950106439123928,148,0.7254901960784313,138,62,1,0.9490250173235835,148,0.7254901960784313,138,62,1,0.0010814218003445397,0,0,False
+meningioma,227,220,7,0.5556869041978794,11,0.048458149779735685,11,7,0,0.9490250173235835,18,0.07929515418502203,18,7,0,-0.3933381131257041,7,7,True
+pituitary,249,237,12,0.9470618500658499,38,0.15261044176706828,38,12,0,0.9490250173235835,39,0.1566265060240964,39,12,0,-0.0019631672577336,1,1,True
