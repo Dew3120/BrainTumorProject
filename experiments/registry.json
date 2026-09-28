@@ -328,7 +328,7 @@
       "id": "p04_warning_copy",
       "path": "experiments/p04_warning_copy",
       "hypothesis_ids": [],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "COMPLETE"
     },
     {
       "id": "sealed_final_evaluation",

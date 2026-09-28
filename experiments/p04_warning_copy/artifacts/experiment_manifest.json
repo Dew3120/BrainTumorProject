@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p04_warning_copy",
+  "status": "PASS",
+  "decision": "ADOPT_FIXED_USER_MESSAGE_CATALOGUE",
+  "threshold": 0.9490250173235835,
+  "message_count": 8,
+  "test_images_accessed": 0,
+  "segmentation_threshold_changed": false,
+  "model_retrained_or_refit": false,
+  "gate_or_policy_relaxed": false,
+  "files": [
+    {
+      "path": "docs/warning_copy.md",
+      "sha256": "9475079d7961baea0e6fe0b62ed285a5347413b3f2bdbaf5121e59a8c1b4bc20",
+      "bytes": 5335
+    },
+    {
+      "path": "experiments/p04_warning_copy/hypothesis.md",
+      "sha256": "e58a7b3093edecb5309a85540d62a0bbcf1458d44a62669cec83085a99322a98",
+      "bytes": 1030
+    },
+    {
+      "path": "experiments/p04_warning_copy/config.json",
+      "sha256": "0d204ba1b197b3a82cbb8e4a48add201c30f538bbe6d5df993d3731c3eb437c1",
+      "bytes": 1462
+    },
+    {
+      "path": "experiments/p04_warning_copy/result.json",
+      "sha256": "e4d60b71076c84ea38f20158b813a683841521db3b3578759b3ad49fba8b5d40",
+      "bytes": 2083
+    },
+    {
+      "path": "experiments/p04_warning_copy/decision.md",
+      "sha256": "e0d66a7c8572fe5eb741b183e68393178cb3426865fd4e446c937f6dbb4ef750",
+      "bytes": 598
+    },
+    {
+      "path": "experiments/p04_warning_copy/artifacts/message_catalogue.json",
+      "sha256": "8e9a8c185221fac7f1bad5a4dedfdf8661e8d59b889ae83b0dd7b731f1004c2f",
+      "bytes": 8864
+    },
+    {
+      "path": "scripts/build_p04_warning_copy.py",
+      "sha256": "17b1af7e1f020b169cc87f7b0a80374d01ce3c4080836279895c439e35565b28",
+      "bytes": 18274
+    },
+    {
+      "path": "tests/test_build_p04_warning_copy.py",
+      "sha256": "d7ace9f1ea24b157f445bd1d2c415671026cebb12a568abd22e87cfe31f4acb8",
+      "bytes": 2000
+    }
+  ]
+}

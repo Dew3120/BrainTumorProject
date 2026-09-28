@@ -1,5 +1,52 @@
 {
   "schema_version": 1,
   "experiment_id": "p04_warning_copy",
-  "status": "NOT_RUN"
+  "status": "PASS",
+  "decision": "ADOPT_FIXED_USER_MESSAGE_CATALOGUE",
+  "catalogue": {
+    "messages": 8,
+    "general_variants": 4,
+    "predicted_glioma_variants": 4,
+    "states": [
+      "STANDARD",
+      "REVIEW_REQUIRED"
+    ],
+    "warning_state": null,
+    "threshold": 0.9490250173235835,
+    "required_disclaimer": "Research prototype \u2014 not for clinical use"
+  },
+  "verification": {
+    "status": "PASS",
+    "hashes_verified": 3,
+    "threshold_unchanged": true,
+    "disclaimer_unchanged": true,
+    "two_state_policy_unchanged": true,
+    "segmentation_threshold": 0.5,
+    "segmentation_threshold_changed": false,
+    "test_images_accessed": 0,
+    "model_retrained_or_refit": false,
+    "gate_or_policy_relaxed": false,
+    "message_count": 8,
+    "unique_ids": true,
+    "complete_combination_coverage": true,
+    "exact_threshold_in_every_message": true,
+    "exact_disclaimer_in_every_message": true,
+    "glioma_copy_prediction_qualified": true,
+    "fallbacks_require_review": true,
+    "warning_policy_state_absent": true,
+    "prohibited_claims_absent": true,
+    "percentage_claims_absent": true,
+    "plain_language_limits_passed": true,
+    "source_hashes": {
+      "experiments/p03_decision_rule/result.json": "5b7573987e92b1a82461e92e37efd68ba46bdfc0bc0cc426c1128218e1944011",
+      "experiments/p03_decision_rule/artifacts/experiment_manifest.json": "2a2bbc1198ae08e4b206ee91c0bdf9c0ac7d45c4d80ffff7eaf982a769038377",
+      "docs/decision_rule.md": "43290ba09ec991819dbbc21346b447cd70c0cfcda1e75b0d21e99b502fd744c5"
+    },
+    "script_sha256": "17b1af7e1f020b169cc87f7b0a80374d01ce3c4080836279895c439e35565b28"
+  },
+  "limitations": [
+    "The messages describe an internal research policy and do not establish clinical validity.",
+    "The copy has not undergone user testing, accessibility testing, translation review, or clinical stakeholder review.",
+    "The glioma note describes weaker internal reliability ranking and must not be interpreted as patient-specific risk."
+  ]
 }

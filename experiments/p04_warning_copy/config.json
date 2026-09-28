@@ -2,7 +2,7 @@
   "schema_version": 1,
   "experiment_id": "p04_warning_copy",
   "hypothesis_ids": [],
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "scope": "User-facing copy for the frozen P03 two-state reliability policy",
   "policy_version": "p03_decision_rule",
   "reliability_threshold": 0.9490250173235835,
