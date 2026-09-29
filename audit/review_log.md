@@ -664,3 +664,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
 - **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
 - **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.
+
+## 2026-09-29 — Register X03 target-representability handling and one restart
+
+- **Decision made:** Register Amendment 17 before restarting X03. Preserve all 9,464 source-positive slices, assign zero overlap metrics to the 82 targets erased by frozen 128×128 nearest-neighbor preprocessing, evaluate the unchanged gate on this strict cohort, and report representable-only and native-coordinate views separately.
+- **Triggering artifact:** `audit/preregistration_amendment_17.md`; hash registered in `experiments/registry.json`. X03 audit result SHA256 `44d4f030ff6830ab9e58d0ccb856a3fbb03df774352d054251352a87a2a3190a`.
+- **Rationale:** The 82 masks contain only 1–15 native pixels. Dropping them would create post-discovery attrition, while changing resize or dilating masks would alter the frozen adapter. Conservative zero scores preserve membership and expose the limitation.
+- **Aborted attempt:** The pre-inference representability check stopped before model loading. No probability, metric, panel, decision, or performance result was produced. The complete affected set contains 82 slices from 54 patients.
+- **Verification:** BRISC sealed-test access, neural retraining, calibration/reliability refitting, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
+- **Alternatives considered:** Exclude the 82 slices; rejected. Change interpolation or dilate targets; rejected. End X03 permanently; rejected because strict, representable-only, and native-coordinate views permit transparent evaluation without modifying the frozen stack.
+- **Who approved:** User explicitly approved Amendment 17, a renewed audit, and exactly one frozen evaluation restart.
