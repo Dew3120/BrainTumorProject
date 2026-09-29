@@ -1,0 +1,9 @@
+source,domain,evaluation_images,accept,review,refuse,flagged,flagged_rate
+brisc,ID,680,620,60,0,60,0.08823529411764706
+cheng,OOD,100,1,99,0,99,0.99
+cifar10,OOD,100,0,100,0,100,1.0
+openneuro,OOD,100,0,100,0,100,1.0
+organamnist,OOD,100,0,100,0,100,1.0
+random_noise,OOD,100,0,100,0,100,1.0
+uniform_gray,OOD,100,0,100,0,100,1.0
+upenn_gbm,OOD,100,0,100,0,100,1.0

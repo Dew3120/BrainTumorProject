@@ -795,3 +795,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** The preregistered held-out selection rule was applied without modification.
 - **Verification:** Source memberships/hashes passed; no masks, labels, external performance inputs, sealed-test access, neural refitting, or threshold changes occurred.
 - **Who approved:** User authorized O01–O06 in one sequential run.
+
+## 2026-09-30T01:45:26+05:30 — Formalize O06 OOD policy
+
+- **Decision made:** Accept the descriptive OOD policy with REVIEW threshold `0.36854275476100085` and REFUSE disabled.
+- **Triggering artifact:** `experiments/o06_ood_policy/result.json`.
+- **Rationale:** Numeric boundaries were computed from BRISC fitting scores only; evaluation membership reports coverage.
+- **Verification:** Required warning/disclaimer and fail-closed invalid-score handling passed. Prior thresholds, neural weights, sealed-test status, and gates were unchanged.
+- **Who approved:** User authorized O01–O06 in one sequential run.

@@ -1,5 +1,134 @@
 {
   "schema_version": 1,
   "experiment_id": "o06_ood_policy",
-  "status": "NOT_RUN"
+  "status": "COMPLETE",
+  "decision": "POLICY_ACCEPTED",
+  "thresholds": {
+    "review": 0.36854275476100085,
+    "review_provenance": "95th percentile of 600 BRISC fitting scores",
+    "refuse": null,
+    "refuse_candidate": 0.8615167211351659,
+    "refuse_provenance": "99th percentile of 600 BRISC fitting scores",
+    "refuse_enabled": false,
+    "refuse_enablement_rule": "held-out refuse precision >= 0.95 and BRISC validation refuse rate <= 0.01",
+    "refuse_precision": 0.9779411764705882,
+    "brisc_refuse_rate": 0.022058823529411766
+  },
+  "coverage": {
+    "brisc_validation_false_flag_rate": 0.08823529411764706,
+    "brisc_validation_false_flags": 60,
+    "brisc_validation_total": 680,
+    "ood_detection_rate": 0.9985714285714286,
+    "ood_detected": 699,
+    "ood_total": 700,
+    "by_source": [
+      {
+        "source": "brisc",
+        "domain": "ID",
+        "evaluation_images": 680,
+        "accept": 620,
+        "review": 60,
+        "refuse": 0,
+        "flagged": 60,
+        "flagged_rate": 0.08823529411764706
+      },
+      {
+        "source": "cheng",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 1,
+        "review": 99,
+        "refuse": 0,
+        "flagged": 99,
+        "flagged_rate": 0.99
+      },
+      {
+        "source": "cifar10",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      },
+      {
+        "source": "openneuro",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      },
+      {
+        "source": "organamnist",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      },
+      {
+        "source": "random_noise",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      },
+      {
+        "source": "uniform_gray",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      },
+      {
+        "source": "upenn_gbm",
+        "domain": "OOD",
+        "evaluation_images": 100,
+        "accept": 0,
+        "review": 100,
+        "refuse": 0,
+        "flagged": 100,
+        "flagged_rate": 1.0
+      }
+    ]
+  },
+  "application_order": [
+    "validate image and compute OOD score",
+    "apply O06 ACCEPT/REVIEW/REFUSE",
+    "only ACCEPT continues to classifier/segmenter",
+    "apply existing reliability policy threshold 0.9490250173235835 to accepted model output"
+  ],
+  "logging_contract": [
+    "timestamp",
+    "input_sha256",
+    "ood_score",
+    "review_threshold",
+    "refuse_threshold",
+    "status",
+    "detector_artifact_hashes"
+  ],
+  "verification": {
+    "o05_scores_sha256": "8018f0eb4751d856426bac2fb80b171cdbdc53091214152836402ae59785b64a",
+    "fit_id_cases": 600,
+    "evaluation_cases": 1380,
+    "reference_masks_used": 0,
+    "diagnostic_labels_used": 0,
+    "external_performance_values_used": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining_or_refitting": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835"
+  }
 }

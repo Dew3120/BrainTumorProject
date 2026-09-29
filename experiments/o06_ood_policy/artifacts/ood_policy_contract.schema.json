@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OOD policy result",
+  "type": "object",
+  "required": [
+    "ood_score",
+    "status",
+    "review_threshold",
+    "refuse_threshold"
+  ],
+  "properties": {
+    "ood_score": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "enum": [
+        "ACCEPT",
+        "REVIEW",
+        "REFUSE"
+      ]
+    },
+    "review_threshold": {
+      "const": 0.36854275476100085
+    },
+    "refuse_threshold": {
+      "const": null
+    }
+  }
+}

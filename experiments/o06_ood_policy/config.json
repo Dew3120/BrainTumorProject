@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "o06_ood_policy",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H9"
   ],
@@ -13,5 +13,10 @@
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "brisc_test_images_accessed": 0,
-  "neural_retraining_or_refitting": false
+  "neural_retraining_or_refitting": false,
+  "selected_detector": "O05 secondary logistic",
+  "review_quantile_fit_id": 0.95,
+  "refuse_quantile_fit_id": 0.99,
+  "invalid_score_status": "REVIEW",
+  "refuse_enablement_rule": "evaluation OOD precision >= 0.95 and ID false-refuse <= 0.01"
 }
