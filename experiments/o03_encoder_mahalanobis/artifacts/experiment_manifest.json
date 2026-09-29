@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o03_encoder_mahalanobis",
+  "created_at": "2026-09-29T10:27:36.732425+00:00",
+  "files": [
+    {
+      "path": "experiments/o03_encoder_mahalanobis/config.json",
+      "sha256": "67630588e1dc5eb55d807130858532e5bec394fbaa51e9afa56696e5be953740",
+      "bytes": 855
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/result.json",
+      "sha256": "6d77cfbd927ebbac97f48f2a6376c398718163b28ade6311612bf894dbdef8ab",
+      "bytes": 1458
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/decision.md",
+      "sha256": "2474442a9164a357c7ee8681f37afb405423c8a808949660f06f05aec14c3f3d",
+      "bytes": 284
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/artifacts/mahalanobis_scores.csv",
+      "sha256": "855e46447bd4228eab9d20d1112100b2af1a8914a17a820ce5b65c9b3c48316b",
+      "bytes": 232095
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/artifacts/frozen_embeddings.npz",
+      "sha256": "b7a800258e58b826538e80fca44a0ad103c748b60ca97022cffcd079dded90b5",
+      "bytes": 1276662
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/artifacts/roc_curve.png",
+      "sha256": "4437fcba14e20ca82f1cbe2f8bedc2f115b9ff03ebdd48f1f6064a7befa8df92",
+      "bytes": 58373
+    },
+    {
+      "path": "experiments/o03_encoder_mahalanobis/artifacts/distance_distributions.png",
+      "sha256": "d3b2762ee9000487ec513e2704d38cba2cf6aa76edb00ab4474b32576c5ffa01",
+      "bytes": 45339
+    }
+  ]
+}

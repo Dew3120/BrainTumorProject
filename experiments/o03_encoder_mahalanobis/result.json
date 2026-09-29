@@ -1,5 +1,45 @@
 {
   "schema_version": 1,
   "experiment_id": "o03_encoder_mahalanobis",
-  "status": "NOT_RUN"
+  "status": "COMPLETE",
+  "decision": "PASS",
+  "gate": {
+    "metric": "held-out AUROC",
+    "threshold": 0.9,
+    "passed": true
+  },
+  "evaluation": {
+    "auroc": 0.9154180672268906,
+    "auroc_ci95": [
+      0.8977098395008384,
+      0.9321439269023595
+    ],
+    "fit_id_p95_threshold": 151.01864080761226,
+    "specificity_at_threshold": 0.7470588235294118,
+    "ood_sensitivity_at_threshold": 0.8657142857142858
+  },
+  "model": {
+    "frozen_checkpoint": "runs/segmentation/20260923-072439-397263-full/top3_checkpoints/epoch_056_macro_dice_0.762662.pt",
+    "checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+    "bottleneck_module": "model.1.submodule.1.submodule.1.submodule",
+    "embedding_dimensions": 128,
+    "spatial_pooling": "mean",
+    "gaussian": "LedoitWolf covariance on 600 BRISC fitting embeddings only"
+  },
+  "population": {
+    "fit_id": 600,
+    "evaluation": 1380,
+    "evaluation_id": 680,
+    "evaluation_ood": 700
+  },
+  "verification": {
+    "o01_manifest_sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd",
+    "reference_masks_used": 0,
+    "diagnostic_labels_used": 0,
+    "external_performance_values_used": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining_or_refitting": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835"
+  }
 }

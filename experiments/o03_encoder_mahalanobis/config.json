@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "o03_encoder_mahalanobis",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H9"
   ],
@@ -13,5 +13,11 @@
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "brisc_test_images_accessed": 0,
-  "neural_retraining_or_refitting": false
+  "neural_retraining_or_refitting": false,
+  "checkpoint_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+  "bottleneck_module": "model.1.submodule.1.submodule.1.submodule",
+  "embedding_dimensions": 128,
+  "gaussian": "LedoitWolf",
+  "fit_id_quantile": 0.95,
+  "o01_manifest_sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd"
 }

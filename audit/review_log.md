@@ -771,3 +771,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Registered inference-time image features and held-out O01 evaluation membership were used.
 - **Verification:** No reference masks, diagnostic labels, external performance data, sealed-test pixels, neural refitting, or threshold changes were used.
 - **Who approved:** User authorized O01–O06 in one sequential run.
+
+## 2026-09-29T15:57:36+05:30 — Evaluate O03 encoder Mahalanobis detector
+
+- **Decision made:** Record O03 as `PASS` without gate relaxation.
+- **Triggering artifact:** `experiments/o03_encoder_mahalanobis/result.json`, held-out AUROC `0.915418`.
+- **Rationale:** A Ledoit-Wolf Gaussian was fitted only to 600 BRISC training embeddings from the frozen segmenter bottleneck.
+- **Verification:** Checkpoint hash passed. Reference masks, labels, external performance data, sealed-test access, neural refitting, and threshold changes were zero.
+- **Who approved:** User authorized O01–O06 in one sequential run.
