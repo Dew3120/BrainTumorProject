@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "experiment_id": "e08_final_selection",
+  "status": "PASS",
+  "decision": "NOMINATE_C03_CALIBRATED_E08_WITH_R02_RELIABILITY",
+  "calibration_condition": {
+    "selected_method": "C03 isotonic calibration",
+    "gate_status": "PASS"
+  },
+  "candidate_table": [
+    {
+      "experiment": "R01",
+      "model": "14-feature logistic baseline",
+      "registered_outcome": "DESCRIPTIVE_COMPLETE",
+      "gate_passed": null,
+      "selection_eligible": false,
+      "cases": 680,
+      "aggregate_oof_auroc": 0.9545028142589118,
+      "ece": 0.01707162736377,
+      "brier": 0.05370771310451019,
+      "selection_note": "Descriptive by registration; cannot be selected.",
+      "matched_r02_auroc": null
+    },
+    {
+      "experiment": "R02",
+      "model": "10-feature aggregate logistic",
+      "registered_outcome": "PASS",
+      "gate_passed": true,
+      "selection_eligible": true,
+      "cases": 680,
+      "aggregate_oof_auroc": 0.9555020801044132,
+      "ece": 0.017133460802129376,
+      "brier": 0.05275733072581438,
+      "selection_note": "Passed noninferiority gate.",
+      "matched_r02_auroc": null
+    },
+    {
+      "experiment": "R03",
+      "model": "20-feature extended logistic",
+      "registered_outcome": "FAIL",
+      "gate_passed": false,
+      "selection_eligible": false,
+      "cases": 680,
+      "aggregate_oof_auroc": 0.9514234440003263,
+      "ece": 0.017258430484973348,
+      "brier": 0.05286611482570424,
+      "selection_note": "Failed registered superiority gate.",
+      "matched_r02_auroc": null
+    },
+    {
+      "experiment": "R04",
+      "model": "Predicted-category routed logistic",
+      "registered_outcome": "PASS",
+      "gate_passed": true,
+      "selection_eligible": true,
+      "cases": 679,
+      "aggregate_oof_auroc": 0.9308600685412279,
+      "ece": 0.017658935037508854,
+      "brier": 0.057901408821025166,
+      "selection_note": "Passed category gates; aggregate operational ranking is lower than R02. One no-tumor route excluded as registered.",
+      "matched_r02_auroc": 0.9550146579132087
+    },
+    {
+      "experiment": "R05",
+      "model": "Category-aware aggregate logistic",
+      "registered_outcome": "FAIL",
+      "gate_passed": false,
+      "selection_eligible": false,
+      "cases": 679,
+      "aggregate_oof_auroc": 0.9548082084313968,
+      "ece": 0.01859774095139583,
+      "brier": 0.053587669749557844,
+      "selection_note": "Failed predicted-glioma AUROC gate.",
+      "matched_r02_auroc": null
+    },
+    {
+      "experiment": "R06",
+      "model": "Best nonlinear candidate (XGBoost)",
+      "registered_outcome": "FAIL",
+      "gate_passed": false,
+      "selection_eligible": false,
+      "cases": 680,
+      "aggregate_oof_auroc": 0.9402683742556488,
+      "ece": 0.025109659190125314,
+      "brier": 0.05912366604825346,
+      "selection_note": "No nonlinear candidate reached 0.975; R02 retained.",
+      "matched_r02_auroc": null
+    }
+  ],
+  "registered_selection_rule": [
+    "passing R02-R06 models only",
+    "highest aggregate OOF AUROC",
+    "lowest ECE",
+    "lowest Brier",
+    "experiment ID ascending"
+  ],
+  "selected_model": {
+    "experiment": "R02",
+    "model": "10-feature aggregate logistic",
+    "registered_outcome": "PASS",
+    "gate_passed": true,
+    "selection_eligible": true,
+    "cases": 680,
+    "aggregate_oof_auroc": 0.9555020801044132,
+    "ece": 0.017133460802129376,
+    "brier": 0.05275733072581438,
+    "selection_note": "Passed noninferiority gate.",
+    "matched_r02_auroc": null
+  },
+  "selected_brier_skill": 0.5033476349941572,
+  "h7_reliability_condition": {
+    "minimum_auroc": 0.941,
+    "selected_aggregate_oof_auroc": 0.9555020801044132,
+    "r08_mean_fold_auroc": 0.9604240365386374,
+    "r08_gate_status": "PASS",
+    "passed": true
+  },
+  "e08_vs_v1": {
+    "e08": {
+      "failure_detection_auroc": 0.9555020801044132,
+      "auroc_ci95_lower": 0.938715915158216,
+      "auroc_ci95_upper": 0.9704214021840543,
+      "ece": 0.017133460802129376,
+      "brier_skill": 0.5033476349941572
+    },
+    "v1": {
+      "failure_detection_auroc": 0.940990091,
+      "auroc_ci95_lower": 0.9184,
+      "auroc_ci95_upper": 0.9612,
+      "ece": 0.021171,
+      "brier_skill": 0.476052
+    },
+    "auroc_difference": 0.014511989104413203,
+    "ece_difference": -0.004037539197870622,
+    "brier_skill_difference": 0.02729563499415727
+  },
+  "stage_status": [
+    {
+      "experiment": "R01",
+      "status": "DESCRIPTIVE_COMPLETE",
+      "principal_outcome": "14-feature ablation baseline; boundary entropy dominated."
+    },
+    {
+      "experiment": "R02",
+      "status": "PASS \u2014 SELECTED",
+      "principal_outcome": "10-feature logistic AUROC 0.955502; passed noninferiority."
+    },
+    {
+      "experiment": "R03",
+      "status": "FAIL",
+      "principal_outcome": "Extended features AUROC 0.951423; superiority gate missed."
+    },
+    {
+      "experiment": "R04",
+      "status": "PASS \u2014 NOT SELECTED",
+      "principal_outcome": "All category gates passed, but routed aggregate AUROC 0.930860."
+    },
+    {
+      "experiment": "R05",
+      "status": "FAIL",
+      "principal_outcome": "Predicted-glioma AUROC 0.871096 missed 0.88."
+    },
+    {
+      "experiment": "R06",
+      "status": "FAIL",
+      "principal_outcome": "All nonlinear models underperformed R02."
+    },
+    {
+      "experiment": "R07",
+      "status": "DESCRIPTIVE_COMPLETE",
+      "principal_outcome": "Four coefficient intervals excluded zero; boundary entropy most stable."
+    },
+    {
+      "experiment": "R08",
+      "status": "PASS",
+      "principal_outcome": "Mean held-out-fold AUROC 0.960424 passed H7 gate."
+    },
+    {
+      "experiment": "R09",
+      "status": "DESCRIPTIVE_COMPLETE",
+      "principal_outcome": "MODERATE fold sensitivity; AUROC SD 0.013362."
+    },
+    {
+      "experiment": "R10",
+      "status": "DESCRIPTIVE_COMPLETE",
+      "principal_outcome": "EXACT seed stability across five registered seeds."
+    }
+  ],
+  "verification": {
+    "source_hashes": {
+      "c03_isotonic": {
+        "result_sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+        "manifest_sha256": "beec6f5526204b1dc5c44bef17048d56ad7f999d15b4dde308d9303f38a9abe4"
+      },
+      "r01_ablation": {
+        "result_sha256": "d53b160a7aec1ab2c8b0d612576530cdcc530e1b7b30bb789d3e49bee3d9499d",
+        "manifest_sha256": "7e7162d4d1b33349c7944a8d8045898dbe37966d2c407b5feec556dbcfa51a7a"
+      },
+      "r02_reduced_features": {
+        "result_sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2",
+        "manifest_sha256": "1dc386a3cd342f14fcb827960c1ec89f749b2413962c768aec1c22bdf74cb819"
+      },
+      "r03_extended_features": {
+        "result_sha256": "eba95d46886f1fad3bf47822ed38f5a5b48fdc74922c084b4bfa013f932ff740",
+        "manifest_sha256": "5ef0b58c58a843867ff4416cca4edfa56979285123c92ef942b7523817519aee"
+      },
+      "r04_per_category": {
+        "result_sha256": "e47d380024953f9e77be1d1916f4eeb0f103a72a12070ecc3a5708d43fc39046",
+        "manifest_sha256": "b5180fb40c4663502c41cce03e83f174721897b74f145d8519c677287f47a047"
+      },
+      "r05_category_aware": {
+        "result_sha256": "3f08ad6dde731209c53d84c4b01c6709bcec64dca536b801cd4e78d94abf2d8d",
+        "manifest_sha256": "237d8dbfeef592fa136ed513458161058acb6a98b32a6f79cc518dc34c6d8415"
+      },
+      "r06_nonlinear_comparison": {
+        "result_sha256": "aa09898ee9e46f4d3edeecae34ec87d90d7107416b95376c2a7dee7a77eefb73",
+        "manifest_sha256": "bafd8a2076564ea0bb563e47e6814660ddc95098ce976b154b2889c828aed634"
+      },
+      "r07_coefficient_bootstrap": {
+        "result_sha256": "fc8b1bd80826913ff990ea993bf1c0c8bdf028b614101f967afc4282c01cb948",
+        "manifest_sha256": "afddd3023655ec9fc539611a50eef3335d36923894e49aa99e831f9743e5dd10"
+      },
+      "r08_prospective_fold_evaluation": {
+        "result_sha256": "8e6ea05a18937949aa55aa4d285e535047e3c1dba3a5a98bc12b7b3e523f34a4",
+        "manifest_sha256": "f96f296e07f8573898d5ff5840dafa78b8f26a63815bf4c35d2e2174156fb1b9"
+      },
+      "r09_fold_sensitivity": {
+        "result_sha256": "29311b740b0ca9ae2806c7eb54ac0c86a93255d8706e324fb52f3262d61274bc",
+        "manifest_sha256": "fcfa94aefaefab4f1e6abcfa12534da52206baed63e616790d7a2c0e34f13423"
+      },
+      "r10_seed_stability": {
+        "result_sha256": "59245caf1f2d8aba0221503a08466b990a6d70318afdaa71c2d87de52e12c888",
+        "manifest_sha256": "7bf8172e7fe5d75d3543e1ca72b189f3cae40a3d5488bbe753547ea45359ed5d"
+      }
+    },
+    "source_commit": "1eb5c4f2ae60f8da45392ffc448a39a4bf7a2265",
+    "r01_r10_all_documented": true,
+    "selection_rule_applied_without_relaxation": true,
+    "expected_test_count": 136,
+    "ruff_expected": "PASS",
+    "test_images_accessed": 0,
+    "threshold_changed": false,
+    "classifier_or_neural_segmenter_retrained": false,
+    "script_sha256": "c696facbe9185aa00880c860619152b62eca3c2841f525f9439401e569e34569"
+  },
+  "limitations": [
+    "Selection uses internal BRISC development data and awaits sealed evaluation.",
+    "BRISC patient independence remains unverified.",
+    "Glioma remains the weakest reliability subgroup.",
+    "E08 and v1 AUROC intervals overlap; no statistical superiority is claimed.",
+    "No clinical validity or external generalization is established."
+  ]
+}

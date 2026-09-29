@@ -1,0 +1,61 @@
+{
+  "scope": "Experimental full BRISC positive-case segmentation training; not clinical validation",
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "training_script_sha256": "16b323e28bc9751a688c1c7c02bfb1c443a7e107a8fe0a812ff62651ee865cbb",
+  "overfit_script_sha256": "69782f19f14c290e63a44131ba2bcbc20d44dc84551fe2fc974f4e5de4e53f0e",
+  "smoke_script_sha256": "defa28dc8f94dc6fd3c41f5928fba1dbb6959d685acc32972711526ce3341dca",
+  "lock_sha256": "d53bd992b7950b822558a2a0900d624b6869c66134dd7d0cf11861abc2d6daa7",
+  "seed": 42,
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "torch": "2.10.0+cu128",
+  "monai": "1.6.0",
+  "image_size": 128,
+  "model": "MONAI compact 2D U-Net with linear logit head",
+  "channels": [
+    16,
+    32,
+    64,
+    128
+  ],
+  "num_res_units": 2,
+  "model_parameter_count": 401277,
+  "loss": "per-image background/foreground balanced BCE + unchanged foreground Dice",
+  "optimizer": "AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 8,
+  "maximum_epochs": 75,
+  "early_stopping_patience": 12,
+  "early_stopping_min_delta": 0.0001,
+  "selection_metric": "validation macro mean of glioma/meningioma/pituitary image-level hard Dice",
+  "precision": "CUDA AMP FP16 model forward, FP32 weighted loss and parameters",
+  "gradient_scale_initial": 1024.0,
+  "gradient_scale_growth_interval": 1000000,
+  "augmentation": "none for the first controlled full baseline",
+  "num_workers": 2,
+  "train_pairs": 2719,
+  "validation_pairs": 680,
+  "sealed_test_pairs": 860,
+  "label_counts": {
+    "train": {
+      "glioma": 817,
+      "meningioma": 908,
+      "pituitary": 994
+    },
+    "validation": {
+      "glioma": 204,
+      "meningioma": 227,
+      "pituitary": 249
+    },
+    "test": {
+      "glioma": 254,
+      "meningioma": 306,
+      "pituitary": 300
+    }
+  },
+  "top_checkpoints_retained": 3,
+  "validation_used_for_selection_and_early_stopping": true,
+  "test_evaluated": false,
+  "patient_independence_verified": false,
+  "mlflow_run_id": "142af7eee98943adb2a0434b8012c268"
+}

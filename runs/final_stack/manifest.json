@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN",
+  "package": "brain-tumor-research-final-stack",
+  "source_commit": "7185bf1ea4096881f5846a62f918618fd5c6961c",
+  "selection": {
+    "classifier": "v1 raw probabilities",
+    "segmenter": "E08 arithmetic mean: E05 + E06 + classifier-routed E07/v1",
+    "calibrator": "C03 final-all-validation isotonic mapping",
+    "reliability": "R02 10-feature L2 logistic regression",
+    "ood": "O05 secondary logistic ensemble",
+    "policy": "O06 ACCEPT/REVIEW; REFUSE disabled"
+  },
+  "thresholds": {
+    "segmentation": "0.50",
+    "reliability": "0.9490250173235835",
+    "ood_review": "0.36854275476100085",
+    "ood_refuse": null
+  },
+  "classifier": {
+    "classes": [
+      "glioma",
+      "meningioma",
+      "pituitary",
+      "no_tumor"
+    ],
+    "probability_source": "raw softmax"
+  },
+  "segmenter": {
+    "size": 128,
+    "routing": {
+      "glioma": "e07",
+      "all_other_classes": "v1"
+    },
+    "ensemble_components": [
+      "e05",
+      "e06",
+      "routed_e07_or_v1"
+    ]
+  },
+  "calibration": {
+    "method": "isotonic",
+    "knots": 501,
+    "operational_mapping": "final_all_validation_mapping"
+  },
+  "reliability": {
+    "feature_order": [
+      "empty_prediction",
+      "predicted_area_fraction",
+      "whole_probability_mean",
+      "whole_probability_sd",
+      "predicted_region_entropy_mean",
+      "boundary_entropy_mean",
+      "high_confidence_foreground_fraction",
+      "uncertain_pixel_fraction",
+      "bounding_box_fill_ratio",
+      "normalized_perimeter"
+    ],
+    "scaler_mean": [
+      0.0029411764705882353,
+      0.014455099666819854,
+      0.01597598615289188,
+      0.09968990161973369,
+      0.3360995778732763,
+      0.3581835898786854,
+      0.544339452523257,
+      0.0026030596564797794,
+      0.6644085100902207,
+      4.744264417719057
+    ],
+    "scaler_scale": [
+      0.05415280188094697,
+      0.01022703268621976,
+      0.008875018301246691,
+      0.0345057206345962,
+      0.15153720440715826,
+      0.12779711971731228,
+      0.2607822983397998,
+      0.0030038324168874535,
+      0.1606121940617423,
+      0.8273014888325436
+    ],
+    "coefficients": [
+      -0.6319540188577428,
+      0.9809906354132327,
+      -0.6354294730230855,
+      0.5944196958965807,
+      0.2796412355159913,
+      -2.0749172607845643,
+      0.47150297049170076,
+      0.5078687717944398,
+      0.15956213248762355,
+      -0.3887452381732838
+    ],
+    "intercept": 3.963481216911019
+  },
+  "ood": {
+    "selected_method": "secondary_logistic",
+    "score_order": [
+      "o02_probability",
+      "o03_mahalanobis",
+      "o04_classifier",
+      "o04_segmenter_entropy"
+    ],
+    "o03_bottleneck_module": "model.1.submodule.1.submodule.1.submodule",
+    "o03_reproduction_max_abs_error": 0.0,
+    "o02_reproduction_max_abs_error": 0.0,
+    "o05_reproduction_max_abs_error": 0.0,
+    "refuse_enabled": false
+  },
+  "verification": {
+    "selection_checks": {
+      "h7_calibration_passed": true,
+      "h7_reliability_passed": true,
+      "e08_selected": true,
+      "c03_selected": true,
+      "classifier_raw_selected": true,
+      "h9_passed": true,
+      "ood_policy_accepted": true,
+      "refuse_disabled": true,
+      "segmentation_threshold": true,
+      "reliability_threshold": true,
+      "ood_threshold": true
+    },
+    "reconstruction_absolute_tolerance": 1e-12,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining": 0,
+    "threshold_changes": 0
+  },
+  "artifacts": [
+    {
+      "path": "calibration/c03_isotonic_mappings.json",
+      "sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa",
+      "size_bytes": 160380,
+      "role": "Selected C03 operational all-validation isotonic mapping",
+      "source_path": "experiments/c03_isotonic/artifacts/isotonic_mappings.json",
+      "source_sha256": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa"
+    },
+    {
+      "path": "configs/c03_result.json",
+      "sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9",
+      "size_bytes": 48020,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "experiments/c03_isotonic/result.json",
+      "source_sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9"
+    },
+    {
+      "path": "configs/classifier_v1_config.json",
+      "sha256": "940456936632e45ff477c3379cb3a6394728f674e4c88122800cb2707d0245ce",
+      "size_bytes": 1637,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "runs/classifier/20260921-170607-243133-baseline/config.json",
+      "source_sha256": "940456936632e45ff477c3379cb3a6394728f674e4c88122800cb2707d0245ce"
+    },
+    {
+      "path": "configs/e08_selection.json",
+      "sha256": "dc2bb7f305d97830b499dc2599050e52c7119c4a3b1ae4997c240cc73edb11b9",
+      "size_bytes": 9341,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "experiments/e08_final_selection/result.json",
+      "source_sha256": "dc2bb7f305d97830b499dc2599050e52c7119c4a3b1ae4997c240cc73edb11b9"
+    },
+    {
+      "path": "configs/o05_result.json",
+      "sha256": "434d389673aad234ae7e29cb0a96f5f305945e98558c6af3ca41a8b5bb60e7f6",
+      "size_bytes": 11656,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "experiments/o05_ensemble_ood/result.json",
+      "source_sha256": "434d389673aad234ae7e29cb0a96f5f305945e98558c6af3ca41a8b5bb60e7f6"
+    },
+    {
+      "path": "configs/segmenter_e05_config.json",
+      "sha256": "feb5ad3b4b3fff89c5a87c89a67e4c095a53e01f812dd31dc02e1a7260f7c29c",
+      "size_bytes": 2370,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "runs/segmentation_v2_weighted/20260924-055049-892543-weighted/config.json",
+      "source_sha256": "feb5ad3b4b3fff89c5a87c89a67e4c095a53e01f812dd31dc02e1a7260f7c29c"
+    },
+    {
+      "path": "configs/segmenter_e06_config.json",
+      "sha256": "0ab097e214b9ca99f5432f636e3089ef5f443b5dad71f2ac732ad260e0e87908",
+      "size_bytes": 2439,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "runs/segmentation_v2_boundary_loss/20260924-063051-647842-boundary/config.json",
+      "source_sha256": "0ab097e214b9ca99f5432f636e3089ef5f443b5dad71f2ac732ad260e0e87908"
+    },
+    {
+      "path": "configs/segmenter_e07_config.json",
+      "sha256": "204f3b5e966822bc22c2a5d3f77ce988d6b9f292985b1510e560ec2f36e7b4c7",
+      "size_bytes": 2365,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "runs/segmentation_v2_glioma_specialized/20260924-105229-241365-specialist/config.json",
+      "source_sha256": "204f3b5e966822bc22c2a5d3f77ce988d6b9f292985b1510e560ec2f36e7b4c7"
+    },
+    {
+      "path": "configs/segmenter_v1_config.json",
+      "sha256": "cf2dc82374cae50b3bb16a535615927ac29eac83294bbefeb4d3066165b32b96",
+      "size_bytes": 2134,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "runs/segmentation/20260923-072439-397263-full/config.json",
+      "source_sha256": "cf2dc82374cae50b3bb16a535615927ac29eac83294bbefeb4d3066165b32b96"
+    },
+    {
+      "path": "environment/pyproject.toml",
+      "sha256": "b54b9e20b946e5136a02c335c6120406bdaf1bed6dc2e609b45bd1d2ad787834",
+      "size_bytes": 746,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "pyproject.toml",
+      "source_sha256": "b54b9e20b946e5136a02c335c6120406bdaf1bed6dc2e609b45bd1d2ad787834"
+    },
+    {
+      "path": "environment/uv.lock",
+      "sha256": "b023b36a7d9cd5c0c691bc8fdf9ed8e2a4d348eb6607ffcc3824bfe26c3effe9",
+      "size_bytes": 248136,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "uv.lock",
+      "source_sha256": "b023b36a7d9cd5c0c691bc8fdf9ed8e2a4d348eb6607ffcc3824bfe26c3effe9"
+    },
+    {
+      "path": "models/classifier_v1.pt",
+      "sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+      "size_bytes": 44791499,
+      "role": "Selected v1 four-class classifier; raw softmax probabilities",
+      "source_path": "runs/classifier/20260921-170607-243133-baseline/best_model.pt",
+      "source_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535"
+    },
+    {
+      "path": "models/segmenter_e05_weighted.pt",
+      "sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+      "size_bytes": 1624529,
+      "role": "E08 ensemble component; not selected standalone",
+      "source_path": "runs/segmentation_v2_weighted/20260924-055049-892543-weighted/top3_checkpoints/epoch_045_macro_dice_0.738782.pt",
+      "source_sha256": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a"
+    },
+    {
+      "path": "models/segmenter_e06_boundary.pt",
+      "sha256": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+      "size_bytes": 1624657,
+      "role": "E08 ensemble component; not selected standalone",
+      "source_path": "runs/segmentation_v2_boundary_loss/20260924-063051-647842-boundary/top3_checkpoints/epoch_040_macro_dice_0.745706.pt",
+      "source_sha256": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab"
+    },
+    {
+      "path": "models/segmenter_e07_glioma_specialist.pt",
+      "sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+      "size_bytes": 1624261,
+      "role": "E08 glioma route component; not selected standalone",
+      "source_path": "runs/segmentation_v2_glioma_specialized/20260924-105229-241365-specialist/top3_checkpoints/epoch_031_glioma_dice_0.580685.pt",
+      "source_sha256": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0"
+    },
+    {
+      "path": "models/segmenter_v1_fallback.pt",
+      "sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de",
+      "size_bytes": 1624337,
+      "role": "E08 non-glioma route and O03 bottleneck source",
+      "source_path": "runs/segmentation/20260923-072439-397263-full/top3_checkpoints/epoch_056_macro_dice_0.762662.pt",
+      "source_sha256": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de"
+    },
+    {
+      "path": "ood/message_catalogue.json",
+      "sha256": "bb20ec0abc700c4d6d5c71433d7f8103c2a5b94e513c13c9592e819173ac2a4e",
+      "size_bytes": 1639,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "experiments/o06_ood_policy/artifacts/message_catalogue.json",
+      "source_sha256": "bb20ec0abc700c4d6d5c71433d7f8103c2a5b94e513c13c9592e819173ac2a4e"
+    },
+    {
+      "path": "ood/o02_state.json",
+      "sha256": "c3b9cde754b2f080cf6cad974f72233c050b81d90ebb8697d9a93741f1137159",
+      "size_bytes": 1397,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "ood/o03_mahalanobis_state.npz",
+      "sha256": "38d79dd606e5e800c09ad5a8ce8a11e975e606c289a3daa26dca0e0ca2f7791c",
+      "size_bytes": 221652,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "ood/o03_recovery.json",
+      "sha256": "9b451cdea9b593ac25bc30ee245e78cf028a2d6ed5c68889e2dd8fb946291134",
+      "size_bytes": 429,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "ood/o05_normalization_reference.npz",
+      "sha256": "de1a43c6a536db221ddf85ebff78dd347848c6193d5e3ec54b9b4fe6692b0354",
+      "size_bytes": 13397,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "ood/o05_state.json",
+      "sha256": "58ad42aa7a6f1aef1baea6a260a50eebfff385dbabe176b1d9f6e4231d125b02",
+      "size_bytes": 682,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "ood/o06_policy.json",
+      "sha256": "44f71a31feb09d412b4e25279bc8a98f108baa4cef9049fcdba9ea9cee65b8be",
+      "size_bytes": 3576,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "experiments/o06_ood_policy/result.json",
+      "source_sha256": "44f71a31feb09d412b4e25279bc8a98f108baa4cef9049fcdba9ea9cee65b8be"
+    },
+    {
+      "path": "reliability/r02_reliability_logistic.pkl",
+      "sha256": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044",
+      "size_bytes": 736,
+      "role": "Selected R02 deployment logistic model",
+      "source_path": "models/r02_reliability_logistic.pkl",
+      "source_sha256": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044"
+    },
+    {
+      "path": "reliability/r02_reliability_manifest.json",
+      "sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f",
+      "size_bytes": 4901,
+      "role": "R02 feature order, scaler state, coefficients, and provenance",
+      "source_path": "models/r02_reliability_manifest.json",
+      "source_sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
+    },
+    {
+      "path": "reliability/r02_reliability_scaler.pkl",
+      "sha256": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8",
+      "size_bytes": 648,
+      "role": "Selected R02 deployment scaler",
+      "source_path": "models/r02_reliability_scaler.pkl",
+      "source_sha256": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8"
+    },
+    {
+      "path": "runtime/final_stack_runtime.py",
+      "sha256": "0f563801329454a35fe46bfb40c855501c76f253d56d898ddbf7160dd54b4309",
+      "size_bytes": 17885,
+      "role": "Configuration, runtime, or policy provenance",
+      "source_path": "scripts/final_stack_runtime.py",
+      "source_sha256": "0f563801329454a35fe46bfb40c855501c76f253d56d898ddbf7160dd54b4309"
+    },
+    {
+      "path": "verification/expected_outputs.json",
+      "sha256": "7b94b8a84adcd6da8d097491f2b21f5905c68072dbe5f99783f644c18e51b17c",
+      "size_bytes": 5128,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "verification/fixtures/elliptic.png",
+      "sha256": "fbf404c68f5dc373656ea55b1724926b3192407cf8068ac820c952027dfc92f7",
+      "size_bytes": 848,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "verification/fixtures/gradient.png",
+      "sha256": "b26228576c7fe2ba78089c8ba81dd6a36b1de2e664e06578dd09cb013ab4c606",
+      "size_bytes": 735,
+      "role": "Generated final-stack verification artifact"
+    },
+    {
+      "path": "verification/fixtures/noise.png",
+      "sha256": "c784d36a24c892c1653f7e06bbe8248b19a75ed063771e3715b750597198f6ce",
+      "size_bytes": 33353,
+      "role": "Generated final-stack verification artifact"
+    }
+  ]
+}

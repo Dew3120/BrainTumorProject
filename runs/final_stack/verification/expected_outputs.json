@@ -1,0 +1,161 @@
+{
+  "elliptic.png": {
+    "input_sha256": "fbf404c68f5dc373656ea55b1724926b3192407cf8068ac820c952027dfc92f7",
+    "classifier": {
+      "class_order": [
+        "glioma",
+        "meningioma",
+        "pituitary",
+        "no_tumor"
+      ],
+      "probabilities": [
+        1.0531082807574421e-05,
+        0.999749481678009,
+        9.8118209734821e-07,
+        0.0002390188747085631
+      ],
+      "predicted_class": "meningioma",
+      "probability_source": "raw"
+    },
+    "segmenter": {
+      "route": "v1_fallback",
+      "raw_probability_sha256": "e88910dc74fe52666d64ad54e7e4c47595af9df7773e493e08fdad8bab967f64",
+      "calibrated_probability_sha256": "a5c6756d51a0d3f34072fe0c0f4aad13d636f649ed0b4d34ae9ff7a9c7124f75",
+      "hard_mask_sha256": "9660a17353c20f3901fdf23a891f8454888edbe8c5432e7e4599e800b95b5206",
+      "hard_foreground_pixels": 439
+    },
+    "reliability": {
+      "score": 0.9980908851076686,
+      "threshold": "0.9490250173235835",
+      "status": "STANDARD"
+    },
+    "ood": {
+      "components": {
+        "o02_probability": 0.00826890581278763,
+        "o03_mahalanobis": 405.14034515597734,
+        "o04_classifier": 0.0002505183219909668,
+        "o04_segmenter_entropy": 0.004631702732983485
+      },
+      "normalized_components": {
+        "o02_probability": 0.4066666666666667,
+        "o03_mahalanobis": 1.0,
+        "o04_classifier": 0.49166666666666664,
+        "o04_segmenter_entropy": 0.6683333333333333
+      },
+      "score": 5.283507235186314e-05,
+      "threshold": "0.36854275476100085",
+      "status": "ACCEPT",
+      "refuse_enabled": false
+    },
+    "application": {
+      "continue_to_prediction_display": true,
+      "reliability_status_if_accepted": "STANDARD"
+    }
+  },
+  "gradient.png": {
+    "input_sha256": "b26228576c7fe2ba78089c8ba81dd6a36b1de2e664e06578dd09cb013ab4c606",
+    "classifier": {
+      "class_order": [
+        "glioma",
+        "meningioma",
+        "pituitary",
+        "no_tumor"
+      ],
+      "probabilities": [
+        0.003979699686169624,
+        0.014421134255826473,
+        0.0003076329594478011,
+        0.9812915325164795
+      ],
+      "predicted_class": "no_tumor",
+      "probability_source": "raw"
+    },
+    "segmenter": {
+      "route": "v1_fallback",
+      "raw_probability_sha256": "af6d336165e503548ca858f24562d7da5478b224391240550b3e32e601190549",
+      "calibrated_probability_sha256": "b27fab7d6b4fd30a984b2c8dbfa1106a4b0d00d57445355b97c6c2848f321677",
+      "hard_mask_sha256": "05614639b4e569e297492525114d770dc07d502e780a0ddaa37e949d721ff1b0",
+      "hard_foreground_pixels": 537
+    },
+    "reliability": {
+      "score": 0.9956323073030418,
+      "threshold": "0.9490250173235835",
+      "status": "STANDARD"
+    },
+    "ood": {
+      "components": {
+        "o02_probability": 0.9999999706279261,
+        "o03_mahalanobis": 874.4596453941107,
+        "o04_classifier": 0.018708467483520508,
+        "o04_segmenter_entropy": 0.05322345069569935
+      },
+      "normalized_components": {
+        "o02_probability": 1.0,
+        "o03_mahalanobis": 1.0,
+        "o04_classifier": 0.9816666666666667,
+        "o04_segmenter_entropy": 1.0
+      },
+      "score": 0.9868319174320498,
+      "threshold": "0.36854275476100085",
+      "status": "REVIEW",
+      "refuse_enabled": false
+    },
+    "application": {
+      "continue_to_prediction_display": false,
+      "reliability_status_if_accepted": "STANDARD"
+    }
+  },
+  "noise.png": {
+    "input_sha256": "c784d36a24c892c1653f7e06bbe8248b19a75ed063771e3715b750597198f6ce",
+    "classifier": {
+      "class_order": [
+        "glioma",
+        "meningioma",
+        "pituitary",
+        "no_tumor"
+      ],
+      "probabilities": [
+        0.007977969944477081,
+        5.1471406550263055e-06,
+        1.318736576649826e-05,
+        0.9920036196708679
+      ],
+      "predicted_class": "no_tumor",
+      "probability_source": "raw"
+    },
+    "segmenter": {
+      "route": "v1_fallback",
+      "raw_probability_sha256": "89102d54322b2c18557d34bd412416bb12af8cbd19499424bc1059550c68d9de",
+      "calibrated_probability_sha256": "5a1bc60691ecd11fc67cb9c1fda4a62146dce8c734579c556c290f72b5dfef72",
+      "hard_mask_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+      "hard_foreground_pixels": 0
+    },
+    "reliability": {
+      "score": 0.010823256963749969,
+      "threshold": "0.9490250173235835",
+      "status": "REVIEW_REQUIRED"
+    },
+    "ood": {
+      "components": {
+        "o02_probability": 0.9999999999994966,
+        "o03_mahalanobis": 698.4411418656339,
+        "o04_classifier": 0.00799638032913208,
+        "o04_segmenter_entropy": 0.01598019925880008
+      },
+      "normalized_components": {
+        "o02_probability": 1.0,
+        "o03_mahalanobis": 1.0,
+        "o04_classifier": 0.96,
+        "o04_segmenter_entropy": 0.9866666666666667
+      },
+      "score": 0.9857111188324729,
+      "threshold": "0.36854275476100085",
+      "status": "REVIEW",
+      "refuse_enabled": false
+    },
+    "application": {
+      "continue_to_prediction_display": false,
+      "reliability_status_if_accepted": "REVIEW_REQUIRED"
+    }
+  }
+}

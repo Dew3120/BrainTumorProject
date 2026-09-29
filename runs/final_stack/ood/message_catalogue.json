@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "thresholds": {
+    "review": 0.36854275476100085,
+    "refuse": null
+  },
+  "messages": [
+    {
+      "message_id": "ood_accept",
+      "status": "ACCEPT",
+      "title": "Input accepted",
+      "body": "This input is within the research prototype's learned input range. Processing can continue, subject to the model's separate reliability policy.",
+      "disclaimer": "Research prototype \u2014 not for clinical use"
+    },
+    {
+      "message_id": "ood_review",
+      "status": "REVIEW",
+      "title": "Input review required",
+      "body": "This input does not match the model's training distribution. Predictions may be unreliable. Check that the upload is a supported brain MRI image before continuing.",
+      "disclaimer": "Research prototype \u2014 not for clinical use"
+    },
+    {
+      "message_id": "ood_refuse",
+      "status": "REFUSE",
+      "enabled": false,
+      "title": "Input cannot be processed",
+      "body": "This input does not match the model's training distribution. Predictions may be unreliable. This research prototype will not produce a tumor prediction for this upload. Use a supported brain MRI image.",
+      "disclaimer": "Research prototype \u2014 not for clinical use"
+    },
+    {
+      "message_id": "ood_score_invalid",
+      "status": "REVIEW",
+      "title": "Input review required",
+      "body": "The input-distribution score was unavailable or invalid. Processing is paused for review. This input does not match the model's training distribution. Predictions may be unreliable.",
+      "disclaimer": "Research prototype \u2014 not for clinical use"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "selected_method": "secondary_logistic",
+  "score_order": [
+    "o02_probability",
+    "o03_mahalanobis",
+    "o04_classifier",
+    "o04_segmenter_entropy"
+  ],
+  "cdf_reference": "600 BRISC fit-ID cases, right-inclusive empirical CDF",
+  "scaler_mean": [
+    0.7694871794871796,
+    0.7482756410256415,
+    0.7135615384615402,
+    0.7343641025641057
+  ],
+  "scaler_scale": [
+    0.3167732577794122,
+    0.31348746019137735,
+    0.3090864248198068,
+    0.31916342556071187
+  ],
+  "coefficients": [
+    6.5199668330161025,
+    1.3832042681484227,
+    0.67844521852357,
+    0.8441188818662546
+  ],
+  "intercept": -2.829540152894162,
+  "reproduction_maximum_absolute_error": 0.0
+}

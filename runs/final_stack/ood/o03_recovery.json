@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "method": "deterministic LedoitWolf recovery from registered frozen embeddings",
+  "fit_id_cases": 600,
+  "embedding_dimensions": 128,
+  "reproduction_tolerance": 1e-12,
+  "maximum_absolute_distance_error": 0.0,
+  "source_embeddings_sha256": "b7a800258e58b826538e80fca44a0ad103c748b60ca97022cffcd079dded90b5",
+  "source_scores_sha256": "855e46447bd4228eab9d20d1112100b2af1a8914a17a820ce5b65c9b3c48316b"
+}

@@ -1,0 +1,46 @@
+{
+  "scope": "EXPERIMENTAL BRISC internal baseline. Phase 1 suitability review remains open. Patient independence and modality consistency are not verified. Scores are not clinical validation. Measurements and segmentation are not included.",
+  "classes": [
+    "glioma",
+    "meningioma",
+    "pituitary",
+    "no_tumor"
+  ],
+  "seed": 42,
+  "epochs_requested": 20,
+  "batch_size": 8,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "patience": 5,
+  "selection_metric": "validation_macro_f1",
+  "tumor_threshold": 0.5,
+  "architecture": "resnet18",
+  "initial_weights": "IMAGENET1K_V1",
+  "preprocessing": "grayscale -> aspect-preserving 224x224 black padding -> RGB -> ImageNet normalization",
+  "augmentation": "training-only brightness/contrast jitter 0.1; no geometric augmentation",
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "smoke": false,
+  "train_images": 3570,
+  "validation_images": 893,
+  "split_sha256": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28",
+  "script_sha256": "06bdad86195b7d91e21caab05bf836001e455f40994f8193387086b7e74acb85",
+  "lock_sha256": "d53bd992b7950b822558a2a0900d624b6869c66134dd7d0cf11861abc2d6daa7",
+  "torch": "2.10.0+cu128",
+  "torchvision": "0.25.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "workers": 0,
+  "test_evaluated": false,
+  "patient_independence_verified": false,
+  "git_commit": "a6f7714b9d80f8edd038f30194e4ccd05b3533ab",
+  "git_status": "?? scripts/phase3_classifier.py\n?? tests/\n",
+  "mlflow_run_id": "f8bb3cf4e8f7499f9a9c5f17b7d4d937"
+}
