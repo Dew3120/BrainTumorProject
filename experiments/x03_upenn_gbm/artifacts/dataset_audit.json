@@ -94,7 +94,7 @@
   "visual_alignment_review": {
     "status": "PASS_NO_SYSTEMATIC_DEFECT",
     "panel": "experiments/x03_upenn_gbm/artifacts/source_alignment_panel.png",
-    "panel_sha256": "a790977ebefbb86c8287977ef3d739ab2642216d2db8819941974a39ffa2dcd3",
+    "panel_sha256": "c09d9596317da459bfc65f1eaedfe81a1da14314d72eba9929ae89c44ad7a582",
     "selection": "12 evenly spaced scans; maximum whole-tumor-area axial slice"
   },
   "constraints": {
@@ -107,8 +107,8 @@
   },
   "disk": {
     "minimal_payload_bytes": 427673840,
-    "drive_e_free_bytes_after_audit": 348145676288,
-    "drive_e_free_gib_after_audit": 324.2359275817871,
+    "drive_e_free_bytes_after_audit": 348145500160,
+    "drive_e_free_gib_after_audit": 324.2357635498047,
     "projected_total_below_250_gb": true
   }
 }

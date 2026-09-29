@@ -211,7 +211,9 @@ def load_canonical_nifti(path: Path):
     if not np.isfinite(image.affine).all() or abs(np.linalg.det(image.affine[:3, :3])) < 1e-12:
         raise ValueError("NIfTI affine is invalid or singular")
     canonical = nib.as_closest_canonical(image)
-    data = canonical.get_fdata(dtype=np.float32)
+    # Preserve the canonical image's native dtype so registered dtype-specific
+    # preprocessing remains reachable (notably the native_uint8 identity path).
+    data = np.asanyarray(canonical.dataobj)
     if not np.isfinite(data).all():
         raise ValueError("NIfTI voxel array contains non-finite values")
     axcodes = tuple(str(code) for code in nib.aff2axcodes(canonical.affine))

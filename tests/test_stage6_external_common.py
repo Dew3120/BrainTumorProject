@@ -76,6 +76,27 @@ def test_canonical_nifti_contract(tmp_path: Path):
     assert geometry.voxel_sizes_mm == (2.0, 3.0, 4.0)
 
 
+def test_constant_uint8_nifti_preserves_dtype_and_uses_native_adapter(tmp_path: Path):
+    path = tmp_path / "constant_uint8.nii.gz"
+    data = np.zeros((8, 9, 3), dtype=np.uint8)
+    nib.save(nib.Nifti1Image(data, np.eye(4)), path)
+
+    canonical, _affine, _geometry = external.load_canonical_nifti(path)
+    assert canonical.dtype == np.uint8
+    segmenter, _segmenter_geometry, segmenter_window = (
+        external.preprocess_segmenter(canonical[:, :, 0])
+    )
+    classifier, _classifier_geometry, classifier_window = (
+        external.preprocess_classifier(canonical[:, :, 0])
+    )
+    assert segmenter_window["method"] == "native_uint8"
+    assert classifier_window["method"] == "native_uint8"
+    assert segmenter.shape == (1, 128, 128)
+    assert classifier.shape == (3, 224, 224)
+    assert np.isfinite(segmenter).all()
+    assert np.isfinite(classifier).all()
+
+
 class FakeDicom:
     def __init__(self, z):
         self.ImageOrientationPatient = [1, 0, 0, 0, 1, 0]

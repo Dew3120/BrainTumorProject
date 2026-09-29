@@ -30,6 +30,10 @@
 
 Glioblastoma is a subtype of glioma. The mapping `glioblastoma -> glioma` is coarse. This GBM-only, atlas-aligned, whole-tumor cohort is not directly comparable to heterogeneous BRISC glioma, and every X03 result must repeat that limitation.
 
+## Native datatype verification
+
+The renewed Amendment-18 audit preserved the release's native `uint8` image and mask datatype through canonical NIfTI loading. All images therefore use the registered `native_uint8` adapter path. A constant-valued `uint8` regression test verifies that reference-empty edge slices are accepted without introducing artificial intensity variation.
+
 ## Disk and decision
 
 - Drive E free after audit: 324.236 GiB. The 250 GB sequential-processing trigger is not reached.
