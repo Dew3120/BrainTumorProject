@@ -1,5 +1,56 @@
 {
   "schema_version": 1,
   "experiment_id": "o04_model_confidence_ood",
-  "status": "NOT_RUN"
+  "status": "COMPLETE",
+  "decision": "FAIL",
+  "gate": {
+    "rule": "both detectors AUROC >= 0.85",
+    "passed": false
+  },
+  "detectors": {
+    "classifier_1_minus_max_softmax": {
+      "auroc": 0.8498172268907562,
+      "auroc_ci95": [
+        0.8241206767407113,
+        0.8724358145413446
+      ],
+      "gate_threshold": 0.85,
+      "passed": false
+    },
+    "segmenter_mean_entropy": {
+      "auroc": 0.7749915966386555,
+      "auroc_ci95": [
+        0.7454206614048338,
+        0.8020560643221487
+      ],
+      "gate_threshold": 0.85,
+      "passed": false
+    }
+  },
+  "population": {
+    "all_scores": 2680,
+    "evaluation": 1380,
+    "evaluation_id": 680,
+    "evaluation_ood": 700
+  },
+  "model": {
+    "classifier_checkpoint_sha256": "3bc044027b83b2de225ebde3fb817be8827d2b427c599824697b13ff7a727535",
+    "segmenter_components": {
+      "e05": "e17e7f5afec1c56e9faf12e12db263eff4a3ebc184cfcd7bdfcfff0c1a977c6a",
+      "e06": "b98afabc8118471e01f560ff6a727ce25c08001574bf12005d77d1be773f43ab",
+      "e07": "bb68ce4f0a9203d74a5ec9dea2e83468d3d833ac285a13ebbdb1d793a0d3bbe0",
+      "v1": "16dc8745993eef959d0f2924c9147a45320673f6fc0b465ab08f8ad7b2f723de"
+    },
+    "segmenter_score_probability": "raw E08 arithmetic-mean foreground probability; C03 not applied"
+  },
+  "verification": {
+    "o01_manifest_sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd",
+    "reference_masks_used": 0,
+    "diagnostic_labels_used": 0,
+    "external_performance_values_used": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining_or_refitting": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835"
+  }
 }

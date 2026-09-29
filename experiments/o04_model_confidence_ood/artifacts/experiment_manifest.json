@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o04_model_confidence_ood",
+  "created_at": "2026-09-29T10:32:55.982038+00:00",
+  "files": [
+    {
+      "path": "experiments/o04_model_confidence_ood/config.json",
+      "sha256": "444af5988046b4e613f76e1510506d3b9a860edd47a886e4616f79d7ae235211",
+      "bytes": 773
+    },
+    {
+      "path": "experiments/o04_model_confidence_ood/result.json",
+      "sha256": "2ffb02350b0238c210c4bb8914d5b9056fd2bead1203c00a9b2b87dd975641d6",
+      "bytes": 1755
+    },
+    {
+      "path": "experiments/o04_model_confidence_ood/decision.md",
+      "sha256": "0f3c4a98c6583b91bed5d93c6401a10ca37e8a0aa10ca52e63e7cc329db95f51",
+      "bytes": 214
+    },
+    {
+      "path": "experiments/o04_model_confidence_ood/artifacts/model_confidence_scores.csv",
+      "sha256": "aa49915f8790bee9ecbc55ffce590a2462a0dae2005cb6f460c47823d1bd7afe",
+      "bytes": 316070
+    },
+    {
+      "path": "experiments/o04_model_confidence_ood/artifacts/roc_curves.png",
+      "sha256": "92aa4631b08d8976a427afbba30703ab835f640aa42fb6211ed4a041dbe64d2f",
+      "bytes": 76672
+    }
+  ]
+}

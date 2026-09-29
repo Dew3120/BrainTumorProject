@@ -779,3 +779,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** A Ledoit-Wolf Gaussian was fitted only to 600 BRISC training embeddings from the frozen segmenter bottleneck.
 - **Verification:** Checkpoint hash passed. Reference masks, labels, external performance data, sealed-test access, neural refitting, and threshold changes were zero.
 - **Who approved:** User authorized O01–O06 in one sequential run.
+
+## 2026-09-29T16:02:56+05:30 — Evaluate O04 frozen-model confidence detectors
+
+- **Decision made:** Record O04 as `FAIL`; classifier AUROC `0.849817`, segmenter AUROC `0.774992`.
+- **Triggering artifact:** `experiments/o04_model_confidence_ood/result.json`.
+- **Rationale:** Both preregistered frozen-model scores were evaluated independently.
+- **Verification:** Frozen hashes passed; masks, labels, external performance values, sealed-test access, neural refitting, and threshold changes were zero.
+- **Who approved:** User authorized O01–O06 in one sequential run.
