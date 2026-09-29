@@ -402,7 +402,7 @@
       "hypothesis_ids": [
         "H8"
       ],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "ACCESS_BLOCKED"
     },
     {
       "id": "x05_cross_dataset_synthesis",

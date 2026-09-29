@@ -1,7 +1,31 @@
 {
   "schema_version": 1,
   "experiment_id": "x04_meningioma_seg_class",
-  "status": "NOT_RUN",
-  "access_state": "CONTROLLED_ACCESS_PENDING_HUMAN_REQUEST",
-  "test_images_accessed": 0
+  "status": "ACCESS_BLOCKED",
+  "audit_outcome": "ACCESS_BLOCKED",
+  "dataset": {
+    "name": "Meningioma-SEG-CLASS",
+    "version": 1,
+    "doi": "10.7937/0TKV-1A36",
+    "access_state": "CONTROLLED_ACCESS_NOT_GRANTED"
+  },
+  "reason": "No verified human-account access grant and no local dataset payload existed after X01-X03 completed. Amendment 13 requires X04 to be recorded as ACCESS_BLOCKED.",
+  "performance_metrics": "NOT_ESTIMABLE: dataset access blocked",
+  "dataset_files_accessed": 0,
+  "dataset_images_accessed": 0,
+  "brisc_sealed_test_images_accessed": 0,
+  "neural_retraining": 0,
+  "calibrator_refits": 0,
+  "reliability_refits": 0,
+  "segmentation_threshold": 0.5,
+  "reliability_policy_threshold": "0.9490250173235835",
+  "threshold_changes": 0,
+  "frozen_hashes": {
+    "models/r02_reliability_scaler.pkl": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8",
+    "models/r02_reliability_logistic.pkl": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044",
+    "models/r02_reliability_manifest.json": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f",
+    "experiments/c03_isotonic/artifacts/isotonic_mappings.json": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa"
+  },
+  "disk_free_bytes": 348132126720,
+  "synthesis_handling": "Omit X04 performance metrics and preserve ACCESS_BLOCKED status."
 }

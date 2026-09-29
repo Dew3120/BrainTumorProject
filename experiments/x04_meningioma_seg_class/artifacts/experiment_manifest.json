@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x04_meningioma_seg_class",
+  "status": "ACCESS_BLOCKED",
+  "files": [
+    {
+      "path": "audit/preregistration_amendment_13.md",
+      "bytes": 12088,
+      "sha256": "728d8c0f92a357c1ecbc78e586fce3af940e12fc8fef74bd3a3c0b93f8958da5"
+    },
+    {
+      "path": "audit/x04_meningioma_seg_class_access_audit.md",
+      "bytes": 1049,
+      "sha256": "c207d5060bb9a9708aada8672ca51308153a0a1a7b754c05958968d2526cbe01"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/artifacts/access_audit.json",
+      "bytes": 1456,
+      "sha256": "77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/config.json",
+      "bytes": 884,
+      "sha256": "570c27040618d5167782cd59f1244e22ddb9726ef764752d04d526d60e78ccbb"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/decision.md",
+      "bytes": 339,
+      "sha256": "97a76799f595eaa2b38911a51e044211d4ea7dd5ecfd7100e72ff4db989fb608"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/hypothesis.md",
+      "bytes": 289,
+      "sha256": "eee80f6c1f79d7702206a4a0a6e1ba1d3a82ce3b8674ea2adb6d362915b179bc"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/result.json",
+      "bytes": 1456,
+      "sha256": "77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722"
+    },
+    {
+      "path": "scripts/record_x04_access_blocked.py",
+      "bytes": 8857,
+      "sha256": "cc4a382ac4bab29831feea4c97b187257b254516c5cfc5f44071eb1bf47a6f7b"
+    },
+    {
+      "path": "scripts/validate_experiment_tracking.py",
+      "bytes": 5687,
+      "sha256": "d4e0c7a17e683316c0fb3c9878058f0d027716d20453deb9cceaa2cfb93b8fd4"
+    },
+    {
+      "path": "tests/test_foundation_controls.py",
+      "bytes": 3013,
+      "sha256": "4ef7110990640518aba5a94136a5507070820c27d3c9ab623e9a913fc2a0ca8c"
+    },
+    {
+      "path": "tests/test_record_x04_access_blocked.py",
+      "bytes": 785,
+      "sha256": "32f72f7e78487808a3ad3755a02d707e19472c625b2d69b10ff97fe56a88a70d"
+    }
+  ]
+}

@@ -735,3 +735,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Independent recomputation covered `45` decision-driving values with maximum absolute difference `0.0`. Visual review found no systematic flip, transpose, offset, or source-mask alignment defect. No BRISC sealed-test image was opened. Neural retraining, calibration/reliability refit, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
 - **Alternatives considered:** Drop the 82 nonrepresentable targets or report only the 9,382-slice sensitivity; rejected by Amendment 17. Modify native dtype handling instead of honoring the registered adapter contract; rejected by Amendment 18. Reuse primary membership for mask-domain bootstraps; rejected by Amendment 19. Tune on X03 or relax the top-20% gate; rejected because external data are evaluation-only and gates remain fixed.
 - **Who approved:** User approved Amendments 17–19 and exactly one fourth attempt after the Amendment-19 correction.
+
+
+## 2026-09-29T14:57:12+05:30 — Close X04 as controlled-access blocked
+
+- **Decision made:** Record X04 as `ACCESS_BLOCKED` after X01-X03 completion and omit performance metrics from X05.
+- **Triggering artifact:** `experiments/x04_meningioma_seg_class/artifacts/access_audit.json`, SHA256 `77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722`.
+- **Rationale:** No verified human-account access grant and no local Meningioma-SEG-CLASS payload existed. Amendment 13 explicitly predeclares this outcome and permits synthesis to continue.
+- **Verification:** Frozen C03/R02 hashes passed. Dataset files and images opened, BRISC sealed-test access, retraining/refitting, threshold changes, and gate relaxations were all zero.
+- **Alternatives considered:** Claim or simulate access; rejected. Impute meningioma metrics; rejected. Delay synthesis indefinitely; rejected by the registered access-blocked rule.
+- **Who approved:** User approved Amendment 13 and instructed X04 to be marked `ACCESS_BLOCKED` if access remained unavailable after X01-X03.

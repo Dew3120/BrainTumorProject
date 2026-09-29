@@ -1,5 +1,5 @@
 # X04 decision
 
-**Decision:** PENDING
+**Decision:** `ACCESS_BLOCKED`
 
-Controlled image access has not been requested or granted through a verified human account. No image has been accessed or evaluated.
+No verified controlled-access grant or local Meningioma-SEG-CLASS payload existed after X01-X03 completed. Under Amendment 13, X04 therefore ends without image access or performance metrics. X05 must preserve this status and must not infer, impute, or pool meningioma transport performance.

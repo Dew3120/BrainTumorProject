@@ -8,7 +8,12 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPERIMENTS = ROOT / "experiments"
 REGISTRY = EXPERIMENTS / "registry.json"
 REQUIRED_FILES = {"hypothesis.md", "config.json", "result.json", "decision.md"}
-VALID_STATUSES = {"REGISTERED_NOT_STARTED", "AUDIT_COMPLETE", "COMPLETE"}
+VALID_STATUSES = {
+    "REGISTERED_NOT_STARTED",
+    "AUDIT_COMPLETE",
+    "ACCESS_BLOCKED",
+    "COMPLETE",
+}
 
 
 def sha256(path):
@@ -55,6 +60,12 @@ def validate_experiment(directory, registry_item):
         decision = (directory / "decision.md").read_text(encoding="utf-8")
         if "**Audit decision:**" not in decision:
             raise ValueError(f"{registry_item['id']} lacks an audit decision")
+    if registry_item["status"] == "ACCESS_BLOCKED":
+        if result["status"] != "ACCESS_BLOCKED":
+            raise ValueError(f"{registry_item['id']} access-blocked result mismatch")
+        decision = (directory / "decision.md").read_text(encoding="utf-8")
+        if "**Decision:** `ACCESS_BLOCKED`" not in decision:
+            raise ValueError(f"{registry_item['id']} lacks access-blocked decision")
     return {
         "id": registry_item["id"],
         "status": registry_item["status"],
