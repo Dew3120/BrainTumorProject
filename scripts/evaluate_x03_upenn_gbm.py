@@ -1,0 +1,1195 @@
+"""Evaluate the frozen E08+C03+R02 stack on audited UPENN-GBM MRI."""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import math
+import subprocess
+from collections import Counter, defaultdict
+from contextlib import nullcontext
+from pathlib import Path
+
+import advanced_calibration_common as calibration_common
+import evaluate_x01_cheng as x01
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+import segmentation_failure_analysis as failure_analysis
+import stage6_external_common as external
+import torch
+from PIL import Image
+from scipy import ndimage
+from scipy.ndimage import binary_dilation, binary_erosion
+from scipy.spatial import cKDTree
+from scipy.spatial.distance import jensenshannon
+from scipy.stats import wasserstein_distance
+from torch.utils.data import DataLoader, Dataset
+
+ROOT = Path(__file__).resolve().parents[1]
+EXPERIMENT = ROOT / "experiments/x03_upenn_gbm"
+ARTIFACTS = EXPERIMENT / "artifacts"
+PAYLOAD = ROOT / "data/external/upenn_gbm_v2"
+AUDIT_RESULT = ARTIFACTS / "dataset_audit.json"
+SUBJECT_MANIFEST = ARTIFACTS / "subject_manifest.csv"
+TUMOR_SLICE_MANIFEST = ARTIFACTS / "tumor_slice_manifest.csv"
+CLASS_NAMES = x01.CLASS_NAMES
+LABEL_INDEX = x01.LABEL_INDEX
+GLIOMA_INDEX = LABEL_INDEX["glioma"]
+BOOTSTRAPS = 2000
+SEED = 42
+EPSILON = 1e-12
+EXPECTED_AUDIT_SHA256 = "f870a89cd5165e41187220c5c2326b9597c181427ed16dc643678da9fb9bc30a"
+EXPECTED_SUBJECT_MANIFEST_SHA256 = (
+    "1e2c633d2f91b124ec5ed12d24a4ed0045614d5cb103588b9e293c0455ab4dcd"
+)
+EXPECTED_TUMOR_SLICE_MANIFEST_SHA256 = (
+    "cfb5cdd292b5eb6799e1198535a075d2a703aa5bfccc662862faf1f392432d4f"
+)
+AMENDMENT_16 = ROOT / "audit/preregistration_amendment_16.md"
+EXPECTED_AMENDMENT_16_SHA256 = (
+    "802ade9daecfdbc11fcd9344c7aee28e9199562f46fc1990624c940ad8b6bf34"
+)
+AMENDMENT_17 = ROOT / "audit/preregistration_amendment_17.md"
+EXPECTED_AMENDMENT_17_SHA256 = (
+    "3c7941e388f8c095884d7bd62bc1886fb3aa8a1b5003520f76cdcbffd6ee12b7"
+)
+AMENDMENT_18 = ROOT / "audit/preregistration_amendment_18.md"
+EXPECTED_AMENDMENT_18_SHA256 = (
+    "cce55327a687c6ef4adec4ba85284e887438bfc6352abeb615f0ab3f361d8c63"
+)
+AMENDMENT_19 = ROOT / "audit/preregistration_amendment_19.md"
+EXPECTED_AMENDMENT_19_SHA256 = (
+    "ab9ba9bcab3896a359e94bf6c72887c8bb69b785cfd62aff0b17ab58b8ec0f66"
+)
+EXPECTED_TARGET_LOSS_SHA256 = "f8e2149e3f6bc896f185d4e653240d45d746dd0482c00a58be8c2f89a9fb59fe"
+
+
+def read_json(path: Path):
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def read_csv(path: Path) -> list[dict]:
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+def write_json(path: Path, value) -> None:
+    path.write_text(
+        json.dumps(value, indent=2, allow_nan=False) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+
+
+def write_csv(path: Path, rows: list[dict]) -> None:
+    if not rows:
+        raise ValueError(f"Refusing to write empty CSV: {path}")
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def build_evaluation_rows(subject_rows: list[dict], tumor_rows: list[dict]) -> list[dict]:
+    tumor_membership = {
+        (row["patient_id"], int(row["axial_index_ras"])) for row in tumor_rows
+    }
+    rows = []
+    for subject in sorted(subject_rows, key=lambda row: row["patient_id"]):
+        shape = tuple(int(value) for value in subject["canonical_shape"].split("x"))
+        if len(shape) != 3 or shape[2] <= 0:
+            raise ValueError(f"Invalid canonical shape: {subject['patient_id']}")
+        for axial_index in range(shape[2]):
+            rows.append(
+                {
+                    "case_id": f"{subject['patient_id']}:axial:{axial_index:03d}",
+                    "patient_id": subject["patient_id"],
+                    "subject_id": subject["patient_id"],
+                    "label": "glioma",
+                    "axial_index_ras": axial_index,
+                    "reference_has_tumor": (
+                        subject["patient_id"], axial_index
+                    )
+                    in tumor_membership,
+                    "image_path": subject["image_name"],
+                    "mask_path": subject["mask_name"],
+                    "width": shape[0],
+                    "height": shape[1],
+                    "depth": shape[2],
+                    "voxel_x_mm": float(subject["voxel_size_x_mm"]),
+                    "voxel_y_mm": float(subject["voxel_size_y_mm"]),
+                    "voxel_z_mm": float(subject["voxel_size_z_mm"]),
+                }
+            )
+    if len(rows) != sum(int(row["canonical_shape"].split("x")[2]) for row in subject_rows):
+        raise ValueError("Evaluation row construction is incomplete")
+    if sum(bool(row["reference_has_tumor"]) for row in rows) != len(tumor_rows):
+        raise ValueError("Primary tumor-bearing membership changed")
+    return rows
+
+
+class UpennDataset(Dataset):
+    def __init__(self, rows: list[dict]):
+        self.rows = rows
+        self._cached_subject = None
+        self._cached_image = None
+        self._cached_mask = None
+
+    def __len__(self):
+        return len(self.rows)
+
+    def _volume(self, row):
+        if self._cached_subject != row["subject_id"]:
+            image, image_affine, _ = external.load_canonical_nifti(
+                PAYLOAD / row["image_path"]
+            )
+            mask, mask_affine, _ = external.load_canonical_nifti(
+                PAYLOAD / row["mask_path"]
+            )
+            if image.shape != mask.shape or np.max(np.abs(image_affine - mask_affine)) > 1e-4:
+                raise ValueError(f"Geometry changed for {row['subject_id']}")
+            self._cached_subject = row["subject_id"]
+            self._cached_image = image
+            self._cached_mask = np.rint(mask).astype(np.uint8)
+        return self._cached_image, self._cached_mask
+
+    def __getitem__(self, position: int):
+        row = self.rows[position]
+        image, mask = self._volume(row)
+        index = int(row["axial_index_ras"])
+        image_slice = image[:, :, index].T
+        target_slice = np.isin(mask[:, :, index], (1, 2, 3)).T
+        segmenter, geometry, _window = external.preprocess_segmenter(image_slice)
+        classifier, _class_geometry, _class_window = external.preprocess_classifier(
+            image_slice
+        )
+        target, mask_geometry = external.preprocess_reference_mask(
+            target_slice, allow_empty=True
+        )
+        if geometry != mask_geometry:
+            raise ValueError(f"Image/mask transform mismatch: {row['case_id']}")
+        return (
+            torch.from_numpy(segmenter),
+            torch.from_numpy(classifier),
+            torch.from_numpy(target.astype(np.float32)),
+            position,
+        )
+
+
+def run_inference(rows, classifier, models, device):
+    primary_global = np.asarray(
+        [index for index, row in enumerate(rows) if row["reference_has_tumor"]],
+        dtype=np.int64,
+    )
+    primary_lookup = {int(value): index for index, value in enumerate(primary_global)}
+    count = len(primary_global)
+    raw_probability = np.empty((count, 128, 128), dtype=np.float32)
+    calibrated = np.empty_like(raw_probability)
+    targets = np.empty((count, 128, 128), dtype=bool)
+    class_probability = np.empty((count, 4), dtype=np.float64)
+    embeddings = np.empty((count, 512), dtype=np.float32)
+    reliability = np.empty(count, dtype=np.float64)
+    intensity = np.empty((count, 3), dtype=np.float64)
+    route = np.empty(count, dtype=object)
+    all_hard = np.empty((len(rows), 128, 128), dtype=bool)
+    loader = DataLoader(
+        UpennDataset(rows),
+        batch_size=16,
+        shuffle=False,
+        num_workers=0,
+        pin_memory=device.type == "cuda",
+    )
+    captured = []
+
+    def hook(_module, _input, output):
+        captured.append(output.detach().float().flatten(1).cpu().numpy())
+
+    hook_handle = classifier.avgpool.register_forward_hook(hook)
+    with torch.inference_mode():
+        for batch_index, (
+            segmenter_images,
+            classifier_images,
+            references,
+            indices,
+        ) in enumerate(loader):
+            segmenter_images = segmenter_images.to(device, non_blocking=True)
+            classifier_images = classifier_images.to(device, non_blocking=True)
+            references = references.numpy()[:, 0] > 0.5
+            index_values = indices.numpy()
+            context = (
+                torch.autocast(device_type="cuda", dtype=torch.float16)
+                if device.type == "cuda"
+                else nullcontext()
+            )
+            with context:
+                class_logits = classifier(classifier_images)
+                e05 = models["e05"](segmenter_images)
+                e06 = models["e06"](segmenter_images)
+                specialist = models["e07_specialist"](segmenter_images)
+                fallback = models["v1_fallback"](segmenter_images)
+            probabilities = class_logits.float().softmax(dim=1).cpu().numpy()
+            predicted = probabilities.argmax(axis=1)
+            glioma_route = predicted == LABEL_INDEX["glioma"]
+            routed = fallback.float().sigmoid()
+            if np.any(glioma_route):
+                route_index = torch.from_numpy(glioma_route).to(device)
+                routed[route_index] = specialist.float().sigmoid()[route_index]
+            ensemble = (e05.float().sigmoid() + e06.float().sigmoid() + routed) / 3.0
+            batch_raw = ensemble[:, 0].cpu().numpy().astype(np.float32)
+            batch_calibrated = external.apply_operational_c03(batch_raw).astype(np.float32)
+            batch_embeddings = captured.pop(0)
+            all_hard[index_values] = batch_calibrated >= 0.5
+            for batch_position, global_index in enumerate(index_values):
+                if int(global_index) not in primary_lookup:
+                    continue
+                output_index = primary_lookup[int(global_index)]
+                raw_probability[output_index] = batch_raw[batch_position]
+                calibrated[output_index] = batch_calibrated[batch_position]
+                targets[output_index] = references[batch_position]
+                class_probability[output_index] = probabilities[batch_position]
+                embeddings[output_index] = batch_embeddings[batch_position]
+                route[output_index] = (
+                    "glioma_specialist" if glioma_route[batch_position] else "v1_fallback"
+                )
+                reliability[output_index] = external.operational_reliability(
+                    batch_calibrated[batch_position]
+                )["score"]
+                values = segmenter_images[batch_position, 0].float().cpu().numpy()
+                nonzero = values[values > 0]
+                intensity[output_index] = [
+                    float(values.mean()),
+                    float(values.std()),
+                    float(nonzero.mean()) if len(nonzero) else 0.0,
+                ]
+            if (batch_index + 1) % 100 == 0 or batch_index + 1 == len(loader):
+                print(
+                    f"X03 inference batches: {batch_index + 1}/{len(loader)}",
+                    flush=True,
+                )
+    hook_handle.remove()
+    numeric = (raw_probability, calibrated, class_probability, embeddings, reliability, intensity)
+    if not all(np.isfinite(value).all() for value in numeric):
+        raise ValueError("Inference produced a non-finite output")
+    return (
+        raw_probability,
+        calibrated,
+        targets,
+        class_probability,
+        embeddings,
+        reliability,
+        intensity,
+        route,
+        all_hard,
+        primary_global,
+    )
+
+
+def target_representability(rows: list[dict]) -> list[dict]:
+    output = []
+    dataset = UpennDataset(rows)
+    for index, row in enumerate(rows):
+        if not row["reference_has_tumor"]:
+            continue
+        sample = dataset[index]
+        model_target = sample[2].numpy()[0]
+        native = (
+            np.isin(dataset._cached_mask[:, :, int(row["axial_index_ras"])], (1, 2, 3)).T
+        )
+        if not model_target.any():
+            output.append(
+                {
+                    "patient_id": row["patient_id"],
+                    "subject_id": row["subject_id"],
+                    "axial_index_ras": int(row["axial_index_ras"]),
+                    "case_id": row["case_id"],
+                    "native_target_pixels": int(native.sum()),
+                    "post_resize_target_pixels": int(model_target.sum()),
+                    "volume_edge": int(row["axial_index_ras"])
+                    in (0, int(row["depth"]) - 1),
+                    "orientation": "axial",
+                }
+            )
+    membership_hash = hashlib.sha256(
+        json.dumps(output, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if (
+        len(output) != 82
+        or len({row["patient_id"] for row in output}) != 54
+        or min(row["native_target_pixels"] for row in output) != 1
+        or max(row["native_target_pixels"] for row in output) != 15
+        or any(row["post_resize_target_pixels"] != 0 for row in output)
+        or membership_hash != EXPECTED_TARGET_LOSS_SHA256
+    ):
+        raise ValueError(
+            "Amendment 17 target-loss membership mismatch: "
+            f"count={len(output)}, hash={membership_hash}"
+        )
+    return output
+
+
+def nonrepresentable_failure_statistics(prediction: np.ndarray) -> dict:
+    prediction = np.asarray(prediction, dtype=bool)
+    labeled, component_count = ndimage.label(prediction, structure=np.ones((3, 3)))
+    predicted_pixels = int(prediction.sum())
+    if component_count:
+        sizes = np.bincount(labeled.ravel())[1:]
+        largest_fraction = float(sizes.max() / predicted_pixels)
+    else:
+        largest_fraction = 0.0
+    return {
+        "reference_foreground_pixels": 0,
+        "prediction_foreground_pixels": predicted_pixels,
+        "overlap_pixels": 0,
+        "prediction_reference_ratio": None,
+        "overlap_exists": False,
+        "empty_prediction": predicted_pixels == 0,
+        "nonempty_zero_overlap": predicted_pixels > 0,
+        "severe_under_prediction": False,
+        "severe_over_prediction": False,
+        "fragmented_prediction": component_count > 1,
+        "prediction_connected_components": int(component_count),
+        "nonoverlap_component_count": int(component_count),
+        "disconnected_false_positive": component_count > 1,
+        "largest_component_fraction": largest_fraction,
+        "reference_touches_model_edge": False,
+        "prediction_touches_model_edge": bool(
+            prediction[0].any()
+            or prediction[-1].any()
+            or prediction[:, 0].any()
+            or prediction[:, -1].any()
+        ),
+        "primary_failure_mode": "target_not_representable_at_128",
+        "target_not_representable_at_128": True,
+    }
+
+
+def subject_classifier_evaluation(rows, probabilities):
+    keys, members = x01.subject_index(rows)
+    subject_probability = np.asarray(
+        [probabilities[members[key]].mean(axis=0) for key in keys], dtype=np.float64
+    )
+
+    def metrics(values):
+        predicted = values.argmax(axis=1)
+        correct = predicted == GLIOMA_INDEX
+        onehot = np.eye(4, dtype=np.float64)[np.full(len(values), GLIOMA_INDEX)]
+        calibration = x01.equal_frequency_calibration(values.max(axis=1), correct)
+        return {
+            "accuracy": float(correct.mean()),
+            "glioma_recall": float(correct.mean()),
+            "nll": float(-np.log(np.clip(values[:, GLIOMA_INDEX], EPSILON, 1)).mean()),
+            "brier": float(np.square(values - onehot).sum(axis=1).mean()),
+            "top_label_ece": calibration["ece"],
+            "top_label_mce": calibration["mce"],
+            "reliability_bins": calibration["bins"],
+            "confusion": {
+                name: int(np.sum(predicted == index))
+                for index, name in enumerate(CLASS_NAMES)
+            },
+            "one_vs_rest_auroc": "NOT_ESTIMABLE: single true category",
+            "no_tumor_specificity": "NOT_ESTIMABLE: no no-tumor subjects",
+            "binary_tumor_auroc": "NOT_ESTIMABLE: no no-tumor subjects",
+        }
+
+    point = metrics(subject_probability)
+    generator = np.random.default_rng(SEED)
+    bootstrap = defaultdict(list)
+    for _ in range(BOOTSTRAPS):
+        selected = subject_probability[generator.integers(0, len(keys), size=len(keys))]
+        value = metrics(selected)
+        for name in (
+            "accuracy",
+            "glioma_recall",
+            "nll",
+            "brier",
+            "top_label_ece",
+            "top_label_mce",
+        ):
+            bootstrap[name].append(value[name])
+    point["bootstrap_ci95"] = {
+        name: x01.percentile_ci(values) for name, values in bootstrap.items()
+    }
+    point["subjects"] = len(keys)
+    point["aggregation"] = "Mean slice probability per subject over tumor-bearing slices"
+    return point
+
+
+def boundary_metrics_physical(prediction, reference, mm_y: float, mm_x: float):
+    structure = np.ones((3, 3), dtype=bool)
+    predicted_boundary = prediction ^ binary_erosion(prediction, structure=structure)
+    reference_boundary = reference ^ binary_erosion(reference, structure=structure)
+    if not predicted_boundary.any():
+        return 0.0, None
+    prediction_close = binary_dilation(predicted_boundary, structure=structure, iterations=2)
+    reference_close = binary_dilation(reference_boundary, structure=structure, iterations=2)
+    precision = float((predicted_boundary & reference_close).sum() / predicted_boundary.sum())
+    recall = float((reference_boundary & prediction_close).sum() / reference_boundary.sum())
+    f1 = 2 * precision * recall / max(precision + recall, EPSILON)
+    pred_points = np.column_stack(np.where(predicted_boundary)).astype(np.float64)
+    ref_points = np.column_stack(np.where(reference_boundary)).astype(np.float64)
+    scale = np.asarray([mm_y, mm_x], dtype=np.float64)
+    pred_points *= scale
+    ref_points *= scale
+    pred_tree, ref_tree = cKDTree(pred_points), cKDTree(ref_points)
+    hausdorff = max(
+        float(ref_tree.query(pred_points, k=1)[0].max()),
+        float(pred_tree.query(ref_points, k=1)[0].max()),
+    )
+    return f1, hausdorff
+
+
+def whole_volume_scores(rows, hard):
+    grouped = defaultdict(list)
+    for index, row in enumerate(rows):
+        grouped[row["subject_id"]].append((index, row))
+    output = []
+    slice_counts = []
+    for subject_id in sorted(grouped):
+        members = sorted(grouped[subject_id], key=lambda item: int(item[1]["axial_index_ras"]))
+        mask, _, _ = external.load_canonical_nifti(PAYLOAD / members[0][1]["mask_path"])
+        mask = np.isin(np.rint(mask).astype(np.uint8), (1, 2, 3))
+        intersection = predicted = reference = 0
+        for index, row in members:
+            source_reference = mask[:, :, int(row["axial_index_ras"])].T
+            geometry = external.letterbox_geometry(int(row["width"]), int(row["height"]), 128)
+            source_prediction = external.restore_to_source(hard[index], geometry, mask=True)
+            current_intersection = int(np.count_nonzero(source_prediction & source_reference))
+            current_prediction = int(np.count_nonzero(source_prediction))
+            current_reference = int(np.count_nonzero(source_reference))
+            intersection += current_intersection
+            predicted += current_prediction
+            reference += current_reference
+            slice_counts.append(
+                {
+                    "case_id": row["case_id"],
+                    "subject_id": subject_id,
+                    "axial_index_ras": row["axial_index_ras"],
+                    "reference_has_tumor": bool(current_reference),
+                    "intersection_pixels": current_intersection,
+                    "prediction_pixels": current_prediction,
+                    "reference_pixels": current_reference,
+                    "dice": 2
+                    * current_intersection
+                    / max(current_prediction + current_reference, 1),
+                    "iou": current_intersection
+                    / max(
+                        current_prediction + current_reference - current_intersection,
+                        1,
+                    ),
+                }
+            )
+        output.append(
+            {
+                "subject_id": subject_id,
+                "intersection_pixels": intersection,
+                "prediction_pixels": predicted,
+                "reference_pixels": reference,
+                "dice": 2 * intersection / max(predicted + reference, 1),
+                "iou": intersection / max(predicted + reference - intersection, 1),
+            }
+        )
+    dice = np.asarray([row["dice"] for row in output], dtype=np.float64)
+    iou = np.asarray([row["iou"] for row in output], dtype=np.float64)
+    generator = np.random.default_rng(SEED)
+    dice_boot, iou_boot = [], []
+    for _ in range(BOOTSTRAPS):
+        indices = generator.integers(0, len(output), size=len(output))
+        dice_boot.append(float(dice[indices].mean()))
+        iou_boot.append(float(iou[indices].mean()))
+    total_i = sum(row["intersection_pixels"] for row in output)
+    total_p = sum(row["prediction_pixels"] for row in output)
+    total_r = sum(row["reference_pixels"] for row in output)
+    summary = {
+        "subject_macro_dice": float(dice.mean()),
+        "subject_macro_dice_ci95": x01.percentile_ci(dice_boot),
+        "subject_macro_iou": float(iou.mean()),
+        "subject_macro_iou_ci95": x01.percentile_ci(iou_boot),
+        "cohort_global_dice": 2 * total_i / max(total_p + total_r, 1),
+        "cohort_global_iou": total_i / max(total_p + total_r - total_i, 1),
+        "subjects": len(output),
+        "axial_slices_including_empty_reference": len(rows),
+    }
+    return summary, output, slice_counts
+
+
+def summarize_failure_modes(rows):
+    if not rows:
+        return {
+            "all": {"count": 0},
+            "glioma": {"count": 0},
+            "meningioma": "NOT_ESTIMABLE",
+            "pituitary": "NOT_ESTIMABLE",
+        }
+    flags = (
+        "empty_prediction",
+        "nonempty_zero_overlap",
+        "severe_under_prediction",
+        "severe_over_prediction",
+        "fragmented_prediction",
+        "disconnected_false_positive",
+        "reference_touches_model_edge",
+        "prediction_touches_model_edge",
+    )
+    summary = {}
+    for name, members in (("all", rows), ("glioma", rows)):
+        values = {"count": len(members)}
+        for flag in flags:
+            count = sum(bool(row[flag]) for row in members)
+            values[flag] = {"count": count, "fraction": count / len(members)}
+        values["complete_miss"] = {
+            "count": values["empty_prediction"]["count"] + values["nonempty_zero_overlap"]["count"],
+            "fraction": (
+                values["empty_prediction"]["count"] + values["nonempty_zero_overlap"]["count"]
+            )
+            / len(members),
+        }
+        primary = Counter(row["primary_failure_mode"] for row in members)
+        values["primary_failure_modes"] = {
+            key: {"count": count, "fraction": count / len(members)}
+            for key, count in sorted(primary.items())
+        }
+        summary[name] = values
+    summary["meningioma"] = "NOT_ESTIMABLE"
+    summary["pituitary"] = "NOT_ESTIMABLE"
+    return summary
+
+
+def mask_features(targets):
+    foreground, centroid_y, centroid_x, components = [], [], [], []
+    for target in targets:
+        foreground.append(float(target.mean()))
+        points = np.column_stack(np.where(target))
+        centroid_y.append(float(points[:, 0].mean() / 127))
+        centroid_x.append(float(points[:, 1].mean() / 127))
+        components.append(float(ndimage.label(target, structure=np.ones((3, 3)))[1]))
+    return {
+        "foreground_fraction": np.asarray(foreground),
+        "centroid_y": np.asarray(centroid_y),
+        "centroid_x": np.asarray(centroid_x),
+        "component_count": np.asarray(components),
+    }
+
+
+def boundary_gradient(images, targets):
+    values = []
+    for image, target in zip(images, targets, strict=True):
+        gradient_y, gradient_x = np.gradient(image.astype(np.float64))
+        magnitude = np.hypot(gradient_y, gradient_x)
+        boundary = target ^ binary_erosion(target, structure=np.ones((3, 3), dtype=bool))
+        values.append(float(magnitude[boundary].mean()))
+    return np.asarray(values)
+
+
+def js_divergence(left, right, bins):
+    left_hist = np.histogram(left, bins=bins)[0].astype(np.float64) + EPSILON
+    right_hist = np.histogram(right, bins=bins)[0].astype(np.float64) + EPSILON
+    left_hist /= left_hist.sum()
+    right_hist /= right_hist.sum()
+    return float(jensenshannon(left_hist, right_hist, base=2.0) ** 2)
+
+
+def distribution_gap(left, right, bins, rows=None):
+    left = np.asarray(left)
+    right = np.asarray(right)
+    result = {
+        "wasserstein": float(wasserstein_distance(left, right)),
+        "jensen_shannon_divergence": js_divergence(left, right, bins),
+        "external_mean": float(np.mean(left)),
+        "brisc_validation_mean": float(np.mean(right)),
+    }
+    if rows is not None:
+        if len(left) != len(rows):
+            raise ValueError(
+                "Domain-gap feature/membership length mismatch: "
+                f"features={len(left)}, membership={len(rows)}"
+            )
+        keys, members = x01.subject_index(rows)
+        generator = np.random.default_rng(SEED)
+        bootstrap = defaultdict(list)
+        for _ in range(BOOTSTRAPS):
+            selected_keys = generator.choice(keys, size=len(keys), replace=True)
+            indices = np.concatenate([members[key] for key in selected_keys])
+            selected = left[indices]
+            bootstrap["wasserstein"].append(
+                float(wasserstein_distance(selected, right))
+            )
+            bootstrap["jensen_shannon_divergence"].append(
+                js_divergence(selected, right, bins)
+            )
+            bootstrap["external_mean"].append(float(np.mean(selected)))
+        result["patient_bootstrap_ci95"] = {
+            name: x01.percentile_ci(values) for name, values in bootstrap.items()
+        }
+    return result
+
+
+def brisc_segmenter_images(order):
+    images = []
+    for row in order:
+        with Image.open(ROOT / row["path"]) as source:
+            tensor, _geometry, _window = external.preprocess_segmenter(np.asarray(source.convert("L")))
+        images.append(tensor[0])
+    return np.asarray(images, dtype=np.float32)
+
+
+def domain_gap(
+    rows,
+    images,
+    intensity,
+    embeddings,
+    targets,
+    reliability,
+    representable,
+    classifier,
+    device,
+    audit,
+):
+    primary_rows = rows
+    representable_rows = [
+        row for row, keep in zip(primary_rows, representable, strict=True) if keep
+    ]
+    if len(primary_rows) != 9464 or len(representable_rows) != 9382:
+        raise ValueError(
+            "X03 domain-gap membership changed: "
+            f"primary={len(primary_rows)}, representable={len(representable_rows)}"
+        )
+    if not (
+        len(images)
+        == len(intensity)
+        == len(embeddings)
+        == len(targets)
+        == len(reliability)
+        == len(primary_rows)
+    ):
+        raise ValueError("X03 full domain-gap feature membership mismatch")
+    brisc = x01.brisc_domain_reference(classifier, device)
+    keep = np.asarray([row["label"] == "glioma" for row in brisc["order"]])
+    brisc = {
+        **brisc,
+        "order": [
+            row for row, selected in zip(brisc["order"], keep, strict=True) if selected
+        ],
+        "raw_probability": brisc["raw_probability"][keep],
+        "targets": brisc["targets"][keep],
+        "reliability": brisc["reliability"][keep],
+        "embeddings": brisc["embeddings"][keep],
+        "intensity": brisc["intensity"][keep],
+    }
+    brisc_images = brisc_segmenter_images(brisc["order"])
+    external_features = mask_features(targets[representable])
+    brisc_features = mask_features(brisc["targets"])
+    external_gradient = boundary_gradient(images[representable], targets[representable])
+    brisc_gradient = boundary_gradient(brisc_images, brisc["targets"])
+    embedding_wasserstein = [
+        wasserstein_distance(embeddings[:, index], brisc["embeddings"][:, index])
+        for index in range(embeddings.shape[1])
+    ]
+    return {
+        "reference": "BRISC development validation only; sealed test pixels unopened",
+        "cohort": {
+            "modality": "3T axial contrast-enhanced T1 MRI",
+            "orientation": "axial; canonical RAS axis 2",
+            "subjects": len({row["subject_id"] for row in rows}),
+            "tumor_bearing_slices": len(rows),
+            "model_space_representable_slices": int(representable.sum()),
+            "target_not_representable_at_128": int((~representable).sum()),
+            "canonical_shape_counts": audit["dataset"]["shape_counts"],
+            "voxel_spacing_mm": {
+                "x_range": [min(row["voxel_x_mm"] for row in rows), max(row["voxel_x_mm"] for row in rows)],
+                "y_range": [min(row["voxel_y_mm"] for row in rows), max(row["voxel_y_mm"] for row in rows)],
+                "z_range": [min(row["voxel_z_mm"] for row in rows), max(row["voxel_z_mm"] for row in rows)],
+            },
+        },
+        "continuous_distribution_shift": {
+            "model_input_mean": distribution_gap(intensity[:, 0], brisc["intensity"][:, 0], np.linspace(0, 1, 31), primary_rows),
+            "model_input_sd": distribution_gap(intensity[:, 1], brisc["intensity"][:, 1], np.linspace(0, 0.5, 31), primary_rows),
+            "nonzero_mean": distribution_gap(intensity[:, 2], brisc["intensity"][:, 2], np.linspace(0, 1, 31), primary_rows),
+            "foreground_fraction": distribution_gap(external_features["foreground_fraction"], brisc_features["foreground_fraction"], np.linspace(0, 0.5, 31), representable_rows),
+            "centroid_y": distribution_gap(external_features["centroid_y"], brisc_features["centroid_y"], np.linspace(0, 1, 31), representable_rows),
+            "centroid_x": distribution_gap(external_features["centroid_x"], brisc_features["centroid_x"], np.linspace(0, 1, 31), representable_rows),
+            "component_count": distribution_gap(external_features["component_count"], brisc_features["component_count"], np.arange(0.5, 10.6, 1), representable_rows),
+            "reference_boundary_gradient": distribution_gap(external_gradient, brisc_gradient, np.linspace(0, 1.5, 31), representable_rows),
+        },
+        "fragmented_reference_fraction": {
+            "upenn_gbm": float(np.mean(external_features["component_count"] > 1)),
+            "brisc_validation": float(np.mean(brisc_features["component_count"] > 1)),
+        },
+        "encoder_representation_shift": {
+            "centroid_euclidean": float(np.linalg.norm(embeddings.mean(axis=0) - brisc["embeddings"].mean(axis=0))),
+            "dimension_mean_wasserstein": float(np.mean(embedding_wasserstein)),
+            "dimension_median_wasserstein": float(np.median(embedding_wasserstein)),
+            "encoder": "frozen classifier ResNet18 avgpool (512 dimensions)",
+        },
+        "reliability_score_shift": distribution_gap(reliability, brisc["reliability"], np.linspace(0, 1, 31), primary_rows),
+        "policy_review_rate": {
+            "upenn_gbm": float(np.mean(reliability < external.RELIABILITY_POLICY_THRESHOLD)),
+            "brisc_operational_reference": float(np.mean(brisc["reliability"] < external.RELIABILITY_POLICY_THRESHOLD)),
+        },
+        "bootstrap_membership": {
+            "primary_rows": len(primary_rows),
+            "representable_rows": len(representable_rows),
+            "input_encoder_reliability_policy_membership": "primary_rows",
+            "mask_geometry_boundary_membership": "representable_rows",
+        },
+    }
+
+
+def render_visual_panel(path: Path, rows, calibrated, targets, dice, eligible=None):
+    if eligible is None:
+        eligible = np.ones(len(rows), dtype=bool)
+    ordered = sorted(
+        (index for index in range(len(rows)) if eligible[index]),
+        key=lambda index: (dice[index], rows[index]["case_id"]),
+    )
+    selected = ordered[:6] + ordered[-6:]
+    figure, axes = plt.subplots(len(selected), 3, figsize=(9, 3 * len(selected)))
+    dataset = UpennDataset(rows)
+    for output_index, index in enumerate(selected):
+        model_input = dataset[index][0].numpy()[0]
+        reference = targets[index]
+        prediction = calibrated[index] >= 0.5
+        axes[output_index, 0].imshow(model_input, cmap="gray")
+        axes[output_index, 0].set_title(f"{rows[index]['case_id']} model input")
+        axes[output_index, 1].imshow(model_input, cmap="gray")
+        axes[output_index, 1].imshow(np.ma.masked_where(~reference, reference), cmap="Reds", alpha=0.55)
+        reference_title = (
+            "TARGET NOT REPRESENTABLE AT 128"
+            if not reference.any()
+            else "Reference (red)"
+        )
+        axes[output_index, 1].set_title(reference_title)
+        axes[output_index, 2].imshow(model_input, cmap="gray")
+        axes[output_index, 2].imshow(np.ma.masked_where(~prediction, prediction), cmap="Blues", alpha=0.55)
+        axes[output_index, 2].set_title(f"Prediction (cyan), Dice {dice[index]:.3f}")
+        for axis in axes[output_index]:
+            axis.axis("off")
+    figure.suptitle(
+        "X03 deterministic six worst / six best eligible glioma slices", y=1.0
+    )
+    figure.tight_layout()
+    figure.savefig(path, dpi=150, bbox_inches="tight")
+    plt.close(figure)
+
+
+def main() -> None:
+    config = read_json(EXPERIMENT / "config.json")
+    audit = read_json(AUDIT_RESULT)
+    if config["status"] != "AUDIT_COMPLETE" or audit["audit_outcome"] != "ELIGIBLE_INDEPENDENT":
+        raise ValueError("X03 does not have a passed independent audit-only state")
+    if x01.sha256(AUDIT_RESULT) != EXPECTED_AUDIT_SHA256:
+        raise ValueError("X03 audit result hash mismatch")
+    if x01.sha256(SUBJECT_MANIFEST) != EXPECTED_SUBJECT_MANIFEST_SHA256:
+        raise ValueError("X03 subject manifest hash mismatch")
+    if x01.sha256(TUMOR_SLICE_MANIFEST) != EXPECTED_TUMOR_SLICE_MANIFEST_SHA256:
+        raise ValueError("X03 tumor-slice manifest hash mismatch")
+    if x01.sha256(AMENDMENT_16) != EXPECTED_AMENDMENT_16_SHA256:
+        raise ValueError("Amendment 16 hash mismatch")
+    if x01.sha256(AMENDMENT_17) != EXPECTED_AMENDMENT_17_SHA256:
+        raise ValueError("Amendment 17 hash mismatch")
+    if x01.sha256(AMENDMENT_18) != EXPECTED_AMENDMENT_18_SHA256:
+        raise ValueError("Amendment 18 hash mismatch")
+    if x01.sha256(AMENDMENT_19) != EXPECTED_AMENDMENT_19_SHA256:
+        raise ValueError("Amendment 19 hash mismatch")
+    if config["segmentation_threshold"] != 0.5:
+        raise ValueError("Segmentation threshold changed")
+    if config["reliability_policy_threshold"] != "0.9490250173235835":
+        raise ValueError("Reliability threshold representation changed")
+
+    all_rows = build_evaluation_rows(read_csv(SUBJECT_MANIFEST), read_csv(TUMOR_SLICE_MANIFEST))
+    nonrepresentable_rows = target_representability(all_rows)
+    frozen = external.verify_frozen_artifacts()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    classifier, models = x01.load_models(device)
+    (
+        raw,
+        calibrated,
+        targets,
+        class_probability,
+        embeddings,
+        reliability,
+        intensity,
+        route,
+        all_hard,
+        primary_all_indices,
+    ) = run_inference(all_rows, classifier, models, device)
+
+    primary_rows = [all_rows[int(index)] for index in primary_all_indices]
+    hard = calibrated >= 0.5
+    raw_hard = raw >= 0.5
+    dice, iou = x01.mask_scores(hard, targets)
+    raw_dice, raw_iou = x01.mask_scores(raw_hard, targets)
+    predicted_class = class_probability.argmax(axis=1)
+    classifier_subject = subject_classifier_evaluation(primary_rows, class_probability)
+    representable = targets.any(axis=(1, 2))
+    if int((~representable).sum()) != 82:
+        raise ValueError("Amendment 17 target-loss count changed after inference")
+    dice[~representable] = 0.0
+    iou[~representable] = 0.0
+    raw_dice[~representable] = 0.0
+    raw_iou[~representable] = 0.0
+
+    boundary_f1 = np.empty(len(primary_rows), dtype=np.float64)
+    hausdorff_mm = np.full(len(primary_rows), np.nan, dtype=np.float64)
+    per_case, failure_rows = [], []
+    primary_images = []
+    primary_dataset = UpennDataset(primary_rows)
+    for index, row in enumerate(primary_rows):
+        image_tensor = primary_dataset[index][0].numpy()[0]
+        primary_images.append(image_tensor)
+        geometry = external.letterbox_geometry(int(row["width"]), int(row["height"]), 128)
+        mm_x = float(row["voxel_x_mm"]) * int(row["width"]) / geometry.resized_width
+        mm_y = float(row["voxel_y_mm"]) * int(row["height"]) / geometry.resized_height
+        if representable[index]:
+            boundary_f1[index], hausdorff = boundary_metrics_physical(
+                hard[index], targets[index], mm_y, mm_x
+            )
+            if hausdorff is not None:
+                hausdorff_mm[index] = hausdorff
+        else:
+            boundary_f1[index] = 0.0
+            hausdorff = None
+        record = {
+            "case_id": row["case_id"],
+            "subject_id": row["subject_id"],
+            "category": "glioma",
+            "axial_index_ras": row["axial_index_ras"],
+            "classifier_predicted": CLASS_NAMES[predicted_class[index]],
+            **{f"classifier_probability_{name}": float(class_probability[index, position]) for position, name in enumerate(CLASS_NAMES)},
+            "e07_route": route[index],
+            "raw_dice": float(raw_dice[index]),
+            "raw_iou": float(raw_iou[index]),
+            "calibrated_dice": float(dice[index]),
+            "calibrated_iou": float(iou[index]),
+            "reference_pixels": int(targets[index].sum()),
+            "predicted_pixels": int(hard[index].sum()),
+            "boundary_f1_tolerance_2": float(boundary_f1[index]),
+            "hausdorff_mm": None if np.isnan(hausdorff_mm[index]) else float(hausdorff_mm[index]),
+            "r02_reliability": float(reliability[index]),
+            "policy_status": "STANDARD" if reliability[index] >= external.RELIABILITY_POLICY_THRESHOLD else "REVIEW_REQUIRED",
+            "failure_dice_below_0_50": bool(dice[index] < 0.5),
+            "target_not_representable_at_128": bool(not representable[index]),
+        }
+        per_case.append(record)
+        if dice[index] < 0.5:
+            statistics = (
+                failure_analysis.component_statistics(hard[index], targets[index])
+                if representable[index]
+                else nonrepresentable_failure_statistics(hard[index])
+            )
+            failure_rows.append({**record, **statistics})
+
+    whole_summary, whole_subject_rows, whole_slice_rows = whole_volume_scores(all_rows, all_hard)
+    source_primary_rows = [row for row in whole_slice_rows if row["reference_has_tumor"]]
+    if [row["case_id"] for row in source_primary_rows] != [
+        row["case_id"] for row in primary_rows
+    ]:
+        raise ValueError("Source-coordinate primary membership/order changed")
+    source_dice = np.asarray([row["dice"] for row in source_primary_rows])
+    source_iou = np.asarray([row["iou"] for row in source_primary_rows])
+    representable_rows = [
+        row for row, keep in zip(primary_rows, representable, strict=True) if keep
+    ]
+    representable_dice = dice[representable]
+    representable_iou = iou[representable]
+    representable_boundary = boundary_f1[representable]
+    segmentation = {
+        "primary_view": "tumor-bearing 2D axial slices",
+        "registered_gate_view": "strict all-9,464 model-space view; 82 TARGET_NOT_REPRESENTABLE_AT_128 cases receive zero",
+        "slice_macro": {
+            "dice": float(dice.mean()),
+            "iou": float(iou.mean()),
+            "raw_dice": float(raw_dice.mean()),
+            "raw_iou": float(raw_iou.mean()),
+            "boundary_f1_tolerance_2": float(boundary_f1.mean()),
+            "hausdorff_mm_nonempty_predictions": float(np.nanmean(hausdorff_mm)),
+        },
+        "subject_macro": {
+            "dice": x01.mean_with_patient_bootstrap(dice, primary_rows),
+            "iou": x01.mean_with_patient_bootstrap(iou, primary_rows),
+            "boundary_f1_tolerance_2": x01.mean_with_patient_bootstrap(boundary_f1, primary_rows),
+        },
+        "model_space": {
+            "role": "secondary sensitivity; does not replace the strict gate",
+            "cases": len(representable_rows),
+            "dice": x01.mean_with_patient_bootstrap(
+                representable_dice, representable_rows
+            ),
+            "iou": x01.mean_with_patient_bootstrap(
+                representable_iou, representable_rows
+            ),
+            "boundary_f1_tolerance_2": x01.mean_with_patient_bootstrap(
+                representable_boundary, representable_rows
+            ),
+            "slice_mean_dice": float(representable_dice.mean()),
+            "slice_mean_iou": float(representable_iou.mean()),
+        },
+        "source_coordinate_all_9464": {
+            "role": "secondary native-resolution view; restored frozen hard predictions",
+            "cases": len(source_primary_rows),
+            "dice": x01.mean_with_patient_bootstrap(source_dice, primary_rows),
+            "iou": x01.mean_with_patient_bootstrap(source_iou, primary_rows),
+            "slice_mean_dice": float(source_dice.mean()),
+            "slice_mean_iou": float(source_iou.mean()),
+        },
+        "per_category": {
+            "meningioma": "NOT_ESTIMABLE",
+            "glioma": {
+                "dice": x01.mean_with_patient_bootstrap(dice, primary_rows),
+                "iou": x01.mean_with_patient_bootstrap(iou, primary_rows),
+                "slice_mean_dice": float(dice.mean()),
+                "slice_mean_iou": float(iou.mean()),
+                "boundary_f1_tolerance_2": x01.mean_with_patient_bootstrap(boundary_f1, primary_rows),
+                "failures_below_0_50": int(np.sum(dice < 0.5)),
+                "zero_dice": int(np.sum(dice == 0)),
+            },
+        },
+        "zero_dice": int(np.sum(dice == 0)),
+        "empty_prediction": int(np.sum(hard.sum(axis=(1, 2)) == 0)),
+        "dice_below_0_50": int(np.sum(dice < 0.5)),
+        "target_not_representable_at_128": int((~representable).sum()),
+        "exploratory_whole_volume": {
+            **whole_summary,
+            "role": "exploratory; not the registered gate because training used annotated 2D slices",
+        },
+    }
+
+    calibration_targets = targets[representable]
+    calibration_raw = raw[representable]
+    calibration_probability = calibrated[representable]
+    regions = {
+        "lesion_centered": np.stack(
+            [
+                calibration_common.lesion_regions(
+                    calibration_targets[index : index + 1]
+                )[0]
+                for index in range(len(representable_rows))
+            ]
+        )
+    }
+    regions["background"] = ~regions["lesion_centered"]
+    regions["whole_image"] = np.ones_like(calibration_targets, dtype=bool)
+    pixel_calibration = {}
+    for region_name, region_masks in regions.items():
+        raw_items = [
+            x01.pixel_region_contributions(
+                calibration_raw[index], calibration_targets[index], region_masks[index]
+            )
+            for index in range(len(representable_rows))
+        ]
+        calibrated_items = [
+            x01.pixel_region_contributions(
+                calibration_probability[index],
+                calibration_targets[index],
+                region_masks[index],
+            )
+            for index in range(len(representable_rows))
+        ]
+        pixel_calibration[region_name] = {
+            "raw": x01.summarize_pixel_contributions(raw_items, representable_rows),
+            "c03_operational": x01.summarize_pixel_contributions(
+                calibrated_items, representable_rows
+            ),
+        }
+    pixel_calibration["evaluation_membership"] = {
+        "model_space_representable_cases": len(representable_rows),
+        "excluded_target_not_representable_at_128": 82,
+        "excluded_case_ids": sorted(row["case_id"] for row in nonrepresentable_rows),
+        "reason": "Lesion-centred regions are undefined when the frozen model-space reference is empty.",
+    }
+
+    success = dice >= 0.5
+    if success.any() and (~success).any():
+        reliability_result = x01.reliability_metrics(reliability, success, primary_rows)
+        order = np.argsort(reliability)
+        top_count = math.ceil(0.20 * len(primary_rows))
+        top = order[:top_count]
+        zero = dice == 0
+        review = reliability < external.RELIABILITY_POLICY_THRESHOLD
+        reliability_result["top20_risk"] = {
+            "cases": top_count,
+            "failures_captured": int((~success[top]).sum()),
+            "failures_total": int((~success).sum()),
+            "zero_dice_captured": int(zero[top].sum()),
+            "zero_dice_total": int(zero.sum()),
+        }
+        reliability_result["policy"] = {
+            "threshold": "0.9490250173235835",
+            "review_required": int(review.sum()),
+            "standard": int((~review).sum()),
+            "review_rate": float(review.mean()),
+            "failures_caught": int((review & ~success).sum()),
+            "failures_missed": int((~review & ~success).sum()),
+            "acceptable_reviewed": int((review & success).sum()),
+            "p01_total_cost": int((review & ~success).sum() + (review & success).sum() + 10 * (~review & ~success).sum()),
+        }
+    else:
+        reliability_result = "NOT_ESTIMABLE: outcome has one class"
+
+    taxonomy = summarize_failure_modes(failure_rows)
+    gap = domain_gap(
+        primary_rows,
+        np.asarray(primary_images),
+        intensity,
+        embeddings,
+        targets,
+        reliability,
+        representable,
+        classifier,
+        device,
+        audit,
+    )
+    render_visual_panel(ARTIFACTS / "visual_audit_panel.png", primary_rows, calibrated, targets, dice)
+    render_visual_panel(
+        ARTIFACTS / "visual_audit_representable_panel.png",
+        primary_rows,
+        calibrated,
+        targets,
+        dice,
+        eligible=representable,
+    )
+    x01.plot_reliability(
+        ARTIFACTS / "classifier_reliability.png",
+        classifier_subject["reliability_bins"],
+        "X03 patient-level classifier reliability",
+    )
+    if isinstance(reliability_result, dict):
+        x01.plot_reliability(
+            ARTIFACTS / "case_reliability.png",
+            reliability_result["bins"],
+            "X03 case reliability transfer",
+        )
+
+    gates = {
+        "classifier_glioma_recall_at_least_0_85": classifier_subject["glioma_recall"] >= 0.85,
+        "classifier_top_label_ece_at_most_0_05": classifier_subject["top_label_ece"] <= 0.05,
+        "glioma_subject_macro_dice_at_least_0_55": segmentation["subject_macro"]["dice"]["subject_macro_mean"] >= 0.55,
+    }
+    if isinstance(reliability_result, dict):
+        gates.update(
+            {
+                "reliability_auroc_at_least_0_75": reliability_result["failure_detection_auroc"] >= 0.75,
+                "reliability_auroc_ci_lower_at_least_0_70": reliability_result["bootstrap_ci95"]["failure_detection_auroc"][0] >= 0.70,
+                "reliability_ece_at_most_0_05": reliability_result["ece"] <= 0.05,
+                "reliability_brier_skill_positive": reliability_result["brier_skill"] > 0,
+                "reliability_brier_skill_ci_lower_positive": reliability_result["bootstrap_ci95"]["brier_skill"][0] > 0,
+                "top20_failure_capture_at_least_half": reliability_result["top20_risk"]["failures_captured"] / max(reliability_result["top20_risk"]["failures_total"], 1) >= 0.50,
+            }
+        )
+    else:
+        gates["reliability_gate"] = "NOT_ESTIMABLE"
+    estimable_gate_values = [value for value in gates.values() if isinstance(value, bool)]
+
+    result = {
+        "schema_version": 1,
+        "experiment_id": "x03_upenn_gbm",
+        "status": "EVALUATION_COMPLETE_VISUAL_REVIEW_PENDING",
+        "audit_outcome": "ELIGIBLE_INDEPENDENT",
+        "independent_external_evidence": True,
+        "scope": "Independent UPENN-GBM glioma transport; retrospective research evaluation, not clinical validation",
+        "population": {
+            "subjects": len({row["subject_id"] for row in primary_rows}),
+            "primary_tumor_bearing_slices": len(primary_rows),
+            "model_space_representable_slices": int(representable.sum()),
+            "target_not_representable_at_128": int((~representable).sum()),
+            "secondary_all_axial_slices": len(all_rows),
+            "true_category": "glioma",
+        },
+        "analytical_views": {
+            "1_strict_model_space": "9,464 source-positive slices; registered gate; 82 unrepresentable targets receive zero",
+            "2_representable_model_space": "9,382 slices; secondary sensitivity only",
+            "3_source_coordinate": "9,464 source-positive slices at native resolution after restoring frozen hard predictions",
+            "4_whole_volume": "22,785 slices; exploratory and not used for the registered gate",
+            "5_confidence_transport": "pixel calibration on 9,382 representable slices; R02 reliability on strict 9,464-slice outcomes",
+        },
+        "classifier": classifier_subject,
+        "segmentation": segmentation,
+        "pixel_calibration": pixel_calibration,
+        "reliability_transfer": reliability_result,
+        "failure_taxonomy": taxonomy,
+        "domain_gap": gap,
+        "gates": {
+            "status": "PASS" if all(estimable_gate_values) else "FAIL",
+            "checks": gates,
+            "unidentifiable_metrics": [
+                "classifier OVR AUROC",
+                "no-tumor specificity",
+                "binary tumor/no-tumor AUROC",
+                "pituitary metrics",
+                "meningioma metrics",
+            ],
+        },
+        "verification": {
+            "frozen_hashes": {**frozen, **x01.EXPECTED_HASHES},
+            "audit_result_sha256": x01.sha256(AUDIT_RESULT),
+            "subject_manifest_sha256": x01.sha256(SUBJECT_MANIFEST),
+            "tumor_slice_manifest_sha256": x01.sha256(TUMOR_SLICE_MANIFEST),
+            "amendment_16_sha256": x01.sha256(AMENDMENT_16),
+            "amendment_17_sha256": x01.sha256(AMENDMENT_17),
+            "amendment_18_sha256": x01.sha256(AMENDMENT_18),
+            "amendment_19_sha256": x01.sha256(AMENDMENT_19),
+            "target_loss_membership_sha256": EXPECTED_TARGET_LOSS_SHA256,
+            "device": str(device),
+            "bootstrap_repetitions": BOOTSTRAPS,
+            "bootstrap_seed": SEED,
+            "bootstrap_unit": "subject_id",
+            "segmentation_threshold": 0.5,
+            "reliability_threshold": "0.9490250173235835",
+            "brisc_files_opened": {"development_validation": 680, "sealed_test": 0},
+            "external_subjects_evaluated": 147,
+            "external_slices_inferred": len(all_rows),
+            "inference_attempts": {
+                "attempt_1_target_representability_stop_slices_inferred": 0,
+                "attempt_2_loader_defect_stop_slices_inferred": 144,
+                "attempt_3_domain_bootstrap_stop_slices_inferred": 22785,
+                "attempt_4_completed": 1,
+            },
+            "neural_retraining": False,
+            "calibrator_refit": False,
+            "reliability_refit": False,
+            "threshold_changed": False,
+            "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
+        },
+        "limitations": [
+            "The cohort contains only glioblastoma subjects, so no-tumor specificity and binary tumor/no-tumor AUROC are not estimable.",
+            "Glioblastoma is a subtype of glioma. This coarse mapping is not directly comparable to BRISC's heterogeneous glioma category.",
+            "The cohort cannot estimate meningioma or pituitary performance.",
+            "Primary 2D analysis selects tumor-bearing slices using the reference mask; whole-volume analysis including empty-reference slices is reported separately.",
+            "Eighty-two native source-positive slices lose all reference foreground under the frozen 128x128 nearest-neighbor transform. They receive zero in the strict primary gate and are excluded only from lesion-region calibration, where the region is undefined.",
+            "The registered whole-tumor target is the union of derivative labels 1, 2, and 3; subregion performance is not estimated.",
+            "The atlas-aligned, skull-stripped CE-Gd T1 images differ materially from BRISC's mixed acquisition and presentation.",
+            "This single-site retrospective cohort does not establish prospective performance, clinical validity, diagnostic safety, or suitability for patient care.",
+            "The curated release is attributed to TCIA UPENN-GBM v2 under CC BY 4.0.",
+        ],
+    }
+    if nonrepresentable_rows:
+        write_csv(ARTIFACTS / "target_not_representable.csv", nonrepresentable_rows)
+    write_csv(ARTIFACTS / "per_case_predictions.csv", per_case)
+    if failure_rows:
+        write_csv(ARTIFACTS / "failure_taxonomy.csv", failure_rows)
+    write_csv(ARTIFACTS / "whole_volume_subject_metrics.csv", whole_subject_rows)
+    write_csv(ARTIFACTS / "whole_volume_slice_counts.csv", whole_slice_rows)
+    write_json(ARTIFACTS / "evaluation_result.json", result)
+    write_json(EXPERIMENT / "result.json", result)
+    write_json(ARTIFACTS / "domain_gap.json", gap)
+    write_json(ARTIFACTS / "failure_taxonomy_summary.json", taxonomy)
+    write_json(ARTIFACTS / "pixel_calibration.json", pixel_calibration)
+    print(
+        json.dumps(
+            {
+                "status": result["status"],
+                "gates": result["gates"],
+                "classifier": classifier_subject,
+                "segmentation": segmentation,
+                "reliability": reliability_result,
+            },
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

@@ -714,3 +714,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
 - **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
 - **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.
+
+
+## 2026-09-29T09:22:40+05:30 — Audit UPENN-GBM v2 before inference
+
+- **Decision made:** Classify X03 as `ELIGIBLE_INDEPENDENT` and authorize one frozen-stack evaluation.
+- **Triggering artifact:** `experiments/x03_upenn_gbm/artifacts/dataset_audit.json`, SHA256 `f870a89cd5165e41187220c5c2326b9597c181427ed16dc643678da9fb9bc30a`.
+- **Rationale:** All 147 expert masks and paired CE-Gd T1 volumes passed published SHA256, size, modality, geometry, label, tumor-presence, duplicate, and overlap checks. Exact cross-dataset pHash candidates: 0.
+- **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
+- **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
+- **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.

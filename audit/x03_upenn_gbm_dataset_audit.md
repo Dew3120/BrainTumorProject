@@ -30,11 +30,11 @@
 
 Glioblastoma is a subtype of glioma. The mapping `glioblastoma -> glioma` is coarse. This GBM-only, atlas-aligned, whole-tumor cohort is not directly comparable to heterogeneous BRISC glioma, and every X03 result must repeat that limitation.
 
-## Native datatype verification
+## Native datatype and membership verification
 
-The renewed Amendment-18 audit preserved the release's native `uint8` image and mask datatype through canonical NIfTI loading. All images therefore use the registered `native_uint8` adapter path. A constant-valued `uint8` regression test verifies that reference-empty edge slices are accepted without introducing artificial intensity variation.
+The Amendment-19 audit preserved native `uint8` image and mask data through canonical NIfTI loading. Constant `uint8` slices use the registered `native_uint8` path. Regression tests also bind mask-derived domain analysis to 9,382 representable rows and input, encoder, reliability, and policy analyses to all 9,464 primary rows.
 
 ## Disk and decision
 
-- Drive E free after audit: 324.236 GiB. The 250 GB sequential-processing trigger is not reached.
+- Drive E free after audit: 324.234 GiB. The 250 GB sequential-processing trigger is not reached.
 - The frozen stack may proceed to one X03 evaluation under `ELIGIBLE_INDEPENDENT`. No model, calibration mapping, reliability estimator, mask threshold, policy threshold, or gate is changed.
