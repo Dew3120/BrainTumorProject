@@ -107,8 +107,8 @@
   },
   "disk": {
     "minimal_payload_bytes": 427673840,
-    "drive_e_free_bytes_after_audit": 348148006912,
-    "drive_e_free_gib_after_audit": 324.23809814453125,
+    "drive_e_free_bytes_after_audit": 348145676288,
+    "drive_e_free_gib_after_audit": 324.2359275817871,
     "projected_total_below_250_gb": true
   }
 }

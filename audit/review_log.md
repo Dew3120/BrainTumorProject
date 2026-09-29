@@ -674,3 +674,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** BRISC sealed-test access, neural retraining, calibration/reliability refitting, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
 - **Alternatives considered:** Exclude the 82 slices; rejected. Change interpolation or dilate targets; rejected. End X03 permanently; rejected because strict, representable-only, and native-coordinate views permit transparent evaluation without modifying the frozen stack.
 - **Who approved:** User explicitly approved Amendment 17, a renewed audit, and exactly one frozen evaluation restart.
+
+
+## 2026-09-29T08:31:25+05:30 — Audit UPENN-GBM v2 before inference
+
+- **Decision made:** Classify X03 as `ELIGIBLE_INDEPENDENT` and authorize one frozen-stack evaluation.
+- **Triggering artifact:** `experiments/x03_upenn_gbm/artifacts/dataset_audit.json`, SHA256 `bb72fe15bd9ce4cc19ce92d5a68f595207e29c94b2dbc65e6071c4849cbeab56`.
+- **Rationale:** All 147 expert masks and paired CE-Gd T1 volumes passed published SHA256, size, modality, geometry, label, tumor-presence, duplicate, and overlap checks. Exact cross-dataset pHash candidates: 0.
+- **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
+- **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
+- **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.

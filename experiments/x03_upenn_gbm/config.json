@@ -13,9 +13,9 @@
     "release": "aligned NIfTI MR and segmentation",
     "role": "independent glioblastoma evaluation candidate with coarse glioma mapping",
     "access_state": "MINIMAL_EXPERT_PAYLOAD_DOWNLOADED_AUDITED",
+    "release_id": 222317008,
     "audit_outcome": "ELIGIBLE_INDEPENDENT",
-    "independent_external_evidence": true,
-    "release_id": 222317008
+    "independent_external_evidence": true
   },
   "execution_order": 3,
   "audit_required_before_inference": true,

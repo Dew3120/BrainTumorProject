@@ -32,5 +32,5 @@ Glioblastoma is a subtype of glioma. The mapping `glioblastoma -> glioma` is coa
 
 ## Disk and decision
 
-- Drive E free after audit: 324.238 GiB. The 250 GB sequential-processing trigger is not reached.
+- Drive E free after audit: 324.236 GiB. The 250 GB sequential-processing trigger is not reached.
 - The frozen stack may proceed to one X03 evaluation under `ELIGIBLE_INDEPENDENT`. No model, calibration mapping, reliability estimator, mask threshold, policy threshold, or gate is changed.
