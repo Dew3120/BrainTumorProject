@@ -1,0 +1,247 @@
+{
+  "lesion_centered": {
+    "raw": {
+      "nll": 1.2953974620325255,
+      "brier": 0.17401227736023417,
+      "ece": 0.14297124238041442,
+      "mce": 0.2583677058440803,
+      "bootstrap_ci95": {
+        "nll": [
+          1.2230146971990987,
+          1.368733781910582
+        ],
+        "brier": [
+          0.16665306193237653,
+          0.18099010412325742
+        ],
+        "ece": [
+          0.13566685118656097,
+          0.15057776544687151
+        ],
+        "mce": [
+          0.2168265637252546,
+          0.3028197821813199
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    },
+    "c03_operational": {
+      "nll": 0.8634240067881592,
+      "brier": 0.17174775340475948,
+      "ece": 0.1419619207663993,
+      "mce": 0.18008470165544843,
+      "bootstrap_ci95": {
+        "nll": [
+          0.8184626732733374,
+          0.9098089420522781
+        ],
+        "brier": [
+          0.16412832267261576,
+          0.17920138797468033
+        ],
+        "ece": [
+          0.13260833001878652,
+          0.1513809693339586
+        ],
+        "mce": [
+          0.16165234840357579,
+          0.20156775380965525
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    }
+  },
+  "background": {
+    "raw": {
+      "nll": 0.020647716035428598,
+      "brier": 0.005259661358801693,
+      "ece": 0.010829520214322697,
+      "mce": 0.9857223928928687,
+      "bootstrap_ci95": {
+        "nll": [
+          0.0189244071225406,
+          0.022407073280240903
+        ],
+        "brier": [
+          0.004842377171146287,
+          0.005706010524131529
+        ],
+        "ece": [
+          0.010149855441861217,
+          0.011558601780927887
+        ],
+        "mce": [
+          0.9850535019405392,
+          0.9864079121312719
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    },
+    "c03_operational": {
+      "nll": 0.012051917779396498,
+      "brier": 0.0026960451221297948,
+      "ece": 0.009089282024413893,
+      "mce": 0.9672748520546598,
+      "bootstrap_ci95": {
+        "nll": [
+          0.011278453689619005,
+          0.012848501383827215
+        ],
+        "brier": [
+          0.0024525067186154928,
+          0.002946434613088188
+        ],
+        "ece": [
+          0.008606984256580337,
+          0.009604309463790834
+        ],
+        "mce": [
+          0.9660696748425687,
+          0.968472111880136
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    }
+  },
+  "whole_image": {
+    "raw": {
+      "nll": 0.12832236165995445,
+      "brier": 0.019319816095978555,
+      "ece": 0.01905530891260543,
+      "mce": 0.4603686872177635,
+      "bootstrap_ci95": {
+        "nll": [
+          0.11776382744322036,
+          0.13989321606636868
+        ],
+        "brier": [
+          0.018069074812442222,
+          0.02059911184812316
+        ],
+        "ece": [
+          0.017914724749106364,
+          0.020182088148940718
+        ],
+        "mce": [
+          0.42026122747560846,
+          0.5020061724409743
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    },
+    "c03_operational": {
+      "nll": 0.08440606446939661,
+      "brier": 0.017074134589811957,
+      "ece": 0.010632983986398399,
+      "mce": 0.25637551529596003,
+      "bootstrap_ci95": {
+        "nll": [
+          0.07749343325275057,
+          0.09175836439746286
+        ],
+        "brier": [
+          0.015790263442407197,
+          0.01839386924925513
+        ],
+        "ece": [
+          0.009705627525133232,
+          0.011773534484694651
+        ],
+        "mce": [
+          0.2200996829448572,
+          0.3024692176835166
+        ]
+      },
+      "weighting": "each patient equal; each slice equal within patient"
+    }
+  },
+  "evaluation_membership": {
+    "model_space_representable_cases": 9382,
+    "excluded_target_not_representable_at_128": 82,
+    "excluded_case_ids": [
+      "sub-006:axial:029",
+      "sub-008:axial:058",
+      "sub-011:axial:054",
+      "sub-017:axial:071",
+      "sub-017:axial:072",
+      "sub-017:axial:073",
+      "sub-017:axial:074",
+      "sub-020:axial:105",
+      "sub-029:axial:139",
+      "sub-030:axial:090",
+      "sub-030:axial:091",
+      "sub-059:axial:134",
+      "sub-076:axial:018",
+      "sub-080:axial:081",
+      "sub-080:axial:082",
+      "sub-080:axial:084",
+      "sub-082:axial:056",
+      "sub-082:axial:057",
+      "sub-082:axial:058",
+      "sub-082:axial:059",
+      "sub-082:axial:060",
+      "sub-082:axial:061",
+      "sub-082:axial:062",
+      "sub-082:axial:063",
+      "sub-082:axial:132",
+      "sub-083:axial:063",
+      "sub-100:axial:033",
+      "sub-100:axial:034",
+      "sub-102:axial:032",
+      "sub-102:axial:033",
+      "sub-102:axial:073",
+      "sub-107:axial:135",
+      "sub-114:axial:140",
+      "sub-115:axial:109",
+      "sub-117:axial:032",
+      "sub-131:axial:075",
+      "sub-134:axial:026",
+      "sub-137:axial:024",
+      "sub-137:axial:083",
+      "sub-140:axial:076",
+      "sub-146:axial:087",
+      "sub-146:axial:088",
+      "sub-151:axial:040",
+      "sub-156:axial:134",
+      "sub-158:axial:098",
+      "sub-166:axial:086",
+      "sub-173:axial:102",
+      "sub-178:axial:120",
+      "sub-189:axial:142",
+      "sub-192:axial:056",
+      "sub-206:axial:048",
+      "sub-215:axial:087",
+      "sub-217:axial:138",
+      "sub-227:axial:135",
+      "sub-228:axial:034",
+      "sub-238:axial:078",
+      "sub-253:axial:128",
+      "sub-259:axial:088",
+      "sub-261:axial:031",
+      "sub-264:axial:098",
+      "sub-272:axial:069",
+      "sub-272:axial:071",
+      "sub-272:axial:073",
+      "sub-272:axial:074",
+      "sub-274:axial:084",
+      "sub-274:axial:085",
+      "sub-275:axial:050",
+      "sub-275:axial:051",
+      "sub-275:axial:052",
+      "sub-284:axial:037",
+      "sub-284:axial:045",
+      "sub-330:axial:106",
+      "sub-351:axial:091",
+      "sub-360:axial:038",
+      "sub-360:axial:039",
+      "sub-373:axial:089",
+      "sub-376:axial:126",
+      "sub-380:axial:024",
+      "sub-380:axial:070",
+      "sub-384:axial:052",
+      "sub-418:axial:057",
+      "sub-430:axial:100"
+    ],
+    "reason": "Lesion-centred regions are undefined when the frozen model-space reference is empty."
+  }
+}

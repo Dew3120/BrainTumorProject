@@ -724,3 +724,14 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Mapping caveat:** Glioblastoma is a glioma subtype, but this GBM-only cohort and whole-tumor target are not directly comparable to heterogeneous BRISC glioma.
 - **Verification:** No inference or metric computation occurred. BRISC sealed-test pixels, retraining, refitting, and threshold changes were zero.
 - **Who approved:** User approved Amendment 13 and continuation through eligible audits/evaluations.
+
+
+## 2026-09-29T09:45:31+05:30 — Reject X03 transport gates and retain independent external findings
+
+- **Decision made:** Complete X03 as `FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL`. Reject H8 for this cohort without tuning on X03.
+- **Triggering artifact:** `experiments/x03_upenn_gbm/artifacts/evaluation_result.json`, SHA256 `7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6`; deterministic prediction panel SHA256 `1b487ef761376a9df33eb511f57b7433deb1247db6245b80773baa8c98f36dfb`.
+- **Rationale:** Glioma recall failed at `0.421769`, and classifier ECE was `0.245390`. Strict all-9,464 subject-macro Dice was `0.220774` against `0.55`. Reliability AUROC passed at `0.831586`, while ECE was `0.339100` and top-20% captured `1886/7600` failures. Complete misses accounted for `4263/7600` failures.
+- **Target representability:** The 82 Amendment-17 cases remain in the strict gate with zero scores. Representable-only Dice `0.222563` and native source-coordinate Dice `0.220473` show that the 82 cases do not explain the broad failure.
+- **Verification:** Independent recomputation covered `45` decision-driving values with maximum absolute difference `0.0`. Visual review found no systematic flip, transpose, offset, or source-mask alignment defect. No BRISC sealed-test image was opened. Neural retraining, calibration/reliability refit, segmentation-threshold changes, policy-threshold changes, and gate relaxation were zero.
+- **Alternatives considered:** Drop the 82 nonrepresentable targets or report only the 9,382-slice sensitivity; rejected by Amendment 17. Modify native dtype handling instead of honoring the registered adapter contract; rejected by Amendment 18. Reuse primary membership for mask-domain bootstraps; rejected by Amendment 19. Tune on X03 or relax the top-20% gate; rejected because external data are evaluation-only and gates remain fixed.
+- **Who approved:** User approved Amendments 17–19 and exactly one fourth attempt after the Amendment-19 correction.

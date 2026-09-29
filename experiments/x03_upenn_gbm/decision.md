@@ -12,3 +12,11 @@ All 147 expert-labelled CE-T1/mask pairs passed release-integrity, target, geome
 - **Attempt 4:** Authorized once after this renewed audit. Any new fail-closed condition stops X03 without another automatic restart.
 
 No prior attempt saved probabilities, metrics, panels, decisions, or a performance result. The complete Amendment-19 audit passed on the same 294 release files, labels, patients, geometry, overlap criteria, and native-`uint8` adapter path.
+
+## Final external-evaluation decision
+
+**Decision:** `FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL`
+
+The independent UPENN-GBM cohort failed classifier recall and calibration, strict glioma Dice, case-reliability ECE, and top-20% failure-capture gates. Reliability ranking AUROC passed, but it does not override the conjunctive failures. The 82 erased targets remain explicit zero-score cases and do not explain the broad failure. No gate is relaxed and X03 will not be used for tuning.
+
+**Attempt 4:** Completed inference on all 22,785 slices and wrote the final registered strict, representable-only, native-resolution, and exploratory whole-volume views. Independent recomputation matched all 45 checked values exactly.

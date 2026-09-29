@@ -1,0 +1,230 @@
+{
+  "reference": "BRISC development validation only; sealed test pixels unopened",
+  "cohort": {
+    "modality": "3T axial contrast-enhanced T1 MRI",
+    "orientation": "axial; canonical RAS axis 2",
+    "subjects": 147,
+    "tumor_bearing_slices": 9464,
+    "model_space_representable_slices": 9382,
+    "target_not_representable_at_128": 82,
+    "canonical_shape_counts": {
+      "240x240x155": 147
+    },
+    "voxel_spacing_mm": {
+      "x_range": [
+        1.0,
+        1.0
+      ],
+      "y_range": [
+        1.0,
+        1.0
+      ],
+      "z_range": [
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "continuous_distribution_shift": {
+    "model_input_mean": {
+      "wasserstein": 0.02540627677495785,
+      "jensen_shannon_divergence": 0.13448856365305403,
+      "external_mean": 0.15521975692175802,
+      "brisc_validation_mean": 0.1303691742028676,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.02299954321998967,
+          0.028110312763295068
+        ],
+        "jensen_shannon_divergence": [
+          0.11634032789257051,
+          0.1577072005574988
+        ],
+        "external_mean": [
+          0.15261058910749886,
+          0.15800036802306247
+        ]
+      }
+    },
+    "model_input_sd": {
+      "wasserstein": 0.07546610099213032,
+      "jensen_shannon_divergence": 0.8634411936850646,
+      "external_mean": 0.22234450809150583,
+      "brisc_validation_mean": 0.14687840709937552,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.07344684594940808,
+          0.07754139166974207
+        ],
+        "jensen_shannon_divergence": [
+          0.8358762347388558,
+          0.8922693415463181
+        ],
+        "external_mean": [
+          0.22032525304878361,
+          0.22441979876911758
+        ]
+      }
+    },
+    "nonzero_mean": {
+      "wasserstein": 0.20843613784893433,
+      "jensen_shannon_divergence": 0.9890709475179522,
+      "external_mean": 0.3697877786124624,
+      "brisc_validation_mean": 0.1613516407635282,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.20497857594391006,
+          0.21173578027418244
+        ],
+        "jensen_shannon_divergence": [
+          0.9796332521370299,
+          0.9981393297207046
+        ],
+        "external_mean": [
+          0.3663302167074382,
+          0.3730874210377106
+        ]
+      }
+    },
+    "foreground_fraction": {
+      "wasserstein": 0.003288518645967383,
+      "jensen_shannon_divergence": 0.015501026911787502,
+      "external_mean": 0.021543653655270733,
+      "brisc_validation_mean": 0.020015641754748775,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.0023050694911276276,
+          0.0046447113666835
+        ],
+        "jensen_shannon_divergence": [
+          0.009190285217677773,
+          0.024709057482403766
+        ],
+        "external_mean": [
+          0.019865404149154803,
+          0.023180561596275396
+        ]
+      }
+    },
+    "centroid_y": {
+      "wasserstein": 0.014114716786430523,
+      "jensen_shannon_divergence": 0.020341382085187862,
+      "external_mean": 0.44485460754439454,
+      "brisc_validation_mean": 0.4328674505454277,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.00782854256961576,
+          0.0300751284853309
+        ],
+        "jensen_shannon_divergence": [
+          0.016414502925086543,
+          0.04220761308384391
+        ],
+        "external_mean": [
+          0.42769665608823093,
+          0.46141534373456355
+        ]
+      }
+    },
+    "centroid_x": {
+      "wasserstein": 0.02590926280857988,
+      "jensen_shannon_divergence": 0.061017639430983,
+      "external_mean": 0.5036842597324842,
+      "brisc_validation_mean": 0.4781215852471914,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.01745177075608153,
+          0.04718825491523865
+        ],
+        "jensen_shannon_divergence": [
+          0.04456532891566644,
+          0.09480368772958747
+        ],
+        "external_mean": [
+          0.48335443599182715,
+          0.5253016533257477
+        ]
+      }
+    },
+    "component_count": {
+      "wasserstein": 1.0708908590082804,
+      "jensen_shannon_divergence": 0.24918307436587292,
+      "external_mean": 2.1199104668514175,
+      "brisc_validation_mean": 1.0490196078431373,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.922950271486246,
+          1.2463024075290563
+        ],
+        "jensen_shannon_divergence": [
+          0.22531168287683168,
+          0.2743393140835699
+        ],
+        "external_mean": [
+          1.9719698793293834,
+          2.2953220153721934
+        ]
+      }
+    },
+    "reference_boundary_gradient": {
+      "wasserstein": 0.0033120051513718476,
+      "jensen_shannon_divergence": 0.00947429616355738,
+      "external_mean": 0.057771606718740355,
+      "brisc_validation_mean": 0.0546913936083458,
+      "patient_bootstrap_ci95": {
+        "wasserstein": [
+          0.0017410730191372563,
+          0.006066930656208495
+        ],
+        "jensen_shannon_divergence": [
+          0.005957185023392398,
+          0.01520905348007955
+        ],
+        "external_mean": [
+          0.05512331770153848,
+          0.060470047541822385
+        ]
+      }
+    }
+  },
+  "fragmented_reference_fraction": {
+    "upenn_gbm": 0.5280324024728202,
+    "brisc_validation": 0.049019607843137254
+  },
+  "encoder_representation_shift": {
+    "centroid_euclidean": 13.11249828338623,
+    "dimension_mean_wasserstein": 0.47908470332712194,
+    "dimension_median_wasserstein": 0.41051367794708593,
+    "encoder": "frozen classifier ResNet18 avgpool (512 dimensions)"
+  },
+  "reliability_score_shift": {
+    "wasserstein": 0.1637428971519783,
+    "jensen_shannon_divergence": 0.07219016990776234,
+    "external_mean": 0.5360568173210679,
+    "brisc_validation_mean": 0.6997521301653838,
+    "patient_bootstrap_ci95": {
+      "wasserstein": [
+        0.1427419791751073,
+        0.18447589986856744
+      ],
+      "jensen_shannon_divergence": [
+        0.06224260601268912,
+        0.0847324014323666
+      ],
+      "external_mean": [
+        0.5153191604546479,
+        0.5571162262771568
+      ]
+    }
+  },
+  "policy_review_rate": {
+    "upenn_gbm": 0.8250211327134404,
+    "brisc_operational_reference": 0.6911764705882353
+  },
+  "bootstrap_membership": {
+    "primary_rows": 9464,
+    "representable_rows": 9382,
+    "input_encoder_reliability_policy_membership": "primary_rows",
+    "mask_geometry_boundary_membership": "representable_rows"
+  }
+}

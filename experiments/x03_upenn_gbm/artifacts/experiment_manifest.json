@@ -1,12 +1,37 @@
 {
   "schema_version": 1,
   "experiment_id": "x03_upenn_gbm",
-  "status": "AUDIT_COMPLETE",
+  "status": "COMPLETE",
   "files": [
     {
-      "path": "audit/x03_upenn_gbm_dataset_audit.md",
-      "bytes": 2955,
-      "sha256": "cad8f2ed3d6ea67a84dd16fed10519448c4dc94bec439c6510cc045d9ba9cc91"
+      "path": "audit/preregistration_amendment_17.md",
+      "bytes": 5323,
+      "sha256": "3c7941e388f8c095884d7bd62bc1886fb3aa8a1b5003520f76cdcbffd6ee12b7"
+    },
+    {
+      "path": "audit/preregistration_amendment_18.md",
+      "bytes": 3931,
+      "sha256": "cce55327a687c6ef4adec4ba85284e887438bfc6352abeb615f0ab3f361d8c63"
+    },
+    {
+      "path": "audit/preregistration_amendment_19.md",
+      "bytes": 3999,
+      "sha256": "ab9ba9bcab3896a359e94bf6c72887c8bb69b785cfd62aff0b17ab58b8ec0f66"
+    },
+    {
+      "path": "audit/x03_upenn_gbm_evaluation.md",
+      "bytes": 7061,
+      "sha256": "a90fd51c6be46973e4fdf433c3c18ff2ce9ce2d9d8f0fa8f137b1dc192d91518"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/case_reliability.png",
+      "bytes": 74485,
+      "sha256": "76e886f3459c7d2646bc07315656ddb33af4bb9e2da7c0469640f4e0b756cf97"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/classifier_reliability.png",
+      "bytes": 81394,
+      "sha256": "b86de1ae2d9985f8919b511de9e8731df64c2be093b8a837e2bd1b7153cdf5fc"
     },
     {
       "path": "experiments/x03_upenn_gbm/artifacts/cross_dataset_overlap_candidates.csv",
@@ -17,6 +42,36 @@
       "path": "experiments/x03_upenn_gbm/artifacts/dataset_audit.json",
       "bytes": 3609,
       "sha256": "f870a89cd5165e41187220c5c2326b9597c181427ed16dc643678da9fb9bc30a"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/domain_gap.json",
+      "bytes": 6500,
+      "sha256": "c61df45c91c8e9762627958452a8036e9111af313200048251032b14a73d5261"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/evaluation_result.json",
+      "bytes": 38302,
+      "sha256": "7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/failure_taxonomy.csv",
+      "bytes": 2922849,
+      "sha256": "25e3d6f636ea232c0060b9d64c5c8b20ebdd968d88a60c582ef7dd32e52e2ae7"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/failure_taxonomy_summary.json",
+      "bytes": 3377,
+      "sha256": "332a4fe5b377076c2e27f4e83e78b7fa482d6deed868cedaa0469707e2dcf152"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/per_case_predictions.csv",
+      "bytes": 2613355,
+      "sha256": "39e35e7d5b256333a08b10502099f040ed2dcb7a99faf2ddb8f9b6ef5381f1c4"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/pixel_calibration.json",
+      "bytes": 6332,
+      "sha256": "552e0030fe4ed094046b18d37ee1de23a00729231d5c66a4598c2b29b639bf7c"
     },
     {
       "path": "experiments/x03_upenn_gbm/artifacts/source_alignment_panel.png",
@@ -34,19 +89,44 @@
       "sha256": "1e2c633d2f91b124ec5ed12d24a4ed0045614d5cb103588b9e293c0455ab4dcd"
     },
     {
+      "path": "experiments/x03_upenn_gbm/artifacts/target_not_representable.csv",
+      "bytes": 4566,
+      "sha256": "8eec258e13c5b5c7cb1eb2bd927c66e13ab7eba6f13fd5dab5ecd91be0b16956"
+    },
+    {
       "path": "experiments/x03_upenn_gbm/artifacts/tumor_slice_manifest.csv",
       "bytes": 2057321,
       "sha256": "cfb5cdd292b5eb6799e1198535a075d2a703aa5bfccc662862faf1f392432d4f"
     },
     {
+      "path": "experiments/x03_upenn_gbm/artifacts/visual_audit_panel.png",
+      "bytes": 502877,
+      "sha256": "1b487ef761376a9df33eb511f57b7433deb1247db6245b80773baa8c98f36dfb"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/visual_audit_representable_panel.png",
+      "bytes": 502877,
+      "sha256": "1b487ef761376a9df33eb511f57b7433deb1247db6245b80773baa8c98f36dfb"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/whole_volume_slice_counts.csv",
+      "bytes": 1366816,
+      "sha256": "38c739c00722a303983da3ae8cd3a78d1dbfc09e4335d23d634c054d2468860a"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/artifacts/whole_volume_subject_metrics.csv",
+      "bytes": 9774,
+      "sha256": "6f7c7297010000f02b5ce6e2651f0c62e67f04e7dd79d17c98fb66c5491e1f78"
+    },
+    {
       "path": "experiments/x03_upenn_gbm/config.json",
-      "bytes": 1039,
-      "sha256": "d3ecf310e1be235e4e9664fbae9fdb4adc7e799f4f842595e7213dbbf920b087"
+      "bytes": 1244,
+      "sha256": "9a0537733e51d6a06f1c4427c74f08a650b6b069fc4f2c27b94ea08e5cccc564"
     },
     {
       "path": "experiments/x03_upenn_gbm/decision.md",
-      "bytes": 1598,
-      "sha256": "b08089e5d899be7266eaf1dc60762301dafb6de6c59a47cdde910c525608f215"
+      "bytes": 2330,
+      "sha256": "6e219de66037c0c7481647cee2886c7ea76408467f32e89f3370eb2019036751"
     },
     {
       "path": "experiments/x03_upenn_gbm/hypothesis.md",
@@ -55,28 +135,28 @@
     },
     {
       "path": "experiments/x03_upenn_gbm/result.json",
-      "bytes": 3609,
-      "sha256": "f870a89cd5165e41187220c5c2326b9597c181427ed16dc643678da9fb9bc30a"
+      "bytes": 38302,
+      "sha256": "7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6"
     },
     {
-      "path": "scripts/audit_x03_upenn_gbm.py",
-      "bytes": 22806,
-      "sha256": "99ab26eea2d199744888204c11d2e39c84fcb1eb7797d0d57c66fc66eaf1885b"
+      "path": "scripts/evaluate_x03_upenn_gbm.py",
+      "bytes": 55645,
+      "sha256": "ea8ec353a570abb183e81b39eb8eb013aea23aed9c6284385357ba8703b35b98"
     },
     {
-      "path": "scripts/download_x03_upenn_gbm.py",
-      "bytes": 5118,
-      "sha256": "6d6113f5ba763697488fa7301d7443e2afeb790ce06dc47f008f6c80bff01d75"
+      "path": "scripts/finalize_x03_upenn_gbm.py",
+      "bytes": 32837,
+      "sha256": "322aa48d30a779e4861b03ae09abb8a3cddbb83d853222af811529a26e972373"
     },
     {
-      "path": "tests/test_audit_x03_upenn_gbm.py",
-      "bytes": 198,
-      "sha256": "65fe648eeded2d9ed739dde31dd1bb8c5eada6fb68bbcd4bbdb1c890497cddf7"
+      "path": "tests/test_evaluate_x03_upenn_gbm.py",
+      "bytes": 2587,
+      "sha256": "5274cdf4011a3319764234de2968d680ce65c914cf31f9eb111b9e38e9d0c1b7"
     },
     {
-      "path": "tests/test_download_x03_upenn_gbm.py",
-      "bytes": 816,
-      "sha256": "81ed4a315e0bb06e6cc1e4572cecd4f372afa3bbbe9ded9f5be51587db270aa8"
+      "path": "tests/test_finalize_x03_upenn_gbm.py",
+      "bytes": 880,
+      "sha256": "536471ee5ae2eeeeeaccef868c240b417124e1c1c234b1530ee6c90c50e03baa"
     }
   ]
 }

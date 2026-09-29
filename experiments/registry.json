@@ -394,7 +394,7 @@
       "hypothesis_ids": [
         "H8"
       ],
-      "status": "AUDIT_COMPLETE"
+      "status": "COMPLETE"
     },
     {
       "id": "x04_meningioma_seg_class",

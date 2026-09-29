@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "x03_upenn_gbm",
-  "status": "AUDIT_COMPLETE",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H8"
   ],
@@ -25,5 +25,9 @@
   "r02_external_inference_state": "OPERATIONAL_ARTIFACT_FROZEN",
   "test_images_accessed": 0,
   "model_retrained_or_refit": false,
-  "r02_manifest_sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f"
+  "r02_manifest_sha256": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f",
+  "evaluation_outcome": "FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL",
+  "amendment_19": "audit/preregistration_amendment_19.md",
+  "aborted_inference_attempts": 3,
+  "completed_inference_attempts": 1
 }
