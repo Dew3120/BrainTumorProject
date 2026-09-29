@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o02_feature_ood",
+  "created_at": "2026-09-29T10:25:01.304461+00:00",
+  "files": [
+    {
+      "path": "experiments/o02_feature_ood/config.json",
+      "sha256": "f9073565c26cd34760448a5c637ffc3ce2eee7ff8ad3b95ace00fc92bd3657a3",
+      "bytes": 1009
+    },
+    {
+      "path": "experiments/o02_feature_ood/result.json",
+      "sha256": "5ad3fb3f61e0c893ad775d58f27ab4e803995d20748d6d063212a09bc01f69bd",
+      "bytes": 6883
+    },
+    {
+      "path": "experiments/o02_feature_ood/decision.md",
+      "sha256": "d137d52d02d29d808f3a00e9fac2db9b07c4226b895068594548fd584ce7b7d9",
+      "bytes": 200
+    },
+    {
+      "path": "experiments/o02_feature_ood/artifacts/image_features_and_scores.csv",
+      "sha256": "34b9a77b48117bba487af66a83dcf10b41a14242165e81c9fe4ea1f5c70eda32",
+      "bytes": 737892
+    },
+    {
+      "path": "experiments/o02_feature_ood/artifacts/feature_coefficients.csv",
+      "sha256": "e2b4f382ffcd0dbf37a77b5fbd08b72c3bfa18e2de71f971713e888a3ac80f9d",
+      "bytes": 606
+    },
+    {
+      "path": "experiments/o02_feature_ood/artifacts/roc_curve.png",
+      "sha256": "895da8fec772e0fd780dc61c190743508b9938d20f7daa76d61613598240fde3",
+      "bytes": 55509
+    }
+  ]
+}

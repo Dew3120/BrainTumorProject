@@ -456,7 +456,7 @@
       "hypothesis_ids": [
         "H9"
       ],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "COMPLETE"
     },
     {
       "id": "o03_encoder_mahalanobis",

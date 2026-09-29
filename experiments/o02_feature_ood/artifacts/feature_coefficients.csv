@@ -1,0 +1,14 @@
+feature,standardized_coefficient,sign
+histogram_entropy,-4.710401406047693,negative
+intensity_mean,1.9037005254173396,positive
+intensity_sd,0.9871735396028739,positive
+intensity_skew,-0.26670152614299797,negative
+intensity_kurtosis,0.16466292681740827,positive
+fraction_q1,-0.9274731085663797,negative
+fraction_q2,-0.5171308397079969,negative
+fraction_q3,1.1406754765342797,positive
+fraction_q4,1.7592331887644106,positive
+aspect_ratio,0.3267257869135419,positive
+edge_density,3.5680710647670595,positive
+harris_corner_count,-1.4781191854962128,negative
+file_bytes,4.254645793779901,positive

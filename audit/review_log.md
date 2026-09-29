@@ -763,3 +763,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Registered populations and counts are present, fitting/evaluation groups are disjoint, and no standardized-pixel class contamination was found.
 - **Verification:** BRISC sealed-test access, reference-mask use, diagnostic-label use, external-performance use, neural retraining, and prior-threshold changes were zero.
 - **Who approved:** User authorized the complete OOD workstream in one sequential run.
+
+## 2026-09-29T15:55:01+05:30 — Evaluate O02 feature OOD detector
+
+- **Decision made:** Record O02 as `PASS` without gate relaxation.
+- **Triggering artifact:** `experiments/o02_feature_ood/result.json`, held-out AUROC `0.996828`.
+- **Rationale:** Registered inference-time image features and held-out O01 evaluation membership were used.
+- **Verification:** No reference masks, diagnostic labels, external performance data, sealed-test pixels, neural refitting, or threshold changes were used.
+- **Who approved:** User authorized O01–O06 in one sequential run.

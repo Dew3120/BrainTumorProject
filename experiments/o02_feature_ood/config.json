@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "o02_feature_ood",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H9"
   ],
@@ -13,5 +13,27 @@
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "brisc_test_images_accessed": 0,
-  "neural_retraining_or_refitting": false
+  "neural_retraining_or_refitting": false,
+  "features": [
+    "histogram_entropy",
+    "intensity_mean",
+    "intensity_sd",
+    "intensity_skew",
+    "intensity_kurtosis",
+    "fraction_q1",
+    "fraction_q2",
+    "fraction_q3",
+    "fraction_q4",
+    "aspect_ratio",
+    "edge_density",
+    "harris_corner_count",
+    "file_bytes"
+  ],
+  "model": {
+    "type": "logistic_regression",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 2000
+  },
+  "o01_manifest_sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd"
 }

@@ -1,5 +1,263 @@
 {
   "schema_version": 1,
   "experiment_id": "o02_feature_ood",
-  "status": "NOT_RUN"
+  "status": "COMPLETE",
+  "decision": "PASS",
+  "gate": {
+    "metric": "held-out AUROC",
+    "threshold": 0.85,
+    "equality_passes": true,
+    "passed": true
+  },
+  "evaluation": {
+    "auroc": 0.9968277310924369,
+    "auroc_ci95": [
+      0.9934105448467377,
+      0.9992914141728536
+    ],
+    "ece": 0.011907158946624185,
+    "mce": 0.04001511299735527,
+    "brier": 0.00599484432550455,
+    "calibration_bins": [
+      {
+        "bin": 1,
+        "n": 92,
+        "mean_probability": 0.0018097415765605384,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.0018097415765605384
+      },
+      {
+        "bin": 2,
+        "n": 92,
+        "mean_probability": 0.004325058355487458,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.004325058355487458
+      },
+      {
+        "bin": 3,
+        "n": 92,
+        "mean_probability": 0.006769726210263466,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.006769726210263466
+      },
+      {
+        "bin": 4,
+        "n": 92,
+        "mean_probability": 0.010289989254318274,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.010289989254318274
+      },
+      {
+        "bin": 5,
+        "n": 92,
+        "mean_probability": 0.015084125910250828,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.015084125910250828
+      },
+      {
+        "bin": 6,
+        "n": 92,
+        "mean_probability": 0.022217673884799612,
+        "observed_ood_fraction": 0.0,
+        "absolute_gap": 0.022217673884799612
+      },
+      {
+        "bin": 7,
+        "n": 92,
+        "mean_probability": 0.037724360275076876,
+        "observed_ood_fraction": 0.010869565217391304,
+        "absolute_gap": 0.026854795057685572
+      },
+      {
+        "bin": 8,
+        "n": 92,
+        "mean_probability": 0.612158800046123,
+        "observed_ood_fraction": 0.6521739130434783,
+        "absolute_gap": 0.04001511299735527
+      },
+      {
+        "bin": 9,
+        "n": 92,
+        "mean_probability": 0.9701147295546914,
+        "observed_ood_fraction": 0.9891304347826086,
+        "absolute_gap": 0.01901570522791729
+      },
+      {
+        "bin": 10,
+        "n": 92,
+        "mean_probability": 0.9870486223039284,
+        "observed_ood_fraction": 0.9891304347826086,
+        "absolute_gap": 0.002081812478680223
+      },
+      {
+        "bin": 11,
+        "n": 92,
+        "mean_probability": 0.9976433304479171,
+        "observed_ood_fraction": 0.9891304347826086,
+        "absolute_gap": 0.00851289566530844
+      },
+      {
+        "bin": 12,
+        "n": 92,
+        "mean_probability": 0.9998921646361569,
+        "observed_ood_fraction": 0.9891304347826086,
+        "absolute_gap": 0.010761729853548285
+      },
+      {
+        "bin": 13,
+        "n": 92,
+        "mean_probability": 0.999999311055434,
+        "observed_ood_fraction": 0.9891304347826086,
+        "absolute_gap": 0.0108688762728254
+      },
+      {
+        "bin": 14,
+        "n": 92,
+        "mean_probability": 0.9999998585481059,
+        "observed_ood_fraction": 1.0,
+        "absolute_gap": 1.4145189408676373e-07
+      },
+      {
+        "bin": 15,
+        "n": 92,
+        "mean_probability": 0.999999999997532,
+        "observed_ood_fraction": 1.0,
+        "absolute_gap": 2.468025783741723e-12
+      }
+    ]
+  },
+  "population": {
+    "fit": 1300,
+    "evaluation": 1380,
+    "evaluation_id": 680,
+    "evaluation_ood": 700
+  },
+  "model": {
+    "type": "StandardScaler + L2 logistic regression",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "intercept": 2.389916739196309,
+    "features": [
+      "histogram_entropy",
+      "intensity_mean",
+      "intensity_sd",
+      "intensity_skew",
+      "intensity_kurtosis",
+      "fraction_q1",
+      "fraction_q2",
+      "fraction_q3",
+      "fraction_q4",
+      "aspect_ratio",
+      "edge_density",
+      "harris_corner_count",
+      "file_bytes"
+    ],
+    "coefficients": [
+      {
+        "feature": "histogram_entropy",
+        "standardized_coefficient": -4.710401406047693,
+        "sign": "negative"
+      },
+      {
+        "feature": "intensity_mean",
+        "standardized_coefficient": 1.9037005254173396,
+        "sign": "positive"
+      },
+      {
+        "feature": "intensity_sd",
+        "standardized_coefficient": 0.9871735396028739,
+        "sign": "positive"
+      },
+      {
+        "feature": "intensity_skew",
+        "standardized_coefficient": -0.26670152614299797,
+        "sign": "negative"
+      },
+      {
+        "feature": "intensity_kurtosis",
+        "standardized_coefficient": 0.16466292681740827,
+        "sign": "positive"
+      },
+      {
+        "feature": "fraction_q1",
+        "standardized_coefficient": -0.9274731085663797,
+        "sign": "negative"
+      },
+      {
+        "feature": "fraction_q2",
+        "standardized_coefficient": -0.5171308397079969,
+        "sign": "negative"
+      },
+      {
+        "feature": "fraction_q3",
+        "standardized_coefficient": 1.1406754765342797,
+        "sign": "positive"
+      },
+      {
+        "feature": "fraction_q4",
+        "standardized_coefficient": 1.7592331887644106,
+        "sign": "positive"
+      },
+      {
+        "feature": "aspect_ratio",
+        "standardized_coefficient": 0.3267257869135419,
+        "sign": "positive"
+      },
+      {
+        "feature": "edge_density",
+        "standardized_coefficient": 3.5680710647670595,
+        "sign": "positive"
+      },
+      {
+        "feature": "harris_corner_count",
+        "standardized_coefficient": -1.4781191854962128,
+        "sign": "negative"
+      },
+      {
+        "feature": "file_bytes",
+        "standardized_coefficient": 4.254645793779901,
+        "sign": "positive"
+      }
+    ],
+    "scaler_mean": [
+      5.693403450394978,
+      0.254529457145106,
+      0.1843319881002241,
+      0.7318101986905221,
+      0.47370633540108725,
+      0.5492160843160199,
+      0.2893551135262021,
+      0.1054356004676388,
+      0.05599320169013935,
+      0.9997698622867301,
+      0.11418479987522713,
+      218.7153846153846,
+      35389.56384615385
+    ],
+    "scaler_scale": [
+      1.9623446464146164,
+      0.14907405394163056,
+      0.07220950492027,
+      0.6667916459355552,
+      1.2207569294223193,
+      0.25307297827321523,
+      0.1707889930249395,
+      0.12913378695060543,
+      0.09989516704488265,
+      0.006604522764927562,
+      0.0983728428508518,
+      182.7094260805893,
+      52728.80199746115
+    ]
+  },
+  "verification": {
+    "o01_manifest_sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd",
+    "reference_masks_used": 0,
+    "diagnostic_labels_used": 0,
+    "external_performance_values_used": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining_or_refitting": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835"
+  }
 }
