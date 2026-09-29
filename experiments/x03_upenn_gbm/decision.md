@@ -11,3 +11,9 @@ Attempt 1 stopped before model loading because 82 of 9,464 source-positive axial
 Attempt 2 stopped after nine complete batches and 144 inferred slices because the shared NIfTI loader converted native `uint8` volumes to `float32`. Eighteen reference-empty slices from 14 patients then entered percentile windowing and were rejected for having no usable range. No probabilities, metrics, panels, decisions, or performance result were saved from either attempt.
 
 Amendment 18 corrected the loader to preserve canonical native datatypes. A constant-`uint8` regression test confirms both registered preprocessors now use `native_uint8`. The complete renewed audit passed on the same 294 release files, labels, patients, geometry, and decision criteria. Exactly one third X03 evaluation attempt is authorized.
+
+## Amendment 19 bootstrap-membership stop
+
+Attempt 3 completed frozen inference on all 22,785 slices. It then stopped before result writing because mask-derived domain features for 9,382 representable cases were indexed using the full 9,464-row primary bootstrap membership. This produced an out-of-bounds index. No probabilities, metrics, panels, decisions, or performance result were saved or inspected.
+
+Amendment 19 authorizes explicit 9,382-row membership for mask-derived domain features and explicit 9,464-row membership for input, encoder, reliability, and policy analyses, with runtime length assertions and a regression test. It also authorizes a complete renewed audit and exactly one fourth X03 attempt.

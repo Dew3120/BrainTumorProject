@@ -685,6 +685,16 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Treat black slices as a data failure; rejected because native `uint8` is explicitly supported. Add arbitrary intensity variation; rejected. Exclude the 18 slices; rejected because the registered whole-volume view includes all 22,785 slices.
 - **Who approved:** User explicitly approved Amendment 18, the regression-tested loader correction, a renewed audit, and exactly one third X03 attempt.
 
+## 2026-09-29 — Register X03 domain-bootstrap membership correction and attempt four
+
+- **Decision made:** Register Amendment 19 before correcting X03 domain-gap bootstrap membership. Bind mask-derived features to 9,382 `representable_rows` and input, encoder, reliability, and policy analyses to 9,464 `primary_rows`, with runtime length assertions.
+- **Triggering artifact:** `audit/preregistration_amendment_19.md`; hash registered in `experiments/registry.json`.
+- **Rationale:** Attempt 3 completed all frozen inference, then a 9,382-element representable-only feature array was indexed with the 9,464-row membership. The error is downstream bookkeeping and occurred before any result was written or inspected.
+- **Attempt history:** Attempt 1 stopped on 82 target losses; Attempt 2 stopped on the NIfTI datatype defect after 144 inferred slices; Attempt 3 inferred all 22,785 slices and stopped on bootstrap membership. All stops were fail-closed and none produced an X03 performance result.
+- **Verification:** BRISC sealed-test access, neural retraining, calibration/reliability refitting, segmentation-threshold changes, policy-threshold changes, resize changes, mask dilation, and gate relaxation were zero.
+- **Alternatives considered:** Disable patient bootstrap; rejected. Bootstrap mask features using full rows with placeholder values; rejected. Exclude target losses from every analysis; rejected because Amendment 17 requires strict reliability evaluation on all 9,464 cases.
+- **Who approved:** User explicitly approved Amendment 19, the regression-tested membership correction, a renewed audit, and exactly one fourth X03 attempt.
+
 
 ## 2026-09-29T08:31:25+05:30 — Audit UPENN-GBM v2 before inference
 
