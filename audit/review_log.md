@@ -675,6 +675,16 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Exclude the 82 slices; rejected. Change interpolation or dilate targets; rejected. End X03 permanently; rejected because strict, representable-only, and native-coordinate views permit transparent evaluation without modifying the frozen stack.
 - **Who approved:** User explicitly approved Amendment 17, a renewed audit, and exactly one frozen evaluation restart.
 
+## 2026-09-29 — Register native-datatype loader correction and X03 attempt three
+
+- **Decision made:** Register Amendment 18 before correcting the shared NIfTI loader. Preserve canonical native array datatypes so UPENN `uint8` volumes use the already registered `native_uint8` adapter path, then renew the X03 audit and authorize exactly one third evaluation attempt.
+- **Triggering artifact:** `audit/preregistration_amendment_18.md`; hash registered in `experiments/registry.json`.
+- **Rationale:** The loader unconditionally converted native `uint8` data to `float32`. This contradicted the adapter contract and caused 18 constant or effectively constant reference-empty slices from 14 patients to enter percentile windowing and be rejected.
+- **Aborted attempts:** Attempt 1 stopped before inference on 82 target-representability losses. Attempt 2 stopped after nine completed batches and 144 inferred slices on the datatype defect. Neither attempt saved probabilities, performance metrics, panels, or a result.
+- **Verification:** The 18 slices include 14 all-zero and four one-nonzero-pixel slices; none is reference-positive. BRISC sealed-test access, retraining, refitting, threshold changes, resize changes, mask dilation, and gate relaxation were zero.
+- **Alternatives considered:** Treat black slices as a data failure; rejected because native `uint8` is explicitly supported. Add arbitrary intensity variation; rejected. Exclude the 18 slices; rejected because the registered whole-volume view includes all 22,785 slices.
+- **Who approved:** User explicitly approved Amendment 18, the regression-tested loader correction, a renewed audit, and exactly one third X03 attempt.
+
 
 ## 2026-09-29T08:31:25+05:30 — Audit UPENN-GBM v2 before inference
 
