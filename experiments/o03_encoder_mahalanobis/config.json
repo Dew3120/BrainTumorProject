@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o03_encoder_mahalanobis",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": [
+    "H9"
+  ],
+  "amendment": "audit/preregistration_amendment_20.md",
+  "amendment_sha256": "52b7d3e99a7354b2dafc42de0fac8d97155b61ddf5fa938a91189f91a92c863b",
+  "gate": "AUROC >= 0.90",
+  "bootstrap_resamples": 2000,
+  "seed": 42,
+  "segmentation_threshold": 0.5,
+  "reliability_policy_threshold": "0.9490250173235835",
+  "brisc_test_images_accessed": 0,
+  "neural_retraining_or_refitting": false
+}

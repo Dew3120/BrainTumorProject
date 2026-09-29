@@ -81,6 +81,10 @@
     {
       "path": "audit/preregistration_amendment_19.md",
       "sha256": "ab9ba9bcab3896a359e94bf6c72887c8bb69b785cfd62aff0b17ab58b8ec0f66"
+    },
+    {
+      "path": "audit/preregistration_amendment_20.md",
+      "sha256": "52b7d3e99a7354b2dafc42de0fac8d97155b61ddf5fa938a91189f91a92c863b"
     }
   ],
   "baseline": {
@@ -435,6 +439,54 @@
       "path": "experiments/measurement_engine_validation",
       "hypothesis_ids": [
         "H6"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o01_ood_benchmark",
+      "path": "experiments/o01_ood_benchmark",
+      "hypothesis_ids": [
+        "H9"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o02_feature_ood",
+      "path": "experiments/o02_feature_ood",
+      "hypothesis_ids": [
+        "H9"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o03_encoder_mahalanobis",
+      "path": "experiments/o03_encoder_mahalanobis",
+      "hypothesis_ids": [
+        "H9"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o04_model_confidence_ood",
+      "path": "experiments/o04_model_confidence_ood",
+      "hypothesis_ids": [
+        "H9"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o05_ensemble_ood",
+      "path": "experiments/o05_ensemble_ood",
+      "hypothesis_ids": [
+        "H9"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o06_ood_policy",
+      "path": "experiments/o06_ood_policy",
+      "hypothesis_ids": [
+        "H9"
       ],
       "status": "REGISTERED_NOT_STARTED"
     }
