@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
-from pathlib import Path
 
 import matplotlib
 
@@ -42,7 +41,7 @@ def feature_row(row):
         "fraction_q1": float((flat < 0.25).mean()), "fraction_q2": float(((flat >= 0.25) & (flat < 0.5)).mean()),
         "fraction_q3": float(((flat >= 0.5) & (flat < 0.75)).mean()), "fraction_q4": float((flat >= 0.75).mean()),
         "aspect_ratio": float(gray.shape[1] / gray.shape[0]), "edge_density": float(edges.mean()),
-        "harris_corner_count": int(len(corners)), "file_bytes": int(path.stat().st_size),
+        "harris_corner_count": len(corners), "file_bytes": int(path.stat().st_size),
     }
     return values
 
