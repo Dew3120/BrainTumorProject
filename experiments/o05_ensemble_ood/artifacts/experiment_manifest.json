@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o05_ensemble_ood",
+  "created_at": "2026-09-29T10:41:23.066283+00:00",
+  "files": [
+    {
+      "path": "experiments/o05_ensemble_ood/config.json",
+      "sha256": "bbd68418ee3fa4652b5d7b4502b94c25d69d33678c15d077275c7ae9bd8f395b",
+      "bytes": 916
+    },
+    {
+      "path": "experiments/o05_ensemble_ood/result.json",
+      "sha256": "434d389673aad234ae7e29cb0a96f5f305945e98558c6af3ca41a8b5bb60e7f6",
+      "bytes": 11656
+    },
+    {
+      "path": "experiments/o05_ensemble_ood/decision.md",
+      "sha256": "3843c7bdf06084fd94bc374e83bb61cf9a8bc9292e1860acb290b881a443f801",
+      "bytes": 297
+    },
+    {
+      "path": "experiments/o05_ensemble_ood/artifacts/ensemble_scores.csv",
+      "sha256": "8018f0eb4751d856426bac2fb80b171cdbdc53091214152836402ae59785b64a",
+      "bytes": 436020
+    },
+    {
+      "path": "experiments/o05_ensemble_ood/artifacts/ensemble_weights.csv",
+      "sha256": "8fb0cde24ab2969f8d06d339ee9091bb8200a178f51ca2ebb2cd8e8b48387122",
+      "bytes": 224
+    },
+    {
+      "path": "experiments/o05_ensemble_ood/artifacts/roc_curve.png",
+      "sha256": "e362797c05a6b2f66ab28af83c24ed6d94e8d44fbf4969d22f6b5dbd7fc75f0c",
+      "bytes": 66466
+    }
+  ]
+}

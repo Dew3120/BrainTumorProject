@@ -787,3 +787,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Both preregistered frozen-model scores were evaluated independently.
 - **Verification:** Frozen hashes passed; masks, labels, external performance values, sealed-test access, neural refitting, and threshold changes were zero.
 - **Who approved:** User authorized O01–O06 in one sequential run.
+
+## 2026-09-29T16:11:23+05:30 — Select O05 OOD ensemble
+
+- **Decision made:** Select `secondary_logistic` and record O05 as `PASS`.
+- **Triggering artifact:** `experiments/o05_ensemble_ood/result.json`, selected AUROC `0.995718`.
+- **Rationale:** The preregistered held-out selection rule was applied without modification.
+- **Verification:** Source memberships/hashes passed; no masks, labels, external performance inputs, sealed-test access, neural refitting, or threshold changes occurred.
+- **Who approved:** User authorized O01–O06 in one sequential run.
