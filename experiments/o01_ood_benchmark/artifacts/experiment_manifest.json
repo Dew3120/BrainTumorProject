@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o01_ood_benchmark",
+  "created_at": "2026-09-29T10:19:45.256776+00:00",
+  "files": [
+    {
+      "path": "experiments/o01_ood_benchmark/artifacts/benchmark_manifest.csv",
+      "sha256": "2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd",
+      "bytes": 1030810
+    },
+    {
+      "path": "experiments/o01_ood_benchmark/artifacts/class_assignments.csv",
+      "sha256": "0ce5d541fe5bacf7419cf0715e06edc6c857ce001e54a0ae59cc5c3412fb957c",
+      "bytes": 589
+    },
+    {
+      "path": "experiments/o01_ood_benchmark/config.json",
+      "sha256": "f247e8e022e5980da0a6d0847220fcb5fd59124fb24b30bd5e8e4a432da1cb99",
+      "bytes": 738
+    },
+    {
+      "path": "experiments/o01_ood_benchmark/result.json",
+      "sha256": "320f2e9b23259913c31eada0a7953973350a566c4d7bf7d5581a999a4fc37336",
+      "bytes": 2820
+    },
+    {
+      "path": "experiments/o01_ood_benchmark/decision.md",
+      "sha256": "8b2e3bd9f9f6163896b2d7bd6def26786ec73538998d564a53df91f3ceccfe3f",
+      "bytes": 327
+    },
+    {
+      "path": "audit/ood_benchmark.md",
+      "sha256": "535daea060e6a723d59ab4d91f36d8f2fe0f35840f1787ffb12c31e17ae10088",
+      "bytes": 1318
+    }
+  ]
+}

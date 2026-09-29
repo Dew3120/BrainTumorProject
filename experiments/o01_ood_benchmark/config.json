@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "o01_ood_benchmark",
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "COMPLETE",
   "hypothesis_ids": [
     "H9"
   ],
@@ -13,5 +13,18 @@
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "brisc_test_images_accessed": 0,
-  "neural_retraining_or_refitting": false
+  "neural_retraining_or_refitting": false,
+  "sources": [
+    "brisc",
+    "cheng",
+    "openneuro",
+    "upenn_gbm",
+    "organamnist",
+    "cifar10",
+    "random_noise",
+    "uniform_gray"
+  ],
+  "id_fit": 600,
+  "id_evaluation": 680,
+  "ood_per_source_per_split": 100
 }

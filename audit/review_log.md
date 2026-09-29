@@ -755,3 +755,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Source order and terminal statuses matched Amendment 13. Frozen artifact hashes passed. BRISC sealed-test access, retraining/refitting, threshold changes, gate relaxations, and pooled cross-dataset metrics were zero.
 - **Alternatives considered:** Pool heterogeneous cohorts, treat X01 as independent, impute X04, or tune from external results; all rejected by the registered protocol.
 - **Who approved:** User approved Amendment 13 and the sequential Stage 6 completion protocol.
+
+## 2026-09-29T15:49:45+05:30 — Accept registered OOD benchmark
+
+- **Decision made:** Complete O01 as an accepted descriptive benchmark.
+- **Triggering artifact:** `experiments/o01_ood_benchmark/artifacts/benchmark_manifest.csv`, SHA256 `2e3cb4fb77c9f37a2cb7c4de1cf179819d970c6fa74d661e3c88827530d8dbdd`.
+- **Rationale:** Registered populations and counts are present, fitting/evaluation groups are disjoint, and no standardized-pixel class contamination was found.
+- **Verification:** BRISC sealed-test access, reference-mask use, diagnostic-label use, external-performance use, neural retraining, and prior-threshold changes were zero.
+- **Who approved:** User authorized the complete OOD workstream in one sequential run.

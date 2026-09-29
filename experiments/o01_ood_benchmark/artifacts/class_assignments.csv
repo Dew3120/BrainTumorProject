@@ -1,0 +1,17 @@
+source,domain,detector_split,images,unique_groups
+brisc,ID,evaluation,680,583
+brisc,ID,fit,600,600
+cheng,NEAR_OOD,evaluation,100,64
+cheng,NEAR_OOD,fit,100,63
+cifar10,FAR_OOD,evaluation,100,100
+cifar10,FAR_OOD,fit,100,100
+openneuro,NEAR_OOD,evaluation,100,25
+openneuro,NEAR_OOD,fit,100,25
+organamnist,FAR_OOD,evaluation,100,100
+organamnist,FAR_OOD,fit,100,100
+random_noise,FAR_OOD,evaluation,100,100
+random_noise,FAR_OOD,fit,100,100
+uniform_gray,FAR_OOD,evaluation,100,100
+uniform_gray,FAR_OOD,fit,100,100
+upenn_gbm,NEAR_OOD,evaluation,100,73
+upenn_gbm,NEAR_OOD,fit,100,74

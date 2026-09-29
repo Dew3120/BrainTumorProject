@@ -1,5 +1,72 @@
 {
   "schema_version": 1,
   "experiment_id": "o01_ood_benchmark",
-  "status": "NOT_RUN"
+  "status": "COMPLETE",
+  "gate": "DESCRIPTIVE",
+  "decision": "ACCEPT_BENCHMARK",
+  "counts": {
+    "brisc/evaluation": 680,
+    "brisc/fit": 600,
+    "cheng/evaluation": 100,
+    "cheng/fit": 100,
+    "cifar10/evaluation": 100,
+    "cifar10/fit": 100,
+    "openneuro/evaluation": 100,
+    "openneuro/fit": 100,
+    "organamnist/evaluation": 100,
+    "organamnist/fit": 100,
+    "random_noise/evaluation": 100,
+    "random_noise/fit": 100,
+    "uniform_gray/evaluation": 100,
+    "uniform_gray/fit": 100,
+    "upenn_gbm/evaluation": 100,
+    "upenn_gbm/fit": 100
+  },
+  "total_images": 2680,
+  "fitting_images": 1300,
+  "evaluation_images": 1380,
+  "integrity": {
+    "unique_standardized_pixels": 2677,
+    "within_partition_repeated_pixel_hashes": 2,
+    "fit_evaluation_group_overlap": 0,
+    "unexpected_class_contamination": 0,
+    "all_file_hashes_verified": true
+  },
+  "downloads": {
+    "organamnist": {
+      "url": "https://zenodo.org/records/10519652/files/organamnist.npz?download=1",
+      "filename": "organamnist.npz",
+      "md5": "68e3f8846a6bd62f0c9bf841c0d9eacc",
+      "release": "MedMNIST v2 OrganAMNIST; Zenodo record 10519652; CC BY 4.0",
+      "path": "data/external/ood_sources/organamnist.npz",
+      "bytes": 38247708,
+      "sha256": "7c8c8b0753e2c0d7f70928817eac02be7cbb09f6beff4346e9d0ea79ecb598bd"
+    },
+    "cifar10_train": {
+      "url": "https://huggingface.co/datasets/uoft-cs/cifar10/resolve/main/plain_text/train-00000-of-00001.parquet",
+      "filename": "cifar10-train.parquet",
+      "sha256": "8428b53a88a11ac374111006708df51469e315a22ac6d66470afd9c78d2ae883",
+      "release": "CIFAR-10 official train partition; University of Toronto dataset mirror",
+      "path": "data/external/ood_sources/cifar10-train.parquet",
+      "bytes": 119705255
+    },
+    "cifar10_test": {
+      "url": "https://huggingface.co/datasets/uoft-cs/cifar10/resolve/main/plain_text/test-00000-of-00001.parquet",
+      "filename": "cifar10-test.parquet",
+      "sha256": "841389e6f2d64f28bf17310e430aebac20ec3ba611a3c5e231dc93c645ce84de",
+      "release": "CIFAR-10 official test partition; University of Toronto dataset mirror",
+      "path": "data/external/ood_sources/cifar10-test.parquet",
+      "bytes": 23940850
+    }
+  },
+  "historical_context": "Near-OOD source cohorts were previously processed in Stage 6. No Stage-6 performance value, reference mask, or diagnostic label entered benchmark selection or detector fitting.",
+  "verification": {
+    "brisc_test_images_accessed": 0,
+    "reference_masks_used": 0,
+    "diagnostic_labels_used": 0,
+    "external_performance_values_used": 0,
+    "neural_retraining_or_refitting": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835"
+  }
 }
