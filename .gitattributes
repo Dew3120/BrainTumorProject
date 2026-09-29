@@ -5,3 +5,4 @@ experiments/registry.json -text
 experiments/*/config.json -text
 runs/baseline_v1/manifest.json binary
 runs/baseline_v1/manifest.sha256 binary
+runs/final_stack/** binary

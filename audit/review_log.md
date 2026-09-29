@@ -803,3 +803,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Numeric boundaries were computed from BRISC fitting scores only; evaluation membership reports coverage.
 - **Verification:** Required warning/disclaimer and fail-closed invalid-score handling passed. Prior thresholds, neural weights, sealed-test status, and gates were unchanged.
 - **Who approved:** User authorized O01–O06 in one sequential run.
+
+## 2026-09-30T02:29:00+05:30 — Freeze the selected final inference stack
+
+- **Decision made:** Freeze classifier v1 raw probabilities, E08, C03, R02, O05 secondary logistic, and the O06 ACCEPT/REVIEW policy as the complete Stage 8 stack.
+- **Triggering artifact:** `runs/final_stack/manifest.json`, SHA256 `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`.
+- **Rationale:** H7 and H9 passed their registered gates. Every required inference artifact is hash-bound, every threshold is stored at registered precision, and fresh manifest-only reconstruction matched three deterministic fixtures.
+- **Alternatives considered:** E01-E04, C01/C02/C04-C07, R01/R03-R10, and the O05 primary average remain excluded. E05-E07 and O02-O04 are included only as required components of selected E08 and O05, not as standalone selections.
+- **Verification:** O03 deterministic recovery reproduced recorded distances with maximum absolute error `0.0`; O05 reconstruction error was `0.0`; strict allowlist and hashes passed; 207 tests passed; Ruff passed; BRISC test access, neural retraining, and threshold changes were zero.
+- **Who approved:** User explicitly approved the verified Stage 8 plan and execution.
