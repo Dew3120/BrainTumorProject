@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x05_cross_dataset_synthesis",
+  "status": "COMPLETE",
+  "h8": {
+    "verdict": "REJECTED_FOR_EVALUATED_INDEPENDENT_COHORTS",
+    "reason": "Both eligible independent cohorts failed conjunctive transport gates. X01 is overlap-control evidence and X04 is access-blocked."
+  },
+  "cohorts": {
+    "x01_cheng_overlap_control": {
+      "evidence_role": "overlap control; not independent",
+      "status": "COMPLETE",
+      "population": {
+        "subjects": 233,
+        "primary_slices": 3064
+      },
+      "classifier": {
+        "target_recall": 0.9325842696629213,
+        "top_label_ece": 0.042847723604558685
+      },
+      "segmentation": {
+        "registered_target_subject_macro_dice": 0.41416471898664975,
+        "overall_subject_macro_dice": {
+          "subject_macro_mean": 0.6688291857601111,
+          "bootstrap_ci95": [
+            0.634868212241788,
+            0.7044014227360171
+          ],
+          "subjects": 233,
+          "slices": 3064
+        },
+        "per_category": {
+          "glioma": {
+            "dice": {
+              "subject_macro_mean": 0.41416471898664975,
+              "bootstrap_ci95": [
+                0.36563590020252684,
+                0.4616427734184697
+              ],
+              "subjects": 89,
+              "slices": 1426
+            },
+            "iou": {
+              "subject_macro_mean": 0.327551426918464,
+              "bootstrap_ci95": [
+                0.28525645745344774,
+                0.3702164524446108
+              ],
+              "subjects": 89,
+              "slices": 1426
+            },
+            "slice_mean_dice": 0.4383336621932528,
+            "slice_mean_iou": 0.3472923655806411,
+            "boundary_f1_tolerance_2": {
+              "subject_macro_mean": 0.4622026561762619,
+              "bootstrap_ci95": [
+                0.4144229691567758,
+                0.5084064579492381
+              ],
+              "subjects": 89,
+              "slices": 1426
+            },
+            "failures_below_0_50": 737,
+            "zero_dice": 323
+          },
+          "meningioma": {
+            "dice": {
+              "subject_macro_mean": 0.867861113690774,
+              "bootstrap_ci95": [
+                0.8440862605616437,
+                0.8887118552931796
+              ],
+              "subjects": 82,
+              "slices": 708
+            },
+            "iou": {
+              "subject_macro_mean": 0.7900348984842939,
+              "bootstrap_ci95": [
+                0.7622561802595328,
+                0.8152534028176763
+              ],
+              "subjects": 82,
+              "slices": 708
+            },
+            "slice_mean_dice": 0.8976903845038201,
+            "slice_mean_iou": 0.8290016515259211,
+            "boundary_f1_tolerance_2": {
+              "subject_macro_mean": 0.9464488437330179,
+              "bootstrap_ci95": [
+                0.9262384340172791,
+                0.9651027615330218
+              ],
+              "subjects": 82,
+              "slices": 708
+            },
+            "failures_below_0_50": 10,
+            "zero_dice": 4
+          },
+          "pituitary": {
+            "dice": {
+              "subject_macro_mean": 0.771160144671783,
+              "bootstrap_ci95": [
+                0.749429542968457,
+                0.7924168435893659
+              ],
+              "subjects": 62,
+              "slices": 930
+            },
+            "iou": {
+              "subject_macro_mean": 0.6552769313126334,
+              "bootstrap_ci95": [
+                0.6299673150765241,
+                0.6809672826656359
+              ],
+              "subjects": 62,
+              "slices": 930
+            },
+            "slice_mean_dice": 0.7805032912991196,
+            "slice_mean_iou": 0.6674460410755999,
+            "boundary_f1_tolerance_2": {
+              "subject_macro_mean": 0.8959037569387717,
+              "bootstrap_ci95": [
+                0.8786370276633337,
+                0.9120050861789437
+              ],
+              "subjects": 62,
+              "slices": 930
+            },
+            "failures_below_0_50": 70,
+            "zero_dice": 9
+          }
+        }
+      },
+      "pixel_calibration": {
+        "lesion_centered": {
+          "raw_ece": 0.08017651218892258,
+          "c03_ece": 0.051402424604133766
+        },
+        "background": {
+          "raw_ece": 0.0028308403156504704,
+          "c03_ece": 0.0029003541418584286
+        },
+        "whole_image": {
+          "raw_ece": 0.006240609437932875,
+          "c03_ece": 0.002051624613911357
+        }
+      },
+      "reliability": {
+        "auroc": 0.9387193260264332,
+        "auroc_ci95": [
+          0.9243624372081871,
+          0.9510102167539277
+        ],
+        "ece": 0.06132259332664226,
+        "brier_skill": 0.5874072094520586,
+        "brier_skill_ci95": [
+          0.5397166412191656,
+          0.6273010044036144
+        ],
+        "top20_failure_capture_fraction": 0.6474908200734394,
+        "policy_review_rate": 0.39327676240208875
+      },
+      "failure_taxonomy": {
+        "failures": 817,
+        "complete_miss_fraction": 0.4112607099143207,
+        "severe_under_prediction_fraction": 0.40024479804161567,
+        "fragmented_prediction_fraction": 0.47980416156670747,
+        "disconnected_false_positive_fraction": 0.3843329253365973
+      },
+      "gates": {
+        "status": "FAIL",
+        "checks": {
+          "classifier_recall_at_least_0_85": {
+            "glioma": true,
+            "meningioma": true,
+            "pituitary": true
+          },
+          "classifier_top_label_ece_at_most_0_05": true,
+          "segmentation_dice": {
+            "glioma_at_least_0_55": false,
+            "meningioma_at_least_0_75": true,
+            "pituitary_at_least_0_75": true
+          },
+          "reliability": {
+            "auroc_at_least_0_75": true,
+            "auroc_ci_lower_at_least_0_70": true,
+            "ece_at_most_0_05": false,
+            "brier_skill_positive": true,
+            "brier_skill_ci_lower_positive": true,
+            "top20_failure_capture_at_least_half": true
+          }
+        },
+        "not_independent": true
+      }
+    },
+    "x02_openneuro_pituitary": {
+      "evidence_role": "independent pituitary cohort",
+      "status": "FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL",
+      "population": {
+        "subjects": 50,
+        "primary_slices": 425
+      },
+      "classifier": {
+        "target_recall": 0.94,
+        "top_label_ece": 0.07618693215463411
+      },
+      "segmentation": {
+        "registered_target_subject_macro_dice": 0.12724200117054443,
+        "overall_subject_macro_dice": {
+          "subject_macro_mean": 0.12724200117054443,
+          "bootstrap_ci95": [
+            0.08235864220425743,
+            0.1777634374606488
+          ],
+          "subjects": 50,
+          "slices": 425
+        },
+        "per_category": {
+          "glioma": "NOT_ESTIMABLE",
+          "meningioma": "NOT_ESTIMABLE",
+          "pituitary": {
+            "dice": {
+              "subject_macro_mean": 0.12724200117054443,
+              "bootstrap_ci95": [
+                0.08235864220425743,
+                0.1777634374606488
+              ],
+              "subjects": 50,
+              "slices": 425
+            },
+            "iou": {
+              "subject_macro_mean": 0.0977028117054753,
+              "bootstrap_ci95": [
+                0.06153139426010806,
+                0.1402792474167734
+              ],
+              "subjects": 50,
+              "slices": 425
+            },
+            "slice_mean_dice": 0.13797254796986835,
+            "slice_mean_iou": 0.1067327026915157,
+            "boundary_f1_tolerance_2": {
+              "subject_macro_mean": 0.15710027925411005,
+              "bootstrap_ci95": [
+                0.10730170806595653,
+                0.21329208167633523
+              ],
+              "subjects": 50,
+              "slices": 425
+            },
+            "failures_below_0_50": 357,
+            "zero_dice": 309
+          }
+        }
+      },
+      "pixel_calibration": {
+        "lesion_centered": {
+          "raw_ece": 0.13484935156306524,
+          "c03_ece": 0.1413670915640238
+        },
+        "background": {
+          "raw_ece": 0.012404989085516363,
+          "c03_ece": 0.010534431910818626
+        },
+        "whole_image": {
+          "raw_ece": 0.016186382594068353,
+          "c03_ece": 0.009801512726830566
+        }
+      },
+      "reliability": {
+        "auroc": 0.8718899324435657,
+        "auroc_ci95": [
+          0.8112022485736097,
+          0.9161683310211312
+        ],
+        "ece": 0.25509601671837145,
+        "brier_skill": 0.7050479068188931,
+        "brier_skill_ci95": [
+          0.6587030379330359,
+          0.7514411987487697
+        ],
+        "top20_failure_capture_fraction": 0.23809523809523808,
+        "policy_review_rate": 0.9058823529411765
+      },
+      "failure_taxonomy": {
+        "failures": 357,
+        "complete_miss_fraction": 0.865546218487395,
+        "severe_under_prediction_fraction": 0.0896358543417367,
+        "fragmented_prediction_fraction": 0.42857142857142855,
+        "disconnected_false_positive_fraction": 0.4117647058823529
+      },
+      "gates": {
+        "status": "FAIL",
+        "checks": {
+          "classifier_pituitary_recall_at_least_0_85": true,
+          "classifier_top_label_ece_at_most_0_05": false,
+          "pituitary_subject_macro_dice_at_least_0_75": false,
+          "reliability_auroc_at_least_0_75": true,
+          "reliability_auroc_ci_lower_at_least_0_70": true,
+          "reliability_ece_at_most_0_05": false,
+          "reliability_brier_skill_positive": true,
+          "reliability_brier_skill_ci_lower_positive": true,
+          "top20_failure_capture_at_least_half": false
+        },
+        "unidentifiable_metrics": [
+          "classifier OVR AUROC",
+          "no-tumor specificity",
+          "binary tumor/no-tumor AUROC",
+          "glioma metrics",
+          "meningioma metrics"
+        ]
+      }
+    },
+    "x03_upenn_gbm": {
+      "evidence_role": "independent GBM-only cohort; coarse glioma mapping",
+      "status": "FAIL_REGISTERED_TRANSPORT_GATES_INDEPENDENT_EXTERNAL",
+      "population": {
+        "subjects": 147,
+        "primary_slices": 9464
+      },
+      "classifier": {
+        "target_recall": 0.4217687074829932,
+        "top_label_ece": 0.24539048517679227
+      },
+      "segmentation": {
+        "registered_target_subject_macro_dice": 0.2207740750097989,
+        "overall_subject_macro_dice": {
+          "subject_macro_mean": 0.2207740750097989,
+          "bootstrap_ci95": [
+            0.2004498094516916,
+            0.24222936592874403
+          ],
+          "subjects": 147,
+          "slices": 9464
+        },
+        "per_category": {
+          "meningioma": "NOT_ESTIMABLE",
+          "glioma": {
+            "dice": {
+              "subject_macro_mean": 0.2207740750097989,
+              "bootstrap_ci95": [
+                0.2004498094516916,
+                0.24222936592874403
+              ],
+              "subjects": 147,
+              "slices": 9464
+            },
+            "iou": {
+              "subject_macro_mean": 0.15356171289960582,
+              "bootstrap_ci95": [
+                0.13776401913233605,
+                0.1699507343141906
+              ],
+              "subjects": 147,
+              "slices": 9464
+            },
+            "slice_mean_dice": 0.21911800693537126,
+            "slice_mean_iou": 0.15139298482334418,
+            "boundary_f1_tolerance_2": {
+              "subject_macro_mean": 0.23865431471931994,
+              "bootstrap_ci95": [
+                0.21662488404948893,
+                0.2612359661522845
+              ],
+              "subjects": 147,
+              "slices": 9464
+            },
+            "failures_below_0_50": 7600,
+            "zero_dice": 4263
+          }
+        }
+      },
+      "pixel_calibration": {
+        "lesion_centered": {
+          "raw_ece": 0.14297124238041442,
+          "c03_ece": 0.1419619207663993
+        },
+        "background": {
+          "raw_ece": 0.010829520214322697,
+          "c03_ece": 0.009089282024413893
+        },
+        "whole_image": {
+          "raw_ece": 0.01905530891260543,
+          "c03_ece": 0.010632983986398399
+        }
+      },
+      "reliability": {
+        "auroc": 0.8315855121978768,
+        "auroc_ci95": [
+          0.8119607000917849,
+          0.8500849318513499
+        ],
+        "ece": 0.33909992805648637,
+        "brier_skill": 0.5715235326127044,
+        "brier_skill_ci95": [
+          0.5453400875743667,
+          0.5969627017780437
+        ],
+        "top20_failure_capture_fraction": 0.2481578947368421,
+        "policy_review_rate": 0.8250211327134404
+      },
+      "failure_taxonomy": {
+        "failures": 7600,
+        "complete_miss_fraction": 0.560921052631579,
+        "severe_under_prediction_fraction": 0.35460526315789476,
+        "fragmented_prediction_fraction": 0.5201315789473684,
+        "disconnected_false_positive_fraction": 0.4561842105263158
+      },
+      "gates": {
+        "status": "FAIL",
+        "checks": {
+          "classifier_glioma_recall_at_least_0_85": false,
+          "classifier_top_label_ece_at_most_0_05": false,
+          "glioma_subject_macro_dice_at_least_0_55": false,
+          "reliability_auroc_at_least_0_75": true,
+          "reliability_auroc_ci_lower_at_least_0_70": true,
+          "reliability_ece_at_most_0_05": false,
+          "reliability_brier_skill_positive": true,
+          "reliability_brier_skill_ci_lower_positive": true,
+          "top20_failure_capture_at_least_half": false
+        },
+        "unidentifiable_metrics": [
+          "classifier OVR AUROC",
+          "no-tumor specificity",
+          "binary tumor/no-tumor AUROC",
+          "pituitary metrics",
+          "meningioma metrics"
+        ]
+      }
+    },
+    "x04_meningioma_seg_class": {
+      "evidence_role": "controlled-access candidate",
+      "status": "ACCESS_BLOCKED",
+      "performance_metrics": "NOT_ESTIMABLE",
+      "dataset_images_accessed": 0
+    }
+  },
+  "source_artifacts": {
+    "x01_cheng_overlap_control": {
+      "path": "experiments/x01_cheng_overlap_control/result.json",
+      "sha256": "c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f"
+    },
+    "x02_openneuro_pituitary": {
+      "path": "experiments/x02_openneuro_pituitary/result.json",
+      "sha256": "a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59"
+    },
+    "x03_upenn_gbm": {
+      "path": "experiments/x03_upenn_gbm/result.json",
+      "sha256": "7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6"
+    },
+    "x04_meningioma_seg_class": {
+      "path": "experiments/x04_meningioma_seg_class/result.json",
+      "sha256": "77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722"
+    }
+  },
+  "frozen_hashes": {
+    "models/r02_reliability_scaler.pkl": "c99a67f8157515d815a9b7a05555b45e26b5a2da0e458b359cc83d63fe30dce8",
+    "models/r02_reliability_logistic.pkl": "9f8ea8530c1c2ee6a0773c6ec7c0b92e6da7923ddf3c50d3d32176379339f044",
+    "models/r02_reliability_manifest.json": "0d56aab5d562a34325003cee116c4f9d5f8fbe3fcc5278717338706d58e5303f",
+    "experiments/c03_isotonic/artifacts/isotonic_mappings.json": "fdc1a735d78af8e8eb89392e696dc97fe6632729b44de6cf9e9e2d888ea760fa"
+  },
+  "verification": {
+    "brisc_sealed_test_images_accessed": 0,
+    "neural_retraining": 0,
+    "calibrator_refits": 0,
+    "reliability_refits": 0,
+    "segmentation_threshold": 0.5,
+    "reliability_policy_threshold": "0.9490250173235835",
+    "segmentation_threshold_changes": 0,
+    "policy_threshold_changes": 0,
+    "gate_relaxations": 0,
+    "pooled_cross_dataset_metric": false,
+    "final_drive_e_free_bytes": 348131704832
+  },
+  "claim_scope": "retrospective research evidence; not clinical validation"
+}

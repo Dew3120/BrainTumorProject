@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "experiment_id": "x05_cross_dataset_synthesis",
+  "status": "COMPLETE",
+  "files": [
+    {
+      "path": "audit/preregistration_amendment_13.md",
+      "bytes": 12088,
+      "sha256": "728d8c0f92a357c1ecbc78e586fce3af940e12fc8fef74bd3a3c0b93f8958da5"
+    },
+    {
+      "path": "audit/stage6_completion_report.md",
+      "bytes": 1138,
+      "sha256": "7265834784c585d3f1058f8ecc9dd12ef211aaedf4d4368ed014d8c54ba36774"
+    },
+    {
+      "path": "audit/stage6_cross_dataset.md",
+      "bytes": 6797,
+      "sha256": "cf011337471053effc3f436e4ea5528a22b2e2fd601c3883537867ae9d875073"
+    },
+    {
+      "path": "experiments/x01_cheng_overlap_control/result.json",
+      "bytes": 29064,
+      "sha256": "c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f"
+    },
+    {
+      "path": "experiments/x02_openneuro_pituitary/result.json",
+      "bytes": 31860,
+      "sha256": "a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59"
+    },
+    {
+      "path": "experiments/x03_upenn_gbm/result.json",
+      "bytes": 38302,
+      "sha256": "7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6"
+    },
+    {
+      "path": "experiments/x04_meningioma_seg_class/result.json",
+      "bytes": 1456,
+      "sha256": "77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/artifacts/dataset_summary.csv",
+      "bytes": 816,
+      "sha256": "fbc2109a3ffccbf4c35b81888844be40d86e68ef119f4a80814749f44e0d4319"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/artifacts/synthesis.json",
+      "bytes": 15876,
+      "sha256": "c84be1bd53dbcec314e1627d3ca92da09997cabb0d9286484a7ed25c6c71752f"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/artifacts/transport_summary.png",
+      "bytes": 162771,
+      "sha256": "0822e2ff25778d8a018e9a1742475ddbe74b06f915e273b844bf54a891927355"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/config.json",
+      "bytes": 628,
+      "sha256": "e14c840a0108a154f8bc54bdf8fa79335b6e9f5dfc43e170873aada0483fed3b"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/decision.md",
+      "bytes": 343,
+      "sha256": "2a41fc2e1d3dec55dad25a017dcfdd5afa176c76f76f75d57d3c458ea2277ffa"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/hypothesis.md",
+      "bytes": 301,
+      "sha256": "1b1fddc5659925348d45388cd1399f90f810f2457f4319de1bbe1fa29159f4c1"
+    },
+    {
+      "path": "experiments/x05_cross_dataset_synthesis/result.json",
+      "bytes": 15876,
+      "sha256": "c84be1bd53dbcec314e1627d3ca92da09997cabb0d9286484a7ed25c6c71752f"
+    },
+    {
+      "path": "scripts/synthesize_stage6.py",
+      "bytes": 26443,
+      "sha256": "0a06ee795200385b88efd91dd7c88bb00eabc1c30c37ae33ce414034425da9df"
+    },
+    {
+      "path": "tests/test_synthesize_stage6.py",
+      "bytes": 1230,
+      "sha256": "5fc5a22fbc663f1edfa8d5a43d3770d2bf6a0350f293334ca9677b10a9624fec"
+    }
+  ]
+}

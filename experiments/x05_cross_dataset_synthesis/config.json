@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "x05_cross_dataset_synthesis",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H8"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H8"
+  ],
   "amendment": "audit/preregistration_amendment_13.md",
   "execution_order": 5,
   "required_source_order": [
@@ -15,5 +17,6 @@
   "segmentation_threshold": 0.5,
   "reliability_policy_threshold": "0.9490250173235835",
   "test_images_accessed": 0,
-  "model_retrained_or_refit": false
+  "model_retrained_or_refit": false,
+  "outcome": "H8_REJECTED_FOR_EVALUATED_INDEPENDENT_COHORTS"
 }

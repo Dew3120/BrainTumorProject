@@ -745,3 +745,13 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Verification:** Frozen C03/R02 hashes passed. Dataset files and images opened, BRISC sealed-test access, retraining/refitting, threshold changes, and gate relaxations were all zero.
 - **Alternatives considered:** Claim or simulate access; rejected. Impute meningioma metrics; rejected. Delay synthesis indefinitely; rejected by the registered access-blocked rule.
 - **Who approved:** User approved Amendment 13 and instructed X04 to be marked `ACCESS_BLOCKED` if access remained unavailable after X01-X03.
+
+
+## 2026-09-29T15:03:37+05:30 — Reject H8 and complete Stage 6 synthesis
+
+- **Decision made:** Reject H8 for the evaluated independent cohorts and complete Stage 6. Preserve X01 as overlap-control evidence and X04 as access-blocked.
+- **Triggering artifacts:** X01 result `c5cd7564f09537ff4433d6b606d3de67a5d3928693591c778370f6d26be94b1f`; X02 result `a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59`; X03 result `7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6`; X04 access result `77350372c96977093a53e022878112c4efe7186f7a0c42b4e3a59e8a48f74722`.
+- **Rationale:** X02 and X03 both failed registered independent transport gates. Reliability ranking remained useful, but calibration and top-risk capture did not transfer. X01 is not independent and X04 has no performance data.
+- **Verification:** Source order and terminal statuses matched Amendment 13. Frozen artifact hashes passed. BRISC sealed-test access, retraining/refitting, threshold changes, gate relaxations, and pooled cross-dataset metrics were zero.
+- **Alternatives considered:** Pool heterogeneous cohorts, treat X01 as independent, impute X04, or tune from external results; all rejected by the registered protocol.
+- **Who approved:** User approved Amendment 13 and the sequential Stage 6 completion protocol.
