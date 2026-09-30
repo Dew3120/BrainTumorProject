@@ -863,3 +863,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** Frozen O05 scores were recomputed on X02 and X03 and associated with Dice/failure without tuning.
 - **Verification:** Final-stack fixtures and all hashes passed; zero fitting, threshold selection, sealed-test access, neural retraining, or threshold changes.
 - **Who approved:** User authorized completion of all Amendment 21 items.
+
+## 2026-09-30T17:31:32+05:30 — Complete P06 joint policy analysis
+
+- **Decision made:** Close H13/P06 as a descriptive fixed-policy analysis with no gate.
+- **Triggering artifact:** `experiments/p06_joint_policy_risk_coverage/result.json`.
+- **Rationale:** O06 and R02 thresholds were applied unchanged and jointly to all registered populations.
+- **Verification:** Source hashes, memberships, score validity, and exact thresholds passed; zero fitting, tuning, sealed-test access, retraining, or threshold changes.
+- **Who approved:** User authorized completion of all Amendment 21 items.

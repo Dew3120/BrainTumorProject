@@ -1,0 +1,4 @@
+cohort,cases,standard_count,standard_rate,review_required_count,review_required_rate,standard_mean_dice,standard_failure_count,standard_failure_rate,total_failures,failures_caught_for_review,failures_missed_in_standard,failure_review_sensitivity,reason_both_accept,reason_ood_review,reason_reliability_review,reason_invalid_score
+brisc_validation,680,450,0.6617647058823529,230,0.3382352941176471,0.8894295554517915,1,0.0022222222222222222,82,81,1,0.9878048780487805,450,60,170,0
+x02_openneuro,425,0,0.0,425,1.0,,0,,357,357,0,1.0,0,425,0,0
+x03_upenn_gbm,9464,0,0.0,9464,1.0,,0,,7600,7600,0,1.0,0,9464,0,0

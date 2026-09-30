@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p06_joint_policy_risk_coverage",
+  "files": [
+    {
+      "path": "experiments/p06_joint_policy_risk_coverage/config.json",
+      "sha256": "bb8afd533a5e834de810b8c68348722c1acca020d2b6001be3dbd0be8e828ad4",
+      "bytes": 2491
+    },
+    {
+      "path": "experiments/p06_joint_policy_risk_coverage/result.json",
+      "sha256": "24275f31cd513b7c8cd7658bdbe6924fc3f3c1822ed09602a904dc13081f204c",
+      "bytes": 7616
+    },
+    {
+      "path": "experiments/p06_joint_policy_risk_coverage/decision.md",
+      "sha256": "e690ae0f639a70c106372a4c0eee4a698ecf1abdf1ff4c1d5b8ed8fa7cadb3b1",
+      "bytes": 940
+    },
+    {
+      "path": "experiments/p06_joint_policy_risk_coverage/artifacts/joint_policy_assignments.csv",
+      "sha256": "97ea18eb70444ca51ec15374fa55c11b499a1ecf6267ee9a048f845e0159d675",
+      "bytes": 1760338
+    },
+    {
+      "path": "experiments/p06_joint_policy_risk_coverage/artifacts/cohort_summary.csv",
+      "sha256": "1f5b239e20380fd8fd22783ed069380878b183bd5a20f3f697d16b02949d028e",
+      "bytes": 609
+    }
+  ],
+  "upstream_o07_scores": {
+    "x02_sha256": "98e5d40bd4c7c7372691e0d83ebaa8b6961998593f373235b4715356409595d5",
+    "x03_sha256": "166a21a7a1fa2a64dfefde048cf929cbf710ad9c938d2b86491bbe3a58c351b5"
+  }
+}

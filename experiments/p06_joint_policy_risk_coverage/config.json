@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "p06_joint_policy_risk_coverage",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H13"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H13"
+  ],
   "amendment_path": "audit/preregistration_amendment_21.md",
   "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
   "populations": {
@@ -10,7 +12,10 @@
     "x02_openneuro_primary_strict": 425,
     "x03_upenn_gbm_primary_strict": 9464
   },
-  "policy_order": ["O06", "R02"],
+  "policy_order": [
+    "O06",
+    "R02"
+  ],
   "thresholds": {
     "segmentation": 0.5,
     "ood_review": "0.36854275476100085",

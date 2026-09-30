@@ -1,15 +1,251 @@
 {
   "schema_version": 1,
   "experiment_id": "p06_joint_policy_risk_coverage",
-  "status": "NOT_RUN",
-  "started_at": null,
-  "completed_at": null,
-  "metrics": {},
-  "gate_checks": {},
-  "constraint_checks": {
-    "brisc_test_images_accessed": 0,
+  "status": "COMPLETE",
+  "decision": "DESCRIPTIVE_NO_GATE",
+  "exploratory_post_review": true,
+  "fixed_rule": "ood_score < 0.36854275476100085 AND reliability >= 0.9490250173235835",
+  "cohorts": {
+    "brisc_validation": {
+      "cases": 680,
+      "standard_count": 450,
+      "standard_rate": 0.6617647058823529,
+      "review_required_count": 230,
+      "review_required_rate": 0.3382352941176471,
+      "standard_mean_dice": 0.8894295554517915,
+      "standard_failure_count": 1,
+      "standard_failure_rate": 0.0022222222222222222,
+      "total_failures": 82,
+      "failures_caught_for_review": 81,
+      "failures_missed_in_standard": 1,
+      "failure_review_sensitivity": 0.9878048780487805,
+      "review_reason_counts": {
+        "BOTH_ACCEPT": 450,
+        "OOD_REVIEW": 60,
+        "RELIABILITY_REVIEW": 170,
+        "INVALID_SCORE": 0
+      },
+      "bootstrap_ci95": {
+        "standard_rate": [
+          0.622608159642317,
+          0.7007199573674394
+        ],
+        "review_required_rate": [
+          0.2992800426325606,
+          0.3773918403576829
+        ],
+        "standard_mean_dice": [
+          0.8812679219250659,
+          0.8971081540855156
+        ],
+        "standard_failure_rate": [
+          0.0,
+          0.007092618735504687
+        ],
+        "failure_review_sensitivity": [
+          0.9583333333333334,
+          1.0
+        ]
+      },
+      "per_category": {
+        "glioma": {
+          "cases": 204,
+          "standard_count": 53,
+          "standard_rate": 0.25980392156862747,
+          "review_required_count": 151,
+          "review_required_rate": 0.7401960784313726,
+          "standard_mean_dice": 0.8537849277200342,
+          "standard_failure_count": 1,
+          "standard_failure_rate": 0.018867924528301886,
+          "total_failures": 63,
+          "failures_caught_for_review": 62,
+          "failures_missed_in_standard": 1,
+          "failure_review_sensitivity": 0.9841269841269841,
+          "review_reason_counts": {
+            "BOTH_ACCEPT": 53,
+            "OOD_REVIEW": 31,
+            "RELIABILITY_REVIEW": 120,
+            "INVALID_SCORE": 0
+          }
+        },
+        "meningioma": {
+          "cases": 227,
+          "standard_count": 195,
+          "standard_rate": 0.8590308370044053,
+          "review_required_count": 32,
+          "review_required_rate": 0.14096916299559473,
+          "standard_mean_dice": 0.9163113296702485,
+          "standard_failure_count": 0,
+          "standard_failure_rate": 0.0,
+          "total_failures": 7,
+          "failures_caught_for_review": 7,
+          "failures_missed_in_standard": 0,
+          "failure_review_sensitivity": 1.0,
+          "review_reason_counts": {
+            "BOTH_ACCEPT": 195,
+            "OOD_REVIEW": 18,
+            "RELIABILITY_REVIEW": 14,
+            "INVALID_SCORE": 0
+          }
+        },
+        "pituitary": {
+          "cases": 249,
+          "standard_count": 202,
+          "standard_rate": 0.8112449799196787,
+          "review_required_count": 47,
+          "review_required_rate": 0.18875502008032127,
+          "standard_mean_dice": 0.8728316311804248,
+          "standard_failure_count": 0,
+          "standard_failure_rate": 0.0,
+          "total_failures": 12,
+          "failures_caught_for_review": 12,
+          "failures_missed_in_standard": 0,
+          "failure_review_sensitivity": 1.0,
+          "review_reason_counts": {
+            "BOTH_ACCEPT": 202,
+            "OOD_REVIEW": 11,
+            "RELIABILITY_REVIEW": 36,
+            "INVALID_SCORE": 0
+          }
+        }
+      }
+    },
+    "x02_openneuro": {
+      "cases": 425,
+      "standard_count": 0,
+      "standard_rate": 0.0,
+      "review_required_count": 425,
+      "review_required_rate": 1.0,
+      "standard_mean_dice": null,
+      "standard_failure_count": 0,
+      "standard_failure_rate": null,
+      "total_failures": 357,
+      "failures_caught_for_review": 357,
+      "failures_missed_in_standard": 0,
+      "failure_review_sensitivity": 1.0,
+      "review_reason_counts": {
+        "BOTH_ACCEPT": 0,
+        "OOD_REVIEW": 425,
+        "RELIABILITY_REVIEW": 0,
+        "INVALID_SCORE": 0
+      },
+      "bootstrap_ci95": {
+        "standard_rate": [
+          0.0,
+          0.0
+        ],
+        "review_required_rate": [
+          1.0,
+          1.0
+        ],
+        "standard_mean_dice": null,
+        "standard_failure_rate": null,
+        "failure_review_sensitivity": [
+          1.0,
+          1.0
+        ]
+      },
+      "per_category": {
+        "pituitary": {
+          "cases": 425,
+          "standard_count": 0,
+          "standard_rate": 0.0,
+          "review_required_count": 425,
+          "review_required_rate": 1.0,
+          "standard_mean_dice": null,
+          "standard_failure_count": 0,
+          "standard_failure_rate": null,
+          "total_failures": 357,
+          "failures_caught_for_review": 357,
+          "failures_missed_in_standard": 0,
+          "failure_review_sensitivity": 1.0,
+          "review_reason_counts": {
+            "BOTH_ACCEPT": 0,
+            "OOD_REVIEW": 425,
+            "RELIABILITY_REVIEW": 0,
+            "INVALID_SCORE": 0
+          }
+        }
+      }
+    },
+    "x03_upenn_gbm": {
+      "cases": 9464,
+      "standard_count": 0,
+      "standard_rate": 0.0,
+      "review_required_count": 9464,
+      "review_required_rate": 1.0,
+      "standard_mean_dice": null,
+      "standard_failure_count": 0,
+      "standard_failure_rate": null,
+      "total_failures": 7600,
+      "failures_caught_for_review": 7600,
+      "failures_missed_in_standard": 0,
+      "failure_review_sensitivity": 1.0,
+      "review_reason_counts": {
+        "BOTH_ACCEPT": 0,
+        "OOD_REVIEW": 9464,
+        "RELIABILITY_REVIEW": 0,
+        "INVALID_SCORE": 0
+      },
+      "bootstrap_ci95": {
+        "standard_rate": [
+          0.0,
+          0.0
+        ],
+        "review_required_rate": [
+          1.0,
+          1.0
+        ],
+        "standard_mean_dice": null,
+        "standard_failure_rate": null,
+        "failure_review_sensitivity": [
+          1.0,
+          1.0
+        ]
+      },
+      "per_category": {
+        "glioma": {
+          "cases": 9464,
+          "standard_count": 0,
+          "standard_rate": 0.0,
+          "review_required_count": 9464,
+          "review_required_rate": 1.0,
+          "standard_mean_dice": null,
+          "standard_failure_count": 0,
+          "standard_failure_rate": null,
+          "total_failures": 7600,
+          "failures_caught_for_review": 7600,
+          "failures_missed_in_standard": 0,
+          "failure_review_sensitivity": 1.0,
+          "review_reason_counts": {
+            "BOTH_ACCEPT": 0,
+            "OOD_REVIEW": 9464,
+            "RELIABILITY_REVIEW": 0,
+            "INVALID_SCORE": 0
+          }
+        }
+      }
+    }
+  },
+  "gate": null,
+  "interpretation": {
+    "prevents_poor_masks_wording": "Report only observed failure-review sensitivity; this retrospective analysis does not establish safety or prospective protection.",
+    "prospective_safety_established": false
+  },
+  "verification": {
+    "source_hashes_verified": true,
+    "o07_final_stack_fixture_verification_inherited": true,
+    "thresholds_exact": {
+      "segmentation": 0.5,
+      "reliability": "0.9490250173235835",
+      "ood_review": "0.36854275476100085",
+      "ood_refuse": null
+    },
+    "final_stack_manifest_unchanged": true,
     "model_fitting": 0,
-    "threshold_changes": 0,
-    "final_stack_modified": false
+    "threshold_tuning": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining": 0,
+    "threshold_changes": 0
   }
 }
