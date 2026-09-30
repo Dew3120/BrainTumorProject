@@ -235,7 +235,11 @@ def reliability_transfer() -> Path:
     fig, ax = plt.subplots(figsize=(8, 5))
     ax.bar(names, values, color=["#0072B2", "#E69F00", "#009E73"], yerr=errors, capsize=5)
     ax.axhline(0.75, color="#D55E00", linestyle="--", label="Registered minimum")
-    ax.set(ylim=(0.70, 1.0), ylabel="Failure-detection AUROC", title="Case-reliability ranking transfers better than segmentation")
+    ax.set(
+        ylim=(0.70, 1.0),
+        ylabel="Failure-detection AUROC",
+        title="Failure ranking retained discrimination on two external cohorts",
+    )
     ax.legend(frameon=False)
     ax.grid(axis="y")
     return save(fig, "14_reliability_transfer.png")
@@ -274,7 +278,7 @@ def main() -> None:
     record(copy_as_figure("experiments/p05_threshold_sensitivity/artifacts/sensitivity_curve.png", "11_threshold_sensitivity.png", "Reliability threshold sensitivity"), ["experiments/p05_threshold_sensitivity/artifacts/sensitivity_curve.png", "experiments/p05_threshold_sensitivity/result.json"], "Threshold sensitivity")
     record(timeline(), ["experiments/registry.json"], "Project-stage timeline")
     record(cost_curve(), ["experiments/p02_threshold_selection/artifacts/binary_threshold_curve.csv", "experiments/p02_threshold_selection/result.json"], "Expected-cost curve")
-    record(reliability_transfer(), ["experiments/r02_reduced_features/result.json", "experiments/x02_openneuro_pituitary/result.json", "experiments/x03_upenn_gbm/result.json"], "Reliability transfer AUROC")
+    record(reliability_transfer(), ["experiments/r02_reduced_features/result.json", "experiments/x02_openneuro_pituitary/result.json", "experiments/x03_upenn_gbm/result.json"], "Failure-ranking AUROC on two external cohorts")
 
     (OUTPUT / "figure_manifest.json").write_text(
         json.dumps({"schema_version": 1, "figure_count": len(records), "figures": records}, indent=2) + "\n",

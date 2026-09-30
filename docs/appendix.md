@@ -184,7 +184,7 @@ Every figure is generated or wrapped at 300 DPI by [`docs/build_stage9_figures.p
 | [`11_threshold_sensitivity.png`](figures/11_threshold_sensitivity.png) | Threshold sensitivity | `7546c8b7bc1ba2ac449a540c52dd15314c9b1df42549677e014692e62b13ff7c` |
 | [`12_stage_progression_timeline.png`](figures/12_stage_progression_timeline.png) | Project-stage timeline | `882882310050458741793c6d7c6fdc348acdb41dfdde574c9b7b3e23f30e5de3` |
 | [`13_policy_cost_curve.png`](figures/13_policy_cost_curve.png) | Expected-cost curve | `9885d4d88489d44139c7a81d349754275a1d5d0aa43c502378033a5198e894f1` |
-| [`14_reliability_transfer.png`](figures/14_reliability_transfer.png) | Reliability transfer AUROC | `d04005f5a79745aab5c5c148227aef88ee229a7bcb3f580c03e0c6fe186519f8` |
+| [`14_reliability_transfer.png`](figures/14_reliability_transfer.png) | Failure-ranking AUROC on two external cohorts | `347ea63850e64f1ebb36238b958291dc52ea579a10575a3870f53b4ea5447ea7` |
 
 ## Reproduction commands
 

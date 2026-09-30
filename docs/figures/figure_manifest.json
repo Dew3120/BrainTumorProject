@@ -196,9 +196,9 @@
     },
     {
       "figure": "docs/figures/14_reliability_transfer.png",
-      "sha256": "d04005f5a79745aab5c5c148227aef88ee229a7bcb3f580c03e0c6fe186519f8",
+      "sha256": "347ea63850e64f1ebb36238b958291dc52ea579a10575a3870f53b4ea5447ea7",
       "dpi": 300,
-      "description": "Reliability transfer AUROC",
+      "description": "Failure-ranking AUROC on two external cohorts",
       "sources": [
         {
           "path": "experiments/r02_reduced_features/result.json",

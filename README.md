@@ -33,7 +33,7 @@ The complete, hash-verified inference package is in [`runs/final_stack/`](runs/f
 - Historical v1 image-mean segmentation Dice was 0.7694. Selected E08 category Dice was 0.6324 glioma, 0.8822 meningioma, and 0.8183 pituitary.
 - R02 failure-ranking AUROC was 0.9555 internally, but glioma was its weakest subgroup.
 - Independent spatial transport failed: OpenNeuro Dice 0.1272 and UPENN-GBM Dice 0.2208. H8 was rejected for the evaluated independent cohorts.
-- Reliability ranking transferred better than segmentation, with AUROC 0.8719 on OpenNeuro and 0.8316 on UPENN-GBM, while absolute reliability calibration did not transfer.
+- Failure ranking retained discrimination on the two evaluated independent cohorts, with AUROC 0.8719 on OpenNeuro and 0.8316 on UPENN-GBM, while absolute reliability calibration did not transfer.
 - O05 AUROC was 0.9957 on the registered retrospective OOD benchmark. The detector may rely on dataset-source and encoding shortcuts.
 - The reliability policy cost was 205 at its registered threshold versus 406 at 0.50, but sensitivity analysis classified the selected threshold as fragile.
 
