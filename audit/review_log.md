@@ -889,3 +889,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Treat the supplied AI responses as formal peer review, omit failed H11, or describe zero external standard coverage as safety; rejected. Begin deferred retraining or threshold work; rejected by Amendment 21 scope.
 - **Verification:** Documentation verification, final-stack reconstruction, Ruff, and the full test suite passed. The frozen tree and manifest remained unchanged. BRISC sealed-test access, neural retraining, operational refitting, threshold changes, and final-stack writes were zero.
 - **Who approved:** User directed completion of the Stage 10 revision addendum after accepting the corrected Amendment 21 scope.
+
+## 2026-09-30T22:25:36+05:30 — Register Amendment 22 application policy contract
+
+- **Decision made:** Register OOD-before-disclosure sequencing and the additive P03 fail-closed reason `SEGMENTATION_RELIABILITY_NOT_APPLICABLE` for model-predicted no-tumor cases before Phase 6 implementation.
+- **Triggering artifact:** `audit/preregistration_amendment_22.md`, SHA256 `c8586e60dcf86de6b82eb8328428ca536e417332ec1565a06c385ad6380984d2`; evidence-state branding commit `2961d37f5ab9dc7766d0264898f687e529fdfa21`.
+- **Rationale:** O05 may require silent frozen forward passes, but no classification or segmentation output may be disclosed before OOD validation. R02 estimates tumor-mask reliability and is not applicable when the model predicts no tumor, so that path must return a normalized null score and fail closed to `REVIEW_REQUIRED`.
+- **Alternatives considered:** Display classification before O05 completes; rejected because it bypasses the registered OOD ordering. Treat no-tumor as `STANDARD` or synthesize a reliability value; rejected because neither is supported by R02. Rewrite historical P03/P04 evidence; rejected in favor of a forward-only additive application contract.
+- **Verification:** Frozen-stack manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`. Segmentation, reliability, and OOD thresholds remain `0.50`, `0.9490250173235835`, and `0.36854275476100085`; REFUSE remains disabled. BRISC sealed-test access, retraining/refitting, threshold changes, and writes under `runs/final_stack/` were zero.
+- **Who approved:** User approved the Gyrus identity and explicitly authorized both Amendment 22 items and the nine-stage Phase 6 documentation contract.
