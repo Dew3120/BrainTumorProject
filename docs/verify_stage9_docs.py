@@ -192,7 +192,7 @@ def verify_supporting_docs() -> None:
         assert (ROOT / relative).is_file(), relative
     appendix = (ROOT / "docs/appendix.md").read_text(encoding="utf-8")
     amendment_ids = set(re.findall(r"preregistration_amendment_(\d{2})", appendix))
-    assert amendment_ids == {f"{index:02d}" for index in range(1, 21)}
+    assert amendment_ids == {f"{index:02d}" for index in range(1, 22)}
     registry = read_json("experiments/registry.json")
     for experiment in registry["experiments"]:
         assert f"`{experiment['id']}`" in appendix
