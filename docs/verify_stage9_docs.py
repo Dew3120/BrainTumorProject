@@ -184,6 +184,9 @@ def verify_supporting_docs() -> None:
         "docs/stage9_source_ledger.json",
         "docs/build_stage9_figures.py",
         "docs/build_stage9_appendix.py",
+        "audit/stage10_self_review.md",
+        "audit/stage10_review_package.md",
+        "audit/stage10_completion_report.md",
     ]
     for relative in required:
         assert (ROOT / relative).is_file(), relative
@@ -193,7 +196,10 @@ def verify_supporting_docs() -> None:
     registry = read_json("experiments/registry.json")
     for experiment in registry["experiments"]:
         assert f"`{experiment['id']}`" in appendix
-    assert "Stage 10" not in (ROOT / "audit/review_log.md").read_text(encoding="utf-8")[-2000:]
+    review_log = (ROOT / "audit/review_log.md").read_text(encoding="utf-8")
+    assert "Complete Stage 10 hostile self-review and external-review preparation" in review_log
+    review_package = (ROOT / "audit/stage10_review_package.md").read_text(encoding="utf-8")
+    assert "It does not claim that any external review has already occurred." in review_package
 
 
 def main() -> None:
