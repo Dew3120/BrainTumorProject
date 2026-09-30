@@ -25,6 +25,7 @@ The complete, hash-verified inference package is in [`runs/final_stack/`](runs/f
 - [Figures and figure manifest](docs/figures/)
 - [Pre-registration](audit/preregistration.md)
 - [Review log](audit/review_log.md)
+- [External-review revision addendum](audit/stage10_revision_addendum.md)
 - [Final freeze report](audit/stage8_final_freezing.md)
 
 ## Headline findings

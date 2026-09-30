@@ -215,6 +215,7 @@ def verify_supporting_docs() -> None:
         "audit/stage10_self_review.md",
         "audit/stage10_review_package.md",
         "audit/stage10_completion_report.md",
+        "audit/stage10_revision_addendum.md",
     ]
     for relative in required:
         assert (ROOT / relative).is_file(), relative
@@ -228,6 +229,15 @@ def verify_supporting_docs() -> None:
     assert "Complete Stage 10 hostile self-review and external-review preparation" in review_log
     review_package = (ROOT / "audit/stage10_review_package.md").read_text(encoding="utf-8")
     assert "It does not claim that any external review has already occurred." in review_package
+    addendum = (ROOT / "audit/stage10_revision_addendum.md").read_text(encoding="utf-8")
+    for phrase in (
+        "H11 was rejected",
+        "total abstention",
+        "49 experiment packages",
+        "not human peer review",
+        "Research prototype — not for clinical use",
+    ):
+        assert phrase in addendum, phrase
 
 
 def main() -> None:

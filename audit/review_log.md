@@ -880,3 +880,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Relax H11, present P06 total abstention as external safety, or describe O05 as a per-mask failure detector; rejected by the registered results. Modify prior audit files or the frozen stack; rejected by Amendment 21 constraints.
 - **Verification:** The documentation verifier passed with 14 figures and a 10,482-word report. Frozen tree `439b4fca4b47f12b173c24eaa039b1258f9ddf03` and manifest SHA256 `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a` remained unchanged. No BRISC sealed-test access, neural retraining, calibration/reliability refitting, threshold changes, or final-stack writes occurred.
 - **Who approved:** User approved Amendment 21 and instructed completion of all six remaining items without partial compliance.
+
+## 2026-09-30T18:06:27+05:30 — Close Amendment 21 external-review response
+
+- **Decision made:** Accept the Stage 10 revision addendum as the consolidated response to the user-supplied Claude, Grok, and DeepSeek adversarial reviews. Close H10–H13 with their registered outcomes and preserve all deferred criticisms.
+- **Triggering artifact:** `audit/stage10_revision_addendum.md`, SHA256 `fd90ae7213fa9b440d4358ad7a000a15dbe31f0ef185f9533ed86f03a7ace779`; documentation-correction commit `927d6598686ac25873d1f9e4e464b71ec881afd0`.
+- **Rationale:** The addendum consolidates accepted criticisms, exact R11–P06 results, revised claims, unresolved work, and the integrity posture. It distinguishes external AI feedback from human peer review and leads with failed independent spatial transport.
+- **Alternatives considered:** Treat the supplied AI responses as formal peer review, omit failed H11, or describe zero external standard coverage as safety; rejected. Begin deferred retraining or threshold work; rejected by Amendment 21 scope.
+- **Verification:** Documentation verification, final-stack reconstruction, Ruff, and the full test suite passed. The frozen tree and manifest remained unchanged. BRISC sealed-test access, neural retraining, operational refitting, threshold changes, and final-stack writes were zero.
+- **Who approved:** User directed completion of the Stage 10 revision addendum after accepting the corrected Amendment 21 scope.
