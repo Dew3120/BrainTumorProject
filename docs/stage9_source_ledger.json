@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "purpose": "Stage 9 documentation-only metric and claim provenance. Values are copied from registered, committed artifacts; this file does not define new results.",
+  "frozen_stack": {
+    "freeze_commit": "c2566214bb921c7185fc8949b3e0376492e7113e",
+    "manifest_path": "runs/final_stack/manifest.json",
+    "manifest_sha256": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a",
+    "git_tree": "439b4fca4b47f12b173c24eaa039b1258f9ddf03",
+    "selection": {
+      "classifier": "v1 ResNet-18 with raw softmax probabilities",
+      "segmenter": "E08 arithmetic mean of E05, E06, and classifier-routed E07/v1",
+      "calibrator": "C03 final-all-validation isotonic mapping",
+      "reliability": "R02 10-feature L2 logistic regression",
+      "ood": "O05 secondary logistic ensemble",
+      "policy": "O06 ACCEPT/REVIEW; REFUSE disabled"
+    },
+    "thresholds": {
+      "segmentation": "0.50",
+      "reliability": "0.9490250173235835",
+      "ood_review": "0.36854275476100085",
+      "ood_refuse": null
+    }
+  },
+  "metrics": {
+    "classifier_internal_validation": {
+      "macro_f1": 0.9779057904419031,
+      "accuracy": 0.9776035834266518,
+      "recall": {
+        "glioma": 0.9803921568627451,
+        "meningioma": 0.9427312775330396,
+        "pituitary": 0.9919678714859438,
+        "no_tumor": 0.9953051643192489
+      },
+      "source": "audit/classifier_training_findings.json"
+    },
+    "segmenter_v1_internal_validation": {
+      "image_mean_dice": 0.7693531739806263,
+      "macro_category_dice": 0.7626617953449699,
+      "per_category_dice": {
+        "glioma": 0.608951638747171,
+        "meningioma": 0.8702445032838158,
+        "pituitary": 0.808789244003923
+      },
+      "source": "audit/segmentation_training_findings.json",
+      "interpretation": "Historical v1 baseline, not the selected E08 segmenter."
+    },
+    "segmenter_e08_internal_validation": {
+      "per_category_dice": {
+        "glioma": 0.6323744899333071,
+        "meningioma": 0.882178088576258,
+        "pituitary": 0.818345864942993
+      },
+      "delta_vs_v1": {
+        "glioma": 0.023422851186136184,
+        "meningioma": 0.011933585292442261,
+        "pituitary": 0.009556620939069949
+      },
+      "source": "experiments/e08_ensemble/result.json"
+    },
+    "c03_pixel_calibration": {
+      "lesion_centered_raw_ece": 0.050542674857612,
+      "lesion_centered_oof_ece": 0.03350925723838701,
+      "lesion_centered_raw_nll": 0.317163319327499,
+      "lesion_centered_oof_nll": 0.22447940526910248,
+      "source": "experiments/c03_isotonic/result.json"
+    },
+    "r02_case_reliability_internal_validation": {
+      "auroc": 0.9555020801044132,
+      "auroc_ci95": [0.938715915158216, 0.9704214021840543],
+      "ece": 0.017133460802129376,
+      "brier_skill": 0.5033476349941572,
+      "source": "experiments/r02_reduced_features/result.json"
+    },
+    "o05_ood_evaluation": {
+      "auroc": 0.9957184873949579,
+      "auroc_ci95": [0.9927263271323088, 0.9979750992249775],
+      "ece": 0.034098324521879345,
+      "brier": 0.028951166626727785,
+      "source": "experiments/o05_ensemble_ood/result.json"
+    },
+    "o06_ood_policy": {
+      "brisc_false_flag_rate": 0.08823529411764706,
+      "ood_detection_rate": 0.9985714285714286,
+      "ood_detected": 699,
+      "ood_total": 700,
+      "source": "experiments/o06_ood_policy/result.json"
+    },
+    "external_openneuro": {
+      "subject_macro_dice": 0.12724200117054443,
+      "dice_ci95": [0.08235864220425743, 0.1777634374606488],
+      "reliability_auroc": 0.8718899324435657,
+      "reliability_auroc_ci95": [0.8112022485736097, 0.9161683310211312],
+      "targets_unrepresentable_at_128": 5,
+      "source": "experiments/x02_openneuro_pituitary/result.json"
+    },
+    "external_upenn_gbm": {
+      "subject_macro_dice": 0.2207740750097989,
+      "dice_ci95": [0.2004498094516916, 0.24222936592874403],
+      "reliability_auroc": 0.8315855121978768,
+      "reliability_auroc_ci95": [0.8119607000917849, 0.8500849318513499],
+      "targets_unrepresentable_at_128": 82,
+      "source": "experiments/x03_upenn_gbm/result.json",
+      "interpretation": "GBM is a glioma subtype, but the GBM-only whole-tumor target is only a coarse mapping to heterogeneous BRISC glioma."
+    },
+    "policy_internal_validation": {
+      "threshold": 0.9490250173235835,
+      "flagged": 195,
+      "accepted": 485,
+      "failures_caught": 81,
+      "failures_missed": 1,
+      "selected_cost": 205,
+      "conventional_0_50_cost": 406,
+      "review_rate": 0.2867647058823529,
+      "source": "experiments/p02_threshold_selection/result.json"
+    },
+    "policy_sensitivity": {
+      "classification": "FRAGILE",
+      "worst_cost_within_0_05": 628,
+      "worst_cost_within_0_10": 680,
+      "source": "experiments/p05_threshold_sensitivity/result.json"
+    },
+    "glioma_small_mask_finding": {
+      "small_failures": 21,
+      "small_total": 32,
+      "small_failure_rate": 0.65625,
+      "risk_difference_small_vs_larger": 0.430,
+      "risk_difference_ci95": [0.258, 0.592],
+      "source": "audit/glioma_failure_findings.md"
+    },
+    "v1_failure_modes": {
+      "weak_cases": 83,
+      "fragmented": 70,
+      "disconnected_false_positive": 67,
+      "complete_miss": 17,
+      "source": "audit/segmentation_failure_modes.md"
+    }
+  },
+  "hypotheses": {
+    "H7": "SATISFIED",
+    "H8": "REJECTED_FOR_EVALUATED_INDEPENDENT_COHORTS",
+    "H9": "SATISFIED"
+  },
+  "claim_limits": [
+    "No clinical validity or patient-care utility is established.",
+    "The sealed BRISC test set remains unopened.",
+    "Patient independence within BRISC is unverified.",
+    "Independent external segmentation transport failed on the evaluated OpenNeuro and UPENN-GBM cohorts.",
+    "The final stack is a frozen research artifact, not a medical device."
+  ]
+}

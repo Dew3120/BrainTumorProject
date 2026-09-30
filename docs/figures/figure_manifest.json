@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "figure_count": 14,
+  "figures": [
+    {
+      "figure": "docs/figures/01_pipeline_architecture.png",
+      "sha256": "683035a5c53090e85cd06fd9111dab87cd43be33b341d0e417efe97d98faa5b2",
+      "dpi": 300,
+      "description": "Frozen inference architecture",
+      "sources": [
+        {
+          "path": "runs/final_stack/manifest.json",
+          "sha256": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/02_classifier_confusion_matrix.png",
+      "sha256": "f858df13b781b3e66a0dbf76c17678fa2ab21bbc5929e89440ca4463ad9778fd",
+      "dpi": 300,
+      "description": "Classifier internal-validation confusion matrix",
+      "sources": [
+        {
+          "path": "runs/classifier/20260921-170607-243133-baseline/validation_predictions.csv",
+          "sha256": "8654b76c30d5aa7eeb977cc7d5f79776d9adb0257386a187d90bfaea0d728344"
+        },
+        {
+          "path": "audit/classifier_training_findings.json",
+          "sha256": "d3c019957f20dbe0a4ccd08b053af0e3967555d55636152aeaafe837ebcf1104"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/03_segmentation_examples.png",
+      "sha256": "0f234d63dcda3b09c7486628ea56724220b55673cb1331eed5c2eb54e066fb80",
+      "dpi": 300,
+      "description": "E08 success and failure examples",
+      "sources": [
+        {
+          "path": "experiments/e08_ensemble/artifacts/best_validation_by_category.png",
+          "sha256": "c1ad41a2dd3b7b462af7b04375af44fb4c0114bbb38ac487c1014fdbfcf3d0fb"
+        },
+        {
+          "path": "experiments/e08_ensemble/artifacts/worst_validation_by_category.png",
+          "sha256": "d3b9f5fef4da87b603479bd64f0d994e2ee1f43d866d1a8c5847b7cc0ffdd50a"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/04_c03_reliability.png",
+      "sha256": "c9c9c9951752f1e1a9081ac1bb8c9d55b2e3f07805ff3ba5e967ff25b6ae35c3",
+      "dpi": 300,
+      "description": "Raw and calibrated pixel reliability",
+      "sources": [
+        {
+          "path": "experiments/c03_isotonic/artifacts/lesion_centered_reliability.png",
+          "sha256": "316d9ca93cf61a0fdff72472952f3169919e431d52a2faaa7865267e29e0160a"
+        },
+        {
+          "path": "experiments/c03_isotonic/result.json",
+          "sha256": "3af002eacbc05e14134abba67135515a58e060b0c4f255bbccd8f10b79c49cb9"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/05_reliability_roc.png",
+      "sha256": "ef723e6ea71feef4ae6844817ca6e4bf0848d58ac58c125017d6e93737dbc51d",
+      "dpi": 300,
+      "description": "Reliability ROC",
+      "sources": [
+        {
+          "path": "experiments/p02_threshold_selection/artifacts/roc_curve.png",
+          "sha256": "bb6b660ef84b5adf8ff38bc24149cb8f0ea999ca12f9b3660f44b15f05dc7165"
+        },
+        {
+          "path": "experiments/r02_reduced_features/result.json",
+          "sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/06_ood_roc.png",
+      "sha256": "107381fdd2d735a8fe5217b3f8d9f4ba62eb05f16271dd4a2dffdad1c9ed1fa7",
+      "dpi": 300,
+      "description": "OOD ROC",
+      "sources": [
+        {
+          "path": "experiments/o05_ensemble_ood/artifacts/roc_curve.png",
+          "sha256": "e362797c05a6b2f66ab28af83c24ed6d94e8d44fbf4969d22f6b5dbd7fc75f0c"
+        },
+        {
+          "path": "experiments/o05_ensemble_ood/result.json",
+          "sha256": "434d389673aad234ae7e29cb0a96f5f305945e98558c6af3ca41a8b5bb60e7f6"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/07_cross_dataset_transport.png",
+      "sha256": "beac28775e0459be68a4ba486eb7c68566d84fed1e4ea8975fc5e9b8290edf29",
+      "dpi": 300,
+      "description": "External transport summary",
+      "sources": [
+        {
+          "path": "experiments/x05_cross_dataset_synthesis/artifacts/transport_summary.png",
+          "sha256": "0822e2ff25778d8a018e9a1742475ddbe74b06f915e273b844bf54a891927355"
+        },
+        {
+          "path": "experiments/x05_cross_dataset_synthesis/result.json",
+          "sha256": "c84be1bd53dbcec314e1627d3ca92da09997cabb0d9286484a7ed25c6c71752f"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/08_failure_mode_breakdown.png",
+      "sha256": "0e13bce6003af69466d564d822a3b3cef12469f2aea4885865dc94dddb4dfaf2",
+      "dpi": 300,
+      "description": "Failure-mode proportions",
+      "sources": [
+        {
+          "path": "audit/segmentation_training_findings.json",
+          "sha256": "b40faac694d0f3e3bbbce05b879ef58bbbf2a365f121aea6aa4af5f64233e7f9"
+        },
+        {
+          "path": "audit/segmentation_failure_modes.md",
+          "sha256": "fc68e677e0d87fe7095f319f5d8db27966b1c5dced44918e1a8edc74f3467fd4"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/09_calibration_comparison.png",
+      "sha256": "38aeabf6bd6cbb061ae2a9681b3d3823b6aef97383bad209c8cdfb42fc6b7734",
+      "dpi": 300,
+      "description": "C01-C07 calibration comparison",
+      "sources": [
+        {
+          "path": "experiments/c08_unified_ece/artifacts/segmenter_ece_table.csv",
+          "sha256": "8a3c803e89141d1404985b152b589d801710e0981767d63ae5e33fd3fb91cdf6"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/10_feature_importance.png",
+      "sha256": "593a0a29f1c64327a4b64bf68b9c3506a9e7c0c5f99fbb9c235cf491698ffc7d",
+      "dpi": 300,
+      "description": "R01 feature importance",
+      "sources": [
+        {
+          "path": "experiments/r01_ablation/artifacts/permutation_importance.csv",
+          "sha256": "8507106a9265eb3d7c25a337d6e53cd5a78bfeb534dccab30595d5020924d85b"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/11_threshold_sensitivity.png",
+      "sha256": "7546c8b7bc1ba2ac449a540c52dd15314c9b1df42549677e014692e62b13ff7c",
+      "dpi": 300,
+      "description": "Threshold sensitivity",
+      "sources": [
+        {
+          "path": "experiments/p05_threshold_sensitivity/artifacts/sensitivity_curve.png",
+          "sha256": "1501b109521fcfaf2c5567ed570313d42df2738ab0a54b4f2c519feeb27e58bd"
+        },
+        {
+          "path": "experiments/p05_threshold_sensitivity/result.json",
+          "sha256": "fa99058527d645d2d85d2b2bb02f63be97916a968bf9a777be0b9914c31e3711"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/12_stage_progression_timeline.png",
+      "sha256": "882882310050458741793c6d7c6fdc348acdb41dfdde574c9b7b3e23f30e5de3",
+      "dpi": 300,
+      "description": "Project-stage timeline",
+      "sources": [
+        {
+          "path": "experiments/registry.json",
+          "sha256": "5d1f3873f7fbf28e18230b717ca24cfaa5607bd01eef817d00cc2d6238556d80"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/13_policy_cost_curve.png",
+      "sha256": "9885d4d88489d44139c7a81d349754275a1d5d0aa43c502378033a5198e894f1",
+      "dpi": 300,
+      "description": "Expected-cost curve",
+      "sources": [
+        {
+          "path": "experiments/p02_threshold_selection/artifacts/binary_threshold_curve.csv",
+          "sha256": "e02d5602e098db2c28451ff07a6e1840721702535f6e3c3258d44bf48c74ccfc"
+        },
+        {
+          "path": "experiments/p02_threshold_selection/result.json",
+          "sha256": "ab86f12bb3116429bbfeb633cdef0ea0f636623757202d821e3f5b52a2fac05c"
+        }
+      ]
+    },
+    {
+      "figure": "docs/figures/14_reliability_transfer.png",
+      "sha256": "d04005f5a79745aab5c5c148227aef88ee229a7bcb3f580c03e0c6fe186519f8",
+      "dpi": 300,
+      "description": "Reliability transfer AUROC",
+      "sources": [
+        {
+          "path": "experiments/r02_reduced_features/result.json",
+          "sha256": "fd680533caf1ac0a32c2d07de3f428cf31e0e85b12cb5f5347d30009394abbb2"
+        },
+        {
+          "path": "experiments/x02_openneuro_pituitary/result.json",
+          "sha256": "a19dc76f447d7151a85df805d9ec9deafdaf251bf8e235ec7c18630ec0375a59"
+        },
+        {
+          "path": "experiments/x03_upenn_gbm/result.json",
+          "sha256": "7b6f7b674688b3310c585b9a75a3a97b1a316c241ab8145e2359d1fd484019a6"
+        }
+      ]
+    }
+  ]
+}
