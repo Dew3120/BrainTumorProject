@@ -1,0 +1,73 @@
+"""Binding names, thresholds, and enumerations for the Gyrus domain layer."""
+
+from __future__ import annotations
+
+from decimal import Decimal
+from enum import StrEnum
+
+APP_NAME = "Gyrus"
+APP_VERSION = "0.1.0"
+PDF_CREATOR = f"{APP_NAME} {APP_VERSION}"
+DISCLAIMER = "Research prototype — not for clinical use"
+
+SEGMENTATION_SIZE = 128
+CLASSIFICATION_SIZE = 224
+SEGMENTATION_THRESHOLD_TEXT = "0.50"
+RELIABILITY_THRESHOLD_TEXT = "0.9490250173235835"
+OOD_REVIEW_THRESHOLD_TEXT = "0.36854275476100085"
+
+SEGMENTATION_THRESHOLD = Decimal(SEGMENTATION_THRESHOLD_TEXT)
+RELIABILITY_THRESHOLD = Decimal(RELIABILITY_THRESHOLD_TEXT)
+OOD_REVIEW_THRESHOLD = Decimal(OOD_REVIEW_THRESHOLD_TEXT)
+
+CLASS_NAMES = ("glioma", "meningioma", "pituitary", "no_tumor")
+TUMOR_CLASS_NAMES = CLASS_NAMES[:3]
+
+
+class DisplayStatus(StrEnum):
+    """The only user-facing result dispositions."""
+
+    STANDARD = "STANDARD"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+
+
+class OodStatus(StrEnum):
+    """Frozen O06 states available to the application."""
+
+    ACCEPT = "ACCEPT"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+
+
+class ReliabilityReason(StrEnum):
+    """P03 reasons plus the Amendment 22 no-tumor extension."""
+
+    AT_OR_ABOVE_THRESHOLD = "AT_OR_ABOVE_THRESHOLD"
+    BELOW_THRESHOLD = "BELOW_THRESHOLD"
+    RELIABILITY_UNAVAILABLE = "RELIABILITY_UNAVAILABLE"
+    RELIABILITY_INVALID = "RELIABILITY_INVALID"
+    SEGMENTATION_RELIABILITY_NOT_APPLICABLE = (
+        "SEGMENTATION_RELIABILITY_NOT_APPLICABLE"
+    )
+
+
+class OodReason(StrEnum):
+    """Reasons emitted by the OOD gate."""
+
+    BELOW_REVIEW_THRESHOLD = "BELOW_REVIEW_THRESHOLD"
+    AT_OR_ABOVE_REVIEW_THRESHOLD = "AT_OR_ABOVE_REVIEW_THRESHOLD"
+    OOD_SCORE_UNAVAILABLE = "OOD_SCORE_UNAVAILABLE"
+    OOD_SCORE_INVALID = "OOD_SCORE_INVALID"
+
+
+class PipelineStage(StrEnum):
+    """Ordered domain events; UI state names are defined in the Qt layer later."""
+
+    INPUT_VALIDATED = "INPUT_VALIDATED"
+    SILENT_FROZEN_FORWARD_PASSES = "SILENT_FROZEN_FORWARD_PASSES"
+    O05_VALIDATED = "O05_VALIDATED"
+    O06_POLICY = "O06_POLICY"
+    CLASSIFICATION_DISCLOSURE = "CLASSIFICATION_DISCLOSURE"
+    CONDITIONAL_SEGMENTATION_RELIABILITY_POLICY = (
+        "CONDITIONAL_SEGMENTATION_RELIABILITY_POLICY"
+    )
+    RESULT = "RESULT"
