@@ -1,15 +1,103 @@
 {
   "schema_version": 1,
   "experiment_id": "o07_ood_failure_correlation",
-  "status": "NOT_RUN",
-  "started_at": null,
-  "completed_at": null,
-  "metrics": {},
-  "gate_checks": {},
-  "constraint_checks": {
-    "brisc_test_images_accessed": 0,
+  "status": "COMPLETE",
+  "decision": "DESCRIPTIVE_NO_GATE",
+  "exploratory_post_review": true,
+  "cohorts": {
+    "x02": {
+      "cases": 425,
+      "failures": 357,
+      "failure_prevalence": 0.84,
+      "spearman_ood_vs_dice": -0.08332867875022368,
+      "failure_detection_auroc": 0.5998311089141539,
+      "failure_average_precision": 0.876059650194171,
+      "highest_ood_quintile": {
+        "cases": 85,
+        "failure_prevalence": 0.8823529411764706,
+        "enrichment_ratio": 1.050420168067227,
+        "failures_captured": 75,
+        "failure_capture_rate": 0.21008403361344538
+      },
+      "patient_bootstrap_ci95": {
+        "spearman_ood_vs_dice": [
+          -0.21692633877628895,
+          0.06506985126396495
+        ],
+        "failure_detection_auroc": [
+          0.5055904568598635,
+          0.6749564063289193
+        ],
+        "failure_average_precision": [
+          0.8265742310518863,
+          0.921539027269831
+        ],
+        "highest_quintile_failure_prevalence": [
+          0.8255813953488372,
+          0.95
+        ],
+        "highest_quintile_enrichment_ratio": [
+          0.9792810180569405,
+          1.1556820069548348
+        ],
+        "highest_quintile_failure_capture_rate": [
+          0.19680402820941909,
+          0.23209540920976404
+        ]
+      }
+    },
+    "x03": {
+      "cases": 9464,
+      "failures": 7600,
+      "failure_prevalence": 0.8030431107354185,
+      "spearman_ood_vs_dice": -0.1219431142953113,
+      "failure_detection_auroc": 0.563848013609668,
+      "failure_average_precision": 0.8417197259902329,
+      "highest_ood_quintile": {
+        "cases": 1893,
+        "failure_prevalence": 0.8615953512942419,
+        "enrichment_ratio": 1.0729129479800927,
+        "failures_captured": 1631,
+        "failure_capture_rate": 0.21460526315789474
+      },
+      "patient_bootstrap_ci95": {
+        "spearman_ood_vs_dice": [
+          -0.17681189026082367,
+          -0.06681551147372886
+        ],
+        "failure_detection_auroc": [
+          0.5287874310719809,
+          0.5993466081903633
+        ],
+        "failure_average_precision": [
+          0.8096543118131919,
+          0.8714810749251163
+        ],
+        "highest_quintile_failure_prevalence": [
+          0.8223373364986268,
+          0.9003828194134591
+        ],
+        "highest_quintile_enrichment_ratio": [
+          1.0295292857390481,
+          1.1184515833594415
+        ],
+        "highest_quintile_failure_capture_rate": [
+          0.20596689063833054,
+          0.22375402394451163
+        ]
+      }
+    }
+  },
+  "gate": null,
+  "verification": {
+    "source_hashes_verified": true,
+    "final_stack_fixtures_verified": true,
+    "fixture_verifier_stdout": "{\n  \"status\": \"PASS\",\n  \"artifact_count\": 31,\n  \"fixture_count\": 3,\n  \"thresholds\": {\n    \"segmentation\": \"0.50\",\n    \"reliability\": \"0.9490250173235835\",\n    \"ood_review\": \"0.36854275476100085\",\n    \"ood_refuse\": null\n  },\n  \"o03_reproduction_max_abs_error\": 0.0,\n  \"o05_reproduction_max_abs_error\": 0.0\n}",
+    "final_stack_manifest_unchanged": true,
     "model_fitting": 0,
-    "threshold_changes": 0,
-    "final_stack_modified": false
+    "threshold_selection": 0,
+    "brisc_test_images_accessed": 0,
+    "neural_retraining": 0,
+    "threshold_changes": 0
   }
 }

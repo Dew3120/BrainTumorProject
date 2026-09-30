@@ -855,3 +855,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** BRISC-only one-feature comparators were frozen before external outcome joins and applied unchanged.
 - **Verification:** All source, membership, fold, and inference reproduction checks passed; zero sealed-test access, neural retraining, R02 refitting, or threshold changes.
 - **Who approved:** User authorized completion of all Amendment 21 items.
+
+## 2026-09-30T17:23:30+05:30 — Complete O07 OOD/failure association
+
+- **Decision made:** Close H12/O07 as a descriptive analysis with no gate.
+- **Triggering artifact:** `experiments/o07_ood_failure_correlation/result.json`.
+- **Rationale:** Frozen O05 scores were recomputed on X02 and X03 and associated with Dice/failure without tuning.
+- **Verification:** Final-stack fixtures and all hashes passed; zero fitting, threshold selection, sealed-test access, neural retraining, or threshold changes.
+- **Who approved:** User authorized completion of all Amendment 21 items.

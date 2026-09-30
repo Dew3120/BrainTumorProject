@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o07_ood_failure_correlation",
+  "files": [
+    {
+      "path": "experiments/o07_ood_failure_correlation/config.json",
+      "sha256": "81c415ed1bd90df4d254fbb86f8ee90e3a8e0adb62dbdface1fe84603e9a907d",
+      "bytes": 1799
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/result.json",
+      "sha256": "f7ec8a567209066c5c1f88b3e77ab291b097657f3392be2ae49eda93bd3b1ec6",
+      "bytes": 3334
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/decision.md",
+      "sha256": "e5ad1bf2e8c49ef691fbf03b35e800d357b66fd73de24a16f3c853eb7f578745",
+      "bytes": 560
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/artifacts/x02_frozen_ood_scores.csv",
+      "sha256": "98e5d40bd4c7c7372691e0d83ebaa8b6961998593f373235b4715356409595d5",
+      "bytes": 75387
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/artifacts/x03_frozen_ood_scores.csv",
+      "sha256": "166a21a7a1fa2a64dfefde048cf929cbf710ad9c938d2b86491bbe3a58c351b5",
+      "bytes": 1576579
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/artifacts/external_ood_scores_with_outcomes.csv",
+      "sha256": "5a8df71b14b22df86deb5142dab1e794dbfef449c08ddeb9640c22d99d7cc894",
+      "bytes": 1791354
+    },
+    {
+      "path": "experiments/o07_ood_failure_correlation/artifacts/patient_bootstrap_metrics.csv",
+      "sha256": "536aba575af6e611a2addfa406c8d28438cf84321f09174ae68601bbcebef6d7",
+      "bytes": 500021
+    }
+  ]
+}

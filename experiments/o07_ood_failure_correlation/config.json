@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "o07_ood_failure_correlation",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H12"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H12"
+  ],
   "amendment_path": "audit/preregistration_amendment_21.md",
   "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
   "populations": {
