@@ -151,10 +151,10 @@ The registry can retain umbrella or future experiments as `REGISTERED_NOT_STARTE
 | `o04_model_confidence_ood` | `COMPLETE` | H9 | [`experiments/o04_model_confidence_ood`](../experiments/o04_model_confidence_ood/) |
 | `o05_ensemble_ood` | `COMPLETE` | H9 | [`experiments/o05_ensemble_ood`](../experiments/o05_ensemble_ood/) |
 | `o06_ood_policy` | `COMPLETE` | H9 | [`experiments/o06_ood_policy`](../experiments/o06_ood_policy/) |
-| `r11_size_robust_metrics` | `REGISTERED_NOT_STARTED` | H10 | [`experiments/r11_size_robust_metrics`](../experiments/r11_size_robust_metrics/) |
-| `r12_r02_external_baselines` | `REGISTERED_NOT_STARTED` | H11 | [`experiments/r12_r02_external_baselines`](../experiments/r12_r02_external_baselines/) |
-| `o07_ood_failure_correlation` | `REGISTERED_NOT_STARTED` | H12 | [`experiments/o07_ood_failure_correlation`](../experiments/o07_ood_failure_correlation/) |
-| `p06_joint_policy_risk_coverage` | `REGISTERED_NOT_STARTED` | H13 | [`experiments/p06_joint_policy_risk_coverage`](../experiments/p06_joint_policy_risk_coverage/) |
+| `r11_size_robust_metrics` | `COMPLETE` | H10 | [`experiments/r11_size_robust_metrics`](../experiments/r11_size_robust_metrics/) |
+| `r12_r02_external_baselines` | `COMPLETE` | H11 | [`experiments/r12_r02_external_baselines`](../experiments/r12_r02_external_baselines/) |
+| `o07_ood_failure_correlation` | `COMPLETE` | H12 | [`experiments/o07_ood_failure_correlation`](../experiments/o07_ood_failure_correlation/) |
+| `p06_joint_policy_risk_coverage` | `COMPLETE` | H13 | [`experiments/p06_joint_policy_risk_coverage`](../experiments/p06_joint_policy_risk_coverage/) |
 
 ## Principal audit reports
 

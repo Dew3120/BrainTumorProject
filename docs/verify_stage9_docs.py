@@ -72,6 +72,10 @@ def verify_ledger() -> None:
     o06 = read_json("experiments/o06_ood_policy/result.json")["coverage"]
     x02 = read_json("experiments/x02_openneuro_pituitary/result.json")
     x03 = read_json("experiments/x03_upenn_gbm/result.json")
+    r11 = read_json("experiments/r11_size_robust_metrics/result.json")
+    r12 = read_json("experiments/r12_r02_external_baselines/result.json")
+    o07 = read_json("experiments/o07_ood_failure_correlation/result.json")
+    p06 = read_json("experiments/p06_joint_policy_risk_coverage/result.json")
     p02 = read_json("experiments/p02_threshold_selection/result.json")["binary_selection"]
     p05 = read_json("experiments/p05_threshold_sensitivity/result.json")["sensitivity"]
 
@@ -89,8 +93,19 @@ def verify_ledger() -> None:
     assert_close(metrics["o06_ood_policy"]["ood_detection_rate"], o06["ood_detection_rate"], "O06 detection")
     assert_close(metrics["external_openneuro"]["subject_macro_dice"], x02["segmentation"]["subject_macro"]["dice"]["subject_macro_mean"], "X02 Dice")
     assert_close(metrics["external_openneuro"]["reliability_auroc"], x02["reliability_transfer"]["failure_detection_auroc"], "X02 reliability")
+    assert_close(metrics["external_openneuro"]["reliability_ece"], x02["reliability_transfer"]["ece"], "X02 reliability ECE")
     assert_close(metrics["external_upenn_gbm"]["subject_macro_dice"], x03["segmentation"]["subject_macro"]["dice"]["subject_macro_mean"], "X03 Dice")
     assert_close(metrics["external_upenn_gbm"]["reliability_auroc"], x03["reliability_transfer"]["failure_detection_auroc"], "X03 reliability")
+    assert_close(metrics["external_upenn_gbm"]["reliability_ece"], x03["reliability_transfer"]["ece"], "X03 reliability ECE")
+    assert_close(metrics["r11_size_robust_metrics"]["surface_dice_e08_minus_v1"], r11["differences"]["surface_dice_e08_minus_v1"], "R11 surface Dice difference")
+    assert metrics["r11_size_robust_metrics"]["surface_dice_difference_ci95"] == [r11["paired_similarity_group_bootstrap_ci95"]["surface_dice"]["ci95_lower"], r11["paired_similarity_group_bootstrap_ci95"]["surface_dice"]["ci95_upper"]]
+    assert metrics["r12_external_simple_baselines"]["checks_passed"] == r12["gate"]["checks_passed"]
+    assert metrics["r12_external_simple_baselines"]["checks_total"] == r12["gate"]["checks_total"]
+    assert_close(metrics["o07_ood_failure_association"]["openneuro_failure_auroc"], o07["cohorts"]["x02"]["failure_detection_auroc"], "O07 X02 AUROC")
+    assert_close(metrics["o07_ood_failure_association"]["upenn_failure_auroc"], o07["cohorts"]["x03"]["failure_detection_auroc"], "O07 X03 AUROC")
+    assert metrics["p06_joint_policy"]["brisc_standard_count"] == p06["cohorts"]["brisc_validation"]["standard_count"]
+    assert metrics["p06_joint_policy"]["openneuro_standard_count"] == p06["cohorts"]["x02_openneuro"]["standard_count"]
+    assert metrics["p06_joint_policy"]["upenn_standard_count"] == p06["cohorts"]["x03_upenn_gbm"]["standard_count"]
     assert_close(metrics["policy_internal_validation"]["threshold"], p02["threshold"], "policy threshold")
     assert metrics["policy_internal_validation"]["selected_cost"] == p02["total_cost"]
     assert metrics["policy_sensitivity"]["classification"] == p05["classification"]
@@ -121,6 +136,15 @@ def verify_report() -> dict[str, int]:
         "30 minutes",
         "2 hours",
         "Verification path",
+        "Small target area is the strongest observed association in this model and dataset. Because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim.",
+        "49 experiment packages",
+        "33 numbered E/C/R/O packages",
+        "process commitment supported by path discipline, scripts, and the review log",
+        "No positive-control model was trained on an external subset",
+        "No comparison against nnU-Net",
+        "OpenNeuro failure-detection AUROC was 0.8719 (CI 0.8112–0.9162) with ECE 0.2551",
+        "UPENN-GBM AUROC was 0.8316 (CI 0.8120–0.8501) with ECE 0.3391",
+        "total abstention",
     ]
     for phrase in required:
         assert phrase in report, phrase
@@ -143,6 +167,10 @@ def verify_report() -> dict[str, int]:
         "experiments/x03_upenn_gbm/result.json",
         "experiments/p02_threshold_selection/result.json",
         "experiments/p05_threshold_sensitivity/result.json",
+        "experiments/r11_size_robust_metrics/result.json",
+        "experiments/r12_r02_external_baselines/result.json",
+        "experiments/o07_ood_failure_correlation/result.json",
+        "experiments/p06_joint_policy_risk_coverage/result.json",
     ]
     for source in metric_sources:
         assert source in report or source in json.dumps(read_json("docs/stage9_source_ledger.json"))

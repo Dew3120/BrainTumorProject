@@ -146,6 +146,10 @@ Reference and predicted boundaries are extracted from binary masks. A predicted 
 
 Image-mean Dice averages over images. Category Dice averages within each true BRISC category. Macro category Dice averages the three category means equally. External subject-macro Dice first averages slices within subject and then averages subjects, preventing subjects with more slices from dominating.
 
+### 6.5 R11 complementary geometry metrics
+
+R11 compares v1 and E08 on the same 204 internal glioma cases and 181 similarity groups. Two-pixel surface Dice measures the fraction of reference and predicted boundary pixels lying within two model-space pixels of the opposite boundary. HD95 is the 95th percentile of the symmetric boundary-to-boundary distance distribution; lower is better. Lesion detection uses 8-connected reference and predicted components and the registered overlap rule, with empty predictions counted as misses. Empty-mask and multi-lesion handling were fixed before evaluation. Paired similarity-group bootstrap draws preserve the model comparison. These metrics complement Dice; they do not remove annotation or resolution dependence.
+
 ## 7. Pixel calibration
 
 ### 7.1 Negative log-likelihood
@@ -271,6 +275,10 @@ BS_{skill}=1-\frac{Brier_{model}}{Brier_{baseline}}.
 
 Positive skill means improvement over the registered prevalence baseline.
 
+### 8.6 R12 external simple baselines
+
+R12 fits two one-feature L2 logistic regressions using BRISC development data only: one uses predicted hard-mask area fraction and one uses maximum C03-calibrated foreground probability. Each comparator uses the existing five similarity-aware folds for OOF internal predictions, then a deterministic full-development fit is frozen before any external outcome table is joined. The frozen estimators are applied unchanged to X02 and X03. External reporting includes AUROC, AUPRC, prevalence, risk-coverage, and accepted-case Dice. The registered H11 gate requires R02 to exceed both comparators by at least 0.03 AUROC on both cohorts. This is a simple-baseline check, not a strong segmentation-model comparison.
+
 ## 9. Cost-sensitive reliability policy
 
 Define a weak mask as policy-positive for review. Review of either a weak or acceptable case costs 1; accepting an acceptable case costs 0; accepting a weak case costs 10. For threshold \(\theta\), a case is reviewed when \(r<\theta\). Total cost is
@@ -316,6 +324,14 @@ The four normalized scores are standardized and passed to the O05 secondary logi
 ### 10.5 O06 policy
 
 The review threshold is the registered 95th percentile of BRISC fitting scores: `0.36854275476100085`. OOD score at or above the threshold gives `REVIEW`; below gives `ACCEPT`. REFUSE is disabled. Invalid values fail closed to review.
+
+### 10.6 O07 failure association
+
+O07 applies the frozen O05 score to the committed X02 and X03 primary rows and compares it with the already computed segmentation Dice. It reports Spearman correlation between OOD score and Dice, O05 AUROC for detecting Dice below 0.50, average precision, and failure enrichment in the highest OOD-score quintile. All analysis is descriptive; no OOD component, threshold, or model is tuned from these results.
+
+### 10.7 P06 joint policy risk-coverage
+
+P06 applies the frozen O06 OOD threshold and R02 reliability threshold unchanged. A case enters `STANDARD` only when O06 returns `ACCEPT` and reliability is at least `0.9490250173235835`; every other valid case enters review, and invalid inputs fail closed. BRISC uses the registered validation rows, while X02 and X03 use their committed external primary rows. The analysis reports accepted/reviewed counts, accepted-case Dice, accepted-case failure rate, failures caught and missed, reason decomposition, per-category results, and patient-group bootstrap intervals externally. It is a retrospective descriptive policy analysis, not a clinical safety evaluation.
 
 ## 11. Bootstrap confidence intervals
 
@@ -363,3 +379,6 @@ The frozen loader verifies every allowlisted artifact and rejects missing or une
 8. OOD acceptance is not proof that an image is medically valid.
 9. No threshold may be rounded or changed in application code without a new registered policy study.
 10. All outputs retain the statement: **Research prototype — not for clinical use.**
+11. H8 external spatial failure is the binding generalization result; internal metrics are development diagnostics.
+12. External reliability AUROC is always reported with cohort ECE because ranking and probability calibration are different claims.
+13. R02 feature reduction, O05 secondary-ensemble selection, P02 threshold selection, the post-H1 H7 pathway, and the glioma subgroup predictor search are exploratory or development model-selection analyses.

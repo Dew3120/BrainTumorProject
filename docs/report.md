@@ -53,7 +53,7 @@ This project is **not a clinical tool**. It is **not a deployable medical device
 
 ## Abstract
 
-This report documents a research pipeline that accepts a two-dimensional brain MRI image, predicts one of four BRISC labels, estimates a tumor mask for tumor-positive categories, calibrates pixel probabilities, estimates BRISC-defined mask reliability, and checks whether the input resembles the development distribution. The final frozen stack combines a ResNet-18 classifier, an E08 ensemble of compact two-dimensional U-Nets, C03 isotonic pixel calibration, an R02 ten-feature logistic reliability estimator, an O05 out-of-distribution detector, and fixed review policies. On BRISC internal development validation, the classifier reached macro F1 0.9779; the historical v1 segmenter reached image-mean Dice 0.7694, while selected E08 improved all three category means to 0.6324 for glioma, 0.8822 for meningioma, and 0.8183 for pituitary. The R02 reliability model reached AUROC 0.9555, and O05 reached AUROC 0.9957 on its registered retrospective OOD benchmark. These strong internal results did not transport spatially: strict subject-macro Dice was 0.1272 on OpenNeuro pituitary and 0.2208 on UPENN-GBM, so H8 was rejected for the evaluated independent cohorts. The project’s principal contribution is therefore not a claim of clinical tumor detection or a novel model architecture. It is an unusually explicit research-engineering record of what succeeded, what failed, how failure was measured, and how frozen safeguards can expose inputs and outputs that need review. [Metric ledger](stage9_source_ledger.json)
+Independent spatial transport is the binding result of this study: the frozen stack reached strict subject-macro Dice 0.1272 on OpenNeuro pituitary and 0.2208 on UPENN-GBM, so H8 was rejected for the evaluated independent cohorts. The project documents a research pipeline that accepts a two-dimensional brain MRI image, predicts one of four BRISC labels, estimates a tumor mask for tumor-positive categories, calibrates pixel probabilities, estimates BRISC-defined mask reliability, and checks whether the input resembles the development distribution. The final frozen stack combines a ResNet-18 classifier, an E08 ensemble of compact two-dimensional U-Nets, C03 isotonic pixel calibration, an R02 ten-feature logistic reliability estimator, an O05 out-of-distribution detector, and fixed review policies. BRISC internal development results were stronger—the classifier reached macro F1 0.9779, E08 category Dice was 0.6324 for glioma, 0.8822 for meningioma, and 0.8183 for pituitary, R02 AUROC was 0.9555, and retrospective O05 AUROC was 0.9957—but these are development diagnostics rather than evidence of external generalization. The project’s principal contribution is an explicit research-engineering record of what succeeded, what failed, how failure was measured, and how frozen safeguards route unsupported outputs to review. [Metric ledger](stage9_source_ledger.json)
 
 ## How to read this report
 
@@ -66,11 +66,13 @@ This report documents a research pipeline that accepts a two-dimensional brain M
 
 ### 1.1 The engineering question
 
+The independent result governs the interpretation: E08+C03+R02 failed the registered H8 spatial-transport gates on both evaluable independent cohorts. OpenNeuro Dice was 0.1272 and UPENN-GBM Dice was 0.2208. All stronger BRISC values below describe internal development behavior and must not be read as external generalization.
+
 The original task was straightforward to state: train a model that accepts an MRI image and reports whether a brain tumor is present. A useful implementation immediately raises harder questions. If a tumor is predicted, can the model distinguish glioma, meningioma, and pituitary cases? Can it show where its evidence lies? Can its probabilities be interpreted? Can it recognize when an upload differs from its training distribution? Can an application decide when to show an output normally and when to demand manual review? Most importantly, can each claim be tied to a frozen artifact and a test that could have failed?
 
 This project treats those questions as separate technical problems. Classification assigns a dataset label. Segmentation estimates a spatial mask. Pixel calibration maps raw segmenter scores toward observed foreground frequencies on internal validation. Case-level reliability ranks the chance that a predicted mask clears a Dice criterion. OOD detection asks whether an input resembles the registered development distribution. A policy turns reliability and OOD scores into display states. These components answer different questions, and success in one does not imply success in another.
 
-That separation became essential. The classifier was strong on BRISC internal validation while the segmenter remained much weaker on glioma. The reliability model could identify many weak masks even when classification was correct. On independent external cohorts, the reliability ranking retained useful AUROC while segmentation Dice collapsed. The OOD detector then identified nearly every registered external or far-OOD evaluation input, but it also relied heavily on image and encoding cues that may be dataset shortcuts. The resulting system is more honest because it does not compress these outcomes into one “accuracy” number.
+That separation became essential. The classifier was strong on BRISC internal validation while the segmenter remained much weaker on glioma. The reliability model could identify many weak masks even when classification was correct. On independent cohorts, OpenNeuro reliability AUROC 0.8719 paired with ECE 0.2551 and UPENN AUROC 0.8316 paired with ECE 0.3391 while segmentation Dice collapsed. The OOD detector then identified nearly every registered external or far-OOD evaluation input, but it also relied heavily on image and encoding cues that may be dataset shortcuts. The resulting system is more honest because it does not compress these outcomes into one “accuracy” number.
 
 ### 1.2 Project objective
 
@@ -92,7 +94,7 @@ BRISC also has limitations that shape every conclusion in this report. Complete 
 
 ### 1.4 Core research hypotheses
 
-The project used falsifiable, registered hypotheses and experiment-specific gates. H1 asked whether controlled segmentation interventions could materially improve glioma without unacceptable losses in other categories. The registered parent improvement was not achieved. H3 governed calibration experiments. H7 allowed E08 to become the final segmenter if selected calibration and reliability conditions passed; both passed. H8 asked whether the frozen stack transported to independent external cohorts under fixed gates; it was rejected. H9 asked whether a frozen OOD detector could distinguish registered BRISC-like images from registered shifted sources; it passed on the retrospective benchmark.
+The project used falsifiable, registered hypotheses and experiment-specific gates. H1 asked whether controlled segmentation interventions could materially improve glioma without unacceptable losses in other categories. The registered parent improvement was not achieved. H3 governed calibration experiments. H7 allowed E08 to become the final segmenter if selected calibration and reliability conditions passed; both passed. H8 asked whether the frozen stack transported to independent external cohorts under fixed gates; it was rejected. H9 asked whether a frozen OOD detector could distinguish registered BRISC-like images from registered shifted sources; it passed on the retrospective benchmark. Amendment 21 added H10–H13 after external adversarial review: H10 passed its point-direction gate, H11 failed its external simple-baseline gate, and H12–H13 were descriptive analyses without acceptance gates.
 
 This mixture of accepted and rejected hypotheses is central to the project. The final stack is not the result of reporting only favourable experiments. It is the result of a registered selection process in which many plausible interventions failed, several calibrators were operationally ineligible, external segmentation transport failed, and a simpler reliability model outperformed more complex alternatives.
 
@@ -330,7 +332,7 @@ The two-state result was evidence-driven. Under the registered cost model, no wa
 
 Stage 6 audited four planned external datasets and evaluated three. X01 was an overlap control. X02 and X03 were independent retrospective cohorts. X04 remained access blocked. The frozen E08+C03+R02 stack was applied without retraining, refitting, or threshold adjustment. Classification, segmentation, calibration, failure taxonomy, domain gap, and reliability ranking were reported with patient-cluster confidence intervals where estimable.
 
-Both independent cohorts failed the registered H8 transport gates. OpenNeuro showed high pituitary label recall but very low segmentation Dice. UPENN-GBM showed poor category recall and poor spatial overlap. R02 failure ranking retained discrimination better than segmentation on these two cohorts, but its probabilities were miscalibrated externally. H8 was rejected for the evaluated independent cohorts. [Stage 6 synthesis](../audit/stage6_cross_dataset.md)
+Both independent cohorts failed the registered H8 transport gates. OpenNeuro showed high pituitary label recall but very low segmentation Dice. UPENN-GBM showed poor category recall and poor spatial overlap. OpenNeuro reliability AUROC was 0.8719 with ECE 0.2551, and UPENN reliability AUROC was 0.8316 with ECE 0.3391: ranking survived better than spatial overlap, but probabilities were miscalibrated. H8 was rejected for the evaluated independent cohorts. [Stage 6 synthesis](../audit/stage6_cross_dataset.md)
 
 ### 5.8 Stage 7 — OOD detection
 
@@ -346,7 +348,9 @@ Three fixtures reconstructed classification, E08 routing, pixel maps, calibratio
 
 ### 5.10 Amendments and review trail
 
-Twenty preregistration amendments were added before the affected result was inspected or the restarted analysis continued. They cover such issues as calibration operational constraints, reliability evaluation, external transport, serialization of R02, unrepresentable targets, datatype preservation, bootstrap membership, and OOD detection. Amendments did not erase failed attempts. The X03 decision file, for example, records unrepresentable targets, a native-datatype loader defect, a bootstrap-membership defect, and the authorized final restart.
+Twenty-one preregistration amendments were added before the affected result was inspected or the restarted analysis continued. They cover such issues as calibration operational constraints, reliability evaluation, external transport, serialization of R02, unrepresentable targets, datatype preservation, bootstrap membership, OOD detection, and the response to external adversarial review. Amendments did not erase failed attempts. The X03 decision file, for example, records unrepresentable targets, a native-datatype loader defect, a bootstrap-membership defect, and the authorized final restart.
+
+At the external-review cutoff, the repository contained 49 experiment packages: 33 numbered E/C/R/O packages and 16 policy, validation, or governance packages. Amendment 21 added four separately registered packages, bringing the current registry to 53. R02 feature reduction, O05 secondary-ensemble selection, P02 threshold selection, the post-H1 H7 pathway, and the glioma subgroup predictor search are exploratory or development model-selection analyses even where they were prospectively registered before their own outcomes were inspected. This multiplicity is relevant to how strongly their results should be generalized.
 
 The review log links decisions to artifact hashes and records whether the user or a predeclared rule approved them. This governance cannot remove every bias, but it makes analytical choices visible and limits quiet post-hoc changes. [Review log](../audit/review_log.md) [Amendment index](appendix.md#amendments)
 
@@ -394,6 +398,8 @@ Target size was the clearest glioma risk factor. Small masks below 100 pixels fa
 
 Diffuse versus sharp boundary, single versus multifocal appearance, and central versus peripheral location did not independently meet the registered predictor rule after the stratified analysis. Visual differences still existed, but they were not as predictive as area in this sample. This result redirected interpretation away from a vague claim that “glioma boundaries are hard” toward a more precise claim: the frozen low-resolution system is particularly sensitive to small glioma targets. [Subgroup analysis](../audit/glioma_subgroup_analysis.md)
 
+Small target area is the strongest observed association in this model and dataset. Because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim. R11 added complementary size-robust views: E08 improved 2-pixel surface Dice over v1 by +0.0143, but its group-bootstrap CI of −0.0108 to +0.0391 crossed zero; HD95 improved by 2.396 pixels with CI 1.107–3.826; and lesion-detection sensitivity changed by only +0.0047 with a CI crossing zero. H10 passed its registered point-direction gate, while the uncertainty shows that the evidence is strongest for boundary distance and ordinary overlap rather than a uniform improvement across every size-robust metric. [R11 result](../experiments/r11_size_robust_metrics/result.json)
+
 ### 6.5 Pixel calibration
 
 C03 reduced lesion-centered pixel ECE from 0.05054 to 0.03351, NLL from 0.31716 to 0.22448, and Brier score from 0.07038 to 0.06337. The hard mask remained identical at the 0.50 threshold. Whole-image calibration became extremely small because background dominates, reinforcing the need for lesion-centered reporting.
@@ -409,6 +415,8 @@ R02 achieved failure-detection AUROC 0.9555 with 95% CI 0.9387–0.9704, ECE 0.0
 **Figure 5.** Case-level reliability ROC on 680 out-of-fold internal validation scores. Source: [P02 ROC artifact](../experiments/p02_threshold_selection/artifacts/roc_curve.png) and [R02 result](../experiments/r02_reduced_features/result.json).
 
 Boundary entropy was the dominant feature. R01’s held-out permutation analysis assigned it a mean AUROC decrease of 0.2650 with CI 0.2404–0.2898. High-confidence foreground fraction was negatively associated with reliability in the earlier model, operationalizing the observation that some failures are confidently wrong. The final model remains associative: it indicates patterns correlated with overlap failure, not mechanisms that cause failure.
+
+R12 tested whether R02 added value over two frozen one-feature comparators fitted only on BRISC development data. R02 exceeded predicted-area-only logistic regression by +0.0195 AUROC on OpenNeuro and +0.0085 on UPENN, and exceeded max-predicted-probability logistic regression by +0.0263 and +0.0445 respectively. Only the last comparison cleared the registered +0.03 margin. H11 therefore failed: R02’s external ranking is real on these cohorts, but the study did not show a consistent large advantage over simple predictors. [R12 result](../experiments/r12_r02_external_baselines/result.json)
 
 ### 6.7 Reliability policy
 
@@ -428,7 +436,7 @@ This apparent precision should not be confused with robustness. P05 classified t
 
 External segmentation transport failed. OpenNeuro strict subject-macro Dice was 0.1272 (CI 0.0824–0.1778). UPENN-GBM strict subject-macro Dice was 0.2208 (CI 0.2004–0.2422). Restoring predictions to native resolution produced nearly identical cohort means, so the unrepresentable 128×128 targets do not explain the broad failure. X01 overlap-control glioma Dice was 0.4142, while meningioma and pituitary performed better, consistent with source overlap and category dependence.
 
-Failure ranking retained discrimination on the two evaluated independent cohorts. Failure-detection AUROC was 0.8719 (CI 0.8112–0.9162) on OpenNeuro and 0.8316 (CI 0.8120–0.8501) on UPENN-GBM. Yet absolute probability calibration did not transfer: reliability ECE increased to 0.2551 and 0.3391. The internal threshold sent 90.6% of OpenNeuro and 82.5% of UPENN cases to review. R02 therefore preserved some ordering on X02 and X03 but not a validated external probability or operating point.
+Failure ranking retained discrimination on the two evaluated independent cohorts, but calibration did not: OpenNeuro failure-detection AUROC was 0.8719 (CI 0.8112–0.9162) with ECE 0.2551, and UPENN-GBM AUROC was 0.8316 (CI 0.8120–0.8501) with ECE 0.3391. The internal threshold sent 90.6% of OpenNeuro and 82.5% of UPENN cases to review. R02 therefore preserved some ordering on X02 and X03 but not a validated external probability or operating point. R12 further showed that R02 did not consistently beat simple BRISC-fitted one-feature comparators by its preregistered margin.
 
 ![External transport](figures/07_cross_dataset_transport.png)
 
@@ -436,7 +444,7 @@ Failure ranking retained discrimination on the two evaluated independent cohorts
 
 ![Reliability transfer](figures/14_reliability_transfer.png)
 
-**Figure 14.** R02 failure-ranking AUROC remains above the registered 0.75 reference on both independent cohorts even as Dice collapses. Error bars are registered bootstrap intervals. Source: [R02](../experiments/r02_reduced_features/result.json), [X02](../experiments/x02_openneuro_pituitary/result.json), and [X03](../experiments/x03_upenn_gbm/result.json).
+**Figure 14.** R02 failure-ranking AUROC remained above the registered 0.75 reference on both independent cohorts even as Dice collapsed, but calibration did not transfer: OpenNeuro AUROC 0.8719 with ECE 0.2551; UPENN AUROC 0.8316 with ECE 0.3391. Error bars are registered bootstrap intervals. Source: [R02](../experiments/r02_reduced_features/result.json), [X02](../experiments/x02_openneuro_pituitary/result.json), and [X03](../experiments/x03_upenn_gbm/result.json).
 
 ### 6.9 OOD detection and policy
 
@@ -445,6 +453,8 @@ O05 achieved AUROC 0.9957 with 95% CI 0.9927–0.9980, ECE 0.0341, and Brier sco
 At the O06 threshold, 699/700 registered OOD evaluation images were flagged: 99/100 Cheng and 100/100 for each of OpenNeuro, UPENN-GBM, OrganAMNIST, CIFAR-10, random noise, and uniform gray. Sixty of 680 BRISC validation images were also flagged, a false-flag rate of 8.82%. REFUSE remained disabled.
 
 These results support OOD review on the registered benchmark. They do not establish universal OOD recognition. O02’s coefficient dominates the ensemble and can exploit differences in encoding, file size, contrast, and acquisition. A future in-distribution source with different encoding could be flagged, while a subtly shifted source that mimics BRISC statistics might pass.
+
+O07 tested whether O05 also identified individual spatial failures inside the two external cohorts. Its failure-detection AUROC was only 0.5998 on OpenNeuro and 0.5638 on UPENN; highest-OOD-score quintiles captured about one fifth of failures, close to their 20% size. O05 is therefore a source-shift gate, not a reliable per-mask failure score. P06 then applied O06 and R02 jointly without changing either threshold. It retained 450/680 BRISC cases in `STANDARD` with one failure among them, but sent every OpenNeuro and every UPENN case to review. The frozen policy prevented evaluated external masks from entering the standard path by total abstention, yielding zero external standard-display coverage rather than demonstrated selective safety. [O07 result](../experiments/o07_ood_failure_correlation/result.json) [P06 result](../experiments/p06_joint_policy_risk_coverage/result.json)
 
 ### 6.10 Frozen stack reproducibility
 
@@ -456,15 +466,15 @@ The first staging attempt created an unlisted Python bytecode cache when importi
 
 ### 7.1 Failure ranking retained discrimination on two cohorts when segmentation did not
 
-The strongest unexpected result was the separation between spatial performance and failure ranking. OpenNeuro Dice was 0.127 while reliability AUROC was 0.872. UPENN-GBM Dice was 0.221 while reliability AUROC was 0.832. The model often failed to draw the right mask, yet prediction-derived geometry and uncertainty still ranked many failures above better cases.
+The strongest unexpected result was the separation between spatial performance and failure ranking. OpenNeuro Dice was 0.127 while reliability AUROC was 0.872 and ECE was 0.255. UPENN-GBM Dice was 0.221 while reliability AUROC was 0.832 and ECE was 0.339. The model often failed to draw the right mask, yet prediction-derived geometry and uncertainty still ranked many failures above better cases.
 
-This does not make the external outputs safe. Reliability ECE deteriorated sharply, and the internal threshold placed most external cases into review. The finding is narrow: relative ordering remained informative on X02 and X03 even though absolute overlap and probability calibration were poor. That pattern may support triage research if tested prospectively, but it does not validate the masks or establish transfer to another cohort.
+This does not make the external outputs safe. The finding is narrow: relative ordering remained informative on X02 and X03 even though absolute overlap and probability calibration were poor. R12 also found that R02 did not consistently outperform simple one-feature baselines by +0.03 AUROC. The observation may motivate prospective triage research, but it does not validate the masks or establish broader transfer.
 
 ### 7.2 Small-mask sensitivity was more predictive than the expected anatomical labels
 
-The literature and initial visual review suggested diffuse boundaries, multifocality, or location might dominate glioma failure. The registered subgroup analysis instead identified small model-space masks as the strongest measured risk factor. That result fits the 128×128 design: small objects have fewer pixels, quantized edges, more volatile overlap, and greater vulnerability to a one-pixel shift.
+The literature and initial visual review suggested diffuse boundaries, multifocality, or location might dominate glioma failure. Small target area is the strongest observed association in this model and dataset. Because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim. That result fits the 128×128 design: small objects have fewer pixels, quantized edges, more volatile overlap, and greater vulnerability to a one-pixel shift.
 
-This finding also helps explain why adding boundary-aware loss did not achieve the parent H1 improvement. Boundary information cannot fully recover spatial information that has been compressed into very few pixels. The conclusion is model- and dataset-specific, but it is supported by a direct risk comparison rather than visual intuition alone.
+R11 showed why the qualification matters: E08’s surface-Dice gain had a confidence interval crossing zero, while HD95 improved clearly and lesion-detection sensitivity changed little. The conclusion is model- and dataset-specific and combines a direct risk association with complementary metrics; it does not establish that target size causes failure.
 
 ### 7.3 The adapter has a countable small-target limit
 
@@ -506,7 +516,7 @@ External calibration results reveal the limit. On independent data, C03 offered 
 
 ### 8.4 Reliability is useful but conditional
 
-R02 combines geometry and uncertainty into a strong internal failure ranking. Its external AUROCs indicate that some ranking structure survives domain shift. Yet its external ECE and policy review rates show that the output is not an externally calibrated success probability.
+R02 combines geometry and uncertainty into a strong internal failure ranking. On OpenNeuro its external AUROC was 0.8719 with ECE 0.2551; on UPENN its external AUROC was 0.8316 with ECE 0.3391. Some ranking structure survived these shifts, but probability honesty did not. R12 failed its conjunctive baseline gate because R02 exceeded both simple predictors by at least +0.03 AUROC in only one of four cohort/comparator checks.
 
 This distinction guides application wording. The interface may display a reliability score and review status as research indicators. It must not say that a mask is “95% clinically correct” or “safe.” The score is learned from BRISC-derived overlap outcomes and its threshold encodes a specific internal cost model.
 
@@ -514,7 +524,7 @@ This distinction guides application wording. The interface may display a reliabi
 
 Stage 6 revealed severe external segmentation failure. Stage 7 then showed that the registered external sources are readily detected as OOD. This is useful because the application can avoid presenting them in the normal flow. OOD detection converts a silent failure into a visible review state for these sources.
 
-The mitigation is retrospective and source-specific. O02’s dominance suggests the detector recognizes dataset style as much as semantic validity. That may be desirable for a frozen prototype: any source difference is reason for review. It is not proof that the detector captures clinically meaningful distribution shift. A robust deployment study would need scanner-, site-, protocol-, and artifact-specific cohorts collected after the detector is frozen.
+The mitigation is retrospective and source-specific. O02’s dominance suggests the detector recognizes dataset style as much as semantic validity. O07 found weak per-case association between O05 score and spatial failure, and P06 showed that the joint policy reviewed every X02 and X03 case. For these cohorts the policy achieved protection through total abstention, not selective acceptance of reliable external masks. A robust deployment study would need scanner-, site-, protocol-, and artifact-specific cohorts collected after the detector is frozen.
 
 ### 8.6 Internal scores are not clinical scores
 
@@ -536,7 +546,7 @@ No radiologist-supervised prospective evaluation, diagnostic study, treatment st
 
 ### 9.2 BRISC patient independence is unverified
 
-Similarity grouping removes known or visually near-duplicate relations but is not a substitute for patient identifiers. The same person may contribute related slices across development partitions. Internal metrics may therefore be optimistic. The sealed BRISC test set remains unopened, but its supplied split would not by itself resolve patient independence.
+Similarity grouping removes known or visually near-duplicate relations but is not a substitute for patient identifiers. The same person may contribute related slices across development partitions. Internal metrics may therefore be optimistic. The statement that the sealed BRISC test set remains unopened is a process commitment supported by path discipline, scripts, and the review log; it is not enforced by cryptographic or operating-system access control. Its supplied split would not by itself resolve patient independence.
 
 ### 9.3 Dataset-source shortcuts
 
@@ -548,15 +558,15 @@ The segmenter operates on a single 128×128 slice. It lacks neighboring-slice co
 
 ### 9.5 Glioma performance remains weak
 
-E08’s glioma Dice of 0.6324 is substantially lower than its other category means. Small masks have high failure risk, and reliability AUROC is weakest for glioma. None of the registered improvement experiments achieved the parent target. The final ensemble reduces but does not resolve the weakness.
+E08’s glioma Dice of 0.6324 is substantially lower than its other category means. Small target area is the strongest observed association in this model and dataset. Because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim. R11’s surface-Dice interval crossed zero even though HD95 improved, and reliability AUROC remains weakest for glioma. None of the registered improvement experiments achieved the parent target.
 
 ### 9.6 External transport failed
 
-H8 was rejected on OpenNeuro and UPENN-GBM. These cohorts differ from BRISC in acquisition, target construction, orientation, and population. UPENN’s GBM-to-glioma mapping is coarse, but the failure remains practically important: the frozen stack does not generalize spatially to these registered independent cohorts. Meningioma external transport remains unknown because X04 access was blocked.
+H8 was rejected on OpenNeuro and UPENN-GBM. These cohorts differ from BRISC in acquisition, target construction, orientation, and population. UPENN’s GBM-to-glioma mapping is coarse, but the failure remains practically important: the frozen stack does not generalize spatially to these registered independent cohorts. No positive-control model was trained on an external subset, so neural-model weakness cannot be fully separated from protocol, preprocessing, or label-definition mismatch. Meningioma external transport remains unknown because X04 access was blocked.
 
 ### 9.7 Reliability probabilities do not transfer cleanly
 
-External AUROC remained useful, but ECE deteriorated. The R02 score should be treated as an internal reliability estimate and ranking signal. The exact 0.9490 policy threshold is not externally validated. It also depends on the selected cost ratio and observed internal prevalence.
+OpenNeuro reliability AUROC was 0.8719 with ECE 0.2551, and UPENN reliability AUROC was 0.8316 with ECE 0.3391. R12 also failed the registered requirement to exceed both simple external baselines by at least +0.03 AUROC. The R02 score should be treated as an internal reliability estimate and an exploratory external ranking signal. The exact 0.9490 policy threshold is not externally validated.
 
 ### 9.8 Threshold fragility
 
@@ -564,7 +574,7 @@ The selected reliability threshold is sensitive to perturbation. This is partly 
 
 ### 9.9 OOD benchmark limitations
 
-The benchmark includes easy far-OOD images and external sources already studied earlier in the project. O05 may detect file and acquisition cues. It has not been tested prospectively on unseen hospitals, scanners, subtle corruptions, or adversarially constructed inputs. REFUSE is disabled because its false-refusal condition failed.
+The benchmark includes easy far-OOD images and external sources already studied earlier in the project. O05 may detect file and acquisition cues. O07 showed weak OOD-score discrimination of individual mask failures, and P06’s external result was total abstention with zero standard-display coverage. The study contains no positive-control cohort that both transports spatially and passes the OOD gate. O05 has not been tested prospectively on unseen hospitals, scanners, subtle corruptions, or adversarial inputs. REFUSE is disabled because its false-refusal condition failed.
 
 ### 9.10 Calibration limitations
 
@@ -576,7 +586,7 @@ Bootstrap intervals describe resampling variability under the registered groupin
 
 ### 9.12 Governance cannot remove all researcher degrees of freedom
 
-Pre-registration, amendments, hashes, and review logs make choices auditable, but the project evolved over many stages. New hypotheses were registered after earlier results, and some later work was motivated by observed failure patterns. The report distinguishes confirmatory registered gates from descriptive or exploratory results, but it should not be read as a single untouched prospective protocol.
+Pre-registration, amendments, hashes, and review logs make choices auditable, but the project evolved over many stages. At the external-review cutoff it contained 49 experiment packages, including 33 numbered E/C/R/O packages. New hypotheses were registered after earlier results, and some later work was motivated by observed failure patterns. R02 feature reduction, O05 secondary-ensemble selection, P02 threshold selection, the post-H1 H7 pathway, and the glioma subgroup predictor search are exploratory or development model-selection analyses. No comparison against nnU-Net, a published BRISC baseline implementation, or another strong compute-matched segmenter was run. The report should not be read as a single untouched prospective protocol.
 
 ### 9.13 What would change my mind
 
@@ -597,9 +607,9 @@ The purpose of these statements is to make the conclusions falsifiable. A future
 
 ## 10. Conclusion
 
-The project built and froze a complete research pipeline for BRISC-style brain MRI classification, tumor segmentation, calibration, reliability estimation, OOD review, and policy display. Internally, classification was strong, E08 improved every segmentation category over v1, C03 improved lesion-centered probability calibration, R02 provided a well-calibrated internal failure ranking, and O05 separated the registered ID and OOD sources. The final stack is hash-verified and reconstructible.
+The binding result is that the frozen pipeline did not transport spatially to the two evaluable independent cohorts. Within that boundary, the project built and froze a complete research pipeline for BRISC-style brain MRI classification, tumor segmentation, calibration, reliability estimation, OOD review, and policy display. Internally, classification was strong, E08 improved every segmentation category over v1, C03 improved lesion-centered probability calibration, R02 provided a well-calibrated internal failure ranking, and O05 separated the registered ID and OOD sources. The final stack is hash-verified and reconstructible.
 
-The project also produced clear negative evidence. Glioma remained weak. Small target area was the strongest measured failure association in this model and dataset. External spatial transport failed on OpenNeuro and UPENN-GBM. Reliability probabilities did not remain calibrated externally. The policy threshold was fragile. OOD performance may rely on dataset shortcuts. These findings are part of the result, not footnotes.
+The project also produced clear negative evidence. Glioma remained weak. Small target area is the strongest observed association in this model and dataset; because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim. External spatial transport failed on OpenNeuro and UPENN-GBM. External reliability AUROC remained above chance while ECE was poor, the simple-baseline gate failed, and the joint policy achieved external protection only by reviewing every case. The policy threshold was fragile, and OOD performance may rely on dataset shortcuts. These findings are part of the result, not footnotes.
 
 The appropriate final claim is modest: this is a rigorous undergraduate research prototype with an unusually complete audit trail. It demonstrates how to combine model training, failure analysis, calibration, reliability, OOD detection, cost-sensitive policy, external validation, and immutable freezing on accessible hardware. It does not demonstrate a medical device or a clinically valid tumor detector.
 

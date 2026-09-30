@@ -14,7 +14,7 @@ Complete patient independence is unverified. Similarity-aware groups reduce obvi
 
 ### Sealed test set
 
-The BRISC supplied test set remains sealed. This protects it from iterative development, but it also means this project reports development-validation performance rather than a final test estimate. Opening the supplied test would not by itself solve the missing patient-identity problem.
+The BRISC supplied test set remains sealed. This is a process commitment supported by path discipline, scripts, and the review log; it is not cryptographic or operating-system access control. The seal protects the set from intentional iterative development, but the project reports development-validation performance rather than a final test estimate. Opening the supplied test would not by itself solve the missing patient-identity problem.
 
 ### Dataset-source confounding
 
@@ -60,6 +60,8 @@ The frozen pipeline does not jointly model standard multi-sequence MRI such as T
 
 The segmenter uses 128×128 model space. Five OpenNeuro targets and 82 UPENN targets disappeared after the frozen nearest-neighbor mask transform. Strict analyses count them as Dice zero. Native-resolution restoration showed that these cases do not explain all external failure, but they establish a small-target limit.
 
+Small target area is the strongest observed association in this model and dataset. Because Dice is mathematically coupled to object size, this is partly a metric artifact and is not a causal claim. R11 found a positive surface-Dice point difference whose CI crossed zero, a clearer HD95 improvement, and almost no lesion-detection sensitivity change. These complementary views narrow the claim rather than establishing a single size-driven mechanism.
+
 ### Glioma weakness
 
 Glioma is the weakest segmentation and reliability subgroup. E08 glioma Dice is 0.6324 internally, and small masks have a 65.6% observed failure rate under the registered size definition. Registered loss, specialist, inference, and ensemble experiments did not meet the original parent improvement target.
@@ -88,7 +90,11 @@ Some categories have few failures, especially meningioma. Per-category reliabili
 
 ### External calibration
 
-Reliability AUROC transferred better than segmentation Dice, but ECE worsened sharply on independent cohorts. The score retained ranking information without retaining probability honesty. The internal threshold is not validated externally.
+OpenNeuro reliability AUROC was 0.8719 with ECE 0.2551, and UPENN reliability AUROC was 0.8316 with ECE 0.3391. Ranking transferred better than segmentation Dice, but probability honesty did not. R12 failed its conjunctive requirement that R02 beat both BRISC-fitted simple predictors by at least +0.03 AUROC on both cohorts. The internal threshold is not validated externally.
+
+### Joint policy coverage
+
+P06 sent every X02 and X03 case to review, giving zero external standard-display coverage. It caught all observed external failures through total abstention. This does not show that the policy can selectively accept useful external masks, and it is not evidence of clinical safety.
 
 ### Policy cost assumptions
 
@@ -120,6 +126,8 @@ Near-OOD datasets were analyzed in Stage 6 before the Stage 7 detector study, al
 
 O06 flags 8.82% of BRISC validation images. REFUSE is disabled because its false-refusal rate exceeded the registered limit. OOD review is a research warning, not a safety guarantee.
 
+O07 further shows that O05 is weak as an individual mask-failure detector: external failure AUROC was 0.5998 on OpenNeuro and 0.5638 on UPENN. O05 is supported only as a registered source-shift detector on its retrospective benchmark.
+
 ## Statistical limitations
 
 ### Confidence intervals
@@ -128,7 +136,15 @@ Bootstrap intervals are conditional on the observed dataset and grouping assumpt
 
 ### Multiple experiments
 
-Many experiments were conducted. Pre-registration and separate gates reduce post-hoc selection, but later hypotheses were motivated by earlier results. The project is not equivalent to one prospective confirmatory trial.
+At the external-review cutoff, 49 experiment packages had been created, including 33 numbered E/C/R/O packages. Amendment 21 added four more. Separate gates and a visible registry reduce but do not eliminate multiplicity and researcher degrees of freedom. R02 feature reduction, O05 secondary-ensemble selection, P02 threshold selection, the post-H1 H7 pathway, and the glioma subgroup predictor search are exploratory or development model-selection analyses.
+
+### Missing strong baselines
+
+The study did not run nnU-Net, reproduce a published BRISC baseline, or compare E08 with another strong compute-matched segmentation system. R12 adds two simple reliability baselines, but it does not close the segmentation-baseline gap. Claims concern this frozen project stack rather than superiority over current medical-image segmentation practice.
+
+### No external positive control
+
+No model was fine-tuned on a subset of OpenNeuro or UPENN to show that the registered adapter and target definitions can support high performance under the same evaluation. The external failures therefore combine neural-model weakness with possible protocol, preprocessing, and label-definition mismatch. These causes cannot be fully separated by the current evidence.
 
 ### Metric dependence
 

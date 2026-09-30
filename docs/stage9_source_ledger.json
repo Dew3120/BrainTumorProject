@@ -90,6 +90,7 @@
       "dice_ci95": [0.08235864220425743, 0.1777634374606488],
       "reliability_auroc": 0.8718899324435657,
       "reliability_auroc_ci95": [0.8112022485736097, 0.9161683310211312],
+      "reliability_ece": 0.25509601671837145,
       "targets_unrepresentable_at_128": 5,
       "source": "experiments/x02_openneuro_pituitary/result.json"
     },
@@ -98,6 +99,7 @@
       "dice_ci95": [0.2004498094516916, 0.24222936592874403],
       "reliability_auroc": 0.8315855121978768,
       "reliability_auroc_ci95": [0.8119607000917849, 0.8500849318513499],
+      "reliability_ece": 0.33909992805648637,
       "targets_unrepresentable_at_128": 82,
       "source": "experiments/x03_upenn_gbm/result.json",
       "interpretation": "GBM is a glioma subtype, but the GBM-only whole-tumor target is only a coarse mapping to heterogeneous BRISC glioma."
@@ -127,6 +129,42 @@
       "risk_difference_ci95": [0.258, 0.592],
       "source": "audit/glioma_failure_findings.md"
     },
+    "r11_size_robust_metrics": {
+      "glioma_cases": 204,
+      "surface_dice_e08_minus_v1": 0.014307472924274478,
+      "surface_dice_difference_ci95": [-0.010789876805384225, 0.03907741421245815],
+      "hd95_v1_minus_e08_pixels": 2.39599367455825,
+      "hd95_difference_ci95": [1.1068856598053003, 3.82600225285477],
+      "lesion_detection_e08_minus_v1": 0.004672897196261627,
+      "decision": "PASS_POINT_DIRECTION",
+      "source": "experiments/r11_size_robust_metrics/result.json"
+    },
+    "r12_external_simple_baselines": {
+      "checks_passed": 1,
+      "checks_total": 4,
+      "openneuro_r02_minus_area_auroc": 0.01952545724172039,
+      "openneuro_r02_minus_max_probability_auroc": 0.026342890097215355,
+      "upenn_r02_minus_area_auroc": 0.00850060707025091,
+      "upenn_r02_minus_max_probability_auroc": 0.04453026174610353,
+      "decision": "FAIL",
+      "source": "experiments/r12_r02_external_baselines/result.json"
+    },
+    "o07_ood_failure_association": {
+      "openneuro_failure_auroc": 0.5998311089141539,
+      "upenn_failure_auroc": 0.563848013609668,
+      "decision": "DESCRIPTIVE_NO_GATE",
+      "source": "experiments/o07_ood_failure_correlation/result.json"
+    },
+    "p06_joint_policy": {
+      "brisc_standard_count": 450,
+      "brisc_standard_failure_count": 1,
+      "openneuro_standard_count": 0,
+      "upenn_standard_count": 0,
+      "openneuro_failures_caught": 357,
+      "upenn_failures_caught": 7600,
+      "decision": "DESCRIPTIVE_NO_GATE",
+      "source": "experiments/p06_joint_policy_risk_coverage/result.json"
+    },
     "v1_failure_modes": {
       "weak_cases": 83,
       "fragmented": 70,
@@ -138,13 +176,27 @@
   "hypotheses": {
     "H7": "SATISFIED",
     "H8": "REJECTED_FOR_EVALUATED_INDEPENDENT_COHORTS",
-    "H9": "SATISFIED"
+    "H9": "SATISFIED",
+    "H10": "PASS_POINT_DIRECTION",
+    "H11": "REJECTED",
+    "H12": "DESCRIPTIVE_COMPLETE",
+    "H13": "DESCRIPTIVE_COMPLETE"
+  },
+  "experiment_count_disclosure": {
+    "external_review_cutoff_total_packages": 49,
+    "external_review_cutoff_numbered_e_c_r_o": 33,
+    "amendment_21_added_packages": 4,
+    "current_registry_packages": 53,
+    "source": "experiments/registry.json"
   },
   "claim_limits": [
     "No clinical validity or patient-care utility is established.",
-    "The sealed BRISC test set remains unopened.",
+    "The sealed BRISC test set remains unopened under procedural controls, not cryptographic or operating-system access control.",
     "Patient independence within BRISC is unverified.",
     "Independent external segmentation transport failed on the evaluated OpenNeuro and UPENN-GBM cohorts.",
-    "The final stack is a frozen research artifact, not a medical device."
+    "The final stack is a frozen research artifact, not a medical device.",
+    "External reliability AUROC must be paired with cohort ECE.",
+    "P06 external protection is total abstention with zero standard-display coverage.",
+    "No strong segmentation baseline or external positive control was run."
   ]
 }

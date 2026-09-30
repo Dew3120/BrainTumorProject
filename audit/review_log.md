@@ -871,3 +871,12 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** O06 and R02 thresholds were applied unchanged and jointly to all registered populations.
 - **Verification:** Source hashes, memberships, score validity, and exact thresholds passed; zero fitting, tuning, sealed-test access, retraining, or threshold changes.
 - **Who approved:** User authorized completion of all Amendment 21 items.
+
+## 2026-09-30T18:00:22+05:30 — Apply Amendment 21 documentation corrections
+
+- **Decision made:** Revise the public narrative and verification ledger in response to the supplied external AI adversarial reviews, without changing any prior audit result or the frozen stack.
+- **Triggering artifacts:** `docs/report.md`, SHA256 `0f485d47f8d0fde931231831d391832b78a105297fb5d2c7acf95891c3997b1d`; `docs/limitations.md`, SHA256 `68bef33dd594ed416fb7ca5dd5dcde3ab5bff4a79c29423a7aa5acbf9ea0f4b3`; `docs/methods.md`, SHA256 `e62274d7ca4dfa36343ab423d26eb9b4ad87fc4d870a4eba5144fd39a317e122`; `README.md`, SHA256 `93e1e7dd0b2460ff7201a70854203a926462e788f6e3f70a152de67aeb9e010b`; `audit/stage10_review_package.md`, SHA256 `2856a72db13c7258f1f94c7a5aca78efd8e7c43d2feb94d22fd68bb60112ee1f`; `docs/stage9_source_ledger.json`, SHA256 `e0fcfa8dbb0351d171f45ba716ccb8e39216d08a1a9dee8d98fc013357f5c452`.
+- **Rationale:** H8 rejection now leads the narrative; external reliability AUROC is paired with ECE; the small-target statement is explicitly associative and partly metric-coupled; the 49-package/33-numbered search history and exploratory selections are disclosed; sealed-test enforcement is described as procedural; missing strong baselines and positive controls are stated; and R11, R12, O07, and P06 are integrated without changing their outcomes.
+- **Alternatives considered:** Relax H11, present P06 total abstention as external safety, or describe O05 as a per-mask failure detector; rejected by the registered results. Modify prior audit files or the frozen stack; rejected by Amendment 21 constraints.
+- **Verification:** The documentation verifier passed with 14 figures and a 10,482-word report. Frozen tree `439b4fca4b47f12b173c24eaa039b1258f9ddf03` and manifest SHA256 `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a` remained unchanged. No BRISC sealed-test access, neural retraining, calibration/reliability refitting, threshold changes, or final-stack writes occurred.
+- **Who approved:** User approved Amendment 21 and instructed completion of all six remaining items without partial compliance.
