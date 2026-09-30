@@ -847,3 +847,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Rationale:** The fixed 204-case glioma comparison was recomputed under Amendment 21.
 - **Verification:** Source hashes and ordinary Dice reproduction passed; zero sealed-test access, retraining, or threshold changes.
 - **Who approved:** User authorized completion of all Amendment 21 items.
+
+## 2026-09-30T16:31:13+05:30 — Complete R12 external reliability baselines
+
+- **Decision made:** Record H11/R12 as `FAIL` under the four-way conjunctive gate.
+- **Triggering artifact:** `experiments/r12_r02_external_baselines/result.json`.
+- **Rationale:** BRISC-only one-feature comparators were frozen before external outcome joins and applied unchanged.
+- **Verification:** All source, membership, fold, and inference reproduction checks passed; zero sealed-test access, neural retraining, R02 refitting, or threshold changes.
+- **Who approved:** User authorized completion of all Amendment 21 items.

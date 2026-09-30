@@ -508,7 +508,7 @@
       "hypothesis_ids": [
         "H11"
       ],
-      "status": "REGISTERED_NOT_STARTED"
+      "status": "COMPLETE"
     },
     {
       "id": "o07_ood_failure_correlation",

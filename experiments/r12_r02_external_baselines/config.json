@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "r12_r02_external_baselines",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H11"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H11"
+  ],
   "amendment_path": "audit/preregistration_amendment_21.md",
   "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
   "development_population": {
@@ -20,7 +22,10 @@
     "maximum_calibrated_foreground_probability"
   ],
   "estimator": {
-    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "pipeline": [
+      "StandardScaler",
+      "LogisticRegression"
+    ],
     "target": "dice_at_least_0_50",
     "penalty": "l2",
     "C": 1.0,
@@ -29,7 +34,18 @@
     "seed": 42
   },
   "risk_coverage": {
-    "retained_coverages": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "retained_coverages": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
     "tie_breaker": "normalized_case_id_ascending",
     "additional_reference": "R02 fixed-policy accepted coverage"
   },

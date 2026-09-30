@@ -1,16 +1,245 @@
 {
   "schema_version": 1,
   "experiment_id": "r12_r02_external_baselines",
-  "status": "NOT_RUN",
-  "started_at": null,
-  "completed_at": null,
-  "metrics": {},
-  "gate_checks": {},
-  "constraint_checks": {
+  "status": "FAIL",
+  "decision": "FAIL",
+  "exploratory_post_review": true,
+  "development": {
+    "cases": 680,
+    "comparator_oof_metrics": {
+      "predicted_area_fraction": {
+        "failure_prevalence": 0.12058823529411765,
+        "failure_detection_auroc": 0.7341952850966638,
+        "failure_detection_auroc_ci95": [
+          0.673598878877751,
+          0.7916007808593009
+        ],
+        "failure_average_precision": 0.41819783770677543,
+        "failure_average_precision_ci95": [
+          0.3201584504609609,
+          0.5255381216486277
+        ]
+      },
+      "maximum_calibrated_foreground_probability": {
+        "failure_prevalence": 0.12058823529411765,
+        "failure_detection_auroc": 0.88016967126193,
+        "failure_detection_auroc_ci95": [
+          0.83422259977978,
+          0.9231147830554615
+        ],
+        "failure_average_precision": 0.6022849229618253,
+        "failure_average_precision_ci95": [
+          0.49616237191672086,
+          0.7313888616237995
+        ]
+      }
+    },
+    "r02_oof_metrics": {
+      "failure_prevalence": 0.12058823529411765,
+      "failure_detection_auroc": 0.9555020801044132,
+      "failure_detection_auroc_ci95": [
+        0.938715915158216,
+        0.9704214021840543
+      ],
+      "failure_average_precision": 0.7493488187920475,
+      "failure_average_precision_ci95": [
+        0.6546972614200989,
+        0.8408650070335602
+      ]
+    }
+  },
+  "external": {
+    "x02": {
+      "cases": 425,
+      "patients": 50,
+      "methods": {
+        "r02": {
+          "failure_prevalence": 0.84,
+          "failure_detection_auroc": 0.8718899324435657,
+          "failure_detection_auroc_ci95": [
+            0.8112022485736097,
+            0.9161683310211312
+          ],
+          "failure_average_precision": 0.9727227507736795,
+          "failure_average_precision_ci95": [
+            0.9593307583923825,
+            0.9844703914624738
+          ]
+        },
+        "predicted_area_fraction": {
+          "failure_prevalence": 0.84,
+          "failure_detection_auroc": 0.8523644752018453,
+          "failure_detection_auroc_ci95": [
+            0.7953511379408086,
+            0.896829832561297
+          ],
+          "failure_average_precision": 0.9715740097370373,
+          "failure_average_precision_ci95": [
+            0.9565907257301366,
+            0.9837810465334562
+          ]
+        },
+        "maximum_calibrated_foreground_probability": {
+          "failure_prevalence": 0.84,
+          "failure_detection_auroc": 0.8455470423463504,
+          "failure_detection_auroc_ci95": [
+            0.785973247940807,
+            0.8905253973618493
+          ],
+          "failure_average_precision": 0.9650110680347449,
+          "failure_average_precision_ci95": [
+            0.9482897967659026,
+            0.9799940231004024
+          ]
+        }
+      },
+      "paired_comparisons": {
+        "predicted_area_fraction": {
+          "r02_minus_comparator_auroc": 0.01952545724172039,
+          "paired_ci95": [
+            -0.016784060415199295,
+            0.05845057713518235
+          ],
+          "gate_passed": false
+        },
+        "maximum_calibrated_foreground_probability": {
+          "r02_minus_comparator_auroc": 0.026342890097215355,
+          "paired_ci95": [
+            -0.0049057632036663855,
+            0.05549960872046683
+          ],
+          "gate_passed": false
+        }
+      },
+      "r02_fixed_policy_accepted_count": 40,
+      "r02_fixed_policy_accepted_coverage": 0.09411764705882353
+    },
+    "x03": {
+      "cases": 9464,
+      "patients": 147,
+      "methods": {
+        "r02": {
+          "failure_prevalence": 0.8030431107354185,
+          "failure_detection_auroc": 0.8315855121978768,
+          "failure_detection_auroc_ci95": [
+            0.8119607000917849,
+            0.8500849318513499
+          ],
+          "failure_average_precision": 0.9552815493365268,
+          "failure_average_precision_ci95": [
+            0.9464589774843589,
+            0.9634725977717398
+          ]
+        },
+        "predicted_area_fraction": {
+          "failure_prevalence": 0.8030431107354185,
+          "failure_detection_auroc": 0.8230849051276259,
+          "failure_detection_auroc_ci95": [
+            0.7962698254366819,
+            0.8481594236175364
+          ],
+          "failure_average_precision": 0.9526451202709382,
+          "failure_average_precision_ci95": [
+            0.9403917933175011,
+            0.9629737145501478
+          ]
+        },
+        "maximum_calibrated_foreground_probability": {
+          "failure_prevalence": 0.8030431107354185,
+          "failure_detection_auroc": 0.7870552504517733,
+          "failure_detection_auroc_ci95": [
+            0.7664916456371813,
+            0.807286989011176
+          ],
+          "failure_average_precision": 0.9380878773924906,
+          "failure_average_precision_ci95": [
+            0.9254458715726129,
+            0.949293892515896
+          ]
+        }
+      },
+      "paired_comparisons": {
+        "predicted_area_fraction": {
+          "r02_minus_comparator_auroc": 0.00850060707025091,
+          "paired_ci95": [
+            -0.017436524823548172,
+            0.0349128739168315
+          ],
+          "gate_passed": false
+        },
+        "maximum_calibrated_foreground_probability": {
+          "r02_minus_comparator_auroc": 0.04453026174610353,
+          "paired_ci95": [
+            0.02815642780566632,
+            0.05952247269565756
+          ],
+          "gate_passed": true
+        }
+      },
+      "r02_fixed_policy_accepted_count": 1656,
+      "r02_fixed_policy_accepted_coverage": 0.1749788672865596
+    }
+  },
+  "gate": {
+    "metric": "R02_minus_comparator_external_AUROC",
+    "operator": ">=",
+    "threshold": 0.03,
+    "equality_passes": true,
+    "conjunctive_comparisons": 4,
+    "checks_passed": 1,
+    "checks_total": 4,
+    "status": "FAIL"
+  },
+  "comparator_states": [
+    {
+      "comparator": "predicted_area_fraction",
+      "pickle_path": "experiments/r12_r02_external_baselines/artifacts/predicted_area_fraction_brisc_frozen.pkl",
+      "pickle_sha256": "b44c7670300c023d2d318c5402bbe648e4bfa4dadbf38d45bdd6e1d9152f41c9",
+      "scaler_mean": [
+        0.014455099666819854
+      ],
+      "scaler_scale": [
+        0.01022703268621976
+      ],
+      "coefficient": [
+        1.2870881750585692
+      ],
+      "intercept": [
+        2.433808530579801
+      ],
+      "frozen_before_external_outcome_join": true,
+      "frozen_at": "2026-09-30T16:27:37+05:30"
+    },
+    {
+      "comparator": "maximum_calibrated_foreground_probability",
+      "pickle_path": "experiments/r12_r02_external_baselines/artifacts/maximum_calibrated_foreground_probability_brisc_frozen.pkl",
+      "pickle_sha256": "00d4ebbf19ce96de652508b85d695ea1f7dd1fb59b959e7f5e125b66ab5c3dad",
+      "scaler_mean": [
+        0.9651619369442227
+      ],
+      "scaler_scale": [
+        0.09153847163969919
+      ],
+      "coefficient": [
+        1.15796964862768
+      ],
+      "intercept": [
+        2.2961005597938167
+      ],
+      "frozen_before_external_outcome_join": true,
+      "frozen_at": "2026-09-30T16:27:37+05:30"
+    }
+  ],
+  "verification": {
+    "comparator_fit_completed_before_external_outcome_join": true,
+    "source_hashes_verified": true,
+    "external_inference_reproduced_committed_dice_pixels_and_r02_within_1e-12": true,
+    "feature_contract": "prediction-only frozen E08+C03 outputs",
+    "final_stack_manifest_unchanged": true,
     "brisc_test_images_accessed": 0,
-    "r02_refit": false,
-    "external_comparator_fitting": false,
+    "neural_retraining": 0,
+    "r02_refitting": 0,
     "threshold_changes": 0,
-    "final_stack_modified": false
+    "segmentation_threshold": 0.5
   }
 }

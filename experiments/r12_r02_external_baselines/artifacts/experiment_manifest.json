@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r12_r02_external_baselines",
+  "files": [
+    {
+      "path": "experiments/r12_r02_external_baselines/config.json",
+      "sha256": "62d0d61db0ab86032272a34d7b885847fa98805653afe7ac6a7fd24fb2d24466",
+      "bytes": 2546
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/result.json",
+      "sha256": "64c6738659097c55a760724be4f388553bbacc6237c3c33eced5a4feca39aee7",
+      "bytes": 7699
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/decision.md",
+      "sha256": "f4c6b97307b4a9ff0505f2bf665402c2acdd5e4ef979c22e6ec0ee9456364366",
+      "bytes": 608
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/brisc_oof_comparator_scores.csv",
+      "sha256": "654290179a8b97faa24d27e22735e5d19f013de1ed6176111e51ef0cb493ace0",
+      "bytes": 146438
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/external_scores.csv",
+      "sha256": "864b2a0e770a3718f040641ccca26567a1d9ce522311eaa5b0256778c33f9d8e",
+      "bytes": 1355126
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/risk_coverage.csv",
+      "sha256": "2b65be66d6450af2e22c3ca2735a70a2daeecb5144771e27457899e8df5a13c5",
+      "bytes": 6559
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/paired_bootstrap_differences.csv",
+      "sha256": "5b270a319edf156d33dc303965103444793f12b6ed97641129422fe64751733f",
+      "bytes": 505436
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/comparator_states.json",
+      "sha256": "e7f31b29032891b27b08bbbb6306ba7b2fe92d39bf2c20d334c5ff3d6eee7f05",
+      "bytes": 1277
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/x02_frozen_feature_cache.csv",
+      "sha256": "c82e1287343185d95b82e6fe0f87aa953d81cadd1819115c2e469c1cf90f57a0",
+      "bytes": 43733
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/x03_frozen_feature_cache.csv",
+      "sha256": "22e1ef2470133f3c2c06d544f484981b0f6cbc3363a77592f036ef84443e1e17",
+      "bytes": 979239
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/predicted_area_fraction_brisc_frozen.pkl",
+      "sha256": "b44c7670300c023d2d318c5402bbe648e4bfa4dadbf38d45bdd6e1d9152f41c9",
+      "bytes": 1108
+    },
+    {
+      "path": "experiments/r12_r02_external_baselines/artifacts/maximum_calibrated_foreground_probability_brisc_frozen.pkl",
+      "sha256": "00d4ebbf19ce96de652508b85d695ea1f7dd1fb59b959e7f5e125b66ab5c3dad",
+      "bytes": 1108
+    }
+  ]
+}
