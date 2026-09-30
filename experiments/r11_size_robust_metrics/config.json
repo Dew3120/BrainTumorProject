@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r11_size_robust_metrics",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H10"],
+  "amendment_path": "audit/preregistration_amendment_21.md",
+  "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
+  "population": {
+    "dataset": "BRISC development validation",
+    "category": "glioma",
+    "cases": 204,
+    "sealed_test_access": false
+  },
+  "models": ["v1", "E08"],
+  "model_space": [128, 128],
+  "segmentation_threshold": 0.5,
+  "metrics": {
+    "surface_dice_tolerance_pixels": 2.0,
+    "hd95_units": "model_pixels",
+    "connectivity": 8,
+    "lesion_detection_component_dice_threshold": 0.5,
+    "component_matching": "deterministic one-to-one maximum-Dice assignment",
+    "empty_prediction_surface_dice": 0.0,
+    "empty_prediction_hd95": 179.60512242138307
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "similarity_group",
+    "paired": true,
+    "ci": "percentile_95"
+  },
+  "gate": {
+    "metric": "mean_surface_dice_E08_minus_v1",
+    "operator": ">",
+    "threshold": 0.0,
+    "equality_passes": false
+  },
+  "source_hashes": {
+    "final_stack_manifest": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a",
+    "e08_per_case_comparison": "be5a27886e7526b2ca11fdc0adabd4c494dfea5a2734944fdecf80283b93cbdc",
+    "e08_experiment_manifest": "496d689a37ca98293542cdcd56f320cd04ee60d30a6fb01177bc7c6f6d1183e6",
+    "split": "d97ef6d8fed52c7c972dbc33f5de4ac4bb0be994e937a95dffa505615cb8ab28"
+  }
+}

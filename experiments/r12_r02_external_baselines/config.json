@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r12_r02_external_baselines",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H11"],
+  "amendment_path": "audit/preregistration_amendment_21.md",
+  "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
+  "development_population": {
+    "dataset": "BRISC development validation",
+    "cases": 680,
+    "folds": 5,
+    "fold_assignment_sha256": "48802b704465c2807ae0752e0a62b26cc95f4c40dcdbf2db69c1194ac2f31bf4"
+  },
+  "external_populations": {
+    "x02_openneuro_primary_strict": 425,
+    "x03_upenn_gbm_primary_strict": 9464
+  },
+  "comparators": [
+    "predicted_area_fraction",
+    "maximum_calibrated_foreground_probability"
+  ],
+  "estimator": {
+    "pipeline": ["StandardScaler", "LogisticRegression"],
+    "target": "dice_at_least_0_50",
+    "penalty": "l2",
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 10000,
+    "seed": 42
+  },
+  "risk_coverage": {
+    "retained_coverages": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "tie_breaker": "normalized_case_id_ascending",
+    "additional_reference": "R02 fixed-policy accepted coverage"
+  },
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "brisc_unit": "similarity_group",
+    "external_unit": "patient",
+    "paired": true,
+    "ci": "percentile_95"
+  },
+  "gate": {
+    "metric": "R02_minus_comparator_external_AUROC",
+    "operator": ">=",
+    "threshold": 0.03,
+    "equality_passes": true,
+    "conjunctive_comparisons": 4
+  },
+  "source_hashes": {
+    "final_stack_manifest": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a",
+    "r01_oof_features": "b9b2c245f932d93f844085fdd4a2c2050cd6facab758831906f06c9bc0a41768",
+    "r02_oof_model_comparison": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "r02_deployable_manifest": "a2c18da509130f3a4f17d3b3cd4ce0ec04edea07cef5ed5ebaac392960d13d35",
+    "x02_per_case_predictions": "57d448e0cc84f67385de9cffcdba63863ff70a368c7f245edab6ea005982cbdf",
+    "x02_experiment_manifest": "48784ede09d0875c6c98e359d92f602d852343e99c7e231eecf15ca81e3eea77",
+    "x03_per_case_predictions": "39e35e7d5b256333a08b10502099f040ed2dcb7a99faf2ddb8f9b6ef5381f1c4",
+    "x03_experiment_manifest": "20d0c8e2474070646e0d4d286094358c19f44af013419b9ae65354e1a456148f"
+  },
+  "prohibited": [
+    "external comparator fitting",
+    "R02 refitting",
+    "external threshold selection",
+    "final-stack modification"
+  ]
+}

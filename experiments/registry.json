@@ -85,6 +85,10 @@
     {
       "path": "audit/preregistration_amendment_20.md",
       "sha256": "52b7d3e99a7354b2dafc42de0fac8d97155b61ddf5fa938a91189f91a92c863b"
+    },
+    {
+      "path": "audit/preregistration_amendment_21.md",
+      "sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7"
     }
   ],
   "baseline": {
@@ -489,6 +493,38 @@
         "H9"
       ],
       "status": "COMPLETE"
+    },
+    {
+      "id": "r11_size_robust_metrics",
+      "path": "experiments/r11_size_robust_metrics",
+      "hypothesis_ids": [
+        "H10"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "r12_r02_external_baselines",
+      "path": "experiments/r12_r02_external_baselines",
+      "hypothesis_ids": [
+        "H11"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "o07_ood_failure_correlation",
+      "path": "experiments/o07_ood_failure_correlation",
+      "hypothesis_ids": [
+        "H12"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
+    },
+    {
+      "id": "p06_joint_policy_risk_coverage",
+      "path": "experiments/p06_joint_policy_risk_coverage",
+      "hypothesis_ids": [
+        "H13"
+      ],
+      "status": "REGISTERED_NOT_STARTED"
     }
   ]
 }

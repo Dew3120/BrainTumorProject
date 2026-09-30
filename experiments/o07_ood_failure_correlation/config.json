@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o07_ood_failure_correlation",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H12"],
+  "amendment_path": "audit/preregistration_amendment_21.md",
+  "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
+  "populations": {
+    "x02_openneuro_primary_strict": 425,
+    "x03_upenn_gbm_primary_strict": 9464
+  },
+  "frozen_score": "O05 selected secondary logistic OOD probability",
+  "failure_definition": "calibrated_dice_below_0_50",
+  "metrics": [
+    "spearman_ood_score_vs_dice",
+    "failure_detection_auroc",
+    "failure_average_precision",
+    "highest_ood_quintile_failure_prevalence",
+    "failure_enrichment_ratio",
+    "failure_capture"
+  ],
+  "highest_risk_fraction": 0.2,
+  "tie_breaker": "normalized_case_id_ascending",
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "unit": "patient",
+    "ci": "percentile_95"
+  },
+  "gate": null,
+  "source_hashes": {
+    "final_stack_manifest": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a",
+    "o05_ensemble_scores": "8018f0eb4751d856426bac2fb80b171cdbdc53091214152836402ae59785b64a",
+    "o05_experiment_manifest": "10ad506ef4ab197d3cff088304dd50d4d9d883ac6ce85481863c217bed757492",
+    "x02_per_case_predictions": "57d448e0cc84f67385de9cffcdba63863ff70a368c7f245edab6ea005982cbdf",
+    "x02_experiment_manifest": "48784ede09d0875c6c98e359d92f602d852343e99c7e231eecf15ca81e3eea77",
+    "x03_per_case_predictions": "39e35e7d5b256333a08b10502099f040ed2dcb7a99faf2ddb8f9b6ef5381f1c4",
+    "x03_experiment_manifest": "20d0c8e2474070646e0d4d286094358c19f44af013419b9ae65354e1a456148f"
+  },
+  "prohibited": [
+    "model fitting",
+    "threshold selection",
+    "cohort pooling as primary result",
+    "O05 or O06 modification"
+  ]
+}

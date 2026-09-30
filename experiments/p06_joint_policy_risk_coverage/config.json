@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "experiment_id": "p06_joint_policy_risk_coverage",
+  "status": "REGISTERED_NOT_STARTED",
+  "hypothesis_ids": ["H13"],
+  "amendment_path": "audit/preregistration_amendment_21.md",
+  "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
+  "populations": {
+    "brisc_development_validation": 680,
+    "x02_openneuro_primary_strict": 425,
+    "x03_upenn_gbm_primary_strict": 9464
+  },
+  "policy_order": ["O06", "R02"],
+  "thresholds": {
+    "segmentation": 0.5,
+    "ood_review": "0.36854275476100085",
+    "ood_refuse": null,
+    "reliability_standard": "0.9490250173235835"
+  },
+  "joint_standard_rule": "ood_score < 0.36854275476100085 AND reliability >= 0.9490250173235835",
+  "invalid_score_rule": "REVIEW_REQUIRED",
+  "brisc_reliability_role": "R02 out-of-fold score",
+  "external_reliability_role": "frozen full-population R02 operational artifact",
+  "metrics": [
+    "standard_count_and_rate",
+    "review_required_count_and_rate",
+    "standard_mean_dice",
+    "standard_failure_rate",
+    "failures_caught_and_missed",
+    "failure_review_sensitivity",
+    "per_category_results"
+  ],
+  "bootstrap": {
+    "repetitions": 2000,
+    "seed": 42,
+    "brisc_unit": "similarity_group",
+    "external_unit": "patient",
+    "ci": "percentile_95"
+  },
+  "gate": null,
+  "source_hashes": {
+    "final_stack_manifest": "7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a",
+    "r02_oof_model_comparison": "9b986435b0da0fdb340a16730209ebb895115ece694386c298830e3956b2fc6a",
+    "r02_deployable_manifest": "a2c18da509130f3a4f17d3b3cd4ce0ec04edea07cef5ed5ebaac392960d13d35",
+    "o05_experiment_manifest": "10ad506ef4ab197d3cff088304dd50d4d9d883ac6ce85481863c217bed757492",
+    "o06_policy_assignments": "61f7663190117d30c437871d0e03812c122e651e4d37724f754856dff4acf64b",
+    "o06_experiment_manifest": "89893ef8e61882ef5d85722488d46ac22417d933034bb09b0a6089aeb04be763",
+    "p03_oof_policy_assignments": "d5e16e57eef25cace1ece366adbb8584b82596d24d4090cd0bdf1da4c6103c93",
+    "p03_experiment_manifest": "2a2bbc1198ae08e4b206ee91c0bdf9c0ac7d45c4d80ffff7eaf982a769038377",
+    "x02_per_case_predictions": "57d448e0cc84f67385de9cffcdba63863ff70a368c7f245edab6ea005982cbdf",
+    "x03_per_case_predictions": "39e35e7d5b256333a08b10502099f040ed2dcb7a99faf2ddb8f9b6ef5381f1c4"
+  },
+  "prohibited": [
+    "threshold tuning",
+    "model fitting",
+    "policy modification",
+    "pooled replacement of cohort results"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "experiment_id": "o07_ood_failure_correlation",
+  "status": "NOT_RUN",
+  "started_at": null,
+  "completed_at": null,
+  "metrics": {},
+  "gate_checks": {},
+  "constraint_checks": {
+    "brisc_test_images_accessed": 0,
+    "model_fitting": 0,
+    "threshold_changes": 0,
+    "final_stack_modified": false
+  }
+}
