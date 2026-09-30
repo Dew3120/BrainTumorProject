@@ -1,8 +1,10 @@
 {
   "schema_version": 1,
   "experiment_id": "r11_size_robust_metrics",
-  "status": "REGISTERED_NOT_STARTED",
-  "hypothesis_ids": ["H10"],
+  "status": "COMPLETE",
+  "hypothesis_ids": [
+    "H10"
+  ],
   "amendment_path": "audit/preregistration_amendment_21.md",
   "amendment_sha256": "9ef21c07c532d2f1bf162508e0f4bef8af4d3d4ba998a45404312143706d4ee7",
   "population": {
@@ -11,8 +13,14 @@
     "cases": 204,
     "sealed_test_access": false
   },
-  "models": ["v1", "E08"],
-  "model_space": [128, 128],
+  "models": [
+    "v1",
+    "E08"
+  ],
+  "model_space": [
+    128,
+    128
+  ],
   "segmentation_threshold": 0.5,
   "metrics": {
     "surface_dice_tolerance_pixels": 2.0,

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_id": "r11_size_robust_metrics",
+  "files": [
+    {
+      "path": "experiments/r11_size_robust_metrics/config.json",
+      "sha256": "f15d9c2e01d13c6c992cae1c470ada093352f79752a696af7472f3d68662d968",
+      "bytes": 1562
+    },
+    {
+      "path": "experiments/r11_size_robust_metrics/result.json",
+      "sha256": "269203537711946fff56ed25947d23e54df0875e995ba15da29e3737973724a0",
+      "bytes": 1969
+    },
+    {
+      "path": "experiments/r11_size_robust_metrics/decision.md",
+      "sha256": "350596e355b545443a4cc1f59bd26bfacc6d5cc2a19657e54408afae63eacbcf",
+      "bytes": 396
+    },
+    {
+      "path": "experiments/r11_size_robust_metrics/artifacts/per_case_size_robust_metrics.csv",
+      "sha256": "94b3f38eae0a23052cee4c65b0123913aaaea36f4fe3cf767c10da5d0c62531c",
+      "bytes": 60351
+    },
+    {
+      "path": "experiments/r11_size_robust_metrics/artifacts/paired_bootstrap_intervals.csv",
+      "sha256": "992cb296784201dd223b99d40dd170ed92ce3b52f16e2c051d4906483e7e719e",
+      "bytes": 237
+    }
+  ]
+}

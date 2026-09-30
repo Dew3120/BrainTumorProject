@@ -839,3 +839,11 @@ This log is append-only. Each decision records the evidence available at the tim
 - **Alternatives considered:** Fit comparators on external cohorts; rejected as evaluation leakage. Refit R02 or modify the final stack; rejected. Add neural baselines, external fine-tuning, routing ablation, or higher-resolution training; deferred because they require retraining or a larger study. Treat the AI critiques as human peer review; rejected.
 - **Verification:** Evidence-cutoff registry contained 49 packages, including 33 numbered E/C/R/O experiments. Amendment registration adds four packages for a current total of 53. R12 permits only two non-operational comparator fits on BRISC development data; R02 and all operational artifacts remain frozen. BRISC sealed-test access, neural retraining, experiment execution, threshold changes, and writes under `runs/final_stack/` were zero.
 - **Who approved:** User accepted the external-review response, corrected experiment count, BRISC-only R12 fitting protocol, added P06, and authorized the fixed execution order with a pause after registration.
+
+## 2026-09-30T15:19:23+05:30 — Complete R11 size-robust metrics
+
+- **Decision made:** Record H10/R11 as `PASS` without changing the gate.
+- **Triggering artifact:** `experiments/r11_size_robust_metrics/result.json`; E08-minus-v1 surface Dice `+0.014307`.
+- **Rationale:** The fixed 204-case glioma comparison was recomputed under Amendment 21.
+- **Verification:** Source hashes and ordinary Dice reproduction passed; zero sealed-test access, retraining, or threshold changes.
+- **Who approved:** User authorized completion of all Amendment 21 items.

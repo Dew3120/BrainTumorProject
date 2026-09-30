@@ -1,15 +1,70 @@
 {
   "schema_version": 1,
   "experiment_id": "r11_size_robust_metrics",
-  "status": "NOT_RUN",
-  "started_at": null,
-  "completed_at": null,
-  "metrics": {},
-  "gate_checks": {},
-  "constraint_checks": {
-    "brisc_test_images_accessed": 0,
+  "status": "PASS",
+  "decision": "PASS",
+  "exploratory_post_review": true,
+  "population": {
+    "cases": 204,
+    "category": "glioma",
+    "similarity_groups": 181
+  },
+  "v1": {
+    "mean_dice": 0.608951638747171,
+    "mean_surface_dice_2px": 0.5948637686261219,
+    "mean_hd95_pixels": 14.239245856624139,
+    "lesions_detected": 155,
+    "reference_lesions": 214,
+    "lesion_detection_rate": 0.7242990654205608
+  },
+  "e08": {
+    "mean_dice": 0.6323744899333071,
+    "mean_surface_dice_2px": 0.6091712415503964,
+    "mean_hd95_pixels": 11.84325218206589,
+    "lesions_detected": 156,
+    "reference_lesions": 214,
+    "lesion_detection_rate": 0.7289719626168224
+  },
+  "differences": {
+    "ordinary_dice_e08_minus_v1": 0.023422851186136184,
+    "surface_dice_e08_minus_v1": 0.014307472924274478,
+    "hd95_v1_minus_e08": 2.39599367455825,
+    "lesion_detection_e08_minus_v1": 0.004672897196261627
+  },
+  "paired_similarity_group_bootstrap_ci95": {
+    "dice": {
+      "ci95_lower": 0.0005932047950724835,
+      "ci95_upper": 0.045321354152674485
+    },
+    "surface_dice": {
+      "ci95_lower": -0.010789876805384225,
+      "ci95_upper": 0.03907741421245815
+    },
+    "hd95": {
+      "ci95_lower": 1.1068856598053003,
+      "ci95_upper": 3.82600225285477
+    },
+    "lesion_detection": {
+      "ci95_lower": -0.038277511961722466,
+      "ci95_upper": 0.04902179621848732
+    }
+  },
+  "gate": {
+    "metric": "mean_surface_dice_E08_minus_v1",
+    "operator": ">",
+    "threshold": 0.0,
+    "equality_passes": false,
+    "observed": 0.014307472924274478,
+    "status": "PASS"
+  },
+  "verification": {
+    "ordinary_dice_max_abs_difference_from_source": 0.0,
+    "tolerance": 1e-12,
+    "source_hashes_verified": true,
+    "final_stack_manifest_unchanged": true,
+    "test_images_accessed": 0,
     "neural_retraining": 0,
     "threshold_changes": 0,
-    "final_stack_modified": false
+    "segmentation_threshold": 0.5
   }
 }
