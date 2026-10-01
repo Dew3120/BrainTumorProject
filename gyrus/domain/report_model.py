@@ -110,17 +110,31 @@ def build_pdf_report_model(
 ) -> PdfReportModel:
     """Create the renderer-independent fixed three-page report contract."""
 
+    return build_pdf_report_model_from_payload(
+        result.to_dict(), generated_at=generated_at, assets=assets,
+        edit_provenance=edit_provenance,
+    )
+
+
+def build_pdf_report_model_from_payload(
+    result: dict[str, Any], *, generated_at: str,
+    assets: tuple[ReportAsset, ...] = (),
+    edit_provenance: MaskEditProvenance | None = None,
+) -> PdfReportModel:
+    """Build the same fixed contract from a verified live or archived result."""
+
+    validate_result_payload(result)
     if edit_provenance is not None:
-        if edit_provenance.case_id != result.case_id:
+        if edit_provenance.case_id != result["case_id"]:
             raise ResultValidationError(
                 "REPORT_EDIT_CASE_MISMATCH", edit_provenance.case_id
             )
-        if result.spatial is None:
+        if result["spatial"] is None:
             raise ResultValidationError(
                 "REPORT_EDIT_WITHOUT_MODEL_MASK",
                 "Edited-mask provenance requires an original model mask.",
             )
-        if edit_provenance.model_mask_sha256 != result.spatial.model_mask.sha256:
+        if edit_provenance.model_mask_sha256 != result["spatial"]["model_mask"]["sha256"]:
             raise ResultValidationError(
                 "REPORT_EDIT_MODEL_HASH_MISMATCH",
                 "Edit provenance does not reference this result's model mask.",
@@ -144,12 +158,12 @@ def build_pdf_report_model(
     )
     return PdfReportModel(
         schema_version=1,
-        case_id=result.case_id,
+        case_id=result["case_id"],
         creator=PDF_CREATOR,
-        default_filename=f"gyrus-research-summary_{result.case_id}.pdf",
+        default_filename=f"gyrus-research-summary_{result['case_id']}.pdf",
         generated_at=generated_at,
         disclaimer=DISCLAIMER,
-        result=result.to_dict(),
+        result=result,
         pages=pages,
         assets=assets,
         edit_provenance=(None if edit_provenance is None else edit_provenance.to_dict()),

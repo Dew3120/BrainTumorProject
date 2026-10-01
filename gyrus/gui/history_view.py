@@ -146,6 +146,7 @@ class HistoryPreviewPanel(QWidget):
 
     open_requested = Signal()
     delete_requested = Signal()
+    export_requested = Signal()
 
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
@@ -167,11 +168,11 @@ class HistoryPreviewPanel(QWidget):
         self.open_button = QPushButton("Open saved result", self)
         self.open_button.setObjectName("PrimaryAction")
         self.delete_button = QPushButton("Delete saved case", self)
-        self.export_button = QPushButton("Export · Stage 7", self)
+        self.export_button = QPushButton("Export PDF", self)
         self.export_button.setEnabled(False)
-        self.export_button.setToolTip("PDF export arrives in Stage 7")
         self.open_button.clicked.connect(self.open_requested)
         self.delete_button.clicked.connect(self.delete_requested)
+        self.export_button.clicked.connect(self.export_requested)
         for button in (self.open_button, self.export_button, self.delete_button):
             column.addWidget(button)
         self.clear()
@@ -182,6 +183,7 @@ class HistoryPreviewPanel(QWidget):
         self.details.setText("History stores only cases you explicitly saved.")
         self.open_button.setEnabled(False)
         self.delete_button.setEnabled(False)
+        self.export_button.setEnabled(False)
 
     def set_case(self, loaded: LoadedHistoryCase) -> None:
         pixmap = QPixmap()
@@ -203,3 +205,4 @@ class HistoryPreviewPanel(QWidget):
         )
         self.open_button.setEnabled(True)
         self.delete_button.setEnabled(True)
+        self.export_button.setEnabled(True)

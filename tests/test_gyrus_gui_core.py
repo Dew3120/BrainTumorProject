@@ -349,6 +349,66 @@ def test_history_bundle_hash_mismatch_locks_preview(tmp_path, qtbot, monkeypatch
     assert window.history_preview.open_button.isEnabled() is False
 
 
+def test_live_and_saved_pdf_preview_use_verified_three_page_document(
+    tmp_path, qtbot, monkeypatch, frozen_responses,
+):
+    from PySide6.QtWidgets import QMessageBox
+
+    from gyrus.gui.pdf_preview import PdfPreviewDialog
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    states_seen = []
+
+    def close_preview(dialog):
+        states_seen.append(dialog.parent().machine.state)
+        assert dialog.document.pageCount() == 3
+        return 0
+
+    monkeypatch.setattr(PdfPreviewDialog, "exec", close_preview)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    assert window.result_inspector.export_pdf_button.isEnabled()
+    window.export_current_pdf()
+    assert window.machine.state == AppState.RESULT_STANDARD
+    window.save_to_history()
+    window.open_history()
+    assert window.history_preview.export_button.isEnabled()
+    window.export_saved_pdf()
+    assert window.machine.state == AppState.HISTORY
+    assert states_seen == [AppState.EXPORT_PREVIEW, AppState.EXPORT_PREVIEW]
+
+
+def test_saved_pdf_export_reverifies_bundle_before_preview(
+    tmp_path, qtbot, monkeypatch, frozen_responses,
+):
+    from PySide6.QtWidgets import QMessageBox
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    window.save_to_history()
+    window.open_history()
+    assert window.history_preview.export_button.isEnabled()
+    bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
+    (bundle / "overlay_preview.png").write_bytes(b"changed after selection")
+    window.export_saved_pdf()
+    assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
+
+
 def test_saved_human_layer_restores_without_recomputing_reliability(
     tmp_path, qtbot, monkeypatch, frozen_responses,
 ):

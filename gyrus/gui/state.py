@@ -82,6 +82,7 @@ _TRANSITIONS: dict[AppState, frozenset[AppState]] = {
     AppState.EXPORT_PREVIEW: frozenset({
         AppState.RESULT_STANDARD,
         AppState.RESULT_REVIEW_REQUIRED,
+        AppState.HISTORY,
         AppState.RECOVERABLE_ERROR,
         AppState.INTEGRITY_ERROR_LOCKED,
     }),
@@ -90,6 +91,7 @@ _TRANSITIONS: dict[AppState, frozenset[AppState]] = {
         AppState.READY_TO_ANALYZE,
         AppState.RESULT_STANDARD,
         AppState.RESULT_REVIEW_REQUIRED,
+        AppState.EXPORT_PREVIEW,
         AppState.INTEGRITY_ERROR_LOCKED,
     }),
     AppState.RECOVERABLE_ERROR: frozenset({

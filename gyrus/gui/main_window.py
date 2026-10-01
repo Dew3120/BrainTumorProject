@@ -34,12 +34,15 @@ from gyrus.domain.history_bundle import (
 )
 from gyrus.domain.manifest import EXPECTED_MANIFEST_SHA256
 from gyrus.domain.mask_editor import MaskEditIntegrityError, MaskEditSession
+from gyrus.domain.pdf_export import PdfRenderPayload, render_pdf
+from gyrus.domain.report_model import build_pdf_report_model_from_payload
 from gyrus.worker.protocol import AnalyzeSuccess, WorkerFailure
 
 from .history_view import HistoryListPanel, HistoryPreviewPanel
 from .image_canvas import ImageCanvas
 from .input_controller import InputValidationThread, ValidatedSelection
 from .mask_editor import MaskEditor
+from .pdf_preview import PdfPreviewDialog
 from .presentation import ResultPresentation, build_presentation
 from .result_panel import LoadingPanel, OodReviewDialog, ResultInspector
 from .splash import ASSET_ROOT
@@ -88,6 +91,7 @@ class GyrusMainWindow(QMainWindow):
         self._pending_result: ResultPresentation | None = None
         self._edit_session: MaskEditSession | None = None
         self._history_return_state: AppState = AppState.READY_EMPTY
+        self._export_return_state: AppState = AppState.READY_EMPTY
         self._history_selected: LoadedHistoryCase | None = None
         self._saved_history_ids: set[str] = set()
         self._gate: OodReviewDialog | None = None
@@ -327,10 +331,12 @@ class GyrusMainWindow(QMainWindow):
         self.result_inspector.new_case_button.clicked.connect(self.clear_case)
         self.result_inspector.edit_mask_button.clicked.connect(self.open_mask_editor)
         self.result_inspector.save_history_button.clicked.connect(self.save_to_history)
+        self.result_inspector.export_pdf_button.clicked.connect(self.export_current_pdf)
         self.inspector_stack.addWidget(self.result_inspector)
         self.history_preview = HistoryPreviewPanel(self.inspector_stack)
         self.history_preview.open_requested.connect(self.open_saved_history_case)
         self.history_preview.delete_requested.connect(self.delete_history_case)
+        self.history_preview.export_requested.connect(self.export_saved_pdf)
         self.inspector_stack.addWidget(self.history_preview)
         return inspector
 
@@ -640,6 +646,74 @@ class GyrusMainWindow(QMainWindow):
             self.mask_editor.clear()
         self._reload_history()
 
+    def _preview_pdf(self, payload: PdfRenderPayload) -> None:
+        try:
+            document = render_pdf(payload)
+        except Exception as exc:  # noqa: BLE001 - invalid report never reaches preview
+            self._lock_result(f"PDF_REPORT_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            return
+        try:
+            dialog = PdfPreviewDialog(document, payload.model.default_filename, self)
+        except Exception as exc:  # noqa: BLE001 - failed viewer must not offer export
+            self.show_notice(f"PDF preview could not open: {type(exc).__name__}: {exc}")
+            return
+        self._export_return_state = self.machine.state
+        self.machine.enter(AppState.EXPORT_PREVIEW, reason="user opened verified PDF preview")
+        self._render_state()
+        try:
+            dialog.exec()
+        finally:
+            if self.machine.state == AppState.EXPORT_PREVIEW:
+                self.machine.enter(self._export_return_state, reason="PDF preview closed")
+                self._render_state()
+        if dialog.saved_path is not None:
+            self.show_notice(f"PDF saved locally: {dialog.saved_path}")
+
+    def export_current_pdf(self) -> None:
+        if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
+            raise RuntimeError("PDF export requires a disclosed result")
+        presentation = self._pending_result
+        if presentation is None:
+            raise RuntimeError("No result available")
+        session = self._edit_session
+        provenance = session.saved_provenance if session is not None else None
+        try:
+            report = build_pdf_report_model_from_payload(
+                presentation.result,
+                generated_at=presentation.result["execution"]["completed_at"],
+                edit_provenance=provenance,
+            )
+            payload = PdfRenderPayload(
+                report, presentation.selection.descriptor.source_path,
+                presentation.selection.preview_png, presentation.selection.model_gray_128,
+                presentation.probability, presentation.mask,
+                session.saved_mask if session is not None else None, provenance,
+            )
+        except Exception as exc:  # noqa: BLE001 - malformed report model is a hard stop
+            self._lock_result(f"PDF_REPORT_MODEL_FAILED: {type(exc).__name__}: {exc}")
+            return
+        self._preview_pdf(payload)
+
+    def export_saved_pdf(self) -> None:
+        if self.machine.state != AppState.HISTORY or self._history_selected is None:
+            raise RuntimeError("PDF history export requires a verified selected case")
+        case_id = self._history_selected.record.case_id
+        try:
+            loaded = load_history_bundle(self._history_repository(), case_id)
+            report = build_pdf_report_model_from_payload(
+                loaded.result, generated_at=loaded.result["execution"]["completed_at"],
+                edit_provenance=loaded.edit_provenance,
+            )
+            payload = PdfRenderPayload(
+                report, loaded.descriptor.source_path, loaded.preview_png,
+                loaded.model_gray_128, loaded.probability, loaded.model_mask,
+                loaded.edited_mask, loaded.edit_provenance,
+            )
+        except Exception as exc:  # noqa: BLE001 - reverify archived case before PDF export
+            self._lock_result(f"PDF_HISTORY_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            return
+        self._preview_pdf(payload)
+
     def open_mask_editor(self) -> None:
         if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
             raise RuntimeError("Mask editing requires a disclosed result")
@@ -781,6 +855,8 @@ class GyrusMainWindow(QMainWindow):
 
     def _render_state(self) -> None:
         state = self.machine.state
+        if state == AppState.EXPORT_PREVIEW:
+            state = self._export_return_state  # modal preserves the underlying result/history view
         verified_states = {
             AppState.READY_EMPTY,
             AppState.INPUT_VALIDATING,
@@ -847,6 +923,10 @@ class GyrusMainWindow(QMainWindow):
             state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
             and self._pending_result is not None
             and self._pending_result.result["case_id"] not in self._saved_history_ids
+        )
+        self.result_inspector.export_pdf_button.setEnabled(
+            state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
+            and self._pending_result is not None
         )
         self.history_button.setEnabled(
             state in {AppState.READY_EMPTY, AppState.READY_TO_ANALYZE,
