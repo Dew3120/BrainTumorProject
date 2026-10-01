@@ -25,6 +25,7 @@ from gyrus.domain.constants import (
     OOD_REVIEW_THRESHOLD_TEXT,
     RELIABILITY_THRESHOLD_TEXT,
 )
+from gyrus.domain.mask_editor import MaskEditSession
 
 from .presentation import ResultPresentation
 from .theme import COLORS
@@ -108,6 +109,10 @@ class ResultInspector(QWidget):
         self.reason = QLabel("", self.status_card)
         self.reason.setWordWrap(True)
         card_column.addWidget(self.reason)
+        self.edited_badge = QLabel("USER EDITED", self.status_card)
+        self.edited_badge.setObjectName("UserEditedBadge")
+        self.edited_badge.setVisible(False)
+        card_column.addWidget(self.edited_badge)
         column.addWidget(self.status_card)
 
         scroll = QScrollArea(self)
@@ -137,6 +142,9 @@ class ResultInspector(QWidget):
         scroll.setWidget(body)
         column.addWidget(scroll, 1)
         self.new_case_button = QPushButton("Choose another image", self)
+        self.edit_mask_button = QPushButton("Edit mask", self)
+        self.edit_mask_button.setAccessibleName("Edit a separate copy of the model mask")
+        column.addWidget(self.edit_mask_button)
         column.addWidget(self.new_case_button)
 
     def _section(self, layout: QVBoxLayout, title: str) -> QLabel:
@@ -158,6 +166,8 @@ class ResultInspector(QWidget):
         status = result["final_policy"]["status"]
         review = status == "REVIEW_REQUIRED"
         self.status.setText(("⚠ " if review else "✓ ") + status)
+        self.edited_badge.setVisible(False)
+        self.edit_mask_button.setEnabled(presentation.mask is not None)
         self.status_card.setProperty("disposition", "review" if review else "standard")
         self.status_card.style().unpolish(self.status_card)
         self.status_card.style().polish(self.status_card)
@@ -225,6 +235,25 @@ class ResultInspector(QWidget):
                 indent=2,
             )
         )
+
+    def set_edit_status(self, session: MaskEditSession) -> None:
+        """Keep frozen result metrics separate from an explicitly saved human layer."""
+        saved = session.saved_mask is not None and session.saved_provenance is not None
+        self.edited_badge.setVisible(saved)
+        score = session.reliability_score
+        if score is not None:
+            self.reliability.setText(
+                f"{score:.6f}\nStandard threshold {RELIABILITY_THRESHOLD_TEXT}\n"
+                "Applies to original model mask only; never recalculated on manual edits."
+            )
+        if saved:
+            self.measurements.setText(
+                self.measurements.text().split("\nHuman-edited layer:")[0]
+                + f"\nHuman-edited layer: {int(session.saved_mask.sum())} pixels"
+            )
+            provenance = json.loads(self.provenance.toPlainText())
+            provenance["human_edit"] = session.saved_provenance.to_dict()
+            self.provenance.setPlainText(json.dumps(provenance, indent=2))
 
 
 class OodReviewDialog(QDialog):

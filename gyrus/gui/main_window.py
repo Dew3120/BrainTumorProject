@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+from pathlib import Path
 from typing import Any
 
 from PySide6.QtCore import Qt, QTimer, Signal
@@ -22,10 +24,12 @@ from PySide6.QtWidgets import (
 
 from gyrus.domain.constants import DISCLAIMER
 from gyrus.domain.manifest import EXPECTED_MANIFEST_SHA256
+from gyrus.domain.mask_editor import MaskEditIntegrityError, MaskEditSession
 from gyrus.worker.protocol import AnalyzeSuccess, WorkerFailure
 
 from .image_canvas import ImageCanvas
 from .input_controller import InputValidationThread, ValidatedSelection
+from .mask_editor import MaskEditor
 from .presentation import ResultPresentation, build_presentation
 from .result_panel import LoadingPanel, OodReviewDialog, ResultInspector
 from .splash import ASSET_ROOT
@@ -72,6 +76,7 @@ class GyrusMainWindow(QMainWindow):
         self._selection: ValidatedSelection | None = None
         self._validator: InputValidationThread | None = None
         self._pending_result: ResultPresentation | None = None
+        self._edit_session: MaskEditSession | None = None
         self._gate: OodReviewDialog | None = None
         self._error_message = ""
         self.setObjectName("GyrusMainWindow")
@@ -126,6 +131,9 @@ class GyrusMainWindow(QMainWindow):
         self.notice.setAccessibleName("Application notice")
         self.notice.setVisible(False)
         right_layout.addWidget(self.notice)
+        self._notice_timer = QTimer(self)
+        self._notice_timer.setSingleShot(True)
+        self._notice_timer.timeout.connect(self.notice.hide)
 
         self.content_host = QWidget(right)
         self.content_layout = QHBoxLayout(self.content_host)
@@ -228,6 +236,14 @@ class GyrusMainWindow(QMainWindow):
 
         self.image_canvas = ImageCanvas(self.workspace_stack)
         self.workspace_stack.addWidget(self.image_canvas)
+        self.mask_editor = MaskEditor(self.workspace_stack)
+        self.mask_editor.save_requested.connect(self.save_edited_layer)
+        self.mask_editor.close_requested.connect(self.close_mask_editor)
+        self.mask_editor.changed.connect(self._update_edit_status)
+        self.mask_editor.integrity_failed.connect(
+            lambda reason: self._lock_result(f"MASK_EDIT_INTEGRITY_FAILED: {reason}")
+        )
+        self.workspace_stack.addWidget(self.mask_editor)
         return workspace
 
     def _make_inspector(self, parent: QWidget) -> QFrame:
@@ -289,6 +305,7 @@ class GyrusMainWindow(QMainWindow):
         self.inspector_stack.addWidget(self.loading_panel)
         self.result_inspector = ResultInspector(self.inspector_stack)
         self.result_inspector.new_case_button.clicked.connect(self.clear_case)
+        self.result_inspector.edit_mask_button.clicked.connect(self.open_mask_editor)
         self.inspector_stack.addWidget(self.result_inspector)
         return inspector
 
@@ -420,6 +437,68 @@ class GyrusMainWindow(QMainWindow):
         self.machine.enter(target, reason="complete validated result disclosed")
         self.image_canvas.set_result(presentation)
         self.result_inspector.set_result(presentation)
+        self._edit_session = None
+        self._render_state()
+
+    def open_mask_editor(self) -> None:
+        if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
+            raise RuntimeError("Mask editing requires a disclosed result")
+        presentation = self._pending_result
+        if presentation is None or presentation.mask is None:
+            raise RuntimeError("No model mask is available for editing")
+        if self._edit_session is None:
+            self._edit_session = MaskEditSession(
+                presentation.result["case_id"], presentation.mask,
+                presentation.result["reliability"]["score"],
+            )
+        self.mask_editor.set_case(self._edit_session, presentation.selection)
+        self.machine.enter(AppState.EDITING_MASK, reason="user opened manual mask editor")
+        self._update_edit_status()
+        self._render_state()
+
+    def _update_edit_status(self) -> None:
+        if self._edit_session is not None:
+            self.result_inspector.set_edit_status(self._edit_session)
+
+    def save_edited_layer(self) -> None:
+        if self.machine.state != AppState.EDITING_MASK or self._edit_session is None:
+            raise RuntimeError("No active edit to save")
+        try:
+            local_appdata = os.environ.get("LOCALAPPDATA")
+            if not local_appdata:
+                raise RuntimeError("Windows local application-data folder is unavailable")
+            directory = Path(local_appdata) / "GyrusResearch" / "edited_layers"
+            directory.mkdir(parents=True, exist_ok=True)
+            target = self._edit_session.export(directory)
+        except MaskEditIntegrityError as exc:
+            self._lock_result(f"MASK_EDIT_INTEGRITY_FAILED: {exc}")
+            return
+        except Exception as exc:  # noqa: BLE001 - I/O failure is visible, never success
+            self.show_notice(f"Edited layer was not saved: {type(exc).__name__}: {exc}")
+            return
+        self._update_edit_status()
+        self.mask_editor._render()
+        self.show_notice(f"Edited layer saved locally: {target}")
+
+    def close_mask_editor(self) -> None:
+        if self.machine.state != AppState.EDITING_MASK or self._pending_result is None:
+            raise RuntimeError("Mask editor is not active")
+        if self._edit_session is not None and self._edit_session.dirty:
+            answer = QMessageBox.question(
+                self, "Discard unsaved edits?", "Unsaved manual edits will be discarded. Continue?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No,
+            )
+            if answer != QMessageBox.StandardButton.Yes:
+                return
+            if self._edit_session.saved_mask is None:
+                self._edit_session = None
+            else:
+                self._edit_session.discard_since_save()
+            self._update_edit_status()
+        target = (AppState.RESULT_STANDARD if self._pending_result.result["final_policy"]["status"] == "STANDARD"
+                  else AppState.RESULT_REVIEW_REQUIRED)
+        self.machine.enter(target, reason="user returned from manual mask editor")
         self._render_state()
 
     def on_job_failed(self, response: object) -> None:
@@ -453,6 +532,8 @@ class GyrusMainWindow(QMainWindow):
             self.machine.enter(AppState.READY_EMPTY, reason="user cleared current case")
         self._selection = None
         self._pending_result = None
+        self._edit_session = None
+        self.mask_editor.clear()
         self._error_message = ""
         self.case_label.setText("New analysis")
         self.image_canvas.clear()
@@ -496,7 +577,7 @@ class GyrusMainWindow(QMainWindow):
     def show_notice(self, message: str, *, duration_ms: int = 5000) -> None:
         self.notice.setText(message)
         self.notice.setVisible(True)
-        QTimer.singleShot(duration_ms, lambda: self.notice.setVisible(False))
+        self._notice_timer.start(duration_ms)
 
     def _render_state(self) -> None:
         state = self.machine.state
@@ -508,6 +589,7 @@ class GyrusMainWindow(QMainWindow):
             AppState.OOD_REVIEW_GATE,
             AppState.RESULT_STANDARD,
             AppState.RESULT_REVIEW_REQUIRED,
+            AppState.EDITING_MASK,
             AppState.RECOVERABLE_ERROR,
         }
         if state in verified_states:
@@ -536,12 +618,12 @@ class GyrusMainWindow(QMainWindow):
             AppState.RESULT_STANDARD,
             AppState.RESULT_REVIEW_REQUIRED,
         }
-        self.workspace_stack.setCurrentIndex(1 if show_image else 0)
+        self.workspace_stack.setCurrentIndex(2 if state == AppState.EDITING_MASK else (1 if show_image else 0))
         if state == AppState.READY_TO_ANALYZE:
             self.inspector_stack.setCurrentIndex(1)
         elif state in {AppState.ANALYZING, AppState.OOD_REVIEW_GATE}:
             self.inspector_stack.setCurrentIndex(2)
-        elif state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
+        elif state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED, AppState.EDITING_MASK}:
             self.inspector_stack.setCurrentIndex(3)
         else:
             self.inspector_stack.setCurrentIndex(0)
@@ -549,6 +631,12 @@ class GyrusMainWindow(QMainWindow):
         self.drop_zone.setVisible(state in {AppState.READY_EMPTY, AppState.RECOVERABLE_ERROR})
         self.choose_button.setEnabled(state in {AppState.READY_EMPTY, AppState.RECOVERABLE_ERROR})
         self.run_button.setEnabled(state == AppState.READY_TO_ANALYZE)
+        self.result_inspector.edit_mask_button.setEnabled(
+            state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
+            and self._pending_result is not None
+            and self._pending_result.mask is not None
+        )
+        self.result_inspector.new_case_button.setEnabled(state != AppState.EDITING_MASK)
         self.empty_label.setVisible(state == AppState.READY_EMPTY)
         self.workspace_message.setVisible(
             state in {

@@ -220,6 +220,72 @@ def test_selection_hash_mismatch_fails_closed(frozen_responses):
         build_presentation(response, wrong_selection)
 
 
+def test_mask_editor_save_preserves_frozen_result(tmp_path, qtbot, monkeypatch, frozen_responses):
+    from gyrus.domain.mask_provenance import mask_sha256
+
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    presentation = window._pending_result
+    assert presentation is not None and presentation.mask is not None
+    model_hash = mask_sha256(presentation.mask)
+    score = presentation.result["reliability"]["score"]
+    window.result_inspector.edit_mask_button.click()
+    assert window.machine.state == AppState.EDITING_MASK
+    assert window.workspace_stack.currentWidget() is window.mask_editor
+    assert window.mask_editor.findChildren(type(window.mask_editor.add_button))[0].width() <= 48
+    assert not window.result_inspector.edited_badge.isVisible()
+    window.mask_editor._stroke([(0, 0)])
+    assert window.mask_editor.session is not None
+    assert window.mask_editor.session.current[0, 0]
+    window.mask_editor.undo_button.click()
+    assert not window.mask_editor.session.current[0, 0]
+    window.mask_editor.redo_button.click()
+    assert window.mask_editor.session.current[0, 0]
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    window.mask_editor.save_button.click()
+    assert window.result_inspector.edited_badge.isVisible()
+    assert "ORIGINAL_MODEL_MASK_ONLY" in window.result_inspector.provenance.toPlainText()
+    assert mask_sha256(presentation.mask) == model_hash
+    assert presentation.result["reliability"]["score"] == score
+    assert "original model mask only" in window.result_inspector.reliability.text()
+    assert len(list((tmp_path / "GyrusResearch" / "edited_layers").glob("gyrus-edit_*"))) == 1
+    window.mask_editor.close_button.click()
+    assert window.machine.state == AppState.RESULT_STANDARD
+    assert window.result_inspector.edited_badge.isVisible()
+
+
+def test_no_tumor_editor_unavailable_and_edit_tamper_locks(qtbot, frozen_responses):
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "gradient.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["gradient.png"])
+    window._gate.view_output.click()
+    assert not window.result_inspector.edit_mask_button.isEnabled()
+    with pytest.raises(RuntimeError, match="No model mask"):
+        window.open_mask_editor()
+
+    window.clear_case()
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    window.open_mask_editor()
+    window._edit_session.current[0, 0] = True
+    window.mask_editor._stroke([(70, 70)])
+    assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
+    assert window.result_inspector.isVisible() is False
+
+
 def test_threshold_drift_fails_closed(frozen_responses):
     response = frozen_responses["elliptic.png"]
     result = {**response.result, "ood": {**response.result["ood"], "threshold": "0.37"}}

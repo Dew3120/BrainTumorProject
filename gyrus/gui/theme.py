@@ -67,6 +67,13 @@ def apply_theme(app: QApplication) -> None:
                          border: 1px solid {COLORS['primary']};
                          border-radius: 6px; padding: 8px; }}
         QLabel#ResultStatus {{ font-size: 20px; font-weight: 700; }}
+        QLabel#UserEditedBadge {{ color: {COLORS['manual_add']};
+                                  font-size: 11px; font-weight: 700; }}
+        QFrame#EditorToolStrip {{ background: {COLORS['elevated']};
+                                   border-right: 1px solid {COLORS['border']}; }}
+        QFrame#EditorToolStrip QPushButton {{ padding: 0; min-height: 40px; }}
+        QFrame#EditorToolStrip QPushButton[selected="true"] {{
+            border: 2px solid {COLORS['primary']}; }}
         QFrame#StatusCard {{ background: {COLORS['elevated']};
                              border: 2px solid {COLORS['border']}; border-radius: 6px; }}
         QFrame#StatusCard[disposition="standard"] {{ border-color: {COLORS['standard']}; }}
