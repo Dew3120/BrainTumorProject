@@ -38,6 +38,10 @@ def select_device(requested: DeviceName) -> torch.device:
             "CUDA was requested, but PyTorch cannot access a CUDA device.",
         )
     try:
+        # The frozen C03 isotonic mapping has steep steps. CuDNN's default TF32
+        # convolution precision can move raw E08 pixels across those steps.
+        # Use full float32 convolution precision for the explicit CUDA worker.
+        torch.backends.cudnn.allow_tf32 = False
         device = torch.device("cuda:0")
         torch.cuda.set_device(device)
         torch.empty(1, device=device)

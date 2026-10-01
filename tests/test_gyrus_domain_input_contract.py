@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pytest
@@ -62,3 +63,39 @@ def test_exif_orientation_is_rejected_instead_of_silently_rotated(tmp_path: Path
     with pytest.raises(InputValidationError) as captured:
         validate_and_decode_image(path)
     assert captured.value.code == "INPUT_EXIF_ORIENTATION_UNSUPPORTED"
+
+
+def test_svg_disguised_as_png_is_rejected(tmp_path: Path):
+    path = tmp_path / "disguised.png"
+    path.write_text('<svg xmlns="http://www.w3.org/2000/svg"/>', encoding="utf-8")
+    with pytest.raises(InputValidationError) as captured:
+        validate_and_decode_image(path)
+    assert captured.value.code == "INPUT_DECODE_FAILED"
+
+
+def test_truncated_read_is_rejected_before_decoding(tmp_path: Path):
+    path = tmp_path / "changed.png"
+    Image.new("L", (32, 32), 10).save(path)
+    original_open = Path.open
+
+    class TruncatedReader:
+        def __init__(self, stream):
+            self.stream = stream
+
+        def __enter__(self):
+            self.stream.__enter__()
+            return self
+
+        def __exit__(self, *args):
+            return self.stream.__exit__(*args)
+
+        def read(self, size=-1):
+            return self.stream.read(size)[:-1]
+
+    def shortened_open(self, *args, **kwargs):
+        opened = original_open(self, *args, **kwargs)
+        return TruncatedReader(opened) if self == path else opened
+
+    with patch.object(Path, "open", shortened_open), pytest.raises(InputValidationError) as captured:
+        validate_and_decode_image(path)
+    assert captured.value.code == "INPUT_FILE_CHANGED"

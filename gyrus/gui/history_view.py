@@ -48,6 +48,7 @@ class HistoryListPanel(QWidget):
         filters = QGridLayout()
         self.search = QLineEdit(self)
         self.search.setPlaceholderText("Search filename or case ID")
+        self.search.setAccessibleName("Search saved cases by filename or case ID")
         self.status = QComboBox(self)
         self.status.addItems(("Any status", "STANDARD", "REVIEW_REQUIRED"))
         self.category = QComboBox(self)
@@ -82,6 +83,7 @@ class HistoryListPanel(QWidget):
             widget.dateChanged.connect(self.filters_changed)
 
         self.table = QTableWidget(0, 6, self)
+        self.table.setAccessibleName("Opt-in local history cases")
         self.table.setHorizontalHeaderLabels(("Saved (UTC)", "Filename", "Category", "Status", "Edit", "Source"))
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
@@ -156,6 +158,7 @@ class HistoryPreviewPanel(QWidget):
         heading.setObjectName("SectionHeading")
         column.addWidget(heading)
         self.preview = QLabel("Select a saved case", self)
+        self.preview.setAccessibleName("Saved case overlay preview")
         self.preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.preview.setFixedHeight(320)
         self.preview.setObjectName("HistoryPreview")

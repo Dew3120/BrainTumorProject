@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import warnings
 from dataclasses import dataclass
+from io import BytesIO
 from pathlib import Path
 
 import numpy as np
@@ -100,20 +101,29 @@ def validate_and_decode_image(
     expected_format = _FORMAT_BY_SUFFIX.get(suffix)
     if expected_format is None:
         raise _fail("INPUT_EXTENSION_UNSUPPORTED", "Only PNG, JPG, and JPEG are supported.")
-    file_bytes = source.stat().st_size
+    try:
+        file_bytes = source.stat().st_size
+    except OSError as exc:
+        raise _fail("INPUT_NOT_FOUND", "The selected image cannot be opened.") from exc
     if file_bytes <= 0 or file_bytes > limits.max_file_bytes:
         raise _fail(
             "INPUT_FILE_SIZE_INVALID",
             f"File size must be between 1 and {limits.max_file_bytes} bytes.",
         )
-    payload = source.read_bytes()
+    try:
+        with source.open("rb") as stream:
+            payload = stream.read(limits.max_file_bytes + 1)
+    except OSError as exc:
+        raise _fail("INPUT_NOT_FOUND", "The selected image cannot be read.") from exc
+    if len(payload) != file_bytes or len(payload) > limits.max_file_bytes:
+        raise _fail("INPUT_FILE_CHANGED", "The image changed while it was being read.")
 
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("error", Image.DecompressionBombWarning)
-            with Image.open(source) as probe:
+            with Image.open(BytesIO(payload)) as probe:
                 probe.verify()
-            with Image.open(source) as image:
+            with Image.open(BytesIO(payload)) as image:
                 image_format = image.format
                 if image_format != expected_format:
                     raise _fail(
