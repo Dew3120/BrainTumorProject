@@ -142,6 +142,9 @@ class MaskEditor(QWidget):
         self._fit = True
         self._zoom = 1.0
         self._tool_add = True
+        self._fit_timer = QTimer(self)
+        self._fit_timer.setSingleShot(True)
+        self._fit_timer.timeout.connect(self.fit_image)
         column = QVBoxLayout(self)
         column.setContentsMargins(0, 0, 0, 0)
         column.setSpacing(0)
@@ -313,9 +316,9 @@ class MaskEditor(QWidget):
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
         if self._fit:
-            QTimer.singleShot(0, self.fit_image)
+            self._fit_timer.start(0)
 
     def showEvent(self, event) -> None:
         super().showEvent(event)
         if self._fit:
-            QTimer.singleShot(0, self.fit_image)
+            self._fit_timer.start(0)
