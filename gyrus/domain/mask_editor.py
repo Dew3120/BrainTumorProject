@@ -47,6 +47,22 @@ class MaskEditSession:
         self._undo: list[np.ndarray] = []
         self._redo: list[np.ndarray] = []
 
+    @classmethod
+    def from_saved(
+        cls, case_id: str, model_mask: np.ndarray, reliability_score: float | None,
+        edited_mask: np.ndarray, provenance: MaskEditProvenance,
+    ) -> MaskEditSession:
+        session = cls(case_id, model_mask, reliability_score)
+        if provenance.case_id != case_id or provenance.model_mask_sha256 != session.provenance.model_mask_sha256:
+            raise MaskEditIntegrityError("Saved edit provenance belongs to another model mask")
+        session.current = np.asarray(edited_mask, dtype=bool).copy()
+        session.provenance = provenance
+        session._verify()
+        session.saved_mask = session.current.copy()
+        session.saved_mask.setflags(write=False)
+        session.saved_provenance = provenance
+        return session
+
     @property
     def dirty(self) -> bool:
         return bool(self.provenance.records) and (

@@ -143,8 +143,10 @@ class ResultInspector(QWidget):
         column.addWidget(scroll, 1)
         self.new_case_button = QPushButton("Choose another image", self)
         self.edit_mask_button = QPushButton("Edit mask", self)
+        self.save_history_button = QPushButton("Save to local history", self)
         self.edit_mask_button.setAccessibleName("Edit a separate copy of the model mask")
         column.addWidget(self.edit_mask_button)
+        column.addWidget(self.save_history_button)
         column.addWidget(self.new_case_button)
 
     def _section(self, layout: QVBoxLayout, title: str) -> QLabel:

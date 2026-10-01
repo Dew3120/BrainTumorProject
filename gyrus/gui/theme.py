@@ -79,6 +79,13 @@ def apply_theme(app: QApplication) -> None:
         QFrame#StatusCard[disposition="standard"] {{ border-color: {COLORS['standard']}; }}
         QFrame#StatusCard[disposition="review"] {{ border-color: {COLORS['review']}; }}
         QGraphicsView#ModelImageCanvas {{ background: {COLORS['image_canvas']}; border: 0; }}
+        QTableWidget {{ background: {COLORS['background']};
+                        border: 1px solid {COLORS['border']}; gridline-color: {COLORS['border']}; }}
+        QTableWidget::item {{ padding: 6px; }}
+        QTableWidget::item:selected {{ background: {COLORS['elevated']};
+                                       color: {COLORS['text']}; }}
+        QLabel#HistoryPreview {{ background: {COLORS['image_canvas']};
+                                  border: 1px solid {COLORS['border']}; }}
         QTabBar::tab {{ background: {COLORS['surface']}; color: {COLORS['secondary']};
                        padding: 9px 12px; border-bottom: 2px solid {COLORS['border']}; }}
         QTabBar::tab:selected {{ color: {COLORS['primary']};

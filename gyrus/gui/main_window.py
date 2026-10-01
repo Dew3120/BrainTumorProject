@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import ctypes
 import os
 from pathlib import Path
 from typing import Any
@@ -23,10 +24,19 @@ from PySide6.QtWidgets import (
 )
 
 from gyrus.domain.constants import DISCLAIMER
+from gyrus.domain.history import HistoryRepository
+from gyrus.domain.history_bundle import (
+    HistoryCasePayload,
+    LoadedHistoryCase,
+    load_history_bundle,
+    planned_files,
+    save_history_bundle,
+)
 from gyrus.domain.manifest import EXPECTED_MANIFEST_SHA256
 from gyrus.domain.mask_editor import MaskEditIntegrityError, MaskEditSession
 from gyrus.worker.protocol import AnalyzeSuccess, WorkerFailure
 
+from .history_view import HistoryListPanel, HistoryPreviewPanel
 from .image_canvas import ImageCanvas
 from .input_controller import InputValidationThread, ValidatedSelection
 from .mask_editor import MaskEditor
@@ -77,6 +87,9 @@ class GyrusMainWindow(QMainWindow):
         self._validator: InputValidationThread | None = None
         self._pending_result: ResultPresentation | None = None
         self._edit_session: MaskEditSession | None = None
+        self._history_return_state: AppState = AppState.READY_EMPTY
+        self._history_selected: LoadedHistoryCase | None = None
+        self._saved_history_ids: set[str] = set()
         self._gate: OodReviewDialog | None = None
         self._error_message = ""
         self.setObjectName("GyrusMainWindow")
@@ -111,6 +124,8 @@ class GyrusMainWindow(QMainWindow):
         self.about_button = self._nav_button("ⓘ\nAbout", "About and integrity", True)
         self.analyze_button.setProperty("active", "true")
         self.history_button.setToolTip("History becomes available in Stage 6")
+        self.history_button.clicked.connect(self.open_history)
+        self.analyze_button.clicked.connect(self.close_history)
         rail_layout.addWidget(self.analyze_button)
         rail_layout.addWidget(self.history_button)
         rail_layout.addWidget(self.about_button)
@@ -244,6 +259,11 @@ class GyrusMainWindow(QMainWindow):
             lambda reason: self._lock_result(f"MASK_EDIT_INTEGRITY_FAILED: {reason}")
         )
         self.workspace_stack.addWidget(self.mask_editor)
+        self.history_list = HistoryListPanel(self.workspace_stack)
+        self.history_list.filters_changed.connect(self._reload_history)
+        self.history_list.case_selected.connect(self._select_history_case)
+        self.history_list.back_requested.connect(self.close_history)
+        self.workspace_stack.addWidget(self.history_list)
         return workspace
 
     def _make_inspector(self, parent: QWidget) -> QFrame:
@@ -306,7 +326,12 @@ class GyrusMainWindow(QMainWindow):
         self.result_inspector = ResultInspector(self.inspector_stack)
         self.result_inspector.new_case_button.clicked.connect(self.clear_case)
         self.result_inspector.edit_mask_button.clicked.connect(self.open_mask_editor)
+        self.result_inspector.save_history_button.clicked.connect(self.save_to_history)
         self.inspector_stack.addWidget(self.result_inspector)
+        self.history_preview = HistoryPreviewPanel(self.inspector_stack)
+        self.history_preview.open_requested.connect(self.open_saved_history_case)
+        self.history_preview.delete_requested.connect(self.delete_history_case)
+        self.inspector_stack.addWidget(self.history_preview)
         return inspector
 
     def _make_footer(self, parent: QWidget) -> QFrame:
@@ -439,6 +464,181 @@ class GyrusMainWindow(QMainWindow):
         self.result_inspector.set_result(presentation)
         self._edit_session = None
         self._render_state()
+
+    def _history_repository(self) -> HistoryRepository:
+        local = os.environ.get("LOCALAPPDATA")
+        if not local:
+            raise RuntimeError("Windows local application-data folder is unavailable")
+        root = (Path(local) / "GyrusResearch").resolve()
+        if os.name == "nt" and (
+            str(root).startswith("\\\\")
+            or ctypes.windll.kernel32.GetDriveTypeW(root.anchor) not in (2, 3)
+        ):
+            raise RuntimeError("Local history cannot use a network or unknown drive")
+        return HistoryRepository(root / "history.db", root / "cases")
+
+    def _history_payload(self) -> HistoryCasePayload:
+        presentation = self._pending_result
+        if presentation is None:
+            raise RuntimeError("No disclosed result to save")
+        session = self._edit_session
+        edited = session.saved_mask if session is not None else None
+        provenance = session.saved_provenance if session is not None else None
+        return HistoryCasePayload(
+            result=presentation.result,
+            source_path=presentation.selection.descriptor.source_path,
+            preview_png=presentation.selection.preview_png,
+            model_gray_128=presentation.selection.model_gray_128,
+            probability=presentation.probability,
+            model_mask=presentation.mask,
+            edited_mask=edited,
+            edit_provenance=provenance,
+            job_id=presentation.job_id,
+            route=presentation.route,
+            raw_probability_sha256=presentation.raw_probability_sha256,
+        )
+
+    def save_to_history(self) -> None:
+        if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
+            raise RuntimeError("History saving requires a disclosed result")
+        payload = self._history_payload()
+        files = planned_files(payload)
+        text = (
+            "Save this case to local history? The following files will be retained under "
+            "%LOCALAPPDATA%\\GyrusResearch\\cases:\n\n"
+            + "\n".join(f"• {name}" for name in files)
+            + "\n\nThe source image or filename may itself contain identifying text. "
+            "No patient-identity fields are added. Research prototype — not for clinical use"
+        )
+        decision = QMessageBox.question(
+            self, "Confirm local retention", text,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if decision != QMessageBox.StandardButton.Yes:
+            return
+        try:
+            record = save_history_bundle(self._history_repository(), payload)
+        except Exception as exc:  # noqa: BLE001 - save failure must not claim retention
+            self.show_notice(f"Case was not saved: {type(exc).__name__}: {exc}")
+            return
+        self.result_inspector.save_history_button.setEnabled(False)
+        self._saved_history_ids.add(record.case_id)
+        self.show_notice(f"Saved to local history: {record.case_id}")
+
+    def open_history(self) -> None:
+        if self.machine.state == AppState.HISTORY:
+            return
+        if not self.machine.can_enter(AppState.HISTORY):
+            raise RuntimeError("History is unavailable during this operation")
+        self._history_return_state = self.machine.state
+        self.machine.enter(AppState.HISTORY, reason="user opened opt-in local history")
+        self.case_label.setText("Local history")
+        self._render_state()
+        self._reload_history()
+
+    def close_history(self) -> None:
+        if self.machine.state != AppState.HISTORY:
+            return
+        target = self._history_return_state
+        self.machine.enter(target, reason="user returned from history")
+        self.case_label.setText(
+            self._selection.descriptor.filename if self._selection is not None else "New analysis"
+        )
+        self._render_state()
+
+    def _reload_history(self) -> None:
+        if self.machine.state != AppState.HISTORY:
+            return
+        try:
+            repository = self._history_repository()
+            records = []
+            if repository.database_path.exists():
+                repository.initialize()
+                while True:
+                    page = repository.list_recent(limit=500, offset=len(records), **self.history_list.query())
+                    records.extend(page)
+                    if len(page) < 500:
+                        break
+            self.history_list.set_records(records)
+        except Exception as exc:  # noqa: BLE001 - no unverified list is displayed
+            self._lock_result(f"HISTORY_LIST_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+
+    def _select_history_case(self, case_id: str) -> None:
+        self._history_selected = None
+        self.history_preview.clear()
+        if self.machine.state != AppState.HISTORY or not case_id:
+            return
+        try:
+            loaded = load_history_bundle(self._history_repository(), case_id)
+            self.history_preview.set_case(loaded)
+        except Exception as exc:  # noqa: BLE001 - corrupt bundle must never be previewed
+            self._lock_result(f"HISTORY_BUNDLE_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            return
+        self._history_selected = loaded
+
+    def open_saved_history_case(self) -> None:
+        if self.machine.state != AppState.HISTORY or self._history_selected is None:
+            raise RuntimeError("No verified saved case is selected")
+        loaded = self._history_selected
+        selection = ValidatedSelection(
+            loaded.descriptor, loaded.preview_png, loaded.model_gray_128,
+        )
+        presentation = ResultPresentation(
+            loaded.result, selection, loaded.probability, loaded.model_mask,
+            loaded.job_id, loaded.route, loaded.raw_probability_sha256,
+        )
+        self._selection = selection
+        self._pending_result = presentation
+        self._edit_session = None
+        if loaded.edited_mask is not None:
+            try:
+                self._edit_session = MaskEditSession.from_saved(
+                    loaded.record.case_id, loaded.model_mask,
+                    loaded.result["reliability"]["score"],
+                    loaded.edited_mask, loaded.edit_provenance,
+                )
+            except Exception as exc:  # noqa: BLE001 - no partial restored result
+                self._lock_result(f"HISTORY_EDIT_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+                return
+        self._saved_history_ids.add(loaded.record.case_id)
+        target = (AppState.RESULT_STANDARD if loaded.record.final_status == "STANDARD"
+                  else AppState.RESULT_REVIEW_REQUIRED)
+        self.machine.enter(target, reason="user reopened a verified local case")
+        self.case_label.setText(loaded.record.filename)
+        self.image_canvas.set_result(presentation)
+        self.result_inspector.set_result(presentation)
+        self._update_edit_status()
+        self._render_state()
+
+    def delete_history_case(self) -> None:
+        if self.machine.state != AppState.HISTORY or self._history_selected is None:
+            raise RuntimeError("No saved case is selected")
+        record = self._history_selected.record
+        decision = QMessageBox.question(
+            self, "Delete local case?",
+            f"Delete {record.filename} and its app-managed bundle and index entry? "
+            "This is not forensic erasure of storage media or backups. "
+            "Research prototype — not for clinical use",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if decision != QMessageBox.StandardButton.Yes:
+            return
+        try:
+            self._history_repository().delete(record.case_id)
+        except Exception as exc:  # noqa: BLE001 - deletion failures are explicit
+            self.show_notice(f"Case deletion did not finish: {type(exc).__name__}: {exc}")
+            return
+        if self._pending_result is not None and self._pending_result.result["case_id"] == record.case_id:
+            self._selection = None
+            self._pending_result = None
+            self._edit_session = None
+            self._history_return_state = AppState.READY_EMPTY
+            self._saved_history_ids.discard(record.case_id)
+            self.image_canvas.clear()
+            self.mask_editor.clear()
+        self._reload_history()
 
     def open_mask_editor(self) -> None:
         if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
@@ -590,6 +790,7 @@ class GyrusMainWindow(QMainWindow):
             AppState.RESULT_STANDARD,
             AppState.RESULT_REVIEW_REQUIRED,
             AppState.EDITING_MASK,
+            AppState.HISTORY,
             AppState.RECOVERABLE_ERROR,
         }
         if state in verified_states:
@@ -618,13 +819,18 @@ class GyrusMainWindow(QMainWindow):
             AppState.RESULT_STANDARD,
             AppState.RESULT_REVIEW_REQUIRED,
         }
-        self.workspace_stack.setCurrentIndex(2 if state == AppState.EDITING_MASK else (1 if show_image else 0))
+        self.workspace_stack.setCurrentIndex(
+            3 if state == AppState.HISTORY else
+            (2 if state == AppState.EDITING_MASK else (1 if show_image else 0))
+        )
         if state == AppState.READY_TO_ANALYZE:
             self.inspector_stack.setCurrentIndex(1)
         elif state in {AppState.ANALYZING, AppState.OOD_REVIEW_GATE}:
             self.inspector_stack.setCurrentIndex(2)
         elif state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED, AppState.EDITING_MASK}:
             self.inspector_stack.setCurrentIndex(3)
+        elif state == AppState.HISTORY:
+            self.inspector_stack.setCurrentIndex(4)
         else:
             self.inspector_stack.setCurrentIndex(0)
 
@@ -637,6 +843,21 @@ class GyrusMainWindow(QMainWindow):
             and self._pending_result.mask is not None
         )
         self.result_inspector.new_case_button.setEnabled(state != AppState.EDITING_MASK)
+        self.result_inspector.save_history_button.setEnabled(
+            state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
+            and self._pending_result is not None
+            and self._pending_result.result["case_id"] not in self._saved_history_ids
+        )
+        self.history_button.setEnabled(
+            state in {AppState.READY_EMPTY, AppState.READY_TO_ANALYZE,
+                      AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED, AppState.HISTORY}
+            and self._manifest_sha256 is not None
+        )
+        self.history_button.setProperty("active", "true" if state == AppState.HISTORY else "false")
+        self.analyze_button.setProperty("active", "false" if state == AppState.HISTORY else "true")
+        for button in (self.history_button, self.analyze_button):
+            button.style().unpolish(button)
+            button.style().polish(button)
         self.empty_label.setVisible(state == AppState.READY_EMPTY)
         self.workspace_message.setVisible(
             state in {

@@ -286,6 +286,171 @@ def test_no_tumor_editor_unavailable_and_edit_tamper_locks(qtbot, frozen_respons
     assert window.result_inspector.isVisible() is False
 
 
+def test_history_is_opt_in_filters_reopens_and_deletes(tmp_path, qtbot, monkeypatch, frozen_responses):
+    from PySide6.QtWidgets import QMessageBox
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    root = tmp_path / "GyrusResearch"
+    window.history_button.click()
+    assert window.machine.state == AppState.HISTORY
+    assert window.history_list.table.rowCount() == 0
+    assert "Retention is off by default" in window.history_list.empty.text()
+    assert not root.exists()
+    window.close_history()
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    assert not root.exists()
+    window.result_inspector.save_history_button.click()
+    assert (root / "history.db").exists()
+    assert window.result_inspector.save_history_button.isEnabled() is False
+    window.history_button.click()
+    assert window.history_list.table.rowCount() == 1
+    assert window.history_list.table.item(0, 5).text() == "SAVED"
+    assert window.history_preview.open_button.isEnabled()
+    window.history_list.category.setCurrentText("pituitary")
+    assert window.history_list.table.rowCount() == 0
+    window.history_list.category.setCurrentText("meningioma")
+    assert window.history_list.table.rowCount() == 1
+    window.history_preview.open_button.click()
+    assert window.machine.state == AppState.RESULT_STANDARD
+    assert window.image_canvas.tabs.isTabEnabled(2)
+    assert window.result_inspector.save_history_button.isEnabled() is False
+    window.history_button.click()
+    window.history_preview.delete_button.click()
+    assert window.history_list.table.rowCount() == 0
+    assert not list((root / "cases").iterdir())
+
+
+def test_history_bundle_hash_mismatch_locks_preview(tmp_path, qtbot, monkeypatch, frozen_responses):
+    from PySide6.QtWidgets import QMessageBox
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    window.save_to_history()
+    bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
+    (bundle / "overlay_preview.png").write_bytes(b"tampered")
+    window.open_history()
+    assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
+    assert window.history_preview.open_button.isEnabled() is False
+
+
+def test_saved_human_layer_restores_without_recomputing_reliability(
+    tmp_path, qtbot, monkeypatch, frozen_responses,
+):
+    from PySide6.QtWidgets import QMessageBox
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    original_score = window._pending_result.result["reliability"]["score"]
+    window.open_mask_editor()
+    window.mask_editor._stroke([(0, 0)])
+    window.save_edited_layer()
+    window.close_mask_editor()
+    window.save_to_history()
+    window.open_history()
+    assert window.history_list.table.item(0, 4).text() == "USER EDITED"
+    window.open_saved_history_case()
+    assert window.result_inspector.edited_badge.isVisible()
+    assert window._edit_session.saved_mask[0, 0]
+    assert window._pending_result.result["reliability"]["score"] == original_score
+    assert "original model mask only" in window.result_inspector.reliability.text()
+
+
+def test_no_tumor_history_retains_source_without_mask(tmp_path, qtbot, monkeypatch, frozen_responses):
+    from PySide6.QtWidgets import QMessageBox
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "gradient.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["gradient.png"])
+    window._gate.view_output.click()
+    window.save_to_history()
+    bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
+    assert (bundle / "source.png").exists()
+    assert not (bundle / "model_mask.png").exists()
+    window.open_history()
+    window.open_saved_history_case()
+    assert window.machine.state == AppState.RESULT_REVIEW_REQUIRED
+    assert window._pending_result.mask is None
+    assert not window.result_inspector.edit_mask_button.isEnabled()
+
+
+def test_history_save_cancel_and_failed_index_leave_no_case(
+    tmp_path, qtbot, monkeypatch, frozen_responses,
+):
+    from PySide6.QtWidgets import QMessageBox
+
+    from gyrus.domain.history import HistoryRepository
+    from gyrus.domain.history_bundle import HistoryCasePayload, save_history_bundle
+
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.No)
+    window.save_to_history()
+    root = tmp_path / "GyrusResearch"
+    assert not root.exists()
+    presentation = window._pending_result
+    payload = HistoryCasePayload(
+        result=presentation.result,
+        source_path=presentation.selection.descriptor.source_path,
+        preview_png=presentation.selection.preview_png,
+        model_gray_128=presentation.selection.model_gray_128,
+        probability=presentation.probability,
+        model_mask=presentation.mask,
+        edited_mask=None,
+        edit_provenance=None,
+        job_id=presentation.job_id,
+        route=presentation.route,
+        raw_probability_sha256=presentation.raw_probability_sha256,
+    )
+    repo = HistoryRepository(root / "history.db", root / "cases")
+    monkeypatch.setattr(repo, "save", lambda _record: (_ for _ in ()).throw(RuntimeError("simulated index failure")))
+    with pytest.raises(RuntimeError, match="simulated index failure"):
+        save_history_bundle(repo, payload)
+    assert not list((root / "cases").iterdir())
+    altered = tmp_path / "altered.png"
+    altered.write_bytes(b"changed after analysis")
+    with pytest.raises(Exception, match="HISTORY_SOURCE_CHANGED"):
+        save_history_bundle(repo, replace(payload, source_path=str(altered)))
+    assert not list((root / "cases").iterdir())
+
+
 def test_threshold_drift_fails_closed(frozen_responses):
     response = frozen_responses["elliptic.png"]
     result = {**response.result, "ood": {**response.result["ood"], "threshold": "0.37"}}

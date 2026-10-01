@@ -87,6 +87,7 @@ _TRANSITIONS: dict[AppState, frozenset[AppState]] = {
     }),
     AppState.HISTORY: frozenset({
         AppState.READY_EMPTY,
+        AppState.READY_TO_ANALYZE,
         AppState.RESULT_STANDARD,
         AppState.RESULT_REVIEW_REQUIRED,
         AppState.INTEGRITY_ERROR_LOCKED,

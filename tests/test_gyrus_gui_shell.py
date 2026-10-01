@@ -46,7 +46,7 @@ def test_shell_geometry_and_required_information(qtbot):
     assert any(
         DISCLAIMER in label.text() for label in window.footer.findChildren(type(window.case_label))
     )
-    assert window.history_button.isEnabled() is False
+    assert window.history_button.isEnabled() is True
     assert window.choose_button.isEnabled() is True
     assert window.privacy_chip.text().endswith("LOCAL ONLY")
     assert window.notice.isVisible() is False
