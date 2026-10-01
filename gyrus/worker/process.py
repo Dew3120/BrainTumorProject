@@ -177,6 +177,7 @@ class SupervisorSnapshot:
     device: str
     manifest_sha256: str
     load_session_id: str
+    artifact_count: int
 
 
 class WorkerSupervisor:
@@ -198,11 +199,12 @@ class WorkerSupervisor:
         if ready is None:
             return None
         return SupervisorSnapshot(
-            ready.generation,
-            ready.process_id,
-            ready.device,
-            ready.manifest_sha256,
-            ready.load_session_id,
+            generation=ready.generation,
+            process_id=ready.process_id,
+            device=ready.device,
+            manifest_sha256=ready.manifest_sha256,
+            load_session_id=ready.load_session_id,
+            artifact_count=ready.artifact_count,
         )
 
     @property
