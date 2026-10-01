@@ -66,6 +66,25 @@ def apply_theme(app: QApplication) -> None:
         QLabel#Notice {{ background: {COLORS['elevated']};
                          border: 1px solid {COLORS['primary']};
                          border-radius: 6px; padding: 8px; }}
+        QLabel#ResultStatus {{ font-size: 20px; font-weight: 700; }}
+        QFrame#StatusCard {{ background: {COLORS['elevated']};
+                             border: 2px solid {COLORS['border']}; border-radius: 6px; }}
+        QFrame#StatusCard[disposition="standard"] {{ border-color: {COLORS['standard']}; }}
+        QFrame#StatusCard[disposition="review"] {{ border-color: {COLORS['review']}; }}
+        QGraphicsView#ModelImageCanvas {{ background: {COLORS['image_canvas']}; border: 0; }}
+        QTabBar::tab {{ background: {COLORS['surface']}; color: {COLORS['secondary']};
+                       padding: 9px 12px; border-bottom: 2px solid {COLORS['border']}; }}
+        QTabBar::tab:selected {{ color: {COLORS['primary']};
+                                border-bottom: 2px solid {COLORS['primary']}; }}
+        QTabBar::tab:disabled {{ color: {COLORS['muted']}; }}
+        QProgressBar {{ border: 1px solid {COLORS['border']}; border-radius: 4px;
+                        background: {COLORS['elevated']}; height: 8px; }}
+        QProgressBar::chunk {{ background: {COLORS['primary']}; }}
+        QPlainTextEdit#Provenance {{ background: {COLORS['elevated']};
+                                    border: 1px solid {COLORS['border']};
+                                    font-family: 'Cascadia Mono'; font-size: 11px; }}
+        QLabel#ReviewHeading {{ color: {COLORS['review']}; font-size: 16px;
+                                font-weight: 700; }}
         QPushButton {{ min-height: 40px; padding: 0 16px; border-radius: 6px;
                        border: 1px solid {COLORS['border']};
                        background: {COLORS['elevated']}; font-weight: 600; }}

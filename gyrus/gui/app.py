@@ -50,6 +50,16 @@ def main(arguments: list[str] | None = None) -> int:
     bridge = WorkerBridge(args.stack_root, args.device)
     window.retry_requested.connect(bridge.retry_verification)
 
+    def submit_analysis(path: str) -> None:
+        try:
+            bridge.submit_image(path)
+        except Exception as exc:  # noqa: BLE001 - keep invalid jobs out of the UI
+            window.on_job_failed(f"WORKER_SUBMISSION_FAILED: {type(exc).__name__}")
+
+    window.analysis_requested.connect(submit_analysis)
+    bridge.job_finished.connect(window.on_job_finished)
+    bridge.job_failed.connect(window.on_job_failed)
+
     def reveal() -> None:
         splash.close()
         window.show()

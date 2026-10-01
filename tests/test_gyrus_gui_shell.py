@@ -47,7 +47,7 @@ def test_shell_geometry_and_required_information(qtbot):
         DISCLAIMER in label.text() for label in window.footer.findChildren(type(window.case_label))
     )
     assert window.history_button.isEnabled() is False
-    assert window.choose_button.isEnabled() is False
+    assert window.choose_button.isEnabled() is True
     assert window.privacy_chip.text().endswith("LOCAL ONLY")
     assert window.notice.isVisible() is False
 
@@ -73,7 +73,7 @@ def test_invalid_ready_metadata_locks_result_display(qtbot):
     assert window.on_worker_ready(_ready(sha="0" * 64)) is False
     assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
     assert not window.drop_zone.isVisible()
-    assert window.retry_button.isVisible()
+    assert not window.retry_button.isVisible()
     assert "VERIFICATION STOPPED" in window.integrity_chip.text()
 
 
