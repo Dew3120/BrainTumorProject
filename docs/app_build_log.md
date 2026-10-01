@@ -300,3 +300,15 @@ The registered O04 segmenter-entropy score is computed from the raw E08 ensemble
 ### What to test next
 
 Before Stage 3, review the parent/worker boundary, silent O04 computation from raw E08, no-tumor result suppression, explicit CPU/CUDA device choice, restart-without-auto-retry behavior, and final response validation. Stage 3 should keep the supervisor off the Qt event loop and preserve the Stage 2 result contract.
+
+### Stage 2 correction — explicit CUDA device index
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Correction commit:** `5c1e9fa69bcd907f45acda7d2fadc449fb317e60` — `Fix explicit CUDA device initialization in Gyrus worker`
+- **Trigger:** The laptop reported CUDA available, but the first direct GPU smoke check failed while loading because PyTorch 2.10 requires an indexed device for `torch.cuda.set_device`; the loader supplied `cuda` without an index.
+- **Decision:** Select `cuda:0` explicitly. CPU behavior, model weights, model selection, inference equations, registered thresholds, and frozen files did not change. The loader still fails instead of falling back if CUDA cannot initialize.
+- **`gyrus/worker/loader.py` purpose/why/content:** Fix explicit device initialization so requested GPU inference can start. The one-line change uses `torch.device("cuda:0")` before the same model-loading and verification checks. **Test:** `python -m pytest -q tests/test_gyrus_worker_inference.py::test_cuda_worker_loads_and_runs_on_requested_gpu tests/test_gyrus_worker_process.py::test_spawn_worker_runs_on_explicit_cuda_device`. **Edge case:** other GPU indices are not exposed in the Stage 2 protocol; the selected laptop device is index 0.
+- **`tests/test_gyrus_worker_inference.py` purpose/why/content:** Add an actual CUDA inference check because simulated unavailability alone missed this bug. It opens the verified stack on `cuda:0`, analyzes the frozen elliptic fixture, and checks the result device, category, and final disclosure. **Test:** `python -m pytest -q tests/test_gyrus_worker_inference.py::test_cuda_worker_loads_and_runs_on_requested_gpu`. **Edge case:** skipped on machines without CUDA hardware.
+- **`tests/test_gyrus_worker_process.py` purpose/why/content:** Add a real spawned CUDA worker check because a direct process test does not prove CUDA works after `spawn`. It verifies the ready device and completed job device are both CUDA. **Test:** `python -m pytest -q tests/test_gyrus_worker_process.py::test_spawn_worker_runs_on_explicit_cuda_device`. **Edge case:** skipped on machines without CUDA hardware.
+- **Verification:** Direct CUDA test passed; spawned CUDA test passed; full suite `245 passed in 46.59s`; Ruff passed. The frozen manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`.
+- **Remaining device limit:** Exact `1e-12` reconstruction was established on CPU. The CUDA tests establish successful execution and disclosure ordering; they do not claim CPU/GPU bitwise parity.
