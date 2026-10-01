@@ -401,3 +401,44 @@ Before Stage 3, review the parent/worker boundary, silent O04 computation from r
 2. Stage 5 adds non-destructive mask editing. Stage 6 adds opt-in history. Stage 7 adds PDF preview/export. Stage 8 expands recovery states and cancellation behavior. Stage 9 covers packaged Windows, accessibility and device-parity checks.
 3. External cohorts failed segmentation transport; the OOD policy reviewed every evaluated external case, and external reliability was miscalibrated. The result inspector states these limitations; `STANDARD` means only the internal registered display policy passed.
 4. Before Stage 5, inspect the native previews, run the focused GUI suite, and confirm the OOD gate and no-tumor path with the committed synthetic fixtures.
+
+## Phase 6, Stage 5 — Non-destructive mask editor
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Implementation commit:** `9da2ee3` — `Add non-destructive Gyrus mask editor with verified provenance exports`
+- **Summary:** Added a 56 px in-panel editor strip, add/erase disk brush, 1–32 model-pixel brush size, undo/redo, reset, and Model/Edited/Difference/Split views. The frozen model mask is copied into a separate human layer. The difference view uses cyan for shared model pixels, violet for additions, and pink diagonal hatch for removals. Saving is an explicit local action to `%LOCALAPPDATA%\GyrusResearch\edited_layers\`; it writes a binary PNG and hash-linked provenance JSON in a versioned per-case folder. No history index is created. `USER EDITED` appears only after a successful save. The original reliability score and registered segmentation mask remain unchanged.
+
+### Files
+
+| Path | Purpose and why | Content | Test command | Known edge cases |
+| --- | --- | --- | --- | --- |
+| `gyrus/domain/mask_editor.py` | Separate manual editing state from immutable model evidence. | Pixel-exact disk rasterization, bounded strokes, undo/redo/reset, original/current/saved masks, chained edit records through `mask_provenance.py`, verification before each operation, explicit local PNG/JSON export, non-overwriting versioned folders. | `uv run python -m pytest -q tests/test_gyrus_mask_editor.py` | A no-op stroke creates no record; off-image points and invalid sizes fail; a broken mask hash locks the UI. A second save creates a new version. Export refuses a network/unknown Windows drive, and an existing target is never overwritten. |
+| `gyrus/gui/mask_editor.py` | Let users correct a mask in the image panel without a separate window. | 56 px tool rail; viewport-to-128×128 coordinate mapping; add/erase stroke gestures, middle-button pan, zoom/fit, brush-size slider, four view tabs, live pixel counts, cyan/violet/pink-hatch renderer, and integrity-failure signal. | `uv run python -m pytest -q tests/test_gyrus_mask_editor.py::test_qt_brush_maps_click_to_model_space tests/test_gyrus_mask_editor.py::test_difference_colors_and_hatch_are_distinct` | Model and Split are comparison views, not paint targets. Fit runs after the widget becomes visible so the image does not remain at its pre-layout size. No smoothing or auto-fill is applied. |
+| `gyrus/gui/main_window.py` | Guard entry/exit and save against the existing 14-state workflow. | Opens editing only after a disclosed tumor-mask result; keeps worker output unchanged; saves to local application data on explicit click; confirms discard of unsaved work; locks the result on edit-integrity failure; disables conflicting result actions while editing. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py::test_mask_editor_save_preserves_frozen_result tests/test_gyrus_gui_core.py::test_no_tumor_editor_unavailable_and_edit_tamper_locks` | No-tumor results cannot enter the editor. A local I/O failure reports no successful save; a hash mismatch locks result display. The notice timer belongs to the window, so destruction cannot leave a callback to a deleted Qt label. |
+| `gyrus/gui/result_panel.py` | Make human changes visible without altering the original policy status. | Adds Edit mask action, `USER EDITED` badge after save, edited pixel count, stored edit provenance, and explicit text that reliability applies only to the original model mask. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py::test_mask_editor_save_preserves_frozen_result` | STANDARD/REVIEW_REQUIRED disposition remains the frozen model decision. Human additions do not change or improve the displayed reliability score. |
+| `gyrus/gui/theme.py` | Keep editor controls consistent with the approved interface. | Styles the narrow tool strip, selected brush tool, and violet edited badge using the existing palette. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | Native Windows preview was used because this host's offscreen Qt renderer does not expose system fonts. |
+| `tests/test_gyrus_mask_editor.py` | Catch editing, export, and visual-difference regressions without real patient images. | Tests immutable model evidence, brush/undo/redo/reset hash chain, explicit export and collision, hash tampering, pixel colors/hatch, bounds, and Qt click-to-pixel mapping. | `uv run python -m pytest -q tests/test_gyrus_mask_editor.py` | Uses synthetic 128×128 arrays; it does not evaluate medical correctness of edits. |
+| `tests/test_gyrus_gui_core.py` | Verify that manual editing cannot contaminate a frozen result or bypass disclosure. | Adds end-to-end tests for tumor editor entry, save/badge/provenance, frozen reliability and mask hash, no-tumor suppression, and tamper-triggered integrity lock. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | Uses committed synthetic frozen-stack fixtures; no BRISC sealed-test input is read. |
+| `docs/app_build_log.md` | Preserve the append-only build record. | This Stage 5 record, verification evidence, gaps, commit provenance, and deferred packaging scope. | Read this entry and run `git diff --check` | Corrections must be appended as new entries, never silently rewritten into an accepted stage. |
+
+### Verification
+
+- Focused editor and GUI regression: **23 passed**. Full repository suite: **276 passed in 98.32 seconds**.
+- `uv run ruff check .`, `uv lock --check`, and `git diff --check` passed.
+- Native Windows visual previews at 820 px and 640 px logical editor widths confirmed image fit, legible controls, distinct difference colors, and 56 px tool rail. Previews used synthetic masks and stayed in the local temporary directory; they are not clinical evidence.
+- Frozen manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`. `runs/final_stack/` had no tracked changes. No BRISC sealed-test access, retraining/refitting, or threshold change occurred.
+
+### Known gaps and next test
+
+1. Saving a human layer writes a local export only after the user clicks Save. Opt-in indexed history is Stage 6; no history record is created in Stage 5. PDF handling of edited masks is Stage 7.
+2. The editor reports pixel counts only; it cannot establish physical size or clinical correctness. Reliability remains a frozen estimate about the original model mask, regardless of the human edit.
+3. Packaged Windows and CPU/GPU parity remain unverified. Stage 9 will exercise the packaged app at 100/125/150/200% display scaling and the agreed device-output tolerance.
+4. For review, open a disclosed tumor result, edit via Add and Erase, compare Model/Edited/Difference/Split, undo/redo/reset, save explicitly, inspect `USER EDITED` and provenance, then confirm the original reliability score is unchanged.
+
+### Deferred Phase 7 packaging scope — do not implement in Stage 5
+
+- Build Windows standalone `Gyrus.exe` with PyInstaller.
+- Bundle Python, PySide6, CPU PyTorch, `runs/final_stack/`, and `assets/`.
+- Use `assets/logo/gyrus.ico` for the executable.
+- Consider an optional Inno Setup MSI installer.
+- Verify launch and manifest checks on a fresh Windows system without Python installed.
