@@ -6,6 +6,7 @@ from uuid import uuid4
 
 import numpy as np
 import pytest
+import torch
 
 from gyrus.domain.constants import ReliabilityReason
 from gyrus.worker.inference import FrozenInferenceEngine
@@ -133,3 +134,19 @@ def test_parent_rejects_corrupted_ipc_result(cpu_engine):
     corrupted_result["stack_manifest_sha256"] = "0" * 64
     with pytest.raises(WorkerSupervisorError, match="PROVENANCE_MISMATCH"):
         _validate_success(replace(response, result=corrupted_result), job, ready)
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA hardware unavailable")
+def test_cuda_worker_loads_and_runs_on_requested_gpu():
+    session = FrozenWorkerSession.open(WorkerConfig(str(FINAL), DeviceName.CUDA))
+    try:
+        assert session.device.type == "cuda"
+        assert session.device.index == 0
+        response = FrozenInferenceEngine(session, generation=1).analyze(
+            _job(FINAL / "verification/fixtures/elliptic.png")
+        )
+        assert response.result["execution"]["device"] == "cuda"
+        assert response.result["classification"]["predicted_category"] == "meningioma"
+        assert response.events[-1].disclosure_allowed is True
+    finally:
+        session.close()

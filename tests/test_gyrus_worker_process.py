@@ -3,6 +3,7 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
+import torch
 
 from gyrus.worker.process import WorkerSupervisor, WorkerSupervisorError
 from gyrus.worker.protocol import AnalyzeJob, AnalyzeSuccess, DeviceName, WorkerConfig
@@ -66,5 +67,25 @@ def test_manifest_mismatch_stops_worker_before_ready_or_job():
             supervisor.start()
         assert supervisor.snapshot is None
         assert supervisor.process_id is None
+    finally:
+        supervisor.close()
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA hardware unavailable")
+def test_spawn_worker_runs_on_explicit_cuda_device():
+    supervisor = WorkerSupervisor(
+        WorkerConfig(
+            str(FINAL),
+            DeviceName.CUDA,
+            startup_timeout_seconds=60.0,
+            job_timeout_seconds=60.0,
+        )
+    )
+    try:
+        ready = supervisor.start()
+        assert ready.device == "cuda"
+        response = supervisor.analyze(_job())
+        assert isinstance(response, AnalyzeSuccess)
+        assert response.result["execution"]["device"] == "cuda"
     finally:
         supervisor.close()

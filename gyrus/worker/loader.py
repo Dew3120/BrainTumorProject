@@ -38,7 +38,7 @@ def select_device(requested: DeviceName) -> torch.device:
             "CUDA was requested, but PyTorch cannot access a CUDA device.",
         )
     try:
-        device = torch.device("cuda")
+        device = torch.device("cuda:0")
         torch.cuda.set_device(device)
         torch.empty(1, device=device)
     except Exception as exc:
