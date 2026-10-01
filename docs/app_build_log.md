@@ -191,3 +191,112 @@ Stage 1 establishes Gyrus's framework-independent contract. It verifies the froz
 ### What to test next
 
 Before Stage 2 begins, review the exact threshold comparisons, OOD-first disclosure events, no-tumor fail-closed result, accepted upload formats, strict frozen-package allowlist, and the decision to keep reliability tied to the original model mask after editing. Stage 2 should begin only after those contracts are accepted.
+
+## Phase 6, Stage 2 — Isolated frozen worker
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Status:** Complete; awaiting user review
+- **Implementation commit:** `35a8f4065948316fd1e29d966d5a51ae24d39bd6` — `Add verified spawn worker for frozen Gyrus inference`
+- **Frozen-stack manifest SHA256 before and after:** `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`
+
+### Stage summary
+
+Stage 2 adds a single-job, `multiprocessing` spawn worker that verifies all 31 frozen artifacts before declaring readiness, loads the model stack once per worker generation, and uses only an explicitly selected CPU or CUDA device. The worker preprocesses the image, runs the classifier and v1 segmenter silently, computes O02–O05 and applies OOD policy, then assembles the cached E08 output with C03 and conditional R02 reliability. It sends only a complete validated result to the parent. The supervisor validates provenance and array payloads again, restarts after a crash or timeout, and never retries a failed job automatically.
+
+The registered O04 segmenter-entropy score is computed from the raw E08 ensemble. E05, E06, and E07 therefore execute silently during O04, before O05 completes; their predictions stay private and cached until the OOD policy decision. This preserves the frozen O04/O05 score definition and Amendment 22 disclosure order.
+
+### Files
+
+#### `gyrus/worker/__init__.py`
+
+- **Purpose:** Exposes the supported worker API.
+- **Why:** Later Qt code needs stable imports without reaching into private process and inference internals.
+- **Content:** Explicit exports for typed protocol messages, loader, inference supervisor, and errors.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_protocol.py`
+- **Known edge cases:** Qt integration and user-visible error mapping are deferred to Stages 3, 4, and 8.
+
+#### `gyrus/worker/protocol.py`
+
+- **Purpose:** Defines typed request, readiness, success, failure, shutdown, event, diagnostics, and content-addressed array messages.
+- **Why:** Parent and child must reject malformed or mismatched IPC data before it reaches the application.
+- **Content:** Frozen dataclasses, protocol version, canonical UUID and timestamp checks, explicit device selection, array shape/byte-count/hash validation, and registered stage order.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_protocol.py`
+- **Known edge cases:** Only local paths are accepted. A process boundary is trusted to carry pickle-safe Python dataclasses; no external client or socket protocol exists.
+
+#### `gyrus/worker/loader.py`
+
+- **Purpose:** Verifies and loads the frozen stack once per worker session on the requested device.
+- **Why:** No job may start with an unverified artifact, changed threshold, missing model, or silent GPU-to-CPU fallback.
+- **Content:** Strict 31-artifact verification, verified runtime import without bytecode writes, CPU/CUDA selection, frozen checkpoint loading, device checks, post-load re-verification, and session cleanup.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_protocol.py tests/test_gyrus_worker_inference.py tests/test_gyrus_worker_process.py`
+- **Known edge cases:** CUDA inference was not exercised on this Stage 2 test run; an unavailable CUDA request fails explicitly. Packaged runtime driver compatibility remains a later integration check.
+
+#### `gyrus/worker/inference.py`
+
+- **Purpose:** Executes the registered frozen stack in one ordered, non-disclosing worker job.
+- **Why:** OOD must complete before classification or spatial output can reach the UI, while the frozen O04 score still requires silent raw-E08 forwards.
+- **Content:** Input decode and change detection, preprocessing, silent classifier/v1 passes, O02/O03/O04/O05, OOD decision, cached E08/C03/conditional R02, immutable result construction, mask statistics, array hashes, and event trace.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_inference.py`
+- **Known edge cases:** For `no_tumor`, silent O04 maps are discarded and no spatial or reliability score is disclosed. DICOM/NIfTI and batching remain outside the Phase 6 input contract.
+
+#### `gyrus/worker/process.py`
+
+- **Purpose:** Runs inference in a spawned child and supervises one request at a time.
+- **Why:** A model crash must not take down the UI, and the next job must use a newly verified worker generation.
+- **Content:** Spawn context, one-slot request/response queues, exclusive job lock, startup readiness, early crash/timeout detection, explicit restart without automatic job retry, parent-side result and array provenance checks, and graceful shutdown.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_process.py`
+- **Known edge cases:** UI cancellation and progress animation are Stage 3/4 integration work; this supervisor exposes a synchronous single-job API. Abrupt process death during a job returns a failure after detection and starts a new generation.
+
+#### `tests/test_gyrus_worker_protocol.py`
+
+- **Purpose:** Verifies typed IPC and architecture boundaries.
+- **Why:** Device fallback, malformed payloads, or a server import would violate the worker design.
+- **Content:** Explicit CPU/CUDA tests, unsupported device rejection, UUID and payload integrity, no Qt/network server imports, and spawn/single-slot assertions.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_protocol.py`
+- **Known edge cases:** The CUDA-unavailable branch is tested by simulation; actual CUDA execution needs a compatible host.
+
+#### `tests/test_gyrus_worker_inference.py`
+
+- **Purpose:** Checks actual CPU inference against frozen verification outputs and tests the parent trust boundary.
+- **Why:** The new execution order must preserve the registered scores, masks, route, and no-tumor policy.
+- **Content:** `1e-12` fixture comparisons, exact raw/calibrated/mask hashes, OOD component checks, no-tumor suppression, one-load multiple-job behavior, and corrupted IPC provenance rejection.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_inference.py`
+- **Known edge cases:** Synthetic frozen fixtures prove reconstruction, not clinical performance or external transport.
+
+#### `tests/test_gyrus_worker_process.py`
+
+- **Purpose:** Exercises a real Windows spawned worker and fail-closed startup.
+- **Why:** In-process tests cannot prove crash isolation, restart, or pre-job hash enforcement.
+- **Content:** Successful job, forced child termination, new generation/session, second successful job, and manifest-hash mismatch before readiness.
+- **Test:** `python -m pytest -q tests/test_gyrus_worker_process.py`
+- **Known edge cases:** Windows process termination uses the `multiprocessing.Process` handle; `os.kill(pid, 0)` was discarded because it interrupts the local test runner on Windows.
+
+#### `docs/app_build_log.md`
+
+- **Purpose:** Append the Stage 2 implementation and verification record.
+- **Why:** Amendment 22 requires one readable, append-only entry per application stage.
+- **Content:** This summary, per-file records, test evidence, known gaps, implementation commit, and next-stage review points.
+- **Test:** Read this entry after writing, run `git diff --check`, and verify the implementation commit is descriptive and the working tree is clean.
+- **Known edge cases:** Corrections to this accepted entry must be appended later rather than silently rewriting it.
+
+### Verification evidence
+
+- **Focused worker suite:** `11 passed` (protocol, frozen inference, spawned-process recovery).
+- **Full repository suite:** `243 passed in 41.36s`.
+- **Ruff:** `All checks passed!`.
+- **Frozen reconstruction:** CPU scores match committed verification fixture values within `1e-12`; raw E08, C03 probability, and hard-mask hashes match exactly.
+- **Crash recovery:** terminating generation 1 leads to generation 2 with a new process ID and load-session ID; a new job succeeds.
+- **Fail-closed startup:** deliberately wrong manifest hash prevents `WorkerReady` and job acceptance.
+- **Governance:** zero BRISC sealed-test access; zero neural retraining or refitting; zero threshold changes; no changes to `runs/final_stack/`; no TCP/HTTP server.
+
+### Known gaps carried to later stages
+
+1. Stage 3 must connect the synchronous supervisor to the Qt shell without running inference on the UI thread.
+2. Stage 4 must display loading and OOD states while withholding model output until the final IPC response.
+3. Stage 8 must map timeout, startup, crash, and malformed-response errors into complete user-visible recovery states.
+4. Stage 9 must exercise packaged Windows execution, CUDA availability and device parity where hardware permits, cancellation, and repeated crash/restart stress.
+5. The frozen test fixtures verify reconstruction and process behavior. They do not establish generalization, clinical validity, or external calibration.
+
+### What to test next
+
+Before Stage 3, review the parent/worker boundary, silent O04 computation from raw E08, no-tumor result suppression, explicit CPU/CUDA device choice, restart-without-auto-retry behavior, and final response validation. Stage 3 should keep the supervisor off the Qt event loop and preserve the Stage 2 result contract.
