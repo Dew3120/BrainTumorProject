@@ -354,3 +354,14 @@ Before Stage 3, review the parent/worker boundary, silent O04 computation from r
 2. Later stages add editing, opt-in history, PDF, and full error-state messaging. The states exist now but their panels do not.
 3. Stage 9 should test packaged Windows startup on actual 100/125/150/200% displays and compare CPU/GPU outputs within an agreed tolerance. Bitwise device parity is not claimed.
 4. Review the shell visually, check the 14-state graph, run the focused and full suites, and confirm the worker bridge has no automatic retry before approving Stage 4.
+
+### Stage 3 correction — verified readiness metadata reaches the shell
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Correction commit:** `b61bcde` — `Expose verified artifact count to Gyrus startup shell`
+- **Trigger:** A direct `main(["--device", "cpu"])` smoke launch stayed at `BOOT_VERIFYING`. The spawned worker had verified all 31 files, but `WorkerSupervisor.start()` returned a `SupervisorSnapshot` without `artifact_count`; the GUI's readiness check raised `AttributeError`. The prior focused test had only asserted the device and used a synthetic shell snapshot, so it missed this boundary mismatch.
+- **Fix:** `gyrus/worker/process.py` now carries the already-validated `WorkerReady.artifact_count` into the immutable supervisor snapshot. No artifact verification logic, worker model, inference equation, or threshold changed.
+- **Regression test:** `tests/test_gyrus_gui_threading.py` now hands a real spawned-worker snapshot to `GyrusMainWindow.on_worker_ready()` and requires 31 artifacts and `READY_EMPTY`. This tests the actual Stage 2/3 contract instead of only synthetic readiness.
+- **Test commands:** `uv run python -m pytest -q tests/test_gyrus_gui_threading.py tests/test_gyrus_worker_process.py` (**4 passed**); `uv run python -m pytest -q` (**258 passed in 102.45 seconds**); `uv run ruff check .` (**all checks passed**). A separate offscreen `main(["--device", "cpu"])` smoke run observed `BOOT_VERIFYING → READY_EMPTY` and clean exit.
+- **Known edge cases:** CPU startup can take around 20 seconds on this machine while the splash remains animated. CUDA startup and CPU/GPU parity are separate Stage 9 checks. A failed job is still not automatically retried.
+- **Governance:** No BRISC sealed-test access, retraining/refitting, threshold change, or frozen-stack modification. Manifest SHA256 remains `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`.
