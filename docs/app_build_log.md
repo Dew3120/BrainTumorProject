@@ -312,3 +312,45 @@ Before Stage 3, review the parent/worker boundary, silent O04 computation from r
 - **`tests/test_gyrus_worker_process.py` purpose/why/content:** Add a real spawned CUDA worker check because a direct process test does not prove CUDA works after `spawn`. It verifies the ready device and completed job device are both CUDA. **Test:** `python -m pytest -q tests/test_gyrus_worker_process.py::test_spawn_worker_runs_on_explicit_cuda_device`. **Edge case:** skipped on machines without CUDA hardware.
 - **Verification:** Direct CUDA test passed; spawned CUDA test passed; full suite `245 passed in 46.59s`; Ruff passed. The frozen manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`.
 - **Remaining device limit:** Exact `1e-12` reconstruction was established on CPU. The CUDA tests establish successful execution and disclosure ordering; they do not claim CPU/GPU bitwise parity.
+
+## Phase 6, Stage 3 — Qt application shell
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Implementation commit:** `18805e3` — `Build Gyrus Qt shell with isolated worker startup and high-DPI support`
+- **Summary:** Added the local PySide6 shell, approved animated splash, guarded 14-state workflow, responsive empty screen, verification and device indicators, and a QThread bridge to the Stage 2 worker. The Qt thread receives only final validated worker responses; analysis and startup remain off the UI thread. No model result panel is exposed in this stage.
+
+### Files
+
+| Path | Purpose and why | Content | Test command | Known edge cases |
+| --- | --- | --- | --- | --- |
+| `pyproject.toml` | Declare GUI and Qt test dependencies reproducibly. | PySide6 and pytest-qt dependency entries. | `uv lock --check` | Windows Qt plugin and GPU driver availability vary by host. |
+| `uv.lock` | Pin the resolved environment. | Locked Qt wheels and transitive packages. | `uv lock --check` | A different platform may resolve compatible wheel variants. |
+| `gyrus/__main__.py` | Provide a simple local launch command. | Calls the GUI `main()` entry point. | `uv run python -m gyrus --help` | Default CUDA startup fails visibly if unavailable; use `--device cpu` explicitly. |
+| `gyrus/gui/__init__.py` | Expose the supported Qt shell API. | Exports app creation, main window, and state machine. | `uv run python -m pytest -q tests/test_gyrus_gui_state.py` | Importing this package requires PySide6. |
+| `gyrus/gui/app.py` | Wire startup without running worker work on the Qt event loop. | High-DPI QApplication, CLI device selection, splash/bridge/window signals, invalid-readiness lock. | `uv run python -m pytest -q tests/test_gyrus_gui_shell.py tests/test_gyrus_gui_threading.py` | CPU and CUDA are explicit modes; no automatic fallback or retry. |
+| `gyrus/gui/main_window.py` | Present the approved empty shell and fail-closed integrity state. | 1440×900 window, 1180×720 minimum, rail/header/footer, notices, empty workspace, integrity dialog and device chip. | `uv run python -m pytest -q tests/test_gyrus_gui_shell.py` | Choose, History and result panels are deliberately inactive until later stages; an invalid ready payload locks analysis. |
+| `gyrus/gui/splash.py` | Show animation while verification is actually pending. | Approved six-panel GIF, static fallback, pending verification lines, success/block transitions. | `uv run python -m pytest -q tests/test_gyrus_gui_shell.py::test_splash_uses_approved_animation_without_early_checkmarks` | The fallback uses the committed static mark if the GIF cannot load; no checkmarks appear before verification. |
+| `gyrus/gui/state.py` | Define all 14 states without Qt dependencies. | Enum, guarded transition graph, reasoned transition history. | `uv run python -m pytest -q tests/test_gyrus_gui_state.py` | Stage 4 and later will activate result, edit, export and history transitions. |
+| `gyrus/gui/theme.py` | Match the approved visual system at logical display sizes. | Exact Section 10 palette, font fallback, Qt stylesheet and transparent labels. | `uv run python -m pytest -q tests/test_gyrus_gui_shell.py tests/test_gyrus_gui_hidpi.py` | Headless Qt on this host exposes no fonts, so native Windows rendering was also visually checked. |
+| `gyrus/gui/work_controller.py` | Keep synchronous worker startup and inference off the UI thread. | QThread service, explicit readiness, final-response-only signal, one busy job, queued shutdown. | `uv run python -m pytest -q tests/test_gyrus_gui_threading.py` | Closing waits up to 60 seconds for worker shutdown; failed jobs are never silently retried. |
+| `tests/test_gyrus_gui_state.py` | Guard the full transition contract. | State coverage, allowed/disallowed transitions and history assertions. | `uv run python -m pytest -q tests/test_gyrus_gui_state.py` | Future panels may add transitions only with matching tests. |
+| `tests/test_gyrus_gui_shell.py` | Verify shell dimensions and fail-closed startup presentation. | Geometry, footer disclaimer, readiness validation, splash and palette tests. | `uv run python -m pytest -q tests/test_gyrus_gui_shell.py` | Runs with the Qt offscreen plugin; native render was inspected separately. |
+| `tests/test_gyrus_gui_threading.py` | Prove real worker execution occurs outside the UI thread. | Spawned CPU worker readiness and one final undisclosed-until-complete fixture result. | `uv run python -m pytest -q tests/test_gyrus_gui_threading.py` | Uses the committed frozen fixture, never the sealed BRISC test set; CUDA parity is not asserted. |
+| `tests/test_gyrus_gui_hidpi.py` | Check supported 100%, 125%, 150%, 200% scales. | Isolated Qt subprocess at each scale, logical geometry and device-pixel-ratio assertions. | `uv run python -m pytest -q tests/test_gyrus_gui_hidpi.py` | Offscreen scaling verifies geometry, while final packaged display testing remains Stage 9. |
+| `docs/app_build_log.md` | Preserve the append-only stage record for review. | This entry, source links, tests, gaps and commit provenance. | Read this entry and run `git diff --check` | Any correction must be appended, not silently edited into an accepted entry. |
+
+### Verification
+
+- Focused Stage 3 suite: **13 passed**.
+- Full repository suite: **258 passed in 111.68 seconds**.
+- Ruff: **all checks passed**; `uv lock --check` passed; `git diff --check` passed.
+- Native Windows render of the 1440×900 empty shell inspected after correcting transparent label backgrounds. The splash GIF is valid and running in the Qt test.
+- Frozen manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`; `runs/final_stack/` had no tracked changes.
+- Zero BRISC sealed-test access, neural retraining/refitting, threshold changes, or network server work.
+
+### Known gaps and next test
+
+1. Stage 4 adds input selection, loading/OOD and result panels. No image can be selected from the Stage 3 shell yet.
+2. Later stages add editing, opt-in history, PDF, and full error-state messaging. The states exist now but their panels do not.
+3. Stage 9 should test packaged Windows startup on actual 100/125/150/200% displays and compare CPU/GPU outputs within an agreed tolerance. Bitwise device parity is not claimed.
+4. Review the shell visually, check the 14-state graph, run the focused and full suites, and confirm the worker bridge has no automatic retry before approving Stage 4.
