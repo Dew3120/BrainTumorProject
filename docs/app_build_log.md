@@ -442,3 +442,12 @@ Before Stage 3, review the parent/worker boundary, silent O04 computation from r
 - Use `assets/logo/gyrus.ico` for the executable.
 - Consider an optional Inno Setup MSI installer.
 - Verify launch and manifest checks on a fresh Windows system without Python installed.
+
+### Stage 5 correction — fit timer lifecycle
+
+- **Date:** 2026-10-01 (Asia/Colombo)
+- **Correction commit:** `737d3bb` — `Bind mask editor fit timer to widget lifetime`
+- **Trigger:** The first-show image-fit callback used a free single-shot timer. An editor closed immediately after showing could leave a queued Python callback referencing a destroyed Qt widget, analogous to the notice-timer issue found in Stage 5 testing.
+- **Fix:** The editor now owns one single-shot `QTimer`; show and resize events restart it, and Qt destroys it with the widget. Image-fitting geometry and model-space coordinates are unchanged.
+- **Verification:** `uv run ruff check .` passed; **23 focused editor/GUI tests passed**. A native Windows preview at 820 logical pixels showed the full image and difference overlay after the timer change. The previously completed full suite passed **276 tests** before this lifecycle-only correction.
+- **Governance:** Frozen manifest SHA256 remained `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`. No BRISC sealed-test access, model work, threshold change, or modification to `runs/final_stack/`.
