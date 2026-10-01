@@ -7,9 +7,10 @@ import os
 from pathlib import Path
 from typing import Any
 
-from PySide6.QtCore import Qt, QTimer, Signal
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt, QTimer, QUrl, Signal
+from PySide6.QtGui import QDesktopServices, QIcon
 from PySide6.QtWidgets import (
+    QApplication,
     QDialog,
     QFileDialog,
     QFrame,
@@ -24,6 +25,7 @@ from PySide6.QtWidgets import (
 )
 
 from gyrus.domain.constants import DISCLAIMER
+from gyrus.domain.error_reporting import ErrorNotice, error_log_path, report_error
 from gyrus.domain.history import HistoryRepository
 from gyrus.domain.history_bundle import (
     HistoryCasePayload,
@@ -96,6 +98,7 @@ class GyrusMainWindow(QMainWindow):
         self._saved_history_ids: set[str] = set()
         self._gate: OodReviewDialog | None = None
         self._error_message = ""
+        self._error_notice: ErrorNotice | None = None
         self.setObjectName("GyrusMainWindow")
         self.setWindowTitle("Gyrus — Brain MRI Research Viewer")
         self.setWindowIcon(QIcon(str(ASSET_ROOT / "gyrus.ico")))
@@ -251,6 +254,18 @@ class GyrusMainWindow(QMainWindow):
         self.retry_button.setVisible(False)
         self.retry_button.clicked.connect(self.retry_boot)
         column.addWidget(self.retry_button, alignment=Qt.AlignmentFlag.AlignLeft)
+        error_actions = QHBoxLayout()
+        self.copy_error_button = QPushButton("Copy details", empty_page)
+        self.copy_error_button.clicked.connect(self._copy_error_details)
+        error_actions.addWidget(self.copy_error_button)
+        self.open_log_button = QPushButton("Open local log", empty_page)
+        self.open_log_button.clicked.connect(self._open_error_log)
+        error_actions.addWidget(self.open_log_button)
+        self.close_error_button = QPushButton("Close application", empty_page)
+        self.close_error_button.clicked.connect(self.close)
+        error_actions.addWidget(self.close_error_button)
+        error_actions.addStretch(1)
+        column.addLayout(error_actions)
         self.workspace_stack.addWidget(empty_page)
 
         self.image_canvas = ImageCanvas(self.workspace_stack)
@@ -411,7 +426,7 @@ class GyrusMainWindow(QMainWindow):
     def _on_input_rejected(self, code: str, message: str) -> None:
         if self.machine.state != AppState.INPUT_VALIDATING:
             return
-        self._error_message = f"{code}: {message}"
+        self._set_error(code, message)
         self.machine.enter(AppState.RECOVERABLE_ERROR, reason=code)
         self._render_state()
 
@@ -431,7 +446,7 @@ class GyrusMainWindow(QMainWindow):
         try:
             presentation = build_presentation(response, self._selection)
         except Exception as exc:  # noqa: BLE001 - no unverified result can reach a widget
-            self._lock_result(f"RESULT_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("RESULT_VERIFICATION_FAILED", exc)
             return
         self.loading_panel.complete()
         self._pending_result = presentation
@@ -526,7 +541,8 @@ class GyrusMainWindow(QMainWindow):
         try:
             record = save_history_bundle(self._history_repository(), payload)
         except Exception as exc:  # noqa: BLE001 - save failure must not claim retention
-            self.show_notice(f"Case was not saved: {type(exc).__name__}: {exc}")
+            self._set_error("HISTORY_SAVE_FAILED", "Case was not saved. Check local storage and try again.", exc)
+            self.show_notice(self._error_message)
             return
         self.result_inspector.save_history_button.setEnabled(False)
         self._saved_history_ids.add(record.case_id)
@@ -568,7 +584,7 @@ class GyrusMainWindow(QMainWindow):
                         break
             self.history_list.set_records(records)
         except Exception as exc:  # noqa: BLE001 - no unverified list is displayed
-            self._lock_result(f"HISTORY_LIST_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("HISTORY_LIST_VERIFICATION_FAILED", exc)
 
     def _select_history_case(self, case_id: str) -> None:
         self._history_selected = None
@@ -579,7 +595,7 @@ class GyrusMainWindow(QMainWindow):
             loaded = load_history_bundle(self._history_repository(), case_id)
             self.history_preview.set_case(loaded)
         except Exception as exc:  # noqa: BLE001 - corrupt bundle must never be previewed
-            self._lock_result(f"HISTORY_BUNDLE_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("HISTORY_BUNDLE_VERIFICATION_FAILED", exc)
             return
         self._history_selected = loaded
 
@@ -605,7 +621,7 @@ class GyrusMainWindow(QMainWindow):
                     loaded.edited_mask, loaded.edit_provenance,
                 )
             except Exception as exc:  # noqa: BLE001 - no partial restored result
-                self._lock_result(f"HISTORY_EDIT_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+                self._lock_result("HISTORY_EDIT_VERIFICATION_FAILED", exc)
                 return
         self._saved_history_ids.add(loaded.record.case_id)
         target = (AppState.RESULT_STANDARD if loaded.record.final_status == "STANDARD"
@@ -634,7 +650,8 @@ class GyrusMainWindow(QMainWindow):
         try:
             self._history_repository().delete(record.case_id)
         except Exception as exc:  # noqa: BLE001 - deletion failures are explicit
-            self.show_notice(f"Case deletion did not finish: {type(exc).__name__}: {exc}")
+            self._set_error("HISTORY_DELETE_FAILED", "Case deletion did not finish. Check the local log.", exc)
+            self.show_notice(self._error_message)
             return
         if self._pending_result is not None and self._pending_result.result["case_id"] == record.case_id:
             self._selection = None
@@ -650,12 +667,13 @@ class GyrusMainWindow(QMainWindow):
         try:
             document = render_pdf(payload)
         except Exception as exc:  # noqa: BLE001 - invalid report never reaches preview
-            self._lock_result(f"PDF_REPORT_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("PDF_REPORT_VERIFICATION_FAILED", exc)
             return
         try:
             dialog = PdfPreviewDialog(document, payload.model.default_filename, self)
         except Exception as exc:  # noqa: BLE001 - failed viewer must not offer export
-            self.show_notice(f"PDF preview could not open: {type(exc).__name__}: {exc}")
+            self._set_error("PDF_PREVIEW_FAILED", "PDF preview could not open. The case is unchanged.", exc)
+            self.show_notice(self._error_message)
             return
         self._export_return_state = self.machine.state
         self.machine.enter(AppState.EXPORT_PREVIEW, reason="user opened verified PDF preview")
@@ -690,7 +708,7 @@ class GyrusMainWindow(QMainWindow):
                 session.saved_mask if session is not None else None, provenance,
             )
         except Exception as exc:  # noqa: BLE001 - malformed report model is a hard stop
-            self._lock_result(f"PDF_REPORT_MODEL_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("PDF_REPORT_MODEL_FAILED", exc)
             return
         self._preview_pdf(payload)
 
@@ -710,7 +728,7 @@ class GyrusMainWindow(QMainWindow):
                 loaded.edited_mask, loaded.edit_provenance,
             )
         except Exception as exc:  # noqa: BLE001 - reverify archived case before PDF export
-            self._lock_result(f"PDF_HISTORY_VERIFICATION_FAILED: {type(exc).__name__}: {exc}")
+            self._lock_result("PDF_HISTORY_VERIFICATION_FAILED", exc)
             return
         self._preview_pdf(payload)
 
@@ -748,7 +766,8 @@ class GyrusMainWindow(QMainWindow):
             self._lock_result(f"MASK_EDIT_INTEGRITY_FAILED: {exc}")
             return
         except Exception as exc:  # noqa: BLE001 - I/O failure is visible, never success
-            self.show_notice(f"Edited layer was not saved: {type(exc).__name__}: {exc}")
+            self._set_error("MASK_EDIT_SAVE_FAILED", "Edited layer was not saved. Check local storage.", exc)
+            self.show_notice(self._error_message)
             return
         self._update_edit_status()
         self.mask_editor._render()
@@ -779,11 +798,16 @@ class GyrusMainWindow(QMainWindow):
         if self.machine.state != AppState.ANALYZING:
             return
         if isinstance(response, WorkerFailure):
-            self._error_message = f"{response.error_code}: {response.safe_message}"
-            fatal = response.fatal
+            fatal = response.fatal or response.error_code.startswith(
+                ("OOD_", "POLICY_", "RESULT_", "MANIFEST_")
+            )
+            message = response.safe_message
+            code = response.error_code
         else:
-            self._error_message = str(response)
-            fatal = False
+            code = "WORKER_CONTROLLER_FAILED"
+            message = "Analysis stopped before producing a result. Restart Gyrus before trying again."
+            fatal = True
+        self._set_error(code, message, blocking=fatal)
         self._pending_result = None
         self.machine.enter(
             AppState.INTEGRITY_ERROR_LOCKED if fatal else AppState.RECOVERABLE_ERROR,
@@ -791,9 +815,16 @@ class GyrusMainWindow(QMainWindow):
         )
         self._render_state()
 
-    def _lock_result(self, reason: str) -> None:
+    def _set_error(self, code: str, message: str, exc: BaseException | None = None,
+                   *, blocking: bool = False) -> None:
+        self._error_notice = report_error(code, message, exception=exc, blocking=blocking)
+        self._error_message = f"{code}: {message} (reference {self._error_notice.reference})"
+
+    def _lock_result(self, reason: str, exc: BaseException | None = None) -> None:
         self._pending_result = None
-        self._error_message = reason
+        code = reason.split(":", 1)[0]
+        self._set_error(code, "Evidence verification failed. Analysis is disabled; no result was produced.",
+                        exc or RuntimeError(reason), blocking=True)
         if self.machine.can_enter(AppState.INTEGRITY_ERROR_LOCKED):
             self.machine.enter(AppState.INTEGRITY_ERROR_LOCKED, reason=reason)
         self._render_state()
@@ -809,6 +840,7 @@ class GyrusMainWindow(QMainWindow):
         self._edit_session = None
         self.mask_editor.clear()
         self._error_message = ""
+        self._error_notice = None
         self.case_label.setText("New analysis")
         self.image_canvas.clear()
         self._render_state()
@@ -823,6 +855,8 @@ class GyrusMainWindow(QMainWindow):
             or snapshot.manifest_sha256 != EXPECTED_MANIFEST_SHA256
             or snapshot.device not in {"cpu", "cuda"}
         ):
+            self._set_error("WORKER_READY_METADATA_INVALID", "Frozen worker metadata did not verify.",
+                            blocking=True)
             self.machine.enter(AppState.INTEGRITY_ERROR_LOCKED, reason="invalid ready metadata")
             self._render_state()
             return False
@@ -833,13 +867,23 @@ class GyrusMainWindow(QMainWindow):
         self._render_state()
         return True
 
-    def on_worker_boot_failed(self, code: str, _description: str) -> None:
-        integrity_prefixes = ("MANIFEST_", "FROZEN_STACK_", "WORKER_STARTUP_PROTOCOL")
-        target = (
-            AppState.INTEGRITY_ERROR_LOCKED
-            if code.startswith(integrity_prefixes)
-            else AppState.BOOT_BLOCKED
+    def on_worker_boot_failed(self, code: str, description: str) -> None:
+        retryable_startup = {
+            "WORKER_CUDA_UNAVAILABLE", "WORKER_CUDA_INITIALIZATION_FAILED",
+            "WORKER_STARTUP_TIMEOUT_OR_CRASH",
+        }
+        target = (AppState.BOOT_BLOCKED if code in retryable_startup
+                  else AppState.INTEGRITY_ERROR_LOCKED)
+        artifact_detail = description.partition(":")[2].strip()
+        safe = (
+            f"Frozen artifact verification failed: {artifact_detail}"
+            if code.startswith("MANIFEST_ARTIFACT_") and artifact_detail
+            else "Frozen stack verification failed."
+            if target == AppState.INTEGRITY_ERROR_LOCKED
+            else "The worker could not start. Check the selected device, or restart with --device cpu."
         )
+        self._set_error(code, safe,
+                        RuntimeError(description), blocking=target == AppState.INTEGRITY_ERROR_LOCKED)
         self.machine.enter(target, reason=code)
         self._render_state()
 
@@ -852,6 +896,15 @@ class GyrusMainWindow(QMainWindow):
         self.notice.setText(message)
         self.notice.setVisible(True)
         self._notice_timer.start(duration_ms)
+
+    def _copy_error_details(self) -> None:
+        if self._error_notice is not None:
+            QApplication.clipboard().setText(self._error_notice.copy_details)
+
+    def _open_error_log(self) -> None:
+        path = error_log_path()
+        if path is not None and path.exists():
+            QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))
 
     def _render_state(self) -> None:
         state = self.machine.state
@@ -948,16 +1001,20 @@ class GyrusMainWindow(QMainWindow):
             }
         )
         self.retry_button.setVisible(state == AppState.BOOT_BLOCKED)
+        show_error_actions = state in {
+            AppState.BOOT_BLOCKED, AppState.INTEGRITY_ERROR_LOCKED, AppState.RECOVERABLE_ERROR,
+        }
+        self.copy_error_button.setVisible(show_error_actions)
+        self.open_log_button.setVisible(show_error_actions and error_log_path() is not None)
+        self.close_error_button.setVisible(state == AppState.INTEGRITY_ERROR_LOCKED)
         if state == AppState.INPUT_VALIDATING:
             self.workspace_message.setText("Validating the selected local image…")
         elif state == AppState.BOOT_BLOCKED:
-            self.workspace_message.setText(
-                "The worker could not start. Review the local device setting and retry."
-            )
+            self.workspace_message.setText(self._error_message)
         elif state == AppState.INTEGRITY_ERROR_LOCKED:
             self.workspace_message.setText(
-                "Integrity or result verification stopped analysis. Restart Gyrus after "
-                f"investigating: {self._error_message or 'frozen stack mismatch'}"
+                "THE FROZEN STACK OR RESULT DID NOT VERIFY. Analysis is disabled.\n"
+                + (self._error_message or "Restart Gyrus after investigating the local log.")
             )
         elif state == AppState.RECOVERABLE_ERROR:
             self.workspace_message.setText(self._error_message)

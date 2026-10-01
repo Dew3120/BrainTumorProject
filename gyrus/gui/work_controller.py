@@ -10,6 +10,8 @@ from uuid import uuid4
 
 from PySide6.QtCore import QObject, Qt, QThread, Signal, Slot
 
+from gyrus.domain.error_reporting import report_error
+
 
 def _default_supervisor_factory(stack_root: str, device: str) -> Any:
     # Importing torch and the frozen runtime happens only inside QThread.
@@ -55,6 +57,8 @@ class _WorkerService(QObject):
                 finally:
                     self._supervisor = None
             code = description.split(":", 1)[0]
+            report_error(code, "Worker startup failed before verification.", exception=exc,
+                         blocking=True)
             self.boot_failed.emit(code, description)
         else:
             self.verified.emit(ready)
@@ -79,7 +83,9 @@ class _WorkerService(QObject):
             else:
                 self.job_failed.emit(response)
         except Exception as exc:  # noqa: BLE001 - Qt boundary must report failures
-            self.job_failed.emit(f"WORKER_JOB_FAILED: {type(exc).__name__}")
+            report_error("WORKER_JOB_FAILED", "Analysis stopped before a result was produced.",
+                         exception=exc, blocking=True)
+            self.job_failed.emit("WORKER_JOB_FAILED")
 
     @Slot()
     def shutdown(self) -> None:
@@ -89,6 +95,13 @@ class _WorkerService(QObject):
         finally:
             self._supervisor = None
             self.stopped.emit()
+
+    def interrupt_for_close(self) -> None:
+        """Signal the supervisor from the GUI thread; it only sets an event and terminates IPC."""
+
+        supervisor = self._supervisor
+        if supervisor is not None:
+            supervisor.request_shutdown()
 
 
 class WorkerBridge(QObject):
@@ -165,6 +178,10 @@ class WorkerBridge(QObject):
     def close(self) -> None:
         if not self._thread.isRunning():
             return
+        # Qt cannot service a queued shutdown while analyze() occupies its worker thread.
+        # Interrupt only the isolated process; the queued service cleanup then runs normally.
+        if self._busy:
+            self._service.interrupt_for_close()
         self._stop_requested.emit()
         if not self._thread.wait(60_000):
             raise RuntimeError("Worker controller did not stop within 60 seconds")

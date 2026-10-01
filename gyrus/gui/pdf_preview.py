@@ -24,6 +24,7 @@ from PySide6.QtWidgets import (
 )
 
 from gyrus.domain.constants import DISCLAIMER
+from gyrus.domain.error_reporting import report_error
 
 
 class PdfSaveError(ValueError):
@@ -180,7 +181,13 @@ class PdfPreviewDialog(QDialog):
             QMessageBox.warning(self, "Local export unavailable", "Windows local application data is unavailable")
             return
         directory = Path(local) / "GyrusResearch" / "exports"
-        directory.mkdir(parents=True, exist_ok=True)
+        try:
+            directory.mkdir(parents=True, exist_ok=True)
+        except OSError as exc:
+            notice = report_error("PDF_EXPORT_DIRECTORY_FAILED", "The local export folder is unavailable.",
+                                  exception=exc)
+            QMessageBox.warning(self, "PDF was not saved", notice.safe_message)
+            return
         filename, _ = QFileDialog.getSaveFileName(
             self, "Save Gyrus research summary", str(directory / self.default_filename),
             "PDF documents (*.pdf)",
@@ -201,6 +208,8 @@ class PdfPreviewDialog(QDialog):
         try:
             self.saved_path = save_pdf_atomic(self._pdf_bytes, target, overwrite=overwrite)
         except Exception as exc:  # noqa: BLE001 - export failure is visible, not partial success
-            QMessageBox.warning(self, "PDF was not saved", f"{type(exc).__name__}: {exc}")
+            notice = report_error("PDF_SAVE_FAILED", "PDF was not saved. Check the destination and local log.",
+                                  exception=exc)
+            QMessageBox.warning(self, "PDF was not saved", notice.safe_message)
             return
         self.accept()

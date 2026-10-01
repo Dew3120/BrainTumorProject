@@ -12,7 +12,11 @@ from datetime import datetime
 from multiprocessing.process import BaseProcess
 from typing import Any, Self
 
-from gyrus.domain.errors import DomainError
+from gyrus.domain.error_reporting import configure_error_log, report_error
+from gyrus.domain.errors import (
+    DomainError,
+    InputValidationError,
+)
 from gyrus.domain.result_schema import validate_result_payload
 
 from .inference import FrozenInferenceEngine
@@ -88,6 +92,7 @@ def worker_main(
     """Verify, load once, then process one queued request at a time."""
 
     session: FrozenWorkerSession | None = None
+    configure_error_log()
     try:
         session = FrozenWorkerSession.open(config)
         engine = FrozenInferenceEngine(session, generation)
@@ -103,6 +108,9 @@ def worker_main(
             )
         )
     except (WorkerLoadError, DomainError) as exc:
+        report_error(getattr(exc, "code", "WORKER_STARTUP_FAILED"),
+                     "Frozen worker startup failed before accepting jobs.",
+                     exception=exc, blocking=True)
         response_queue.put(
             WorkerFailure(
                 job_id=None,
@@ -114,6 +122,8 @@ def worker_main(
         )
         return
     except Exception as exc:  # noqa: BLE001 - process boundary must fail closed
+        report_error("WORKER_STARTUP_FAILED", "Worker startup failed.", exception=exc,
+                     blocking=True)
         response_queue.put(
             WorkerFailure(
                 job_id=None,
@@ -145,21 +155,36 @@ def worker_main(
             try:
                 response_queue.put(engine.analyze(message))
             except DomainError as exc:
+                # Only source-image rejection can safely leave the loaded worker in service.
+                # Policy, OOD, provenance, and result-contract failures must lock disclosure.
+                recoverable = isinstance(exc, InputValidationError)
+                report_error(exc.code, exc.message, exception=exc, blocking=not recoverable)
                 response_queue.put(
                     WorkerFailure(
                         job_id=message.job_id,
                         error_code=exc.code,
                         safe_message=exc.message,
-                        fatal=False,
+                        fatal=not recoverable,
                         generation=generation,
                     )
                 )
+                if not recoverable:
+                    return
             except Exception as exc:  # noqa: BLE001 - process boundary must fail closed
+                out_of_memory = "OutOfMemory" in type(exc).__name__
+                code = "WORKER_CUDA_OUT_OF_MEMORY" if out_of_memory else "WORKER_INFERENCE_FAILED"
+                safe = (
+                    "The selected device ran out of memory. Restart Gyrus with --device cpu "
+                    "if you want to try that device explicitly. The job was not retried."
+                    if out_of_memory else "Frozen inference failed. No result was produced."
+                )
+                report_error(code, safe,
+                             exception=exc, blocking=True)
                 response_queue.put(
                     WorkerFailure(
                         job_id=message.job_id,
-                        error_code="WORKER_INFERENCE_FAILED",
-                        safe_message=f"Frozen inference failed: {type(exc).__name__}",
+                        error_code=code,
+                        safe_message=safe,
                         fatal=True,
                         generation=generation,
                     )
@@ -187,6 +212,7 @@ class WorkerSupervisor:
         self.config = config
         self._context = mp.get_context("spawn")
         self._lock = threading.Lock()
+        self._shutdown = threading.Event()
         self._generation = 0
         self._process: BaseProcess | None = None
         self._requests: Any = None
@@ -233,6 +259,8 @@ class WorkerSupervisor:
             return self._start_locked()
 
     def _start_locked(self) -> SupervisorSnapshot:
+        if self._shutdown.is_set():
+            raise WorkerSupervisorError("WORKER_SHUTTING_DOWN")
         if self._process is not None and self._process.is_alive() and self._ready:
             snapshot = self.snapshot
             assert snapshot is not None
@@ -294,6 +322,14 @@ class WorkerSupervisor:
             if response is None:
                 failed_generation = self._generation
                 self._dispose_process()
+                if self._shutdown.is_set():
+                    return WorkerFailure(
+                        job_id=job.job_id,
+                        error_code="WORKER_CANCELLED_ON_CLOSE",
+                        safe_message="Gyrus closed during analysis. No result was produced or retried.",
+                        fatal=True,
+                        generation=failed_generation,
+                    )
                 self._start_locked()
                 return WorkerFailure(
                     job_id=job.job_id,
@@ -347,6 +383,8 @@ class WorkerSupervisor:
     def _receive_until(self, timeout_seconds: float) -> WorkerResponse | None:
         deadline = time.monotonic() + timeout_seconds
         while True:
+            if self._shutdown.is_set():
+                return None
             remaining = deadline - time.monotonic()
             if remaining <= 0:
                 return None
@@ -356,7 +394,17 @@ class WorkerSupervisor:
                 if self._process is None or not self._process.is_alive():
                     return None
 
+    def request_shutdown(self) -> None:
+        """Interrupt a running job so application close never waits for inference timeout."""
+
+        self._shutdown.set()
+        process = self._process
+        if process is not None and process.is_alive():
+            process.terminate()
+
     def close(self) -> None:
+        if self._lock.locked():
+            self.request_shutdown()
         with self._lock:
             if self._process is not None and self._process.is_alive() and self._requests:
                 try:
@@ -365,6 +413,7 @@ class WorkerSupervisor:
                         self._responses.get(timeout=5.0)
                 except (queue.Empty, queue.Full, OSError, EOFError):
                     pass
+            self._shutdown.set()
             self._dispose_process()
 
     def __enter__(self) -> Self:

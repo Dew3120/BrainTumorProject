@@ -11,6 +11,7 @@ from PySide6.QtGui import QGuiApplication
 from PySide6.QtWidgets import QApplication
 
 from gyrus.domain.constants import APP_NAME, APP_VERSION
+from gyrus.domain.error_reporting import configure_error_log, report_error
 
 from .main_window import GyrusMainWindow
 from .splash import GyrusSplash
@@ -38,6 +39,7 @@ def create_application(arguments: list[str] | None = None) -> QApplication:
 
 
 def main(arguments: list[str] | None = None) -> int:
+    configure_error_log()
     parser = argparse.ArgumentParser(description="Gyrus local research viewer")
     parser.add_argument("--device", choices=("cuda", "cpu"), default="cuda")
     parser.add_argument(
@@ -54,7 +56,9 @@ def main(arguments: list[str] | None = None) -> int:
         try:
             bridge.submit_image(path)
         except Exception as exc:  # noqa: BLE001 - keep invalid jobs out of the UI
-            window.on_job_failed(f"WORKER_SUBMISSION_FAILED: {type(exc).__name__}")
+            report_error("WORKER_SUBMISSION_FAILED", "Analysis could not be submitted.",
+                         exception=exc, blocking=True)
+            window.on_job_failed("WORKER_SUBMISSION_FAILED")
 
     window.analysis_requested.connect(submit_analysis)
     bridge.job_finished.connect(window.on_job_finished)

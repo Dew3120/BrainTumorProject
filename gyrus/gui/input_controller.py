@@ -9,6 +9,7 @@ from pathlib import Path
 from PIL import Image
 from PySide6.QtCore import QThread, Signal
 
+from gyrus.domain.error_reporting import report_error
 from gyrus.domain.errors import InputValidationError
 from gyrus.domain.input_contract import (
     InputDescriptor,
@@ -55,4 +56,6 @@ class InputValidationThread(QThread):
         except InputValidationError as exc:
             self.rejected.emit(exc.code, exc.message)
         except Exception as exc:  # noqa: BLE001 - file boundary must fail closed
-            self.rejected.emit("INPUT_PREVIEW_FAILED", type(exc).__name__)
+            report_error("INPUT_PREVIEW_FAILED", "The image preview could not be created.",
+                         exception=exc)
+            self.rejected.emit("INPUT_PREVIEW_FAILED", "The image preview could not be created.")
