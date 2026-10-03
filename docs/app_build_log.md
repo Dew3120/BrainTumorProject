@@ -596,3 +596,50 @@ Before Stage 3, review the parent/worker boundary, silent O04 computation from r
 2. The native golden images cover the verified empty shell. Result, OOD gate, edit, history, PDF, and error screens have functional Qt tests and prior manual visual inspection, but do not yet have cross-machine pixel baselines.
 3. A standalone `Gyrus.exe`, bundled CPU runtime/assets, and a clean Windows-without-Python trial are Phase 7 packaging work, not claimed here.
 4. CPU/CUDA parity is established only for two frozen synthetic fixtures. Phase 8 must record its chosen device before sealed evaluation and must not interpret this QA result as universal bitwise parity.
+
+## Phase 7 — Gyrus interface polish and local Windows package
+
+- **Date:** 2026-10-03 (Asia/Colombo)
+- **Implementation commit:** `3065514` — `Polish Gyrus results and PDFs, move local exports off-thread, and package Windows app`
+- **Summary:** Reworked the result hierarchy and all three PDF pages so a reader sees the policy status, plain-language explanation, category, probabilities, and image evidence before technical identifiers. Fixed first-display canvas fitting, moved history save and PDF verification/rendering off the UI thread, and built a CPU-only, one-folder Windows package with a spawned-worker and PDF self-test. The package launches as a windowed `Gyrus.exe`; its assets and 31 frozen artifacts remain bundled and verified.
+
+### Files
+
+| Path | Purpose and content | Test command | Known edge cases |
+| --- | --- | --- | --- |
+| `gyrus/domain/explanation.py` | Translates verified OOD, reliability, and final-policy codes into human-readable copy; unknown codes fail closed. | `uv run python -m pytest -q tests/test_gyrus_explanation.py` | No-tumor has no model mask or mask-reliability score; no wording implies a clinical probability. |
+| `gyrus/domain/pdf_export.py` | Puts result meaning before technical hashes across the fixed three-page report while preserving exact thresholds and deterministic bytes. | `uv run python -m pytest -q tests/test_gyrus_pdf_export.py` | Missing/altered source or model evidence still blocks export; no partial PDF is offered. |
+| `gyrus/gui/result_panel.py` | Makes status, category probabilities, pixel measurements, and input-similarity context readable; keeps raw audit details expandable. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | A no-tumor case shows no mask and no irrelevant reliability threshold; external performance limits remain visible. |
+| `gyrus/gui/theme.py` | Styles the category heading and four probability bars consistently with the established Gyrus palette. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | High-DPI Qt rendering still depends on system font metrics. |
+| `gyrus/gui/image_canvas.py` | Defers initial Fit until the result viewport has real dimensions so an MRI does not render as a tiny image. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | Later manual zoom is not reset by every redraw. |
+| `gyrus/gui/local_task.py` | Runs bounded local saves and PDF preparation in a Qt worker thread and returns success or failure to the GUI thread. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py tests/test_gyrus_error_handling.py` | Closing waits for the current local operation; it does not silently cancel an atomic save. |
+| `gyrus/gui/main_window.py` | Integrates off-thread history/PDF actions, disables affected controls while busy, and waits safely on close; corrects the History tooltip. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py tests/test_gyrus_error_handling.py` | An export failure preserves the live or saved case; only verified bytes reach PDF preview. |
+| `gyrus/gui/app.py` | Makes CPU the portable default and adds a synthetic package self-test CLI; CUDA remains an explicit choice in an equipped development environment. | `uv run python -m gyrus --self-test-report "$env:TEMP\gyrus-source-self-test.json"` | The CPU package does not contain CUDA and never silently falls back after a device failure. |
+| `gyrus/packaging_self_test.py` | Verifies the packaged manifest, two spawned CPU inference paths, and a three-page PDF with disclaimer and creator metadata. | `dist\Gyrus\Gyrus.exe --self-test-report "$env:TEMP\gyrus-self-test.json"` | Fixtures are synthetic and provide software checks only, not model-performance evidence. |
+| `packaging/Gyrus.spec` | Bundles a windowed executable, Qt/PDF libraries, icon, logo assets, and the frozen stack; excludes a conflicting build-host ICU DLL. | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\build_gyrus_windows.ps1` | The entire one-folder output must stay together; independent clean-PC compatibility is unverified. |
+| `scripts/build_gyrus_windows.ps1` | Creates/reuses an isolated pinned CPU build environment, builds cleanly, verifies 31 artifact hashes, then waits for the windowed executable's self-test. | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\build_gyrus_windows.ps1` | The windowed process must be awaited explicitly; checking JSON immediately after launch is a race. |
+| `scripts/launch_gyrus.py` | Calls multiprocessing `freeze_support()` before importing the GUI so a packaged spawned worker starts correctly. | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts\build_gyrus_windows.ps1` | Designed for Windows spawn; a failed worker job is not silently retried. |
+| `scripts/capture_gyrus_result_qa.py` | Captures a local result-screen QA image using the frozen synthetic fixture for layout review. | `uv run python scripts/capture_gyrus_result_qa.py` | The image is a software fixture and must never be presented as a real patient example. |
+| `tests/test_gyrus_explanation.py` | Guards readable review reasons and fail-closed behavior for unknown reason codes. | `uv run python -m pytest -q tests/test_gyrus_explanation.py` | Tests explanation semantics, not predictive validity. |
+| `tests/test_gyrus_gui_core.py` | Adds canvas-fit, display-copy, and asynchronous history-save/close checks. | `uv run python -m pytest -q tests/test_gyrus_gui_core.py` | Qt tests use a synthetic fixture and supported local display environment. |
+| `tests/test_gyrus_error_handling.py` | Confirms the revised local-operation failure path does not claim a save. | `uv run python -m pytest -q tests/test_gyrus_error_handling.py` | An abrupt OS termination cannot guarantee a completed log or save. |
+| `tests/test_gyrus_pdf_export.py` | Checks readable status/category labels alongside deterministic pages, metadata, disclaimer, and provenance. | `uv run python -m pytest -q tests/test_gyrus_pdf_export.py` | Pixel layout was additionally inspected manually at native rendered resolution. |
+| `docs/gyrus_user_guide.md` | Tells a non-developer how to launch, analyze, inspect, edit, save, and export without clinical claims. | Open the Markdown and follow the packaged self-test command. | No installer or signed binary is supplied. |
+| `docs/phase7_release.md` | Records build evidence, exact policy thresholds, package boundaries, and the clean-machine limitation. | Compare its manifest hash and package self-test against local outputs. | A separate Windows machine without Python has not been tested. |
+| `README.md` | Links the desktop guide and release record from the repository landing page. | Open both links. | Source and local bundle are separate deliverables. |
+| `.gitignore` | Keeps `.build-venv/`, `build/`, and `dist/` out of source history; the build remains reproducible from committed code. | `git status --short` after building. | GitHub contains the recipe and verified source, not the 710 MB local executable bundle. |
+
+### Verification and review
+
+- The full source regression suite passed **324 tests**. After the final no-tumor wording adjustment, **27 focused GUI/PDF/explanation tests** passed. `uv run ruff check .`, `uv lock --check`, and `git diff --check` passed.
+- The clean, windowed PyInstaller build passed its own synthetic package self-test under a minimal Windows PATH: **31 verified frozen artifacts**, two spawned CPU analyses (`STANDARD` and `REVIEW_REQUIRED` paths), and **three parsed PDF pages** with disclaimer. Repeating the same test from `%TEMP%` as the working directory also passed.
+- `dist\Gyrus\Gyrus.exe` launched an interactive window titled `Gyrus — Brain MRI Research Viewer`. The local package measured **709,854,063 bytes**; the executable SHA256 was `ccfd6e13d4fc28162682781b625bf348975291a6e730d60abfa437ddb40162c9`.
+- The frozen manifest SHA256 stayed `7e67de9f16b183165cf0c065e98111cff318ef616630adf52108ce6a57cacf8a`; no tracked `runs/final_stack/` file changed. The segmentation `0.50`, reliability `0.9490250173235835`, and OOD `0.36854275476100085` thresholds remain unchanged. No BRISC sealed-test access or neural retraining/refitting occurred.
+- Native result-screen and three-page PDF renders were visually inspected for hierarchy, readable labels, and clipping. The screenshot input was a synthetic shape, not a patient MRI or model-performance example.
+
+### Known limits and next boundary
+
+1. The CPU one-folder package works on this Windows development host with a minimal PATH; an independent fresh Windows PC without Python has not been tested. It is not code signed, and no MSI installer was produced.
+2. The packaged self-test proves software reconstruction and PDF generation on two synthetic images. It does not establish clinical accuracy, external generalization, or universal CPU/CUDA parity.
+3. The app offers no curated patient-image demo mode. Bundling patient images or presenting synthetic shapes as clinical examples would be misleading; the user supplies a local image explicitly.
+4. Phase 8 sealed-test evaluation is still unopened. Its device, procedure, and one-time reporting must remain separate from this UI release.
