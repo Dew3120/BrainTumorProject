@@ -17,6 +17,8 @@ The complete, hash-verified inference package is in [`runs/final_stack/`](runs/f
 
 ## Start here
 
+- [Gyrus desktop guide](docs/gyrus_user_guide.md)
+- [Gyrus Windows release status](docs/phase7_release.md)
 - [Narrative report](docs/report.md)
 - [Methods and formulas](docs/methods.md)
 - [Consolidated limitations](docs/limitations.md)

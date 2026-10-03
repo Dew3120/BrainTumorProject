@@ -43,6 +43,7 @@ from gyrus.worker.protocol import AnalyzeSuccess, WorkerFailure
 from .history_view import HistoryListPanel, HistoryPreviewPanel
 from .image_canvas import ImageCanvas
 from .input_controller import InputValidationThread, ValidatedSelection
+from .local_task import LocalTask
 from .mask_editor import MaskEditor
 from .pdf_preview import PdfPreviewDialog
 from .presentation import ResultPresentation, build_presentation
@@ -99,6 +100,11 @@ class GyrusMainWindow(QMainWindow):
         self._gate: OodReviewDialog | None = None
         self._error_message = ""
         self._error_notice: ErrorNotice | None = None
+        self._local_task: LocalTask | None = None
+        self._local_kind: str | None = None
+        self._local_result: object | None = None
+        self._local_error: BaseException | None = None
+        self._close_after_local_task = False
         self.setObjectName("GyrusMainWindow")
         self.setWindowTitle("Gyrus — Brain MRI Research Viewer")
         self.setWindowIcon(QIcon(str(ASSET_ROOT / "gyrus.ico")))
@@ -130,7 +136,7 @@ class GyrusMainWindow(QMainWindow):
         self.history_button = self._nav_button("◷\nHistory", "History", False)
         self.about_button = self._nav_button("ⓘ\nAbout", "About and integrity", True)
         self.analyze_button.setProperty("active", "true")
-        self.history_button.setToolTip("History becomes available in Stage 6")
+        self.history_button.setToolTip("Open cases you explicitly saved on this computer")
         self.history_button.clicked.connect(self.open_history)
         self.analyze_button.clicked.connect(self.close_history)
         rail_layout.addWidget(self.analyze_button)
@@ -542,15 +548,9 @@ class GyrusMainWindow(QMainWindow):
         )
         if decision != QMessageBox.StandardButton.Yes:
             return
-        try:
-            record = save_history_bundle(self._history_repository(), payload)
-        except Exception as exc:  # noqa: BLE001 - save failure must not claim retention
-            self._set_error("HISTORY_SAVE_FAILED", "Case was not saved. Check local storage and try again.", exc)
-            self.show_notice(self._error_message)
-            return
-        self.result_inspector.save_history_button.setEnabled(False)
-        self._saved_history_ids.add(record.case_id)
-        self.show_notice(f"Saved to local history: {record.case_id}")
+        repository = self._history_repository()
+        self._start_local_task("history_save", lambda: save_history_bundle(repository, payload))
+        self.show_notice("Saving this case to local history…")
 
     def open_history(self) -> None:
         if self.machine.state == AppState.HISTORY:
@@ -668,13 +668,15 @@ class GyrusMainWindow(QMainWindow):
         self._reload_history()
 
     def _preview_pdf(self, payload: PdfRenderPayload) -> None:
+        self._start_local_task(
+            "pdf_render",
+            lambda: (render_pdf(payload), payload.model.default_filename),
+        )
+        self.show_notice("Checking source and preparing the PDF preview…")
+
+    def _open_pdf_bytes(self, document: bytes, filename: str) -> None:
         try:
-            document = render_pdf(payload)
-        except Exception as exc:  # noqa: BLE001 - invalid report never reaches preview
-            self._lock_result("PDF_REPORT_VERIFICATION_FAILED", exc)
-            return
-        try:
-            dialog = PdfPreviewDialog(document, payload.model.default_filename, self)
+            dialog = PdfPreviewDialog(document, filename, self)
         except Exception as exc:  # noqa: BLE001 - failed viewer must not offer export
             self._set_error("PDF_PREVIEW_FAILED", "PDF preview could not open. The case is unchanged.", exc)
             self.show_notice(self._error_message)
@@ -720,8 +722,10 @@ class GyrusMainWindow(QMainWindow):
         if self.machine.state != AppState.HISTORY or self._history_selected is None:
             raise RuntimeError("PDF history export requires a verified selected case")
         case_id = self._history_selected.record.case_id
-        try:
-            loaded = load_history_bundle(self._history_repository(), case_id)
+        repository = self._history_repository()
+
+        def build_saved_pdf() -> tuple[bytes, str]:
+            loaded = load_history_bundle(repository, case_id)
             report = build_pdf_report_model_from_payload(
                 loaded.result, generated_at=loaded.result["execution"]["completed_at"],
                 edit_provenance=loaded.edit_provenance,
@@ -731,10 +735,68 @@ class GyrusMainWindow(QMainWindow):
                 loaded.model_gray_128, loaded.probability, loaded.model_mask,
                 loaded.edited_mask, loaded.edit_provenance,
             )
-        except Exception as exc:  # noqa: BLE001 - reverify archived case before PDF export
-            self._lock_result("PDF_HISTORY_VERIFICATION_FAILED", exc)
+            return render_pdf(payload), report.default_filename
+
+        self._start_local_task("history_pdf", build_saved_pdf)
+        self.show_notice("Rechecking the saved case and preparing its PDF…")
+
+    def _start_local_task(self, kind: str, operation) -> None:
+        if self._local_task is not None:
+            raise RuntimeError("Another local operation is still running")
+        task = LocalTask(operation)
+        self._local_task = task
+        self._local_kind = kind
+        self._local_result = None
+        self._local_error = None
+        task.succeeded.connect(self._local_task_succeeded)
+        task.failed.connect(self._local_task_failed)
+        task.finished.connect(self._local_task_finished)
+        self._render_state()
+        task.start()
+
+    def _local_task_succeeded(self, result: object) -> None:
+        self._local_result = result
+
+    def _local_task_failed(self, error: BaseException) -> None:
+        self._local_error = error
+
+    def _local_task_finished(self) -> None:
+        task = self._local_task
+        kind = self._local_kind
+        result = self._local_result
+        error = self._local_error
+        self._local_task = None
+        self._local_kind = None
+        self._local_result = None
+        self._local_error = None
+        if task is not None:
+            task.deleteLater()
+        self._render_state()
+        if self._close_after_local_task:
+            if error is not None:
+                report_error(
+                    "LOCAL_TASK_FAILED_DURING_CLOSE",
+                    "A local operation failed while Gyrus was closing.",
+                    exception=error,
+                )
+            QTimer.singleShot(0, self.close)
             return
-        self._preview_pdf(payload)
+        if error is not None:
+            if kind in {"history_pdf", "pdf_render"}:
+                self._lock_result("PDF_REPORT_VERIFICATION_FAILED", error)
+            else:
+                self._set_error(
+                    "HISTORY_SAVE_FAILED", "Case was not saved. Check local storage and try again.",
+                    error,
+                )
+                self.show_notice(self._error_message)
+        elif kind == "history_save":
+            self._saved_history_ids.add(result.case_id)
+            self.result_inspector.save_history_button.setEnabled(False)
+            self.show_notice(f"Saved to local history: {result.case_id}")
+        elif kind in {"pdf_render", "history_pdf"}:
+            document, filename = result
+            self._open_pdf_bytes(document, filename)
 
     def open_mask_editor(self) -> None:
         if self.machine.state not in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}:
@@ -968,27 +1030,42 @@ class GyrusMainWindow(QMainWindow):
             self.inspector_stack.setCurrentIndex(0)
 
         self.drop_zone.setVisible(state in {AppState.READY_EMPTY, AppState.RECOVERABLE_ERROR})
-        self.choose_button.setEnabled(state in {AppState.READY_EMPTY, AppState.RECOVERABLE_ERROR})
-        self.run_button.setEnabled(state == AppState.READY_TO_ANALYZE)
+        busy = self._local_task is not None
+        self.choose_button.setEnabled(not busy and state in {AppState.READY_EMPTY, AppState.RECOVERABLE_ERROR})
+        self.run_button.setEnabled(not busy and state == AppState.READY_TO_ANALYZE)
         self.result_inspector.edit_mask_button.setEnabled(
+            not busy
+            and
             state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
             and self._pending_result is not None
             and self._pending_result.mask is not None
         )
-        self.result_inspector.new_case_button.setEnabled(state != AppState.EDITING_MASK)
+        self.result_inspector.new_case_button.setEnabled(not busy and state != AppState.EDITING_MASK)
         self.result_inspector.save_history_button.setEnabled(
+            not busy
+            and
             state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
             and self._pending_result is not None
             and self._pending_result.result["case_id"] not in self._saved_history_ids
         )
         self.result_inspector.export_pdf_button.setEnabled(
+            not busy
+            and
             state in {AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED}
             and self._pending_result is not None
         )
         self.history_button.setEnabled(
+            not busy
+            and
             state in {AppState.READY_EMPTY, AppState.READY_TO_ANALYZE,
                       AppState.RESULT_STANDARD, AppState.RESULT_REVIEW_REQUIRED, AppState.HISTORY}
             and self._manifest_sha256 is not None
+        )
+        self.analyze_button.setEnabled(not busy and state not in {
+            AppState.BOOT_VERIFYING, AppState.BOOT_BLOCKED, AppState.INTEGRITY_ERROR_LOCKED,
+        })
+        self.history_preview.export_button.setEnabled(
+            not busy and state == AppState.HISTORY and self._history_selected is not None
         )
         self.history_button.setProperty("active", "true" if state == AppState.HISTORY else "false")
         self.analyze_button.setProperty("active", "false" if state == AppState.HISTORY else "true")
@@ -1043,3 +1120,11 @@ class GyrusMainWindow(QMainWindow):
         else:
             self.inspector.setFixedWidth(480)
             self.content_layout.setContentsMargins(24, 24, 24, 32)
+
+    def closeEvent(self, event) -> None:
+        if self._local_task is not None:
+            self._close_after_local_task = True
+            self.show_notice("Finishing the local file operation before closing…", duration_ms=30000)
+            event.ignore()
+            return
+        super().closeEvent(event)

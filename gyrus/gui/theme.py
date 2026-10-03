@@ -67,6 +67,7 @@ def apply_theme(app: QApplication) -> None:
                          border: 1px solid {COLORS['primary']};
                          border-radius: 6px; padding: 8px; }}
         QLabel#ResultStatus {{ font-size: 20px; font-weight: 700; }}
+        QLabel#CategoryValue {{ font-size: 21px; font-weight: 650; }}
         QLabel#UserEditedBadge {{ color: {COLORS['manual_add']};
                                   font-size: 11px; font-weight: 700; }}
         QFrame#EditorToolStrip {{ background: {COLORS['elevated']};
@@ -94,6 +95,9 @@ def apply_theme(app: QApplication) -> None:
         QProgressBar {{ border: 1px solid {COLORS['border']}; border-radius: 4px;
                         background: {COLORS['elevated']}; height: 8px; }}
         QProgressBar::chunk {{ background: {COLORS['primary']}; }}
+        QProgressBar#ClassProbabilityBar {{ height: 9px; border-radius: 4px; }}
+        QProgressBar#ClassProbabilityBar::chunk {{ background: {COLORS['primary']};
+                                                   border-radius: 4px; }}
         QPlainTextEdit#Provenance {{ background: {COLORS['elevated']};
                                     border: 1px solid {COLORS['border']};
                                     font-family: 'Cascadia Mono'; font-size: 11px; }}

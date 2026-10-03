@@ -25,21 +25,15 @@ from gyrus.domain.constants import (
     OOD_REVIEW_THRESHOLD_TEXT,
     RELIABILITY_THRESHOLD_TEXT,
 )
+from gyrus.domain.explanation import (
+    ood_explanation,
+    policy_explanation,
+    reliability_explanation,
+)
 from gyrus.domain.mask_editor import MaskEditSession
 
 from .presentation import ResultPresentation
 from .theme import COLORS
-
-REASON_TEXT = {
-    "AT_OR_ABOVE_REVIEW_THRESHOLD": "Input differs from development data.",
-    "BELOW_REVIEW_THRESHOLD": "OOD review gate passed.",
-    "BELOW_THRESHOLD": "Model mask fell below the internal reliability threshold.",
-    "RELIABILITY_UNAVAILABLE": "Mask reliability could not be computed.",
-    "RELIABILITY_INVALID": "Mask reliability output was invalid.",
-    "SEGMENTATION_RELIABILITY_NOT_APPLICABLE": (
-        "No segmentation-reliability score applies to this model-predicted label."
-    ),
-}
 
 
 class LoadingPanel(QWidget):
@@ -122,14 +116,37 @@ class ResultInspector(QWidget):
         rows = QVBoxLayout(body)
         rows.setContentsMargins(0, 0, 0, 0)
         rows.setSpacing(12)
-        self.ood = self._section(rows, "OOD GATE")
-        self.category = self._section(rows, "MODEL-PREDICTED CATEGORY")
-        self.probabilities = self._section(rows, "RAW CLASS PROBABILITIES")
-        self.reliability = self._section(rows, "INTERNAL MASK RELIABILITY")
-        self.measurements = self._section(rows, "MODEL MASK · PIXELS ONLY")
-        self.caveat = self._section(rows, "INTERPRETATION")
+        self.category = self._section(rows, "MODEL-PREDICTED LABEL")
+        self.category.setObjectName("CategoryValue")
+        probability_heading = QLabel("CATEGORY PROBABILITIES", body)
+        probability_heading.setObjectName("Metadata")
+        rows.addWidget(probability_heading)
+        self.probabilities = QLabel("", body)
+        self.probabilities.setVisible(False)
+        self.probability_rows: list[tuple[QLabel, QProgressBar]] = []
+        for name in CLASS_NAMES:
+            line = QHBoxLayout()
+            label = QLabel(name.replace("_", " ").title(), body)
+            label.setFixedWidth(92)
+            bar = QProgressBar(body)
+            bar.setObjectName("ClassProbabilityBar")
+            bar.setRange(0, 1000)
+            bar.setTextVisible(False)
+            bar.setFixedHeight(9)
+            value = QLabel("0.00%", body)
+            value.setFixedWidth(64)
+            value.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            line.addWidget(label)
+            line.addWidget(bar, 1)
+            line.addWidget(value)
+            rows.addLayout(line)
+            self.probability_rows.append((value, bar))
+        self.measurements = self._section(rows, "HIGHLIGHTED REGION · MODEL PIXELS")
+        self.ood = self._section(rows, "INPUT SIMILARITY CHECK")
+        self.reliability = self._section(rows, "MASK RELIABILITY · INTERNAL ESTIMATE")
+        self.caveat = self._section(rows, "WHAT THIS MEANS")
         self.provenance_toggle = QToolButton(body)
-        self.provenance_toggle.setText("Provenance ▸")
+        self.provenance_toggle.setText("Technical details ▸")
         self.provenance_toggle.setCheckable(True)
         self.provenance_toggle.toggled.connect(self._toggle_provenance)
         rows.addWidget(self.provenance_toggle)
@@ -162,60 +179,64 @@ class ResultInspector(QWidget):
         return value
 
     def _toggle_provenance(self, checked: bool) -> None:
-        self.provenance_toggle.setText("Provenance ▾" if checked else "Provenance ▸")
+        self.provenance_toggle.setText("Technical details ▾" if checked else "Technical details ▸")
         self.provenance.setVisible(checked)
 
     def set_result(self, presentation: ResultPresentation) -> None:
         result = presentation.result
         status = result["final_policy"]["status"]
         review = status == "REVIEW_REQUIRED"
-        self.status.setText(("⚠ " if review else "✓ ") + status)
+        self.status.setText("⚠  REVIEW REQUIRED" if review else "✓  STANDARD")
         self.edited_badge.setVisible(False)
         self.edit_mask_button.setEnabled(presentation.mask is not None)
         self.status_card.setProperty("disposition", "review" if review else "standard")
         self.status_card.style().unpolish(self.status_card)
         self.status_card.style().polish(self.status_card)
         reasons = result["final_policy"]["reasons"]
-        self.reason.setText(
-            "Both internal review gates passed."
-            if not review
-            else "Review reason: " + " ".join(REASON_TEXT.get(code, code) for code in reasons)
-        )
+        self.reason.setText(policy_explanation(result))
         ood = result["ood"]
         self.ood.setText(
-            f"{ood['status']} · score {ood['score']:.6f}\n"
-            f"Review threshold {OOD_REVIEW_THRESHOLD_TEXT}"
+            f"{ood_explanation(result)}\n"
+            f"Score {ood['score']:.4f} · review from {OOD_REVIEW_THRESHOLD_TEXT}"
         )
         classification = result["classification"]
         category = classification["predicted_category"]
-        self.category.setText(f"Model-predicted label: {category}")
+        self.category.setText(category.replace("_", " ").title())
         self.probabilities.setText(
             "\n".join(
                 f"{name.replace('_', ' ')}  {value:.4f}"
                 for name, value in zip(CLASS_NAMES, classification["probabilities"], strict=True)
             )
         )
+        for (value_label, bar), probability in zip(
+            self.probability_rows, classification["probabilities"], strict=True
+        ):
+            bar.setValue(round(probability * 1000))
+            value_label.setText(f"{probability * 100:.2f}%")
         reliability = result["reliability"]
         score = reliability["score"]
-        self.reliability.setText(
-            ("Not applicable to a no-tumor prediction" if score is None else f"{score:.6f}")
-            + f"\nStandard threshold {RELIABILITY_THRESHOLD_TEXT}"
-        )
+        if score is None:
+            self.reliability.setText(reliability_explanation(result))
+        else:
+            self.reliability.setText(
+                f"Score {score:.4f} · standard from {RELIABILITY_THRESHOLD_TEXT}\n"
+                + reliability_explanation(result)
+            )
         spatial = result["spatial"]
         if spatial is None:
             self.measurements.setText("No model mask disclosed. Classification-only output.")
         else:
             stats = spatial["statistics"]
+            box = stats["bounding_box_xywh"]
+            box_text = "No bounding box" if box is None else f"{box[2]} × {box[3]} px bounding box"
             self.measurements.setText(
-                f"Area {stats['foreground_pixels']} / {stats['total_pixels']} model pixels\n"
-                f"Components {stats['component_count']} · box {stats['bounding_box_xywh']}"
+                f"{stats['foreground_pixels']:,} highlighted pixels · {box_text}\n"
+                f"{stats['component_count']} separate region(s). Physical size is unknown."
             )
         caveat = (
-            "This is an internal research policy, not a clinical assessment. "
-            "In evaluated external cohorts, the frozen OOD policy sent every case "
-            "to review while segmentation transferred poorly. External reliability "
-            "was miscalibrated, and OOD is weak at ranking whether an individual "
-            "mask is correct. E08 combines three model outputs, adding complexity."
+            "The coloured region is a model suggestion, not a verified tumor boundary. "
+            "On independent external datasets, segmentation performed poorly. "
+            "The input-similarity check cannot tell whether this individual mask is correct."
         )
         if category == "glioma":
             caveat += " Glioma reliability ranking was weaker in internal development tests."
@@ -232,6 +253,8 @@ class ResultInspector(QWidget):
                     "segmentation_threshold": spatial["segmentation_threshold"] if spatial else None,
                     "ood_reason": ood["reason"],
                     "policy_reasons": reasons,
+                    "ood_score_full_precision": ood["score"],
+                    "reliability_score_full_precision": score,
                     "e08_route": presentation.route,
                     "raw_probability_sha256": presentation.raw_probability_sha256,
                     "stack": "classifier v1 · E08 · C03 · R02 · O05",

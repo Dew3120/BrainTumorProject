@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import numpy as np
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QEvent, Qt, QTimer
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtWidgets import (
     QFrame,
@@ -82,6 +82,7 @@ class ImageCanvas(QWidget):
         self.view.setDragMode(QGraphicsView.DragMode.ScrollHandDrag)
         self.view.setTransformationAnchor(QGraphicsView.ViewportAnchor.AnchorUnderMouse)
         self.view.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.view.viewport().installEventFilter(self)
         self.image_item = QGraphicsPixmapItem()
         self.scene.addItem(self.image_item)
         column.addWidget(self.view, 1)
@@ -184,6 +185,13 @@ class ImageCanvas(QWidget):
         self.image_item.setPixmap(pixmap)
         self.scene.setSceneRect(self.image_item.boundingRect())
         self.fit_image()
+        # The result can arrive before Qt finishes laying out a newly shown
+        # viewer. A second fit after the layout pass prevents a tiny image.
+        QTimer.singleShot(0, self._fit_after_layout)
+
+    def _fit_after_layout(self) -> None:
+        if self._fit and self.isVisible():
+            self.fit_image()
 
     def fit_image(self) -> None:
         if self.image_item.pixmap().isNull():
@@ -205,4 +213,9 @@ class ImageCanvas(QWidget):
     def resizeEvent(self, event) -> None:
         super().resizeEvent(event)
         if self._fit:
-            self.fit_image()
+            QTimer.singleShot(0, self._fit_after_layout)
+
+    def eventFilter(self, watched, event) -> bool:
+        if watched is self.view.viewport() and event.type() == QEvent.Type.Resize and self._fit:
+            QTimer.singleShot(0, self._fit_after_layout)
+        return super().eventFilter(watched, event)

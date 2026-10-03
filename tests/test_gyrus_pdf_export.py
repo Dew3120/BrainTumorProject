@@ -85,19 +85,19 @@ def test_tumor_pdf_is_three_pages_deterministic_and_traceable(reports):
     for page in pages:
         assert "RESEARCH PROTOTYPE — NOT FOR CLINICAL USE" in page
         assert DISCLAIMER in page
-    assert payload.model.result["classification"]["predicted_category"] in pages[0]
+    assert payload.model.result["classification"]["predicted_category"].title() in pages[0]
     assert "FROZEN MODEL MASK" in pages[1]
     assert payload.model.result["stack_manifest_sha256"] in pages[2]
     assert payload.model.result["input"]["source_sha256"] in pages[2]
     for threshold in (SEGMENTATION_THRESHOLD_TEXT, RELIABILITY_THRESHOLD_TEXT, OOD_REVIEW_THRESHOLD_TEXT):
         assert threshold in pages[2]
-    assert "REVIEW_REQUIRED" not in pages[0]  # synthetic elliptic fixture is standard
+    assert "REVIEW REQUIRED" not in pages[0]  # synthetic elliptic fixture is standard
 
 
 def test_no_tumor_pdf_reports_absent_mask_without_fabricating_measurements(reports):
     pdf = render_pdf(reports["gradient.png"])
     pages = [page.extract_text() for page in PdfReader(io.BytesIO(pdf)).pages]
-    assert all("REVIEW_REQUIRED" in page for page in pages)
+    assert all("REVIEW REQUIRED" in page for page in pages)
     assert "did not produce a segmentation mask" in " ".join(pages[1].split())
     assert "not applicable" in pages[1]
 

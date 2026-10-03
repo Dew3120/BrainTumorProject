@@ -35,6 +35,52 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "runs/final_stack/verification/fixtures"
 
 
+def _wait_for_local_task(qtbot, window):
+    qtbot.waitUntil(lambda: window._local_task is None, timeout=20_000)
+
+
+def test_history_save_runs_off_ui_thread_and_close_waits(
+    tmp_path, qtbot, monkeypatch, frozen_responses,
+):
+    from threading import Event
+    from types import SimpleNamespace
+
+    from PySide6.QtCore import QTimer
+    from PySide6.QtWidgets import QMessageBox
+
+    entered, release = Event(), Event()
+    monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args: QMessageBox.StandardButton.Yes)
+    window = GyrusMainWindow()
+    qtbot.addWidget(window)
+    window.show()
+    window.on_worker_ready(_ready())
+    window.select_image(str(FIXTURES / "elliptic.png"))
+    qtbot.waitUntil(lambda: window.machine.state == AppState.READY_TO_ANALYZE, timeout=20_000)
+    window.run_analysis()
+    window.on_job_finished(frozen_responses["elliptic.png"])
+
+    def slow_save(_repository, _payload):
+        entered.set()
+        if not release.wait(5):
+            raise TimeoutError("synthetic save was not released")
+        return SimpleNamespace(case_id=window._pending_result.result["case_id"])
+
+    monkeypatch.setattr("gyrus.gui.main_window.save_history_bundle", slow_save)
+    try:
+        window.save_to_history()
+        qtbot.waitUntil(entered.is_set, timeout=5_000)
+        ticked = []
+        QTimer.singleShot(0, lambda: ticked.append(True))
+        qtbot.waitUntil(lambda: bool(ticked), timeout=1_000)
+        assert not window.result_inspector.export_pdf_button.isEnabled()
+        window.close()
+        assert window.isVisible()
+    finally:
+        release.set()
+    qtbot.waitUntil(lambda: window.isHidden(), timeout=5_000)
+
+
 def _ready():
     from gyrus.domain.manifest import EXPECTED_MANIFEST_SHA256
 
@@ -153,6 +199,12 @@ def test_standard_result_is_visible_only_after_complete_response(qtbot, frozen_r
     assert "STANDARD" in window.result_inspector.status.text()
     assert window.image_canvas.tabs.isTabEnabled(2)
     assert window.image_canvas.tabs.currentIndex() == 2
+    qtbot.waitUntil(
+        lambda: window.image_canvas.view.mapFromScene(
+            window.image_canvas.image_item.sceneBoundingRect()
+        ).boundingRect().width() >= window.image_canvas.view.viewport().width() * 0.5,
+        timeout=5_000,
+    )
     assert "0.9490250173235835" in window.result_inspector.reliability.text()
     assert "0.36854275476100085" in window.result_inspector.ood.text()
     assert window.workspace.width() == 820
@@ -193,7 +245,7 @@ def test_ood_review_is_modal_before_result_and_no_tumor_has_no_mask(qtbot, froze
     assert window.machine.state == AppState.RESULT_REVIEW_REQUIRED
     assert "Not applicable" in window.result_inspector.reliability.text()
     assert not window.image_canvas.tabs.isTabEnabled(2)
-    assert "Model-predicted label: no_tumor" in window.result_inspector.category.text()
+    assert window.result_inspector.category.text() == "No Tumor"
 
 
 def test_ood_gate_choose_another_discards_undisclosed_output(qtbot, frozen_responses):
@@ -308,6 +360,7 @@ def test_history_is_opt_in_filters_reopens_and_deletes(tmp_path, qtbot, monkeypa
     window.on_job_finished(frozen_responses["elliptic.png"])
     assert not root.exists()
     window.result_inspector.save_history_button.click()
+    _wait_for_local_task(qtbot, window)
     assert (root / "history.db").exists()
     assert window.result_inspector.save_history_button.isEnabled() is False
     window.history_button.click()
@@ -342,6 +395,7 @@ def test_history_bundle_hash_mismatch_locks_preview(tmp_path, qtbot, monkeypatch
     window.run_analysis()
     window.on_job_finished(frozen_responses["elliptic.png"])
     window.save_to_history()
+    _wait_for_local_task(qtbot, window)
     bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
     (bundle / "overlay_preview.png").write_bytes(b"tampered")
     window.open_history()
@@ -376,11 +430,14 @@ def test_live_and_saved_pdf_preview_use_verified_three_page_document(
     window.on_job_finished(frozen_responses["elliptic.png"])
     assert window.result_inspector.export_pdf_button.isEnabled()
     window.export_current_pdf()
+    _wait_for_local_task(qtbot, window)
     assert window.machine.state == AppState.RESULT_STANDARD
     window.save_to_history()
+    _wait_for_local_task(qtbot, window)
     window.open_history()
     assert window.history_preview.export_button.isEnabled()
     window.export_saved_pdf()
+    _wait_for_local_task(qtbot, window)
     assert window.machine.state == AppState.HISTORY
     assert states_seen == [AppState.EXPORT_PREVIEW, AppState.EXPORT_PREVIEW]
 
@@ -401,11 +458,13 @@ def test_saved_pdf_export_reverifies_bundle_before_preview(
     window.run_analysis()
     window.on_job_finished(frozen_responses["elliptic.png"])
     window.save_to_history()
+    _wait_for_local_task(qtbot, window)
     window.open_history()
     assert window.history_preview.export_button.isEnabled()
     bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
     (bundle / "overlay_preview.png").write_bytes(b"changed after selection")
     window.export_saved_pdf()
+    _wait_for_local_task(qtbot, window)
     assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
 
 
@@ -430,6 +489,7 @@ def test_saved_human_layer_restores_without_recomputing_reliability(
     window.save_edited_layer()
     window.close_mask_editor()
     window.save_to_history()
+    _wait_for_local_task(qtbot, window)
     window.open_history()
     assert window.history_list.table.item(0, 4).text() == "USER EDITED"
     window.open_saved_history_case()
@@ -454,6 +514,7 @@ def test_no_tumor_history_retains_source_without_mask(tmp_path, qtbot, monkeypat
     window.on_job_finished(frozen_responses["gradient.png"])
     window._gate.view_output.click()
     window.save_to_history()
+    _wait_for_local_task(qtbot, window)
     bundle = next((tmp_path / "GyrusResearch" / "cases").iterdir())
     assert (bundle / "source.png").exists()
     assert not (bundle / "model_mask.png").exists()

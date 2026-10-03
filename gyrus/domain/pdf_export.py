@@ -23,6 +23,7 @@ from .constants import (
     RELIABILITY_THRESHOLD_TEXT,
     SEGMENTATION_THRESHOLD_TEXT,
 )
+from .explanation import ood_explanation, policy_explanation, reliability_explanation
 from .input_contract import preprocess_for_frozen_stack, validate_and_decode_image
 from .manifest import EXPECTED_MANIFEST_SHA256
 from .mask_provenance import MaskEditProvenance, mask_sha256
@@ -239,7 +240,7 @@ def _page_frame(pdf: canvas.Canvas, page_number: int, title: str, status: str) -
         pdf.roundRect(_PAGE_W - 181, _PAGE_H - 86, 139, 22, 5, stroke=0, fill=1)
         pdf.setFillColor(_INK)
         pdf.setFont("GyrusSans-Bold", 8.5)
-        pdf.drawCentredString(_PAGE_W - 111.5, _PAGE_H - 78, status)
+        pdf.drawCentredString(_PAGE_W - 111.5, _PAGE_H - 78, "REVIEW REQUIRED")
     pdf.setStrokeColor(_LINE)
     pdf.line(42, 62, _PAGE_W - 42, 62)
     pdf.setFillColor(_MUTED)
@@ -311,8 +312,8 @@ def _page_one(pdf: canvas.Canvas, payload: PdfRenderPayload,
     _label(pdf, "Case status", 56, 711)
     pdf.setFillColor(_AMBER if status == "REVIEW_REQUIRED" else _GREEN)
     pdf.setFont("GyrusSans-Bold", 16)
-    pdf.drawString(56, 687, status)
-    _paragraph(pdf, f"Reason: {result['final_policy']['primary_reason']}", 56, 666,
+    pdf.drawString(56, 687, status.replace("_", " "))
+    _paragraph(pdf, policy_explanation(result), 56, 666,
                _PAGE_W - 112, size=8.5)
     _label(pdf, "Source image", 42, 614)
     filename = result["input"]["filename"]
@@ -320,7 +321,8 @@ def _page_one(pdf: canvas.Canvas, payload: PdfRenderPayload,
                f"{result['input']['image_format']} / {result['input']['source_mode']}",
                42, 598, _PAGE_W - 84, size=9)
     _label(pdf, "Model-predicted category", 42, 563)
-    _paragraph(pdf, result["classification"]["predicted_category"], 42, 546,
+    category = result["classification"]["predicted_category"]
+    _paragraph(pdf, category.replace("_", " ").title(), 42, 546,
                _PAGE_W - 84, size=13, leading=17, font="GyrusSans-Bold")
     probabilities = result["classification"]["probabilities"]
     for index, name in enumerate(("Glioma", "Meningioma", "Pituitary", "No tumor")):
@@ -379,40 +381,47 @@ def _page_two(pdf: canvas.Canvas, payload: PdfRenderPayload, gray: np.ndarray) -
 def _page_three(pdf: canvas.Canvas, payload: PdfRenderPayload) -> None:
     model = payload.model
     result = model.result
-    _page_frame(pdf, 3, "Provenance and limitations", result["final_policy"]["status"])
-    _label(pdf, "Frozen policy evidence", 42, 724)
+    _page_frame(pdf, 3, "Understanding this output", result["final_policy"]["status"])
+    _label(pdf, "Why this result has its status", 42, 724)
+    _paragraph(pdf, policy_explanation(result), 42, 704, _PAGE_W - 84,
+               size=10, leading=15)
     ood, reliability = result["ood"], result["reliability"]
-    _paragraph(pdf, f"OOD score: {ood['score']}  |  Decision: {ood['status']}  |  "
-               f"Reason: {ood['reason']}", 42, 704, _PAGE_W - 84)
-    score = "not applicable" if reliability["score"] is None else str(reliability["score"])
-    _paragraph(pdf, f"Segmentation reliability score: {score}  |  Status: {reliability['status']}",
-               42, 682, _PAGE_W - 84)
-    _paragraph(pdf, f"Reliability reason: {reliability['reason']}", 42, 663, _PAGE_W - 84)
-    _label(pdf, "Exact registered thresholds", 42, 632)
+    _label(pdf, "Input similarity", 42, 645)
+    _paragraph(pdf, ood_explanation(result), 42, 628, _PAGE_W - 84,
+               size=9, leading=13)
+    _paragraph(pdf, f"Input similarity score: {ood['score']:.4f}", 42, 597,
+               _PAGE_W - 84, size=9)
+    _label(pdf, "Mask reliability", 42, 574)
+    score = "not applicable" if reliability["score"] is None else f"{reliability['score']:.4f}"
+    _paragraph(pdf, f"Score: {score}. {reliability_explanation(result)}", 42, 557,
+               _PAGE_W - 84, size=9, leading=13)
+    _label(pdf, "Exact policy thresholds · audit reference", 42, 506)
     for y, label, value in (
-        (613, "Segmentation", SEGMENTATION_THRESHOLD_TEXT),
-        (595, "Reliability", RELIABILITY_THRESHOLD_TEXT),
-        (577, "OOD review", OOD_REVIEW_THRESHOLD_TEXT),
+        (488, "Model mask", SEGMENTATION_THRESHOLD_TEXT),
+        (472, "Mask reliability", RELIABILITY_THRESHOLD_TEXT),
+        (456, "Input similarity review", OOD_REVIEW_THRESHOLD_TEXT),
     ):
-        _paragraph(pdf, f"{label}: {value}", 42, y, _PAGE_W - 84, font="Courier", size=9)
-    _label(pdf, "Content provenance", 42, 546)
+        _paragraph(pdf, f"{label}: {value}", 42, y, _PAGE_W - 84, font="Courier", size=8.5)
+    _label(pdf, "Technical trace · SHA256", 42, 428)
     for y, label, value in (
-        (527, "Frozen stack manifest SHA256", result["stack_manifest_sha256"]),
-        (492, "Input file SHA256", result["input"]["source_sha256"]),
-        (457, "Decoded grayscale SHA256", result["input"]["grayscale_sha256"]),
+        (410, "Frozen stack manifest", result["stack_manifest_sha256"]),
+        (378, "Source image", result["input"]["source_sha256"]),
+        (346, "Decoded grayscale", result["input"]["grayscale_sha256"]),
     ):
         _label(pdf, label, 42, y)
-        _paragraph(pdf, value, 42, y - 15, _PAGE_W - 84, font="Courier", size=8)
-    _label(pdf, "Execution", 42, 411)
+        _paragraph(pdf, value, 42, y - 14, _PAGE_W - 84, font="Courier", size=7.5)
+    _label(pdf, "Execution", 42, 311)
     execution = result["execution"]
     _paragraph(pdf, f"Device: {execution['device']}  |  Completed: {execution['completed_at']}  |  "
-               f"Duration: {execution['duration_ms']} ms", 42, 392, _PAGE_W - 84)
+               f"Duration: {execution['duration_ms']} ms", 42, 294, _PAGE_W - 84,
+               size=8, leading=11)
     _paragraph(pdf, f"Case ID: {model.case_id}  |  Creator: {model.creator}",
-               42, 371, _PAGE_W - 84)
+               42, 270, _PAGE_W - 84, size=8, leading=11)
     if payload.edit_provenance is not None:
         _paragraph(pdf, f"Human edit records: {len(payload.edit_provenance.records)}  |  "
-                   "Reliability scope: original model mask only", 42, 349, _PAGE_W - 84)
-    _label(pdf, "Limits of this output", 42, 315)
+                   "Reliability scope: original model mask only", 42, 253,
+                   _PAGE_W - 84, size=8, leading=11)
+    _label(pdf, "Limits of this output", 42, 231)
     limitations = (
         "This research prototype is not a clinical tool and is not validated for patient care.",
         "BRISC patient independence was not verified. External segmentation transfer was weak.",
@@ -420,9 +429,9 @@ def _page_three(pdf: canvas.Canvas, payload: PdfRenderPayload) -> None:
         "External reliability probabilities were miscalibrated; OOD review does not prove a mask is correct.",
         "All measurements here are pixel-based. Physical size and depth are not established.",
     )
-    y = 295
+    y = 214
     for item in limitations:
-        y = _paragraph(pdf, f"• {item}", 42, y, _PAGE_W - 84, size=9, leading=12) - 8
+        y = _paragraph(pdf, f"• {item}", 42, y, _PAGE_W - 84, size=8, leading=11) - 5
     pdf.showPage()
 
 

@@ -41,11 +41,22 @@ def create_application(arguments: list[str] | None = None) -> QApplication:
 def main(arguments: list[str] | None = None) -> int:
     configure_error_log()
     parser = argparse.ArgumentParser(description="Gyrus local research viewer")
-    parser.add_argument("--device", choices=("cuda", "cpu"), default="cuda")
+    # CPU is the portable default. CUDA is always an explicit user choice; the
+    # worker never switches device silently after startup.
+    parser.add_argument("--device", choices=("cuda", "cpu"), default="cpu")
     parser.add_argument(
         "--stack-root", type=Path, default=PROJECT_ROOT / "runs" / "final_stack"
     )
+    parser.add_argument(
+        "--self-test-report", type=Path,
+        help="Run packaged-worker checks on synthetic frozen fixtures and write JSON",
+    )
     args = parser.parse_args(arguments)
+    if args.self_test_report is not None:
+        from gyrus.packaging_self_test import run_packaging_self_test
+
+        run_packaging_self_test(args.stack_root, args.self_test_report)
+        return 0
     app = create_application(["Gyrus"])
     splash = GyrusSplash()
     window = GyrusMainWindow()

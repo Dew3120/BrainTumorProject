@@ -188,6 +188,7 @@ def test_pdf_render_error_keeps_no_partial_result(monkeypatch, qtbot):
 
     monkeypatch.setattr("gyrus.gui.main_window.render_pdf", fail_render)
     window._preview_pdf(object())
+    qtbot.waitUntil(lambda: window._local_task is None, timeout=20_000)
     assert window.machine.state == AppState.INTEGRITY_ERROR_LOCKED
     assert "private PDF renderer detail" not in window.workspace_message.text()
 
@@ -204,6 +205,7 @@ def test_pdf_preview_failure_keeps_case_available(monkeypatch, qtbot):
 
     monkeypatch.setattr("gyrus.gui.main_window.PdfPreviewDialog", fail_viewer)
     window._preview_pdf(SimpleNamespace(model=SimpleNamespace(default_filename="case.pdf")))
+    qtbot.waitUntil(lambda: window._local_task is None, timeout=20_000)
     assert window.machine.state == AppState.READY_EMPTY
     assert "PDF preview could not open" in window.notice.text()
     assert "private QPdfView detail" not in window.notice.text()
@@ -284,6 +286,7 @@ def test_history_write_permission_failure_never_claims_save(monkeypatch, qtbot):
 
     monkeypatch.setattr("gyrus.gui.main_window.save_history_bundle", fail_save)
     window.save_to_history()
+    qtbot.waitUntil(lambda: window._local_task is None, timeout=20_000)
     assert window.machine.state == AppState.RESULT_STANDARD
     assert "Case was not saved" in window.notice.text()
     assert "private index location" not in window.notice.text()
